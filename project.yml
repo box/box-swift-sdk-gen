@@ -1,0 +1,9 @@
+name: BoxSDK
+targets:
+  SwiftSDK:
+    type: framework
+    platform: [iOS, macOS]
+    deploymentTarget:
+      iOS: "15.0"
+      macOS: "12.0"
+    sources: [Sources]

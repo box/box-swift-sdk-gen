@@ -1,0 +1,42 @@
+import Foundation
+
+public class ClassificationTemplateFieldsFieldOptionsField: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case key
+        case staticConfig
+    }
+
+    /// The unique ID of this classification.,
+    public let id: String?
+    /// The display name and key for this classification.,
+    public let key: String?
+    /// Additional information about the classification.,
+    public let staticConfig: ClassificationTemplateFieldsFieldOptionsFieldStaticConfigField?
+
+    /// Initializer for a ClassificationTemplateFieldsFieldOptionsField.
+    ///
+    /// - Parameters:
+    ///   - id: The unique ID of this classification.
+    ///   - key: The display name and key for this classification.
+    ///   - staticConfig: Additional information about the classification.
+    public init(id: String? = nil, key: String? = nil, staticConfig: ClassificationTemplateFieldsFieldOptionsFieldStaticConfigField? = nil) {
+        self.id = id
+        self.key = key
+        self.staticConfig = staticConfig
+    }
+
+    required public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decodeIfPresent(String.self, forKey: .id)
+        key = try container.decodeIfPresent(String.self, forKey: .key)
+        staticConfig = try container.decodeIfPresent(ClassificationTemplateFieldsFieldOptionsFieldStaticConfigField.self, forKey: .staticConfig)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(key, forKey: .key)
+        try container.encodeIfPresent(staticConfig, forKey: .staticConfig)
+    }
+}
