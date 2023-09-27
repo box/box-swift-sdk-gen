@@ -1,0 +1,27 @@
+import Foundation
+
+public enum WorkflowFlowsFieldOutcomesFieldActionTypeField: String, CodableStringEnum {
+    case addMetadata = "add_metadata"
+    case assignTask = "assign_task"
+    case copyFile = "copy_file"
+    case copyFolder = "copy_folder"
+    case createFolder = "create_folder"
+    case deleteFile = "delete_file"
+    case deleteFolder = "delete_folder"
+    case lockFile = "lock_file"
+    case moveFile = "move_file"
+    case moveFolder = "move_folder"
+    case removeWatermarkFile = "remove_watermark_file"
+    case renameFolder = "rename_folder"
+    case restoreFolder = "restore_folder"
+    case shareFile = "share_file"
+    case shareFolder = "share_folder"
+    case unlockFile = "unlock_file"
+    case uploadFile = "upload_file"
+    case waitForTask = "wait_for_task"
+    case watermarkFile = "watermark_file"
+    case goBackToStep = "go_back_to_step"
+    case applyFileClassification = "apply_file_classification"
+    case applyFolderClassification = "apply_folder_classification"
+    case sendNotification = "send_notification"
+}
