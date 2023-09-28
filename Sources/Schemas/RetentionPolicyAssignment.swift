@@ -1,0 +1,87 @@
+import Foundation
+
+public class RetentionPolicyAssignment: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case type
+        case retentionPolicy = "retention_policy"
+        case assignedTo = "assigned_to"
+        case filterFields = "filter_fields"
+        case assignedBy = "assigned_by"
+        case assignedAt = "assigned_at"
+        case startDateField = "start_date_field"
+    }
+
+    /// The unique identifier for a retention policy assignment.,
+    public let id: String?
+    /// `retention_policy_assignment`,
+    public let type: RetentionPolicyAssignmentTypeField?
+    public let retentionPolicy: RetentionPolicyMini?
+    /// The `type` and `id` of the content that is under
+    /// retention. The `type` can either be `folder`
+    /// `enterprise`, or `metadata_template`.,
+    public let assignedTo: RetentionPolicyAssignmentAssignedToField?
+    /// An array of field objects. Values are only returned if the `assigned_to`
+    /// type is `metadata_template`. Otherwise, the array is blank.,
+    public let filterFields: [RetentionPolicyAssignmentFilterFieldsField]?
+    public let assignedBy: UserMini?
+    /// When the retention policy assignment object was
+    /// created.,
+    public let assignedAt: String?
+    /// The date the retention policy assignment begins.
+    /// If the `assigned_to` type is `metadata_template`,
+    /// this field can be a date field's metadata attribute key id.,
+    public let startDateField: String?
+
+    /// Initializer for a RetentionPolicyAssignment.
+    ///
+    /// - Parameters:
+    ///   - id: The unique identifier for a retention policy assignment.
+    ///   - type: `retention_policy_assignment`
+    ///   - retentionPolicy: RetentionPolicyMini?
+    ///   - assignedTo: The `type` and `id` of the content that is under
+    ///     retention. The `type` can either be `folder`
+    ///     `enterprise`, or `metadata_template`.
+    ///   - filterFields: An array of field objects. Values are only returned if the `assigned_to`
+    ///     type is `metadata_template`. Otherwise, the array is blank.
+    ///   - assignedBy: UserMini?
+    ///   - assignedAt: When the retention policy assignment object was
+    ///     created.
+    ///   - startDateField: The date the retention policy assignment begins.
+    ///     If the `assigned_to` type is `metadata_template`,
+    ///     this field can be a date field's metadata attribute key id.
+    public init(id: String? = nil, type: RetentionPolicyAssignmentTypeField? = nil, retentionPolicy: RetentionPolicyMini? = nil, assignedTo: RetentionPolicyAssignmentAssignedToField? = nil, filterFields: [RetentionPolicyAssignmentFilterFieldsField]? = nil, assignedBy: UserMini? = nil, assignedAt: String? = nil, startDateField: String? = nil) {
+        self.id = id
+        self.type = type
+        self.retentionPolicy = retentionPolicy
+        self.assignedTo = assignedTo
+        self.filterFields = filterFields
+        self.assignedBy = assignedBy
+        self.assignedAt = assignedAt
+        self.startDateField = startDateField
+    }
+
+    required public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decodeIfPresent(String.self, forKey: .id)
+        type = try container.decodeIfPresent(RetentionPolicyAssignmentTypeField.self, forKey: .type)
+        retentionPolicy = try container.decodeIfPresent(RetentionPolicyMini.self, forKey: .retentionPolicy)
+        assignedTo = try container.decodeIfPresent(RetentionPolicyAssignmentAssignedToField.self, forKey: .assignedTo)
+        filterFields = try container.decodeIfPresent([RetentionPolicyAssignmentFilterFieldsField].self, forKey: .filterFields)
+        assignedBy = try container.decodeIfPresent(UserMini.self, forKey: .assignedBy)
+        assignedAt = try container.decodeIfPresent(String.self, forKey: .assignedAt)
+        startDateField = try container.decodeIfPresent(String.self, forKey: .startDateField)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(retentionPolicy, forKey: .retentionPolicy)
+        try container.encodeIfPresent(assignedTo, forKey: .assignedTo)
+        try container.encodeIfPresent(filterFields, forKey: .filterFields)
+        try container.encodeIfPresent(assignedBy, forKey: .assignedBy)
+        try container.encodeIfPresent(assignedAt, forKey: .assignedAt)
+        try container.encodeIfPresent(startDateField, forKey: .startDateField)
+    }
+}
