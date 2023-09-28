@@ -1,0 +1,96 @@
+import Foundation
+
+public class SignRequestSigner: SignRequestCreateSigner {
+    private enum CodingKeys: String, CodingKey {
+        case hasViewedDocument = "has_viewed_document"
+        case signerDecision = "signer_decision"
+        case inputs
+        case embedUrl = "embed_url"
+        case iframeableEmbedUrl = "iframeable_embed_url"
+    }
+
+    /// Set to `true` if the signer views the document,
+    public let hasViewedDocument: Bool?
+    /// Final decision made by the signer,
+    public let signerDecision: SignRequestSignerSignerDecisionField?
+    public let inputs: [SignRequestSignerInput]?
+    /// URL to direct a signer to for signing,
+    public let embedUrl: String?
+    /// This URL is specifically designed for
+    /// signing documents within an HTML `iframe` tag.
+    /// It will be returned in the response
+    /// only if the `embed_url_external_user_id`
+    /// parameter was passed in the
+    /// `create sign request` call.,
+    public let iframeableEmbedUrl: String?
+
+    /// Initializer for a SignRequestSigner.
+    ///
+    /// - Parameters:
+    ///   - email: Email address of the signer
+    ///   - role: Defines the role of the signer in the sign request. A `signer`
+    ///     must sign the document and an `approver` must approve the document. A
+    ///     `final_copy_reader` only receives the final signed document and signing
+    ///     log.
+    ///   - isInPerson: Used in combination with an embed URL for a sender. After the
+    ///     sender signs, they are redirected to the next `in_person` signer.
+    ///   - order: Order of the signer
+    ///   - embedUrlExternalUserId: User ID for the signer in an external application responsible
+    ///     for authentication when accessing the embed URL.
+    ///   - redirectUrl: The URL that a signer will be redirected
+    ///     to after signing a document. Defining this URL
+    ///     overrides default or global redirect URL
+    ///     settings for a specific signer.
+    ///     If no declined redirect URL is specified,
+    ///     this URL will be used for decline actions as well.
+    ///   - declinedRedirectUrl: The URL that a signer will be redirect
+    ///     to after declining to sign a document.
+    ///     Defining this URL overrides default or global
+    ///     declined redirect URL settings for a specific signer.
+    ///   - loginRequired: If set to true, signer will need to login to a Box account
+    ///     before signing the request. If the signer does not have
+    ///     an existing account, they will have an option to create
+    ///     a free Box account.
+    ///   - verificationPhoneNumber: If set, this phone number is be used to verify the signer
+    ///     via two factor authentication before they are able to sign the document.
+    ///   - password: If set, the signer is required to enter the password before they are able
+    ///     to sign a document. This field is write only.
+    ///   - hasViewedDocument: Set to `true` if the signer views the document
+    ///   - signerDecision: Final decision made by the signer
+    ///   - inputs: [SignRequestSignerInput]?
+    ///   - embedUrl: URL to direct a signer to for signing
+    ///   - iframeableEmbedUrl: This URL is specifically designed for
+    ///     signing documents within an HTML `iframe` tag.
+    ///     It will be returned in the response
+    ///     only if the `embed_url_external_user_id`
+    ///     parameter was passed in the
+    ///     `create sign request` call.
+    public init(email: String, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil, hasViewedDocument: Bool? = nil, signerDecision: SignRequestSignerSignerDecisionField? = nil, inputs: [SignRequestSignerInput]? = nil, embedUrl: String? = nil, iframeableEmbedUrl: String? = nil) {
+        self.hasViewedDocument = hasViewedDocument
+        self.signerDecision = signerDecision
+        self.inputs = inputs
+        self.embedUrl = embedUrl
+        self.iframeableEmbedUrl = iframeableEmbedUrl
+        super.init(email: email, role: role, isInPerson: isInPerson, order: order, embedUrlExternalUserId: embedUrlExternalUserId, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, loginRequired: loginRequired, verificationPhoneNumber: verificationPhoneNumber, password: password)
+    }
+
+    required public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        hasViewedDocument = try container.decodeIfPresent(Bool.self, forKey: .hasViewedDocument)
+        signerDecision = try container.decodeIfPresent(SignRequestSignerSignerDecisionField.self, forKey: .signerDecision)
+        inputs = try container.decodeIfPresent([SignRequestSignerInput].self, forKey: .inputs)
+        embedUrl = try container.decodeIfPresent(String.self, forKey: .embedUrl)
+        iframeableEmbedUrl = try container.decodeIfPresent(String.self, forKey: .iframeableEmbedUrl)
+        try super.init(from:decoder)
+    }
+
+    public override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(hasViewedDocument, forKey: .hasViewedDocument)
+        try container.encodeIfPresent(signerDecision, forKey: .signerDecision)
+        try container.encodeIfPresent(inputs, forKey: .inputs)
+        try container.encodeIfPresent(embedUrl, forKey: .embedUrl)
+        try container.encodeIfPresent(iframeableEmbedUrl, forKey: .iframeableEmbedUrl)
+        try super.encode(to: encoder)
+    }
+}
