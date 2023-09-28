@@ -1,0 +1,350 @@
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+enum HTTPHeaderKey {
+    static let authorization = "Authorization"
+    static let contentType = "Content-Type"
+    static let retryAfter = "Retry-After"
+}
+
+/// Networking layer interface
+public class NetworkClient {
+    public static let shared = NetworkClient()
+
+    private let utilityQueue = DispatchQueue.global(qos: .utility)
+
+    private init(){}
+
+    /// Executes requests
+    ///
+    /// - Parameters:
+    ///   - url: The URL for the request.
+    ///   - options: Request options  that provides request-specific information, such as the request type, and body, query parameters.
+    /// - Returns: Response of the request in the form of FetchResponse object.
+    /// - Throws: An error if the request fails for any reason.
+    public func fetch(url: String, options: FetchOptions) async throws -> FetchResponse {
+        return try await fetch(
+            url: url,
+            options: options,
+            networkSession: options.networkSession ?? NetworkSession(),
+            attempt: 1
+        )
+    }
+
+    /// Executes requests
+    ///
+    /// - Parameters:
+    ///   - url: The URL for the request.
+    ///   - options: Request options  that provides request-specific information, such as the request type, and body, query parameters.
+    ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
+    ///   - attempt: The request attempt number.
+    /// - Returns: Response of the request in the form of FetchResponse object.
+    /// - Throws: An error if the request fails for any reason.
+    private func fetch(
+        url: String,
+        options: FetchOptions,
+        networkSession: NetworkSession,
+        attempt: Int
+    ) async throws -> FetchResponse {
+        let urlRequest = try await createRequest(
+            url: url,
+            options: options,
+            networkSession: networkSession
+        )
+
+        if let downloadDestinationURL = options.downloadDestinationURL {
+            let (downloadUrl, urlResponse) = try await sendDownloadRequest(urlRequest, downloadDestinationURL: downloadDestinationURL, networkSession: networkSession)
+            let conversation = FetchConversation(url: url, options: options, urlRequest: urlRequest, urlResponse: urlResponse as! HTTPURLResponse, responseType: .url(downloadUrl))
+            return try await processResponse(using: conversation, networkSession: networkSession, attempt: attempt)
+        } else {
+            let (data, urlResponse) =  try await sendDataRequest(urlRequest, networkSession: networkSession)
+            let conversation = FetchConversation(url: url, options: options, urlRequest: urlRequest, urlResponse: urlResponse as! HTTPURLResponse, responseType: .data(data))
+            return try await processResponse(using: conversation, networkSession: networkSession, attempt: attempt)
+        }
+    }
+
+    /// Executes data request using dataTask and converts it's callback based API into an async API.
+    ///
+    /// - Parameters:
+    ///   - urlRequest: The request object.
+    ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
+    /// - Returns: Tuple of  of (Data, URLReponse)
+    /// - Throws: An error if the request fails for any reason.
+    private func sendDataRequest(_ urlRequest: URLRequest, networkSession: NetworkSession) async throws -> (Data, URLResponse) {
+        return try await withCheckedThrowingContinuation { continuation in
+            networkSession.session.dataTask(with: urlRequest) { data, response, error in
+                if let error {
+                    continuation.resume(with: .failure(NetworkError(message: .customValue(error.localizedDescription), error: error)))
+                    return
+                }
+
+                guard let response else {
+                    continuation.resume(
+                        with: .failure(NetworkError(message: .noResponse(url: urlRequest.url)))
+                    )
+                    return
+                }
+
+                continuation.resume(
+                    with: .success((data ?? Data(), response))
+                )
+            }
+            .resume()
+        }
+    }
+
+    /// Executes download request using downloadTask and converts it's callback based API into an async API.
+    ///
+    /// - Parameters:
+    ///   - urlRequest: The request object.
+    ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
+    /// - Returns: Tuple of  of (URL, URLReponse)
+    /// - Throws: An error if the request fails for any reason.
+    private func sendDownloadRequest(_ urlRequest: URLRequest, downloadDestinationURL: URL, networkSession: NetworkSession) async throws -> (URL, URLResponse) {
+        return try await withCheckedThrowingContinuation { continuation in
+            networkSession.session.downloadTask(with: urlRequest) { location, response, error in
+                if let error {
+                    continuation.resume(with: .failure(NetworkError(message: .customValue(error.localizedDescription), error: error)))
+                    return
+                }
+
+                guard let localURL = location else {
+                    continuation.resume(
+                        with: .failure(NetworkError(message: .downloadFailed(url: urlRequest.url)))
+                    )
+                    return
+                }
+
+                guard let response else {
+                    continuation.resume(
+                        with: .failure(NetworkError(message: .noResponse(url: urlRequest.url)))
+                    )
+                    return
+                }
+
+                do {
+                    try? FileManager.default.removeItem(at: downloadDestinationURL)
+                    try FileManager.default.moveItem(at: localURL, to: downloadDestinationURL)
+                }
+                catch {
+                    continuation.resume(
+                        with: .failure(GeneralError(message: .moveFileFailed(sourceUrl: localURL, destinationUrl: downloadDestinationURL)))
+                    )
+                }
+
+                continuation.resume(
+                    with: .success((downloadDestinationURL, response))
+                )
+            }.resume()
+        }
+    }
+
+    /// Creates the request object `URLRequest` based on  parameters passed in `options`.
+    ///
+    /// - Parameters:
+    ///   - url: The URL for the request.
+    ///   - options: Request options  that provides request-specific information, such as the request type, and body, query parameters.
+    ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
+    /// - Returns: The URLRequest object which represents information about the request.
+    /// - Throws: An error if the operation fails for any reason.
+    private func createRequest(
+        url: String,
+        options: FetchOptions,
+        networkSession: NetworkSession
+    ) async throws -> URLRequest {
+        var urlRequest = URLRequest(url: createEndpointUrl(url: url, params: options.params))
+        urlRequest.httpMethod = options.method.rawValue
+
+        try await updateRequestWithHeaders(&urlRequest, options: options, networkSession: networkSession)
+
+        if let fileStream = options.fileStream {
+            urlRequest.httpBodyStream = fileStream
+        } else if let multipartData = options.multipartData {
+            updateRequestWithMultipartData(&urlRequest, multipartData: multipartData)
+        } else if let body = options.body {
+            urlRequest.httpBody = body.data(using: .utf8)
+        }
+
+        return urlRequest
+    }
+
+    /// Updates the passed request object `URLRequest` with headers,  based on  parameters passed in `options`.
+    ///
+    /// - Parameters:
+    ///   - urlRequest: The request object.
+    ///   - options: Request options  that provides request-specific information, such as the request type, and body, query parameters.
+    ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
+    /// - Throws: An error if the operation fails for any reason.
+    private func updateRequestWithHeaders(_ urlRequest: inout URLRequest, options: FetchOptions, networkSession: NetworkSession) async throws {
+        urlRequest.allHTTPHeaderFields = options.headers.compactMapValues { $0?.paramValue }
+
+        if let contentType = options.contentType {
+            urlRequest.setValue(contentType, forHTTPHeaderField: HTTPHeaderKey.contentType)
+        }
+
+        for (key, value) in BoxConstants.analyticsHeaders {
+            urlRequest.setValue(value, forHTTPHeaderField: key)
+        }
+
+        try await updateRequestWithAuthorizationHeader(&urlRequest, options: options, networkSession: networkSession)
+    }
+
+    /// Updates the passed request object `URLRequest` with authorization header,  based on  parameters passed in `options`.
+    ///
+    /// - Parameters:
+    ///   - urlRequest: The request object.
+    ///   - options: Request options  that provides request-specific information, such as the request type, and body, query parameters.
+    ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
+    /// - Throws: An error if the operation fails for any reason.
+    private func updateRequestWithAuthorizationHeader(_ urlRequest: inout URLRequest, options: FetchOptions, networkSession: NetworkSession) async throws {
+        if let auth = options.auth, let token = (try await auth.retrieveToken(networkSession: networkSession)).accessToken {
+            urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: HTTPHeaderKey.authorization)
+        }
+    }
+
+    /// Updates the passed request object `URLRequest` with multipart data,  based on  parameters passed in `multipartData`.
+    ///
+    /// - Parameters:
+    ///   - urlRequest: The request object.
+    ///   - multipartData: An array of `MultipartItem` which will be used to create the body of the request.
+    private func updateRequestWithMultipartData(_ urlRequest: inout URLRequest, multipartData: [MultipartItem]) {
+        var parameters: [String: Any] = [:]
+        var partName = ""
+        var fileName = ""
+        var mimeType = ""
+        var bodyStream = InputStream(data: Data())
+        let boundary = "Boundary-\(UUID().uuidString)"
+        for part in multipartData {
+            if let body = part.body {
+                parameters[part.partName] = body
+            } else if let fileStream = part.fileStream {
+                let unwrapFileName = part.fileName ?? ""
+                let unwrapMimeType = part.contentType ?? ""
+
+                partName = part.partName
+                fileName = unwrapFileName
+                mimeType = unwrapMimeType
+                bodyStream = fileStream
+            }
+        }
+
+        let bodyStreams = createMultipartBodyStreams(parameters, partName: partName, fileName: fileName, mimetype: mimeType, bodyStream: bodyStream, boundary: boundary)
+        urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: HTTPHeaderKey.contentType)
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+        urlRequest.httpBodyStream = ArrayInputStream(inputStreams: bodyStreams)
+    }
+
+    /// Creates an array of `InputStream`based on passed arguments, which will be used as an bodyStream of the request.
+    ///
+    /// - Parameters:
+    ///   - parameters: The parameters of the multipart request in form of a Dictionary.
+    ///   - partName: The name of the file part.
+    ///   - fileName: The file name.
+    ///   - mimetype: The content type of the file part.
+    ///   - bodyStream: The stream containing the file contents.
+    ///   - boundary: The boundary value,  used to separate name/value pair.
+    /// - Returns: An array of `InputStream`streams.
+    private func createMultipartBodyStreams(_ parameters: [String: Any]?, partName: String, fileName: String, mimetype: String, bodyStream: InputStream, boundary: String) -> [InputStream] {
+        var preBody = Data()
+        if let parameters = parameters {
+            for (key, value) in parameters {
+                preBody.append("--\(boundary)\r\n".data(using: .utf8)!)
+                preBody.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
+                preBody.append("\(value)\r\n".data(using: .utf8)!)
+            }
+        }
+
+        preBody.append("--\(boundary)\r\n".data(using: .utf8)!)
+        preBody.append("Content-Disposition: form-data; name=\"\(partName)\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
+        preBody.append("Content-Type: \(mimetype)\r\n\r\n".data(using: .utf8)!)
+
+        var postBody = Data()
+        postBody.append("\r\n".data(using: .utf8)!)
+        postBody.append("--\(boundary)--\r\n".data(using: .utf8)!)
+
+        var bodyStreams: [InputStream] = []
+        bodyStreams.append(InputStream(data: preBody))
+        bodyStreams.append(bodyStream)
+        bodyStreams.append(InputStream(data: postBody))
+
+        return bodyStreams
+    }
+
+    /// Creates a `URL`object  based on url and query parameters
+    ///
+    /// - Parameters:
+    ///   - url: The URL for the request.
+    ///   - params: Query parameters to be passed in the URL.
+    /// - Returns: The URL of the endpoint.
+    private func createEndpointUrl(url: String, params: [String: ParameterConvertible?]?) -> URL {
+        guard let params = params else {
+            return URL(string: url)!
+        }
+
+        let nonNullQueryParams: [String: String] = params.compactMapValues { $0?.paramValue }
+        var components = URLComponents(url: URL(string: url)!, resolvingAgainstBaseURL: true)!
+        components.queryItems = nonNullQueryParams.map { URLQueryItem(name: $0.key, value: $0.value) }
+
+        return components.url!
+    }
+
+    /// Processes  response and performs the appropriate action
+    ///
+    /// - Parameters:
+    ///   - using: Represents a data combined with the request and the corresponding response.
+    ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
+    ///   - attempt: The request attempt number.
+    /// - Returns: Response of the request in the form of FetchResponse object.
+    /// - Throws: An error if the operation fails for any reason.
+    private func processResponse(
+        using conversation: FetchConversation,
+        networkSession: NetworkSession,
+        attempt: Int
+    ) async throws -> FetchResponse {
+        let statusCode = conversation.urlResponse.statusCode
+
+        // OK
+        if statusCode >= 200 && statusCode < 400 {
+            return conversation.convertToFetchResponse()
+        }
+
+        // available attempts exceeded
+        if attempt >= networkSession.networkSettings.maxRetryAttempts {
+            throw APIError(message: .rateLimitMaxRetries, conversation: conversation)
+        }
+
+        // Unauthorized
+        if statusCode == 401, let auth = conversation.options.auth  {
+            _ = try await auth.refreshToken(networkSession: networkSession)
+            return try await fetch(url: conversation.url, options: conversation.options, networkSession: networkSession, attempt: attempt + 1)
+        }
+
+        // Retryable
+        if statusCode == 429 || statusCode >= 500 {
+            let retryTimeout = Double(conversation.urlResponse.value(forHTTPHeaderField: HTTPHeaderKey.retryAfter) ?? "")
+            ?? networkSession.networkSettings.retryStrategy.getRetryTimeout(attempt: attempt)
+            try await wait(seconds: retryTimeout)
+
+            return try await fetch(url: conversation.url, options: conversation.options, networkSession: networkSession, attempt: attempt + 1)
+        }
+
+        throw APIError(conversation: conversation)
+    }
+
+    /// Suspends the current task for the given duration of seconds.
+    ///
+    /// - Parameters:
+    ///   - seconds: Number of seconds to wait.
+    /// - Throws: An error if the operation fails for any reason.
+    private func wait(seconds delay: TimeInterval) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            utilityQueue.asyncAfter(
+                deadline: .now() + .milliseconds(Int(delay * 1000))
+            ) {
+                continuation.resume()
+            }
+        }
+    }
+}
