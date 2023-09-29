@@ -25,7 +25,7 @@ public class IntegrationMapping: IntegrationMappingBase {
     /// (as opposed to being automatically created),
     public let isManuallyCreated: Bool?
     /// Integration mapping options for Slack,
-    public let options: IntegrationMappingOptionsField?
+    public let options: IntegrationMappingSlackOptions?
     /// An object representing the user who
     /// created the integration mapping,
     public let createdBy: UserIntegrationMappings?
@@ -61,7 +61,7 @@ public class IntegrationMapping: IntegrationMappingBase {
     ///     last modified the integration mapping
     ///   - createdAt: When the integration mapping object was created
     ///   - modifiedAt: When the integration mapping object was last modified
-    public init(id: String? = nil, integrationType: IntegrationMappingBaseIntegrationTypeField? = nil, type: IntegrationMappingTypeField, partnerItem: IntegrationMappingPartnerItemSlack, boxItem: FolderMini, isManuallyCreated: Bool? = nil, options: IntegrationMappingOptionsField? = nil, createdBy: UserIntegrationMappings? = nil, modifiedBy: UserIntegrationMappings? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
+    public init(id: String? = nil, integrationType: IntegrationMappingBaseIntegrationTypeField? = nil, type: IntegrationMappingTypeField, partnerItem: IntegrationMappingPartnerItemSlack, boxItem: FolderMini, isManuallyCreated: Bool? = nil, options: IntegrationMappingSlackOptions? = nil, createdBy: UserIntegrationMappings? = nil, modifiedBy: UserIntegrationMappings? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
         self.type = type
         self.partnerItem = partnerItem
         self.boxItem = boxItem
@@ -80,7 +80,7 @@ public class IntegrationMapping: IntegrationMappingBase {
         partnerItem = try container.decode(IntegrationMappingPartnerItemSlack.self, forKey: .partnerItem)
         boxItem = try container.decode(FolderMini.self, forKey: .boxItem)
         isManuallyCreated = try container.decodeIfPresent(Bool.self, forKey: .isManuallyCreated)
-        options = try container.decodeIfPresent(IntegrationMappingOptionsField.self, forKey: .options)
+        options = try container.decodeIfPresent(IntegrationMappingSlackOptions.self, forKey: .options)
         createdBy = try container.decodeIfPresent(UserIntegrationMappings.self, forKey: .createdBy)
         modifiedBy = try container.decodeIfPresent(UserIntegrationMappings.self, forKey: .modifiedBy)
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
