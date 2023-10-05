@@ -47,7 +47,7 @@ assignees: mwwoda, mhagmajer, arjankowski, lukaszsocha2, bartlomiejleszczynski, 
 
 Swift SDK: <!-- Replace with the version of the SDK you're using. -->
 Platform: <!-- Replace with the platform you're using (e.g. iOS, macOS, Linux, etc.) -->
-Xcode (if applicabe): <!-- Replace with the version of Xcode your application is developed in. -->
+Xcode (if applicable): <!-- Replace with the version of Xcode your application is developed in. --
 
 [sdk-docs]: https://github.com/box/box-swift-sdk-gen/tree/main/docs
 [api-docs]: https://developer.box.com/docs
