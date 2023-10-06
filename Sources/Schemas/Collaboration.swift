@@ -14,6 +14,7 @@ public class Collaboration: Codable {
         case createdBy = "created_by"
         case createdAt = "created_at"
         case modifiedAt = "modified_at"
+        case isAccessOnly = "is_access_only"
         case acceptanceRequirementsStatus = "acceptance_requirements_status"
     }
 
@@ -42,6 +43,12 @@ public class Collaboration: Codable {
     public let createdAt: String?
     /// When the collaboration object was last modified.,
     public let modifiedAt: String?
+    /// If set to `true`, collaborators have access to
+    /// shared items, but such items won't be visible in the
+    /// All Files list. Additionally, collaborators won't
+    /// see the the path to the root folder for the
+    /// shared item.,
+    public let isAccessOnly: Bool?
     public let acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField?
 
     /// Initializer for a Collaboration.
@@ -63,8 +70,13 @@ public class Collaboration: Codable {
     ///   - createdBy: UserCollaborations?
     ///   - createdAt: When the collaboration object was created.
     ///   - modifiedAt: When the collaboration object was last modified.
+    ///   - isAccessOnly: If set to `true`, collaborators have access to
+    ///     shared items, but such items won't be visible in the
+    ///     All Files list. Additionally, collaborators won't
+    ///     see the the path to the root folder for the
+    ///     shared item.
     ///   - acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField?
-    public init(id: String? = nil, type: CollaborationTypeField? = nil, item: FileOrFolderOrWebLink? = nil, accessibleBy: GroupMiniOrUserCollaborations? = nil, inviteEmail: String? = nil, role: CollaborationRoleField? = nil, expiresAt: String? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: String? = nil, createdBy: UserCollaborations? = nil, createdAt: String? = nil, modifiedAt: String? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
+    public init(id: String? = nil, type: CollaborationTypeField? = nil, item: FileOrFolderOrWebLink? = nil, accessibleBy: GroupMiniOrUserCollaborations? = nil, inviteEmail: String? = nil, role: CollaborationRoleField? = nil, expiresAt: String? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: String? = nil, createdBy: UserCollaborations? = nil, createdAt: String? = nil, modifiedAt: String? = nil, isAccessOnly: Bool? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
         self.id = id
         self.type = type
         self.item = item
@@ -77,6 +89,7 @@ public class Collaboration: Codable {
         self.createdBy = createdBy
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self.isAccessOnly = isAccessOnly
         self.acceptanceRequirementsStatus = acceptanceRequirementsStatus
     }
 
@@ -94,6 +107,7 @@ public class Collaboration: Codable {
         createdBy = try container.decodeIfPresent(UserCollaborations.self, forKey: .createdBy)
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
         modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
+        isAccessOnly = try container.decodeIfPresent(Bool.self, forKey: .isAccessOnly)
         acceptanceRequirementsStatus = try container.decodeIfPresent(CollaborationAcceptanceRequirementsStatusField.self, forKey: .acceptanceRequirementsStatus)
     }
 
@@ -111,6 +125,7 @@ public class Collaboration: Codable {
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        try container.encodeIfPresent(isAccessOnly, forKey: .isAccessOnly)
         try container.encodeIfPresent(acceptanceRequirementsStatus, forKey: .acceptanceRequirementsStatus)
     }
 }
