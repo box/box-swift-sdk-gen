@@ -5,6 +5,7 @@ public class CreateCollaborationRequestBodyArg: Codable {
         case item
         case accessibleBy = "accessible_by"
         case role
+        case isAccessOnly = "is_access_only"
         case canViewPath = "can_view_path"
         case expiresAt = "expires_at"
     }
@@ -15,6 +16,12 @@ public class CreateCollaborationRequestBodyArg: Codable {
     public let accessibleBy: CreateCollaborationRequestBodyArgAccessibleByField
     /// The level of access granted.,
     public let role: CreateCollaborationRequestBodyArgRoleField
+    /// If set to `true`, collaborators have access to
+    /// shared items, but such items won't be visible in the
+    /// All Files list. Additionally, collaborators won't
+    /// see the the path to the root folder for the
+    /// shared item.,
+    public let isAccessOnly: Bool?
     /// Determines if the invited users can see the entire parent path to
     /// the associated folder. The user will not gain privileges in any
     /// parent folder and therefore can not see content the user is not
@@ -46,6 +53,11 @@ public class CreateCollaborationRequestBodyArg: Codable {
     ///   - item: The item to attach the comment to.
     ///   - accessibleBy: The user or group to give access to the item.
     ///   - role: The level of access granted.
+    ///   - isAccessOnly: If set to `true`, collaborators have access to
+    ///     shared items, but such items won't be visible in the
+    ///     All Files list. Additionally, collaborators won't
+    ///     see the the path to the root folder for the
+    ///     shared item.
     ///   - canViewPath: Determines if the invited users can see the entire parent path to
     ///     the associated folder. The user will not gain privileges in any
     ///     parent folder and therefore can not see content the user is not
@@ -68,10 +80,11 @@ public class CreateCollaborationRequestBodyArg: Codable {
     ///     of the **Admin Console**. When the setting is not enabled,
     ///     collaborations can not have an expiry date and a value for this
     ///     field will be result in an error.
-    public init(item: CreateCollaborationRequestBodyArgItemField, accessibleBy: CreateCollaborationRequestBodyArgAccessibleByField, role: CreateCollaborationRequestBodyArgRoleField, canViewPath: Bool? = nil, expiresAt: String? = nil) {
+    public init(item: CreateCollaborationRequestBodyArgItemField, accessibleBy: CreateCollaborationRequestBodyArgAccessibleByField, role: CreateCollaborationRequestBodyArgRoleField, isAccessOnly: Bool? = nil, canViewPath: Bool? = nil, expiresAt: String? = nil) {
         self.item = item
         self.accessibleBy = accessibleBy
         self.role = role
+        self.isAccessOnly = isAccessOnly
         self.canViewPath = canViewPath
         self.expiresAt = expiresAt
     }
@@ -81,6 +94,7 @@ public class CreateCollaborationRequestBodyArg: Codable {
         item = try container.decode(CreateCollaborationRequestBodyArgItemField.self, forKey: .item)
         accessibleBy = try container.decode(CreateCollaborationRequestBodyArgAccessibleByField.self, forKey: .accessibleBy)
         role = try container.decode(CreateCollaborationRequestBodyArgRoleField.self, forKey: .role)
+        isAccessOnly = try container.decodeIfPresent(Bool.self, forKey: .isAccessOnly)
         canViewPath = try container.decodeIfPresent(Bool.self, forKey: .canViewPath)
         expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt)
     }
@@ -90,6 +104,7 @@ public class CreateCollaborationRequestBodyArg: Codable {
         try container.encode(item, forKey: .item)
         try container.encode(accessibleBy, forKey: .accessibleBy)
         try container.encode(role, forKey: .role)
+        try container.encodeIfPresent(isAccessOnly, forKey: .isAccessOnly)
         try container.encodeIfPresent(canViewPath, forKey: .canViewPath)
         try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
     }
