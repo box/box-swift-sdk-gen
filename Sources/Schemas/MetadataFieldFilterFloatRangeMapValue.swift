@@ -9,12 +9,12 @@ public class MetadataFieldFilterFloatRangeMapValue: Codable {
     /// Specifies the (inclusive) upper bound for the metadata field
     /// value. The value of a field must be lower than (`lt`) or
     /// equal to this value for the search query to match this
-    /// template.,
+    /// template.
     public let lt: Int?
     /// Specifies the (inclusive) lower bound for the metadata field
     /// value. The value of a field must be greater than (`gt`) or
     /// equal to this value for the search query to match this
-    /// template.,
+    /// template.
     public let gt: Int?
 
     /// Initializer for a MetadataFieldFilterFloatRangeMapValue.

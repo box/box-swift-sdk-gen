@@ -6,9 +6,9 @@ public class CreateCommentRequestBodyArgItemField: Codable {
         case type
     }
 
-    /// The ID of the item,
+    /// The ID of the item
     public let id: String
-    /// The type of the item that this comment will be placed on.,
+    /// The type of the item that this comment will be placed on.
     public let type: CreateCommentRequestBodyArgItemFieldTypeField
 
     /// Initializer for a CreateCommentRequestBodyArgItemField.

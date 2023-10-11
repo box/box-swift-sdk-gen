@@ -7,11 +7,11 @@ public class CollaborationAcceptanceRequirementsStatusFieldStrongPasswordRequire
     }
 
     /// Whether or not the enterprise that owns the content requires
-    /// a strong password to collaborate on the content.,
+    /// a strong password to collaborate on the content.
     public let enterpriseHasStrongPasswordRequiredForExternalUsers: Bool?
     /// Whether or not the user has a strong password set for their
     /// account. The field is `null` when a strong password is not
-    /// required.,
+    /// required.
     public let userHasStrongPassword: Bool?
 
     /// Initializer for a CollaborationAcceptanceRequirementsStatusFieldStrongPasswordRequirementField.

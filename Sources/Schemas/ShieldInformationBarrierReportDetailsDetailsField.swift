@@ -5,7 +5,7 @@ public class ShieldInformationBarrierReportDetailsDetailsField: Codable {
         case folderId = "folder_id"
     }
 
-    /// Folder ID for locating this report,
+    /// Folder ID for locating this report
     public let folderId: String?
 
     /// Initializer for a ShieldInformationBarrierReportDetailsDetailsField.

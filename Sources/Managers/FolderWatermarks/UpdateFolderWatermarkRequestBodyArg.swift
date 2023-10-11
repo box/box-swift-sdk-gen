@@ -5,7 +5,7 @@ public class UpdateFolderWatermarkRequestBodyArg: Codable {
         case watermark
     }
 
-    /// The watermark to imprint on the folder,
+    /// The watermark to imprint on the folder
     public let watermark: UpdateFolderWatermarkRequestBodyArgWatermarkField
 
     /// Initializer for a UpdateFolderWatermarkRequestBodyArg.

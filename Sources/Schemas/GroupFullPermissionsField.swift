@@ -5,7 +5,7 @@ public class GroupFullPermissionsField: Codable {
         case canInviteAsCollaborator = "can_invite_as_collaborator"
     }
 
-    /// Specifies if the user can invite the group to collaborate on any items.,
+    /// Specifies if the user can invite the group to collaborate on any items.
     public let canInviteAsCollaborator: Bool?
 
     /// Initializer for a GroupFullPermissionsField.

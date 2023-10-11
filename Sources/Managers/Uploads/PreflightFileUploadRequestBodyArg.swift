@@ -7,9 +7,9 @@ public class PreflightFileUploadRequestBodyArg: Codable {
         case parent
     }
 
-    /// The name for the file,
+    /// The name for the file
     public let name: String?
-    /// The size of the file in bytes,
+    /// The size of the file in bytes
     public let size: Int?
     public let parent: PreflightFileUploadRequestBodyArgParentField?
 

@@ -6,7 +6,7 @@ public class UpdateFileVersionByIdRequestBodyArg: Codable {
     }
 
     /// Set this to `null` to clear
-    /// the date and restore the file.,
+    /// the date and restore the file.
     public let trashedAt: String?
 
     /// Initializer for a UpdateFileVersionByIdRequestBodyArg.

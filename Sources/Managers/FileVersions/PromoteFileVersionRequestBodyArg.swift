@@ -6,9 +6,9 @@ public class PromoteFileVersionRequestBodyArg: Codable {
         case type
     }
 
-    /// The file version ID,
+    /// The file version ID
     public let id: String?
-    /// The type to promote,
+    /// The type to promote
     public let type: PromoteFileVersionRequestBodyArgTypeField?
 
     /// Initializer for a PromoteFileVersionRequestBodyArg.

@@ -1,5 +1,6 @@
 import Foundation
 
+/// A list of files under retention.
 public class FilesUnderRetention: Codable {
     private enum CodingKeys: String, CodingKey {
         case limit
@@ -10,13 +11,13 @@ public class FilesUnderRetention: Codable {
 
     /// The limit that was used for these entries. This will be the same as the
     /// `limit` query parameter unless that value exceeded the maximum value
-    /// allowed. The maximum value varies by API.,
+    /// allowed. The maximum value varies by API.
     public let limit: Int64?
-    /// The marker for the start of the next page of results.,
+    /// The marker for the start of the next page of results.
     public let nextMarker: Int64?
-    /// The marker for the start of the previous page of results.,
+    /// The marker for the start of the previous page of results.
     public let prevMarker: Int64?
-    /// A list of files,
+    /// A list of files
     public let entries: [FileMini]?
 
     /// Initializer for a FilesUnderRetention.

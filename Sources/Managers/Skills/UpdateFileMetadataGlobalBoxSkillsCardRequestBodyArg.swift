@@ -7,11 +7,11 @@ public class UpdateFileMetadataGlobalBoxSkillsCardRequestBodyArg: Codable {
         case value
     }
 
-    /// `replace`,
+    /// `replace`
     public let op: UpdateFileMetadataGlobalBoxSkillsCardRequestBodyArgOpField?
     /// The JSON Path that represents the card to replace. In most cases
     /// this will be in the format `/cards/{index}` where `index` is the
-    /// zero-indexed position of the card in the list of cards.,
+    /// zero-indexed position of the card in the list of cards.
     public let path: String?
     public let value: KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard?
 

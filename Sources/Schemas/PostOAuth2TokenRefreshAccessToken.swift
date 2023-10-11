@@ -1,5 +1,7 @@
 import Foundation
 
+/// A request to refresh an Access Token. Use this API to refresh an expired
+/// Access Token using a valid Refresh Token.
 public class PostOAuth2TokenRefreshAccessToken: Codable {
     private enum CodingKeys: String, CodingKey {
         case grantType = "grant_type"
@@ -8,13 +10,13 @@ public class PostOAuth2TokenRefreshAccessToken: Codable {
         case refreshToken = "refresh_token"
     }
 
-    /// The type of request being made, in this case a refresh request.,
+    /// The type of request being made, in this case a refresh request.
     public let grantType: PostOAuth2TokenRefreshAccessTokenGrantTypeField
-    /// The client ID of the application requesting to refresh the token.,
+    /// The client ID of the application requesting to refresh the token.
     public let clientId: String
-    /// The client secret of the application requesting to refresh the token.,
+    /// The client secret of the application requesting to refresh the token.
     public let clientSecret: String
-    /// The refresh token to refresh.,
+    /// The refresh token to refresh.
     public let refreshToken: String
 
     /// Initializer for a PostOAuth2TokenRefreshAccessToken.

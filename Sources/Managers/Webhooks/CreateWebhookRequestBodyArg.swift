@@ -7,12 +7,12 @@ public class CreateWebhookRequestBodyArg: Codable {
         case triggers
     }
 
-    /// The item that will trigger the webhook,
+    /// The item that will trigger the webhook
     public let target: CreateWebhookRequestBodyArgTargetField
-    /// The URL that is notified by this webhook,
+    /// The URL that is notified by this webhook
     public let address: String
     /// An array of event names that this webhook is
-    /// to be triggered for,
+    /// to be triggered for
     public let triggers: [CreateWebhookRequestBodyArgTriggersField]
 
     /// Initializer for a CreateWebhookRequestBodyArg.

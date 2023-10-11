@@ -1,7 +1,7 @@
 import Foundation
 
 public class CreateUserHeadersArg {
-    /// Extra headers that will be included in the HTTP request.,
+    /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
     /// Initializer for a CreateUserHeadersArg.

@@ -12,11 +12,11 @@ public class UpdateTaskByIdRequestBodyArg: Codable {
     /// 
     /// * `review` defines an approval task that can be approved or
     /// rejected
-    /// * `complete` defines a general task which can be completed,
+    /// * `complete` defines a general task which can be completed
     public let action: UpdateTaskByIdRequestBodyArgActionField?
-    /// The message included with the task.,
+    /// The message included with the task.
     public let message: String?
-    /// When the task is due at.,
+    /// When the task is due at.
     public let dueAt: String?
     /// Defines which assignees need to complete this task before the task
     /// is considered completed.
@@ -24,7 +24,7 @@ public class UpdateTaskByIdRequestBodyArg: Codable {
     /// * `all_assignees` (default) requires all assignees to review or
     /// approve the the task in order for it to be considered completed.
     /// * `any_assignee` accepts any one assignee to review or
-    /// approve the the task in order for it to be considered completed.,
+    /// approve the the task in order for it to be considered completed.
     public let completionRule: UpdateTaskByIdRequestBodyArgCompletionRuleField?
 
     /// Initializer for a UpdateTaskByIdRequestBodyArg.

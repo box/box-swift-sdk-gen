@@ -6,9 +6,9 @@ public class CreateWorkflowStartRequestBodyArgFolderField: Codable {
         case id
     }
 
-    /// The type of the folder object,
+    /// The type of the folder object
     public let type: CreateWorkflowStartRequestBodyArgFolderFieldTypeField?
-    /// The id of the folder,
+    /// The id of the folder
     public let id: String?
 
     /// Initializer for a CreateWorkflowStartRequestBodyArgFolderField.

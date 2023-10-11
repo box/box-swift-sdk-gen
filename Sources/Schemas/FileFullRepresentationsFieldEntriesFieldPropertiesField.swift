@@ -7,13 +7,13 @@ public class FileFullRepresentationsFieldEntriesFieldPropertiesField: Codable {
         case thumb
     }
 
-    /// The width by height size of this representation in pixels.,
+    /// The width by height size of this representation in pixels.
     public let dimensions: String?
     /// Indicates if the representation is build up out of multiple
-    /// pages.,
+    /// pages.
     public let paged: Bool?
     /// Indicates if the representation can be used as a thumbnail of
-    /// the file.,
+    /// the file.
     public let thumb: Bool?
 
     /// Initializer for a FileFullRepresentationsFieldEntriesFieldPropertiesField.

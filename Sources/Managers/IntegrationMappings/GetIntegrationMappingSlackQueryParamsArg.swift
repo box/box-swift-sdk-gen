@@ -4,19 +4,19 @@ public class GetIntegrationMappingSlackQueryParamsArg {
     /// Defines the position marker at which to begin returning results. This is
     /// used when paginating using marker-based pagination.
     /// 
-    /// This requires `usemarker` to be set to `true`.,
+    /// This requires `usemarker` to be set to `true`.
     public let marker: String?
-    /// The maximum number of items to return per page.,
+    /// The maximum number of items to return per page.
     public let limit: Int64?
-    /// Mapped item type, for which the mapping should be returned,
+    /// Mapped item type, for which the mapping should be returned
     public let partnerItemType: GetIntegrationMappingSlackQueryParamsArgPartnerItemTypeField?
-    /// ID of the mapped item, for which the mapping should be returned,
+    /// ID of the mapped item, for which the mapping should be returned
     public let partnerItemId: String?
-    /// Box item ID, for which the mappings should be returned,
+    /// Box item ID, for which the mappings should be returned
     public let boxItemId: String?
-    /// Box item type, for which the mappings should be returned,
+    /// Box item type, for which the mappings should be returned
     public let boxItemType: GetIntegrationMappingSlackQueryParamsArgBoxItemTypeField?
-    /// Whether the mapping has been manually created,
+    /// Whether the mapping has been manually created
     public let isManuallyCreated: Bool?
 
     /// Initializer for a GetIntegrationMappingSlackQueryParamsArg.

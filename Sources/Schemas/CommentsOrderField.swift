@@ -6,9 +6,9 @@ public class CommentsOrderField: Codable {
         case direction
     }
 
-    /// The field to order by,
+    /// The field to order by
     public let by: String?
-    /// The direction to order by, either ascending or descending,
+    /// The direction to order by, either ascending or descending
     public let direction: CommentsOrderFieldDirectionField?
 
     /// Initializer for a CommentsOrderField.

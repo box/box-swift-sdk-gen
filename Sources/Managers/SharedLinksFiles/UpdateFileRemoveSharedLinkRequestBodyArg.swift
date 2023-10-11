@@ -6,7 +6,7 @@ public class UpdateFileRemoveSharedLinkRequestBodyArg: Codable {
     }
 
     /// By setting this value to `null`, the shared link
-    /// is removed from the file.,
+    /// is removed from the file.
     public let sharedLink: UpdateFileRemoveSharedLinkRequestBodyArgSharedLinkField?
 
     /// Initializer for a UpdateFileRemoveSharedLinkRequestBodyArg.

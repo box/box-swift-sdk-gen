@@ -1,5 +1,8 @@
 import Foundation
 
+/// Comments are messages created on files. Comments
+/// can be made independently or created as responses to other
+/// comments
 public class CommentFull: Comment {
     private enum CodingKeys: String, CodingKey {
         case taggedMessage = "tagged_message"
@@ -8,7 +11,7 @@ public class CommentFull: Comment {
     /// The string representing the comment text with
     /// @mentions included. @mention format is @[id:username]
     /// where `id` is user's Box ID and `username` is
-    /// their display name.,
+    /// their display name.
     public let taggedMessage: String?
 
     /// Initializer for a CommentFull.

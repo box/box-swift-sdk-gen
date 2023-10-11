@@ -5,7 +5,7 @@ public class UpdateTermOfServiceUserStatusByIdRequestBodyArg: Codable {
         case isAccepted = "is_accepted"
     }
 
-    /// Whether the user has accepted the terms.,
+    /// Whether the user has accepted the terms.
     public let isAccepted: Bool
 
     /// Initializer for a UpdateTermOfServiceUserStatusByIdRequestBodyArg.

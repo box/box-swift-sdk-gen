@@ -1,5 +1,7 @@
 import Foundation
 
+/// The basic representation of an upload
+/// session chunk.
 public class UploadPartMini: Codable {
     private enum CodingKeys: String, CodingKey {
         case partId = "part_id"
@@ -7,13 +9,13 @@ public class UploadPartMini: Codable {
         case size
     }
 
-    /// The unique ID of the chunk.,
+    /// The unique ID of the chunk.
     public let partId: String?
     /// The offset of the chunk within the file
     /// in bytes. The lower bound of the position
-    /// of the chunk within the file.,
+    /// of the chunk within the file.
     public let offset: Int64?
-    /// The size of the chunk in bytes.,
+    /// The size of the chunk in bytes.
     public let size: Int64?
 
     /// Initializer for a UploadPartMini.

@@ -6,9 +6,9 @@ public class CreateLegalHoldPolicyAssignmentRequestBodyArgAssignToField: Codable
         case id
     }
 
-    /// The type of item to assign the policy to,
+    /// The type of item to assign the policy to
     public let type: CreateLegalHoldPolicyAssignmentRequestBodyArgAssignToFieldTypeField
-    /// The ID of item to assign the policy to,
+    /// The ID of item to assign the policy to
     public let id: String
 
     /// Initializer for a CreateLegalHoldPolicyAssignmentRequestBodyArgAssignToField.

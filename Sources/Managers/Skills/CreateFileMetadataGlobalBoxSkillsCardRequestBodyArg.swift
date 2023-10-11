@@ -5,7 +5,7 @@ public class CreateFileMetadataGlobalBoxSkillsCardRequestBodyArg: Codable {
         case cards
     }
 
-    /// A list of Box Skill cards to apply to this file.,
+    /// A list of Box Skill cards to apply to this file.
     public let cards: [KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard]
 
     /// Initializer for a CreateFileMetadataGlobalBoxSkillsCardRequestBodyArg.

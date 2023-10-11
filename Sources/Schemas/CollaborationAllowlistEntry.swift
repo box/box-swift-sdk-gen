@@ -1,5 +1,7 @@
 import Foundation
 
+/// An entry that describes an approved domain for which users can collaborate
+/// with files and folders in your enterprise or vice versa.
 public class CollaborationAllowlistEntry: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -10,16 +12,16 @@ public class CollaborationAllowlistEntry: Codable {
         case createdAt = "created_at"
     }
 
-    /// The unique identifier for this entry,
+    /// The unique identifier for this entry
     public let id: String?
-    /// `collaboration_whitelist_entry`,
+    /// `collaboration_whitelist_entry`
     public let type: CollaborationAllowlistEntryTypeField?
-    /// The whitelisted domain,
+    /// The whitelisted domain
     public let domain: String?
-    /// The direction of the collaborations to allow.,
+    /// The direction of the collaborations to allow.
     public let direction: CollaborationAllowlistEntryDirectionField?
     public let enterprise: CollaborationAllowlistEntryEnterpriseField?
-    /// The time the entry was created at,
+    /// The time the entry was created at
     public let createdAt: String?
 
     /// Initializer for a CollaborationAllowlistEntry.

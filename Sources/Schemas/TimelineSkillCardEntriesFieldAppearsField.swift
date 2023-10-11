@@ -7,10 +7,10 @@ public class TimelineSkillCardEntriesFieldAppearsField: Codable {
     }
 
     /// The time in seconds when an
-    /// entry should start appearing on a timeline.,
+    /// entry should start appearing on a timeline.
     public let start: Int?
     /// The time in seconds when an
-    /// entry should stop appearing on a timeline.,
+    /// entry should stop appearing on a timeline.
     public let end: Int?
 
     /// Initializer for a TimelineSkillCardEntriesFieldAppearsField.

@@ -1,5 +1,5 @@
 import Foundation
 
 public enum IntegrationMappingBaseIntegrationTypeField: String, CodableStringEnum {
-    case slack = "slack"
+    case slack
 }

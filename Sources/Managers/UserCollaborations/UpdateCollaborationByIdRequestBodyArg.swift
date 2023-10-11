@@ -8,11 +8,11 @@ public class UpdateCollaborationByIdRequestBodyArg: Codable {
         case canViewPath = "can_view_path"
     }
 
-    /// The level of access granted.,
+    /// The level of access granted.
     public let role: UpdateCollaborationByIdRequestBodyArgRoleField
     /// <!--alex ignore reject-->
     /// Set the status of a `pending` collaboration invitation,
-    /// effectively accepting, or rejecting the invite.,
+    /// effectively accepting, or rejecting the invite.
     public let status: UpdateCollaborationByIdRequestBodyArgStatusField?
     /// Update the expiration date for the collaboration. At this date,
     /// the collaboration will be automatically removed from the item.
@@ -26,7 +26,7 @@ public class UpdateCollaborationByIdRequestBodyArg: Codable {
     /// 
     /// Additionally, a collaboration can only be given an
     /// expiration if it was created after the **Automatically remove
-    /// invited collaborator** setting was enabled.,
+    /// invited collaborator** setting was enabled.
     public let expiresAt: String?
     /// Determines if the invited users can see the entire parent path to
     /// the associated folder. The user will not gain privileges in any
@@ -40,7 +40,7 @@ public class UpdateCollaborationByIdRequestBodyArg: Codable {
     /// Only owner or co-owners can invite collaborators with a `can_view_path` of
     /// `true`.
     /// 
-    /// `can_view_path` can only be used for folder collaborations.,
+    /// `can_view_path` can only be used for folder collaborations.
     public let canViewPath: Bool?
 
     /// Initializer for a UpdateCollaborationByIdRequestBodyArg.

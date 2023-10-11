@@ -9,6 +9,13 @@ public class SignTemplatesManager {
         self.networkSession = networkSession
     }
 
+    /// Gets Box Sign templates created by a user.
+    ///
+    /// - Parameters:
+    ///   - queryParams: Query parameters of getSignTemplates method
+    ///   - headers: Headers of getSignTemplates method
+    /// - Returns: The `SignTemplates`.
+    /// - Throws: The `GeneralError`.
     public func getSignTemplates(queryParams: GetSignTemplatesQueryParamsArg = GetSignTemplatesQueryParamsArg(), headers: GetSignTemplatesHeadersArg = GetSignTemplatesHeadersArg()) async throws -> SignTemplates {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
@@ -16,6 +23,14 @@ public class SignTemplatesManager {
         return try SignTemplates.deserialize(from: response.text)
     }
 
+    /// Fetches details of a specific Box Sign template.
+    ///
+    /// - Parameters:
+    ///   - templateId: The ID of a Box Sign template.
+    ///     Example: "123075213-7d117509-8f05-42e4-a5ef-5190a319d41d"
+    ///   - headers: Headers of getSignTemplateById method
+    /// - Returns: The `SignTemplate`.
+    /// - Throws: The `GeneralError`.
     public func getSignTemplateById(templateId: String, headers: GetSignTemplateByIdHeadersArg = GetSignTemplateByIdHeadersArg()) async throws -> SignTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/sign_templates/")\(templateId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))

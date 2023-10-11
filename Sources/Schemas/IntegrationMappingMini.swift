@@ -1,5 +1,7 @@
 import Foundation
 
+/// A mini representation of an
+/// integration mapping object.
 public class IntegrationMappingMini: IntegrationMappingBase {
     private enum CodingKeys: String, CodingKey {
         case partnerItemId = "partner_item_id"
@@ -8,13 +10,13 @@ public class IntegrationMappingMini: IntegrationMappingBase {
         case boxItemType = "box_item_type"
     }
 
-    /// ID of the mapped partner item,
+    /// ID of the mapped partner item
     public let partnerItemId: String?
-    /// Domain-specific type of the mapped partner item,
+    /// Domain-specific type of the mapped partner item
     public let partnerItemType: IntegrationMappingMiniPartnerItemTypeField?
-    /// ID of the Box item mapped to the object referenced in `partner_item_id`,
+    /// ID of the Box item mapped to the object referenced in `partner_item_id`
     public let boxItemId: String?
-    /// Type of the Box object referenced in `box_item_id`,
+    /// Type of the Box object referenced in `box_item_id`
     public let boxItemType: IntegrationMappingMiniBoxItemTypeField?
 
     /// Initializer for a IntegrationMappingMini.

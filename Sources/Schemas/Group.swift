@@ -1,14 +1,16 @@
 import Foundation
 
+/// A standard representation of a group, as returned from any
+/// group API endpoints by default
 public class Group: GroupMini {
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
         case modifiedAt = "modified_at"
     }
 
-    /// When the group object was created,
+    /// When the group object was created
     public let createdAt: String?
-    /// When the group object was last modified,
+    /// When the group object was last modified
     public let modifiedAt: String?
 
     /// Initializer for a Group.

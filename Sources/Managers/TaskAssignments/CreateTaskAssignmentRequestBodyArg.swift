@@ -6,9 +6,9 @@ public class CreateTaskAssignmentRequestBodyArg: Codable {
         case assignTo = "assign_to"
     }
 
-    /// The task to assign to a user.,
+    /// The task to assign to a user.
     public let task: CreateTaskAssignmentRequestBodyArgTaskField
-    /// The user to assign the task to.,
+    /// The user to assign the task to.
     public let assignTo: CreateTaskAssignmentRequestBodyArgAssignToField
 
     /// Initializer for a CreateTaskAssignmentRequestBodyArg.

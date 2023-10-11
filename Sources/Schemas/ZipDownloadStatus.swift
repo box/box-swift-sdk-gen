@@ -1,5 +1,6 @@
 import Foundation
 
+/// The status of a `zip` archive being downloaded.
 public class ZipDownloadStatus: Codable {
     private enum CodingKeys: String, CodingKey {
         case totalFileCount = "total_file_count"
@@ -9,21 +10,21 @@ public class ZipDownloadStatus: Codable {
         case state
     }
 
-    /// The total number of files in the archive.,
+    /// The total number of files in the archive.
     public let totalFileCount: Int?
-    /// The number of files that have already been downloaded.,
+    /// The number of files that have already been downloaded.
     public let downloadedFileCount: Int?
     /// The number of files that have been skipped as they could not be
     /// downloaded. In many cases this is due to permission issues that have
     /// surfaced between the creation of the request for the archive and the
-    /// archive being downloaded.,
+    /// archive being downloaded.
     public let skippedFileCount: Int?
     /// The number of folders that have been skipped as they could not be
     /// downloaded. In many cases this is due to permission issues that have
     /// surfaced between the creation of the request for the archive and the
-    /// archive being downloaded.,
+    /// archive being downloaded.
     public let skippedFolderCount: Int?
-    /// The state of the archive being downloaded.,
+    /// The state of the archive being downloaded.
     public let state: ZipDownloadStatusStateField?
 
     /// Initializer for a ZipDownloadStatus.

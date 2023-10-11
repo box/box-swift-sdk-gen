@@ -1,14 +1,15 @@
 import Foundation
 
+/// A list of task assignments
 public class TaskAssignments: Codable {
     private enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
         case entries
     }
 
-    /// The total number of items in this collection.,
+    /// The total number of items in this collection.
     public let totalCount: Int64?
-    /// A list of task assignments,
+    /// A list of task assignments
     public let entries: [TaskAssignment]?
 
     /// Initializer for a TaskAssignments.

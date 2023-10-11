@@ -8,13 +8,13 @@ public class LegalHoldPolicyAssignmentCountsField: Codable {
         case fileVersion = "file_version"
     }
 
-    /// The number of users this policy is applied to,
+    /// The number of users this policy is applied to
     public let user: Int64?
-    /// The number of folders this policy is applied to,
+    /// The number of folders this policy is applied to
     public let folder: Int64?
-    /// The number of files this policy is applied to,
+    /// The number of files this policy is applied to
     public let file: Int64?
-    /// The number of file versions this policy is applied to,
+    /// The number of file versions this policy is applied to
     public let fileVersion: Int64?
 
     /// Initializer for a LegalHoldPolicyAssignmentCountsField.

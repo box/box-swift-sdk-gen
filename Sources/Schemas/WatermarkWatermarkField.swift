@@ -6,9 +6,9 @@ public class WatermarkWatermarkField: Codable {
         case modifiedAt = "modified_at"
     }
 
-    /// When this watermark was created,
+    /// When this watermark was created
     public let createdAt: String?
-    /// When this task was modified,
+    /// When this task was modified
     public let modifiedAt: String?
 
     /// Initializer for a WatermarkWatermarkField.

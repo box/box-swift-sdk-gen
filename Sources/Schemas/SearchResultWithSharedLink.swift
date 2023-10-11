@@ -1,5 +1,11 @@
 import Foundation
 
+/// A single of files, folder or web link that matched the search query,
+/// including the additional information about the shared link through
+/// which the item has been shared with the user.
+/// 
+/// This response format is only returned when the
+/// `include_recent_shared_links` query parameter has been set to `true`.
 public class SearchResultWithSharedLink: Codable {
     private enum CodingKeys: String, CodingKey {
         case accessibleViaSharedLink = "accessible_via_shared_link"
@@ -10,10 +16,10 @@ public class SearchResultWithSharedLink: Codable {
     /// The optional shared link through which the user has access to this
     /// item. This value is only returned for items for which the user has
     /// recently accessed the file through a shared link. For all other
-    /// items this value will return `null`.,
+    /// items this value will return `null`.
     public let accessibleViaSharedLink: String?
     public let item: FileOrFolderOrWebLink?
-    /// The result type. The value is always `search_result`.,
+    /// The result type. The value is always `search_result`.
     public let type: String?
 
     /// Initializer for a SearchResultWithSharedLink.

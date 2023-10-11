@@ -6,7 +6,7 @@ public class TransferOwnedFolderRequestBodyArgOwnedByField: Codable {
     }
 
     /// The ID of the user who the folder will be
-    /// transferred to,
+    /// transferred to
     public let id: String
 
     /// Initializer for a TransferOwnedFolderRequestBodyArgOwnedByField.

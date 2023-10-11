@@ -11,7 +11,7 @@ public class CreateMetadataCascadePolicyApplyRequestBodyArg: Codable {
     /// 
     /// * `none` will preserve the existing value on the file
     /// * `overwrite` will force-apply the templates values over
-    ///   any existing values.,
+    ///   any existing values.
     public let conflictResolution: CreateMetadataCascadePolicyApplyRequestBodyArgConflictResolutionField
 
     /// Initializer for a CreateMetadataCascadePolicyApplyRequestBodyArg.

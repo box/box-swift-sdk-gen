@@ -6,9 +6,9 @@ public class CreateCollaborationWhitelistEntryRequestBodyArg: Codable {
         case direction
     }
 
-    /// The domain to add to the list of allowed domains.,
+    /// The domain to add to the list of allowed domains.
     public let domain: String
-    /// The direction in which to allow collaborations.,
+    /// The direction in which to allow collaborations.
     public let direction: CreateCollaborationWhitelistEntryRequestBodyArgDirectionField
 
     /// Initializer for a CreateCollaborationWhitelistEntryRequestBodyArg.

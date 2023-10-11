@@ -1,5 +1,7 @@
 import Foundation
 
+/// File-Version-Legal-Hold is an entity representing all
+/// holds on a File Version.
 public class FileVersionLegalHold: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -10,16 +12,16 @@ public class FileVersionLegalHold: Codable {
         case deletedAt = "deleted_at"
     }
 
-    /// The unique identifier for this file version legal hold,
+    /// The unique identifier for this file version legal hold
     public let id: String?
-    /// `file_version_legal_hold`,
+    /// `file_version_legal_hold`
     public let type: FileVersionLegalHoldTypeField?
     public let fileVersion: FileVersionMini?
     public let file: FileMini?
-    /// List of assignments contributing to this Hold.,
+    /// List of assignments contributing to this Hold.
     public let legalHoldPolicyAssignments: [LegalHoldPolicyAssignment]?
     /// Time that this File-Version-Legal-Hold was
-    /// deleted.,
+    /// deleted.
     public let deletedAt: String?
 
     /// Initializer for a FileVersionLegalHold.

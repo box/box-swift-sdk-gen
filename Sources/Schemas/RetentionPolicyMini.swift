@@ -1,5 +1,7 @@
 import Foundation
 
+/// A mini representation of a retention policy, used when
+/// nested within another resource.
 public class RetentionPolicyMini: RetentionPolicyBase {
     private enum CodingKeys: String, CodingKey {
         case policyName = "policy_name"
@@ -7,14 +9,14 @@ public class RetentionPolicyMini: RetentionPolicyBase {
         case dispositionAction = "disposition_action"
     }
 
-    /// The name given to the retention policy.,
+    /// The name given to the retention policy.
     public let policyName: String?
     /// The length of the retention policy. This value
     /// specifies the duration in days that the retention
     /// policy will be active for after being assigned to
     /// content.  If the policy has a `policy_type` of
     /// `indefinite`, the `retention_length` will also be
-    /// `indefinite`.,
+    /// `indefinite`.
     public let retentionLength: String?
     /// The disposition action of the retention policy.
     /// This action can be `permanently_delete`, which
@@ -22,7 +24,7 @@ public class RetentionPolicyMini: RetentionPolicyBase {
     /// to be permanently deleted, or `remove_retention`,
     /// which will lift the retention policy from the content,
     /// allowing it to be deleted by users,
-    /// once the retention policy has expired.,
+    /// once the retention policy has expired.
     public let dispositionAction: RetentionPolicyMiniDispositionActionField?
 
     /// Initializer for a RetentionPolicyMini.

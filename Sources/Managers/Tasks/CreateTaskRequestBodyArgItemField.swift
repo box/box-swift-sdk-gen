@@ -6,9 +6,9 @@ public class CreateTaskRequestBodyArgItemField: Codable {
         case type
     }
 
-    /// The ID of the file,
+    /// The ID of the file
     public let id: String?
-    /// `file`,
+    /// `file`
     public let type: CreateTaskRequestBodyArgItemFieldTypeField?
 
     /// Initializer for a CreateTaskRequestBodyArgItemField.

@@ -1,5 +1,9 @@
 import Foundation
 
+/// Collaborations define access permissions for users and groups to files and
+/// folders, similar to access control lists. A collaboration object grants a
+/// user or group access to a file or folder with permissions defined by a
+/// specific role.
 public class Collaboration: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -18,36 +22,36 @@ public class Collaboration: Codable {
         case acceptanceRequirementsStatus = "acceptance_requirements_status"
     }
 
-    /// The unique identifier for this collaboration.,
+    /// The unique identifier for this collaboration.
     public let id: String?
-    /// `collaboration`,
+    /// `collaboration`
     public let type: CollaborationTypeField?
     public let item: FileOrFolderOrWebLink?
     public let accessibleBy: GroupMiniOrUserCollaborations?
     /// The email address used to invite an unregistered collaborator, if
-    /// they are not a registered user.,
+    /// they are not a registered user.
     public let inviteEmail: String?
-    /// The level of access granted.,
+    /// The level of access granted.
     public let role: CollaborationRoleField?
     /// When the collaboration will expire, or `null` if no expiration
-    /// date is set.,
+    /// date is set.
     public let expiresAt: String?
     /// The status of the collaboration invitation. If the status
-    /// is `pending`, `login` and `name` return an empty string.,
+    /// is `pending`, `login` and `name` return an empty string.
     public let status: CollaborationStatusField?
     /// When the `status` of the collaboration object changed to
-    /// `accepted` or `rejected`.,
+    /// `accepted` or `rejected`.
     public let acknowledgedAt: String?
     public let createdBy: UserCollaborations?
-    /// When the collaboration object was created.,
+    /// When the collaboration object was created.
     public let createdAt: String?
-    /// When the collaboration object was last modified.,
+    /// When the collaboration object was last modified.
     public let modifiedAt: String?
     /// If set to `true`, collaborators have access to
     /// shared items, but such items won't be visible in the
     /// All Files list. Additionally, collaborators won't
     /// see the the path to the root folder for the
-    /// shared item.,
+    /// shared item.
     public let isAccessOnly: Bool?
     public let acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField?
 

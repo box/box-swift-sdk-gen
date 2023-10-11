@@ -10,17 +10,17 @@ public class UploadSessionSessionEndpointsField: Codable {
         case logEvent = "log_event"
     }
 
-    /// The URL to upload parts to,
+    /// The URL to upload parts to
     public let uploadPart: String?
-    /// The URL used to commit the file,
+    /// The URL used to commit the file
     public let commit: String?
-    /// The URL for used to abort the session.,
+    /// The URL for used to abort the session.
     public let abort: String?
-    /// The URL users to list all parts.,
+    /// The URL users to list all parts.
     public let listParts: String?
-    /// The URL used to get the status of the upload.,
+    /// The URL used to get the status of the upload.
     public let status: String?
-    /// The URL used to get the upload log from.,
+    /// The URL used to get the upload log from.
     public let logEvent: String?
 
     /// Initializer for a UploadSessionSessionEndpointsField.

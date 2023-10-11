@@ -9,6 +9,21 @@ public class TrashedItemsManager {
         self.networkSession = networkSession
     }
 
+    /// Retrieves the files and folders that have been moved
+    /// to the trash.
+    /// 
+    /// Any attribute in the full files or folders objects can be passed
+    /// in with the `fields` parameter to retrieve those specific
+    /// attributes that are not returned by default.
+    /// 
+    /// This endpoint defaults to use offset-based pagination, yet also supports
+    /// marker-based pagination using the `marker` parameter.
+    ///
+    /// - Parameters:
+    ///   - queryParams: Query parameters of getFolderTrashItems method
+    ///   - headers: Headers of getFolderTrashItems method
+    /// - Returns: The `Items`.
+    /// - Throws: The `GeneralError`.
     public func getFolderTrashItems(queryParams: GetFolderTrashItemsQueryParamsArg = GetFolderTrashItemsQueryParamsArg(), headers: GetFolderTrashItemsHeadersArg = GetFolderTrashItemsHeadersArg()) async throws -> Items {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "limit": Utils.Strings.toString(value: queryParams.limit), "offset": Utils.Strings.toString(value: queryParams.offset), "usemarker": Utils.Strings.toString(value: queryParams.usemarker), "marker": Utils.Strings.toString(value: queryParams.marker), "direction": Utils.Strings.toString(value: queryParams.direction), "sort": Utils.Strings.toString(value: queryParams.sort)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))

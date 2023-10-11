@@ -1,5 +1,7 @@
 import Foundation
 
+/// A standard representation
+/// of a shield information barrier report object
 public class ShieldInformationBarrierReport: ShieldInformationBarrierReportBase {
     private enum CodingKeys: String, CodingKey {
         case shieldInformationBarrier = "shield_information_barrier"
@@ -11,15 +13,15 @@ public class ShieldInformationBarrierReport: ShieldInformationBarrierReportBase 
     }
 
     public let shieldInformationBarrier: ShieldInformationBarrierReference?
-    /// Status of the shield information report,
+    /// Status of the shield information report
     public let status: ShieldInformationBarrierReportStatusField?
     public let details: ShieldInformationBarrierReportDetails?
     /// ISO date time string when this
-    /// shield information barrier report object was created.,
+    /// shield information barrier report object was created.
     public let createdAt: String?
     public let createdBy: UserBase?
     /// ISO date time string when this
-    /// shield information barrier report was updated.,
+    /// shield information barrier report was updated.
     public let updatedAt: String?
 
     /// Initializer for a ShieldInformationBarrierReport.

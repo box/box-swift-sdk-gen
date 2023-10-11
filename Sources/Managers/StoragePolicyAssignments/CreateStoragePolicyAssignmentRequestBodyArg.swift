@@ -7,10 +7,10 @@ public class CreateStoragePolicyAssignmentRequestBodyArg: Codable {
     }
 
     /// The storage policy to assign to the user or
-    /// enterprise,
+    /// enterprise
     public let storagePolicy: CreateStoragePolicyAssignmentRequestBodyArgStoragePolicyField
     /// The user or enterprise to assign the storage
-    /// policy to.,
+    /// policy to.
     public let assignedTo: CreateStoragePolicyAssignmentRequestBodyArgAssignedToField
 
     /// Initializer for a CreateStoragePolicyAssignmentRequestBodyArg.

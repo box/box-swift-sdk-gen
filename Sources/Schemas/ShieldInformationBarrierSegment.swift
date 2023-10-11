@@ -1,5 +1,6 @@
 import Foundation
 
+/// A shield information barrier segment object
 public class ShieldInformationBarrierSegment: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -13,21 +14,21 @@ public class ShieldInformationBarrierSegment: Codable {
         case updatedBy = "updated_by"
     }
 
-    /// The unique identifier for the shield information barrier segment,
+    /// The unique identifier for the shield information barrier segment
     public let id: String?
-    /// The type of the shield information barrier segment,
+    /// The type of the shield information barrier segment
     public let type: ShieldInformationBarrierSegmentTypeField?
     public let shieldInformationBarrier: ShieldInformationBarrierBase?
-    /// Name of the shield information barrier segment,
+    /// Name of the shield information barrier segment
     public let name: String?
-    /// Description of the shield information barrier segment,
+    /// Description of the shield information barrier segment
     public let description: String?
     /// ISO date time string when this shield information
-    /// barrier object was created.,
+    /// barrier object was created.
     public let createdAt: String?
     public let createdBy: UserBase?
     /// ISO date time string when this
-    /// shield information barrier segment was updated.,
+    /// shield information barrier segment was updated.
     public let updatedAt: String?
     public let updatedBy: UserBase?
 

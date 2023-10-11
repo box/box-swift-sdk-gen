@@ -1,14 +1,15 @@
 import Foundation
 
+/// An OAuth 2.0 error
 public class OAuth2Error: Codable {
     private enum CodingKeys: String, CodingKey {
         case error
         case errorDescription = "error_description"
     }
 
-    /// The type of the error returned.,
+    /// The type of the error returned.
     public let error: String?
-    /// The type of the error returned.,
+    /// The type of the error returned.
     public let errorDescription: String?
 
     /// Initializer for a OAuth2Error.

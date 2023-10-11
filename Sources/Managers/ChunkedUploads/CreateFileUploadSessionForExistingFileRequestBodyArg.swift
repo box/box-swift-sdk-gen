@@ -6,9 +6,9 @@ public class CreateFileUploadSessionForExistingFileRequestBodyArg: Codable {
         case fileName = "file_name"
     }
 
-    /// The total number of bytes of the file to be uploaded,
+    /// The total number of bytes of the file to be uploaded
     public let fileSize: Int64
-    /// The optional new name of new file,
+    /// The optional new name of new file
     public let fileName: String?
 
     /// Initializer for a CreateFileUploadSessionForExistingFileRequestBodyArg.

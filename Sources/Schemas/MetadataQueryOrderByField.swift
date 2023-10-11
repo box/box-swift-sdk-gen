@@ -9,12 +9,12 @@ public class MetadataQueryOrderByField: Codable {
     /// The metadata template field to order by.
     /// 
     /// The `field_key` represents the `key` value of a field from the
-    /// metadata template being searched for.,
+    /// metadata template being searched for.
     public let fieldKey: String?
     /// The direction to order by, either ascending or descending.
     /// 
     /// The `ordering` direction must be the same for each item in the
-    /// array.,
+    /// array.
     public let direction: MetadataQueryOrderByFieldDirectionField?
 
     /// Initializer for a MetadataQueryOrderByField.

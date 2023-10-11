@@ -1,5 +1,6 @@
 import Foundation
 
+/// The details for the upload session for the file.
 public class UploadUrl: Codable {
     private enum CodingKeys: String, CodingKey {
         case uploadUrl = "upload_url"
@@ -7,9 +8,9 @@ public class UploadUrl: Codable {
     }
 
     /// A URL for an upload session that can be used to upload
-    /// the file.,
+    /// the file.
     public let uploadUrl: String?
-    /// An optional access token to use to upload the file,
+    /// An optional access token to use to upload the file
     public let uploadToken: String?
 
     /// Initializer for a UploadUrl.

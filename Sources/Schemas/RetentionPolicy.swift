@@ -1,5 +1,11 @@
 import Foundation
 
+/// A retention policy blocks permanent deletion of content
+/// for a specified amount of time. Admins can create retention
+/// policies and then later assign them to specific folders, metadata
+/// templates, or their entire enterprise.  To use this feature, you must
+/// have the manage retention policies scope enabled
+/// for your API key via your application management console.
 public class RetentionPolicy: RetentionPolicyMini {
     private enum CodingKeys: String, CodingKey {
         case description
@@ -15,13 +21,13 @@ public class RetentionPolicy: RetentionPolicyMini {
         case assignmentCounts = "assignment_counts"
     }
 
-    /// The additional text description of the retention policy.,
+    /// The additional text description of the retention policy.
     public let description: String?
     /// The type of the retention policy. A retention
     /// policy type can either be `finite`, where a
     /// specific amount of time to retain the content is known
     /// upfront, or `indefinite`, where the amount of time
-    /// to retain the content is still unknown.,
+    /// to retain the content is still unknown.
     public let policyType: RetentionPolicyPolicyTypeField?
     /// Specifies the retention type:
     /// 
@@ -37,30 +43,30 @@ public class RetentionPolicy: RetentionPolicyMini {
     ///  or notification settings. You cannot perform other actions,
     ///  such as deleting the assignment or shortening the
     ///  policy duration. Use this type to ensure
-    ///  compliance with regulatory retention policies.,
+    ///  compliance with regulatory retention policies.
     public let retentionType: RetentionPolicyRetentionTypeField?
     /// The status of the retention policy. The status of
     /// a policy will be `active`, unless explicitly retired by an
     /// administrator, in which case the status will be `retired`.
     /// Once a policy has been retired, it cannot become
-    /// active again.,
+    /// active again.
     public let status: RetentionPolicyStatusField?
     public let createdBy: UserMini?
-    /// When the retention policy object was created.,
+    /// When the retention policy object was created.
     public let createdAt: String?
-    /// When the retention policy object was last modified.,
+    /// When the retention policy object was last modified.
     public let modifiedAt: String?
     /// Determines if the owner of items under the policy
     /// can extend the retention when the original
-    /// retention duration is about to end.,
+    /// retention duration is about to end.
     public let canOwnerExtendRetention: Bool?
     /// Determines if owners and co-owners of items
     /// under the policy are notified when
-    /// the retention duration is about to end.,
+    /// the retention duration is about to end.
     public let areOwnersNotified: Bool?
-    /// A list of users notified when the retention policy duration is about to end.,
+    /// A list of users notified when the retention policy duration is about to end.
     public let customNotificationRecipients: [UserMini]?
-    /// Counts the retention policy assignments for each item type.,
+    /// Counts the retention policy assignments for each item type.
     public let assignmentCounts: RetentionPolicyAssignmentCountsField?
 
     /// Initializer for a RetentionPolicy.

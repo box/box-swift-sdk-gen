@@ -6,9 +6,9 @@ public class SignTemplateAdditionalInfoField: Codable {
         case required
     }
 
-    /// Non editable fields.,
+    /// Non editable fields.
     public let nonEditable: [SignTemplateAdditionalInfoFieldNonEditableField]?
-    /// Required fields.,
+    /// Required fields.
     public let required: SignTemplateAdditionalInfoFieldRequiredField?
 
     /// Initializer for a SignTemplateAdditionalInfoField.

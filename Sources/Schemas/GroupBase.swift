@@ -1,14 +1,15 @@
 import Foundation
 
+/// A base representation of a group.
 public class GroupBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
     }
 
-    /// The unique identifier for this object,
+    /// The unique identifier for this object
     public let id: String
-    /// `group`,
+    /// `group`
     public let type: GroupBaseTypeField
 
     /// Initializer for a GroupBase.

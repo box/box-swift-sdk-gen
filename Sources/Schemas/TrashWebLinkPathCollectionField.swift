@@ -6,9 +6,9 @@ public class TrashWebLinkPathCollectionField: Codable {
         case entries
     }
 
-    /// The number of folders in this list.,
+    /// The number of folders in this list.
     public let totalCount: Int64
-    /// Array of folders for this item's path collection,
+    /// Array of folders for this item's path collection
     public let entries: [TrashWebLinkPathCollectionFieldEntriesField]
 
     /// Initializer for a TrashWebLinkPathCollectionField.

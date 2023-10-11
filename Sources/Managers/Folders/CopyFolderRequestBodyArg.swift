@@ -2,10 +2,12 @@ import Foundation
 
 public class CopyFolderRequestBodyArg: Codable {
     private enum CodingKeys: String, CodingKey {
-        case name
         case parent
+        case name
     }
 
+    /// The destination folder to copy the folder to.
+    public let parent: CopyFolderRequestBodyArgParentField
     /// An optional new name for the copied folder.
     /// 
     /// There are some restrictions to the file name. Names containing
@@ -14,14 +16,13 @@ public class CopyFolderRequestBodyArg: Codable {
     /// prohibited.
     /// 
     /// Additionally, the names `.` and `..` are
-    /// not allowed either.,
+    /// not allowed either.
     public let name: String?
-    /// The destination folder to copy the folder to.,
-    public let parent: CopyFolderRequestBodyArgParentField
 
     /// Initializer for a CopyFolderRequestBodyArg.
     ///
     /// - Parameters:
+    ///   - parent: The destination folder to copy the folder to.
     ///   - name: An optional new name for the copied folder.
     ///     
     ///     There are some restrictions to the file name. Names containing
@@ -31,21 +32,20 @@ public class CopyFolderRequestBodyArg: Codable {
     ///     
     ///     Additionally, the names `.` and `..` are
     ///     not allowed either.
-    ///   - parent: The destination folder to copy the folder to.
-    public init(name: String? = nil, parent: CopyFolderRequestBodyArgParentField) {
-        self.name = name
+    public init(parent: CopyFolderRequestBodyArgParentField, name: String? = nil) {
         self.parent = parent
+        self.name = name
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decodeIfPresent(String.self, forKey: .name)
         parent = try container.decode(CopyFolderRequestBodyArgParentField.self, forKey: .parent)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(name, forKey: .name)
         try container.encode(parent, forKey: .parent)
+        try container.encodeIfPresent(name, forKey: .name)
     }
 }

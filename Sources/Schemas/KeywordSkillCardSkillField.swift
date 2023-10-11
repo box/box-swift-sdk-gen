@@ -6,10 +6,10 @@ public class KeywordSkillCardSkillField: Codable {
         case id
     }
 
-    /// `service`,
+    /// `service`
     public let type: KeywordSkillCardSkillFieldTypeField
     /// A custom identifier that represent the service that
-    /// applied this metadata.,
+    /// applied this metadata.
     public let id: String
 
     /// Initializer for a KeywordSkillCardSkillField.

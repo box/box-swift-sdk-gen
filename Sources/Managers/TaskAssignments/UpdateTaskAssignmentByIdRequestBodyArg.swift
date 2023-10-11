@@ -6,14 +6,14 @@ public class UpdateTaskAssignmentByIdRequestBodyArg: Codable {
         case resolutionState = "resolution_state"
     }
 
-    /// An optional message by the assignee that can be added to the task.,
+    /// An optional message by the assignee that can be added to the task.
     public let message: String?
     /// The state of the task assigned to the user.
     /// 
     /// * For a task with an `action` value of `complete` this can be
     /// `incomplete` or `completed`.
     /// * For a task with an `action` of `review` this can be
-    /// `incomplete`, `approved`, or `rejected`.,
+    /// `incomplete`, `approved`, or `rejected`.
     public let resolutionState: UpdateTaskAssignmentByIdRequestBodyArgResolutionStateField?
 
     /// Initializer for a UpdateTaskAssignmentByIdRequestBodyArg.

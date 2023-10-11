@@ -1,12 +1,13 @@
 import Foundation
 
+/// A relation between a file and the scopes for which the file can be accessed
 public class FileScope: Codable {
     private enum CodingKeys: String, CodingKey {
         case scope
         case object
     }
 
-    /// The file scopes for the file access,
+    /// The file scopes for the file access
     public let scope: FileScopeScopeField?
     public let object: FileMini?
 

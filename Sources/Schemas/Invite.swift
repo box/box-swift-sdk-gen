@@ -1,5 +1,6 @@
 import Foundation
 
+/// An invite for a user to an enterprise.
 public class Invite: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -12,19 +13,19 @@ public class Invite: Codable {
         case modifiedAt = "modified_at"
     }
 
-    /// The unique identifier for this invite,
+    /// The unique identifier for this invite
     public let id: String?
-    /// `invite`,
+    /// `invite`
     public let type: InviteTypeField?
-    /// A representation of a Box enterprise,
+    /// A representation of a Box enterprise
     public let invitedTo: InviteInvitedToField?
     public let actionableBy: UserMini?
     public let invitedBy: UserMini?
-    /// The status of the invite,
+    /// The status of the invite
     public let status: String?
-    /// When the invite was created,
+    /// When the invite was created
     public let createdAt: String?
-    /// When the invite was modified.,
+    /// When the invite was modified.
     public let modifiedAt: String?
 
     /// Initializer for a Invite.

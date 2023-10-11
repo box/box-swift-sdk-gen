@@ -2,36 +2,36 @@ import Foundation
 
 public class FileRequestCopyRequestFolderField: Codable {
     private enum CodingKeys: String, CodingKey {
-        case type
         case id
+        case type
     }
 
-    /// `folder`,
-    public let type: FileRequestCopyRequestFolderFieldTypeField?
     /// The ID of the folder to associate the new
-    /// file request to.,
+    /// file request to.
     public let id: String
+    /// `folder`
+    public let type: FileRequestCopyRequestFolderFieldTypeField?
 
     /// Initializer for a FileRequestCopyRequestFolderField.
     ///
     /// - Parameters:
-    ///   - type: `folder`
     ///   - id: The ID of the folder to associate the new
     ///     file request to.
-    public init(type: FileRequestCopyRequestFolderFieldTypeField? = nil, id: String) {
-        self.type = type
+    ///   - type: `folder`
+    public init(id: String, type: FileRequestCopyRequestFolderFieldTypeField? = nil) {
         self.id = id
+        self.type = type
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decodeIfPresent(FileRequestCopyRequestFolderFieldTypeField.self, forKey: .type)
         id = try container.decode(String.self, forKey: .id)
+        type = try container.decodeIfPresent(FileRequestCopyRequestFolderFieldTypeField.self, forKey: .type)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(type, forKey: .type)
         try container.encode(id, forKey: .id)
+        try container.encodeIfPresent(type, forKey: .type)
     }
 }

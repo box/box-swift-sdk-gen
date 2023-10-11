@@ -5,7 +5,7 @@ public class CreateGroupMembershipRequestBodyArgGroupField: Codable {
         case id
     }
 
-    /// The ID of the group to add the user to,
+    /// The ID of the group to add the user to
     public let id: String
 
     /// Initializer for a CreateGroupMembershipRequestBodyArgGroupField.

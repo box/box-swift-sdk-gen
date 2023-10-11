@@ -10,13 +10,13 @@ public class WorkflowFlowsField: Codable {
         case createdBy = "created_by"
     }
 
-    /// The identifier of the flow,
+    /// The identifier of the flow
     public let id: String?
-    /// The flow's resource type,
+    /// The flow's resource type
     public let type: WorkflowFlowsFieldTypeField?
     public let trigger: WorkflowFlowsFieldTriggerField?
     public let outcomes: [WorkflowFlowsFieldOutcomesField]?
-    /// When this flow was created,
+    /// When this flow was created
     public let createdAt: String?
     public let createdBy: UserBase?
 

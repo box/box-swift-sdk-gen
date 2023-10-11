@@ -1,14 +1,15 @@
 import Foundation
 
+/// A list of metadata instances that have been applied to a file or folder.
 public class Metadatas: Codable {
     private enum CodingKeys: String, CodingKey {
         case entries
         case limit
     }
 
-    /// A list of metadata instances, as applied to this file or folder.,
+    /// A list of metadata instances, as applied to this file or folder.
     public let entries: [Metadata]?
-    /// The limit that was used for this page of results.,
+    /// The limit that was used for this page of results.
     public let limit: Int?
 
     /// Initializer for a Metadatas.

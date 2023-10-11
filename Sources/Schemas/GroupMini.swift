@@ -1,14 +1,16 @@
 import Foundation
 
+/// Mini representation of a group, including id and name of
+/// group.
 public class GroupMini: GroupBase {
     private enum CodingKeys: String, CodingKey {
         case name
         case groupType = "group_type"
     }
 
-    /// The name of the group,
+    /// The name of the group
     public let name: String?
-    /// The type of the group.,
+    /// The type of the group.
     public let groupType: GroupMiniGroupTypeField?
 
     /// Initializer for a GroupMini.

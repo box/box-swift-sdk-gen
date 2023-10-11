@@ -9,10 +9,10 @@ public class CreateCollaborationQueryParamsArg {
     /// effect that none of the standard fields are returned in
     /// the response unless explicitly specified, instead only
     /// fields for the mini representation are returned, additional
-    /// to the fields requested.,
+    /// to the fields requested.
     public let fields: [String]?
     /// Determines if users should receive email notification
-    /// for the action performed.,
+    /// for the action performed.
     public let notify: Bool?
 
     /// Initializer for a CreateCollaborationQueryParamsArg.

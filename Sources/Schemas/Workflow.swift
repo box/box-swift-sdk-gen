@@ -1,11 +1,15 @@
 import Foundation
 
+/// Box Relay Workflows are objects that represent a named collection of flows.
+/// 
+/// Your application must be authorized to use the `Manage Box Relay` application
+/// scope within the developer console in order to use this resource.
 public class Workflow: WorkflowMini {
     private enum CodingKeys: String, CodingKey {
         case flows
     }
 
-    /// A list of flows assigned to a workflow.,
+    /// A list of flows assigned to a workflow.
     public let flows: [WorkflowFlowsField]?
 
     /// Initializer for a Workflow.

@@ -16,21 +16,21 @@ public class CreateMetadataTemplateSchemaRequestBodyArgFieldsField: Codable {
     /// 
     /// Additionally, metadata templates support an `enum` field for a basic list
     /// of items, and ` multiSelect` field for a similar list of items where the
-    /// user can select more than one value.,
+    /// user can select more than one value.
     public let type: CreateMetadataTemplateSchemaRequestBodyArgFieldsFieldTypeField
     /// A unique identifier for the field. The identifier must
-    /// be unique within the template to which it belongs.,
+    /// be unique within the template to which it belongs.
     public let key: String
     /// The display name of the field as it is shown to the user in the web and
-    /// mobile apps.,
+    /// mobile apps.
     public let displayName: String
-    /// A description of the field. This is not shown to the user.,
+    /// A description of the field. This is not shown to the user.
     public let description: String?
     /// Whether this field is hidden in the UI for the user and can only be set
-    /// through the API instead.,
+    /// through the API instead.
     public let hidden: Bool?
     /// A list of options for this field. This is used in combination with the
-    /// `enum` and `multiSelect` field types.,
+    /// `enum` and `multiSelect` field types.
     public let options: [CreateMetadataTemplateSchemaRequestBodyArgFieldsFieldOptionsField]?
 
     /// Initializer for a CreateMetadataTemplateSchemaRequestBodyArgFieldsField.

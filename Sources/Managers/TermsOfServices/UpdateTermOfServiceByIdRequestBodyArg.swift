@@ -6,11 +6,11 @@ public class UpdateTermOfServiceByIdRequestBodyArg: Codable {
         case text
     }
 
-    /// Whether this terms of service is active.,
+    /// Whether this terms of service is active.
     public let status: UpdateTermOfServiceByIdRequestBodyArgStatusField
     /// The terms of service text to display to users.
     /// 
-    /// The text can be set to empty if the `status` is set to `disabled`.,
+    /// The text can be set to empty if the `status` is set to `disabled`.
     public let text: String
 
     /// Initializer for a UpdateTermOfServiceByIdRequestBodyArg.

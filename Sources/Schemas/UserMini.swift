@@ -1,14 +1,16 @@
 import Foundation
 
+/// A mini representation of a user, as can be returned when nested within other
+/// resources.
 public class UserMini: UserBase {
     private enum CodingKeys: String, CodingKey {
         case name
         case login
     }
 
-    /// The display name of this user,
+    /// The display name of this user
     public let name: String?
-    /// The primary email address of this user,
+    /// The primary email address of this user
     public let login: String?
 
     /// Initializer for a UserMini.

@@ -1,5 +1,6 @@
 import Foundation
 
+/// The assignment of a storage policy to a user or enterprise
 public class StoragePolicyAssignment: Codable {
     private enum CodingKeys: String, CodingKey {
         case storagePolicy = "storage_policy"

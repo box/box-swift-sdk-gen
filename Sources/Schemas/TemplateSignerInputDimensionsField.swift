@@ -6,9 +6,9 @@ public class TemplateSignerInputDimensionsField: Codable {
         case height
     }
 
-    /// Relative width to the page the input is on, ranging from 0 to 1.,
+    /// Relative width to the page the input is on, ranging from 0 to 1.
     public let width: Int?
-    /// Relative height to the page the input is on, ranging from 0 to 1.,
+    /// Relative height to the page the input is on, ranging from 0 to 1.
     public let height: Int?
 
     /// Initializer for a TemplateSignerInputDimensionsField.

@@ -9,6 +9,33 @@ public class FoldersManager {
         self.networkSession = networkSession
     }
 
+    /// Retrieves details for a folder, including the first 100 entries
+    /// in the folder.
+    /// 
+    /// Passing `sort`, `direction`, `offset`, and `limit`
+    /// parameters in query allows you to manage the
+    /// list of returned
+    /// [folder items](r://folder--full#param-item-collection).
+    /// 
+    /// To fetch more items within the folder, use the
+    /// [Get items in a folder](#get-folders-id-items) endpoint.
+    ///
+    /// - Parameters:
+    ///   - folderId: The unique identifier that represent a folder.
+    ///     
+    ///     The ID for any folder can be determined
+    ///     by visiting this folder in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/folder/123`
+    ///     the `folder_id` is `123`.
+    ///     
+    ///     The root folder of a Box account is
+    ///     always represented by the ID `0`.
+    ///     Example: "12345"
+    ///   - queryParams: Query parameters of getFolderById method
+    ///   - headers: Headers of getFolderById method
+    /// - Returns: The `FolderFull`.
+    /// - Throws: The `GeneralError`.
     public func getFolderById(folderId: String, queryParams: GetFolderByIdQueryParamsArg = GetFolderByIdQueryParamsArg(), headers: GetFolderByIdHeadersArg = GetFolderByIdHeadersArg()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "sort": Utils.Strings.toString(value: queryParams.sort), "direction": Utils.Strings.toString(value: queryParams.direction), "offset": Utils.Strings.toString(value: queryParams.offset), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch), "boxapi": Utils.Strings.toString(value: headers.boxapi)], headers.extraHeaders))
@@ -16,6 +43,26 @@ public class FoldersManager {
         return try FolderFull.deserialize(from: response.text)
     }
 
+    /// Updates a folder. This can be also be used to move the folder,
+    /// create shared links, update collaborations, and more.
+    ///
+    /// - Parameters:
+    ///   - folderId: The unique identifier that represent a folder.
+    ///     
+    ///     The ID for any folder can be determined
+    ///     by visiting this folder in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/folder/123`
+    ///     the `folder_id` is `123`.
+    ///     
+    ///     The root folder of a Box account is
+    ///     always represented by the ID `0`.
+    ///     Example: "12345"
+    ///   - requestBody: Request body of updateFolderById method
+    ///   - queryParams: Query parameters of updateFolderById method
+    ///   - headers: Headers of updateFolderById method
+    /// - Returns: The `FolderFull`.
+    /// - Throws: The `GeneralError`.
     public func updateFolderById(folderId: String, requestBody: UpdateFolderByIdRequestBodyArg = UpdateFolderByIdRequestBodyArg(), queryParams: UpdateFolderByIdQueryParamsArg = UpdateFolderByIdQueryParamsArg(), headers: UpdateFolderByIdHeadersArg = UpdateFolderByIdHeadersArg()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-match": Utils.Strings.toString(value: headers.ifMatch)], headers.extraHeaders))
@@ -23,12 +70,52 @@ public class FoldersManager {
         return try FolderFull.deserialize(from: response.text)
     }
 
+    /// Deletes a folder, either permanently or by moving it to
+    /// the trash.
+    ///
+    /// - Parameters:
+    ///   - folderId: The unique identifier that represent a folder.
+    ///     
+    ///     The ID for any folder can be determined
+    ///     by visiting this folder in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/folder/123`
+    ///     the `folder_id` is `123`.
+    ///     
+    ///     The root folder of a Box account is
+    ///     always represented by the ID `0`.
+    ///     Example: "12345"
+    ///   - queryParams: Query parameters of deleteFolderById method
+    ///   - headers: Headers of deleteFolderById method
+    /// - Throws: The `GeneralError`.
     public func deleteFolderById(folderId: String, queryParams: DeleteFolderByIdQueryParamsArg = DeleteFolderByIdQueryParamsArg(), headers: DeleteFolderByIdHeadersArg = DeleteFolderByIdHeadersArg()) async throws {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["recursive": Utils.Strings.toString(value: queryParams.recursive)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-match": Utils.Strings.toString(value: headers.ifMatch)], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)", options: FetchOptions(method: "DELETE", params: queryParamsMap, headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
+    /// Retrieves a page of items in a folder. These items can be files,
+    /// folders, and web links.
+    /// 
+    /// To request more information about the folder itself, like its size,
+    /// use the [Get a folder](#get-folders-id) endpoint instead.
+    ///
+    /// - Parameters:
+    ///   - folderId: The unique identifier that represent a folder.
+    ///     
+    ///     The ID for any folder can be determined
+    ///     by visiting this folder in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/folder/123`
+    ///     the `folder_id` is `123`.
+    ///     
+    ///     The root folder of a Box account is
+    ///     always represented by the ID `0`.
+    ///     Example: "12345"
+    ///   - queryParams: Query parameters of getFolderItems method
+    ///   - headers: Headers of getFolderItems method
+    /// - Returns: The `Items`.
+    /// - Throws: The `GeneralError`.
     public func getFolderItems(folderId: String, queryParams: GetFolderItemsQueryParamsArg = GetFolderItemsQueryParamsArg(), headers: GetFolderItemsHeadersArg = GetFolderItemsHeadersArg()) async throws -> Items {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "usemarker": Utils.Strings.toString(value: queryParams.usemarker), "marker": Utils.Strings.toString(value: queryParams.marker), "offset": Utils.Strings.toString(value: queryParams.offset), "limit": Utils.Strings.toString(value: queryParams.limit), "sort": Utils.Strings.toString(value: queryParams.sort), "direction": Utils.Strings.toString(value: queryParams.direction)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["boxapi": Utils.Strings.toString(value: headers.boxapi)], headers.extraHeaders))
@@ -36,6 +123,14 @@ public class FoldersManager {
         return try Items.deserialize(from: response.text)
     }
 
+    /// Creates a new empty folder within the specified parent folder.
+    ///
+    /// - Parameters:
+    ///   - requestBody: Request body of createFolder method
+    ///   - queryParams: Query parameters of createFolder method
+    ///   - headers: Headers of createFolder method
+    /// - Returns: The `FolderFull`.
+    /// - Throws: The `GeneralError`.
     public func createFolder(requestBody: CreateFolderRequestBodyArg, queryParams: CreateFolderQueryParamsArg = CreateFolderQueryParamsArg(), headers: CreateFolderHeadersArg = CreateFolderHeadersArg()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
@@ -43,6 +138,26 @@ public class FoldersManager {
         return try FolderFull.deserialize(from: response.text)
     }
 
+    /// Creates a copy of a folder within a destination folder.
+    /// 
+    /// The original folder will not be changed.
+    ///
+    /// - Parameters:
+    ///   - folderId: The unique identifier of the folder to copy.
+    ///     
+    ///     The ID for any folder can be determined
+    ///     by visiting this folder in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/folder/123`
+    ///     the `folder_id` is `123`.
+    ///     
+    ///     The root folder with the ID `0` can not be copied.
+    ///     Example: "0"
+    ///   - requestBody: Request body of copyFolder method
+    ///   - queryParams: Query parameters of copyFolder method
+    ///   - headers: Headers of copyFolder method
+    /// - Returns: The `FolderFull`.
+    /// - Throws: The `GeneralError`.
     public func copyFolder(folderId: String, requestBody: CopyFolderRequestBodyArg, queryParams: CopyFolderQueryParamsArg = CopyFolderQueryParamsArg(), headers: CopyFolderHeadersArg = CopyFolderHeadersArg()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))

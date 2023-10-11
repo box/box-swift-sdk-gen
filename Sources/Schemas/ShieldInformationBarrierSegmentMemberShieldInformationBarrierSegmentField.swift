@@ -7,9 +7,9 @@ public class ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmen
     }
 
     /// The ID reference of the requesting
-    /// shield information barrier segment.,
+    /// shield information barrier segment.
     public let id: String?
-    /// The type of the shield information barrier segment,
+    /// The type of the shield information barrier segment
     public let type: ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentFieldTypeField?
 
     /// Initializer for a ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentField.

@@ -8,9 +8,9 @@ public class CreateShieldInformationBarrierSegmentRequestBodyArg: Codable {
     }
 
     public let shieldInformationBarrier: ShieldInformationBarrierBase
-    /// Name of the shield information barrier segment,
+    /// Name of the shield information barrier segment
     public let name: String
-    /// Description of the shield information barrier segment,
+    /// Description of the shield information barrier segment
     public let description: String?
 
     /// Initializer for a CreateShieldInformationBarrierSegmentRequestBodyArg.

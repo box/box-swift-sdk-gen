@@ -1,5 +1,6 @@
 import Foundation
 
+/// A page of files and folders that matched the metadata query.
 public class MetadataQueryResults: Codable {
     private enum CodingKeys: String, CodingKey {
         case entries
@@ -12,13 +13,13 @@ public class MetadataQueryResults: Codable {
     /// 
     /// By default, this endpoint returns only the most basic info about the
     /// items. To get additional fields for each item, including any of the
-    /// metadata, use the `fields` attribute in the query.,
+    /// metadata, use the `fields` attribute in the query.
     public let entries: [FileOrFolder]?
     /// The limit that was used for this search. This will be the same as the
     /// `limit` query parameter unless that value exceeded the maximum value
-    /// allowed.,
+    /// allowed.
     public let limit: Int64?
-    /// The marker for the start of the next page of results.,
+    /// The marker for the start of the next page of results.
     public let nextMarker: String?
 
     /// Initializer for a MetadataQueryResults.

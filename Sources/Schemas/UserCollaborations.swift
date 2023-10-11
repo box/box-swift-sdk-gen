@@ -1,14 +1,16 @@
 import Foundation
 
+/// A mini representation of a user, can be returned only when
+/// the status is `pending`.
 public class UserCollaborations: UserBase {
     private enum CodingKeys: String, CodingKey {
         case name
         case login
     }
 
-    /// The display name of this user. If the collaboration status is `pending`, an empty string is returned.,
+    /// The display name of this user. If the collaboration status is `pending`, an empty string is returned.
     public let name: String?
-    /// The primary email address of this user. If the collaboration status is `pending`, an empty string is returned.,
+    /// The primary email address of this user. If the collaboration status is `pending`, an empty string is returned.
     public let login: String?
 
     /// Initializer for a UserCollaborations.

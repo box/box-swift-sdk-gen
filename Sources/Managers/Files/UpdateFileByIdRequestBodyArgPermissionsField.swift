@@ -12,7 +12,7 @@ public class UpdateFileByIdRequestBodyArgPermissionsField: Codable {
     /// This setting overrides the download permissions that are
     /// normally part of the `role` of a collaboration. When set to
     /// `company`, this essentially removes the download option for
-    /// external users with `viewer` or `editor` a roles.,
+    /// external users with `viewer` or `editor` a roles.
     public let canDownload: UpdateFileByIdRequestBodyArgPermissionsFieldCanDownloadField?
 
     /// Initializer for a UpdateFileByIdRequestBodyArgPermissionsField.

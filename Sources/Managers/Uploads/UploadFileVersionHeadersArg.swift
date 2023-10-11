@@ -7,12 +7,12 @@ public class UploadFileVersionHeadersArg {
     /// Pass in the item's last observed `etag` value
     /// into this header and the endpoint will fail
     /// with a `412 Precondition Failed` if it
-    /// has changed since.,
+    /// has changed since.
     public let ifMatch: String?
     /// An optional header containing the SHA1 hash of the file to
-    /// ensure that the file was not corrupted in transit.,
+    /// ensure that the file was not corrupted in transit.
     public let contentMd5: String?
-    /// Extra headers that will be included in the HTTP request.,
+    /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
     /// Initializer for a UploadFileVersionHeadersArg.

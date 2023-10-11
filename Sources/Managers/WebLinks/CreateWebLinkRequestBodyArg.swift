@@ -9,13 +9,13 @@ public class CreateWebLinkRequestBodyArg: Codable {
     }
 
     /// The URL that this web link links to. Must start with
-    /// `"http://"` or `"https://"`.,
+    /// `"http://"` or `"https://"`.
     public let url: String
-    /// The parent folder to create the web link within.,
+    /// The parent folder to create the web link within.
     public let parent: CreateWebLinkRequestBodyArgParentField
-    /// Name of the web link. Defaults to the URL if not set.,
+    /// Name of the web link. Defaults to the URL if not set.
     public let name: String?
-    /// Description of the web link.,
+    /// Description of the web link.
     public let description: String?
 
     /// Initializer for a CreateWebLinkRequestBodyArg.

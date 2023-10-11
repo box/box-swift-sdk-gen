@@ -1,7 +1,7 @@
 import Foundation
 
 public enum GetSearchQueryParamsArgTypeField: String, CodableStringEnum {
-    case file = "file"
-    case folder = "folder"
+    case file
+    case folder
     case webLink = "web_link"
 }

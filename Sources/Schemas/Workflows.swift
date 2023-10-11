@@ -1,5 +1,9 @@
 import Foundation
 
+/// A list of workflows.
+/// 
+/// You application must be authorized to use the `Manage Box Relay` application
+/// scope within the developer console in order to use this resource.
 public class Workflows: Codable {
     private enum CodingKeys: String, CodingKey {
         case limit
@@ -10,13 +14,13 @@ public class Workflows: Codable {
 
     /// The limit that was used for these entries. This will be the same as the
     /// `limit` query parameter unless that value exceeded the maximum value
-    /// allowed. The maximum value varies by API.,
+    /// allowed. The maximum value varies by API.
     public let limit: Int64?
-    /// The marker for the start of the next page of results.,
+    /// The marker for the start of the next page of results.
     public let nextMarker: Int64?
-    /// The marker for the start of the previous page of results.,
+    /// The marker for the start of the previous page of results.
     public let prevMarker: Int64?
-    /// A list of workflows,
+    /// A list of workflows
     public let entries: [Workflow]?
 
     /// Initializer for a Workflows.

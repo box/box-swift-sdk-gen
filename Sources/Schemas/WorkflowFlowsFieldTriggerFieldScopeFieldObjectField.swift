@@ -6,9 +6,9 @@ public class WorkflowFlowsFieldTriggerFieldScopeFieldObjectField: Codable {
         case id
     }
 
-    /// The type of the object,
+    /// The type of the object
     public let type: WorkflowFlowsFieldTriggerFieldScopeFieldObjectFieldTypeField?
-    /// The id of the object,
+    /// The id of the object
     public let id: String?
 
     /// Initializer for a WorkflowFlowsFieldTriggerFieldScopeFieldObjectField.

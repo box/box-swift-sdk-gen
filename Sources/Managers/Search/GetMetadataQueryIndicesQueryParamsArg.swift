@@ -1,9 +1,9 @@
 import Foundation
 
 public class GetMetadataQueryIndicesQueryParamsArg {
-    /// The scope of the metadata template,
+    /// The scope of the metadata template
     public let scope: GetMetadataQueryIndicesQueryParamsArgScopeField
-    /// The name of the metadata template,
+    /// The name of the metadata template
     public let templateKey: String
 
     /// Initializer for a GetMetadataQueryIndicesQueryParamsArg.

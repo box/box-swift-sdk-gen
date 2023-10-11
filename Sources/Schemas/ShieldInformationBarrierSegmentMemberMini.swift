@@ -1,5 +1,7 @@
 import Foundation
 
+/// A mini representation of a
+/// shield information barrier segment member object
 public class ShieldInformationBarrierSegmentMemberMini: ShieldInformationBarrierSegmentMemberBase {
     private enum CodingKeys: String, CodingKey {
         case user

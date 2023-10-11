@@ -7,9 +7,9 @@ public class DeleteFileByIdHeadersArg {
     /// Pass in the item's last observed `etag` value
     /// into this header and the endpoint will fail
     /// with a `412 Precondition Failed` if it
-    /// has changed since.,
+    /// has changed since.
     public let ifMatch: String?
-    /// Extra headers that will be included in the HTTP request.,
+    /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
     /// Initializer for a DeleteFileByIdHeadersArg.

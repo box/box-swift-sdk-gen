@@ -1,14 +1,17 @@
 import Foundation
 
+/// The bare basic representation of a file version, the minimal
+/// amount of fields returned when using the `fields` query
+/// parameter.
 public class FileVersionBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
     }
 
-    /// The unique identifier that represent a file version.,
+    /// The unique identifier that represent a file version.
     public let id: String
-    /// `file_version`,
+    /// `file_version`
     public let type: FileVersionBaseTypeField
 
     /// Initializer for a FileVersionBase.

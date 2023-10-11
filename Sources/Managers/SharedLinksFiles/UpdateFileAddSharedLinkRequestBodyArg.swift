@@ -7,7 +7,7 @@ public class UpdateFileAddSharedLinkRequestBodyArg: Codable {
 
     /// The settings for the shared link to create on the file.
     /// Use an empty object (`{}`) to use the default settings for shared
-    /// links.,
+    /// links.
     public let sharedLink: UpdateFileAddSharedLinkRequestBodyArgSharedLinkField?
 
     /// Initializer for a UpdateFileAddSharedLinkRequestBodyArg.

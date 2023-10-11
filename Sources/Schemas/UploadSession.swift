@@ -1,5 +1,6 @@
 import Foundation
 
+/// An upload session for chunk uploading a file.
 public class UploadSession: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -11,25 +12,25 @@ public class UploadSession: Codable {
         case sessionEndpoints = "session_endpoints"
     }
 
-    /// The unique identifier for this session,
+    /// The unique identifier for this session
     public let id: String?
-    /// `upload_session`,
+    /// `upload_session`
     public let type: UploadSessionTypeField?
-    /// The date and time when this session expires.,
+    /// The date and time when this session expires.
     public let sessionExpiresAt: String?
     /// The  size in bytes that must be used for all parts of of the
     /// upload.
     /// 
-    /// Only the last part is allowed to be of a smaller size.,
+    /// Only the last part is allowed to be of a smaller size.
     public let partSize: Int64?
     /// The total number of parts expected in this upload session,
-    /// as determined by the file size and part size.,
+    /// as determined by the file size and part size.
     public let totalParts: Int?
     /// The number of parts that have been uploaded and processed
     /// by the server. This starts at `0`.
     /// 
     /// When committing a file files, inspecting this property can
-    /// provide insight if all parts have been uploaded correctly.,
+    /// provide insight if all parts have been uploaded correctly.
     public let numPartsProcessed: Int?
     public let sessionEndpoints: UploadSessionSessionEndpointsField?
 

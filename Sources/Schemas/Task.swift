@@ -1,5 +1,8 @@
 import Foundation
 
+/// A task allows for file-centric workflows within Box. Users can
+/// create tasks on files and assign them to other users for them to complete the
+/// tasks.
 public class Task: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -15,23 +18,23 @@ public class Task: Codable {
         case completionRule = "completion_rule"
     }
 
-    /// The unique identifier for this task,
+    /// The unique identifier for this task
     public let id: String?
-    /// `task`,
+    /// `task`
     public let type: TaskTypeField?
     public let item: FileMini?
-    /// When the task is due,
+    /// When the task is due
     public let dueAt: String?
     /// The type of task the task assignee will be prompted to
-    /// perform.,
+    /// perform.
     public let action: TaskActionField?
-    /// A message that will be included with the task,
+    /// A message that will be included with the task
     public let message: String?
     public let taskAssignmentCollection: TaskAssignments?
-    /// Whether the task has been completed,
+    /// Whether the task has been completed
     public let isCompleted: Bool?
     public let createdBy: UserMini?
-    /// When the task object was created,
+    /// When the task object was created
     public let createdAt: String?
     /// Defines which assignees need to complete this task before the task
     /// is considered completed.
@@ -39,7 +42,7 @@ public class Task: Codable {
     /// * `all_assignees` requires all assignees to review or
     /// approve the the task in order for it to be considered completed.
     /// * `any_assignee` accepts any one assignee to review or
-    /// approve the the task in order for it to be considered completed.,
+    /// approve the the task in order for it to be considered completed.
     public let completionRule: TaskCompletionRuleField?
 
     /// Initializer for a Task.

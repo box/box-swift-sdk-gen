@@ -8,11 +8,11 @@ public class WorkflowFlowsFieldOutcomesFieldIfRejectedField: Codable {
         case actionType = "action_type"
     }
 
-    /// The identifier of the outcome,
+    /// The identifier of the outcome
     public let id: String?
-    /// The outcomes resource type,
+    /// The outcomes resource type
     public let type: WorkflowFlowsFieldOutcomesFieldIfRejectedFieldTypeField?
-    /// The name of the outcome,
+    /// The name of the outcome
     public let name: String?
     public let actionType: WorkflowFlowsFieldOutcomesFieldIfRejectedFieldActionTypeField?
 

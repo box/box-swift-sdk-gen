@@ -1,14 +1,20 @@
 import Foundation
 
+/// Legal Hold Assignments are used to assign Legal Hold
+/// Policies to Users, Folders, Files, or File Versions.
+/// 
+/// Creating a Legal Hold Assignment puts a hold
+/// on the File-Versions that belong to the Assignment's
+/// 'apply-to' entity.
 public class LegalHoldPolicyAssignmentBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
     }
 
-    /// The unique identifier for this legal hold assignment,
+    /// The unique identifier for this legal hold assignment
     public let id: String?
-    /// `legal_hold_policy_assignment`,
+    /// `legal_hold_policy_assignment`
     public let type: LegalHoldPolicyAssignmentBaseTypeField?
 
     /// Initializer for a LegalHoldPolicyAssignmentBase.

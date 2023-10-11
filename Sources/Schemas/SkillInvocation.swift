@@ -1,5 +1,7 @@
 import Foundation
 
+/// The payload of a Box skill as sent to a skill's
+/// `invocation_url`.
 public class SkillInvocation: Codable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -14,18 +16,18 @@ public class SkillInvocation: Codable {
         case event
     }
 
-    /// `skill_invocation`,
+    /// `skill_invocation`
     public let type: SkillInvocationTypeField?
-    /// Unique identifier for the invocation request.,
+    /// Unique identifier for the invocation request.
     public let id: String?
     public let skill: SkillInvocationSkillField?
-    /// The read-only and read-write access tokens for this item,
+    /// The read-only and read-write access tokens for this item
     public let token: SkillInvocationTokenField?
-    /// The details status of this event.,
+    /// The details status of this event.
     public let status: SkillInvocationStatusField?
-    /// The time this invocation was created.,
+    /// The time this invocation was created.
     public let createdAt: String?
-    /// Action that triggered the invocation,
+    /// Action that triggered the invocation
     public let trigger: String?
     public let enterprise: SkillInvocationEnterpriseField?
     public let source: FileOrFolder?

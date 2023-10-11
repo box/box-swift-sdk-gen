@@ -14,7 +14,7 @@ public class GetFileByIdQueryParamsArg {
     /// Additionally this field can be used to query any metadata
     /// applied to the file by specifying the `metadata` field as well
     /// as the scope and key of the template to retrieve, for example
-    /// `?field=metadata.enterprise_12345.contractTemplate`.,
+    /// `?field=metadata.enterprise_12345.contractTemplate`.
     public let fields: [String]?
 
     /// Initializer for a GetFileByIdQueryParamsArg.

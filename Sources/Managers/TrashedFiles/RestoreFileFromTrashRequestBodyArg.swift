@@ -6,7 +6,7 @@ public class RestoreFileFromTrashRequestBodyArg: Codable {
         case parent
     }
 
-    /// An optional new name for the file.,
+    /// An optional new name for the file.
     public let name: String?
     public let parent: RestoreFileFromTrashRequestBodyArgParentField?
 

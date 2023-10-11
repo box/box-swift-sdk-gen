@@ -1,5 +1,7 @@
 import Foundation
 
+/// Groups contain a set of users, and can be used in place of
+/// users in some operations, such as collaborations.
 public class GroupFull: Group {
     private enum CodingKeys: String, CodingKey {
         case provenance
@@ -15,7 +17,7 @@ public class GroupFull: Group {
     /// "Facebook Groups").  Setting this will
     /// also prevent Box users from editing the group name
     /// and its members directly via the Box web application.
-    /// This is desirable for one-way syncing of groups.,
+    /// This is desirable for one-way syncing of groups.
     public let provenance: String?
     /// An arbitrary identifier that can be used by
     /// external group sync tools to link this Box Group to
@@ -23,9 +25,9 @@ public class GroupFull: Group {
     /// could be an Active Directory Object ID or a Google
     /// Group ID.  We recommend you use of this field in
     /// order to avoid issues when group names are updated in
-    /// either Box or external systems.,
+    /// either Box or external systems.
     public let externalSyncIdentifier: String?
-    /// Human readable description of the group.,
+    /// Human readable description of the group.
     public let description: String?
     /// Specifies who can invite the group to collaborate
     /// on items.
@@ -37,7 +39,7 @@ public class GroupFull: Group {
     /// above and group members can invite the group.
     /// 
     /// When set to `all_managed_users` all managed users in the
-    /// enterprise can invite the group.,
+    /// enterprise can invite the group.
     public let invitabilityLevel: GroupFullInvitabilityLevelField?
     /// Specifies who can view the members of the group
     /// (Get Memberships for Group).
@@ -46,7 +48,7 @@ public class GroupFull: Group {
     ///   group admin
     /// * `admins_and_members` - all admins and group members
     /// * `all_managed_users` - all managed users in the
-    ///   enterprise,
+    ///   enterprise
     public let memberViewabilityLevel: GroupFullMemberViewabilityLevelField?
     public let permissions: GroupFullPermissionsField?
 

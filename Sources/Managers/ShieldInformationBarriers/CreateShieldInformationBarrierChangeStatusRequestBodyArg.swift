@@ -6,9 +6,9 @@ public class CreateShieldInformationBarrierChangeStatusRequestBodyArg: Codable {
         case status
     }
 
-    /// The ID of the shield information barrier.,
+    /// The ID of the shield information barrier.
     public let id: String
-    /// The desired status for the shield information barrier.,
+    /// The desired status for the shield information barrier.
     public let status: CreateShieldInformationBarrierChangeStatusRequestBodyArgStatusField
 
     /// Initializer for a CreateShieldInformationBarrierChangeStatusRequestBodyArg.

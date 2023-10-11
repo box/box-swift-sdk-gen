@@ -1,5 +1,7 @@
 import Foundation
 
+/// The root-level record that is supposed to represent a
+/// single Terms of Service.
 public class TermsOfService: TermsOfServiceBase {
     private enum CodingKeys: String, CodingKey {
         case status
@@ -10,17 +12,17 @@ public class TermsOfService: TermsOfServiceBase {
         case modifiedAt = "modified_at"
     }
 
-    /// Whether these terms are enabled or not,
+    /// Whether these terms are enabled or not
     public let status: TermsOfServiceStatusField?
     public let enterprise: TermsOfServiceEnterpriseField?
-    /// Whether to apply these terms to managed users or external users,
+    /// Whether to apply these terms to managed users or external users
     public let tosType: TermsOfServiceTosTypeField?
     /// The text for your terms and conditions. This text could be
-    /// empty if the `status` is set to `disabled`.,
+    /// empty if the `status` is set to `disabled`.
     public let text: String?
-    /// When the legal item was created,
+    /// When the legal item was created
     public let createdAt: String?
-    /// When the legal item was modified.,
+    /// When the legal item was modified.
     public let modifiedAt: String?
 
     /// Initializer for a TermsOfService.

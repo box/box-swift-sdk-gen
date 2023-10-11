@@ -1,17 +1,17 @@
 import Foundation
 
 public enum SignRequestSignerInputContentTypeField: String, CodableStringEnum {
-    case initial = "initial"
-    case stamp = "stamp"
-    case signature = "signature"
-    case company = "company"
-    case title = "title"
-    case email = "email"
+    case initial
+    case stamp
+    case signature
+    case company
+    case title
+    case email
     case fullName = "full_name"
     case firstName = "first_name"
     case lastName = "last_name"
-    case text = "text"
-    case date = "date"
-    case checkbox = "checkbox"
-    case attachment = "attachment"
+    case text
+    case date
+    case checkbox
+    case attachment
 }

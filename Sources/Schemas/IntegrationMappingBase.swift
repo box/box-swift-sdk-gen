@@ -1,5 +1,7 @@
 import Foundation
 
+/// A base representation of an
+/// integration mapping object.
 public class IntegrationMappingBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -8,12 +10,12 @@ public class IntegrationMappingBase: Codable {
 
     /// A unique identifier of a folder mapping
     /// (part of a composite key together
-    /// with `integration_type`),
+    /// with `integration_type`)
     public let id: String?
     /// Identifies the Box partner app,
     /// with which the mapping is associated.
     /// Currently only supports Slack.
-    /// (part of the composite key together with `id`),
+    /// (part of the composite key together with `id`)
     public let integrationType: IntegrationMappingBaseIntegrationTypeField?
 
     /// Initializer for a IntegrationMappingBase.

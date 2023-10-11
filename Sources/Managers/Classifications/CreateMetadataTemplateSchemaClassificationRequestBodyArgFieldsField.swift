@@ -9,16 +9,16 @@ public class CreateMetadataTemplateSchemaClassificationRequestBodyArgFieldsField
         case options
     }
 
-    /// `enum`,
+    /// `enum`
     public let type: CreateMetadataTemplateSchemaClassificationRequestBodyArgFieldsFieldTypeField?
-    /// `Box__Security__Classification__Key`,
+    /// `Box__Security__Classification__Key`
     public let key: CreateMetadataTemplateSchemaClassificationRequestBodyArgFieldsFieldKeyField?
-    /// `Classification`,
+    /// `Classification`
     public let displayName: CreateMetadataTemplateSchemaClassificationRequestBodyArgFieldsFieldDisplayNameField?
-    /// `false`,
+    /// `false`
     public let hidden: Bool?
     /// The actual list of classifications that are present on
-    /// this template.,
+    /// this template.
     public let options: [CreateMetadataTemplateSchemaClassificationRequestBodyArgFieldsFieldOptionsField]?
 
     /// Initializer for a CreateMetadataTemplateSchemaClassificationRequestBodyArgFieldsField.

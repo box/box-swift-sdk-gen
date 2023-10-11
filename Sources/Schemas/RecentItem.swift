@@ -1,5 +1,6 @@
 import Foundation
 
+/// A recent item accessed by a user.
 public class RecentItem: Codable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -9,16 +10,16 @@ public class RecentItem: Codable {
         case interactionSharedLink = "interaction_shared_link"
     }
 
-    /// `recent_item`,
+    /// `recent_item`
     public let type: String?
     public let item: FileOrFolderOrWebLink?
     /// The most recent type of access the user performed on
-    /// the item.,
+    /// the item.
     public let interactionType: RecentItemInteractionTypeField?
-    /// The time of the most recent interaction.,
+    /// The time of the most recent interaction.
     public let interactedAt: String?
     /// If the item was accessed through a shared link it will appear here,
-    /// otherwise this will be null.,
+    /// otherwise this will be null.
     public let interactionSharedLink: String?
 
     /// Initializer for a RecentItem.

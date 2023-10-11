@@ -1,5 +1,6 @@
 import Foundation
 
+/// Standard representation of a comment.
 public class Comment: CommentBase {
     private enum CodingKeys: String, CodingKey {
         case isReplyComment = "is_reply_comment"
@@ -11,14 +12,14 @@ public class Comment: CommentBase {
     }
 
     /// Whether or not this comment is a reply to another
-    /// comment,
+    /// comment
     public let isReplyComment: Bool?
-    /// The text of the comment, as provided by the user,
+    /// The text of the comment, as provided by the user
     public let message: String?
     public let createdBy: UserMini?
-    /// The time this comment was created,
+    /// The time this comment was created
     public let createdAt: String?
-    /// The time this comment was last modified,
+    /// The time this comment was last modified
     public let modifiedAt: String?
     public let item: CommentItemField?
 

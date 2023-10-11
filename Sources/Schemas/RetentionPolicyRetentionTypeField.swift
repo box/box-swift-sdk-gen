@@ -1,6 +1,6 @@
 import Foundation
 
 public enum RetentionPolicyRetentionTypeField: String, CodableStringEnum {
-    case modifiable = "modifiable"
+    case modifiable
     case nonModifiable = "non-modifiable"
 }

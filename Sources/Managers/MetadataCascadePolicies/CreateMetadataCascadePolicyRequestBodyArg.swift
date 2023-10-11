@@ -9,10 +9,10 @@ public class CreateMetadataCascadePolicyRequestBodyArg: Codable {
 
     /// The ID of the folder to apply the policy to. This folder will
     /// need to already have an instance of the targeted metadata
-    /// template applied to it.,
+    /// template applied to it.
     public let folderId: String
     /// The scope of the targeted metadata template. This template will
-    /// need to already have an instance applied to the targeted folder.,
+    /// need to already have an instance applied to the targeted folder.
     public let scope: CreateMetadataCascadePolicyRequestBodyArgScopeField
     /// The key of the targeted metadata template. This template will
     /// need to already have an instance applied to the targeted folder.
@@ -28,7 +28,7 @@ public class CreateMetadataCascadePolicyRequestBodyArg: Codable {
     /// 
     /// [list]: e://get-metadata-templates-enterprise
     /// [file]: e://get-files-id-metadata
-    /// [folder]: e://get-folders-id-metadata,
+    /// [folder]: e://get-folders-id-metadata
     public let templateKey: String
 
     /// Initializer for a CreateMetadataCascadePolicyRequestBodyArg.

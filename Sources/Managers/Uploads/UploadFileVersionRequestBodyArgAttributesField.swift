@@ -7,11 +7,11 @@ public class UploadFileVersionRequestBodyArgAttributesField: Codable {
     }
 
     /// An optional new name for the file. If specified, the file
-    /// will be renamed when the new version is uploaded.,
+    /// will be renamed when the new version is uploaded.
     public let name: String
     /// Defines the time the file was last modified at.
     /// 
-    /// If not set, the upload time will be used.,
+    /// If not set, the upload time will be used.
     public let contentModifiedAt: String?
 
     /// Initializer for a UploadFileVersionRequestBodyArgAttributesField.

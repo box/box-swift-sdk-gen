@@ -11,7 +11,7 @@ public class UpdateGroupByIdRequestBodyArg: Codable {
     }
 
     /// The name of the new group to be created. Must be unique within the
-    /// enterprise.,
+    /// enterprise.
     public let name: String?
     /// Keeps track of which external source this group is
     /// coming, for example `Active Directory`, or `Okta`.
@@ -20,7 +20,7 @@ public class UpdateGroupByIdRequestBodyArg: Codable {
     /// the group name and its members directly via the Box
     /// web application.
     /// 
-    /// This is desirable for one-way syncing of groups.,
+    /// This is desirable for one-way syncing of groups.
     public let provenance: String?
     /// An arbitrary identifier that can be used by
     /// external group sync tools to link this Box Group to
@@ -32,9 +32,9 @@ public class UpdateGroupByIdRequestBodyArg: Codable {
     /// 
     /// We recommend you use of this field in
     /// order to avoid issues when group names are updated in
-    /// either Box or external systems.,
+    /// either Box or external systems.
     public let externalSyncIdentifier: String?
-    /// A human readable description of the group.,
+    /// A human readable description of the group.
     public let description: String?
     /// Specifies who can invite the group to collaborate
     /// on folders.
@@ -46,7 +46,7 @@ public class UpdateGroupByIdRequestBodyArg: Codable {
     /// above and group members can invite the group.
     /// 
     /// When set to `all_managed_users` all managed users in the
-    /// enterprise can invite the group.,
+    /// enterprise can invite the group.
     public let invitabilityLevel: UpdateGroupByIdRequestBodyArgInvitabilityLevelField?
     /// Specifies who can see the members of the group.
     /// 
@@ -54,7 +54,7 @@ public class UpdateGroupByIdRequestBodyArg: Codable {
     ///   group admin
     /// * `admins_and_members` - all admins and group members
     /// * `all_managed_users` - all managed users in the
-    ///   enterprise,
+    ///   enterprise
     public let memberViewabilityLevel: UpdateGroupByIdRequestBodyArgMemberViewabilityLevelField?
 
     /// Initializer for a UpdateGroupByIdRequestBodyArg.

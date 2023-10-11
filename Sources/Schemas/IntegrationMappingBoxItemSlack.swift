@@ -1,14 +1,15 @@
 import Foundation
 
+/// The schema for an integration mapping Box item object for type Slack
 public class IntegrationMappingBoxItemSlack: Codable {
     private enum CodingKeys: String, CodingKey {
         case type
         case id
     }
 
-    /// Type of the mapped item referenced in `id`,
+    /// Type of the mapped item referenced in `id`
     public let type: IntegrationMappingBoxItemSlackTypeField
-    /// ID of the mapped item (of type referenced in `type`),
+    /// ID of the mapped item (of type referenced in `type`)
     public let id: String
 
     /// Initializer for a IntegrationMappingBoxItemSlack.

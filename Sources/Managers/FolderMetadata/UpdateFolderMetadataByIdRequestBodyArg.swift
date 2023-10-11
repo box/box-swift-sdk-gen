@@ -9,7 +9,7 @@ public class UpdateFolderMetadataByIdRequestBodyArg: Codable {
     }
 
     /// The type of change to perform on the template. Some
-    /// of these are hazardous as they will change existing templates.,
+    /// of these are hazardous as they will change existing templates.
     public let op: UpdateFolderMetadataByIdRequestBodyArgOpField?
     /// The location in the metadata JSON object
     /// to apply the changes to, in the format of a
@@ -17,7 +17,7 @@ public class UpdateFolderMetadataByIdRequestBodyArg: Codable {
     /// 
     /// The path must always be prefixed with a `/` to represent the root
     /// of the template. The characters `~` and `/` are reserved
-    /// characters and must be escaped in the key.,
+    /// characters and must be escaped in the key.
     public let path: String?
     /// The value to be set or tested.
     /// 
@@ -27,11 +27,11 @@ public class UpdateFolderMetadataByIdRequestBodyArg: Codable {
     /// replacing.
     /// 
     /// For `test`, the existing value at the `path` location must match
-    /// the specified value.,
+    /// the specified value.
     public let value: String?
     /// The location in the metadata JSON object to move or copy a value
     /// from. Required for `move` or `copy` operations and must be in the
-    /// format of a [JSON-Pointer](https://tools.ietf.org/html/rfc6901).,
+    /// format of a [JSON-Pointer](https://tools.ietf.org/html/rfc6901).
     public let from: String?
 
     /// Initializer for a UpdateFolderMetadataByIdRequestBodyArg.

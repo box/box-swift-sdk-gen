@@ -1,5 +1,7 @@
 import Foundation
 
+/// The error that occurs when a file can not be created due
+/// to a conflict.
 public class ConflictError: ClientError {
     /// Initializer for a ConflictError.
     ///

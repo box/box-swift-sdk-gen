@@ -1,5 +1,10 @@
 import Foundation
 
+/// An instance of the classification metadata template, containing
+/// the classification applied to the file or folder.
+/// 
+/// To get more details about the classification applied to an item,
+/// request the classification metadata template.
 public class Classification: Codable {
     private enum CodingKeys: String, CodingKey {
         case boxSecurityClassificationKey = "Box__Security__Classification__Key"
@@ -12,30 +17,30 @@ public class Classification: Codable {
         case canEdit = "$canEdit"
     }
 
-    /// The name of the classification applied to the item.,
+    /// The name of the classification applied to the item.
     public let boxSecurityClassificationKey: String?
     /// The identifier of the item that this metadata instance
     /// has been attached to. This combines the `type` and the `id`
-    /// of the parent in the form `{type}_{id}`.,
+    /// of the parent in the form `{type}_{id}`.
     public let parent: String?
-    /// `securityClassification-6VMVochwUWo`,
+    /// `securityClassification-6VMVochwUWo`
     public let template: ClassificationTemplateField?
     /// The scope of the enterprise that this classification has been
     /// applied for.
     /// 
-    /// This will be in the format `enterprise_{enterprise_id}`.,
+    /// This will be in the format `enterprise_{enterprise_id}`.
     public let scope: String?
     /// The version of the metadata instance. This version starts at 0 and
-    /// increases every time a classification is updated.,
+    /// increases every time a classification is updated.
     public let version: Int?
     /// The unique ID of this classification instance. This will be include
-    /// the name of the classification template and a unique ID.,
+    /// the name of the classification template and a unique ID.
     public let type: String?
     /// The version of the metadata template. This version starts at 0 and
     /// increases every time the template is updated. This is mostly for internal
-    /// use.,
+    /// use.
     public let typeVersion: Int?
-    /// Whether an end user can change the classification.,
+    /// Whether an end user can change the classification.
     public let canEdit: Bool?
 
     /// Initializer for a Classification.

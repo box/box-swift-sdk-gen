@@ -7,11 +7,11 @@ public class RetentionPolicyAssignmentCountsField: Codable {
         case metadataTemplate = "metadata_template"
     }
 
-    /// The number of enterprise assignments this policy has. The maximum value is 1.,
+    /// The number of enterprise assignments this policy has. The maximum value is 1.
     public let enterprise: Int64?
-    /// The number of folder assignments this policy has.,
+    /// The number of folder assignments this policy has.
     public let folder: Int64?
-    /// The number of metadata template assignments this policy has.,
+    /// The number of metadata template assignments this policy has.
     public let metadataTemplate: Int64?
 
     /// Initializer for a RetentionPolicyAssignmentCountsField.

@@ -5,7 +5,7 @@ public class CreateCollaborationWhitelistExemptTargetRequestBodyArg: Codable {
         case user
     }
 
-    /// The user to exempt.,
+    /// The user to exempt.
     public let user: CreateCollaborationWhitelistExemptTargetRequestBodyArgUserField
 
     /// Initializer for a CreateCollaborationWhitelistExemptTargetRequestBodyArg.

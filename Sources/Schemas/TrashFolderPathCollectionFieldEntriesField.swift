@@ -9,15 +9,15 @@ public class TrashFolderPathCollectionFieldEntriesField: Codable {
         case name
     }
 
-    /// `folder`,
+    /// `folder`
     public let type: TrashFolderPathCollectionFieldEntriesFieldTypeField?
-    /// The unique identifier that represent a folder.,
+    /// The unique identifier that represent a folder.
     public let id: String?
-    /// This field is null for the Trash folder,
+    /// This field is null for the Trash folder
     public let sequenceId: String?
-    /// This field is null for the Trash folder,
+    /// This field is null for the Trash folder
     public let etag: String?
-    /// The name of the Trash folder.,
+    /// The name of the Trash folder.
     public let name: String?
 
     /// Initializer for a TrashFolderPathCollectionFieldEntriesField.

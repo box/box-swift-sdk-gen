@@ -2,7 +2,7 @@ import Foundation
 
 public class UpdateWebLinkAddSharedLinkQueryParamsArg {
     /// Explicitly request the `shared_link` fields
-    /// to be returned for this item.,
+    /// to be returned for this item.
     public let fields: String
 
     /// Initializer for a UpdateWebLinkAddSharedLinkQueryParamsArg.

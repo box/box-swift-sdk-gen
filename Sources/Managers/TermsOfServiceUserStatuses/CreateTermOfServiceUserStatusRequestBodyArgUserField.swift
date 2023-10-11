@@ -6,9 +6,9 @@ public class CreateTermOfServiceUserStatusRequestBodyArgUserField: Codable {
         case id
     }
 
-    /// The type of object.,
+    /// The type of object.
     public let type: CreateTermOfServiceUserStatusRequestBodyArgUserFieldTypeField
-    /// The ID of user,
+    /// The ID of user
     public let id: String
 
     /// Initializer for a CreateTermOfServiceUserStatusRequestBodyArgUserField.

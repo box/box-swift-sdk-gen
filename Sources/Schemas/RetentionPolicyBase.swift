@@ -1,14 +1,15 @@
 import Foundation
 
+/// A base representation of a retention policy.
 public class RetentionPolicyBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
     }
 
-    /// The unique identifier that represents a retention policy.,
+    /// The unique identifier that represents a retention policy.
     public let id: String
-    /// `retention_policy`,
+    /// `retention_policy`
     public let type: RetentionPolicyBaseTypeField
 
     /// Initializer for a RetentionPolicyBase.

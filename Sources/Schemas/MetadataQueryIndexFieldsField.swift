@@ -6,9 +6,9 @@ public class MetadataQueryIndexFieldsField: Codable {
         case sortDirection = "sort_direction"
     }
 
-    /// The metadata template field key.,
+    /// The metadata template field key.
     public let key: String?
-    /// The sort direction of the field.,
+    /// The sort direction of the field.
     public let sortDirection: MetadataQueryIndexFieldsFieldSortDirectionField?
 
     /// Initializer for a MetadataQueryIndexFieldsField.

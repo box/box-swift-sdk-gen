@@ -1,5 +1,7 @@
 import Foundation
 
+/// A request to create a
+/// Slack Integration Mapping object
 public class IntegrationMappingSlackCreateRequest: Codable {
     private enum CodingKeys: String, CodingKey {
         case partnerItem = "partner_item"

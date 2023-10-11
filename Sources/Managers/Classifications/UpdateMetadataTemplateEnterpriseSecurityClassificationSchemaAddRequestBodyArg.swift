@@ -7,11 +7,11 @@ public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequ
         case data
     }
 
-    /// `addEnumOption`,
+    /// `addEnumOption`
     public let op: String
-    /// `Box__Security__Classification__Key`,
+    /// `Box__Security__Classification__Key`
     public let fieldKey: String
-    /// The details of the classification to add.,
+    /// The details of the classification to add.
     public let data: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataField
 
     /// Initializer for a UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArg.

@@ -7,9 +7,9 @@ public class CreateMetadataTemplateSchemaClassificationRequestBodyArgFieldsField
     }
 
     /// The display name and key this classification. This
-    /// will be show in the Box UI.,
+    /// will be show in the Box UI.
     public let key: String?
-    /// Additional information about the classification.,
+    /// Additional information about the classification.
     public let staticConfig: CreateMetadataTemplateSchemaClassificationRequestBodyArgFieldsFieldOptionsFieldStaticConfigField?
 
     /// Initializer for a CreateMetadataTemplateSchemaClassificationRequestBodyArgFieldsFieldOptionsField.

@@ -10,14 +10,14 @@ public class UpdateWebLinkByIdRequestBodyArg: Codable {
     }
 
     /// The new URL that the web link links to. Must start with
-    /// `"http://"` or `"https://"`.,
+    /// `"http://"` or `"https://"`.
     public let url: String?
     public let parent: UpdateWebLinkByIdRequestBodyArgParentField?
-    /// A new name for the web link. Defaults to the URL if not set.,
+    /// A new name for the web link. Defaults to the URL if not set.
     public let name: String?
-    /// A new description of the web link.,
+    /// A new description of the web link.
     public let description: String?
-    /// The settings for the shared link to update.,
+    /// The settings for the shared link to update.
     public let sharedLink: UpdateWebLinkByIdRequestBodyArgSharedLinkField?
 
     /// Initializer for a UpdateWebLinkByIdRequestBodyArg.

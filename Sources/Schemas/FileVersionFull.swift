@@ -1,11 +1,13 @@
 import Foundation
 
+/// A full representation of a file version, as can be returned from any
+/// file version API endpoints by default
 public class FileVersionFull: FileVersion {
     private enum CodingKeys: String, CodingKey {
         case versionNumber = "version_number"
     }
 
-    /// The version number of this file version,
+    /// The version number of this file version
     public let versionNumber: String?
 
     /// Initializer for a FileVersionFull.

@@ -10,17 +10,17 @@ public class ClassificationTemplateFieldsField: Codable {
         case options
     }
 
-    /// The unique ID of the field.,
+    /// The unique ID of the field.
     public let id: String?
-    /// `enum`,
+    /// `enum`
     public let type: ClassificationTemplateFieldsFieldTypeField?
-    /// `Box__Security__Classification__Key`,
+    /// `Box__Security__Classification__Key`
     public let key: ClassificationTemplateFieldsFieldKeyField?
-    /// `Classification`,
+    /// `Classification`
     public let displayName: ClassificationTemplateFieldsFieldDisplayNameField?
-    /// Classifications are always visible to web and mobile users.,
+    /// Classifications are always visible to web and mobile users.
     public let hidden: Bool?
-    /// A list of classifications available in this enterprise.,
+    /// A list of classifications available in this enterprise.
     public let options: [ClassificationTemplateFieldsFieldOptionsField]?
 
     /// Initializer for a ClassificationTemplateFieldsField.

@@ -1,14 +1,15 @@
 import Foundation
 
+/// A list of terms of services
 public class TermsOfServices: Codable {
     private enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
         case entries
     }
 
-    /// The total number of objects.,
+    /// The total number of objects.
     public let totalCount: Int64?
-    /// A list of terms of service objects,
+    /// A list of terms of service objects
     public let entries: [TermsOfService]?
 
     /// Initializer for a TermsOfServices.

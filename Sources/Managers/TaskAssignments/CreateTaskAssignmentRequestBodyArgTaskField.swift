@@ -6,9 +6,9 @@ public class CreateTaskAssignmentRequestBodyArgTaskField: Codable {
         case type
     }
 
-    /// The ID of the task,
+    /// The ID of the task
     public let id: String
-    /// The type of the item to assign.,
+    /// The type of the item to assign.
     public let type: CreateTaskAssignmentRequestBodyArgTaskFieldTypeField
 
     /// Initializer for a CreateTaskAssignmentRequestBodyArgTaskField.

@@ -7,7 +7,7 @@ public class CollaborationAcceptanceRequirementsStatusFieldTermsOfServiceRequire
     }
 
     /// Whether or not the terms of service have been accepted.  The
-    /// field is `null` when there is no terms of service required.,
+    /// field is `null` when there is no terms of service required.
     public let isAccepted: Bool?
     public let termsOfService: TermsOfServiceBase?
 

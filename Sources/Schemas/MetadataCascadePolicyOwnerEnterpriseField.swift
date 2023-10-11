@@ -6,9 +6,9 @@ public class MetadataCascadePolicyOwnerEnterpriseField: Codable {
         case id
     }
 
-    /// `enterprise`,
+    /// `enterprise`
     public let type: MetadataCascadePolicyOwnerEnterpriseFieldTypeField?
-    /// The ID of the enterprise that owns the policy.,
+    /// The ID of the enterprise that owns the policy.
     public let id: String?
 
     /// Initializer for a MetadataCascadePolicyOwnerEnterpriseField.

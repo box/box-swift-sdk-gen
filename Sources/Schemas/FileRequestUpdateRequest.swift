@@ -1,5 +1,6 @@
 import Foundation
 
+/// The request body to update a file request.
 public class FileRequestUpdateRequest: Codable {
     private enum CodingKeys: String, CodingKey {
         case title
@@ -13,12 +14,12 @@ public class FileRequestUpdateRequest: Codable {
     /// An optional new title for the file request. This can be
     /// used to change the title of the file request.
     /// 
-    /// This will default to the value on the existing file request.,
+    /// This will default to the value on the existing file request.
     public let title: String?
     /// An optional new description for the file request. This can be
     /// used to change the description of the file request.
     /// 
-    /// This will default to the value on the existing file request.,
+    /// This will default to the value on the existing file request.
     public let description: String?
     /// An optional new status of the file request.
     /// 
@@ -27,7 +28,7 @@ public class FileRequestUpdateRequest: Codable {
     /// to the file request URL will receive a `HTTP 404` status
     /// code.
     /// 
-    /// This will default to the value on the existing file request.,
+    /// This will default to the value on the existing file request.
     public let status: FileRequestUpdateRequestStatusField?
     /// Whether a file request submitter is required to provide
     /// their email address.
@@ -35,7 +36,7 @@ public class FileRequestUpdateRequest: Codable {
     /// When this setting is set to true, the Box UI will show
     /// an email field on the file request form.
     /// 
-    /// This will default to the value on the existing file request.,
+    /// This will default to the value on the existing file request.
     public let isEmailRequired: Bool?
     /// Whether a file request submitter is required to provide
     /// a description of the files they are submitting.
@@ -43,7 +44,7 @@ public class FileRequestUpdateRequest: Codable {
     /// When this setting is set to true, the Box UI will show
     /// a description field on the file request form.
     /// 
-    /// This will default to the value on the existing file request.,
+    /// This will default to the value on the existing file request.
     public let isDescriptionRequired: Bool?
     /// The date after which a file request will no longer accept new
     /// submissions.
@@ -51,7 +52,7 @@ public class FileRequestUpdateRequest: Codable {
     /// After this date, the `status` will automatically be set to
     /// `inactive`.
     /// 
-    /// This will default to the value on the existing file request.,
+    /// This will default to the value on the existing file request.
     public let expiresAt: String?
 
     /// Initializer for a FileRequestUpdateRequest.

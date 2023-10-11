@@ -6,9 +6,9 @@ public class CreateFolderLockRequestBodyArgLockedOperationsField: Codable {
         case delete
     }
 
-    /// Whether moving the folder should be locked.,
+    /// Whether moving the folder should be locked.
     public let move: Bool
-    /// Whether deleting the folder should be locked.,
+    /// Whether deleting the folder should be locked.
     public let delete: Bool
 
     /// Initializer for a CreateFolderLockRequestBodyArgLockedOperationsField.

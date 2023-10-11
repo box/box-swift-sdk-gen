@@ -5,7 +5,7 @@ public class UpdateUserByIdRequestBodyArgNotificationEmailField: Codable {
         case email
     }
 
-    /// The email address to send the notifications to.,
+    /// The email address to send the notifications to.
     public let email: String?
 
     /// Initializer for a UpdateUserByIdRequestBodyArgNotificationEmailField.

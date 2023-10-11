@@ -1,5 +1,7 @@
 import Foundation
 
+/// A metadata cascade policy automatically applies a metadata template instance
+/// to all the files and folders within the targeted folder.
 public class MetadataCascadePolicy: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -10,16 +12,16 @@ public class MetadataCascadePolicy: Codable {
         case templateKey
     }
 
-    /// The ID of the metadata cascade policy object,
+    /// The ID of the metadata cascade policy object
     public let id: String?
-    /// `metadata_cascade_policy`,
+    /// `metadata_cascade_policy`
     public let type: MetadataCascadePolicyTypeField?
-    /// The enterprise that owns this policy.,
+    /// The enterprise that owns this policy.
     public let ownerEnterprise: MetadataCascadePolicyOwnerEnterpriseField?
-    /// Represent the folder the policy is applied to.,
+    /// Represent the folder the policy is applied to.
     public let parent: MetadataCascadePolicyParentField?
     /// The scope of the of the template that is cascaded down to the folder's
-    /// children.,
+    /// children.
     public let scope: MetadataCascadePolicyScopeField?
     /// The key of the template that is cascaded down to the folder's
     /// children.
@@ -35,7 +37,7 @@ public class MetadataCascadePolicy: Codable {
     /// 
     /// [list]: e://get-metadata-templates-enterprise
     /// [file]: e://get-files-id-metadata
-    /// [folder]: e://get-folders-id-metadata,
+    /// [folder]: e://get-folders-id-metadata
     public let templateKey: String?
 
     /// Initializer for a MetadataCascadePolicy.

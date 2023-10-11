@@ -7,7 +7,7 @@ public class UpdateFileWatermarkRequestBodyArgWatermarkField: Codable {
 
     /// The type of watermark to apply.
     /// 
-    /// Currently only supports one option.,
+    /// Currently only supports one option.
     public let imprint: UpdateFileWatermarkRequestBodyArgWatermarkFieldImprintField
 
     /// Initializer for a UpdateFileWatermarkRequestBodyArgWatermarkField.

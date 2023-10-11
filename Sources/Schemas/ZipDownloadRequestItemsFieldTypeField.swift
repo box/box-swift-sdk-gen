@@ -1,6 +1,6 @@
 import Foundation
 
 public enum ZipDownloadRequestItemsFieldTypeField: String, CodableStringEnum {
-    case file = "file"
+    case file
     case folder = "folder."
 }

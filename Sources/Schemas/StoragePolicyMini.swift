@@ -1,14 +1,15 @@
 import Foundation
 
+/// A mini description of a Storage Policy object
 public class StoragePolicyMini: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
     }
 
-    /// The unique identifier for this storage policy,
+    /// The unique identifier for this storage policy
     public let id: String?
-    /// `storage_policy`,
+    /// `storage_policy`
     public let type: StoragePolicyMiniTypeField?
 
     /// Initializer for a StoragePolicyMini.

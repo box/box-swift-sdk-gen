@@ -6,9 +6,9 @@ public class TemplateSignerInputCoordinatesField: Codable {
         case y
     }
 
-    /// Relative x coordinate to the page the input is on, ranging from 0 to 1.,
+    /// Relative x coordinate to the page the input is on, ranging from 0 to 1.
     public let x: Int?
-    /// Relative y coordinate to the page the input is on, ranging from 0 to 1.,
+    /// Relative y coordinate to the page the input is on, ranging from 0 to 1.
     public let y: Int?
 
     /// Initializer for a TemplateSignerInputCoordinatesField.

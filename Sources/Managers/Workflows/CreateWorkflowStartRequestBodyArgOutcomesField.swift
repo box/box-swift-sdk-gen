@@ -7,13 +7,13 @@ public class CreateWorkflowStartRequestBodyArgOutcomesField: Codable {
         case parameter
     }
 
-    /// The id of the outcome,
+    /// The id of the outcome
     public let id: String?
-    /// The type of the outcome object,
+    /// The type of the outcome object
     public let type: CreateWorkflowStartRequestBodyArgOutcomesFieldTypeField?
     /// This is a placeholder example for various objects that
     /// can be passed in - refer to the guides section to find
-    /// out more information.,
+    /// out more information.
     public let parameter: String?
 
     /// Initializer for a CreateWorkflowStartRequestBodyArgOutcomesField.

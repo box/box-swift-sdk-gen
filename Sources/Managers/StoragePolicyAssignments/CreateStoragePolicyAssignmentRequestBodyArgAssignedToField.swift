@@ -6,9 +6,9 @@ public class CreateStoragePolicyAssignmentRequestBodyArgAssignedToField: Codable
         case id
     }
 
-    /// The type to assign the policy to.,
+    /// The type to assign the policy to.
     public let type: CreateStoragePolicyAssignmentRequestBodyArgAssignedToFieldTypeField
-    /// The ID of the user or enterprise,
+    /// The ID of the user or enterprise
     public let id: String
 
     /// Initializer for a CreateStoragePolicyAssignmentRequestBodyArgAssignedToField.

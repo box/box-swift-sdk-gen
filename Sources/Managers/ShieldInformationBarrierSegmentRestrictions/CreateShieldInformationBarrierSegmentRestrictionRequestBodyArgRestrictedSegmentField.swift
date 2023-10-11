@@ -7,10 +7,10 @@ public class CreateShieldInformationBarrierSegmentRestrictionRequestBodyArgRestr
     }
 
     /// The ID reference of the restricted
-    /// shield information barrier segment.,
+    /// shield information barrier segment.
     public let id: String?
     /// The type of the restricted shield
-    /// information barrier segment.,
+    /// information barrier segment.
     public let type: CreateShieldInformationBarrierSegmentRestrictionRequestBodyArgRestrictedSegmentFieldTypeField?
 
     /// Initializer for a CreateShieldInformationBarrierSegmentRestrictionRequestBodyArgRestrictedSegmentField.

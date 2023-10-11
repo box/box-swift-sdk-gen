@@ -6,7 +6,7 @@ public class UpdateWebLinkRemoveSharedLinkRequestBodyArg: Codable {
     }
 
     /// By setting this value to `null`, the shared link
-    /// is removed from the web link.,
+    /// is removed from the web link.
     public let sharedLink: UpdateWebLinkRemoveSharedLinkRequestBodyArgSharedLinkField?
 
     /// Initializer for a UpdateWebLinkRemoveSharedLinkRequestBodyArg.

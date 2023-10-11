@@ -6,9 +6,9 @@ public class UserNotificationEmailField: Codable {
         case isConfirmed = "is_confirmed"
     }
 
-    /// The email address to send the notifications to.,
+    /// The email address to send the notifications to.
     public let email: String?
-    /// Specifies if this email address has been confirmed.,
+    /// Specifies if this email address has been confirmed.
     public let isConfirmed: Bool?
 
     /// Initializer for a UserNotificationEmailField.

@@ -6,7 +6,7 @@ public class CreateMetadataTemplateSchemaRequestBodyArgFieldsFieldOptionsField: 
     }
 
     /// The text value of the option. This represents both the display name of the
-    /// option and the internal key used when updating templates.,
+    /// option and the internal key used when updating templates.
     public let key: String
 
     /// Initializer for a CreateMetadataTemplateSchemaRequestBodyArgFieldsFieldOptionsField.

@@ -13,16 +13,16 @@ public class UpdateRetentionPolicyByIdRequestBodyArg: Codable {
         case customNotificationRecipients = "custom_notification_recipients"
     }
 
-    /// The name for the retention policy,
+    /// The name for the retention policy
     public let policyName: String?
-    /// The additional text description of the retention policy.,
+    /// The additional text description of the retention policy.
     public let description: String?
     /// The disposition action of the retention policy.
     /// `permanently_delete` deletes the content
     /// retained by the policy permanently.
     /// `remove_retention` lifts retention policy
     /// from the content, allowing it to be deleted
-    /// by users once the retention policy has expired.,
+    /// by users once the retention policy has expired.
     public let dispositionAction: UpdateRetentionPolicyByIdRequestBodyArgDispositionActionField?
     /// Specifies the retention type:
     /// 
@@ -42,29 +42,29 @@ public class UpdateRetentionPolicyByIdRequestBodyArg: Codable {
     /// When updating a retention policy, you can use
     /// `non-modifiable` type only. You can convert a
     /// `modifiable` policy to `non-modifiable`, but
-    /// not the other way around.,
+    /// not the other way around.
     public let retentionType: String?
     /// The length of the retention policy. This value
     /// specifies the duration in days that the retention
     /// policy will be active for after being assigned to
     /// content.  If the policy has a `policy_type` of
     /// `indefinite`, the `retention_length` will also be
-    /// `indefinite`.,
+    /// `indefinite`.
     public let retentionLength: String?
     /// Used to retire a retention policy.
     /// 
     /// If not retiring a policy, do not include this parameter
-    /// or set it to `null`.,
+    /// or set it to `null`.
     public let status: String?
     /// Determines if the owner of items under the policy
     /// can extend the retention when the original retention
-    /// duration is about to end.,
+    /// duration is about to end.
     public let canOwnerExtendRetention: Bool?
     /// Determines if owners and co-owners of items
     /// under the policy are notified when
-    /// the retention duration is about to end.,
+    /// the retention duration is about to end.
     public let areOwnersNotified: Bool?
-    /// A list of users notified when the retention duration is about to end.,
+    /// A list of users notified when the retention duration is about to end.
     public let customNotificationRecipients: [UserMini]?
 
     /// Initializer for a UpdateRetentionPolicyByIdRequestBodyArg.

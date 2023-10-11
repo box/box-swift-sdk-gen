@@ -5,7 +5,7 @@ public class CopyFileRequestBodyArgParentField: Codable {
         case id
     }
 
-    /// The ID of folder to copy the file to.,
+    /// The ID of folder to copy the file to.
     public let id: String
 
     /// Initializer for a CopyFileRequestBodyArgParentField.

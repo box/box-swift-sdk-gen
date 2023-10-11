@@ -5,7 +5,7 @@ public class TransferOwnedFolderRequestBodyArg: Codable {
         case ownedBy = "owned_by"
     }
 
-    /// The user who the folder will be transferred to,
+    /// The user who the folder will be transferred to
     public let ownedBy: TransferOwnedFolderRequestBodyArgOwnedByField
 
     /// Initializer for a TransferOwnedFolderRequestBodyArg.

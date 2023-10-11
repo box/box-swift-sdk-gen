@@ -7,11 +7,11 @@ public class ClassificationTemplateFieldsFieldOptionsField: Codable {
         case staticConfig
     }
 
-    /// The unique ID of this classification.,
+    /// The unique ID of this classification.
     public let id: String?
-    /// The display name and key for this classification.,
+    /// The display name and key for this classification.
     public let key: String?
-    /// Additional information about the classification.,
+    /// Additional information about the classification.
     public let staticConfig: ClassificationTemplateFieldsFieldOptionsFieldStaticConfigField?
 
     /// Initializer for a ClassificationTemplateFieldsFieldOptionsField.

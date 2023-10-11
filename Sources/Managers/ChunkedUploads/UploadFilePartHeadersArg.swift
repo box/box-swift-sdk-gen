@@ -11,7 +11,7 @@ public class UploadFilePartHeadersArg {
     /// openSSL command to encode the file part:
     /// `openssl sha1 -binary <FILE_PART_NAME> | base64`
     /// 
-    /// [1]: https://tools.ietf.org/html/rfc3230,
+    /// [1]: https://tools.ietf.org/html/rfc3230
     public let digest: String
     /// The byte range of the chunk.
     /// 
@@ -25,9 +25,9 @@ public class UploadFilePartHeadersArg {
     /// 
     /// * The lower bound of each part's byte range
     ///   must be a multiple of the part size.
-    /// * The higher bound must be a multiple of the part size - 1.,
+    /// * The higher bound must be a multiple of the part size - 1.
     public let contentRange: String
-    /// Extra headers that will be included in the HTTP request.,
+    /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
     /// Initializer for a UploadFilePartHeadersArg.

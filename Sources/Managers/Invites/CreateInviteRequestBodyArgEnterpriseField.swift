@@ -5,7 +5,7 @@ public class CreateInviteRequestBodyArgEnterpriseField: Codable {
         case id
     }
 
-    /// The ID of the enterprise,
+    /// The ID of the enterprise
     public let id: String
 
     /// Initializer for a CreateInviteRequestBodyArgEnterpriseField.

@@ -1,5 +1,6 @@
 import Foundation
 
+/// A list of tasks
 public class Tasks: Codable {
     private enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
@@ -8,9 +9,9 @@ public class Tasks: Codable {
 
     /// One greater than the offset of the last entry in the entire collection.
     /// The total number of entries in the collection may be less than
-    /// `total_count`.,
+    /// `total_count`.
     public let totalCount: Int64?
-    /// A list of tasks,
+    /// A list of tasks
     public let entries: [Task]?
 
     /// Initializer for a Tasks.

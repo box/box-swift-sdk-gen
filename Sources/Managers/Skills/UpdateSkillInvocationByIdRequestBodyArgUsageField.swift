@@ -6,9 +6,9 @@ public class UpdateSkillInvocationByIdRequestBodyArgUsageField: Codable {
         case value
     }
 
-    /// `file`,
+    /// `file`
     public let unit: String?
-    /// `1`,
+    /// `1`
     public let value: Int?
 
     /// Initializer for a UpdateSkillInvocationByIdRequestBodyArgUsageField.

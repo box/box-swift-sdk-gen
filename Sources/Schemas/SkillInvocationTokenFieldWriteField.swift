@@ -8,15 +8,15 @@ public class SkillInvocationTokenFieldWriteField: Codable {
         case restrictedTo = "restricted_to"
     }
 
-    /// The requested access token.,
+    /// The requested access token.
     public let accessToken: String?
-    /// The time in seconds by which this token will expire.,
+    /// The time in seconds by which this token will expire.
     public let expiresIn: Int64?
-    /// The type of access token returned.,
+    /// The type of access token returned.
     public let tokenType: SkillInvocationTokenFieldWriteFieldTokenTypeField?
     /// The permissions that this access token permits,
     /// providing a list of resources (files, folders, etc)
-    /// and the scopes permitted for each of those resources.,
+    /// and the scopes permitted for each of those resources.
     public let restrictedTo: String?
 
     /// Initializer for a SkillInvocationTokenFieldWriteField.

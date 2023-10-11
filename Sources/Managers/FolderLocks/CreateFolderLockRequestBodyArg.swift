@@ -2,38 +2,38 @@ import Foundation
 
 public class CreateFolderLockRequestBodyArg: Codable {
     private enum CodingKeys: String, CodingKey {
-        case lockedOperations = "locked_operations"
         case folder
+        case lockedOperations = "locked_operations"
     }
 
+    /// The folder to apply the lock to.
+    public let folder: CreateFolderLockRequestBodyArgFolderField
     /// The operations to lock for the folder. If `locked_operations` is
     /// included in the request, both `move` and `delete` must also be
-    /// included and both set to `true`.,
+    /// included and both set to `true`.
     public let lockedOperations: CreateFolderLockRequestBodyArgLockedOperationsField?
-    /// The folder to apply the lock to.,
-    public let folder: CreateFolderLockRequestBodyArgFolderField
 
     /// Initializer for a CreateFolderLockRequestBodyArg.
     ///
     /// - Parameters:
+    ///   - folder: The folder to apply the lock to.
     ///   - lockedOperations: The operations to lock for the folder. If `locked_operations` is
     ///     included in the request, both `move` and `delete` must also be
     ///     included and both set to `true`.
-    ///   - folder: The folder to apply the lock to.
-    public init(lockedOperations: CreateFolderLockRequestBodyArgLockedOperationsField? = nil, folder: CreateFolderLockRequestBodyArgFolderField) {
-        self.lockedOperations = lockedOperations
+    public init(folder: CreateFolderLockRequestBodyArgFolderField, lockedOperations: CreateFolderLockRequestBodyArgLockedOperationsField? = nil) {
         self.folder = folder
+        self.lockedOperations = lockedOperations
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        lockedOperations = try container.decodeIfPresent(CreateFolderLockRequestBodyArgLockedOperationsField.self, forKey: .lockedOperations)
         folder = try container.decode(CreateFolderLockRequestBodyArgFolderField.self, forKey: .folder)
+        lockedOperations = try container.decodeIfPresent(CreateFolderLockRequestBodyArgLockedOperationsField.self, forKey: .lockedOperations)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(lockedOperations, forKey: .lockedOperations)
         try container.encode(folder, forKey: .folder)
+        try container.encodeIfPresent(lockedOperations, forKey: .lockedOperations)
     }
 }

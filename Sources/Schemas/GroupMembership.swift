@@ -1,5 +1,7 @@
 import Foundation
 
+/// Membership is used to signify that a user is part of a
+/// group.
 public class GroupMembership: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -11,17 +13,17 @@ public class GroupMembership: Codable {
         case modifiedAt = "modified_at"
     }
 
-    /// The unique identifier for this group membership,
+    /// The unique identifier for this group membership
     public let id: String?
-    /// `group_membership`,
+    /// `group_membership`
     public let type: GroupMembershipTypeField?
     public let user: UserMini?
     public let group: GroupMini?
-    /// The role of the user in the group.,
+    /// The role of the user in the group.
     public let role: GroupMembershipRoleField?
-    /// The time this membership was created.,
+    /// The time this membership was created.
     public let createdAt: String?
-    /// The time this membership was last modified.,
+    /// The time this membership was last modified.
     public let modifiedAt: String?
 
     /// Initializer for a GroupMembership.

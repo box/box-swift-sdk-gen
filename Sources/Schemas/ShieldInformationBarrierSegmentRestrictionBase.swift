@@ -1,15 +1,18 @@
 import Foundation
 
+/// A base representation of
+/// a segment restriction object for
+/// the shield information barrier
 public class ShieldInformationBarrierSegmentRestrictionBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case type
         case id
     }
 
-    /// Shield information barrier segment restriction,
+    /// Shield information barrier segment restriction
     public let type: ShieldInformationBarrierSegmentRestrictionBaseTypeField?
     /// The unique identifier for the
-    /// shield information barrier segment restriction.,
+    /// shield information barrier segment restriction.
     public let id: String?
 
     /// Initializer for a ShieldInformationBarrierSegmentRestrictionBase.

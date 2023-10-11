@@ -5,7 +5,7 @@ public class FileFullRepresentationsField: Codable {
         case entries
     }
 
-    /// A list of files,
+    /// A list of files
     public let entries: [FileFullRepresentationsFieldEntriesField]?
 
     /// Initializer for a FileFullRepresentationsField.

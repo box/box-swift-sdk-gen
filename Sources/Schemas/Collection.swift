@@ -1,5 +1,13 @@
 import Foundation
 
+/// A collection of items, including files and folders.
+/// 
+/// Currently, the only collection available
+/// is the `favorites` collection.
+/// 
+/// The contents of a collection can be explored in a
+/// similar way to which the contents of a folder is
+/// explored.
 public class Collection: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -8,15 +16,15 @@ public class Collection: Codable {
         case collectionType = "collection_type"
     }
 
-    /// The unique identifier for this collection.,
+    /// The unique identifier for this collection.
     public let id: String?
-    /// `collection`,
+    /// `collection`
     public let type: CollectionTypeField?
-    /// The name of the collection.,
+    /// The name of the collection.
     public let name: CollectionNameField?
     /// The type of the collection. This is used to
     /// determine the proper visual treatment for
-    /// collections.,
+    /// collections.
     public let collectionType: CollectionCollectionTypeField?
 
     /// Initializer for a Collection.

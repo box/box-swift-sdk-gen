@@ -6,9 +6,9 @@ public class CreateStoragePolicyAssignmentRequestBodyArgStoragePolicyField: Coda
         case id
     }
 
-    /// The type to assign.,
+    /// The type to assign.
     public let type: CreateStoragePolicyAssignmentRequestBodyArgStoragePolicyFieldTypeField
-    /// The ID of the storage policy to assign.,
+    /// The ID of the storage policy to assign.
     public let id: String
 
     /// Initializer for a CreateStoragePolicyAssignmentRequestBodyArgStoragePolicyField.

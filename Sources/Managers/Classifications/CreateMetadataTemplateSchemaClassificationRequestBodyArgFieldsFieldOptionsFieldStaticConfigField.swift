@@ -5,7 +5,7 @@ public class CreateMetadataTemplateSchemaClassificationRequestBodyArgFieldsField
         case classification
     }
 
-    /// Additional information about the classification.,
+    /// Additional information about the classification.
     public let classification: CreateMetadataTemplateSchemaClassificationRequestBodyArgFieldsFieldOptionsFieldStaticConfigFieldClassificationField?
 
     /// Initializer for a CreateMetadataTemplateSchemaClassificationRequestBodyArgFieldsFieldOptionsFieldStaticConfigField.

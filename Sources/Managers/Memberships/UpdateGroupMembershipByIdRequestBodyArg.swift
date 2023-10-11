@@ -6,7 +6,7 @@ public class UpdateGroupMembershipByIdRequestBodyArg: Codable {
         case configurablePermissions = "configurable_permissions"
     }
 
-    /// The role of the user in the group.,
+    /// The role of the user in the group.
     public let role: UpdateGroupMembershipByIdRequestBodyArgRoleField?
     /// Custom configuration for the permissions an admin
     /// if a group will receive. This option has no effect
@@ -17,7 +17,7 @@ public class UpdateGroupMembershipByIdRequestBodyArg: Codable {
     /// 
     /// Specifying a value of "null" for this object will deactivate
     /// all configurable permissions. Specifying permissions will set
-    /// them accordingly, omitted permissions will be enabled by default.,
+    /// them accordingly, omitted permissions will be enabled by default.
     public let configurablePermissions: [String: Bool]?
 
     /// Initializer for a UpdateGroupMembershipByIdRequestBodyArg.

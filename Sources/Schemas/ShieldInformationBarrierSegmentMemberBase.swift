@@ -1,5 +1,7 @@
 import Foundation
 
+/// A base representation of a
+/// shield information barrier segment member object
 public class ShieldInformationBarrierSegmentMemberBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -7,9 +9,9 @@ public class ShieldInformationBarrierSegmentMemberBase: Codable {
     }
 
     /// The unique identifier for the
-    /// shield information barrier segment member,
+    /// shield information barrier segment member
     public let id: String?
-    /// The type of the shield information barrier segment member,
+    /// The type of the shield information barrier segment member
     public let type: ShieldInformationBarrierSegmentMemberBaseTypeField?
 
     /// Initializer for a ShieldInformationBarrierSegmentMemberBase.

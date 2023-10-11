@@ -7,9 +7,9 @@ public class CreateFolderLockRequestBodyArgFolderField: Codable {
     }
 
     /// The content type the lock is being applied to. Only `folder`
-    /// is supported.,
+    /// is supported.
     public let type: String
-    /// The ID of the folder.,
+    /// The ID of the folder.
     public let id: String
 
     /// Initializer for a CreateFolderLockRequestBodyArgFolderField.

@@ -6,10 +6,10 @@ public class ZipDownloadRequestItemsField: Codable {
         case id
     }
 
-    /// The type of the item to add to the archive.,
+    /// The type of the item to add to the archive.
     public let type: ZipDownloadRequestItemsFieldTypeField
     /// The identifier of the item to add to the archive. When this item is
-    /// a folder then this can not be the root folder with ID `0`.,
+    /// a folder then this can not be the root folder with ID `0`.
     public let id: String
 
     /// Initializer for a ZipDownloadRequestItemsField.

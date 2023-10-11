@@ -1,11 +1,12 @@
 import Foundation
 
+/// Input created by a Signer on a Template
 public class TemplateSignerInput: SignRequestPrefillTag {
     private enum CodingKeys: String, CodingKey {
+        case pageIndex = "page_index"
         case type
         case contentType = "content_type"
         case isRequired = "is_required"
-        case pageIndex = "page_index"
         case documentId = "document_id"
         case dropdownChoices = "dropdown_choices"
         case groupId = "group_id"
@@ -14,30 +15,31 @@ public class TemplateSignerInput: SignRequestPrefillTag {
         case label
     }
 
-    /// Type of input,
-    public let type: TemplateSignerInputTypeField?
-    /// Content type of input,
-    public let contentType: TemplateSignerInputContentTypeField?
-    /// Whether or not the input is required.,
-    public let isRequired: Bool?
-    /// Index of page that the input is on.,
+    /// Index of page that the input is on.
     public let pageIndex: Int
-    /// Document identifier.,
+    /// Type of input
+    public let type: TemplateSignerInputTypeField?
+    /// Content type of input
+    public let contentType: TemplateSignerInputContentTypeField?
+    /// Whether or not the input is required.
+    public let isRequired: Bool?
+    /// Document identifier.
     public let documentId: String?
-    /// When the input is of the type `dropdown` this values will be filled with all the dropdown options.,
+    /// When the input is of the type `dropdown` this values will be filled with all the dropdown options.
     public let dropdownChoices: [String]?
-    /// When the input is of type `radio` they can be grouped to gather with this identifier.,
+    /// When the input is of type `radio` they can be grouped to gather with this identifier.
     public let groupId: String?
-    /// Where the input is located on a page.,
+    /// Where the input is located on a page.
     public let coordinates: TemplateSignerInputCoordinatesField?
-    /// The size of the input.,
+    /// The size of the input.
     public let dimensions: TemplateSignerInputDimensionsField?
-    /// The label field is used especially for text, attachment, radio, and checkbox type inputs.,
+    /// The label field is used especially for text, attachment, radio, and checkbox type inputs.
     public let label: String?
 
     /// Initializer for a TemplateSignerInput.
     ///
     /// - Parameters:
+    ///   - pageIndex: Index of page that the input is on.
     ///   - documentTagId: This references the ID of a specific tag contained in a file of the sign request.
     ///   - textValue: Text prefill value
     ///   - checkboxValue: Checkbox prefill value
@@ -45,18 +47,17 @@ public class TemplateSignerInput: SignRequestPrefillTag {
     ///   - type: Type of input
     ///   - contentType: Content type of input
     ///   - isRequired: Whether or not the input is required.
-    ///   - pageIndex: Index of page that the input is on.
     ///   - documentId: Document identifier.
     ///   - dropdownChoices: When the input is of the type `dropdown` this values will be filled with all the dropdown options.
     ///   - groupId: When the input is of type `radio` they can be grouped to gather with this identifier.
     ///   - coordinates: Where the input is located on a page.
     ///   - dimensions: The size of the input.
     ///   - label: The label field is used especially for text, attachment, radio, and checkbox type inputs.
-    public init(documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: String? = nil, type: TemplateSignerInputTypeField? = nil, contentType: TemplateSignerInputContentTypeField? = nil, isRequired: Bool? = nil, pageIndex: Int, documentId: String? = nil, dropdownChoices: [String]? = nil, groupId: String? = nil, coordinates: TemplateSignerInputCoordinatesField? = nil, dimensions: TemplateSignerInputDimensionsField? = nil, label: String? = nil) {
+    public init(pageIndex: Int, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: String? = nil, type: TemplateSignerInputTypeField? = nil, contentType: TemplateSignerInputContentTypeField? = nil, isRequired: Bool? = nil, documentId: String? = nil, dropdownChoices: [String]? = nil, groupId: String? = nil, coordinates: TemplateSignerInputCoordinatesField? = nil, dimensions: TemplateSignerInputDimensionsField? = nil, label: String? = nil) {
+        self.pageIndex = pageIndex
         self.type = type
         self.contentType = contentType
         self.isRequired = isRequired
-        self.pageIndex = pageIndex
         self.documentId = documentId
         self.dropdownChoices = dropdownChoices
         self.groupId = groupId
@@ -68,10 +69,10 @@ public class TemplateSignerInput: SignRequestPrefillTag {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        pageIndex = try container.decode(Int.self, forKey: .pageIndex)
         type = try container.decodeIfPresent(TemplateSignerInputTypeField.self, forKey: .type)
         contentType = try container.decodeIfPresent(TemplateSignerInputContentTypeField.self, forKey: .contentType)
         isRequired = try container.decodeIfPresent(Bool.self, forKey: .isRequired)
-        pageIndex = try container.decode(Int.self, forKey: .pageIndex)
         documentId = try container.decodeIfPresent(String.self, forKey: .documentId)
         dropdownChoices = try container.decodeIfPresent([String].self, forKey: .dropdownChoices)
         groupId = try container.decodeIfPresent(String.self, forKey: .groupId)
@@ -83,10 +84,10 @@ public class TemplateSignerInput: SignRequestPrefillTag {
 
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(pageIndex, forKey: .pageIndex)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(contentType, forKey: .contentType)
         try container.encodeIfPresent(isRequired, forKey: .isRequired)
-        try container.encode(pageIndex, forKey: .pageIndex)
         try container.encodeIfPresent(documentId, forKey: .documentId)
         try container.encodeIfPresent(dropdownChoices, forKey: .dropdownChoices)
         try container.encodeIfPresent(groupId, forKey: .groupId)

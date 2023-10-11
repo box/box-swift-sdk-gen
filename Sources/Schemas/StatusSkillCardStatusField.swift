@@ -9,10 +9,10 @@ public class StatusSkillCardStatusField: Codable {
     /// A code for the status of this Skill invocation. By
     /// default each of these will have their own accompanied
     /// messages. These can be adjusted by setting the `message`
-    /// value on this object.,
+    /// value on this object.
     public let code: StatusSkillCardStatusFieldCodeField
     /// A custom message that can be provided with this status.
-    /// This will be shown in the web app to the end user.,
+    /// This will be shown in the web app to the end user.
     public let message: String?
 
     /// Initializer for a StatusSkillCardStatusField.

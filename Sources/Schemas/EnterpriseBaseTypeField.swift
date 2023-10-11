@@ -1,5 +1,5 @@
 import Foundation
 
 public enum EnterpriseBaseTypeField: String, CodableStringEnum {
-    case enterprise = "enterprise"
+    case enterprise
 }

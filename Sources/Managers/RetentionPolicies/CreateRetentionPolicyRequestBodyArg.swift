@@ -3,9 +3,9 @@ import Foundation
 public class CreateRetentionPolicyRequestBodyArg: Codable {
     private enum CodingKeys: String, CodingKey {
         case policyName = "policy_name"
-        case description
         case policyType = "policy_type"
         case dispositionAction = "disposition_action"
+        case description
         case retentionLength = "retention_length"
         case retentionType = "retention_type"
         case canOwnerExtendRetention = "can_owner_extend_retention"
@@ -13,29 +13,29 @@ public class CreateRetentionPolicyRequestBodyArg: Codable {
         case customNotificationRecipients = "custom_notification_recipients"
     }
 
-    /// The name for the retention policy,
+    /// The name for the retention policy
     public let policyName: String
-    /// The additional text description of the retention policy.,
-    public let description: String?
     /// The type of the retention policy. A retention
     /// policy type can either be `finite`, where a
     /// specific amount of time to retain the content is known
     /// upfront, or `indefinite`, where the amount of time
-    /// to retain the content is still unknown.,
+    /// to retain the content is still unknown.
     public let policyType: CreateRetentionPolicyRequestBodyArgPolicyTypeField
     /// The disposition action of the retention policy.
     /// `permanently_delete` deletes the content
     /// retained by the policy permanently.
     /// `remove_retention` lifts retention policy
     /// from the content, allowing it to be deleted
-    /// by users once the retention policy has expired.,
+    /// by users once the retention policy has expired.
     public let dispositionAction: CreateRetentionPolicyRequestBodyArgDispositionActionField
+    /// The additional text description of the retention policy.
+    public let description: String?
     /// The length of the retention policy. This value
     /// specifies the duration in days that the retention
     /// policy will be active for after being assigned to
     /// content.  If the policy has a `policy_type` of
     /// `indefinite`, the `retention_length` will also be
-    /// `indefinite`.,
+    /// `indefinite`.
     public let retentionLength: String?
     /// Specifies the retention type:
     /// 
@@ -51,23 +51,22 @@ public class CreateRetentionPolicyRequestBodyArg: Codable {
     /// or notification settings. You cannot perform other actions,
     /// such as deleting the assignment or shortening the
     /// policy duration. Use this type to ensure
-    /// compliance with regulatory retention policies.,
+    /// compliance with regulatory retention policies.
     public let retentionType: CreateRetentionPolicyRequestBodyArgRetentionTypeField?
     /// Whether the owner of a file will be allowed to
-    /// extend the retention.,
+    /// extend the retention.
     public let canOwnerExtendRetention: Bool?
     /// Whether owner and co-owners of a file are notified
-    /// when the policy nears expiration.,
+    /// when the policy nears expiration.
     public let areOwnersNotified: Bool?
     /// A list of users notified when
-    /// the retention policy duration is about to end.,
+    /// the retention policy duration is about to end.
     public let customNotificationRecipients: [UserMini]?
 
     /// Initializer for a CreateRetentionPolicyRequestBodyArg.
     ///
     /// - Parameters:
     ///   - policyName: The name for the retention policy
-    ///   - description: The additional text description of the retention policy.
     ///   - policyType: The type of the retention policy. A retention
     ///     policy type can either be `finite`, where a
     ///     specific amount of time to retain the content is known
@@ -79,6 +78,7 @@ public class CreateRetentionPolicyRequestBodyArg: Codable {
     ///     `remove_retention` lifts retention policy
     ///     from the content, allowing it to be deleted
     ///     by users once the retention policy has expired.
+    ///   - description: The additional text description of the retention policy.
     ///   - retentionLength: The length of the retention policy. This value
     ///     specifies the duration in days that the retention
     ///     policy will be active for after being assigned to
@@ -106,11 +106,11 @@ public class CreateRetentionPolicyRequestBodyArg: Codable {
     ///     when the policy nears expiration.
     ///   - customNotificationRecipients: A list of users notified when
     ///     the retention policy duration is about to end.
-    public init(policyName: String, description: String? = nil, policyType: CreateRetentionPolicyRequestBodyArgPolicyTypeField, dispositionAction: CreateRetentionPolicyRequestBodyArgDispositionActionField, retentionLength: String? = nil, retentionType: CreateRetentionPolicyRequestBodyArgRetentionTypeField? = nil, canOwnerExtendRetention: Bool? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserMini]? = nil) {
+    public init(policyName: String, policyType: CreateRetentionPolicyRequestBodyArgPolicyTypeField, dispositionAction: CreateRetentionPolicyRequestBodyArgDispositionActionField, description: String? = nil, retentionLength: String? = nil, retentionType: CreateRetentionPolicyRequestBodyArgRetentionTypeField? = nil, canOwnerExtendRetention: Bool? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserMini]? = nil) {
         self.policyName = policyName
-        self.description = description
         self.policyType = policyType
         self.dispositionAction = dispositionAction
+        self.description = description
         self.retentionLength = retentionLength
         self.retentionType = retentionType
         self.canOwnerExtendRetention = canOwnerExtendRetention
@@ -121,9 +121,9 @@ public class CreateRetentionPolicyRequestBodyArg: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         policyName = try container.decode(String.self, forKey: .policyName)
-        description = try container.decodeIfPresent(String.self, forKey: .description)
         policyType = try container.decode(CreateRetentionPolicyRequestBodyArgPolicyTypeField.self, forKey: .policyType)
         dispositionAction = try container.decode(CreateRetentionPolicyRequestBodyArgDispositionActionField.self, forKey: .dispositionAction)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
         retentionLength = try container.decodeIfPresent(String.self, forKey: .retentionLength)
         retentionType = try container.decodeIfPresent(CreateRetentionPolicyRequestBodyArgRetentionTypeField.self, forKey: .retentionType)
         canOwnerExtendRetention = try container.decodeIfPresent(Bool.self, forKey: .canOwnerExtendRetention)
@@ -134,9 +134,9 @@ public class CreateRetentionPolicyRequestBodyArg: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(policyName, forKey: .policyName)
-        try container.encodeIfPresent(description, forKey: .description)
         try container.encode(policyType, forKey: .policyType)
         try container.encode(dispositionAction, forKey: .dispositionAction)
+        try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(retentionLength, forKey: .retentionLength)
         try container.encodeIfPresent(retentionType, forKey: .retentionType)
         try container.encodeIfPresent(canOwnerExtendRetention, forKey: .canOwnerExtendRetention)

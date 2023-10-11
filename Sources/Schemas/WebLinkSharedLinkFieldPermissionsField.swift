@@ -11,17 +11,17 @@ public class WebLinkSharedLinkFieldPermissionsField: Codable {
     /// shared links on folders, this also applies to any items in the folder.
     /// 
     /// This value can be set to `true` when the effective access level is
-    /// set to `open` or `company`, not `collaborators`.,
+    /// set to `open` or `company`, not `collaborators`.
     public let canDownload: Bool
     /// Defines if the shared link allows for the item to be previewed.
     /// 
     /// This value is always `true`. For shared links on folders this also
-    /// applies to any items in the folder.,
+    /// applies to any items in the folder.
     public let canPreview: Bool
     /// Defines if the shared link allows for the item to be edited.
     /// 
     /// This value can only be `true` if `can_download` is also `true` and if
-    /// the item has a type of `file`.,
+    /// the item has a type of `file`.
     public let canEdit: Bool
 
     /// Initializer for a WebLinkSharedLinkFieldPermissionsField.

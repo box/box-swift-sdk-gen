@@ -7,11 +7,11 @@ public class CreateFileUploadSessionRequestBodyArg: Codable {
         case fileName = "file_name"
     }
 
-    /// The ID of the folder to upload the new file to.,
+    /// The ID of the folder to upload the new file to.
     public let folderId: String
-    /// The total number of bytes of the file to be uploaded,
+    /// The total number of bytes of the file to be uploaded
     public let fileSize: Int64
-    /// The name of new file,
+    /// The name of new file
     public let fileName: String
 
     /// Initializer for a CreateFileUploadSessionRequestBodyArg.

@@ -7,11 +7,11 @@ public class WorkflowFlowsFieldTriggerFieldScopeField: Codable {
         case object
     }
 
-    /// The trigger scope's resource type,
+    /// The trigger scope's resource type
     public let type: WorkflowFlowsFieldTriggerFieldScopeFieldTypeField?
-    /// Indicates the path of the condition value to check,
+    /// Indicates the path of the condition value to check
     public let ref: String?
-    /// The object the `ref` points to,
+    /// The object the `ref` points to
     public let object: WorkflowFlowsFieldTriggerFieldScopeFieldObjectField?
 
     /// Initializer for a WorkflowFlowsFieldTriggerFieldScopeField.

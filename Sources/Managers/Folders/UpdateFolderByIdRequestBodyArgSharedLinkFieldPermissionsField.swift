@@ -7,7 +7,7 @@ public class UpdateFolderByIdRequestBodyArgSharedLinkFieldPermissionsField: Coda
 
     /// If the shared link allows for downloading of files.
     /// This can only be set when `access` is set to
-    /// `open` or `company`.,
+    /// `open` or `company`.
     public let canDownload: Bool?
 
     /// Initializer for a UpdateFolderByIdRequestBodyArgSharedLinkFieldPermissionsField.

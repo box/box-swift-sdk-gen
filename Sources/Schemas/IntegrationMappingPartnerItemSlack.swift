@@ -1,5 +1,10 @@
 import Foundation
 
+/// The schema for an integration mapping mapped item object for type Slack.
+/// 
+/// Depending if Box for Slack is installed at the org or workspace level,
+/// provide **either** `slack_org_id` **or** `slack_workspace_id`.
+/// Do not use both parameters at the same time.
 public class IntegrationMappingPartnerItemSlack: Codable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -8,13 +13,13 @@ public class IntegrationMappingPartnerItemSlack: Codable {
         case slackOrgId = "slack_org_id"
     }
 
-    /// Type of the mapped item referenced in `id`,
+    /// Type of the mapped item referenced in `id`
     public let type: IntegrationMappingPartnerItemSlackTypeField
-    /// ID of the mapped item (of type referenced in `type`),
+    /// ID of the mapped item (of type referenced in `type`)
     public let id: String
-    /// ID of the Slack workspace with which the item is associated. Use this parameter if Box for Slack is installed at a workspace level. Do not use `slack_org_id` at the same time.,
+    /// ID of the Slack workspace with which the item is associated. Use this parameter if Box for Slack is installed at a workspace level. Do not use `slack_org_id` at the same time.
     public let slackWorkspaceId: String?
-    /// ID of the Slack org with which the item is associated. Use this parameter if Box for Slack is installed at the org level. Do not use `slack_workspace_id` at the same time.,
+    /// ID of the Slack org with which the item is associated. Use this parameter if Box for Slack is installed at the org level. Do not use `slack_workspace_id` at the same time.
     public let slackOrgId: String?
 
     /// Initializer for a IntegrationMappingPartnerItemSlack.

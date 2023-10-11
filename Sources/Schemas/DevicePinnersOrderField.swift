@@ -6,9 +6,9 @@ public class DevicePinnersOrderField: Codable {
         case direction
     }
 
-    /// The field that is ordered by,
+    /// The field that is ordered by
     public let by: DevicePinnersOrderFieldByField?
-    /// The direction to order by, either ascending or descending,
+    /// The direction to order by, either ascending or descending
     public let direction: DevicePinnersOrderFieldDirectionField?
 
     /// Initializer for a DevicePinnersOrderField.

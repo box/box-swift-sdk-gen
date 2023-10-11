@@ -1,14 +1,16 @@
 import Foundation
 
+/// A mini representation of a enterprise, used when
+/// nested within another resource.
 public class EnterpriseBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
     }
 
-    /// The unique identifier for this enterprise,
+    /// The unique identifier for this enterprise
     public let id: String?
-    /// `enterprise`,
+    /// `enterprise`
     public let type: EnterpriseBaseTypeField?
 
     /// Initializer for a EnterpriseBase.

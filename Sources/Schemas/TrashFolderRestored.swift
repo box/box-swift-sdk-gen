@@ -1,5 +1,6 @@
 import Foundation
 
+/// Represents a folder restored from the trash.
 public class TrashFolderRestored: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -31,60 +32,60 @@ public class TrashFolderRestored: Codable {
     /// by visiting a folder in the web application
     /// and copying the ID from the URL. For example,
     /// for the URL `https://*.app.box.com/folders/123`
-    /// the `folder_id` is `123`.,
+    /// the `folder_id` is `123`.
     public let id: String?
     /// The HTTP `etag` of this folder. This can be used within some API
     /// endpoints in the `If-Match` and `If-None-Match` headers to only
-    /// perform changes on the folder if (no) changes have happened.,
+    /// perform changes on the folder if (no) changes have happened.
     public let etag: String?
-    /// `folder`,
+    /// `folder`
     public let type: TrashFolderRestoredTypeField?
     public let sequenceId: String?
-    /// The name of the folder.,
+    /// The name of the folder.
     public let name: String?
     /// The date and time when the folder was created. This value may
     /// be `null` for some folders such as the root folder or the trash
-    /// folder.,
+    /// folder.
     public let createdAt: String?
     /// The date and time when the folder was last updated. This value may
     /// be `null` for some folders such as the root folder or the trash
-    /// folder.,
+    /// folder.
     public let modifiedAt: String?
     public let description: String?
     /// The folder size in bytes.
     /// 
     /// Be careful parsing this integer as its
-    /// value can get very large.,
+    /// value can get very large.
     public let size: Int64?
     public let pathCollection: TrashFolderRestoredPathCollectionField?
     public let createdBy: UserMini?
     public let modifiedBy: UserMini?
     /// The time at which this folder was put in the
-    /// trash - becomes `null` after restore.,
+    /// trash - becomes `null` after restore.
     public let trashedAt: String?
     /// The time at which this folder is expected to be purged
-    /// from the trash  - becomes `null` after restore.,
+    /// from the trash  - becomes `null` after restore.
     public let purgedAt: String?
     /// The date and time at which this folder was originally
-    /// created.,
+    /// created.
     public let contentCreatedAt: String?
-    /// The date and time at which this folder was last updated.,
+    /// The date and time at which this folder was last updated.
     public let contentModifiedAt: String?
     public let ownedBy: UserMini?
     /// The shared link for this file. This will
     /// be `null` if a folder had been trashed, even though the original shared
-    /// link does become active again.,
+    /// link does become active again.
     public let sharedLink: String?
     /// The folder upload email for this folder. This will
     /// be `null` if a folder has been trashed, even though the original upload
-    /// email does become active again.,
+    /// email does become active again.
     public let folderUploadEmail: String?
     public let parent: FolderMini?
     /// Defines if this item has been deleted or not.
     /// 
     /// * `active` when the item has is not in the trash
     /// * `trashed` when the item has been moved to the trash but not deleted
-    /// * `deleted` when the item has been permanently deleted.,
+    /// * `deleted` when the item has been permanently deleted.
     public let itemStatus: TrashFolderRestoredItemStatusField?
 
     /// Initializer for a TrashFolderRestored.

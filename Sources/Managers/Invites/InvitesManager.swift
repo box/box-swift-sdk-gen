@@ -9,6 +9,22 @@ public class InvitesManager {
         self.networkSession = networkSession
     }
 
+    /// Invites an existing external user to join an enterprise.
+    /// 
+    /// The existing user can not be part of another enterprise and
+    /// must already have a Box account. Once invited, the user will receive an
+    /// email and are prompted to accept the invitation within the
+    /// Box web application.
+    /// 
+    /// This method requires the "Manage An Enterprise" scope enabled for
+    /// the application, which can be enabled within the developer console.
+    ///
+    /// - Parameters:
+    ///   - requestBody: Request body of createInvite method
+    ///   - queryParams: Query parameters of createInvite method
+    ///   - headers: Headers of createInvite method
+    /// - Returns: The `Invite`.
+    /// - Throws: The `GeneralError`.
     public func createInvite(requestBody: CreateInviteRequestBodyArg, queryParams: CreateInviteQueryParamsArg = CreateInviteQueryParamsArg(), headers: CreateInviteHeadersArg = CreateInviteHeadersArg()) async throws -> Invite {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
@@ -16,6 +32,15 @@ public class InvitesManager {
         return try Invite.deserialize(from: response.text)
     }
 
+    /// Returns the status of a user invite.
+    ///
+    /// - Parameters:
+    ///   - inviteId: The ID of an invite.
+    ///     Example: "213723"
+    ///   - queryParams: Query parameters of getInviteById method
+    ///   - headers: Headers of getInviteById method
+    /// - Returns: The `Invite`.
+    /// - Throws: The `GeneralError`.
     public func getInviteById(inviteId: String, queryParams: GetInviteByIdQueryParamsArg = GetInviteByIdQueryParamsArg(), headers: GetInviteByIdHeadersArg = GetInviteByIdHeadersArg()) async throws -> Invite {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))

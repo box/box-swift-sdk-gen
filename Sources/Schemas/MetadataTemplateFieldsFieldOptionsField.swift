@@ -7,9 +7,9 @@ public class MetadataTemplateFieldsFieldOptionsField: Codable {
     }
 
     /// The text value of the option. This represents both the display name of the
-    /// option and the internal key used when updating templates.,
+    /// option and the internal key used when updating templates.
     public let key: String
-    /// The internal unique identifier of the the option.,
+    /// The internal unique identifier of the the option.
     public let id: String?
 
     /// Initializer for a MetadataTemplateFieldsFieldOptionsField.

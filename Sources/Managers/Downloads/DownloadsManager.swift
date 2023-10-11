@@ -9,6 +9,22 @@ public class DownloadsManager {
         self.networkSession = networkSession
     }
 
+    /// Returns the contents of a file in binary format.
+    ///
+    /// - Parameters:
+    ///   - fileId: The unique identifier that represents a file.
+    ///     
+    ///     The ID for any file can be determined
+    ///     by visiting a file in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/files/123`
+    ///     the `file_id` is `123`.
+    ///     Example: "12345"
+    ///   - downloadDestinationURL: The URL on disk where the file will be saved once it has been downloaded.
+    ///   - queryParams: Query parameters of downloadFile method
+    ///   - headers: Headers of downloadFile method
+    /// - Returns: The `URL`.
+    /// - Throws: The `GeneralError`.
     public func downloadFile(fileId: String, downloadDestinationURL: URL, queryParams: DownloadFileQueryParamsArg = DownloadFileQueryParamsArg(), headers: DownloadFileHeadersArg = DownloadFileHeadersArg()) async throws -> URL {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["version": Utils.Strings.toString(value: queryParams.version), "access_token": Utils.Strings.toString(value: queryParams.accessToken)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["range": Utils.Strings.toString(value: headers.range), "boxapi": Utils.Strings.toString(value: headers.boxapi)], headers.extraHeaders))

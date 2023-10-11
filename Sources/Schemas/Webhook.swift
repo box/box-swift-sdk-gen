@@ -1,5 +1,6 @@
 import Foundation
 
+/// Represents a configured webhook.
 public class Webhook: WebhookMini {
     private enum CodingKeys: String, CodingKey {
         case createdBy = "created_by"
@@ -10,12 +11,12 @@ public class Webhook: WebhookMini {
 
     public let createdBy: UserMini?
     /// A timestamp identifying the time that
-    /// the webhook was created.,
+    /// the webhook was created.
     public let createdAt: String?
-    /// The URL that is notified by this webhook,
+    /// The URL that is notified by this webhook
     public let address: String?
     /// An array of event names that this webhook is
-    /// to be triggered for,
+    /// to be triggered for
     public let triggers: [WebhookTriggersField]?
 
     /// Initializer for a Webhook.
