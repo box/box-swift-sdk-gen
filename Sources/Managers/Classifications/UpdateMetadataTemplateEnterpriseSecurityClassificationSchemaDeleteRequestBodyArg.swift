@@ -7,11 +7,11 @@ public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaDeleteR
         case enumOptionKey
     }
 
-    /// `removeEnumOption`,
+    /// `removeEnumOption`
     public let op: String
-    /// `Box__Security__Classification__Key`,
+    /// `Box__Security__Classification__Key`
     public let fieldKey: String
-    /// The label of the classification to remove.,
+    /// The label of the classification to remove.
     public let enumOptionKey: String
 
     /// Initializer for a UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaDeleteRequestBodyArg.

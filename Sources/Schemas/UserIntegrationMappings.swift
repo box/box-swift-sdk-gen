@@ -1,14 +1,16 @@
 import Foundation
 
+/// A user representation for integration mappings
+/// API purposes. Fields name and login are not required.
 public class UserIntegrationMappings: UserBase {
     private enum CodingKeys: String, CodingKey {
         case name
         case login
     }
 
-    /// The display name of this user,
+    /// The display name of this user
     public let name: String?
-    /// The primary email address of this user,
+    /// The primary email address of this user
     public let login: String?
 
     /// Initializer for a UserIntegrationMappings.

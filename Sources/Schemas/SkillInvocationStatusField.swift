@@ -17,13 +17,13 @@ public class SkillInvocationStatusField: Codable {
     /// * `transient_failure` - Encountered an issue which can be
     ///   retried.
     /// * `permanent_failure` -  Encountered a permanent issue and
-    ///   retry would not help.,
+    ///   retry would not help.
     public let state: SkillInvocationStatusFieldStateField?
-    /// Status information,
+    /// Status information
     public let message: String?
-    /// Error code information, if error occurred.,
+    /// Error code information, if error occurred.
     public let errorCode: String?
-    /// Additional status information.,
+    /// Additional status information.
     public let additionalInfo: String?
 
     /// Initializer for a SkillInvocationStatusField.

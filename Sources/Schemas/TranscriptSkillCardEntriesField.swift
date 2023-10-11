@@ -7,10 +7,10 @@ public class TranscriptSkillCardEntriesField: Codable {
     }
 
     /// The text of the entry. This would be the transcribed text assigned
-    /// to the entry on the timeline.,
+    /// to the entry on the timeline.
     public let text: String?
     /// Defines when a transcribed bit of text appears. This only includes a
-    /// start time and no end time.,
+    /// start time and no end time.
     public let appears: [TranscriptSkillCardEntriesFieldAppearsField]?
 
     /// Initializer for a TranscriptSkillCardEntriesField.

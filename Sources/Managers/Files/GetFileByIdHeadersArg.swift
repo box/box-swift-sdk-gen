@@ -6,7 +6,7 @@ public class GetFileByIdHeadersArg {
     /// Pass in the item's last observed `etag` value
     /// into this header and the endpoint will fail
     /// with a `304 Not Modified` if the item has not
-    /// changed since.,
+    /// changed since.
     public let ifNoneMatch: String?
     /// The URL, and optional password, for the shared link of this item.
     /// 
@@ -17,7 +17,7 @@ public class GetFileByIdHeadersArg {
     /// use `shared_link=[link]&shared_link_password=[password]`.
     /// 
     /// This header can be used on the file or folder shared, as well as on any files
-    /// or folders nested within the item.,
+    /// or folders nested within the item.
     public let boxapi: String?
     /// A header required to request specific `representations`
     /// of a file. Use this in combination with the `fields` query
@@ -37,9 +37,9 @@ public class GetFileByIdHeadersArg {
     /// document file types in Box using the `[extracted_text]`
     /// representation.
     /// 
-    /// `x-rep-hints: [extracted_text]`,
+    /// `x-rep-hints: [extracted_text]`
     public let xRepHints: String?
-    /// Extra headers that will be included in the HTTP request.,
+    /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
     /// Initializer for a GetFileByIdHeadersArg.

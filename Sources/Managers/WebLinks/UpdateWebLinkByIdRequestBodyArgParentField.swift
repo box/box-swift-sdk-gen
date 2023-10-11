@@ -5,7 +5,7 @@ public class UpdateWebLinkByIdRequestBodyArgParentField: Codable {
         case id
     }
 
-    /// The ID of parent item,
+    /// The ID of parent item
     public let id: String?
 
     /// Initializer for a UpdateWebLinkByIdRequestBodyArgParentField.

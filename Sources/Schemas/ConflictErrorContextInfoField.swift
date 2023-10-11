@@ -5,7 +5,7 @@ public class ConflictErrorContextInfoField: Codable {
         case conflicts
     }
 
-    /// A list of the file conflicts that caused this error.,
+    /// A list of the file conflicts that caused this error.
     public let conflicts: [FileConflict]?
 
     /// Initializer for a ConflictErrorContextInfoField.

@@ -1,14 +1,15 @@
 import Foundation
 
+/// Base representation of a comment.
 public class CommentBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
     }
 
-    /// The unique identifier for this comment.,
+    /// The unique identifier for this comment.
     public let id: String?
-    /// `comment`,
+    /// `comment`
     public let type: CommentBaseTypeField?
 
     /// Initializer for a CommentBase.

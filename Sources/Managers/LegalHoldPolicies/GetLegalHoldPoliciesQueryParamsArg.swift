@@ -2,7 +2,7 @@ import Foundation
 
 public class GetLegalHoldPoliciesQueryParamsArg {
     /// Limits results to policies for which the names start with
-    /// this search term. This is a case-insensitive prefix.,
+    /// this search term. This is a case-insensitive prefix.
     public let policyName: String?
     /// A comma-separated list of attributes to include in the
     /// response. This can be used to request fields that are
@@ -12,14 +12,14 @@ public class GetLegalHoldPoliciesQueryParamsArg {
     /// effect that none of the standard fields are returned in
     /// the response unless explicitly specified, instead only
     /// fields for the mini representation are returned, additional
-    /// to the fields requested.,
+    /// to the fields requested.
     public let fields: [String]?
     /// Defines the position marker at which to begin returning results. This is
     /// used when paginating using marker-based pagination.
     /// 
-    /// This requires `usemarker` to be set to `true`.,
+    /// This requires `usemarker` to be set to `true`.
     public let marker: String?
-    /// The maximum number of items to return per page.,
+    /// The maximum number of items to return per page.
     public let limit: Int64?
 
     /// Initializer for a GetLegalHoldPoliciesQueryParamsArg.

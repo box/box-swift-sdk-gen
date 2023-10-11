@@ -1,5 +1,6 @@
 import Foundation
 
+/// A Sign Request Object
 public class SignRequest: SignRequestBase {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -14,33 +15,34 @@ public class SignRequest: SignRequestBase {
         case autoExpireAt = "auto_expire_at"
     }
 
-    /// object type,
+    /// object type
     public let type: SignRequestTypeField?
-    /// List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.,
+    /// List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
     public let sourceFiles: [FileBase]?
-    /// Array of signers for the sign request,
+    /// Array of signers for the sign request
     public let signers: [SignRequestSigner]?
-    /// Force a specific color for the signature (blue, black, or red).,
+    /// Force a specific color for the signature (blue, black, or red).
     public let signatureColor: String?
-    /// Sign request ID,
+    /// Sign request ID
     public let id: String?
     /// This URL is returned if `is_document_preparation_needed` is
     /// set to `true` in the request. It is used to prepare the sign request
-    /// via UI. The sign request is not sent until preparation is complete.,
+    /// via UI. The sign request is not sent until preparation is complete.
     public let prepareUrl: String?
     public let signingLog: FileMini?
-    /// Describes the status of the sign request,
+    /// Describes the status of the sign request
     public let status: SignRequestStatusField?
     /// List of files that will be signed, which are copies of the original
     /// source files. A new version of these files are created as signers sign
-    /// and can be downloaded at any point in the signing process.,
+    /// and can be downloaded at any point in the signing process.
     public let signFiles: SignRequestSignFilesField?
-    /// Uses `days_valid` to calculate the date and time, in GMT, the sign request will expire if unsigned.,
+    /// Uses `days_valid` to calculate the date and time, in GMT, the sign request will expire if unsigned.
     public let autoExpireAt: String?
 
     /// Initializer for a SignRequest.
     ///
     /// - Parameters:
+    ///   - parentFolder: FolderMini
     ///   - isDocumentPreparationNeeded: Indicates if the sender should receive a `prepare_url` in the response to complete document preparation via UI.
     ///   - redirectUrl: When specified, signature request will be redirected to this url when a document is signed.
     ///   - declinedRedirectUrl: The uri that a signer will be redirected to after declining to sign a document.
@@ -48,7 +50,6 @@ public class SignRequest: SignRequestBase {
     ///   - emailSubject: Subject of sign request email. This is cleaned by sign request. If this field is not passed, a default subject will be used.
     ///   - emailMessage: Message to include in sign request email. The field is cleaned through sanitization of specific characters. However, some html tags are allowed. Links included in the message are also converted to hyperlinks in the email. The message may contain the following html tags including `a`, `abbr`, `acronym`, `b`, `blockquote`, `code`, `em`, `i`, `ul`, `li`, `ol`, and `strong`. Be aware that when the text to html ratio is too high, the email may end up in spam filters. Custom styles on these tags are not allowed. If this field is not passed, a default message will be used.
     ///   - areRemindersEnabled: Reminds signers to sign a document on day 3, 8, 13 and 18. Reminders are only sent to outstanding signers.
-    ///   - parentFolder: FolderMini
     ///   - name: Name of the sign request.
     ///   - prefillTags: When a document contains sign related tags in the content, you can prefill them using this `prefill_tags` by referencing the 'id' of the tag as the `external_id` field of the prefill tag.
     ///   - daysValid: Set the number of days after which the created signature request will automatically expire if not completed. By default, we do not apply any expiration date on signature requests, and the signature request does not expire.
@@ -69,7 +70,7 @@ public class SignRequest: SignRequestBase {
     ///     source files. A new version of these files are created as signers sign
     ///     and can be downloaded at any point in the signing process.
     ///   - autoExpireAt: Uses `days_valid` to calculate the date and time, in GMT, the sign request will expire if unsigned.
-    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, parentFolder: FolderMini, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: String? = nil, id: String? = nil, prepareUrl: String? = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: String? = nil) {
+    public init(parentFolder: FolderMini, isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: String? = nil, id: String? = nil, prepareUrl: String? = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: String? = nil) {
         self.type = type
         self.sourceFiles = sourceFiles
         self.signers = signers
@@ -80,7 +81,7 @@ public class SignRequest: SignRequestBase {
         self.status = status
         self.signFiles = signFiles
         self.autoExpireAt = autoExpireAt
-        super.init(isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, parentFolder: parentFolder, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, isPhoneVerificationRequiredToView: isPhoneVerificationRequiredToView, templateId: templateId)
+        super.init(parentFolder: parentFolder, isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, isPhoneVerificationRequiredToView: isPhoneVerificationRequiredToView, templateId: templateId)
     }
 
     required public init(from decoder: Decoder) throws {

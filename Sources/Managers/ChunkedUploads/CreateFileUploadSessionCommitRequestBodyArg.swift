@@ -5,7 +5,7 @@ public class CreateFileUploadSessionCommitRequestBodyArg: Codable {
         case parts
     }
 
-    /// The list details for the uploaded parts,
+    /// The list details for the uploaded parts
     public let parts: [UploadPart]
 
     /// Initializer for a CreateFileUploadSessionCommitRequestBodyArg.

@@ -4,12 +4,12 @@ public class GetEnterpriseDevicePinnersQueryParamsArg {
     /// Defines the position marker at which to begin returning results. This is
     /// used when paginating using marker-based pagination.
     /// 
-    /// This requires `usemarker` to be set to `true`.,
+    /// This requires `usemarker` to be set to `true`.
     public let marker: String?
-    /// The maximum number of items to return per page.,
+    /// The maximum number of items to return per page.
     public let limit: Int64?
     /// The direction to sort results in. This can be either in alphabetical ascending
-    /// (`ASC`) or descending (`DESC`) order.,
+    /// (`ASC`) or descending (`DESC`) order.
     public let direction: GetEnterpriseDevicePinnersQueryParamsArgDirectionField?
 
     /// Initializer for a GetEnterpriseDevicePinnersQueryParamsArg.

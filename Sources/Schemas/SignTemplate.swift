@@ -1,5 +1,6 @@
 import Foundation
 
+/// A Box Sign template object
 public class SignTemplate: Codable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -21,39 +22,39 @@ public class SignTemplate: Codable {
         case customBranding = "custom_branding"
     }
 
-    /// object type,
+    /// object type
     public let type: SignTemplateTypeField?
-    /// Template identifier.,
+    /// Template identifier.
     public let id: String?
-    /// The name of the template.,
+    /// The name of the template.
     public let name: String?
-    /// Subject of signature request email. This is cleaned by sign request. If this field is not passed, a default subject will be used.,
+    /// Subject of signature request email. This is cleaned by sign request. If this field is not passed, a default subject will be used.
     public let emailSubject: String?
-    /// Message to include in signature request email. The field is cleaned through sanitization of specific characters. However, some html tags are allowed. Links included in the message are also converted to hyperlinks in the email. The message may contain the following html tags including `a`, `abbr`, `acronym`, `b`, `blockquote`, `code`, `em`, `i`, `ul`, `li`, `ol`, and `strong`. Be aware that when the text to html ratio is too high, the email may end up in spam filters. Custom styles on these tags are not allowed. If this field is not passed, a default message will be used.,
+    /// Message to include in signature request email. The field is cleaned through sanitization of specific characters. However, some html tags are allowed. Links included in the message are also converted to hyperlinks in the email. The message may contain the following html tags including `a`, `abbr`, `acronym`, `b`, `blockquote`, `code`, `em`, `i`, `ul`, `li`, `ol`, and `strong`. Be aware that when the text to html ratio is too high, the email may end up in spam filters. Custom styles on these tags are not allowed. If this field is not passed, a default message will be used.
     public let emailMessage: String?
-    /// Set the number of days after which the created signature request will automatically expire if not completed. By default, we do not apply any expiration date on signature requests, and the signature request does not expire.,
+    /// Set the number of days after which the created signature request will automatically expire if not completed. By default, we do not apply any expiration date on signature requests, and the signature request does not expire.
     public let daysValid: Int?
     public let parentFolder: FolderMini?
-    /// List of files to create a signing document from. Only the ID and type fields are required for each file.,
+    /// List of files to create a signing document from. Only the ID and type fields are required for each file.
     public let sourceFiles: [FileMini]?
-    /// Indicates if the template input fields are editable or not.,
+    /// Indicates if the template input fields are editable or not.
     public let areFieldsLocked: Bool?
-    /// Indicates if the template document options are editable or not, for example renaming the document.,
+    /// Indicates if the template document options are editable or not, for example renaming the document.
     public let areOptionsLocked: Bool?
-    /// Indicates if the template signers are editable or not.,
+    /// Indicates if the template signers are editable or not.
     public let areRecipientsLocked: Bool?
-    /// Indicates if the template email settings are editable or not.,
+    /// Indicates if the template email settings are editable or not.
     public let areEmailSettingsLocked: Bool?
-    /// Indicates if the template files are editable or not. This includes deleting or renaming template files.,
+    /// Indicates if the template files are editable or not. This includes deleting or renaming template files.
     public let areFilesLocked: Bool?
-    /// Array of signers for the template.,
+    /// Array of signers for the template.
     public let signers: [TemplateSigner]?
-    /// Additional information on which fields are required and which fields are not editable.,
+    /// Additional information on which fields are required and which fields are not editable.
     public let additionalInfo: SignTemplateAdditionalInfoField?
-    /// Box's ready-sign link feature enables you to create a link to a signature request that you've created from a template. Use this link when you want to post a signature request on a public form — such as an email, social media post, or web page — without knowing who the signers will be. Note: The ready-sign link feature is limited to Enterprise Plus customers and not available to Box Verified Enterprises.,
+    /// Box's ready-sign link feature enables you to create a link to a signature request that you've created from a template. Use this link when you want to post a signature request on a public form — such as an email, social media post, or web page — without knowing who the signers will be. Note: The ready-sign link feature is limited to Enterprise Plus customers and not available to Box Verified Enterprises.
     public let readySignLink: SignTemplateReadySignLinkField?
     /// Custom branding applied to notifications
-    /// and signature requests.,
+    /// and signature requests.
     public let customBranding: SignTemplateCustomBrandingField?
 
     /// Initializer for a SignTemplate.

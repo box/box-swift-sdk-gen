@@ -2,11 +2,11 @@ import Foundation
 
 public class GetRetentionPoliciesQueryParamsArg {
     /// Filters results by a case sensitive prefix of the name of
-    /// retention policies.,
+    /// retention policies.
     public let policyName: String?
-    /// Filters results by the type of retention policy.,
+    /// Filters results by the type of retention policy.
     public let policyType: GetRetentionPoliciesQueryParamsArgPolicyTypeField?
-    /// Filters results by the ID of the user who created policy.,
+    /// Filters results by the ID of the user who created policy.
     public let createdByUserId: String?
     /// A comma-separated list of attributes to include in the
     /// response. This can be used to request fields that are
@@ -16,12 +16,12 @@ public class GetRetentionPoliciesQueryParamsArg {
     /// effect that none of the standard fields are returned in
     /// the response unless explicitly specified, instead only
     /// fields for the mini representation are returned, additional
-    /// to the fields requested.,
+    /// to the fields requested.
     public let fields: [String]?
-    /// The maximum number of items to return per page.,
+    /// The maximum number of items to return per page.
     public let limit: Int64?
     /// Defines the position marker at which to begin returning results. This is
-    /// used when paginating using marker-based pagination.,
+    /// used when paginating using marker-based pagination.
     public let marker: String?
 
     /// Initializer for a GetRetentionPoliciesQueryParamsArg.

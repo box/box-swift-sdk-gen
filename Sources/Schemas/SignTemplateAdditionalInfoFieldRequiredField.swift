@@ -5,7 +5,7 @@ public class SignTemplateAdditionalInfoFieldRequiredField: Codable {
         case signers
     }
 
-    /// Required signer fields.,
+    /// Required signer fields.
     public let signers: [[SignTemplateAdditionalInfoFieldRequiredFieldSignersField]]?
 
     /// Initializer for a SignTemplateAdditionalInfoFieldRequiredField.

@@ -1,7 +1,7 @@
 import Foundation
 
 public class CreateUserEmailAliasHeadersArg {
-    /// Extra headers that will be included in the HTTP request.,
+    /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
     /// Initializer for a CreateUserEmailAliasHeadersArg.

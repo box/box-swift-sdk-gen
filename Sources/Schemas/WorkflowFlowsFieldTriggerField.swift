@@ -7,11 +7,11 @@ public class WorkflowFlowsFieldTriggerField: Codable {
         case scope
     }
 
-    /// The trigger's resource type,
+    /// The trigger's resource type
     public let type: WorkflowFlowsFieldTriggerFieldTypeField?
-    /// The type of trigger selected for this flow,
+    /// The type of trigger selected for this flow
     public let triggerType: WorkflowFlowsFieldTriggerFieldTriggerTypeField?
-    /// List of trigger scopes,
+    /// List of trigger scopes
     public let scope: [WorkflowFlowsFieldTriggerFieldScopeField]?
 
     /// Initializer for a WorkflowFlowsFieldTriggerField.

@@ -6,10 +6,10 @@ public class UpdateShieldInformationBarrierSegmentByIdRequestBodyArg: Codable {
         case description
     }
 
-    /// The updated name for the shield information barrier segment.,
+    /// The updated name for the shield information barrier segment.
     public let name: String?
     /// The updated description for
-    /// the shield information barrier segment.,
+    /// the shield information barrier segment.
     public let description: String?
 
     /// Initializer for a UpdateShieldInformationBarrierSegmentByIdRequestBodyArg.

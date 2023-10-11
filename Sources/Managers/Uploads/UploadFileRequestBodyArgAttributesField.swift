@@ -8,17 +8,17 @@ public class UploadFileRequestBodyArgAttributesField: Codable {
         case contentModifiedAt = "content_modified_at"
     }
 
-    /// The name of the file,
+    /// The name of the file
     public let name: String
-    /// The parent folder to upload the file to,
+    /// The parent folder to upload the file to
     public let parent: UploadFileRequestBodyArgAttributesFieldParentField
     /// Defines the time the file was originally created at.
     /// 
-    /// If not set, the upload time will be used.,
+    /// If not set, the upload time will be used.
     public let contentCreatedAt: String?
     /// Defines the time the file was last modified at.
     /// 
-    /// If not set, the upload time will be used.,
+    /// If not set, the upload time will be used.
     public let contentModifiedAt: String?
 
     /// Initializer for a UploadFileRequestBodyArgAttributesField.

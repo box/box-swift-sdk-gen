@@ -1,11 +1,13 @@
 import Foundation
 
+/// Create a search using SQL-like syntax to return items that match specific
+/// metadata.
 public class MetadataQuery: Codable {
     private enum CodingKeys: String, CodingKey {
         case from
+        case ancestorFolderId = "ancestor_folder_id"
         case query
         case queryParams = "query_params"
-        case ancestorFolderId = "ancestor_folder_id"
         case orderBy = "order_by"
         case limit
         case marker
@@ -15,36 +17,36 @@ public class MetadataQuery: Codable {
     /// Specifies the template used in the query. Must be in the form
     /// `scope.templateKey`. Not all templates can be used in this field,
     /// most notably the built-in, Box-provided classification templates
-    /// can not be used in a query.,
+    /// can not be used in a query.
     public let from: String
+    /// The ID of the folder that you are restricting the query to. A
+    /// value of zero will return results from all folders you have access
+    /// to. A non-zero value will only return results found in the folder
+    /// corresponding to the ID or in any of its subfolders.
+    public let ancestorFolderId: String
     /// The query to perform. A query is a logical expression that is very similar
     /// to a SQL `SELECT` statement. Values in the search query can be turned into
     /// parameters specified in the `query_param` arguments list to prevent having
     /// to manually insert search values into the query string.
     /// 
     /// For example, a value of `:amount` would represent the `amount` value in
-    /// `query_params` object.,
+    /// `query_params` object.
     public let query: String?
     /// Set of arguments corresponding to the parameters specified in the
     /// `query`. The type of each parameter used in the `query_params` must match
-    /// the type of the corresponding metadata template field.,
+    /// the type of the corresponding metadata template field.
     public let queryParams: [String: String]?
-    /// The ID of the folder that you are restricting the query to. A
-    /// value of zero will return results from all folders you have access
-    /// to. A non-zero value will only return results found in the folder
-    /// corresponding to the ID or in any of its subfolders.,
-    public let ancestorFolderId: String
     /// A list of template fields and directions to sort the metadata query
     /// results by.
     /// 
-    /// The ordering `direction` must be the same for each item in the array.,
+    /// The ordering `direction` must be the same for each item in the array.
     public let orderBy: [MetadataQueryOrderByField]?
     /// A value between 0 and 100 that indicates the maximum number of results
     /// to return for a single request. This only specifies a maximum
     /// boundary and will not guarantee the minimum number of results
-    /// returned.,
+    /// returned.
     public let limit: Int?
-    /// Marker to use for requesting the next page.,
+    /// Marker to use for requesting the next page.
     public let marker: String?
     /// By default, this endpoint returns only the most basic info about the items for
     /// which the query matches. This attribute can be used to specify a list of
@@ -62,7 +64,7 @@ public class MetadataQuery: Codable {
     /// * `metadata.<scope>.<templateKey>.<field>` will return all the mini-representation
     /// of the metadata instance identified by the `scope` and `templateKey` plus
     /// the field specified by the `field` name. Multiple fields for the same
-    /// `scope` and `templateKey` can be defined.,
+    /// `scope` and `templateKey` can be defined.
     public let fields: [String]?
 
     /// Initializer for a MetadataQuery.
@@ -72,6 +74,10 @@ public class MetadataQuery: Codable {
     ///     `scope.templateKey`. Not all templates can be used in this field,
     ///     most notably the built-in, Box-provided classification templates
     ///     can not be used in a query.
+    ///   - ancestorFolderId: The ID of the folder that you are restricting the query to. A
+    ///     value of zero will return results from all folders you have access
+    ///     to. A non-zero value will only return results found in the folder
+    ///     corresponding to the ID or in any of its subfolders.
     ///   - query: The query to perform. A query is a logical expression that is very similar
     ///     to a SQL `SELECT` statement. Values in the search query can be turned into
     ///     parameters specified in the `query_param` arguments list to prevent having
@@ -82,10 +88,6 @@ public class MetadataQuery: Codable {
     ///   - queryParams: Set of arguments corresponding to the parameters specified in the
     ///     `query`. The type of each parameter used in the `query_params` must match
     ///     the type of the corresponding metadata template field.
-    ///   - ancestorFolderId: The ID of the folder that you are restricting the query to. A
-    ///     value of zero will return results from all folders you have access
-    ///     to. A non-zero value will only return results found in the folder
-    ///     corresponding to the ID or in any of its subfolders.
     ///   - orderBy: A list of template fields and directions to sort the metadata query
     ///     results by.
     ///     
@@ -112,11 +114,11 @@ public class MetadataQuery: Codable {
     ///     of the metadata instance identified by the `scope` and `templateKey` plus
     ///     the field specified by the `field` name. Multiple fields for the same
     ///     `scope` and `templateKey` can be defined.
-    public init(from: String, query: String? = nil, queryParams: [String: String]? = nil, ancestorFolderId: String, orderBy: [MetadataQueryOrderByField]? = nil, limit: Int? = nil, marker: String? = nil, fields: [String]? = nil) {
+    public init(from: String, ancestorFolderId: String, query: String? = nil, queryParams: [String: String]? = nil, orderBy: [MetadataQueryOrderByField]? = nil, limit: Int? = nil, marker: String? = nil, fields: [String]? = nil) {
         self.from = from
+        self.ancestorFolderId = ancestorFolderId
         self.query = query
         self.queryParams = queryParams
-        self.ancestorFolderId = ancestorFolderId
         self.orderBy = orderBy
         self.limit = limit
         self.marker = marker
@@ -126,9 +128,9 @@ public class MetadataQuery: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         from = try container.decode(String.self, forKey: .from)
+        ancestorFolderId = try container.decode(String.self, forKey: .ancestorFolderId)
         query = try container.decodeIfPresent(String.self, forKey: .query)
         queryParams = try container.decodeIfPresent([String: String].self, forKey: .queryParams)
-        ancestorFolderId = try container.decode(String.self, forKey: .ancestorFolderId)
         orderBy = try container.decodeIfPresent([MetadataQueryOrderByField].self, forKey: .orderBy)
         limit = try container.decodeIfPresent(Int.self, forKey: .limit)
         marker = try container.decodeIfPresent(String.self, forKey: .marker)
@@ -138,9 +140,9 @@ public class MetadataQuery: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(from, forKey: .from)
+        try container.encode(ancestorFolderId, forKey: .ancestorFolderId)
         try container.encodeIfPresent(query, forKey: .query)
         try container.encodeIfPresent(queryParams, forKey: .queryParams)
-        try container.encode(ancestorFolderId, forKey: .ancestorFolderId)
         try container.encodeIfPresent(orderBy, forKey: .orderBy)
         try container.encodeIfPresent(limit, forKey: .limit)
         try container.encodeIfPresent(marker, forKey: .marker)

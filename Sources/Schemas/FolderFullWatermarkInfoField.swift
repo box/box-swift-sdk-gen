@@ -5,7 +5,7 @@ public class FolderFullWatermarkInfoField: Codable {
         case isWatermarked = "is_watermarked"
     }
 
-    /// Specifies if this item has a watermark applied.,
+    /// Specifies if this item has a watermark applied.
     public let isWatermarked: Bool?
 
     /// Initializer for a FolderFullWatermarkInfoField.

@@ -20,24 +20,24 @@ public class UpdateFolderByIdRequestBodyArgSharedLinkField: Codable {
     /// no `access` field, for example `{ "shared_link": {} }`.
     /// 
     /// The `company` access level is only available to paid
-    /// accounts.,
+    /// accounts.
     public let access: UpdateFolderByIdRequestBodyArgSharedLinkFieldAccessField?
     /// The password required to access the shared link. Set the
     /// password to `null` to remove it.
     /// Passwords must now be at least eight characters
     /// long and include a number, upper case letter, or
     /// a non-numeric or non-alphabetic character.
-    /// A password can only be set when `access` is set to `open`.,
+    /// A password can only be set when `access` is set to `open`.
     public let password: String?
     /// Defines a custom vanity name to use in the shared link URL,
     /// for example `https://app.box.com/v/my-shared-link`.
     /// 
     /// Custom URLs should not be used when sharing sensitive content
-    /// as vanity URLs are a lot easier to guess than regular shared links.,
+    /// as vanity URLs are a lot easier to guess than regular shared links.
     public let vanityName: String?
     /// The timestamp at which this shared link will
     /// expire. This field can only be set by
-    /// users with paid accounts.,
+    /// users with paid accounts.
     public let unsharedAt: String?
     public let permissions: UpdateFolderByIdRequestBodyArgSharedLinkFieldPermissionsField?
 

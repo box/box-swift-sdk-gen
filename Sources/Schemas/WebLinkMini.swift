@@ -1,5 +1,10 @@
 import Foundation
 
+/// Web links are objects that point to URLs. These objects
+/// are also known as bookmarks within the Box web application.
+/// 
+/// Web link objects are treated similarly to file objects,
+/// they will also support most actions that apply to regular files.
 public class WebLinkMini: WebLinkBase {
     private enum CodingKeys: String, CodingKey {
         case url
@@ -7,10 +12,10 @@ public class WebLinkMini: WebLinkBase {
         case name
     }
 
-    /// The URL this web link points to,
+    /// The URL this web link points to
     public let url: String?
     public let sequenceId: String?
-    /// The name of the web link,
+    /// The name of the web link
     public let name: String?
 
     /// Initializer for a WebLinkMini.

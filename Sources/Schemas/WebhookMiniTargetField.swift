@@ -6,9 +6,9 @@ public class WebhookMiniTargetField: Codable {
         case type
     }
 
-    /// The ID of the item to trigger a webhook,
+    /// The ID of the item to trigger a webhook
     public let id: String?
-    /// The type of item to trigger a webhook,
+    /// The type of item to trigger a webhook
     public let type: WebhookMiniTargetFieldTypeField?
 
     /// Initializer for a WebhookMiniTargetField.

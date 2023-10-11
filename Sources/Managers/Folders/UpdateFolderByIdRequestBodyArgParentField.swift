@@ -5,7 +5,7 @@ public class UpdateFolderByIdRequestBodyArgParentField: Codable {
         case id
     }
 
-    /// The ID of the new parent folder,
+    /// The ID of the new parent folder
     public let id: String?
 
     /// Initializer for a UpdateFolderByIdRequestBodyArgParentField.

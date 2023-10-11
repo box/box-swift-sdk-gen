@@ -9,18 +9,18 @@ public class FileFullExpiringEmbedLinkField: Codable {
         case url
     }
 
-    /// The requested access token.,
+    /// The requested access token.
     public let accessToken: String?
-    /// The time in seconds by which this token will expire.,
+    /// The time in seconds by which this token will expire.
     public let expiresIn: Int64?
-    /// The type of access token returned.,
+    /// The type of access token returned.
     public let tokenType: FileFullExpiringEmbedLinkFieldTokenTypeField?
     /// The permissions that this access token permits,
     /// providing a list of resources (files, folders, etc)
-    /// and the scopes permitted for each of those resources.,
+    /// and the scopes permitted for each of those resources.
     public let restrictedTo: [FileScope]?
     /// The actual expiring embed URL for this file, constructed
-    /// from the file ID and access tokens specified in this object.,
+    /// from the file ID and access tokens specified in this object.
     public let url: String?
 
     /// Initializer for a FileFullExpiringEmbedLinkField.

@@ -1,5 +1,7 @@
 import Foundation
 
+/// A real-time server that can be used for
+/// long polling user events
 public class RealtimeServer: Codable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -9,22 +11,22 @@ public class RealtimeServer: Codable {
         case retryTimeout = "retry_timeout"
     }
 
-    /// `realtime_server`,
+    /// `realtime_server`
     public let type: String?
-    /// The URL for the server.,
+    /// The URL for the server.
     public let url: String?
-    /// The time in minutes for which this server is available,
+    /// The time in minutes for which this server is available
     public let ttl: Int?
     /// The maximum number of retries this server will
     /// allow before a new long poll should be started by
-    /// getting a [new list of server](#options-events).,
+    /// getting a [new list of server](#options-events).
     public let maxRetries: Int?
     /// The maximum number of seconds without a response
     /// after which you should retry the long poll connection.
     /// 
     /// This helps to overcome network issues where the long
     /// poll looks to be working but no packages are coming
-    /// through.,
+    /// through.
     public let retryTimeout: Int?
 
     /// Initializer for a RealtimeServer.

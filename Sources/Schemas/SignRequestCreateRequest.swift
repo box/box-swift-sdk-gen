@@ -1,20 +1,24 @@
 import Foundation
 
+/// A request to create a sign request object
 public class SignRequestCreateRequest: SignRequestBase {
     private enum CodingKeys: String, CodingKey {
-        case sourceFiles = "source_files"
         case signers
+        case sourceFiles = "source_files"
     }
 
-    /// List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.,
-    public let sourceFiles: [FileBase]?
     /// Array of signers for the sign request. 35 is the
-    /// max number of signers permitted.,
+    /// max number of signers permitted.
     public let signers: [SignRequestCreateSigner]
+    /// List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
+    public let sourceFiles: [FileBase]?
 
     /// Initializer for a SignRequestCreateRequest.
     ///
     /// - Parameters:
+    ///   - parentFolder: FolderMini
+    ///   - signers: Array of signers for the sign request. 35 is the
+    ///     max number of signers permitted.
     ///   - isDocumentPreparationNeeded: Indicates if the sender should receive a `prepare_url` in the response to complete document preparation via UI.
     ///   - redirectUrl: When specified, signature request will be redirected to this url when a document is signed.
     ///   - declinedRedirectUrl: The uri that a signer will be redirected to after declining to sign a document.
@@ -22,7 +26,6 @@ public class SignRequestCreateRequest: SignRequestBase {
     ///   - emailSubject: Subject of sign request email. This is cleaned by sign request. If this field is not passed, a default subject will be used.
     ///   - emailMessage: Message to include in sign request email. The field is cleaned through sanitization of specific characters. However, some html tags are allowed. Links included in the message are also converted to hyperlinks in the email. The message may contain the following html tags including `a`, `abbr`, `acronym`, `b`, `blockquote`, `code`, `em`, `i`, `ul`, `li`, `ol`, and `strong`. Be aware that when the text to html ratio is too high, the email may end up in spam filters. Custom styles on these tags are not allowed. If this field is not passed, a default message will be used.
     ///   - areRemindersEnabled: Reminds signers to sign a document on day 3, 8, 13 and 18. Reminders are only sent to outstanding signers.
-    ///   - parentFolder: FolderMini
     ///   - name: Name of the sign request.
     ///   - prefillTags: When a document contains sign related tags in the content, you can prefill them using this `prefill_tags` by referencing the 'id' of the tag as the `external_id` field of the prefill tag.
     ///   - daysValid: Set the number of days after which the created signature request will automatically expire if not completed. By default, we do not apply any expiration date on signature requests, and the signature request does not expire.
@@ -30,25 +33,23 @@ public class SignRequestCreateRequest: SignRequestBase {
     ///   - isPhoneVerificationRequiredToView: Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.
     ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
     ///   - sourceFiles: List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
-    ///   - signers: Array of signers for the sign request. 35 is the
-    ///     max number of signers permitted.
-    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, parentFolder: FolderMini, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestCreateSigner]) {
-        self.sourceFiles = sourceFiles
+    public init(parentFolder: FolderMini, signers: [SignRequestCreateSigner], isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil, sourceFiles: [FileBase]? = nil) {
         self.signers = signers
-        super.init(isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, parentFolder: parentFolder, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, isPhoneVerificationRequiredToView: isPhoneVerificationRequiredToView, templateId: templateId)
+        self.sourceFiles = sourceFiles
+        super.init(parentFolder: parentFolder, isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, isPhoneVerificationRequiredToView: isPhoneVerificationRequiredToView, templateId: templateId)
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sourceFiles = try container.decodeIfPresent([FileBase].self, forKey: .sourceFiles)
         signers = try container.decode([SignRequestCreateSigner].self, forKey: .signers)
+        sourceFiles = try container.decodeIfPresent([FileBase].self, forKey: .sourceFiles)
         try super.init(from:decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(sourceFiles, forKey: .sourceFiles)
         try container.encode(signers, forKey: .signers)
+        try container.encodeIfPresent(sourceFiles, forKey: .sourceFiles)
         try super.encode(to: encoder)
     }
 }

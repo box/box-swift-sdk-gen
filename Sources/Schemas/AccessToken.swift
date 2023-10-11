@@ -1,5 +1,6 @@
 import Foundation
 
+/// A token that can be used to make authenticated API calls.
 public class AccessToken: Codable {
     private enum CodingKeys: String, CodingKey {
         case accessToken = "access_token"
@@ -10,21 +11,21 @@ public class AccessToken: Codable {
         case issuedTokenType = "issued_token_type"
     }
 
-    /// The requested access token.,
+    /// The requested access token.
     public let accessToken: String?
-    /// The time in seconds by which this token will expire.,
+    /// The time in seconds by which this token will expire.
     public let expiresIn: Int64?
-    /// The type of access token returned.,
+    /// The type of access token returned.
     public let tokenType: AccessTokenTokenTypeField?
     /// The permissions that this access token permits,
     /// providing a list of resources (files, folders, etc)
-    /// and the scopes permitted for each of those resources.,
+    /// and the scopes permitted for each of those resources.
     public let restrictedTo: [FileScope]?
     /// The refresh token for this access token, which can be used
-    /// to request a new access token when the current one expires.,
+    /// to request a new access token when the current one expires.
     public let refreshToken: String?
     /// The type of downscoped access token returned. This is only
-    /// returned if an access token has been downscoped.,
+    /// returned if an access token has been downscoped.
     public let issuedTokenType: AccessTokenIssuedTokenTypeField?
 
     /// Initializer for a AccessToken.

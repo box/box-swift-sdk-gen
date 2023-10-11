@@ -1,5 +1,6 @@
 import Foundation
 
+/// A list of device pins
 public class DevicePinners: Codable {
     private enum CodingKeys: String, CodingKey {
         case entries
@@ -8,15 +9,15 @@ public class DevicePinners: Codable {
         case order
     }
 
-    /// A list of device pins,
+    /// A list of device pins
     public let entries: [DevicePinner]?
     /// The limit that was used for these entries. This will be the same as the
     /// `limit` query parameter unless that value exceeded the maximum value
-    /// allowed.,
+    /// allowed.
     public let limit: Int64?
-    /// The marker for the start of the next page of results.,
+    /// The marker for the start of the next page of results.
     public let nextMarker: Int64?
-    /// The order by which items are returned.,
+    /// The order by which items are returned.
     public let order: [DevicePinnersOrderField]?
 
     /// Initializer for a DevicePinners.

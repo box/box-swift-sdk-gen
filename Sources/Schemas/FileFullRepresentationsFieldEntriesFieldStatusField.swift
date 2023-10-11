@@ -13,7 +13,7 @@ public class FileFullRepresentationsFieldEntriesFieldStatusField: Codable {
     ///   this endpoint to re-check the status.
     /// * `none` defines that the representation will be created when
     ///   requested. Request the URL defined in the `info` object to
-    ///   trigger this generation.,
+    ///   trigger this generation.
     public let state: FileFullRepresentationsFieldEntriesFieldStatusFieldStateField?
 
     /// Initializer for a FileFullRepresentationsFieldEntriesFieldStatusField.

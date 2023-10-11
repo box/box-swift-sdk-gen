@@ -1,5 +1,7 @@
 import Foundation
 
+/// Indicates which folder the report
+/// file is located and any errors when generating the report.
 public class ShieldInformationBarrierReportDetails: Codable {
     private enum CodingKeys: String, CodingKey {
         case details

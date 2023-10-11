@@ -1,5 +1,5 @@
 import Foundation
 
 public enum SkillInvocationTokenFieldWriteFieldTokenTypeField: String, CodableStringEnum {
-    case bearer = "bearer"
+    case bearer
 }

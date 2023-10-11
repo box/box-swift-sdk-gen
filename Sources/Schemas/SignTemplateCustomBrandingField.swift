@@ -8,13 +8,13 @@ public class SignTemplateCustomBrandingField: Codable {
         case emailFooterText = "email_footer_text"
     }
 
-    /// Name of the company,
+    /// Name of the company
     public let companyName: String?
-    /// Custom branding logo URI in the form of a base64 image.,
+    /// Custom branding logo URI in the form of a base64 image.
     public let logoUri: String?
-    /// Custom branding color in hex.,
+    /// Custom branding color in hex.
     public let brandingColor: String?
-    /// Content of the email footer.,
+    /// Content of the email footer.
     public let emailFooterText: String?
 
     /// Initializer for a SignTemplateCustomBrandingField.

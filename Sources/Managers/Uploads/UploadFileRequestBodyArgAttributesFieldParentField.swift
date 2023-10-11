@@ -6,7 +6,7 @@ public class UploadFileRequestBodyArgAttributesFieldParentField: Codable {
     }
 
     /// The id of the parent folder. Use
-    /// `0` for the user's root folder.,
+    /// `0` for the user's root folder.
     public let id: String
 
     /// Initializer for a UploadFileRequestBodyArgAttributesFieldParentField.

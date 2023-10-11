@@ -8,7 +8,7 @@ public class UpdateWebLinkAddSharedLinkRequestBodyArg: Codable {
     /// The settings for the shared link to create on the web link.
     /// 
     /// Use an empty object (`{}`) to use the default settings for shared
-    /// links.,
+    /// links.
     public let sharedLink: UpdateWebLinkAddSharedLinkRequestBodyArgSharedLinkField?
 
     /// Initializer for a UpdateWebLinkAddSharedLinkRequestBodyArg.

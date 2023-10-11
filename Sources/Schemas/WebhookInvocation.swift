@@ -1,5 +1,6 @@
 import Foundation
 
+/// The event that is sent to a webhook address when an event happens.
 public class WebhookInvocation: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -11,14 +12,14 @@ public class WebhookInvocation: Codable {
         case source
     }
 
-    /// The unique identifier for this webhook invocation,
+    /// The unique identifier for this webhook invocation
     public let id: String?
-    /// `webhook_event`,
+    /// `webhook_event`
     public let type: WebhookInvocationTypeField?
     public let webhook: Webhook?
     public let createdBy: UserMini?
     /// A timestamp identifying the time that
-    /// the webhook event was triggered.,
+    /// the webhook event was triggered.
     public let createdAt: String?
     public let trigger: WebhookInvocationTriggerField?
     public let source: FileOrFolder?

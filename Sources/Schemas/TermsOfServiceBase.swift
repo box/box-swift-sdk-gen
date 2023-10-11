@@ -1,14 +1,16 @@
 import Foundation
 
+/// The root-level record that is supposed to represent a
+/// single Terms of Service.
 public class TermsOfServiceBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
     }
 
-    /// The unique identifier for this terms of service.,
+    /// The unique identifier for this terms of service.
     public let id: String?
-    /// `terms_of_service`,
+    /// `terms_of_service`
     public let type: TermsOfServiceBaseTypeField?
 
     /// Initializer for a TermsOfServiceBase.

@@ -1,5 +1,6 @@
 import Foundation
 
+/// The schema for an integration mapping options object for Slack type.
 public class IntegrationMappingSlackOptions: Codable {
     private enum CodingKeys: String, CodingKey {
         case isAccessManagementDisabled = "is_access_management_disabled"
@@ -9,7 +10,7 @@ public class IntegrationMappingSlackOptions: Codable {
     /// access to the underlying box item
     /// should be automatically managed.
     /// Depending on type of channel, access is managed
-    /// through creating collaborations or shared links.,
+    /// through creating collaborations or shared links.
     public let isAccessManagementDisabled: Bool?
 
     /// Initializer for a IntegrationMappingSlackOptions.

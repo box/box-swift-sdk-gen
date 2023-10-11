@@ -1,6 +1,6 @@
 import Foundation
 
 public enum DeleteFolderMetadataByIdScopeArg: String, CodableStringEnum {
-    case global = "global"
-    case enterprise = "enterprise"
+    case global
+    case enterprise
 }

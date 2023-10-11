@@ -1,5 +1,6 @@
 import Foundation
 
+/// The association between a Terms of Service and a user
 public class TermsOfServiceUserStatus: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -11,17 +12,17 @@ public class TermsOfServiceUserStatus: Codable {
         case modifiedAt = "modified_at"
     }
 
-    /// The unique identifier for this terms of service user status,
+    /// The unique identifier for this terms of service user status
     public let id: String?
-    /// `terms_of_service_user_status`,
+    /// `terms_of_service_user_status`
     public let type: TermsOfServiceUserStatusTypeField?
     public let tos: TermsOfServiceBase?
     public let user: UserMini?
-    /// If the user has accepted the terms of services,
+    /// If the user has accepted the terms of services
     public let isAccepted: Bool?
-    /// When the legal item was created,
+    /// When the legal item was created
     public let createdAt: String?
-    /// When the legal item was modified.,
+    /// When the legal item was modified.
     public let modifiedAt: String?
 
     /// Initializer for a TermsOfServiceUserStatus.

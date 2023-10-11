@@ -6,11 +6,11 @@ public class CreateRetentionPolicyAssignmentRequestBodyArgAssignToField: Codable
         case id
     }
 
-    /// The type of item to assign the policy to.,
+    /// The type of item to assign the policy to.
     public let type: CreateRetentionPolicyAssignmentRequestBodyArgAssignToFieldTypeField
     /// The ID of item to assign the policy to.
     /// Set to `null` or omit when `type` is set to
-    /// `enterprise`.,
+    /// `enterprise`.
     public let id: String
 
     /// Initializer for a CreateRetentionPolicyAssignmentRequestBodyArgAssignToField.

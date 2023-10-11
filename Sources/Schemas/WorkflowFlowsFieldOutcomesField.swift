@@ -9,15 +9,15 @@ public class WorkflowFlowsFieldOutcomesField: Codable {
         case ifRejected = "if_rejected"
     }
 
-    /// The identifier of the outcome,
+    /// The identifier of the outcome
     public let id: String?
-    /// The outcomes resource type,
+    /// The outcomes resource type
     public let type: WorkflowFlowsFieldOutcomesFieldTypeField?
-    /// The name of the outcome,
+    /// The name of the outcome
     public let name: String?
     public let actionType: WorkflowFlowsFieldOutcomesFieldActionTypeField?
     /// If `action_type` is `assign_task` and the task is rejected, returns a
-    /// list of outcomes to complete,
+    /// list of outcomes to complete
     public let ifRejected: [WorkflowFlowsFieldOutcomesFieldIfRejectedField]?
 
     /// Initializer for a WorkflowFlowsFieldOutcomesField.

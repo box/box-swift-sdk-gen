@@ -7,9 +7,9 @@ public class RetentionPolicyAssignmentAssignedToField: Codable {
     }
 
     /// The ID of the folder, enterprise, or metadata template
-    /// the policy is assigned to.,
+    /// the policy is assigned to.
     public let id: String?
-    /// The type of resource the policy is assigned to.,
+    /// The type of resource the policy is assigned to.
     public let type: RetentionPolicyAssignmentAssignedToFieldTypeField?
 
     /// Initializer for a RetentionPolicyAssignmentAssignedToField.

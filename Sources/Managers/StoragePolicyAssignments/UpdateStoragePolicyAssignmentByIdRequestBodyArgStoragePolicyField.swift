@@ -6,9 +6,9 @@ public class UpdateStoragePolicyAssignmentByIdRequestBodyArgStoragePolicyField: 
         case id
     }
 
-    /// The type to assign.,
+    /// The type to assign.
     public let type: UpdateStoragePolicyAssignmentByIdRequestBodyArgStoragePolicyFieldTypeField
-    /// The ID of the storage policy to assign.,
+    /// The ID of the storage policy to assign.
     public let id: String
 
     /// Initializer for a UpdateStoragePolicyAssignmentByIdRequestBodyArgStoragePolicyField.

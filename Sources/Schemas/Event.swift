@@ -1,5 +1,6 @@
 import Foundation
 
+/// The description of an event that happened within Box
 public class Event: Codable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -13,18 +14,18 @@ public class Event: Codable {
         case additionalDetails = "additional_details"
     }
 
-    /// `event`,
+    /// `event`
     public let type: String?
-    /// When the event object was created,
+    /// When the event object was created
     public let createdAt: String?
-    /// When the event object was recorded in database,
+    /// When the event object was recorded in database
     public let recordedAt: String?
-    /// The ID of the event object. You can use this to detect duplicate events,
+    /// The ID of the event object. You can use this to detect duplicate events
     public let eventId: String?
     public let createdBy: UserMini?
     public let eventType: EventEventTypeField?
     /// The session of the user that performed the action. Not all events will
-    /// populate this attribute.,
+    /// populate this attribute.
     public let sessionId: String?
     public let source: EventSourceOrFileOrFolderOrUser?
     /// This object provides additional information about the event if available.
@@ -32,7 +33,7 @@ public class Event: Codable {
     /// This can include how a user performed an event as well as additional
     /// information to correlate an event to external KeySafe logs. Not all events
     /// have an `additional_details` object.  This object is only available in the
-    /// Enterprise Events.,
+    /// Enterprise Events.
     public let additionalDetails: EventAdditionalDetailsField?
 
     /// Initializer for a Event.

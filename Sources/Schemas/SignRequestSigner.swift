@@ -1,5 +1,6 @@
 import Foundation
 
+/// The schema for a Signer in a GET Sign Request request body
 public class SignRequestSigner: SignRequestCreateSigner {
     private enum CodingKeys: String, CodingKey {
         case hasViewedDocument = "has_viewed_document"
@@ -9,19 +10,19 @@ public class SignRequestSigner: SignRequestCreateSigner {
         case iframeableEmbedUrl = "iframeable_embed_url"
     }
 
-    /// Set to `true` if the signer views the document,
+    /// Set to `true` if the signer views the document
     public let hasViewedDocument: Bool?
-    /// Final decision made by the signer,
+    /// Final decision made by the signer
     public let signerDecision: SignRequestSignerSignerDecisionField?
     public let inputs: [SignRequestSignerInput]?
-    /// URL to direct a signer to for signing,
+    /// URL to direct a signer to for signing
     public let embedUrl: String?
     /// This URL is specifically designed for
     /// signing documents within an HTML `iframe` tag.
     /// It will be returned in the response
     /// only if the `embed_url_external_user_id`
     /// parameter was passed in the
-    /// `create sign request` call.,
+    /// `create sign request` call.
     public let iframeableEmbedUrl: String?
 
     /// Initializer for a SignRequestSigner.

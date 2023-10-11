@@ -8,9 +8,9 @@ public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequ
 
     /// The label of the classification as shown in the web and
     /// mobile interfaces. This is the only field required to
-    /// add a classification.,
+    /// add a classification.
     public let key: String
-    /// Additional details for the classification.,
+    /// Additional details for the classification.
     public let classification: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataFieldClassificationField?
 
     /// Initializer for a UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataField.

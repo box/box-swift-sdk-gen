@@ -5,7 +5,7 @@ public class EventSourceClassificationField: Codable {
         case name
     }
 
-    /// The classification's name,
+    /// The classification's name
     public let name: String?
 
     /// Initializer for a EventSourceClassificationField.

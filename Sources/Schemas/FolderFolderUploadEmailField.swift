@@ -18,9 +18,9 @@ public class FolderFolderUploadEmailField: Codable {
     /// any email aliases a user might have registered.
     /// 
     /// When set to `open` it will accept emails from any email
-    /// address.,
+    /// address.
     public let access: FolderFolderUploadEmailFieldAccessField?
-    /// The optional upload email address for this folder.,
+    /// The optional upload email address for this folder.
     public let email: String?
 
     /// Initializer for a FolderFolderUploadEmailField.

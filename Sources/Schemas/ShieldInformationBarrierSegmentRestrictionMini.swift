@@ -1,5 +1,8 @@
 import Foundation
 
+/// A mini representation of
+/// a segment restriction object for
+/// the shield information barrier
 public class ShieldInformationBarrierSegmentRestrictionMini: ShieldInformationBarrierSegmentRestrictionBase {
     private enum CodingKeys: String, CodingKey {
         case shieldInformationBarrierSegment = "shield_information_barrier_segment"
@@ -7,23 +10,23 @@ public class ShieldInformationBarrierSegmentRestrictionMini: ShieldInformationBa
     }
 
     /// The `type` and `id` of the
-    /// requested shield information barrier segment.,
+    /// requested shield information barrier segment.
     public let shieldInformationBarrierSegment: ShieldInformationBarrierSegmentRestrictionMiniShieldInformationBarrierSegmentField
     /// The `type` and `id` of the
-    /// restricted shield information barrier segment.,
+    /// restricted shield information barrier segment.
     public let restrictedSegment: ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentField
 
     /// Initializer for a ShieldInformationBarrierSegmentRestrictionMini.
     ///
     /// - Parameters:
-    ///   - type: Shield information barrier segment restriction
-    ///   - id: The unique identifier for the
-    ///     shield information barrier segment restriction.
     ///   - shieldInformationBarrierSegment: The `type` and `id` of the
     ///     requested shield information barrier segment.
     ///   - restrictedSegment: The `type` and `id` of the
     ///     restricted shield information barrier segment.
-    public init(type: ShieldInformationBarrierSegmentRestrictionBaseTypeField? = nil, id: String? = nil, shieldInformationBarrierSegment: ShieldInformationBarrierSegmentRestrictionMiniShieldInformationBarrierSegmentField, restrictedSegment: ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentField) {
+    ///   - type: Shield information barrier segment restriction
+    ///   - id: The unique identifier for the
+    ///     shield information barrier segment restriction.
+    public init(shieldInformationBarrierSegment: ShieldInformationBarrierSegmentRestrictionMiniShieldInformationBarrierSegmentField, restrictedSegment: ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentField, type: ShieldInformationBarrierSegmentRestrictionBaseTypeField? = nil, id: String? = nil) {
         self.shieldInformationBarrierSegment = shieldInformationBarrierSegment
         self.restrictedSegment = restrictedSegment
         super.init(type: type, id: id)

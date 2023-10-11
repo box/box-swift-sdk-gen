@@ -5,7 +5,7 @@ public class CreateGroupTerminateSessionRequestBodyArg: Codable {
         case groupIds = "group_ids"
     }
 
-    /// A list of group IDs,
+    /// A list of group IDs
     public let groupIds: [String]
 
     /// Initializer for a CreateGroupTerminateSessionRequestBodyArg.

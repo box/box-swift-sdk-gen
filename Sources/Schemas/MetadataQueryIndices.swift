@@ -1,5 +1,6 @@
 import Foundation
 
+/// A collection of metadata query indices.
 public class MetadataQueryIndices: Codable {
     private enum CodingKeys: String, CodingKey {
         case entries
@@ -7,11 +8,11 @@ public class MetadataQueryIndices: Codable {
         case nextMarker = "next_marker"
     }
 
-    /// A collection of metadata query indices.,
+    /// A collection of metadata query indices.
     public let entries: [MetadataQueryIndex]?
-    /// The limit that was used for this request.,
+    /// The limit that was used for this request.
     public let limit: Int64?
-    /// The marker for the start of the next page of results.,
+    /// The marker for the start of the next page of results.
     public let nextMarker: String?
 
     /// Initializer for a MetadataQueryIndices.

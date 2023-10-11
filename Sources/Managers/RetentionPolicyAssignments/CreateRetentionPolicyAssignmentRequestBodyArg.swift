@@ -8,19 +8,19 @@ public class CreateRetentionPolicyAssignmentRequestBodyArg: Codable {
         case startDateField = "start_date_field"
     }
 
-    /// The ID of the retention policy to assign,
+    /// The ID of the retention policy to assign
     public let policyId: String
-    /// The item to assign the policy to,
+    /// The item to assign the policy to
     public let assignTo: CreateRetentionPolicyAssignmentRequestBodyArgAssignToField
     /// If the `assign_to` type is `metadata_template`,
     /// then optionally add the `filter_fields` parameter which will
     /// require an array of objects with a field entry and a value entry.
-    /// Currently only one object of `field` and `value` is supported.,
+    /// Currently only one object of `field` and `value` is supported.
     public let filterFields: [CreateRetentionPolicyAssignmentRequestBodyArgFilterFieldsField]?
     /// The date the retention policy assignment begins.
     /// 
     /// If the `assigned_to` type is `metadata_template`,
-    /// this field can be a date field's metadata attribute key id.,
+    /// this field can be a date field's metadata attribute key id.
     public let startDateField: String?
 
     /// Initializer for a CreateRetentionPolicyAssignmentRequestBodyArg.

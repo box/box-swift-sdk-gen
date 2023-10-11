@@ -10,7 +10,7 @@ public class GetFolderLocksQueryParamsArg {
     /// the `folder_id` is `123`.
     /// 
     /// The root folder of a Box account is
-    /// always represented by the ID `0`.,
+    /// always represented by the ID `0`.
     public let folderId: String
 
     /// Initializer for a GetFolderLocksQueryParamsArg.

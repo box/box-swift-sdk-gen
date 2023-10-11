@@ -9,10 +9,10 @@ public class TimelineSkillCardEntriesField: Codable {
 
     /// The text of the entry. This would be the display
     /// name for an item being placed on the timeline, for example the name
-    /// of the person who was detected in a video.,
+    /// of the person who was detected in a video.
     public let text: String?
     /// Defines a list of timestamps for when this item should appear on the
-    /// timeline.,
+    /// timeline.
     public let appears: [TimelineSkillCardEntriesFieldAppearsField]?
     /// The image to show on a for an entry that appears
     /// on a timeline. This image URL is required for every entry.
@@ -20,7 +20,7 @@ public class TimelineSkillCardEntriesField: Codable {
     /// The image will be shown in a
     /// list of items (for example faces), and clicking
     /// the image will show the user where that entry
-    /// appears during the duration of this entry.,
+    /// appears during the duration of this entry.
     public let imageUrl: String?
 
     /// Initializer for a TimelineSkillCardEntriesField.

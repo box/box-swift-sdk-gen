@@ -1,5 +1,7 @@
 import Foundation
 
+/// A standard representation of a file, as returned from any
+/// file API endpoints by default
 public class File: FileMini {
     private enum CodingKeys: String, CodingKey {
         case description
@@ -19,26 +21,26 @@ public class File: FileMini {
         case itemStatus = "item_status"
     }
 
-    /// The optional description of this file,
+    /// The optional description of this file
     public let description: String?
     /// The file size in bytes. Be careful parsing this integer as it can
-    /// get very large and cause an integer overflow.,
+    /// get very large and cause an integer overflow.
     public let size: Int?
     public let pathCollection: FilePathCollectionField?
-    /// The date and time when the file was created on Box.,
+    /// The date and time when the file was created on Box.
     public let createdAt: String?
-    /// The date and time when the file was last updated on Box.,
+    /// The date and time when the file was last updated on Box.
     public let modifiedAt: String?
-    /// The time at which this file was put in the trash.,
+    /// The time at which this file was put in the trash.
     public let trashedAt: String?
     /// The time at which this file is expected to be purged
-    /// from the trash.,
+    /// from the trash.
     public let purgedAt: String?
     /// The date and time at which this file was originally
-    /// created, which might be before it was uploaded to Box.,
+    /// created, which might be before it was uploaded to Box.
     public let contentCreatedAt: String?
     /// The date and time at which this file was last updated,
-    /// which might be before it was uploaded to Box.,
+    /// which might be before it was uploaded to Box.
     public let contentModifiedAt: String?
     public let createdBy: UserMini?
     public let modifiedBy: UserMini?
@@ -49,7 +51,7 @@ public class File: FileMini {
     /// 
     /// * `active` when the item has is not in the trash
     /// * `trashed` when the item has been moved to the trash but not deleted
-    /// * `deleted` when the item has been permanently deleted.,
+    /// * `deleted` when the item has been permanently deleted.
     public let itemStatus: FileItemStatusField?
 
     /// Initializer for a File.
@@ -62,10 +64,10 @@ public class File: FileMini {
     ///     and copying the ID from the URL. For example,
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
+    ///   - type: `file`
     ///   - etag: The HTTP `etag` of this file. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the file if (no) changes have happened.
-    ///   - type: `file`
     ///   - sequenceId: String?
     ///   - name: The name of the file
     ///   - sha1: The SHA1 hash of the file. This can be used to compare the contents
@@ -94,7 +96,7 @@ public class File: FileMini {
     ///     * `active` when the item has is not in the trash
     ///     * `trashed` when the item has been moved to the trash but not deleted
     ///     * `deleted` when the item has been permanently deleted.
-    public init(id: String, etag: String? = nil, type: FileBaseTypeField, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: String? = nil, modifiedAt: String? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: FolderMini? = nil, itemStatus: FileItemStatusField? = nil) {
+    public init(id: String, type: FileBaseTypeField, etag: String? = nil, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: String? = nil, modifiedAt: String? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: FolderMini? = nil, itemStatus: FileItemStatusField? = nil) {
         self.description = description
         self.size = size
         self.pathCollection = pathCollection
@@ -110,7 +112,7 @@ public class File: FileMini {
         self.sharedLink = sharedLink
         self.parent = parent
         self.itemStatus = itemStatus
-        super.init(id: id, etag: etag, type: type, sequenceId: sequenceId, name: name, sha1: sha1, fileVersion: fileVersion)
+        super.init(id: id, type: type, etag: etag, sequenceId: sequenceId, name: name, sha1: sha1, fileVersion: fileVersion)
     }
 
     required public init(from decoder: Decoder) throws {

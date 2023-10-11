@@ -1,5 +1,7 @@
 import Foundation
 
+/// A standard representation of a
+/// shield information barrier object
 public class ShieldInformationBarrier: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -14,21 +16,21 @@ public class ShieldInformationBarrier: Codable {
         case enabledBy = "enabled_by"
     }
 
-    /// The unique identifier for the shield information barrier,
+    /// The unique identifier for the shield information barrier
     public let id: String?
-    /// The type of the shield information barrier,
+    /// The type of the shield information barrier
     public let type: ShieldInformationBarrierTypeField?
     public let enterprise: EnterpriseBase?
-    /// Status of the shield information barrier,
+    /// Status of the shield information barrier
     public let status: ShieldInformationBarrierStatusField?
     /// ISO date time string when this
-    /// shield information barrier object was created.,
+    /// shield information barrier object was created.
     public let createdAt: String?
     public let createdBy: UserBase?
-    /// ISO date time string when this shield information barrier was updated.,
+    /// ISO date time string when this shield information barrier was updated.
     public let updatedAt: String?
     public let updatedBy: UserBase?
-    /// ISO date time string when this shield information barrier was enabled.,
+    /// ISO date time string when this shield information barrier was enabled.
     public let enabledAt: String?
     public let enabledBy: UserBase?
 

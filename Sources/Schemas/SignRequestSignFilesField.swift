@@ -11,7 +11,7 @@ public class SignRequestSignFilesField: Codable {
     /// and the PDFs may be out of date. A change to any document
     /// requires processing on all `sign_files`. We
     /// recommended waiting until processing is finished
-    /// (and this value is true) before downloading the PDFs.,
+    /// (and this value is true) before downloading the PDFs.
     public let isReadyForDownload: Bool?
 
     /// Initializer for a SignRequestSignFilesField.

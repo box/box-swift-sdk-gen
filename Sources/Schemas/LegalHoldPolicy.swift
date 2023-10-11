@@ -1,5 +1,8 @@
 import Foundation
 
+/// Legal Hold Policy information describes the basic
+/// characteristics of the Policy, such as name, description,
+/// and filter dates.
 public class LegalHoldPolicy: LegalHoldPolicyMini {
     private enum CodingKeys: String, CodingKey {
         case policyName = "policy_name"
@@ -15,39 +18,39 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
         case releaseNotes = "release_notes"
     }
 
-    /// Name of the legal hold policy.,
+    /// Name of the legal hold policy.
     public let policyName: String?
     /// Description of the legal hold policy. Optional
-    /// property with a 500 character limit.,
+    /// property with a 500 character limit.
     public let description: String?
     /// * 'active' - the policy is not in a transition state
     /// * 'applying' - that the policy is in the process of
     ///   being applied
     /// * 'releasing' - that the process is in the process
     ///   of being released
-    /// * 'released' - the policy is no longer active,
+    /// * 'released' - the policy is no longer active
     public let status: LegalHoldPolicyStatusField?
-    /// Counts of assignments within this a legal hold policy by item type,
+    /// Counts of assignments within this a legal hold policy by item type
     public let assignmentCounts: LegalHoldPolicyAssignmentCountsField?
     public let createdBy: UserMini?
-    /// When the legal hold policy object was created,
+    /// When the legal hold policy object was created
     public let createdAt: String?
     /// When the legal hold policy object was modified.
-    /// Does not update when assignments are added or removed.,
+    /// Does not update when assignments are added or removed.
     public let modifiedAt: String?
     /// When the policy release request was sent. (Because
     /// it can take time for a policy to fully delete, this
     /// isn't quite the same time that the policy is fully deleted).
     /// 
-    /// If `null`, the policy was not deleted.,
+    /// If `null`, the policy was not deleted.
     public let deletedAt: String?
     /// User-specified, optional date filter applies to
-    /// Custodian assignments only,
+    /// Custodian assignments only
     public let filterStartedAt: String?
     /// User-specified, optional date filter applies to
-    /// Custodian assignments only,
+    /// Custodian assignments only
     public let filterEndedAt: String?
-    /// Optional notes about why the policy was created.,
+    /// Optional notes about why the policy was created.
     public let releaseNotes: String?
 
     /// Initializer for a LegalHoldPolicy.

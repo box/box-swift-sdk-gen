@@ -5,7 +5,7 @@ public class UpdateFileUpdateSharedLinkRequestBodyArg: Codable {
         case sharedLink = "shared_link"
     }
 
-    /// The settings for the shared link to update.,
+    /// The settings for the shared link to update.
     public let sharedLink: UpdateFileUpdateSharedLinkRequestBodyArgSharedLinkField?
 
     /// Initializer for a UpdateFileUpdateSharedLinkRequestBodyArg.

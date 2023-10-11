@@ -1,5 +1,12 @@
 import Foundation
 
+/// A retention policy blocks permanent deletion of content
+/// for a specified amount of time. Admins can apply policies to
+/// specified folders, or an entire enterprise. A file version retention
+/// is a  record for a retained file version. To use this feature,
+/// you must  have the manage retention policies scope enabled for your
+/// API key via  your application management console. For more information
+/// about retention policies, please visit our help documentation
 public class FileVersionRetention: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -11,17 +18,17 @@ public class FileVersionRetention: Codable {
         case winningRetentionPolicy = "winning_retention_policy"
     }
 
-    /// The unique identifier for this file version retention.,
+    /// The unique identifier for this file version retention.
     public let id: String?
-    /// `file_version_retention`,
+    /// `file_version_retention`
     public let type: FileVersionRetentionTypeField?
     public let fileVersion: FileVersionMini?
     public let file: FileMini?
     /// When this file version retention object was
-    /// created,
+    /// created
     public let appliedAt: String?
     /// When the retention expires on this file
-    /// version retention,
+    /// version retention
     public let dispositionAt: String?
     public let winningRetentionPolicy: RetentionPolicyMini?
 

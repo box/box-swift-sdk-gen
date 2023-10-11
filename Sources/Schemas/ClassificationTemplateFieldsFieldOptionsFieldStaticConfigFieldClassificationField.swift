@@ -6,7 +6,7 @@ public class ClassificationTemplateFieldsFieldOptionsFieldStaticConfigFieldClass
         case colorId = "colorID"
     }
 
-    /// A longer description of the classification.,
+    /// A longer description of the classification.
     public let classificationDefinition: String?
     /// An internal Box identifier used to assign a color to
     /// a classification label.
@@ -22,7 +22,7 @@ public class ClassificationTemplateFieldsFieldOptionsFieldStaticConfigFieldClass
     /// * `4`: Light blue
     /// * `5`: Dark blue
     /// * `6`: Light green
-    /// * `7`: Gray,
+    /// * `7`: Gray
     public let colorId: Int?
 
     /// Initializer for a ClassificationTemplateFieldsFieldOptionsFieldStaticConfigFieldClassificationField.

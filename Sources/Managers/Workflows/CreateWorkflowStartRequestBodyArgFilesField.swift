@@ -6,9 +6,9 @@ public class CreateWorkflowStartRequestBodyArgFilesField: Codable {
         case id
     }
 
-    /// The type of the file object,
+    /// The type of the file object
     public let type: CreateWorkflowStartRequestBodyArgFilesFieldTypeField?
-    /// The id of the file,
+    /// The id of the file
     public let id: String?
 
     /// Initializer for a CreateWorkflowStartRequestBodyArgFilesField.

@@ -5,7 +5,7 @@ public class CopyFolderRequestBodyArgParentField: Codable {
         case id
     }
 
-    /// The ID of parent folder,
+    /// The ID of parent folder
     public let id: String
 
     /// Initializer for a CopyFolderRequestBodyArgParentField.

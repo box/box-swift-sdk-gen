@@ -6,9 +6,9 @@ public class CreateWorkflowStartRequestBodyArgFlowField: Codable {
         case id
     }
 
-    /// The type of the flow object,
+    /// The type of the flow object
     public let type: String?
-    /// The id of the flow,
+    /// The id of the flow
     public let id: String?
 
     /// Initializer for a CreateWorkflowStartRequestBodyArgFlowField.

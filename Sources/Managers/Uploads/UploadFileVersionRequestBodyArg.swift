@@ -12,7 +12,7 @@ public class UploadFileVersionRequestBodyArg {
     ///   uploading the file will receive a HTTP `400` error with a
     ///   `metadata_after_file_contents` error code.
     /// 
-    /// </Message>,
+    /// </Message>
     public let attributes: UploadFileVersionRequestBodyArgAttributesField
     /// The content of the file to upload to Box.
     /// 
@@ -23,7 +23,7 @@ public class UploadFileVersionRequestBodyArg {
     ///   uploading the file will receive a HTTP `400` error with a
     ///   `metadata_after_file_contents` error code.
     /// 
-    /// </Message>,
+    /// </Message>
     public let file: InputStream
     public let fileFileName: String?
     public let fileContentType: String?

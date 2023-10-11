@@ -5,7 +5,7 @@ public class UpdateFileWatermarkRequestBodyArg: Codable {
         case watermark
     }
 
-    /// The watermark to imprint on the file,
+    /// The watermark to imprint on the file
     public let watermark: UpdateFileWatermarkRequestBodyArgWatermarkField
 
     /// Initializer for a UpdateFileWatermarkRequestBodyArg.

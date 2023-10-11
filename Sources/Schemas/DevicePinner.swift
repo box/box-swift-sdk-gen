@@ -1,5 +1,7 @@
 import Foundation
 
+/// Device pins allow enterprises to control what devices can
+/// use native Box applications.
 public class DevicePinner: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -8,12 +10,12 @@ public class DevicePinner: Codable {
         case productName = "product_name"
     }
 
-    /// The unique identifier for this device pin.,
+    /// The unique identifier for this device pin.
     public let id: String?
-    /// `device_pinner`,
+    /// `device_pinner`
     public let type: DevicePinnerTypeField?
     public let ownedBy: UserMini?
-    /// The type of device being pinned,
+    /// The type of device being pinned
     public let productName: String?
 
     /// Initializer for a DevicePinner.

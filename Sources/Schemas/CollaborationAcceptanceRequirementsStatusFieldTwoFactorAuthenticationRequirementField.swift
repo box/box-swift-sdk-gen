@@ -8,11 +8,11 @@ public class CollaborationAcceptanceRequirementsStatusFieldTwoFactorAuthenticati
 
     /// Whether or not the enterprise that owns the content requires
     /// two-factor authentication to be enabled in order to
-    /// collaborate on the content.,
+    /// collaborate on the content.
     public let enterpriseHasTwoFactorAuthEnabled: Bool?
     /// Whether or not the user has two-factor authentication
     /// enabled. The field is `null` when two-factor
-    /// authentication is not required.,
+    /// authentication is not required.
     public let userHasTwoFactorAuthenticationEnabled: Bool?
 
     /// Initializer for a CollaborationAcceptanceRequirementsStatusFieldTwoFactorAuthenticationRequirementField.

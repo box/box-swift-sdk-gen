@@ -1,14 +1,16 @@
 import Foundation
 
+/// A list of real-time servers that can
+/// be used for long-polling.
 public class RealtimeServers: Codable {
     private enum CodingKeys: String, CodingKey {
         case chunkSize = "chunk_size"
         case entries
     }
 
-    /// The number of items in this response.,
+    /// The number of items in this response.
     public let chunkSize: Int64?
-    /// A list of real-time servers,
+    /// A list of real-time servers
     public let entries: [RealtimeServer]?
 
     /// Initializer for a RealtimeServers.

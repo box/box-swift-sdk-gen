@@ -1,11 +1,12 @@
 import Foundation
 
+/// The Storage Policy object describes the storage zone.
 public class StoragePolicy: StoragePolicyMini {
     private enum CodingKeys: String, CodingKey {
         case name
     }
 
-    /// A descriptive name of the region,
+    /// A descriptive name of the region
     public let name: String?
 
     /// Initializer for a StoragePolicy.

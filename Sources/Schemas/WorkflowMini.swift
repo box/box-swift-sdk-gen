@@ -1,5 +1,9 @@
 import Foundation
 
+/// Box Relay Workflows are objects that represent a named collection of flows.
+/// 
+/// You application must be authorized to use the `Manage Box Relay` application
+/// scope within the developer console in order to use this resource.
 public class WorkflowMini: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -9,15 +13,15 @@ public class WorkflowMini: Codable {
         case isEnabled = "is_enabled"
     }
 
-    /// The unique identifier for the workflow,
+    /// The unique identifier for the workflow
     public let id: String?
-    /// `workflow`,
+    /// `workflow`
     public let type: WorkflowMiniTypeField?
-    /// The name of the workflow,
+    /// The name of the workflow
     public let name: String?
-    /// The description for a workflow.,
+    /// The description for a workflow.
     public let description: String?
-    /// Specifies if this workflow is enabled,
+    /// Specifies if this workflow is enabled
     public let isEnabled: Bool?
 
     /// Initializer for a WorkflowMini.

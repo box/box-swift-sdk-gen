@@ -1,5 +1,6 @@
 import Foundation
 
+/// A task assignment defines which task is assigned to which user to complete.
 public class TaskAssignment: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -14,26 +15,26 @@ public class TaskAssignment: Codable {
         case assignedBy = "assigned_by"
     }
 
-    /// The unique identifier for this task assignment,
+    /// The unique identifier for this task assignment
     public let id: String?
-    /// `task_assignment`,
+    /// `task_assignment`
     public let type: TaskAssignmentTypeField?
     public let item: FileMini?
     public let assignedTo: UserMini?
     /// A message that will is included with the task
     /// assignment. This is visible to the assigned user in the web and mobile
-    /// UI.,
+    /// UI.
     public let message: String?
     /// The date at which this task assignment was
-    /// completed. This will be `null` if the task is not completed yet.,
+    /// completed. This will be `null` if the task is not completed yet.
     public let completedAt: String?
-    /// The date at which this task was assigned to the user.,
+    /// The date at which this task was assigned to the user.
     public let assignedAt: String?
     /// The date at which the assigned user was reminded of this task
-    /// assignment.,
+    /// assignment.
     public let remindedAt: String?
     /// The current state of the assignment. The available states depend on
-    /// the `action` value of the task object.,
+    /// the `action` value of the task object.
     public let resolutionState: TaskAssignmentResolutionStateField?
     public let assignedBy: UserMini?
 

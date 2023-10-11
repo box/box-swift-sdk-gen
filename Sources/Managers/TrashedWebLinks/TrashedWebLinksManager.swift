@@ -9,6 +9,19 @@ public class TrashedWebLinksManager {
         self.networkSession = networkSession
     }
 
+    /// Restores a web link that has been moved to the trash.
+    /// 
+    /// An optional new parent ID can be provided to restore the  web link to in case
+    /// the original folder has been deleted.
+    ///
+    /// - Parameters:
+    ///   - webLinkId: The ID of the web link.
+    ///     Example: "12345"
+    ///   - requestBody: Request body of createWebLinkById method
+    ///   - queryParams: Query parameters of createWebLinkById method
+    ///   - headers: Headers of createWebLinkById method
+    /// - Returns: The `TrashWebLinkRestored`.
+    /// - Throws: The `GeneralError`.
     public func createWebLinkById(webLinkId: String, requestBody: CreateWebLinkByIdRequestBodyArg = CreateWebLinkByIdRequestBodyArg(), queryParams: CreateWebLinkByIdQueryParamsArg = CreateWebLinkByIdQueryParamsArg(), headers: CreateWebLinkByIdHeadersArg = CreateWebLinkByIdHeadersArg()) async throws -> TrashWebLinkRestored {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
@@ -16,6 +29,15 @@ public class TrashedWebLinksManager {
         return try TrashWebLinkRestored.deserialize(from: response.text)
     }
 
+    /// Retrieves a web link that has been moved to the trash.
+    ///
+    /// - Parameters:
+    ///   - webLinkId: The ID of the web link.
+    ///     Example: "12345"
+    ///   - queryParams: Query parameters of getWebLinkTrash method
+    ///   - headers: Headers of getWebLinkTrash method
+    /// - Returns: The `TrashWebLink`.
+    /// - Throws: The `GeneralError`.
     public func getWebLinkTrash(webLinkId: String, queryParams: GetWebLinkTrashQueryParamsArg = GetWebLinkTrashQueryParamsArg(), headers: GetWebLinkTrashHeadersArg = GetWebLinkTrashHeadersArg()) async throws -> TrashWebLink {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
@@ -23,6 +45,14 @@ public class TrashedWebLinksManager {
         return try TrashWebLink.deserialize(from: response.text)
     }
 
+    /// Permanently deletes a web link that is in the trash.
+    /// This action cannot be undone.
+    ///
+    /// - Parameters:
+    ///   - webLinkId: The ID of the web link.
+    ///     Example: "12345"
+    ///   - headers: Headers of deleteWebLinkTrash method
+    /// - Throws: The `GeneralError`.
     public func deleteWebLinkTrash(webLinkId: String, headers: DeleteWebLinkTrashHeadersArg = DeleteWebLinkTrashHeadersArg()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/web_links/")\(webLinkId)\("/trash")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))

@@ -1,14 +1,16 @@
 import Foundation
 
+/// A base representation of a
+/// shield information barrier object
 public class ShieldInformationBarrierBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
     }
 
-    /// The unique identifier for the shield information barrier,
+    /// The unique identifier for the shield information barrier
     public let id: String?
-    /// The type of the shield information barrier,
+    /// The type of the shield information barrier
     public let type: ShieldInformationBarrierBaseTypeField?
 
     /// Initializer for a ShieldInformationBarrierBase.

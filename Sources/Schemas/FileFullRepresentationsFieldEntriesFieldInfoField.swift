@@ -7,7 +7,7 @@ public class FileFullRepresentationsFieldEntriesFieldInfoField: Codable {
 
     /// The API URL that can be used to get more info on this file
     /// representation. Make sure to make an authenticated API call
-    /// to this endpoint.,
+    /// to this endpoint.
     public let url: String?
 
     /// Initializer for a FileFullRepresentationsFieldEntriesFieldInfoField.

@@ -1,14 +1,15 @@
 import Foundation
 
+/// A list of email aliases
 public class EmailAliases: Codable {
     private enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
         case entries
     }
 
-    /// The number of email aliases.,
+    /// The number of email aliases.
     public let totalCount: Int64?
-    /// A list of email aliases,
+    /// A list of email aliases
     public let entries: [EmailAlias]?
 
     /// Initializer for a EmailAliases.

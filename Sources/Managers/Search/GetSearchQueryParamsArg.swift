@@ -34,7 +34,7 @@ public class GetSearchQueryParamsArg {
     /// `and`, `or`, and `not`) or mixed case (that is, `And`, `Or`, and `Not`)
     /// operators.
     /// 
-    /// This field is required unless the `mdfilters` parameter is defined.,
+    /// This field is required unless the `mdfilters` parameter is defined.
     public let query: String?
     /// Limits the search results to either the files that the user has
     /// access to, or to files available to the entire enterprise.
@@ -46,11 +46,11 @@ public class GetSearchQueryParamsArg {
     /// The `enterprise_content` can be requested by an admin through our
     /// support channels. Once this scope has been enabled for a user, it
     /// will allow that use to query for content across the entire
-    /// enterprise and not only the content that they have access to.,
+    /// enterprise and not only the content that they have access to.
     public let scope: GetSearchQueryParamsArgScopeField?
     /// Limits the search results to any files that match any of the provided
     /// file extensions. This list is a comma-separated list of file extensions
-    /// without the dots.,
+    /// without the dots.
     public let fileExtensions: [String]?
     /// Limits the search results to any items created within
     /// a given date range.
@@ -62,7 +62,7 @@ public class GetSearchQueryParamsArg {
     /// anything created before the end date will be returned.
     /// 
     /// If the end date is omitted (`2014-05-15T13:35:01-07:00,`) the
-    /// current date will be used as the end date instead.,
+    /// current date will be used as the end date instead.
     public let createdAtRange: [String]?
     /// Limits the search results to any items updated within
     /// a given date range.
@@ -74,7 +74,7 @@ public class GetSearchQueryParamsArg {
     /// anything updated before the end date will be returned.
     /// 
     /// If the end date is omitted (`2014-05-15T13:35:01-07:00,`) the
-    /// current date will be used as the end date instead.,
+    /// current date will be used as the end date instead.
     public let updatedAtRange: [String]?
     /// Limits the search results to any items with a size within
     /// a given file size range. This applied to files and folders.
@@ -82,7 +82,7 @@ public class GetSearchQueryParamsArg {
     /// Size ranges are defined as comma separated list of a lower
     /// and upper byte size limit (inclusive).
     /// 
-    /// The upper and lower bound can be omitted to create open ranges.,
+    /// The upper and lower bound can be omitted to create open ranges.
     public let sizeRange: [Int]?
     /// Limits the search results to any items that are owned
     /// by the given list of owners, defined as a list of comma separated
@@ -95,7 +95,7 @@ public class GetSearchQueryParamsArg {
     /// 
     /// To search across an entire enterprise, we recommend using the
     /// `enterprise_content` scope parameter which can be requested with our
-    /// support team.,
+    /// support team.
     public let ownerUserIds: [String]?
     /// Limits the search results to any items that have been updated
     /// by the given list of users, defined as a list of comma separated
@@ -106,7 +106,7 @@ public class GetSearchQueryParamsArg {
     /// results. If the user does not have access to any files owned by any of
     /// the users an empty result set will be returned.
     /// 
-    /// This feature only searches back to the last 10 versions of an item.,
+    /// This feature only searches back to the last 10 versions of an item.
     public let recentUpdaterUserIds: [String]?
     /// Limits the search results to items within the given
     /// list of folders, defined as a comma separated lists
@@ -122,7 +122,7 @@ public class GetSearchQueryParamsArg {
     /// 
     /// To search across an entire enterprise, we recommend using the
     /// `enterprise_content` scope parameter which can be requested with our
-    /// support team.,
+    /// support team.
     public let ancestorFolderIds: [String]?
     /// Limits the search results to any items that match the search query
     /// for a specific part of the file, for example the file description.
@@ -137,7 +137,7 @@ public class GetSearchQueryParamsArg {
     /// * `comments` - The content of any of the comments on a file or
     ///    folder.
     /// * `tags` - Any tags that are applied to an item, as defined by its
-    ///    `tags` field.,
+    ///    `tags` field.
     public let contentTypes: [GetSearchQueryParamsArgContentTypesField]?
     /// Limits the search results to any items of this type. This
     /// parameter only takes one value. By default the API returns
@@ -146,7 +146,7 @@ public class GetSearchQueryParamsArg {
     /// * `file` - Limits the search results to files
     /// * `folder` - Limits the search results to folders
     /// * `web_link` - Limits the search results to web links, also known
-    ///    as bookmarks,
+    ///    as bookmarks
     public let type: GetSearchQueryParamsArgTypeField?
     /// Determines if the search should look in the trash for items.
     /// 
@@ -156,7 +156,7 @@ public class GetSearchQueryParamsArg {
     /// * `trashed_only` - Only searches for items currently in the trash
     /// * `non_trashed_only` - Only searches for items currently not in
     ///   the trash
-    /// * `all_items` - Searches for both trashed and non-trashed items.,
+    /// * `all_items` - Searches for both trashed and non-trashed items.
     public let trashContent: GetSearchQueryParamsArgTrashContentField?
     /// Limits the search results to any items for which the metadata matches
     /// the provided filter.
@@ -165,7 +165,7 @@ public class GetSearchQueryParamsArg {
     /// the search results by. This list can currently only
     /// contain one entry, though this might be expanded in the future.
     /// 
-    /// This parameter is required unless the `query` parameter is provided.,
+    /// This parameter is required unless the `query` parameter is provided.
     public let mdfilters: [MetadataFilter]?
     /// Defines the order in which search results are returned. This API
     /// defaults to returning items by relevance unless this parameter is
@@ -175,17 +175,17 @@ public class GetSearchQueryParamsArg {
     /// query search term. The relevance is based on the occurrence of the search
     /// term in the items name, description, content, and additional properties.
     /// * `modified_at` returns the results ordered in descending order by date
-    /// at which the item was last modified.,
+    /// at which the item was last modified.
     public let sort: GetSearchQueryParamsArgSortField?
     /// Defines the direction in which search results are ordered. This API
     /// defaults to returning items in descending (`DESC`) order unless this
     /// parameter is explicitly specified.
     /// 
     /// When results are sorted by `relevance` the ordering is locked to returning
-    /// items in descending order of relevance, and this parameter is ignored.,
+    /// items in descending order of relevance, and this parameter is ignored.
     public let direction: GetSearchQueryParamsArgDirectionField?
     /// Defines the maximum number of items to return as part of a page of
-    /// results.,
+    /// results.
     public let limit: Int64?
     /// Defines whether the search results should include any items
     /// that the user recently accessed through a shared link.
@@ -193,7 +193,7 @@ public class GetSearchQueryParamsArg {
     /// When this parameter has been set to true,
     /// the format of the response of this API changes to return
     /// a list of [Search Results with
-    /// Shared Links](r://search_results_with_shared_links),
+    /// Shared Links](r://search_results_with_shared_links)
     public let includeRecentSharedLinks: Bool?
     /// A comma-separated list of attributes to include in the
     /// response. This can be used to request fields that are
@@ -203,13 +203,13 @@ public class GetSearchQueryParamsArg {
     /// effect that none of the standard fields are returned in
     /// the response unless explicitly specified, instead only
     /// fields for the mini representation are returned, additional
-    /// to the fields requested.,
+    /// to the fields requested.
     public let fields: [String]?
     /// The offset of the item at which to begin the response.
     /// 
     /// Queries with offset parameter value
     /// exceeding 10000 will be rejected
-    /// with a 400 response.,
+    /// with a 400 response.
     public let offset: Int64?
     /// Limits the search results to items that were deleted by the given
     /// list of users, defined as a list of comma separated user IDs.
@@ -224,7 +224,7 @@ public class GetSearchQueryParamsArg {
     /// If the user does not have access to any files owned by
     /// any of the users, an empty result set is returned.
     /// 
-    /// Data available from 2023-02-01 onwards.,
+    /// Data available from 2023-02-01 onwards.
     public let deletedUserIds: [String]?
     /// Limits the search results to any items deleted within a given
     /// date range.
@@ -242,7 +242,7 @@ public class GetSearchQueryParamsArg {
     /// If searching in trash is not performed, then an empty result
     /// is returned.
     /// 
-    /// Data available from 2023-02-01 onwards.,
+    /// Data available from 2023-02-01 onwards.
     public let deletedAtRange: [String]?
 
     /// Initializer for a GetSearchQueryParamsArg.

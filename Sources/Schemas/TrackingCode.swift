@@ -1,5 +1,8 @@
 import Foundation
 
+/// Tracking codes allow an admin to generate reports from the admin console
+/// and assign an attribute to a specific group of users.
+/// This setting must be enabled for an enterprise before it can be used.
 public class TrackingCode: Codable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -7,12 +10,12 @@ public class TrackingCode: Codable {
         case value
     }
 
-    /// `tracking_code`,
+    /// `tracking_code`
     public let type: TrackingCodeTypeField?
     /// The name of the tracking code, which must be preconfigured in
-    /// the Admin Console,
+    /// the Admin Console
     public let name: String?
-    /// The value of the tracking code,
+    /// The value of the tracking code
     public let value: String?
 
     /// Initializer for a TrackingCode.

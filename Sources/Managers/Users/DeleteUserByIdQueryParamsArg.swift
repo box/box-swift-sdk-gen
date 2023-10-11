@@ -2,10 +2,10 @@ import Foundation
 
 public class DeleteUserByIdQueryParamsArg {
     /// Whether the user will receive email notification of
-    /// the deletion,
+    /// the deletion
     public let notify: Bool?
     /// Whether the user should be deleted even if this user
-    /// still own files,
+    /// still own files
     public let force: Bool?
 
     /// Initializer for a DeleteUserByIdQueryParamsArg.

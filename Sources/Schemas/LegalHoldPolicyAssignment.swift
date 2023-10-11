@@ -1,5 +1,11 @@
 import Foundation
 
+/// Legal Hold Assignments are used to assign Legal Hold
+/// Policies to Users, Folders, Files, or File Versions.
+/// 
+/// Creating a Legal Hold Assignment puts a hold
+/// on the File-Versions that belong to the Assignment's
+/// 'apply-to' entity.
 public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
     private enum CodingKeys: String, CodingKey {
         case legalHoldPolicy = "legal_hold_policy"
@@ -13,13 +19,13 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
     public let assignedTo: FileOrFolderOrWebLink?
     public let assignedBy: UserMini?
     /// When the legal hold policy assignment object was
-    /// created,
+    /// created
     public let assignedAt: String?
     /// When the assignment release request was sent.
     /// (Because it can take time for an assignment to fully
     /// delete, this isn't quite the same time that the
     /// assignment is fully deleted). If null, Assignment
-    /// was not deleted.,
+    /// was not deleted.
     public let deletedAt: String?
 
     /// Initializer for a LegalHoldPolicyAssignment.

@@ -1,5 +1,7 @@
 import Foundation
 
+/// Folder locks define access restrictions placed by folder owners
+/// to prevent specific folders from being moved or deleted.
 public class FolderLock: Codable {
     private enum CodingKeys: String, CodingKey {
         case folder
@@ -12,19 +14,19 @@ public class FolderLock: Codable {
     }
 
     public let folder: FolderMini?
-    /// The unique identifier for this folder lock.,
+    /// The unique identifier for this folder lock.
     public let id: String?
-    /// The object type, always `folder_lock`.,
+    /// The object type, always `folder_lock`.
     public let type: String?
     public let createdBy: UserBase?
-    /// When the folder lock object was created.,
+    /// When the folder lock object was created.
     public let createdAt: String?
     /// The operations that have been locked. Currently the `move`
     /// and `delete` operations cannot be locked separately, and both need to be
     /// set to `true`.
-    /// ,
+    /// 
     public let lockedOperations: FolderLockLockedOperationsField?
-    /// The lock type, always `freeze`.,
+    /// The lock type, always `freeze`.
     public let lockType: String?
 
     /// Initializer for a FolderLock.

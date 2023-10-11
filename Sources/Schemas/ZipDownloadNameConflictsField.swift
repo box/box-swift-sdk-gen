@@ -8,14 +8,14 @@ public class ZipDownloadNameConflictsField: Codable {
         case downloadName = "download_name"
     }
 
-    /// The identifier of the item,
+    /// The identifier of the item
     public let id: String?
-    /// The type of this item,
+    /// The type of this item
     public let type: ZipDownloadNameConflictsFieldTypeField?
-    /// The original name of this item,
+    /// The original name of this item
     public let originalName: String?
     /// The new name of this item as it will appear in the
-    /// downloaded `zip` archive.,
+    /// downloaded `zip` archive.
     public let downloadName: String?
 
     /// Initializer for a ZipDownloadNameConflictsField.

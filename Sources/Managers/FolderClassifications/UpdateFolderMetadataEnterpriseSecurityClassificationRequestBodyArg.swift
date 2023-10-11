@@ -7,16 +7,16 @@ public class UpdateFolderMetadataEnterpriseSecurityClassificationRequestBodyArg:
         case value
     }
 
-    /// `replace`,
+    /// `replace`
     public let op: UpdateFolderMetadataEnterpriseSecurityClassificationRequestBodyArgOpField?
-    /// `/Box__Security__Classification__Key`,
+    /// `/Box__Security__Classification__Key`
     public let path: UpdateFolderMetadataEnterpriseSecurityClassificationRequestBodyArgPathField?
     /// The name of the classification to apply to this folder.
     /// 
     /// To list the available classifications in an enterprise,
     /// use the classification API to retrieve the
     /// [classification template](e://get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema)
-    /// which lists all available classification keys.,
+    /// which lists all available classification keys.
     public let value: String?
 
     /// Initializer for a UpdateFolderMetadataEnterpriseSecurityClassificationRequestBodyArg.

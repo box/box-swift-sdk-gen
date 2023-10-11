@@ -1,14 +1,15 @@
 import Foundation
 
+/// A base representation of a retention policy assignment.
 public class RetentionPolicyAssignmentBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
     }
 
-    /// The unique identifier that represents a file version.,
+    /// The unique identifier that represents a file version.
     public let id: String
-    /// `retention_policy_assignment`,
+    /// `retention_policy_assignment`
     public let type: RetentionPolicyAssignmentBaseTypeField
 
     /// Initializer for a RetentionPolicyAssignmentBase.

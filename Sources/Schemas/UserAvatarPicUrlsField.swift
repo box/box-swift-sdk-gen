@@ -7,11 +7,11 @@ public class UserAvatarPicUrlsField: Codable {
         case preview
     }
 
-    /// The location of a small-sized avatar.,
+    /// The location of a small-sized avatar.
     public let small: String?
-    /// The location of a large-sized avatar.,
+    /// The location of a large-sized avatar.
     public let large: String?
-    /// The location of the avatar preview.,
+    /// The location of the avatar preview.
     public let preview: String?
 
     /// Initializer for a UserAvatarPicUrlsField.

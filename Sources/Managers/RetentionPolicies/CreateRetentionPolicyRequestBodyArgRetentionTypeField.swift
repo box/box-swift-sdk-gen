@@ -1,6 +1,6 @@
 import Foundation
 
 public enum CreateRetentionPolicyRequestBodyArgRetentionTypeField: String, CodableStringEnum {
-    case modifiable = "modifiable"
+    case modifiable
     case nonModifiable = "non-modifiable"
 }

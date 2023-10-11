@@ -1,13 +1,13 @@
 import Foundation
 
 public class GetFileThumbnailByIdQueryParamsArg {
-    /// The minimum height of the thumbnail,
+    /// The minimum height of the thumbnail
     public let minHeight: Int?
-    /// The minimum width of the thumbnail,
+    /// The minimum width of the thumbnail
     public let minWidth: Int?
-    /// The maximum height of the thumbnail,
+    /// The maximum height of the thumbnail
     public let maxHeight: Int?
-    /// The maximum width of the thumbnail,
+    /// The maximum width of the thumbnail
     public let maxWidth: Int?
 
     /// Initializer for a GetFileThumbnailByIdQueryParamsArg.

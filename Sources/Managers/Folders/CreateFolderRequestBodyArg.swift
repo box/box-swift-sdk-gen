@@ -16,14 +16,14 @@ public class CreateFolderRequestBodyArg: Codable {
     /// prohibited.
     /// 
     /// Additionally, the names `.` and `..` are
-    /// not allowed either.,
+    /// not allowed either.
     public let name: String
-    /// The parent folder to create the new folder within.,
+    /// The parent folder to create the new folder within.
     public let parent: CreateFolderRequestBodyArgParentField
     public let folderUploadEmail: CreateFolderRequestBodyArgFolderUploadEmailField?
     /// Specifies whether a folder should be synced to a
     /// user's device or not. This is used by Box Sync
-    /// (discontinued) and is not used by Box Drive.,
+    /// (discontinued) and is not used by Box Drive.
     public let syncState: CreateFolderRequestBodyArgSyncStateField?
 
     /// Initializer for a CreateFolderRequestBodyArg.

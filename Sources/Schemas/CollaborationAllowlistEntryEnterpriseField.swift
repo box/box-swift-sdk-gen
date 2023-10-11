@@ -7,11 +7,11 @@ public class CollaborationAllowlistEntryEnterpriseField: Codable {
         case name
     }
 
-    /// The unique identifier for this enterprise.,
+    /// The unique identifier for this enterprise.
     public let id: String?
-    /// `enterprise`,
+    /// `enterprise`
     public let type: CollaborationAllowlistEntryEnterpriseFieldTypeField?
-    /// The name of the enterprise,
+    /// The name of the enterprise
     public let name: String?
 
     /// Initializer for a CollaborationAllowlistEntryEnterpriseField.

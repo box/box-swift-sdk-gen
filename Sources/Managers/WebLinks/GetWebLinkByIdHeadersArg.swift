@@ -10,9 +10,9 @@ public class GetWebLinkByIdHeadersArg {
     /// use `shared_link=[link]&shared_link_password=[password]`.
     /// 
     /// This header can be used on the file or folder shared, as well as on any files
-    /// or folders nested within the item.,
+    /// or folders nested within the item.
     public let boxapi: String?
-    /// Extra headers that will be included in the HTTP request.,
+    /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
     /// Initializer for a GetWebLinkByIdHeadersArg.

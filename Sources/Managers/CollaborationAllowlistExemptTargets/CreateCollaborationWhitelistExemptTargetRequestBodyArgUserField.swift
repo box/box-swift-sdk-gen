@@ -5,7 +5,7 @@ public class CreateCollaborationWhitelistExemptTargetRequestBodyArgUserField: Co
         case id
     }
 
-    /// The ID of the user to exempt.,
+    /// The ID of the user to exempt.
     public let id: String
 
     /// Initializer for a CreateCollaborationWhitelistExemptTargetRequestBodyArgUserField.

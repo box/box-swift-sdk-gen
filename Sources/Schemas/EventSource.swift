@@ -1,5 +1,7 @@
 import Foundation
 
+/// The source file or folder that triggered an event in
+/// the event stream.
 public class EventSource: Codable {
     private enum CodingKeys: String, CodingKey {
         case itemType = "item_type"
@@ -12,18 +14,18 @@ public class EventSource: Codable {
 
     /// The type of the item that the event
     /// represents. Can be `file` or `folder`.
-    /// ,
+    /// 
     public let itemType: EventSourceItemTypeField
     /// The unique identifier that represents the
     /// item.
-    /// ,
+    /// 
     public let itemId: String
     /// The name of the item.
-    /// ,
+    /// 
     public let itemName: String
     /// The object containing classification information for the item that
     /// triggered the event. This field will not appear if the item does not
-    /// have a classification set.,
+    /// have a classification set.
     public let classification: EventSourceClassificationField?
     public let parent: FolderMini?
     public let ownedBy: UserMini?

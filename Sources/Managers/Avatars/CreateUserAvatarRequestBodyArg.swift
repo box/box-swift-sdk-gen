@@ -3,7 +3,7 @@ import Foundation
 public class CreateUserAvatarRequestBodyArg {
     /// The image file to be uploaded to Box.
     /// Accepted file extensions are `.jpg` or `.png`.
-    /// The maximum file size is 1MB.,
+    /// The maximum file size is 1MB.
     public let pic: InputStream
     public let picFileName: String?
     public let picContentType: String?

@@ -8,13 +8,13 @@ public class SkillInvocationSkillField: Codable {
         case apiKey = "api_key"
     }
 
-    /// The unique identifier for this skill,
+    /// The unique identifier for this skill
     public let id: String?
-    /// `skill`,
+    /// `skill`
     public let type: SkillInvocationSkillFieldTypeField?
-    /// The name of the skill,
+    /// The name of the skill
     public let name: String?
-    /// The client ID of the application,
+    /// The client ID of the application
     public let apiKey: String?
 
     /// Initializer for a SkillInvocationSkillField.

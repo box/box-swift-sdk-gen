@@ -7,11 +7,11 @@ public class SignRequestSignerSignerDecisionField: Codable {
         case additionalInfo = "additional_info"
     }
 
-    /// Type of decision made by the signer,
+    /// Type of decision made by the signer
     public let type: SignRequestSignerSignerDecisionFieldTypeField?
-    /// Date and Time that the decision was made,
+    /// Date and Time that the decision was made
     public let finalizedAt: String?
-    /// Additional info about the decision, such as the decline reason from the signer,
+    /// Additional info about the decision, such as the decline reason from the signer
     public let additionalInfo: String?
 
     /// Initializer for a SignRequestSignerSignerDecisionField.

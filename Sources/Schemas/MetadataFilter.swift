@@ -1,5 +1,6 @@
 import Foundation
 
+/// A metadata template to filter the search results by.
 public class MetadataFilter: Codable {
     private enum CodingKeys: String, CodingKey {
         case scope
@@ -11,7 +12,7 @@ public class MetadataFilter: Codable {
     /// 
     /// This will be `enterprise_{enterprise_id}` for templates defined
     /// for use in this enterprise, and `global` for general templates
-    /// that are available to all enterprises using Box.,
+    /// that are available to all enterprises using Box.
     public let scope: MetadataFilterScopeField?
     /// The key of the template to filter search results by.
     /// 
@@ -26,7 +27,7 @@ public class MetadataFilter: Codable {
     /// 
     /// [list]: e://get-metadata-templates-enterprise
     /// [file]: e://get-files-id-metadata
-    /// [folder]: e://get-folders-id-metadata,
+    /// [folder]: e://get-folders-id-metadata
     public let templateKey: String?
     public let filters: MetadataFilterFiltersField?
 

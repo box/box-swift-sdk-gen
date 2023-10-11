@@ -1,5 +1,5 @@
 import Foundation
 
 public enum WorkflowMiniTypeField: String, CodableStringEnum {
-    case workflow = "workflow"
+    case workflow
 }

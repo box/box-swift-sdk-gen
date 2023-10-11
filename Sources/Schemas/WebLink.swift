@@ -1,5 +1,10 @@
 import Foundation
 
+/// Web links are objects that point to URLs. These objects
+/// are also known as bookmarks within the Box web application.
+/// 
+/// Web link objects are treated similarly to file objects,
+/// they will also support most actions that apply to regular files.
 public class WebLink: WebLinkMini {
     private enum CodingKeys: String, CodingKey {
         case parent
@@ -18,17 +23,17 @@ public class WebLink: WebLinkMini {
 
     public let parent: FolderMini?
     /// The description accompanying the web link. This is
-    /// visible within the Box web application.,
+    /// visible within the Box web application.
     public let description: String?
     public let pathCollection: WebLinkPathCollectionField?
-    /// When this file was created on Box’s servers.,
+    /// When this file was created on Box’s servers.
     public let createdAt: String?
     /// When this file was last updated on the Box
-    /// servers.,
+    /// servers.
     public let modifiedAt: String?
-    /// When this file was moved to the trash.,
+    /// When this file was moved to the trash.
     public let trashedAt: String?
-    /// When this file will be permanently deleted.,
+    /// When this file will be permanently deleted.
     public let purgedAt: String?
     public let createdBy: UserMini?
     public let modifiedBy: UserMini?
@@ -36,7 +41,7 @@ public class WebLink: WebLinkMini {
     public let sharedLink: WebLinkSharedLinkField?
     /// Whether this item is deleted or not. Values include `active`,
     /// `trashed` if the file has been moved to the trash, and `deleted` if
-    /// the file has been permanently deleted,
+    /// the file has been permanently deleted
     public let itemStatus: WebLinkItemStatusField?
 
     /// Initializer for a WebLink.

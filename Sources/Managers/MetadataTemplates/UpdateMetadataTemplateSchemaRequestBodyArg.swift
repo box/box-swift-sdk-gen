@@ -13,28 +13,28 @@ public class UpdateMetadataTemplateSchemaRequestBodyArg: Codable {
     }
 
     /// The type of change to perform on the template. Some
-    /// of these are hazardous as they will change existing templates.,
+    /// of these are hazardous as they will change existing templates.
     public let op: UpdateMetadataTemplateSchemaRequestBodyArgOpField
     /// The data for the operation. This will vary depending on the
-    /// operation being performed.,
+    /// operation being performed.
     public let data: [String: String]?
     /// For operations that affect a single field this defines the key of
-    /// the field that is affected.,
+    /// the field that is affected.
     public let fieldKey: String?
     /// For operations that affect multiple fields this defines the keys
-    /// of the fields that are affected.,
+    /// of the fields that are affected.
     public let fieldKeys: [String]?
     /// For operations that affect a single `enum` option this defines
-    /// the key of the option that is affected.,
+    /// the key of the option that is affected.
     public let enumOptionKey: String?
     /// For operations that affect multiple `enum` options this defines
-    /// the keys of the options that are affected.,
+    /// the keys of the options that are affected.
     public let enumOptionKeys: [String]?
     /// For operations that affect a single multi select option this
-    /// defines the key of the option that is affected.,
+    /// defines the key of the option that is affected.
     public let multiSelectOptionKey: String?
     /// For operations that affect multiple multi select options this
-    /// defines the keys of the options that are affected.,
+    /// defines the keys of the options that are affected.
     public let multiSelectOptionKeys: [String]?
 
     /// Initializer for a UpdateMetadataTemplateSchemaRequestBodyArg.

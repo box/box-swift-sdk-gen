@@ -7,11 +7,11 @@ public class UpdateFileByIdRequestBodyArgLockField: Codable {
         case isDownloadPrevented = "is_download_prevented"
     }
 
-    /// The type of this object.,
+    /// The type of this object.
     public let access: UpdateFileByIdRequestBodyArgLockFieldAccessField?
-    /// Defines the time at which the lock expires.,
+    /// Defines the time at which the lock expires.
     public let expiresAt: String?
-    /// Defines if the file can be downloaded while it is locked.,
+    /// Defines if the file can be downloaded while it is locked.
     public let isDownloadPrevented: Bool?
 
     /// Initializer for a UpdateFileByIdRequestBodyArgLockField.

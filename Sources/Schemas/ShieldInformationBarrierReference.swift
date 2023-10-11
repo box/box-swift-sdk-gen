@@ -1,5 +1,6 @@
 import Foundation
 
+/// A shield information barrier reference for requests and responses
 public class ShieldInformationBarrierReference: Codable {
     private enum CodingKeys: String, CodingKey {
         case shieldInformationBarrier = "shield_information_barrier"

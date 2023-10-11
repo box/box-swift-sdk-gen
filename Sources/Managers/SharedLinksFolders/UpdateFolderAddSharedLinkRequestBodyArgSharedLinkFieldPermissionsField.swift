@@ -9,14 +9,14 @@ public class UpdateFolderAddSharedLinkRequestBodyArgSharedLinkFieldPermissionsFi
 
     /// If the shared link allows for downloading of files.
     /// This can only be set when `access` is set to
-    /// `open` or `company`.,
+    /// `open` or `company`.
     public let canDownload: Bool?
     /// If the shared link allows for previewing of files.
     /// This value is always `true`. For shared links on folders
-    /// this also applies to any items in the folder.,
+    /// this also applies to any items in the folder.
     public let canPreview: Bool?
     /// This value can only be `false` for items
-    /// with a `type` of `folder`.,
+    /// with a `type` of `folder`.
     public let canEdit: Bool?
 
     /// Initializer for a UpdateFolderAddSharedLinkRequestBodyArgSharedLinkFieldPermissionsField.

@@ -1,14 +1,15 @@
 import Foundation
 
+/// A list of files
 public class Files: Codable {
     private enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
         case entries
     }
 
-    /// The number of files.,
+    /// The number of files.
     public let totalCount: Int64?
-    /// A list of files,
+    /// A list of files
     public let entries: [File]?
 
     /// Initializer for a Files.

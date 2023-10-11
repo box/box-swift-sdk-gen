@@ -6,9 +6,9 @@ public class UpdateSkillInvocationByIdRequestBodyArgFileField: Codable {
         case id
     }
 
-    /// `file`,
+    /// `file`
     public let type: UpdateSkillInvocationByIdRequestBodyArgFileFieldTypeField?
-    /// The ID of the file,
+    /// The ID of the file
     public let id: String?
 
     /// Initializer for a UpdateSkillInvocationByIdRequestBodyArgFileField.

@@ -6,10 +6,10 @@ public class CreateRetentionPolicyAssignmentRequestBodyArgFilterFieldsField: Cod
         case value
     }
 
-    /// The metadata attribute key id.,
+    /// The metadata attribute key id.
     public let field: String?
     /// The metadata attribute field id. For value, only
-    /// enum and multiselect types are supported.,
+    /// enum and multiselect types are supported.
     public let value: String?
 
     /// Initializer for a CreateRetentionPolicyAssignmentRequestBodyArgFilterFieldsField.

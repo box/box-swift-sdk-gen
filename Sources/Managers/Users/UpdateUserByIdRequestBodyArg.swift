@@ -26,68 +26,68 @@ public class UpdateUserByIdRequestBodyArg: Codable {
     }
 
     /// Set this to `null` to roll the user out of the enterprise
-    /// and make them a free user,
+    /// and make them a free user
     public let enterprise: String?
     /// Whether the user should receive an email when they
-    /// are rolled out of an enterprise,
+    /// are rolled out of an enterprise
     public let notify: Bool?
-    /// The name of the user,
+    /// The name of the user
     public let name: String?
     /// The email address the user uses to log in
     /// 
     /// Note: If the target user's email is not confirmed, then the
-    /// primary login address cannot be changed.,
+    /// primary login address cannot be changed.
     public let login: String?
-    /// The user’s enterprise role,
+    /// The user’s enterprise role
     public let role: UpdateUserByIdRequestBodyArgRoleField?
     /// The language of the user, formatted in modified version of the
-    /// [ISO 639-1](/guides/api-calls/language-codes) format.,
+    /// [ISO 639-1](/guides/api-calls/language-codes) format.
     public let language: String?
-    /// Whether the user can use Box Sync,
+    /// Whether the user can use Box Sync
     public let isSyncEnabled: Bool?
-    /// The user’s job title,
+    /// The user’s job title
     public let jobTitle: String?
-    /// The user’s phone number,
+    /// The user’s phone number
     public let phone: String?
-    /// The user’s address,
+    /// The user’s address
     public let address: String?
     /// Tracking codes allow an admin to generate reports from the
     /// admin console and assign an attribute to a specific group
     /// of users. This setting must be enabled for an enterprise before it
-    /// can be used.,
+    /// can be used.
     public let trackingCodes: [TrackingCode]?
     /// Whether the user can see other enterprise users in their
-    /// contact list,
+    /// contact list
     public let canSeeManagedUsers: Bool?
-    /// The user's timezone,
+    /// The user's timezone
     public let timezone: String?
     /// Whether the user is allowed to collaborate with users outside
-    /// their enterprise,
+    /// their enterprise
     public let isExternalCollabRestricted: Bool?
-    /// Whether to exempt the user from enterprise device limits,
+    /// Whether to exempt the user from enterprise device limits
     public let isExemptFromDeviceLimits: Bool?
-    /// Whether the user must use two-factor authentication,
+    /// Whether the user must use two-factor authentication
     public let isExemptFromLoginVerification: Bool?
-    /// Whether the user is required to reset their password,
+    /// Whether the user is required to reset their password
     public let isPasswordResetRequired: Bool?
-    /// The user's account status,
+    /// The user's account status
     public let status: UpdateUserByIdRequestBodyArgStatusField?
     /// The user’s total available space in bytes. Set this to `-1` to
-    /// indicate unlimited storage.,
+    /// indicate unlimited storage.
     public let spaceAmount: Int64?
     /// An alternate notification email address to which email
     /// notifications are sent. When it's confirmed, this will be
     /// the email address to which notifications are sent instead of
     /// to the primary email address.
     /// 
-    /// Set this value to `null` to remove the notification email.,
+    /// Set this value to `null` to remove the notification email.
     public let notificationEmail: UpdateUserByIdRequestBodyArgNotificationEmailField?
     /// An external identifier for an app user, which can be used to look
     /// up the user. This can be used to tie user IDs from external
     /// identity providers to Box users.
     /// 
     /// Note: In order to update this field, you need to request a token
-    /// using the application that created the app user.,
+    /// using the application that created the app user.
     public let externalAppUserId: String?
 
     /// Initializer for a UpdateUserByIdRequestBodyArg.

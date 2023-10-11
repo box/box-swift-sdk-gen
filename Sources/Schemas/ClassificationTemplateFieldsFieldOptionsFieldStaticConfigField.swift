@@ -11,7 +11,7 @@ public class ClassificationTemplateFieldsFieldOptionsFieldStaticConfigField: Cod
     /// more object fields might be returned. These fields
     /// are used for internal Box Shield and Box Governance
     /// purposes and no additional value must be derived from
-    /// these fields.,
+    /// these fields.
     public let classification: ClassificationTemplateFieldsFieldOptionsFieldStaticConfigFieldClassificationField?
 
     /// Initializer for a ClassificationTemplateFieldsFieldOptionsFieldStaticConfigField.

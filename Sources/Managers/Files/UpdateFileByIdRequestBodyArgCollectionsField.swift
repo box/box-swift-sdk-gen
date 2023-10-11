@@ -6,9 +6,9 @@ public class UpdateFileByIdRequestBodyArgCollectionsField: Codable {
         case type
     }
 
-    /// The unique identifier for this object,
+    /// The unique identifier for this object
     public let id: String?
-    /// The type for this object,
+    /// The type for this object
     public let type: String?
 
     /// Initializer for a UpdateFileByIdRequestBodyArgCollectionsField.

@@ -1,11 +1,13 @@
 import Foundation
 
+/// A mini representation of a file version, used when
+/// nested within another resource.
 public class FileVersionMini: FileVersionBase {
     private enum CodingKeys: String, CodingKey {
         case sha1
     }
 
-    /// The SHA1 hash of this version of the file.,
+    /// The SHA1 hash of this version of the file.
     public let sha1: String?
 
     /// Initializer for a FileVersionMini.

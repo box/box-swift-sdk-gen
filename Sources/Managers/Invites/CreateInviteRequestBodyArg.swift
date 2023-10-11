@@ -6,9 +6,9 @@ public class CreateInviteRequestBodyArg: Codable {
         case actionableBy = "actionable_by"
     }
 
-    /// The enterprise to invite the user to,
+    /// The enterprise to invite the user to
     public let enterprise: CreateInviteRequestBodyArgEnterpriseField
-    /// The user to invite,
+    /// The user to invite
     public let actionableBy: CreateInviteRequestBodyArgActionableByField
 
     /// Initializer for a CreateInviteRequestBodyArg.

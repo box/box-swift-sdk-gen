@@ -10,16 +10,16 @@ public class FileFullRepresentationsFieldEntriesField: Codable {
     }
 
     /// An object containing the URL that can be used to actually fetch
-    /// the representation.,
+    /// the representation.
     public let content: FileFullRepresentationsFieldEntriesFieldContentField?
     /// An object containing the URL that can be used to fetch more info
-    /// on this representation.,
+    /// on this representation.
     public let info: FileFullRepresentationsFieldEntriesFieldInfoField?
-    /// An object containing the size and type of this presentation.,
+    /// An object containing the size and type of this presentation.
     public let properties: FileFullRepresentationsFieldEntriesFieldPropertiesField?
-    /// Indicates the file type of the returned representation.,
+    /// Indicates the file type of the returned representation.
     public let representation: String?
-    /// An object containing the status of this representation.,
+    /// An object containing the status of this representation.
     public let status: FileFullRepresentationsFieldEntriesFieldStatusField?
 
     /// Initializer for a FileFullRepresentationsFieldEntriesField.

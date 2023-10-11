@@ -9,6 +9,15 @@ public class TermsOfServiceUserStatusesManager {
         self.networkSession = networkSession
     }
 
+    /// Retrieves an overview of users and their status for a
+    /// terms of service, including Whether they have accepted
+    /// the terms and when.
+    ///
+    /// - Parameters:
+    ///   - queryParams: Query parameters of getTermOfServiceUserStatuses method
+    ///   - headers: Headers of getTermOfServiceUserStatuses method
+    /// - Returns: The `TermsOfServiceUserStatuses`.
+    /// - Throws: The `GeneralError`.
     public func getTermOfServiceUserStatuses(queryParams: GetTermOfServiceUserStatusesQueryParamsArg, headers: GetTermOfServiceUserStatusesHeadersArg = GetTermOfServiceUserStatusesHeadersArg()) async throws -> TermsOfServiceUserStatuses {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["tos_id": Utils.Strings.toString(value: queryParams.tosId), "user_id": Utils.Strings.toString(value: queryParams.userId)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
@@ -16,12 +25,28 @@ public class TermsOfServiceUserStatusesManager {
         return try TermsOfServiceUserStatuses.deserialize(from: response.text)
     }
 
+    /// Sets the status for a terms of service for a user.
+    ///
+    /// - Parameters:
+    ///   - requestBody: Request body of createTermOfServiceUserStatus method
+    ///   - headers: Headers of createTermOfServiceUserStatus method
+    /// - Returns: The `TermsOfServiceUserStatus`.
+    /// - Throws: The `GeneralError`.
     public func createTermOfServiceUserStatus(requestBody: CreateTermOfServiceUserStatusRequestBodyArg, headers: CreateTermOfServiceUserStatusHeadersArg = CreateTermOfServiceUserStatusHeadersArg()) async throws -> TermsOfServiceUserStatus {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/terms_of_service_user_statuses")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try TermsOfServiceUserStatus.deserialize(from: response.text)
     }
 
+    /// Updates the status for a terms of service for a user.
+    ///
+    /// - Parameters:
+    ///   - termsOfServiceUserStatusId: The ID of the terms of service status.
+    ///     Example: "324234"
+    ///   - requestBody: Request body of updateTermOfServiceUserStatusById method
+    ///   - headers: Headers of updateTermOfServiceUserStatusById method
+    /// - Returns: The `TermsOfServiceUserStatus`.
+    /// - Throws: The `GeneralError`.
     public func updateTermOfServiceUserStatusById(termsOfServiceUserStatusId: String, requestBody: UpdateTermOfServiceUserStatusByIdRequestBodyArg, headers: UpdateTermOfServiceUserStatusByIdHeadersArg = UpdateTermOfServiceUserStatusByIdHeadersArg()) async throws -> TermsOfServiceUserStatus {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/terms_of_service_user_statuses/")\(termsOfServiceUserStatusId)", options: FetchOptions(method: "PUT", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))

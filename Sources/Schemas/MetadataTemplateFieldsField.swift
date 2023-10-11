@@ -21,23 +21,23 @@ public class MetadataTemplateFieldsField: Codable {
     /// 
     /// **Note**: The `integer` value is deprecated.
     /// It is still present in the response,
-    /// but cannot be used in the POST request.,
+    /// but cannot be used in the POST request.
     public let type: MetadataTemplateFieldsFieldTypeField
     /// A unique identifier for the field. The identifier must
-    /// be unique within the template to which it belongs.,
+    /// be unique within the template to which it belongs.
     public let key: String
     /// The display name of the field as it is shown to the user in the web and
-    /// mobile apps.,
+    /// mobile apps.
     public let displayName: String
-    /// A description of the field. This is not shown to the user.,
+    /// A description of the field. This is not shown to the user.
     public let description: String?
     /// Whether this field is hidden in the UI for the user and can only be set
-    /// through the API instead.,
+    /// through the API instead.
     public let hidden: Bool?
     /// A list of options for this field. This is used in combination
-    /// with the `enum` and `multiSelect` field types.,
+    /// with the `enum` and `multiSelect` field types.
     public let options: [MetadataTemplateFieldsFieldOptionsField]?
-    /// The unique ID of the metadata template field.,
+    /// The unique ID of the metadata template field.
     public let id: String?
 
     /// Initializer for a MetadataTemplateFieldsField.

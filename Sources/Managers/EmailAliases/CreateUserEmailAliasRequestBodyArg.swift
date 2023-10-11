@@ -11,7 +11,7 @@ public class CreateUserEmailAliasRequestBodyArg: Codable {
     ///  to your enterprise.
     /// See the [domain verification guide](
     ///   https://support.box.com/hc/en-us/articles/4408619650579-Domain-Verification
-    ///   ) for steps to add a new domain.,
+    ///   ) for steps to add a new domain.
     public let email: String
 
     /// Initializer for a CreateUserEmailAliasRequestBodyArg.

@@ -1,6 +1,6 @@
 import Foundation
 
 public enum UpdateTermOfServiceByIdRequestBodyArgStatusField: String, CodableStringEnum {
-    case enabled = "enabled"
-    case disabled = "disabled"
+    case enabled
+    case disabled
 }

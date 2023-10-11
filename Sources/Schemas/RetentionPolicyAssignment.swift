@@ -1,5 +1,9 @@
 import Foundation
 
+/// A retention assignment represents a rule specifying
+/// the files a retention policy retains.
+/// Assignments can retain files based on their folder or metadata,
+/// or hold all files in the enterprise.
 public class RetentionPolicyAssignment: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -12,25 +16,25 @@ public class RetentionPolicyAssignment: Codable {
         case startDateField = "start_date_field"
     }
 
-    /// The unique identifier for a retention policy assignment.,
+    /// The unique identifier for a retention policy assignment.
     public let id: String?
-    /// `retention_policy_assignment`,
+    /// `retention_policy_assignment`
     public let type: RetentionPolicyAssignmentTypeField?
     public let retentionPolicy: RetentionPolicyMini?
     /// The `type` and `id` of the content that is under
     /// retention. The `type` can either be `folder`
-    /// `enterprise`, or `metadata_template`.,
+    /// `enterprise`, or `metadata_template`.
     public let assignedTo: RetentionPolicyAssignmentAssignedToField?
     /// An array of field objects. Values are only returned if the `assigned_to`
-    /// type is `metadata_template`. Otherwise, the array is blank.,
+    /// type is `metadata_template`. Otherwise, the array is blank.
     public let filterFields: [RetentionPolicyAssignmentFilterFieldsField]?
     public let assignedBy: UserMini?
     /// When the retention policy assignment object was
-    /// created.,
+    /// created.
     public let assignedAt: String?
     /// The date the retention policy assignment begins.
     /// If the `assigned_to` type is `metadata_template`,
-    /// this field can be a date field's metadata attribute key id.,
+    /// this field can be a date field's metadata attribute key id.
     public let startDateField: String?
 
     /// Initializer for a RetentionPolicyAssignment.

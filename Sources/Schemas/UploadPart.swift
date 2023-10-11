@@ -1,11 +1,13 @@
 import Foundation
 
+/// The representation of an upload
+/// session chunk.
 public class UploadPart: UploadPartMini {
     private enum CodingKeys: String, CodingKey {
         case sha1
     }
 
-    /// The SHA1 hash of the chunk.,
+    /// The SHA1 hash of the chunk.
     public let sha1: String?
 
     /// Initializer for a UploadPart.

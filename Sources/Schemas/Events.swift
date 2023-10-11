@@ -1,5 +1,6 @@
 import Foundation
 
+/// A list of event objects
 public class Events: Codable {
     private enum CodingKeys: String, CodingKey {
         case chunkSize = "chunk_size"
@@ -7,12 +8,12 @@ public class Events: Codable {
         case entries
     }
 
-    /// The number of events returned in this response.,
+    /// The number of events returned in this response.
     public let chunkSize: Int64?
     /// The stream position of the start of the next page (chunk)
-    /// of events.,
+    /// of events.
     public let nextStreamPosition: String?
-    /// A list of events,
+    /// A list of events
     public let entries: [Event]?
 
     /// Initializer for a Events.

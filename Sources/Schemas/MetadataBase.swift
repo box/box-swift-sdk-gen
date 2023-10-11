@@ -1,5 +1,6 @@
 import Foundation
 
+/// The base representation of a metadata instance.
 public class MetadataBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case parent = "$parent"
@@ -10,17 +11,17 @@ public class MetadataBase: Codable {
 
     /// The identifier of the item that this metadata instance
     /// has been attached to. This combines the `type` and the `id`
-    /// of the parent in the form `{type}_{id}`.,
+    /// of the parent in the form `{type}_{id}`.
     public let parent: String?
-    /// The name of the template,
+    /// The name of the template
     public let template: String?
     /// An ID for the scope in which this template
     /// has been applied. This will be `enterprise_{enterprise_id}` for templates
     /// defined for use in this enterprise, and `global` for general templates
-    /// that are available to all enterprises using Box.,
+    /// that are available to all enterprises using Box.
     public let scope: String?
     /// The version of the metadata instance. This version starts at 0 and
-    /// increases every time a user-defined property is modified.,
+    /// increases every time a user-defined property is modified.
     public let version: Int?
 
     /// Initializer for a MetadataBase.

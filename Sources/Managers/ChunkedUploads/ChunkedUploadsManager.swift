@@ -9,35 +9,93 @@ public class ChunkedUploadsManager {
         self.networkSession = networkSession
     }
 
+    /// Creates an upload session for a new file.
+    ///
+    /// - Parameters:
+    ///   - requestBody: Request body of createFileUploadSession method
+    ///   - headers: Headers of createFileUploadSession method
+    /// - Returns: The `UploadSession`.
+    /// - Throws: The `GeneralError`.
     public func createFileUploadSession(requestBody: CreateFileUploadSessionRequestBodyArg, headers: CreateFileUploadSessionHeadersArg = CreateFileUploadSessionHeadersArg()) async throws -> UploadSession {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://upload.box.com/api/2.0/files/upload_sessions")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UploadSession.deserialize(from: response.text)
     }
 
+    /// Creates an upload session for an existing file.
+    ///
+    /// - Parameters:
+    ///   - fileId: The unique identifier that represents a file.
+    ///     
+    ///     The ID for any file can be determined
+    ///     by visiting a file in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/files/123`
+    ///     the `file_id` is `123`.
+    ///     Example: "12345"
+    ///   - requestBody: Request body of createFileUploadSessionForExistingFile method
+    ///   - headers: Headers of createFileUploadSessionForExistingFile method
+    /// - Returns: The `UploadSession`.
+    /// - Throws: The `GeneralError`.
     public func createFileUploadSessionForExistingFile(fileId: String, requestBody: CreateFileUploadSessionForExistingFileRequestBodyArg, headers: CreateFileUploadSessionForExistingFileHeadersArg = CreateFileUploadSessionForExistingFileHeadersArg()) async throws -> UploadSession {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://upload.box.com/api/2.0/files/")\(fileId)\("/upload_sessions")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UploadSession.deserialize(from: response.text)
     }
 
+    /// Return information about an upload session.
+    ///
+    /// - Parameters:
+    ///   - uploadSessionId: The ID of the upload session.
+    ///     Example: "D5E3F7A"
+    ///   - headers: Headers of getFileUploadSessionById method
+    /// - Returns: The `UploadSession`.
+    /// - Throws: The `GeneralError`.
     public func getFileUploadSessionById(uploadSessionId: String, headers: GetFileUploadSessionByIdHeadersArg = GetFileUploadSessionByIdHeadersArg()) async throws -> UploadSession {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://upload.box.com/api/2.0/files/upload_sessions/")\(uploadSessionId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UploadSession.deserialize(from: response.text)
     }
 
+    /// Updates a chunk of an upload session for a file.
+    ///
+    /// - Parameters:
+    ///   - uploadSessionId: The ID of the upload session.
+    ///     Example: "D5E3F7A"
+    ///   - requestBody: Request body of uploadFilePart method
+    ///   - headers: Headers of uploadFilePart method
+    /// - Returns: The `UploadedPart`.
+    /// - Throws: The `GeneralError`.
     public func uploadFilePart(uploadSessionId: String, requestBody: InputStream, headers: UploadFilePartHeadersArg) async throws -> UploadedPart {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["digest": Utils.Strings.toString(value: headers.digest), "content-range": Utils.Strings.toString(value: headers.contentRange)], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://upload.box.com/api/2.0/files/upload_sessions/")\(uploadSessionId)", options: FetchOptions(method: "PUT", headers: headersMap, fileStream: requestBody, contentType: "application/octet-stream", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UploadedPart.deserialize(from: response.text)
     }
 
+    /// Abort an upload session and discard all data uploaded.
+    /// 
+    /// This cannot be reversed.
+    ///
+    /// - Parameters:
+    ///   - uploadSessionId: The ID of the upload session.
+    ///     Example: "D5E3F7A"
+    ///   - headers: Headers of deleteFileUploadSessionById method
+    /// - Throws: The `GeneralError`.
     public func deleteFileUploadSessionById(uploadSessionId: String, headers: DeleteFileUploadSessionByIdHeadersArg = DeleteFileUploadSessionByIdHeadersArg()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://upload.box.com/api/2.0/files/upload_sessions/")\(uploadSessionId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
+    /// Return a list of the chunks uploaded to the upload
+    /// session so far.
+    ///
+    /// - Parameters:
+    ///   - uploadSessionId: The ID of the upload session.
+    ///     Example: "D5E3F7A"
+    ///   - queryParams: Query parameters of getFileUploadSessionParts method
+    ///   - headers: Headers of getFileUploadSessionParts method
+    /// - Returns: The `UploadParts`.
+    /// - Throws: The `GeneralError`.
     public func getFileUploadSessionParts(uploadSessionId: String, queryParams: GetFileUploadSessionPartsQueryParamsArg = GetFileUploadSessionPartsQueryParamsArg(), headers: GetFileUploadSessionPartsHeadersArg = GetFileUploadSessionPartsHeadersArg()) async throws -> UploadParts {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["offset": Utils.Strings.toString(value: queryParams.offset), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
@@ -45,6 +103,16 @@ public class ChunkedUploadsManager {
         return try UploadParts.deserialize(from: response.text)
     }
 
+    /// Close an upload session and create a file from the
+    /// uploaded chunks.
+    ///
+    /// - Parameters:
+    ///   - uploadSessionId: The ID of the upload session.
+    ///     Example: "D5E3F7A"
+    ///   - requestBody: Request body of createFileUploadSessionCommit method
+    ///   - headers: Headers of createFileUploadSessionCommit method
+    /// - Returns: The `Files`.
+    /// - Throws: The `GeneralError`.
     public func createFileUploadSessionCommit(uploadSessionId: String, requestBody: CreateFileUploadSessionCommitRequestBodyArg, headers: CreateFileUploadSessionCommitHeadersArg) async throws -> Files {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["digest": Utils.Strings.toString(value: headers.digest), "if-match": Utils.Strings.toString(value: headers.ifMatch), "if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch)], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://upload.box.com/api/2.0/files/upload_sessions/")\(uploadSessionId)\("/commit")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))

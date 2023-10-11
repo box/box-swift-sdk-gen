@@ -7,9 +7,9 @@ public class ShieldInformationBarrierSegmentRestrictionMiniShieldInformationBarr
     }
 
     /// The ID reference of the
-    /// requesting shield information barrier segment.,
+    /// requesting shield information barrier segment.
     public let id: String?
-    /// The type of the shield information barrier segment,
+    /// The type of the shield information barrier segment
     public let type: ShieldInformationBarrierSegmentRestrictionMiniShieldInformationBarrierSegmentFieldTypeField?
 
     /// Initializer for a ShieldInformationBarrierSegmentRestrictionMiniShieldInformationBarrierSegmentField.

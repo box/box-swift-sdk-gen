@@ -8,11 +8,11 @@ public class CreateGroupMembershipRequestBodyArg: Codable {
         case configurablePermissions = "configurable_permissions"
     }
 
-    /// The user to add to the group.,
+    /// The user to add to the group.
     public let user: CreateGroupMembershipRequestBodyArgUserField
-    /// The group to add the user to.,
+    /// The group to add the user to.
     public let group: CreateGroupMembershipRequestBodyArgGroupField
-    /// The role of the user in the group.,
+    /// The role of the user in the group.
     public let role: CreateGroupMembershipRequestBodyArgRoleField?
     /// Custom configuration for the permissions an admin
     /// if a group will receive. This option has no effect
@@ -23,7 +23,7 @@ public class CreateGroupMembershipRequestBodyArg: Codable {
     /// 
     /// Specifying a value of "null" for this object will deactivate
     /// all configurable permissions. Specifying permissions will set
-    /// them accordingly, omitted permissions will be enabled by default.,
+    /// them accordingly, omitted permissions will be enabled by default.
     public let configurablePermissions: [String: Bool]?
 
     /// Initializer for a CreateGroupMembershipRequestBodyArg.

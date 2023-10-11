@@ -9,7 +9,7 @@ public class GetSharedItemsQueryParamsArg {
     /// effect that none of the standard fields are returned in
     /// the response unless explicitly specified, instead only
     /// fields for the mini representation are returned, additional
-    /// to the fields requested.,
+    /// to the fields requested.
     public let fields: [String]?
 
     /// Initializer for a GetSharedItemsQueryParamsArg.

@@ -5,7 +5,7 @@ public class CreateInviteRequestBodyArgActionableByField: Codable {
         case login
     }
 
-    /// The login of the invited user,
+    /// The login of the invited user
     public let login: String?
 
     /// Initializer for a CreateInviteRequestBodyArgActionableByField.

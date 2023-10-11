@@ -14,12 +14,12 @@ public class UpdateFileByIdRequestBodyArg: Codable {
     }
 
     /// An optional different name for the file. This can be used to
-    /// rename the file.,
+    /// rename the file.
     public let name: String?
     /// The description for a file. This can be seen in the right-hand sidebar panel
     /// when viewing a file in the Box web app. Additionally, this index is used in
     /// the search index of the file, allowing users to find the file by the content
-    /// in the description.,
+    /// in the description.
     public let description: String?
     public let parent: UpdateFileByIdRequestBodyArgParentField?
     public let sharedLink: UpdateFileByIdRequestBodyArgSharedLinkField?
@@ -27,12 +27,12 @@ public class UpdateFileByIdRequestBodyArg: Codable {
     /// moved, renamed, or otherwise changed by anyone other than the user
     /// who created the lock.
     /// 
-    /// Set this to `null` to remove the lock.,
+    /// Set this to `null` to remove the lock.
     public let lock: UpdateFileByIdRequestBodyArgLockField?
     /// The retention expiration timestamp for the given file. This
-    /// date cannot be shortened once set on a file.,
+    /// date cannot be shortened once set on a file.
     public let dispositionAt: String?
-    /// Defines who can download a file.,
+    /// Defines who can download a file.
     public let permissions: UpdateFileByIdRequestBodyArgPermissionsField?
     /// An array of collections to make this file
     /// a member of. Currently
@@ -44,7 +44,7 @@ public class UpdateFileByIdRequestBodyArg: Codable {
     /// Passing an empty array `[]` or `null` will remove
     /// the file from all collections.
     /// 
-    /// [1]: e://get-collections,
+    /// [1]: e://get-collections
     public let collections: [UpdateFileByIdRequestBodyArgCollectionsField]?
     /// The tags for this item. These tags are shown in
     /// the Box web app and mobile apps next to an item.
@@ -53,7 +53,7 @@ public class UpdateFileByIdRequestBodyArg: Codable {
     /// modify them, and then update this field.
     /// 
     /// There is a limit of 100 tags per item, and 10,000
-    /// unique tags per enterprise.,
+    /// unique tags per enterprise.
     public let tags: [String]?
 
     /// Initializer for a UpdateFileByIdRequestBodyArg.

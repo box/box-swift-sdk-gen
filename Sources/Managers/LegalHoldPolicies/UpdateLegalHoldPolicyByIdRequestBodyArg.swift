@@ -7,11 +7,11 @@ public class UpdateLegalHoldPolicyByIdRequestBodyArg: Codable {
         case releaseNotes = "release_notes"
     }
 
-    /// The name of the policy.,
+    /// The name of the policy.
     public let policyName: String?
-    /// A description for the policy.,
+    /// A description for the policy.
     public let description: String?
-    /// Notes around why the policy was released.,
+    /// Notes around why the policy was released.
     public let releaseNotes: String?
 
     /// Initializer for a UpdateLegalHoldPolicyByIdRequestBodyArg.

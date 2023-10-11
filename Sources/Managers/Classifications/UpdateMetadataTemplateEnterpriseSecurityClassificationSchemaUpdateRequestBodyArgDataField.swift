@@ -7,9 +7,9 @@ public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateR
     }
 
     /// A new label for the classification, as it will be
-    /// shown in the web and mobile interfaces.,
+    /// shown in the web and mobile interfaces.
     public let key: String
-    /// Additional details for the classification.,
+    /// Additional details for the classification.
     public let classification: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArgDataFieldClassificationField?
 
     /// Initializer for a UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArgDataField.

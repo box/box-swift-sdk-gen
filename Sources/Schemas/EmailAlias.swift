@@ -1,5 +1,6 @@
 import Foundation
 
+/// An email alias for a user.
 public class EmailAlias: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -8,13 +9,13 @@ public class EmailAlias: Codable {
         case isConfirmed = "is_confirmed"
     }
 
-    /// The unique identifier for this object,
+    /// The unique identifier for this object
     public let id: String?
-    /// `email_alias`,
+    /// `email_alias`
     public let type: EmailAliasTypeField?
-    /// The email address,
+    /// The email address
     public let email: String?
-    /// Whether the email address has been confirmed,
+    /// Whether the email address has been confirmed
     public let isConfirmed: Bool?
 
     /// Initializer for a EmailAlias.

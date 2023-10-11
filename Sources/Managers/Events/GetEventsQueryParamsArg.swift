@@ -19,13 +19,13 @@ public class GetEventsQueryParamsArg {
     ///   stream type is for polling for recent events across all users within
     ///   the enterprise. Latency will be much lower than `admin_logs`, but
     ///   events will not be returned in chronological order and may
-    ///   contain duplicates.,
+    ///   contain duplicates.
     public let streamType: GetEventsQueryParamsArgStreamTypeField?
     /// The location in the event stream to start receiving events from.
     /// 
     /// * `now` will return an empty list events and
     /// the latest stream position for initialization.
-    /// * `0` or `null` will return all events.,
+    /// * `0` or `null` will return all events.
     public let streamPosition: String?
     /// Limits the number of events returned
     /// 
@@ -33,20 +33,20 @@ public class GetEventsQueryParamsArg {
     /// even when there may be more events remaining. This is primarily done in
     /// the case where a number of events have already been retrieved and these
     /// retrieved events are returned rather than delaying for an unknown amount
-    /// of time to see if there are any more results.,
+    /// of time to see if there are any more results.
     public let limit: Int64?
     /// A comma-separated list of events to filter by. This can only be used when
     /// requesting the events with a `stream_type` of `admin_logs` or
     /// `adming_logs_streaming`. For any other `stream_type` this value will be
-    /// ignored.,
+    /// ignored.
     public let eventType: [GetEventsQueryParamsArgEventTypeField]?
     /// The lower bound date and time to return events for. This can only be used
     /// when requesting the events with a `stream_type` of `admin_logs`. For any
-    /// other `stream_type` this value will be ignored.,
+    /// other `stream_type` this value will be ignored.
     public let createdAfter: String?
     /// The upper bound date and time to return events for. This can only be used
     /// when requesting the events with a `stream_type` of `admin_logs`. For any
-    /// other `stream_type` this value will be ignored.,
+    /// other `stream_type` this value will be ignored.
     public let createdBefore: String?
 
     /// Initializer for a GetEventsQueryParamsArg.

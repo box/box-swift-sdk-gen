@@ -6,9 +6,9 @@ public class SkillInvocationTokenField: Codable {
         case write
     }
 
-    /// The basics of an access token,
+    /// The basics of an access token
     public let read: SkillInvocationTokenFieldReadField?
-    /// The basics of an access token,
+    /// The basics of an access token
     public let write: SkillInvocationTokenFieldWriteField?
 
     /// Initializer for a SkillInvocationTokenField.

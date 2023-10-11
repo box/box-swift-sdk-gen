@@ -7,11 +7,11 @@ public class CreateTermOfServiceUserStatusRequestBodyArg: Codable {
         case isAccepted = "is_accepted"
     }
 
-    /// The terms of service to set the status for.,
+    /// The terms of service to set the status for.
     public let tos: CreateTermOfServiceUserStatusRequestBodyArgTosField
-    /// The user to set the status for.,
+    /// The user to set the status for.
     public let user: CreateTermOfServiceUserStatusRequestBodyArgUserField
-    /// Whether the user has accepted the terms.,
+    /// Whether the user has accepted the terms.
     public let isAccepted: Bool
 
     /// Initializer for a CreateTermOfServiceUserStatusRequestBodyArg.

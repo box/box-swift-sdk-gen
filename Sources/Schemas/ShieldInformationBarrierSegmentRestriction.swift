@@ -1,5 +1,8 @@
 import Foundation
 
+/// A standard representation of a
+/// segment restriction of a shield information barrier
+/// object
 public class ShieldInformationBarrierSegmentRestriction: ShieldInformationBarrierSegmentRestrictionMini {
     private enum CodingKeys: String, CodingKey {
         case shieldInformationBarrier = "shield_information_barrier"
@@ -12,25 +15,25 @@ public class ShieldInformationBarrierSegmentRestriction: ShieldInformationBarrie
     public let shieldInformationBarrier: ShieldInformationBarrierBase?
     /// ISO date time string when this
     /// shield information barrier
-    /// Segment Restriction object was created.,
+    /// Segment Restriction object was created.
     public let createdAt: String?
     public let createdBy: UserBase?
     /// ISO date time string when this
     /// shield information barrier segment
-    /// Restriction was updated.,
+    /// Restriction was updated.
     public let updatedAt: String?
     public let updatedBy: UserBase?
 
     /// Initializer for a ShieldInformationBarrierSegmentRestriction.
     ///
     /// - Parameters:
-    ///   - type: Shield information barrier segment restriction
-    ///   - id: The unique identifier for the
-    ///     shield information barrier segment restriction.
     ///   - shieldInformationBarrierSegment: The `type` and `id` of the
     ///     requested shield information barrier segment.
     ///   - restrictedSegment: The `type` and `id` of the
     ///     restricted shield information barrier segment.
+    ///   - type: Shield information barrier segment restriction
+    ///   - id: The unique identifier for the
+    ///     shield information barrier segment restriction.
     ///   - shieldInformationBarrier: ShieldInformationBarrierBase?
     ///   - createdAt: ISO date time string when this
     ///     shield information barrier
@@ -40,13 +43,13 @@ public class ShieldInformationBarrierSegmentRestriction: ShieldInformationBarrie
     ///     shield information barrier segment
     ///     Restriction was updated.
     ///   - updatedBy: UserBase?
-    public init(type: ShieldInformationBarrierSegmentRestrictionBaseTypeField? = nil, id: String? = nil, shieldInformationBarrierSegment: ShieldInformationBarrierSegmentRestrictionMiniShieldInformationBarrierSegmentField, restrictedSegment: ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentField, shieldInformationBarrier: ShieldInformationBarrierBase? = nil, createdAt: String? = nil, createdBy: UserBase? = nil, updatedAt: String? = nil, updatedBy: UserBase? = nil) {
+    public init(shieldInformationBarrierSegment: ShieldInformationBarrierSegmentRestrictionMiniShieldInformationBarrierSegmentField, restrictedSegment: ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentField, type: ShieldInformationBarrierSegmentRestrictionBaseTypeField? = nil, id: String? = nil, shieldInformationBarrier: ShieldInformationBarrierBase? = nil, createdAt: String? = nil, createdBy: UserBase? = nil, updatedAt: String? = nil, updatedBy: UserBase? = nil) {
         self.shieldInformationBarrier = shieldInformationBarrier
         self.createdAt = createdAt
         self.createdBy = createdBy
         self.updatedAt = updatedAt
         self.updatedBy = updatedBy
-        super.init(type: type, id: id, shieldInformationBarrierSegment: shieldInformationBarrierSegment, restrictedSegment: restrictedSegment)
+        super.init(shieldInformationBarrierSegment: shieldInformationBarrierSegment, restrictedSegment: restrictedSegment, type: type, id: id)
     }
 
     required public init(from decoder: Decoder) throws {

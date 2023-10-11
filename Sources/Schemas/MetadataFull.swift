@@ -1,5 +1,7 @@
 import Foundation
 
+/// An instance of a metadata template, which has been applied to a file or
+/// folder.
 public class MetadataFull: Metadata {
     private enum CodingKeys: String, CodingKey {
         case canEdit = "$canEdit"
@@ -9,17 +11,17 @@ public class MetadataFull: Metadata {
         case extraData
     }
 
-    /// Whether the user can edit this metadata instance.,
+    /// Whether the user can edit this metadata instance.
     public let canEdit: Bool?
-    /// A UUID to identify the metadata instance.,
+    /// A UUID to identify the metadata instance.
     public let id: String?
     /// A unique identifier for the "type" of this instance. This is an
     /// internal system property and should not be used by a client
-    /// application.,
+    /// application.
     public let type: String?
     /// The last-known version of the template of the object. This is an
     /// internal system property and should not be used by a client
-    /// application.,
+    /// application.
     public let typeVersion: Int?
     public let extraData: [String: String]?
 

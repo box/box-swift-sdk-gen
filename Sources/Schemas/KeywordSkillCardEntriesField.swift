@@ -5,7 +5,7 @@ public class KeywordSkillCardEntriesField: Codable {
         case text
     }
 
-    /// The text of the keyword.,
+    /// The text of the keyword.
     public let text: String?
 
     /// Initializer for a KeywordSkillCardEntriesField.

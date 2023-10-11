@@ -1,5 +1,7 @@
 import Foundation
 
+/// The user that is exempt from any of the restrictions
+/// imposed by the list of allowed collaboration domains for this enterprise.
 public class CollaborationAllowlistExemptTarget: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -10,15 +12,15 @@ public class CollaborationAllowlistExemptTarget: Codable {
         case modifiedAt = "modified_at"
     }
 
-    /// The unique identifier for this exemption,
+    /// The unique identifier for this exemption
     public let id: String?
-    /// `collaboration_whitelist_exempt_target`,
+    /// `collaboration_whitelist_exempt_target`
     public let type: CollaborationAllowlistExemptTargetTypeField?
     public let enterprise: CollaborationAllowlistExemptTargetEnterpriseField?
     public let user: UserMini?
-    /// The time the entry was created,
+    /// The time the entry was created
     public let createdAt: String?
-    /// The time the entry was modified,
+    /// The time the entry was modified
     public let modifiedAt: String?
 
     /// Initializer for a CollaborationAllowlistExemptTarget.

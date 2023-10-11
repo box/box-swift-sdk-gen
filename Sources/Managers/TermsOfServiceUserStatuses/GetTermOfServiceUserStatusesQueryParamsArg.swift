@@ -1,9 +1,9 @@
 import Foundation
 
 public class GetTermOfServiceUserStatusesQueryParamsArg {
-    /// The ID of the terms of service.,
+    /// The ID of the terms of service.
     public let tosId: String
-    /// Limits results to the given user ID.,
+    /// Limits results to the given user ID.
     public let userId: String?
 
     /// Initializer for a GetTermOfServiceUserStatusesQueryParamsArg.

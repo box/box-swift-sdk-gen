@@ -29,7 +29,7 @@ public class FileFullRepresentationsFieldEntriesFieldContentField: Codable {
     ///   define the representation's file name used in the
     ///   `Content-Disposition` header.  If not defined, the filename
     ///   is derived from the source file name in Box combined with the
-    ///   extension of the representation.,
+    ///   extension of the representation.
     public let urlTemplate: String?
 
     /// Initializer for a FileFullRepresentationsFieldEntriesFieldContentField.

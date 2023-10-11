@@ -6,7 +6,7 @@ public class CreateWebLinkByIdRequestBodyArg: Codable {
         case parent
     }
 
-    /// An optional new name for the web link.,
+    /// An optional new name for the web link.
     public let name: String?
     public let parent: CreateWebLinkByIdRequestBodyArgParentField?
 

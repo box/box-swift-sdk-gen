@@ -17,7 +17,7 @@ public class CreateFolderRequestBodyArgFolderUploadEmailField: Codable {
     /// any email aliases a user might have registered.
     /// 
     /// When set to `open` it will accept emails from any email
-    /// address.,
+    /// address.
     public let access: CreateFolderRequestBodyArgFolderUploadEmailFieldAccessField?
 
     /// Initializer for a CreateFolderRequestBodyArgFolderUploadEmailField.

@@ -6,9 +6,9 @@ public class FolderLockLockedOperationsField: Codable {
         case delete
     }
 
-    /// Whether moving the folder is restricted.,
+    /// Whether moving the folder is restricted.
     public let move: Bool
-    /// Whether deleting the folder is restricted.,
+    /// Whether deleting the folder is restricted.
     public let delete: Bool
 
     /// Initializer for a FolderLockLockedOperationsField.

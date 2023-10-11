@@ -5,7 +5,7 @@ public class ClientErrorContextInfoField: Codable {
         case message
     }
 
-    /// More details on the error.,
+    /// More details on the error.
     public let message: String?
 
     /// Initializer for a ClientErrorContextInfoField.

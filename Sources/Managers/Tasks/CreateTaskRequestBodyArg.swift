@@ -9,18 +9,18 @@ public class CreateTaskRequestBodyArg: Codable {
         case completionRule = "completion_rule"
     }
 
-    /// The file to attach the task to.,
+    /// The file to attach the task to.
     public let item: CreateTaskRequestBodyArgItemField
     /// The action the task assignee will be prompted to do. Must be
     /// 
     /// * `review` defines an approval task that can be approved or
     /// rejected
-    /// * `complete` defines a general task which can be completed,
+    /// * `complete` defines a general task which can be completed
     public let action: CreateTaskRequestBodyArgActionField?
-    /// An optional message to include with the task.,
+    /// An optional message to include with the task.
     public let message: String?
     /// Defines when the task is due. Defaults to `null` if not
-    /// provided.,
+    /// provided.
     public let dueAt: String?
     /// Defines which assignees need to complete this task before the task
     /// is considered completed.
@@ -28,7 +28,7 @@ public class CreateTaskRequestBodyArg: Codable {
     /// * `all_assignees` (default) requires all assignees to review or
     /// approve the the task in order for it to be considered completed.
     /// * `any_assignee` accepts any one assignee to review or
-    /// approve the the task in order for it to be considered completed.,
+    /// approve the the task in order for it to be considered completed.
     public let completionRule: CreateTaskRequestBodyArgCompletionRuleField?
 
     /// Initializer for a CreateTaskRequestBodyArg.

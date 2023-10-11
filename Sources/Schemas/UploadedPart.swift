@@ -1,5 +1,7 @@
 import Foundation
 
+/// A chunk of a file uploaded as part of
+/// an upload session, as returned by some endpoints.
 public class UploadedPart: Codable {
     private enum CodingKeys: String, CodingKey {
         case part

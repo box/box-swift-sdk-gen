@@ -7,9 +7,9 @@ public class CreateCollaborationRequestBodyArgItemField: Codable {
     }
 
     /// The type of the item that this collaboration will be
-    /// granted access to,
+    /// granted access to
     public let type: CreateCollaborationRequestBodyArgItemFieldTypeField?
-    /// The ID of the item that will be granted access to,
+    /// The ID of the item that will be granted access to
     public let id: String?
 
     /// Initializer for a CreateCollaborationRequestBodyArgItemField.

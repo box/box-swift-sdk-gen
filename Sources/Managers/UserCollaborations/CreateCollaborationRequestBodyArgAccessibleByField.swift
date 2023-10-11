@@ -7,16 +7,16 @@ public class CreateCollaborationRequestBodyArgAccessibleByField: Codable {
         case login
     }
 
-    /// The type of collaborator to invite.,
+    /// The type of collaborator to invite.
     public let type: CreateCollaborationRequestBodyArgAccessibleByFieldTypeField
     /// The ID of the user or group.
     /// 
     /// Alternatively, use `login` to specify a user by email
-    /// address.,
+    /// address.
     public let id: String?
     /// The email address of the user to grant access to the item.
     /// 
-    /// Alternatively, use `id` to specify a user by user ID.,
+    /// Alternatively, use `id` to specify a user by user ID.
     public let login: String?
 
     /// Initializer for a CreateCollaborationRequestBodyArgAccessibleByField.

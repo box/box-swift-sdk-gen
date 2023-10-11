@@ -1,20 +1,20 @@
 import Foundation
 
 public class GetLegalHoldPolicyAssignmentsQueryParamsArg {
-    /// The ID of the legal hold policy,
+    /// The ID of the legal hold policy
     public let policyId: String
     /// Filters the results by the type of item the
-    /// policy was applied to.,
+    /// policy was applied to.
     public let assignToType: GetLegalHoldPolicyAssignmentsQueryParamsArgAssignToTypeField?
     /// Filters the results by the ID of item the
-    /// policy was applied to.,
+    /// policy was applied to.
     public let assignToId: String?
     /// Defines the position marker at which to begin returning results. This is
     /// used when paginating using marker-based pagination.
     /// 
-    /// This requires `usemarker` to be set to `true`.,
+    /// This requires `usemarker` to be set to `true`.
     public let marker: String?
-    /// The maximum number of items to return per page.,
+    /// The maximum number of items to return per page.
     public let limit: Int64?
     /// A comma-separated list of attributes to include in the
     /// response. This can be used to request fields that are
@@ -24,7 +24,7 @@ public class GetLegalHoldPolicyAssignmentsQueryParamsArg {
     /// effect that none of the standard fields are returned in
     /// the response unless explicitly specified, instead only
     /// fields for the mini representation are returned, additional
-    /// to the fields requested.,
+    /// to the fields requested.
     public let fields: [String]?
 
     /// Initializer for a GetLegalHoldPolicyAssignmentsQueryParamsArg.

@@ -1,5 +1,6 @@
 import Foundation
 
+/// Represents a configured webhook.
 public class WebhookMini: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -7,11 +8,11 @@ public class WebhookMini: Codable {
         case target
     }
 
-    /// The unique identifier for this webhook.,
+    /// The unique identifier for this webhook.
     public let id: String?
-    /// `webhook`,
+    /// `webhook`
     public let type: WebhookMiniTypeField?
-    /// The item that will trigger the webhook,
+    /// The item that will trigger the webhook
     public let target: WebhookMiniTargetField?
 
     /// Initializer for a WebhookMini.

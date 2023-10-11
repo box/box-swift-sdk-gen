@@ -1,16 +1,18 @@
 import Foundation
 
+/// The request body to copy a file request.
 public class FileRequestCopyRequest: FileRequestUpdateRequest {
     private enum CodingKeys: String, CodingKey {
         case folder
     }
 
-    /// The folder to associate the new file request to.,
+    /// The folder to associate the new file request to.
     public let folder: FileRequestCopyRequestFolderField
 
     /// Initializer for a FileRequestCopyRequest.
     ///
     /// - Parameters:
+    ///   - folder: The folder to associate the new file request to.
     ///   - title: An optional new title for the file request. This can be
     ///     used to change the title of the file request.
     ///     
@@ -48,8 +50,7 @@ public class FileRequestCopyRequest: FileRequestUpdateRequest {
     ///     `inactive`.
     ///     
     ///     This will default to the value on the existing file request.
-    ///   - folder: The folder to associate the new file request to.
-    public init(title: String? = nil, description: String? = nil, status: FileRequestUpdateRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: String? = nil, folder: FileRequestCopyRequestFolderField) {
+    public init(folder: FileRequestCopyRequestFolderField, title: String? = nil, description: String? = nil, status: FileRequestUpdateRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: String? = nil) {
         self.folder = folder
         super.init(title: title, description: description, status: status, isEmailRequired: isEmailRequired, isDescriptionRequired: isDescriptionRequired, expiresAt: expiresAt)
     }

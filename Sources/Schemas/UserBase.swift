@@ -1,14 +1,16 @@
 import Foundation
 
+/// A mini representation of a user, used when
+/// nested within another resource.
 public class UserBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
     }
 
-    /// The unique identifier for this user,
+    /// The unique identifier for this user
     public let id: String
-    /// `user`,
+    /// `user`
     public let type: UserBaseTypeField
 
     /// Initializer for a UserBase.

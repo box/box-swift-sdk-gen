@@ -1,5 +1,9 @@
 import Foundation
 
+/// Box Relay Workflows are objects that represent a named collection of flows.
+/// 
+/// You application must be authorized to use the `Manage Box Relay` application
+/// scope within the developer console in order to use this resource.
 public class WorkflowFull: Workflow {
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
@@ -8,9 +12,9 @@ public class WorkflowFull: Workflow {
         case modifiedBy = "modified_by"
     }
 
-    /// The date and time when the workflow was created on Box,
+    /// The date and time when the workflow was created on Box
     public let createdAt: String?
-    /// The date and time when the workflow was last updated on Box,
+    /// The date and time when the workflow was last updated on Box
     public let modifiedAt: String?
     public let createdBy: UserBase?
     public let modifiedBy: UserBase?

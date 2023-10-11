@@ -8,13 +8,13 @@ public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateR
         case data
     }
 
-    /// `editEnumOption`,
+    /// `editEnumOption`
     public let op: String
-    /// `Box__Security__Classification__Key`,
+    /// `Box__Security__Classification__Key`
     public let fieldKey: String
-    /// The original label of the classification to change.,
+    /// The original label of the classification to change.
     public let enumOptionKey: String
-    /// The details of the updated classification.,
+    /// The details of the updated classification.
     public let data: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArgDataField
 
     /// Initializer for a UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArg.

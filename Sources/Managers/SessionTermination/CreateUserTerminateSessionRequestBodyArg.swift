@@ -6,9 +6,9 @@ public class CreateUserTerminateSessionRequestBodyArg: Codable {
         case userLogins = "user_logins"
     }
 
-    /// A list of user IDs,
+    /// A list of user IDs
     public let userIds: [String]
-    /// A list of user logins,
+    /// A list of user logins
     public let userLogins: [String]
 
     /// Initializer for a CreateUserTerminateSessionRequestBodyArg.

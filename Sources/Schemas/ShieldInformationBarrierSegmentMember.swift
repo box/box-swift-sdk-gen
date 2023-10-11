@@ -1,5 +1,7 @@
 import Foundation
 
+/// A standard representation of a
+/// shield information barrier segment member object
 public class ShieldInformationBarrierSegmentMember: ShieldInformationBarrierSegmentMemberMini {
     private enum CodingKeys: String, CodingKey {
         case shieldInformationBarrier = "shield_information_barrier"
@@ -12,14 +14,14 @@ public class ShieldInformationBarrierSegmentMember: ShieldInformationBarrierSegm
 
     public let shieldInformationBarrier: ShieldInformationBarrierBase?
     /// The `type` and `id` of the requested
-    /// shield information barrier segment.,
+    /// shield information barrier segment.
     public let shieldInformationBarrierSegment: ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentField?
     /// ISO date time string when this shield
-    /// information barrier object was created.,
+    /// information barrier object was created.
     public let createdAt: String?
     public let createdBy: UserBase?
     /// ISO date time string when this
-    /// shield information barrier segment Member was updated.,
+    /// shield information barrier segment Member was updated.
     public let updatedAt: String?
     public let updatedBy: UserBase?
 

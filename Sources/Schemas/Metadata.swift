@@ -1,5 +1,7 @@
 import Foundation
 
+/// An instance of a metadata template, which has been applied to a file or
+/// folder.
 public class Metadata: MetadataBase {
     /// Initializer for a Metadata.
     ///

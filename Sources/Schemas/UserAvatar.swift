@@ -1,11 +1,13 @@
 import Foundation
 
+/// A resource holding URLs to the
+/// avatar uploaded to a Box application.
 public class UserAvatar: Codable {
     private enum CodingKeys: String, CodingKey {
         case picUrls = "pic_urls"
     }
 
-    /// Represents an object with user avatar URLs.,
+    /// Represents an object with user avatar URLs.
     public let picUrls: UserAvatarPicUrlsField?
 
     /// Initializer for a UserAvatar.

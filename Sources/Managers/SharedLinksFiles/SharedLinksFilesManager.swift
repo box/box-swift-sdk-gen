@@ -9,6 +9,22 @@ public class SharedLinksFilesManager {
         self.networkSession = networkSession
     }
 
+    /// Returns the file represented by a shared link.
+    /// 
+    /// A shared file can be represented by a shared link,
+    /// which can originate within the current enterprise or within another.
+    /// 
+    /// This endpoint allows an application to retrieve information about a
+    /// shared file when only given a shared link.
+    /// 
+    /// The `shared_link_permission_options` array field can be returned
+    /// by requesting it in the `fields` query parameter.
+    ///
+    /// - Parameters:
+    ///   - queryParams: Query parameters of getSharedItems method
+    ///   - headers: Headers of getSharedItems method
+    /// - Returns: The `FileFull`.
+    /// - Throws: The `GeneralError`.
     public func getSharedItems(queryParams: GetSharedItemsQueryParamsArg = GetSharedItemsQueryParamsArg(), headers: GetSharedItemsHeadersArg) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch), "boxapi": Utils.Strings.toString(value: headers.boxapi)], headers.extraHeaders))
@@ -16,6 +32,21 @@ public class SharedLinksFilesManager {
         return try FileFull.deserialize(from: response.text)
     }
 
+    /// Gets the information for a shared link on a file.
+    ///
+    /// - Parameters:
+    ///   - fileId: The unique identifier that represents a file.
+    ///     
+    ///     The ID for any file can be determined
+    ///     by visiting a file in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/files/123`
+    ///     the `file_id` is `123`.
+    ///     Example: "12345"
+    ///   - queryParams: Query parameters of getFileGetSharedLink method
+    ///   - headers: Headers of getFileGetSharedLink method
+    /// - Returns: The `FileFull`.
+    /// - Throws: The `GeneralError`.
     public func getFileGetSharedLink(fileId: String, queryParams: GetFileGetSharedLinkQueryParamsArg, headers: GetFileGetSharedLinkHeadersArg = GetFileGetSharedLinkHeadersArg()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
@@ -23,6 +54,22 @@ public class SharedLinksFilesManager {
         return try FileFull.deserialize(from: response.text)
     }
 
+    /// Adds a shared link to a file.
+    ///
+    /// - Parameters:
+    ///   - fileId: The unique identifier that represents a file.
+    ///     
+    ///     The ID for any file can be determined
+    ///     by visiting a file in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/files/123`
+    ///     the `file_id` is `123`.
+    ///     Example: "12345"
+    ///   - requestBody: Request body of updateFileAddSharedLink method
+    ///   - queryParams: Query parameters of updateFileAddSharedLink method
+    ///   - headers: Headers of updateFileAddSharedLink method
+    /// - Returns: The `FileFull`.
+    /// - Throws: The `GeneralError`.
     public func updateFileAddSharedLink(fileId: String, requestBody: UpdateFileAddSharedLinkRequestBodyArg = UpdateFileAddSharedLinkRequestBodyArg(), queryParams: UpdateFileAddSharedLinkQueryParamsArg, headers: UpdateFileAddSharedLinkHeadersArg = UpdateFileAddSharedLinkHeadersArg()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
@@ -30,6 +77,22 @@ public class SharedLinksFilesManager {
         return try FileFull.deserialize(from: response.text)
     }
 
+    /// Updates a shared link on a file.
+    ///
+    /// - Parameters:
+    ///   - fileId: The unique identifier that represents a file.
+    ///     
+    ///     The ID for any file can be determined
+    ///     by visiting a file in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/files/123`
+    ///     the `file_id` is `123`.
+    ///     Example: "12345"
+    ///   - requestBody: Request body of updateFileUpdateSharedLink method
+    ///   - queryParams: Query parameters of updateFileUpdateSharedLink method
+    ///   - headers: Headers of updateFileUpdateSharedLink method
+    /// - Returns: The `FileFull`.
+    /// - Throws: The `GeneralError`.
     public func updateFileUpdateSharedLink(fileId: String, requestBody: UpdateFileUpdateSharedLinkRequestBodyArg = UpdateFileUpdateSharedLinkRequestBodyArg(), queryParams: UpdateFileUpdateSharedLinkQueryParamsArg, headers: UpdateFileUpdateSharedLinkHeadersArg = UpdateFileUpdateSharedLinkHeadersArg()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
@@ -37,6 +100,22 @@ public class SharedLinksFilesManager {
         return try FileFull.deserialize(from: response.text)
     }
 
+    /// Removes a shared link from a file.
+    ///
+    /// - Parameters:
+    ///   - fileId: The unique identifier that represents a file.
+    ///     
+    ///     The ID for any file can be determined
+    ///     by visiting a file in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/files/123`
+    ///     the `file_id` is `123`.
+    ///     Example: "12345"
+    ///   - requestBody: Request body of updateFileRemoveSharedLink method
+    ///   - queryParams: Query parameters of updateFileRemoveSharedLink method
+    ///   - headers: Headers of updateFileRemoveSharedLink method
+    /// - Returns: The `FileFull`.
+    /// - Throws: The `GeneralError`.
     public func updateFileRemoveSharedLink(fileId: String, requestBody: UpdateFileRemoveSharedLinkRequestBodyArg = UpdateFileRemoveSharedLinkRequestBodyArg(), queryParams: UpdateFileRemoveSharedLinkQueryParamsArg, headers: UpdateFileRemoveSharedLinkHeadersArg = UpdateFileRemoveSharedLinkHeadersArg()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))

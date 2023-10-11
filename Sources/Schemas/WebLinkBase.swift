@@ -1,5 +1,10 @@
 import Foundation
 
+/// Web links are objects that point to URLs. These objects
+/// are also known as bookmarks within the Box web application.
+/// 
+/// Web link objects are treated similarly to file objects,
+/// they will also support most actions that apply to regular files.
 public class WebLinkBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -7,12 +12,12 @@ public class WebLinkBase: Codable {
         case etag
     }
 
-    /// The unique identifier for this web link,
+    /// The unique identifier for this web link
     public let id: String
-    /// `web_link`,
+    /// `web_link`
     public let type: WebLinkBaseTypeField
     /// The entity tag of this web link. Used with `If-Match`
-    /// headers.,
+    /// headers.
     public let etag: String?
 
     /// Initializer for a WebLinkBase.

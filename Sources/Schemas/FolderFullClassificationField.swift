@@ -7,13 +7,13 @@ public class FolderFullClassificationField: Codable {
         case color
     }
 
-    /// The name of the classification,
+    /// The name of the classification
     public let name: String?
-    /// An explanation of the meaning of this classification.,
+    /// An explanation of the meaning of this classification.
     public let definition: String?
     /// The color that is used to display the
     /// classification label in a user-interface. Colors are defined by the admin
-    /// or co-admin who created the classification in the Box web app.,
+    /// or co-admin who created the classification in the Box web app.
     public let color: String?
 
     /// Initializer for a FolderFullClassificationField.

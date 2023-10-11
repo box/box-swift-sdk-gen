@@ -6,9 +6,9 @@ public class CreateLegalHoldPolicyAssignmentRequestBodyArg: Codable {
         case assignTo = "assign_to"
     }
 
-    /// The ID of the policy to assign.,
+    /// The ID of the policy to assign.
     public let policyId: String
-    /// The item to assign the policy to,
+    /// The item to assign the policy to
     public let assignTo: CreateLegalHoldPolicyAssignmentRequestBodyArgAssignToField
 
     /// Initializer for a CreateLegalHoldPolicyAssignmentRequestBodyArg.

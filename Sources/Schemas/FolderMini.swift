@@ -1,12 +1,14 @@
 import Foundation
 
+/// A mini representation of a file version, used when
+/// nested under another resource.
 public class FolderMini: FolderBase {
     private enum CodingKeys: String, CodingKey {
         case name
         case sequenceId = "sequence_id"
     }
 
-    /// The name of the folder.,
+    /// The name of the folder.
     public let name: String?
     /// A numeric identifier that represents the most recent user event
     /// that has been applied to this item.
@@ -20,7 +22,7 @@ public class FolderMini: FolderBase {
     /// user events for changes to the item. The application would
     /// ignore any user events where the `sequence_id` in the event
     /// is smaller than or equal to the `sequence_id` in the originally
-    /// fetched resource.,
+    /// fetched resource.
     public let sequenceId: String?
 
     /// Initializer for a FolderMini.
@@ -33,10 +35,10 @@ public class FolderMini: FolderBase {
     ///     and copying the ID from the URL. For example,
     ///     for the URL `https://*.app.box.com/folders/123`
     ///     the `folder_id` is `123`.
+    ///   - type: `folder`
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
-    ///   - type: `folder`
     ///   - name: The name of the folder.
     ///   - sequenceId: A numeric identifier that represents the most recent user event
     ///     that has been applied to this item.
@@ -51,10 +53,10 @@ public class FolderMini: FolderBase {
     ///     ignore any user events where the `sequence_id` in the event
     ///     is smaller than or equal to the `sequence_id` in the originally
     ///     fetched resource.
-    public init(id: String, etag: String? = nil, type: FolderBaseTypeField, name: String? = nil, sequenceId: String? = nil) {
+    public init(id: String, type: FolderBaseTypeField, etag: String? = nil, name: String? = nil, sequenceId: String? = nil) {
         self.name = name
         self.sequenceId = sequenceId
-        super.init(id: id, etag: etag, type: type)
+        super.init(id: id, type: type, etag: etag)
     }
 
     required public init(from decoder: Decoder) throws {

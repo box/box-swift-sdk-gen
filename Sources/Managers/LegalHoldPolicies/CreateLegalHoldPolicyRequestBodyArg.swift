@@ -9,9 +9,9 @@ public class CreateLegalHoldPolicyRequestBodyArg: Codable {
         case isOngoing = "is_ongoing"
     }
 
-    /// The name of the policy.,
+    /// The name of the policy.
     public let policyName: String
-    /// A description for the policy.,
+    /// A description for the policy.
     public let description: String?
     /// The filter start date.
     /// 
@@ -21,7 +21,7 @@ public class CreateLegalHoldPolicyRequestBodyArg: Codable {
     /// date range. Other assignment types, such as folders and
     /// files, will ignore the date filter.
     /// 
-    /// Required if `is_ongoing` is set to `false`.,
+    /// Required if `is_ongoing` is set to `false`.
     public let filterStartedAt: String?
     /// The filter end date.
     /// 
@@ -31,7 +31,7 @@ public class CreateLegalHoldPolicyRequestBodyArg: Codable {
     /// date range. Other assignment types, such as folders and
     /// files, will ignore the date filter.
     /// 
-    /// Required if `is_ongoing` is set to `false`.,
+    /// Required if `is_ongoing` is set to `false`.
     public let filterEndedAt: String?
     /// Whether new assignments under this policy should
     /// continue applying to files even after initialization.
@@ -44,7 +44,7 @@ public class CreateLegalHoldPolicyRequestBodyArg: Codable {
     /// today, and that user uploads a file tomorrow, that file will
     /// get held. This will continue until the policy is retired.
     /// 
-    /// Required if no filter dates are set.,
+    /// Required if no filter dates are set.
     public let isOngoing: Bool?
 
     /// Initializer for a CreateLegalHoldPolicyRequestBodyArg.

@@ -6,9 +6,9 @@ public class FolderPathCollectionField: Codable {
         case entries
     }
 
-    /// The number of folders in this list.,
+    /// The number of folders in this list.
     public let totalCount: Int64
-    /// The parent folders for this item,
+    /// The parent folders for this item
     public let entries: [FolderMini]
 
     /// Initializer for a FolderPathCollectionField.

@@ -1,5 +1,6 @@
 import Foundation
 
+/// A request to revoke an OAuth 2.0 token
 public class PostOAuth2Revoke: Codable {
     private enum CodingKeys: String, CodingKey {
         case clientId = "client_id"
@@ -8,12 +9,12 @@ public class PostOAuth2Revoke: Codable {
     }
 
     /// The Client ID of the application requesting to revoke the
-    /// access token.,
+    /// access token.
     public let clientId: String?
     /// The client secret of the application requesting to revoke
-    /// an access token.,
+    /// an access token.
     public let clientSecret: String?
-    /// The access token to revoke.,
+    /// The access token to revoke.
     public let token: String?
 
     /// Initializer for a PostOAuth2Revoke.

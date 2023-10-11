@@ -6,9 +6,9 @@ public class MetadataCascadePolicyParentField: Codable {
         case id
     }
 
-    /// `folder`,
+    /// `folder`
     public let type: MetadataCascadePolicyParentFieldTypeField?
-    /// The ID of the folder the policy is applied to.,
+    /// The ID of the folder the policy is applied to.
     public let id: String?
 
     /// Initializer for a MetadataCascadePolicyParentField.

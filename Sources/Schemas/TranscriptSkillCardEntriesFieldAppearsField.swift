@@ -6,7 +6,7 @@ public class TranscriptSkillCardEntriesFieldAppearsField: Codable {
     }
 
     /// The time in seconds when an
-    /// entry should start appearing on a timeline.,
+    /// entry should start appearing on a timeline.
     public let start: Int?
 
     /// Initializer for a TranscriptSkillCardEntriesFieldAppearsField.

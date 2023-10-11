@@ -1,5 +1,6 @@
 import Foundation
 
+/// A generic error
 public class ClientError: Codable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -11,22 +12,22 @@ public class ClientError: Codable {
         case requestId = "request_id"
     }
 
-    /// `error`,
+    /// `error`
     public let type: ClientErrorTypeField?
-    /// The HTTP status of the response.,
+    /// The HTTP status of the response.
     public let status: Int?
-    /// A Box-specific error code,
+    /// A Box-specific error code
     public let code: ClientErrorCodeField?
-    /// A short message describing the error.,
+    /// A short message describing the error.
     public let message: String?
     /// A free-form object that contains additional context
     /// about the error. The possible fields are defined on
-    /// a per-endpoint basis. `message` is only one example.,
+    /// a per-endpoint basis. `message` is only one example.
     public let contextInfo: ClientErrorContextInfoField?
-    /// A URL that links to more information about why this error occurred.,
+    /// A URL that links to more information about why this error occurred.
     public let helpUrl: String?
     /// A unique identifier for this response, which can be used
-    /// when contacting Box support.,
+    /// when contacting Box support.
     public let requestId: String?
 
     /// Initializer for a ClientError.

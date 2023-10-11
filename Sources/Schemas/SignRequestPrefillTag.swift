@@ -1,5 +1,7 @@
 import Foundation
 
+/// Prefill tags are used to prefill placeholders with signer input data. Only
+/// one value field can be included.
 public class SignRequestPrefillTag: Codable {
     private enum CodingKeys: String, CodingKey {
         case documentTagId = "document_tag_id"
@@ -8,13 +10,13 @@ public class SignRequestPrefillTag: Codable {
         case dateValue = "date_value"
     }
 
-    /// This references the ID of a specific tag contained in a file of the sign request.,
+    /// This references the ID of a specific tag contained in a file of the sign request.
     public let documentTagId: String?
-    /// Text prefill value,
+    /// Text prefill value
     public let textValue: String?
-    /// Checkbox prefill value,
+    /// Checkbox prefill value
     public let checkboxValue: Bool?
-    /// Date prefill value,
+    /// Date prefill value
     public let dateValue: String?
 
     /// Initializer for a SignRequestPrefillTag.

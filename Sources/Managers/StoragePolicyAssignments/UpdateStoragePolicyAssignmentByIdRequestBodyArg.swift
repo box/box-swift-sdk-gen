@@ -6,7 +6,7 @@ public class UpdateStoragePolicyAssignmentByIdRequestBodyArg: Codable {
     }
 
     /// The storage policy to assign to the user or
-    /// enterprise,
+    /// enterprise
     public let storagePolicy: UpdateStoragePolicyAssignmentByIdRequestBodyArgStoragePolicyField
 
     /// Initializer for a UpdateStoragePolicyAssignmentByIdRequestBodyArg.
