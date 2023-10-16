@@ -7,6 +7,7 @@ public class SignTemplates: Codable {
         case limit
         case nextMarker = "next_marker"
         case prevMarker = "prev_marker"
+        case entries
     }
 
     /// The limit that was used for these entries. This will be the same as the
@@ -17,6 +18,8 @@ public class SignTemplates: Codable {
     public let nextMarker: String?
     /// The marker for the start of the previous page of results.
     public let prevMarker: String?
+    /// A list of templates.
+    public let entries: [SignTemplate]?
 
     /// Initializer for a SignTemplates.
     ///
@@ -26,10 +29,12 @@ public class SignTemplates: Codable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
-    public init(limit: Int64? = nil, nextMarker: String? = nil, prevMarker: String? = nil) {
+    ///   - entries: A list of templates.
+    public init(limit: Int64? = nil, nextMarker: String? = nil, prevMarker: String? = nil, entries: [SignTemplate]? = nil) {
         self.limit = limit
         self.nextMarker = nextMarker
         self.prevMarker = prevMarker
+        self.entries = entries
     }
 
     required public init(from decoder: Decoder) throws {
@@ -37,6 +42,7 @@ public class SignTemplates: Codable {
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         nextMarker = try container.decodeIfPresent(String.self, forKey: .nextMarker)
         prevMarker = try container.decodeIfPresent(String.self, forKey: .prevMarker)
+        entries = try container.decodeIfPresent([SignTemplate].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -44,5 +50,6 @@ public class SignTemplates: Codable {
         try container.encodeIfPresent(limit, forKey: .limit)
         try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
         try container.encodeIfPresent(prevMarker, forKey: .prevMarker)
+        try container.encodeIfPresent(entries, forKey: .entries)
     }
 }

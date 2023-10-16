@@ -20,15 +20,18 @@ public class ShieldInformationBarrier: Codable {
     public let id: String?
     /// The type of the shield information barrier
     public let type: ShieldInformationBarrierTypeField?
+    /// The `type` and `id` of enterprise this barrier is under.
     public let enterprise: EnterpriseBase?
     /// Status of the shield information barrier
     public let status: ShieldInformationBarrierStatusField?
     /// ISO date time string when this
     /// shield information barrier object was created.
     public let createdAt: String?
+    /// The user who created this shield information barrier.
     public let createdBy: UserBase?
     /// ISO date time string when this shield information barrier was updated.
     public let updatedAt: String?
+    /// The user that updated this shield information barrier.
     public let updatedBy: UserBase?
     /// ISO date time string when this shield information barrier was enabled.
     public let enabledAt: String?
@@ -39,13 +42,13 @@ public class ShieldInformationBarrier: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for the shield information barrier
     ///   - type: The type of the shield information barrier
-    ///   - enterprise: EnterpriseBase?
+    ///   - enterprise: The `type` and `id` of enterprise this barrier is under.
     ///   - status: Status of the shield information barrier
     ///   - createdAt: ISO date time string when this
     ///     shield information barrier object was created.
-    ///   - createdBy: UserBase?
+    ///   - createdBy: The user who created this shield information barrier.
     ///   - updatedAt: ISO date time string when this shield information barrier was updated.
-    ///   - updatedBy: UserBase?
+    ///   - updatedBy: The user that updated this shield information barrier.
     ///   - enabledAt: ISO date time string when this shield information barrier was enabled.
     ///   - enabledBy: UserBase?
     public init(id: String? = nil, type: ShieldInformationBarrierTypeField? = nil, enterprise: EnterpriseBase? = nil, status: ShieldInformationBarrierStatusField? = nil, createdAt: String? = nil, createdBy: UserBase? = nil, updatedAt: String? = nil, updatedBy: UserBase? = nil, enabledAt: String? = nil, enabledBy: UserBase? = nil) {

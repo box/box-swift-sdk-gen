@@ -9,7 +9,7 @@ public class RetentionPolicyAssignments: Codable {
     }
 
     /// A list of retention policy assignments
-    public let entries: [RetentionPolicyAssignmentBase]?
+    public let entries: [RetentionPolicyAssignment]?
     /// The limit that was used for these entries. This will be the same as the
     /// `limit` query parameter unless that value exceeded the maximum value
     /// allowed. The maximum value varies by API.
@@ -25,7 +25,7 @@ public class RetentionPolicyAssignments: Codable {
     ///     `limit` query parameter unless that value exceeded the maximum value
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
-    public init(entries: [RetentionPolicyAssignmentBase]? = nil, limit: Int64? = nil, nextMarker: String? = nil) {
+    public init(entries: [RetentionPolicyAssignment]? = nil, limit: Int64? = nil, nextMarker: String? = nil) {
         self.entries = entries
         self.limit = limit
         self.nextMarker = nextMarker
@@ -33,7 +33,7 @@ public class RetentionPolicyAssignments: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        entries = try container.decodeIfPresent([RetentionPolicyAssignmentBase].self, forKey: .entries)
+        entries = try container.decodeIfPresent([RetentionPolicyAssignment].self, forKey: .entries)
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         nextMarker = try container.decodeIfPresent(String.self, forKey: .nextMarker)
     }

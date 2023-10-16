@@ -28,7 +28,8 @@ public class SignRequestSigner: SignRequestCreateSigner {
     /// Initializer for a SignRequestSigner.
     ///
     /// - Parameters:
-    ///   - email: Email address of the signer
+    ///   - email: Email address of the signer.
+    ///     The email address of the signer is required when making signature requests, except when using templates that are configured to include emails.
     ///   - role: Defines the role of the signer in the sign request. A `signer`
     ///     must sign the document and an `approver` must approve the document. A
     ///     `final_copy_reader` only receives the final signed document and signing
@@ -66,7 +67,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     only if the `embed_url_external_user_id`
     ///     parameter was passed in the
     ///     `create sign request` call.
-    public init(email: String, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil, hasViewedDocument: Bool? = nil, signerDecision: SignRequestSignerSignerDecisionField? = nil, inputs: [SignRequestSignerInput]? = nil, embedUrl: String? = nil, iframeableEmbedUrl: String? = nil) {
+    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil, hasViewedDocument: Bool? = nil, signerDecision: SignRequestSignerSignerDecisionField? = nil, inputs: [SignRequestSignerInput]? = nil, embedUrl: String? = nil, iframeableEmbedUrl: String? = nil) {
         self.hasViewedDocument = hasViewedDocument
         self.signerDecision = signerDecision
         self.inputs = inputs

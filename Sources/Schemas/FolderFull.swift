@@ -68,20 +68,8 @@ public class FolderFull: Folder {
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
+    ///   - sequenceId: String?
     ///   - name: The name of the folder.
-    ///   - sequenceId: A numeric identifier that represents the most recent user event
-    ///     that has been applied to this item.
-    ///     
-    ///     This can be used in combination with the `GET /events`-endpoint
-    ///     to filter out user events that would have occurred before this
-    ///     identifier was read.
-    ///     
-    ///     An example would be where a Box Drive-like application
-    ///     would fetch an item via the API, and then listen to incoming
-    ///     user events for changes to the item. The application would
-    ///     ignore any user events where the `sequence_id` in the event
-    ///     is smaller than or equal to the `sequence_id` in the originally
-    ///     fetched resource.
     ///   - createdAt: The date and time when the folder was created. This value may
     ///     be `null` for some folders such as the root folder or the trash
     ///     folder.
@@ -139,7 +127,7 @@ public class FolderFull: Folder {
     ///     It also restricts non-owners from inviting new
     ///     collaborators.
     ///   - classification: FolderFullClassificationField?
-    public init(id: String, type: FolderBaseTypeField, etag: String? = nil, name: String? = nil, sequenceId: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FolderPathCollectionField? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, ownedBy: UserMini? = nil, sharedLink: FolderSharedLinkField? = nil, folderUploadEmail: FolderFolderUploadEmailField? = nil, parent: FolderMini? = nil, itemStatus: FolderItemStatusField? = nil, itemCollection: Items? = nil, syncState: FolderFullSyncStateField? = nil, hasCollaborations: Bool? = nil, permissions: FolderFullPermissionsField? = nil, tags: [String]? = nil, canNonOwnersInvite: Bool? = nil, isExternallyOwned: Bool? = nil, metadata: FolderFullMetadataField? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, allowedSharedLinkAccessLevels: [FolderFullAllowedSharedLinkAccessLevelsField]? = nil, allowedInviteeRoles: [FolderFullAllowedInviteeRolesField]? = nil, watermarkInfo: FolderFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, canNonOwnersViewCollaborators: Bool? = nil, classification: FolderFullClassificationField? = nil) {
+    public init(id: String, type: FolderBaseTypeField, etag: String? = nil, sequenceId: String? = nil, name: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FolderPathCollectionField? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, ownedBy: UserMini? = nil, sharedLink: FolderSharedLinkField? = nil, folderUploadEmail: FolderFolderUploadEmailField? = nil, parent: FolderMini? = nil, itemStatus: FolderItemStatusField? = nil, itemCollection: Items? = nil, syncState: FolderFullSyncStateField? = nil, hasCollaborations: Bool? = nil, permissions: FolderFullPermissionsField? = nil, tags: [String]? = nil, canNonOwnersInvite: Bool? = nil, isExternallyOwned: Bool? = nil, metadata: FolderFullMetadataField? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, allowedSharedLinkAccessLevels: [FolderFullAllowedSharedLinkAccessLevelsField]? = nil, allowedInviteeRoles: [FolderFullAllowedInviteeRolesField]? = nil, watermarkInfo: FolderFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, canNonOwnersViewCollaborators: Bool? = nil, classification: FolderFullClassificationField? = nil) {
         self.syncState = syncState
         self.hasCollaborations = hasCollaborations
         self.permissions = permissions
@@ -154,7 +142,7 @@ public class FolderFull: Folder {
         self.isAccessibleViaSharedLink = isAccessibleViaSharedLink
         self.canNonOwnersViewCollaborators = canNonOwnersViewCollaborators
         self.classification = classification
-        super.init(id: id, type: type, etag: etag, name: name, sequenceId: sequenceId, createdAt: createdAt, modifiedAt: modifiedAt, description: description, size: size, pathCollection: pathCollection, createdBy: createdBy, modifiedBy: modifiedBy, trashedAt: trashedAt, purgedAt: purgedAt, contentCreatedAt: contentCreatedAt, contentModifiedAt: contentModifiedAt, ownedBy: ownedBy, sharedLink: sharedLink, folderUploadEmail: folderUploadEmail, parent: parent, itemStatus: itemStatus, itemCollection: itemCollection)
+        super.init(id: id, type: type, etag: etag, sequenceId: sequenceId, name: name, createdAt: createdAt, modifiedAt: modifiedAt, description: description, size: size, pathCollection: pathCollection, createdBy: createdBy, modifiedBy: modifiedBy, trashedAt: trashedAt, purgedAt: purgedAt, contentCreatedAt: contentCreatedAt, contentModifiedAt: contentModifiedAt, ownedBy: ownedBy, sharedLink: sharedLink, folderUploadEmail: folderUploadEmail, parent: parent, itemStatus: itemStatus, itemCollection: itemCollection)
     }
 
     required public init(from decoder: Decoder) throws {

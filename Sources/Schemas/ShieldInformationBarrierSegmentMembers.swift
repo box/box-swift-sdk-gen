@@ -1,8 +1,7 @@
 import Foundation
 
-/// A standard representation of a sign request, as returned from any Box Sign
-/// API endpoints by default.
-public class SignRequests: Codable {
+/// List of Shield Information Barrier Member objects
+public class ShieldInformationBarrierSegmentMembers: Codable {
     private enum CodingKeys: String, CodingKey {
         case limit
         case nextMarker = "next_marker"
@@ -15,18 +14,20 @@ public class SignRequests: Codable {
     public let limit: Int64?
     /// The marker for the start of the next page of results.
     public let nextMarker: String?
-    /// A list of sign requests
-    public let entries: [SignRequest]?
+    /// A list of shield information
+    /// barrier segment members
+    public let entries: [ShieldInformationBarrierSegmentMember]?
 
-    /// Initializer for a SignRequests.
+    /// Initializer for a ShieldInformationBarrierSegmentMembers.
     ///
     /// - Parameters:
     ///   - limit: The limit that was used for these entries. This will be the same as the
     ///     `limit` query parameter unless that value exceeded the maximum value
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
-    ///   - entries: A list of sign requests
-    public init(limit: Int64? = nil, nextMarker: String? = nil, entries: [SignRequest]? = nil) {
+    ///   - entries: A list of shield information
+    ///     barrier segment members
+    public init(limit: Int64? = nil, nextMarker: String? = nil, entries: [ShieldInformationBarrierSegmentMember]? = nil) {
         self.limit = limit
         self.nextMarker = nextMarker
         self.entries = entries
@@ -36,7 +37,7 @@ public class SignRequests: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         nextMarker = try container.decodeIfPresent(String.self, forKey: .nextMarker)
-        entries = try container.decodeIfPresent([SignRequest].self, forKey: .entries)
+        entries = try container.decodeIfPresent([ShieldInformationBarrierSegmentMember].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {

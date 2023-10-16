@@ -11,7 +11,7 @@ public class CreateRetentionPolicyAssignmentRequestBodyArgAssignToField: Codable
     /// The ID of item to assign the policy to.
     /// Set to `null` or omit when `type` is set to
     /// `enterprise`.
-    public let id: String
+    public let id: String?
 
     /// Initializer for a CreateRetentionPolicyAssignmentRequestBodyArgAssignToField.
     ///
@@ -20,7 +20,7 @@ public class CreateRetentionPolicyAssignmentRequestBodyArgAssignToField: Codable
     ///   - id: The ID of item to assign the policy to.
     ///     Set to `null` or omit when `type` is set to
     ///     `enterprise`.
-    public init(type: CreateRetentionPolicyAssignmentRequestBodyArgAssignToFieldTypeField, id: String) {
+    public init(type: CreateRetentionPolicyAssignmentRequestBodyArgAssignToFieldTypeField, id: String? = nil) {
         self.type = type
         self.id = id
     }
@@ -28,12 +28,12 @@ public class CreateRetentionPolicyAssignmentRequestBodyArgAssignToField: Codable
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         type = try container.decode(CreateRetentionPolicyAssignmentRequestBodyArgAssignToFieldTypeField.self, forKey: .type)
-        id = try container.decode(String.self, forKey: .id)
+        id = try container.decodeIfPresent(String.self, forKey: .id)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type, forKey: .type)
-        try container.encode(id, forKey: .id)
+        try container.encodeIfPresent(id, forKey: .id)
     }
 }

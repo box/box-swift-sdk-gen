@@ -15,8 +15,9 @@ public class SignRequestCreateSigner: Codable {
         case password
     }
 
-    /// Email address of the signer
-    public let email: String
+    /// Email address of the signer.
+    /// The email address of the signer is required when making signature requests, except when using templates that are configured to include emails.
+    public let email: String?
     /// Defines the role of the signer in the sign request. A `signer`
     /// must sign the document and an `approver` must approve the document. A
     /// `final_copy_reader` only receives the final signed document and signing
@@ -57,7 +58,8 @@ public class SignRequestCreateSigner: Codable {
     /// Initializer for a SignRequestCreateSigner.
     ///
     /// - Parameters:
-    ///   - email: Email address of the signer
+    ///   - email: Email address of the signer.
+    ///     The email address of the signer is required when making signature requests, except when using templates that are configured to include emails.
     ///   - role: Defines the role of the signer in the sign request. A `signer`
     ///     must sign the document and an `approver` must approve the document. A
     ///     `final_copy_reader` only receives the final signed document and signing
@@ -85,7 +87,7 @@ public class SignRequestCreateSigner: Codable {
     ///     via two factor authentication before they are able to sign the document.
     ///   - password: If set, the signer is required to enter the password before they are able
     ///     to sign a document. This field is write only.
-    public init(email: String, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil) {
+    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil) {
         self.email = email
         self.role = role
         self.isInPerson = isInPerson
@@ -100,7 +102,7 @@ public class SignRequestCreateSigner: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        email = try container.decode(String.self, forKey: .email)
+        email = try container.decodeIfPresent(String.self, forKey: .email)
         role = try container.decodeIfPresent(SignRequestCreateSignerRoleField.self, forKey: .role)
         isInPerson = try container.decodeIfPresent(Bool.self, forKey: .isInPerson)
         order = try container.decodeIfPresent(Int.self, forKey: .order)
@@ -114,7 +116,7 @@ public class SignRequestCreateSigner: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(email, forKey: .email)
+        try container.encodeIfPresent(email, forKey: .email)
         try container.encodeIfPresent(role, forKey: .role)
         try container.encodeIfPresent(isInPerson, forKey: .isInPerson)
         try container.encodeIfPresent(order, forKey: .order)

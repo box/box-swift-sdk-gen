@@ -43,11 +43,13 @@ public class ShieldInformationBarrierSegmentMembersManager {
     /// - Parameters:
     ///   - queryParams: Query parameters of getShieldInformationBarrierSegmentMembers method
     ///   - headers: Headers of getShieldInformationBarrierSegmentMembers method
+    /// - Returns: The `ShieldInformationBarrierSegmentMembers`.
     /// - Throws: The `GeneralError`.
-    public func getShieldInformationBarrierSegmentMembers(queryParams: GetShieldInformationBarrierSegmentMembersQueryParamsArg, headers: GetShieldInformationBarrierSegmentMembersHeadersArg = GetShieldInformationBarrierSegmentMembersHeadersArg()) async throws {
+    public func getShieldInformationBarrierSegmentMembers(queryParams: GetShieldInformationBarrierSegmentMembersQueryParamsArg, headers: GetShieldInformationBarrierSegmentMembersHeadersArg = GetShieldInformationBarrierSegmentMembersHeadersArg()) async throws -> ShieldInformationBarrierSegmentMembers {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["shield_information_barrier_segment_id": Utils.Strings.toString(value: queryParams.shieldInformationBarrierSegmentId), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/shield_information_barrier_segment_members")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try ShieldInformationBarrierSegmentMembers.deserialize(from: response.text)
     }
 
     /// Creates a new shield information barrier segment member.

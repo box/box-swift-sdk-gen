@@ -10,8 +10,6 @@ public class StoragePolicyAssignmentsManager {
     }
 
     /// Fetches all the storage policy assignment for an enterprise or user.
-    /// Only a Primary Admin can access this endpoint. The user
-    /// needs to generate a token for an account to authenticate this request.
     ///
     /// - Parameters:
     ///   - queryParams: Query parameters of getStoragePolicyAssignments method
@@ -26,8 +24,6 @@ public class StoragePolicyAssignmentsManager {
     }
 
     /// Creates a storage policy assignment for an enterprise or user.
-    /// Only a Primary Admin can access this endpoint. The user
-    /// needs to generate a token for an account to authenticate this request.
     ///
     /// - Parameters:
     ///   - requestBody: Request body of createStoragePolicyAssignment method
@@ -40,7 +36,7 @@ public class StoragePolicyAssignmentsManager {
         return try StoragePolicyAssignment.deserialize(from: response.text)
     }
 
-    /// Fetches a specific storage policy assignment. Only a Primary Admin can access this endpoint. The user needs to generate a token for an account to authenticate this request.
+    /// Fetches a specific storage policy assignment.
     ///
     /// - Parameters:
     ///   - storagePolicyAssignmentId: The ID of the storage policy assignment.
@@ -54,7 +50,7 @@ public class StoragePolicyAssignmentsManager {
         return try StoragePolicyAssignment.deserialize(from: response.text)
     }
 
-    /// Updates a specific storage policy assignment. Only a Primary Admin can access this endpoint. The user needs to generate a token for an account to authenticate this request.
+    /// Updates a specific storage policy assignment.
     ///
     /// - Parameters:
     ///   - storagePolicyAssignmentId: The ID of the storage policy assignment.
@@ -77,9 +73,6 @@ public class StoragePolicyAssignmentsManager {
     /// 
     /// There is a rate limit for calling this endpoint of only
     /// twice per user in a 24 hour time frame.
-    /// 
-    /// Only a Primary Admin can access this endpoint. The user
-    /// needs to generate a token for an account to authenticate this request.
     ///
     /// - Parameters:
     ///   - storagePolicyAssignmentId: The ID of the storage policy assignment.

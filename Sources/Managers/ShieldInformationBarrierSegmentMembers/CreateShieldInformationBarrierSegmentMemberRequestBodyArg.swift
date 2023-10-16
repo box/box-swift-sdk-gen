@@ -11,6 +11,7 @@ public class CreateShieldInformationBarrierSegmentMemberRequestBodyArg: Codable 
     /// The `type` and `id` of the
     /// requested shield information barrier segment.
     public let shieldInformationBarrierSegment: CreateShieldInformationBarrierSegmentMemberRequestBodyArgShieldInformationBarrierSegmentField
+    /// User to which restriction will be applied.
     public let user: UserBase
     /// -| A type of the shield barrier segment member.
     public let type: CreateShieldInformationBarrierSegmentMemberRequestBodyArgTypeField?
@@ -21,7 +22,7 @@ public class CreateShieldInformationBarrierSegmentMemberRequestBodyArg: Codable 
     /// - Parameters:
     ///   - shieldInformationBarrierSegment: The `type` and `id` of the
     ///     requested shield information barrier segment.
-    ///   - user: UserBase
+    ///   - user: User to which restriction will be applied.
     ///   - type: -| A type of the shield barrier segment member.
     ///   - shieldInformationBarrier: ShieldInformationBarrierBase?
     public init(shieldInformationBarrierSegment: CreateShieldInformationBarrierSegmentMemberRequestBodyArgShieldInformationBarrierSegmentField, user: UserBase, type: CreateShieldInformationBarrierSegmentMemberRequestBodyArgTypeField? = nil, shieldInformationBarrier: ShieldInformationBarrierBase? = nil) {
