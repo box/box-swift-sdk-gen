@@ -76,20 +76,8 @@ public class Folder: FolderMini {
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
+    ///   - sequenceId: String?
     ///   - name: The name of the folder.
-    ///   - sequenceId: A numeric identifier that represents the most recent user event
-    ///     that has been applied to this item.
-    ///     
-    ///     This can be used in combination with the `GET /events`-endpoint
-    ///     to filter out user events that would have occurred before this
-    ///     identifier was read.
-    ///     
-    ///     An example would be where a Box Drive-like application
-    ///     would fetch an item via the API, and then listen to incoming
-    ///     user events for changes to the item. The application would
-    ///     ignore any user events where the `sequence_id` in the event
-    ///     is smaller than or equal to the `sequence_id` in the originally
-    ///     fetched resource.
     ///   - createdAt: The date and time when the folder was created. This value may
     ///     be `null` for some folders such as the root folder or the trash
     ///     folder.
@@ -120,7 +108,7 @@ public class Folder: FolderMini {
     ///     * `trashed` when the item has been moved to the trash but not deleted
     ///     * `deleted` when the item has been permanently deleted.
     ///   - itemCollection: Items?
-    public init(id: String, type: FolderBaseTypeField, etag: String? = nil, name: String? = nil, sequenceId: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FolderPathCollectionField? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, ownedBy: UserMini? = nil, sharedLink: FolderSharedLinkField? = nil, folderUploadEmail: FolderFolderUploadEmailField? = nil, parent: FolderMini? = nil, itemStatus: FolderItemStatusField? = nil, itemCollection: Items? = nil) {
+    public init(id: String, type: FolderBaseTypeField, etag: String? = nil, sequenceId: String? = nil, name: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FolderPathCollectionField? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, ownedBy: UserMini? = nil, sharedLink: FolderSharedLinkField? = nil, folderUploadEmail: FolderFolderUploadEmailField? = nil, parent: FolderMini? = nil, itemStatus: FolderItemStatusField? = nil, itemCollection: Items? = nil) {
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
         self.description = description
@@ -138,7 +126,7 @@ public class Folder: FolderMini {
         self.parent = parent
         self.itemStatus = itemStatus
         self.itemCollection = itemCollection
-        super.init(id: id, type: type, etag: etag, name: name, sequenceId: sequenceId)
+        super.init(id: id, type: type, etag: etag, sequenceId: sequenceId, name: name)
     }
 
     required public init(from decoder: Decoder) throws {

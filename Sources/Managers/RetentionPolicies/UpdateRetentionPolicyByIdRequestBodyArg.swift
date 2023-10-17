@@ -18,12 +18,14 @@ public class UpdateRetentionPolicyByIdRequestBodyArg: Codable {
     /// The additional text description of the retention policy.
     public let description: String?
     /// The disposition action of the retention policy.
-    /// `permanently_delete` deletes the content
-    /// retained by the policy permanently.
-    /// `remove_retention` lifts retention policy
-    /// from the content, allowing it to be deleted
-    /// by users once the retention policy has expired.
-    public let dispositionAction: UpdateRetentionPolicyByIdRequestBodyArgDispositionActionField?
+    /// This action can be `permanently_delete`, which
+    /// will cause the content retained by the policy
+    /// to be permanently deleted, or `remove_retention`,
+    /// which will lift the retention policy from the content,
+    /// allowing it to be deleted by users,
+    /// once the retention policy has expired.
+    /// You can use "null" if you don't want to change `disposition_action`.
+    public let dispositionAction: String?
     /// Specifies the retention type:
     /// 
     /// * `modifiable`: You can modify the retention policy. For example,
@@ -65,7 +67,7 @@ public class UpdateRetentionPolicyByIdRequestBodyArg: Codable {
     /// the retention duration is about to end.
     public let areOwnersNotified: Bool?
     /// A list of users notified when the retention duration is about to end.
-    public let customNotificationRecipients: [UserMini]?
+    public let customNotificationRecipients: [UserBase]?
 
     /// Initializer for a UpdateRetentionPolicyByIdRequestBodyArg.
     ///
@@ -73,11 +75,13 @@ public class UpdateRetentionPolicyByIdRequestBodyArg: Codable {
     ///   - policyName: The name for the retention policy
     ///   - description: The additional text description of the retention policy.
     ///   - dispositionAction: The disposition action of the retention policy.
-    ///     `permanently_delete` deletes the content
-    ///     retained by the policy permanently.
-    ///     `remove_retention` lifts retention policy
-    ///     from the content, allowing it to be deleted
-    ///     by users once the retention policy has expired.
+    ///     This action can be `permanently_delete`, which
+    ///     will cause the content retained by the policy
+    ///     to be permanently deleted, or `remove_retention`,
+    ///     which will lift the retention policy from the content,
+    ///     allowing it to be deleted by users,
+    ///     once the retention policy has expired.
+    ///     You can use "null" if you don't want to change `disposition_action`.
     ///   - retentionType: Specifies the retention type:
     ///     
     ///     * `modifiable`: You can modify the retention policy. For example,
@@ -114,7 +118,7 @@ public class UpdateRetentionPolicyByIdRequestBodyArg: Codable {
     ///     under the policy are notified when
     ///     the retention duration is about to end.
     ///   - customNotificationRecipients: A list of users notified when the retention duration is about to end.
-    public init(policyName: String? = nil, description: String? = nil, dispositionAction: UpdateRetentionPolicyByIdRequestBodyArgDispositionActionField? = nil, retentionType: String? = nil, retentionLength: String? = nil, status: String? = nil, canOwnerExtendRetention: Bool? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserMini]? = nil) {
+    public init(policyName: String? = nil, description: String? = nil, dispositionAction: String? = nil, retentionType: String? = nil, retentionLength: String? = nil, status: String? = nil, canOwnerExtendRetention: Bool? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserBase]? = nil) {
         self.policyName = policyName
         self.description = description
         self.dispositionAction = dispositionAction
@@ -130,13 +134,13 @@ public class UpdateRetentionPolicyByIdRequestBodyArg: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         policyName = try container.decodeIfPresent(String.self, forKey: .policyName)
         description = try container.decodeIfPresent(String.self, forKey: .description)
-        dispositionAction = try container.decodeIfPresent(UpdateRetentionPolicyByIdRequestBodyArgDispositionActionField.self, forKey: .dispositionAction)
+        dispositionAction = try container.decodeIfPresent(String.self, forKey: .dispositionAction)
         retentionType = try container.decodeIfPresent(String.self, forKey: .retentionType)
         retentionLength = try container.decodeIfPresent(String.self, forKey: .retentionLength)
         status = try container.decodeIfPresent(String.self, forKey: .status)
         canOwnerExtendRetention = try container.decodeIfPresent(Bool.self, forKey: .canOwnerExtendRetention)
         areOwnersNotified = try container.decodeIfPresent(Bool.self, forKey: .areOwnersNotified)
-        customNotificationRecipients = try container.decodeIfPresent([UserMini].self, forKey: .customNotificationRecipients)
+        customNotificationRecipients = try container.decodeIfPresent([UserBase].self, forKey: .customNotificationRecipients)
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -10,8 +10,6 @@ public class StoragePoliciesManager {
     }
 
     /// Fetches all the storage policies in the enterprise.
-    /// Only a Primary Admin can access this endpoint. The user
-    /// needs to generate a token for an account to authenticate this request.
     ///
     /// - Parameters:
     ///   - queryParams: Query parameters of getStoragePolicies method
@@ -25,7 +23,7 @@ public class StoragePoliciesManager {
         return try StoragePolicies.deserialize(from: response.text)
     }
 
-    /// Fetches a specific storage policy. Only a Primary Admin can access this endpoint. The user needs to generate a token for an account to authenticate this request.
+    /// Fetches a specific storage policy.
     ///
     /// - Parameters:
     ///   - storagePolicyId: The ID of the storage policy.

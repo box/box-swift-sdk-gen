@@ -8,6 +8,7 @@ public class RetentionPolicyAssignmentAssignedToField: Codable {
 
     /// The ID of the folder, enterprise, or metadata template
     /// the policy is assigned to.
+    /// Set to null or omit when type is set to enterprise.
     public let id: String?
     /// The type of resource the policy is assigned to.
     public let type: RetentionPolicyAssignmentAssignedToFieldTypeField?
@@ -17,6 +18,7 @@ public class RetentionPolicyAssignmentAssignedToField: Codable {
     /// - Parameters:
     ///   - id: The ID of the folder, enterprise, or metadata template
     ///     the policy is assigned to.
+    ///     Set to null or omit when type is set to enterprise.
     ///   - type: The type of resource the policy is assigned to.
     public init(id: String? = nil, type: RetentionPolicyAssignmentAssignedToFieldTypeField? = nil) {
         self.id = id

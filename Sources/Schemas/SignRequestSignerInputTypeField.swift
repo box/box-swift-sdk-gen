@@ -5,4 +5,6 @@ public enum SignRequestSignerInputTypeField: String, CodableStringEnum {
     case date
     case text
     case checkbox
+    case radio
+    case dropdown
 }

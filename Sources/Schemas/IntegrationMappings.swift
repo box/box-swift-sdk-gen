@@ -6,7 +6,6 @@ public class IntegrationMappings: Codable {
     private enum CodingKeys: String, CodingKey {
         case limit
         case nextMarker = "next_marker"
-        case prevMarker = "prev_marker"
         case entries
     }
 
@@ -15,9 +14,7 @@ public class IntegrationMappings: Codable {
     /// allowed. The maximum value varies by API.
     public let limit: Int64?
     /// The marker for the start of the next page of results.
-    public let nextMarker: Int64?
-    /// The marker for the start of the previous page of results.
-    public let prevMarker: Int64?
+    public let nextMarker: String?
     /// A list of integration mappings
     public let entries: [IntegrationMapping]?
 
@@ -28,20 +25,17 @@ public class IntegrationMappings: Codable {
     ///     `limit` query parameter unless that value exceeded the maximum value
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
-    ///   - prevMarker: The marker for the start of the previous page of results.
     ///   - entries: A list of integration mappings
-    public init(limit: Int64? = nil, nextMarker: Int64? = nil, prevMarker: Int64? = nil, entries: [IntegrationMapping]? = nil) {
+    public init(limit: Int64? = nil, nextMarker: String? = nil, entries: [IntegrationMapping]? = nil) {
         self.limit = limit
         self.nextMarker = nextMarker
-        self.prevMarker = prevMarker
         self.entries = entries
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
-        nextMarker = try container.decodeIfPresent(Int64.self, forKey: .nextMarker)
-        prevMarker = try container.decodeIfPresent(Int64.self, forKey: .prevMarker)
+        nextMarker = try container.decodeIfPresent(String.self, forKey: .nextMarker)
         entries = try container.decodeIfPresent([IntegrationMapping].self, forKey: .entries)
     }
 
@@ -49,7 +43,6 @@ public class IntegrationMappings: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(limit, forKey: .limit)
         try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
-        try container.encodeIfPresent(prevMarker, forKey: .prevMarker)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
 }

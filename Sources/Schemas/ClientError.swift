@@ -12,7 +12,7 @@ public class ClientError: Codable {
         case requestId = "request_id"
     }
 
-    /// `error`
+    /// error
     public let type: ClientErrorTypeField?
     /// The HTTP status of the response.
     public let status: Int?
@@ -33,7 +33,7 @@ public class ClientError: Codable {
     /// Initializer for a ClientError.
     ///
     /// - Parameters:
-    ///   - type: `error`
+    ///   - type: error
     ///   - status: The HTTP status of the response.
     ///   - code: A Box-specific error code
     ///   - message: A short message describing the error.
