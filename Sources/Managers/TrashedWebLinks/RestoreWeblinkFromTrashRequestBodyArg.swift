@@ -1,6 +1,6 @@
 import Foundation
 
-public class CreateWebLinkByIdRequestBodyArg: Codable {
+public class RestoreWeblinkFromTrashRequestBodyArg: Codable {
     private enum CodingKeys: String, CodingKey {
         case name
         case parent
@@ -8,14 +8,14 @@ public class CreateWebLinkByIdRequestBodyArg: Codable {
 
     /// An optional new name for the web link.
     public let name: String?
-    public let parent: CreateWebLinkByIdRequestBodyArgParentField?
+    public let parent: RestoreWeblinkFromTrashRequestBodyArgParentField?
 
-    /// Initializer for a CreateWebLinkByIdRequestBodyArg.
+    /// Initializer for a RestoreWeblinkFromTrashRequestBodyArg.
     ///
     /// - Parameters:
     ///   - name: An optional new name for the web link.
-    ///   - parent: CreateWebLinkByIdRequestBodyArgParentField?
-    public init(name: String? = nil, parent: CreateWebLinkByIdRequestBodyArgParentField? = nil) {
+    ///   - parent: RestoreWeblinkFromTrashRequestBodyArgParentField?
+    public init(name: String? = nil, parent: RestoreWeblinkFromTrashRequestBodyArgParentField? = nil) {
         self.name = name
         self.parent = parent
     }
@@ -23,7 +23,7 @@ public class CreateWebLinkByIdRequestBodyArg: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decodeIfPresent(String.self, forKey: .name)
-        parent = try container.decodeIfPresent(CreateWebLinkByIdRequestBodyArgParentField.self, forKey: .parent)
+        parent = try container.decodeIfPresent(RestoreWeblinkFromTrashRequestBodyArgParentField.self, forKey: .parent)
     }
 
     public func encode(to encoder: Encoder) throws {

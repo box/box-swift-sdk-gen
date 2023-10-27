@@ -27,7 +27,7 @@ public class SignRequestCreateSigner: Codable {
     /// sender signs, they are redirected to the next `in_person` signer.
     public let isInPerson: Bool?
     /// Order of the signer
-    public let order: Int?
+    public let order: Int64?
     /// User ID for the signer in an external application responsible
     /// for authentication when accessing the embed URL.
     public let embedUrlExternalUserId: String?
@@ -87,7 +87,7 @@ public class SignRequestCreateSigner: Codable {
     ///     via two factor authentication before they are able to sign the document.
     ///   - password: If set, the signer is required to enter the password before they are able
     ///     to sign a document. This field is write only.
-    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil) {
+    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil) {
         self.email = email
         self.role = role
         self.isInPerson = isInPerson
@@ -105,7 +105,7 @@ public class SignRequestCreateSigner: Codable {
         email = try container.decodeIfPresent(String.self, forKey: .email)
         role = try container.decodeIfPresent(SignRequestCreateSignerRoleField.self, forKey: .role)
         isInPerson = try container.decodeIfPresent(Bool.self, forKey: .isInPerson)
-        order = try container.decodeIfPresent(Int.self, forKey: .order)
+        order = try container.decodeIfPresent(Int64.self, forKey: .order)
         embedUrlExternalUserId = try container.decodeIfPresent(String.self, forKey: .embedUrlExternalUserId)
         redirectUrl = try container.decodeIfPresent(String.self, forKey: .redirectUrl)
         declinedRedirectUrl = try container.decodeIfPresent(String.self, forKey: .declinedRedirectUrl)

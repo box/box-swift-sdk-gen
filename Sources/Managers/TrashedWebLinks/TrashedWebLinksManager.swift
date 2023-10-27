@@ -17,12 +17,12 @@ public class TrashedWebLinksManager {
     /// - Parameters:
     ///   - webLinkId: The ID of the web link.
     ///     Example: "12345"
-    ///   - requestBody: Request body of createWebLinkById method
-    ///   - queryParams: Query parameters of createWebLinkById method
-    ///   - headers: Headers of createWebLinkById method
+    ///   - requestBody: Request body of restoreWeblinkFromTrash method
+    ///   - queryParams: Query parameters of restoreWeblinkFromTrash method
+    ///   - headers: Headers of restoreWeblinkFromTrash method
     /// - Returns: The `TrashWebLinkRestored`.
     /// - Throws: The `GeneralError`.
-    public func createWebLinkById(webLinkId: String, requestBody: CreateWebLinkByIdRequestBodyArg = CreateWebLinkByIdRequestBodyArg(), queryParams: CreateWebLinkByIdQueryParamsArg = CreateWebLinkByIdQueryParamsArg(), headers: CreateWebLinkByIdHeadersArg = CreateWebLinkByIdHeadersArg()) async throws -> TrashWebLinkRestored {
+    public func restoreWeblinkFromTrash(webLinkId: String, requestBody: RestoreWeblinkFromTrashRequestBodyArg = RestoreWeblinkFromTrashRequestBodyArg(), queryParams: RestoreWeblinkFromTrashQueryParamsArg = RestoreWeblinkFromTrashQueryParamsArg(), headers: RestoreWeblinkFromTrashHeadersArg = RestoreWeblinkFromTrashHeadersArg()) async throws -> TrashWebLinkRestored {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/web_links/")\(webLinkId)", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))

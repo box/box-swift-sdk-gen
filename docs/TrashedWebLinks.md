@@ -12,23 +12,23 @@ Restores a web link that has been moved to the trash.
 An optional new parent ID can be provided to restore the  web link to in case
 the original folder has been deleted.
 
-This operation is performed by calling function `createWebLinkById`.
+This operation is performed by calling function `restoreWeblinkFromTrash`.
 
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/post-web-links-id/).
 
-*Currently we don't have an example for calling `createWebLinkById` in integration tests*
+*Currently we don't have an example for calling `restoreWeblinkFromTrash` in integration tests*
 
 ### Arguments
 
 - webLinkId `String`
   - The ID of the web link. Example: "12345"
-- requestBody `CreateWebLinkByIdRequestBodyArg`
-  - Request body of createWebLinkById method
-- queryParams `CreateWebLinkByIdQueryParamsArg`
-  - Query parameters of createWebLinkById method
-- headers `CreateWebLinkByIdHeadersArg`
-  - Headers of createWebLinkById method
+- requestBody `RestoreWeblinkFromTrashRequestBodyArg`
+  - Request body of restoreWeblinkFromTrash method
+- queryParams `RestoreWeblinkFromTrashQueryParamsArg`
+  - Query parameters of restoreWeblinkFromTrash method
+- headers `RestoreWeblinkFromTrashHeadersArg`
+  - Headers of restoreWeblinkFromTrash method
 
 
 ### Returns

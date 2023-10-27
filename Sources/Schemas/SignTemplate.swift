@@ -33,7 +33,7 @@ public class SignTemplate: Codable {
     /// Message to include in signature request email. The field is cleaned through sanitization of specific characters. However, some html tags are allowed. Links included in the message are also converted to hyperlinks in the email. The message may contain the following html tags including `a`, `abbr`, `acronym`, `b`, `blockquote`, `code`, `em`, `i`, `ul`, `li`, `ol`, and `strong`. Be aware that when the text to html ratio is too high, the email may end up in spam filters. Custom styles on these tags are not allowed. If this field is not passed, a default message will be used.
     public let emailMessage: String?
     /// Set the number of days after which the created signature request will automatically expire if not completed. By default, we do not apply any expiration date on signature requests, and the signature request does not expire.
-    public let daysValid: Int?
+    public let daysValid: Int64?
     public let parentFolder: FolderMini?
     /// List of files to create a signing document from. Only the ID and type fields are required for each file.
     public let sourceFiles: [FileMini]?
@@ -78,7 +78,7 @@ public class SignTemplate: Codable {
     ///   - readySignLink: Box's ready-sign link feature enables you to create a link to a signature request that you've created from a template. Use this link when you want to post a signature request on a public form — such as an email, social media post, or web page — without knowing who the signers will be. Note: The ready-sign link feature is limited to Enterprise Plus customers and not available to Box Verified Enterprises.
     ///   - customBranding: Custom branding applied to notifications
     ///     and signature requests.
-    public init(type: SignTemplateTypeField? = nil, id: String? = nil, name: String? = nil, emailSubject: String? = nil, emailMessage: String? = nil, daysValid: Int? = nil, parentFolder: FolderMini? = nil, sourceFiles: [FileMini]? = nil, areFieldsLocked: Bool? = nil, areOptionsLocked: Bool? = nil, areRecipientsLocked: Bool? = nil, areEmailSettingsLocked: Bool? = nil, areFilesLocked: Bool? = nil, signers: [TemplateSigner]? = nil, additionalInfo: SignTemplateAdditionalInfoField? = nil, readySignLink: SignTemplateReadySignLinkField? = nil, customBranding: SignTemplateCustomBrandingField? = nil) {
+    public init(type: SignTemplateTypeField? = nil, id: String? = nil, name: String? = nil, emailSubject: String? = nil, emailMessage: String? = nil, daysValid: Int64? = nil, parentFolder: FolderMini? = nil, sourceFiles: [FileMini]? = nil, areFieldsLocked: Bool? = nil, areOptionsLocked: Bool? = nil, areRecipientsLocked: Bool? = nil, areEmailSettingsLocked: Bool? = nil, areFilesLocked: Bool? = nil, signers: [TemplateSigner]? = nil, additionalInfo: SignTemplateAdditionalInfoField? = nil, readySignLink: SignTemplateReadySignLinkField? = nil, customBranding: SignTemplateCustomBrandingField? = nil) {
         self.type = type
         self.id = id
         self.name = name
@@ -105,7 +105,7 @@ public class SignTemplate: Codable {
         name = try container.decodeIfPresent(String.self, forKey: .name)
         emailSubject = try container.decodeIfPresent(String.self, forKey: .emailSubject)
         emailMessage = try container.decodeIfPresent(String.self, forKey: .emailMessage)
-        daysValid = try container.decodeIfPresent(Int.self, forKey: .daysValid)
+        daysValid = try container.decodeIfPresent(Int64.self, forKey: .daysValid)
         parentFolder = try container.decodeIfPresent(FolderMini.self, forKey: .parentFolder)
         sourceFiles = try container.decodeIfPresent([FileMini].self, forKey: .sourceFiles)
         areFieldsLocked = try container.decodeIfPresent(Bool.self, forKey: .areFieldsLocked)

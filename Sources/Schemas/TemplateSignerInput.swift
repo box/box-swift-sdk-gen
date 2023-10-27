@@ -16,7 +16,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
     }
 
     /// Index of page that the input is on.
-    public let pageIndex: Int
+    public let pageIndex: Int64
     /// Type of input
     public let type: TemplateSignerInputTypeField?
     /// Content type of input
@@ -53,7 +53,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
     ///   - coordinates: Where the input is located on a page.
     ///   - dimensions: The size of the input.
     ///   - label: The label field is used especially for text, attachment, radio, and checkbox type inputs.
-    public init(pageIndex: Int, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: String? = nil, type: TemplateSignerInputTypeField? = nil, contentType: TemplateSignerInputContentTypeField? = nil, isRequired: Bool? = nil, documentId: String? = nil, dropdownChoices: [String]? = nil, groupId: String? = nil, coordinates: TemplateSignerInputCoordinatesField? = nil, dimensions: TemplateSignerInputDimensionsField? = nil, label: String? = nil) {
+    public init(pageIndex: Int64, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: String? = nil, type: TemplateSignerInputTypeField? = nil, contentType: TemplateSignerInputContentTypeField? = nil, isRequired: Bool? = nil, documentId: String? = nil, dropdownChoices: [String]? = nil, groupId: String? = nil, coordinates: TemplateSignerInputCoordinatesField? = nil, dimensions: TemplateSignerInputDimensionsField? = nil, label: String? = nil) {
         self.pageIndex = pageIndex
         self.type = type
         self.contentType = contentType
@@ -69,7 +69,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        pageIndex = try container.decode(Int.self, forKey: .pageIndex)
+        pageIndex = try container.decode(Int64.self, forKey: .pageIndex)
         type = try container.decodeIfPresent(TemplateSignerInputTypeField.self, forKey: .type)
         contentType = try container.decodeIfPresent(TemplateSignerInputContentTypeField.self, forKey: .contentType)
         isRequired = try container.decodeIfPresent(Bool.self, forKey: .isRequired)

@@ -32,14 +32,14 @@ public class Classification: Codable {
     public let scope: String?
     /// The version of the metadata instance. This version starts at 0 and
     /// increases every time a classification is updated.
-    public let version: Int?
+    public let version: Int64?
     /// The unique ID of this classification instance. This will be include
     /// the name of the classification template and a unique ID.
     public let type: String?
     /// The version of the metadata template. This version starts at 0 and
     /// increases every time the template is updated. This is mostly for internal
     /// use.
-    public let typeVersion: Int?
+    public let typeVersion: Double?
     /// Whether an end user can change the classification.
     public let canEdit: Bool?
 
@@ -63,7 +63,7 @@ public class Classification: Codable {
     ///     increases every time the template is updated. This is mostly for internal
     ///     use.
     ///   - canEdit: Whether an end user can change the classification.
-    public init(boxSecurityClassificationKey: String? = nil, parent: String? = nil, template: ClassificationTemplateField? = nil, scope: String? = nil, version: Int? = nil, type: String? = nil, typeVersion: Int? = nil, canEdit: Bool? = nil) {
+    public init(boxSecurityClassificationKey: String? = nil, parent: String? = nil, template: ClassificationTemplateField? = nil, scope: String? = nil, version: Int64? = nil, type: String? = nil, typeVersion: Double? = nil, canEdit: Bool? = nil) {
         self.boxSecurityClassificationKey = boxSecurityClassificationKey
         self.parent = parent
         self.template = template
@@ -80,9 +80,9 @@ public class Classification: Codable {
         parent = try container.decodeIfPresent(String.self, forKey: .parent)
         template = try container.decodeIfPresent(ClassificationTemplateField.self, forKey: .template)
         scope = try container.decodeIfPresent(String.self, forKey: .scope)
-        version = try container.decodeIfPresent(Int.self, forKey: .version)
+        version = try container.decodeIfPresent(Int64.self, forKey: .version)
         type = try container.decodeIfPresent(String.self, forKey: .type)
-        typeVersion = try container.decodeIfPresent(Int.self, forKey: .typeVersion)
+        typeVersion = try container.decodeIfPresent(Double.self, forKey: .typeVersion)
         canEdit = try container.decodeIfPresent(Bool.self, forKey: .canEdit)
     }
 

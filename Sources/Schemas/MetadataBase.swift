@@ -22,7 +22,7 @@ public class MetadataBase: Codable {
     public let scope: String?
     /// The version of the metadata instance. This version starts at 0 and
     /// increases every time a user-defined property is modified.
-    public let version: Int?
+    public let version: Int64?
 
     /// Initializer for a MetadataBase.
     ///
@@ -37,7 +37,7 @@ public class MetadataBase: Codable {
     ///     that are available to all enterprises using Box.
     ///   - version: The version of the metadata instance. This version starts at 0 and
     ///     increases every time a user-defined property is modified.
-    public init(parent: String? = nil, template: String? = nil, scope: String? = nil, version: Int? = nil) {
+    public init(parent: String? = nil, template: String? = nil, scope: String? = nil, version: Int64? = nil) {
         self.parent = parent
         self.template = template
         self.scope = scope
@@ -49,7 +49,7 @@ public class MetadataBase: Codable {
         parent = try container.decodeIfPresent(String.self, forKey: .parent)
         template = try container.decodeIfPresent(String.self, forKey: .template)
         scope = try container.decodeIfPresent(String.self, forKey: .scope)
-        version = try container.decodeIfPresent(Int.self, forKey: .version)
+        version = try container.decodeIfPresent(Int64.self, forKey: .version)
     }
 
     public func encode(to encoder: Encoder) throws {

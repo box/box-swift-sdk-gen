@@ -9,7 +9,7 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
     }
 
     /// Index of page that the input is on
-    public let pageIndex: Int
+    public let pageIndex: Int64
     /// Type of input
     public let type: SignRequestSignerInputTypeField?
     /// Content type of input
@@ -25,7 +25,7 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
     ///   - dateValue: Date prefill value
     ///   - type: Type of input
     ///   - contentType: Content type of input
-    public init(pageIndex: Int, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: String? = nil, type: SignRequestSignerInputTypeField? = nil, contentType: SignRequestSignerInputContentTypeField? = nil) {
+    public init(pageIndex: Int64, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: String? = nil, type: SignRequestSignerInputTypeField? = nil, contentType: SignRequestSignerInputContentTypeField? = nil) {
         self.pageIndex = pageIndex
         self.type = type
         self.contentType = contentType
@@ -34,7 +34,7 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        pageIndex = try container.decode(Int.self, forKey: .pageIndex)
+        pageIndex = try container.decode(Int64.self, forKey: .pageIndex)
         type = try container.decodeIfPresent(SignRequestSignerInputTypeField.self, forKey: .type)
         contentType = try container.decodeIfPresent(SignRequestSignerInputContentTypeField.self, forKey: .contentType)
         try super.init(from:decoder)

@@ -11,19 +11,19 @@ public class ZipDownloadStatus: Codable {
     }
 
     /// The total number of files in the archive.
-    public let totalFileCount: Int?
+    public let totalFileCount: Int64?
     /// The number of files that have already been downloaded.
-    public let downloadedFileCount: Int?
+    public let downloadedFileCount: Int64?
     /// The number of files that have been skipped as they could not be
     /// downloaded. In many cases this is due to permission issues that have
     /// surfaced between the creation of the request for the archive and the
     /// archive being downloaded.
-    public let skippedFileCount: Int?
+    public let skippedFileCount: Int64?
     /// The number of folders that have been skipped as they could not be
     /// downloaded. In many cases this is due to permission issues that have
     /// surfaced between the creation of the request for the archive and the
     /// archive being downloaded.
-    public let skippedFolderCount: Int?
+    public let skippedFolderCount: Int64?
     /// The state of the archive being downloaded.
     public let state: ZipDownloadStatusStateField?
 
@@ -41,7 +41,7 @@ public class ZipDownloadStatus: Codable {
     ///     surfaced between the creation of the request for the archive and the
     ///     archive being downloaded.
     ///   - state: The state of the archive being downloaded.
-    public init(totalFileCount: Int? = nil, downloadedFileCount: Int? = nil, skippedFileCount: Int? = nil, skippedFolderCount: Int? = nil, state: ZipDownloadStatusStateField? = nil) {
+    public init(totalFileCount: Int64? = nil, downloadedFileCount: Int64? = nil, skippedFileCount: Int64? = nil, skippedFolderCount: Int64? = nil, state: ZipDownloadStatusStateField? = nil) {
         self.totalFileCount = totalFileCount
         self.downloadedFileCount = downloadedFileCount
         self.skippedFileCount = skippedFileCount
@@ -51,10 +51,10 @@ public class ZipDownloadStatus: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        totalFileCount = try container.decodeIfPresent(Int.self, forKey: .totalFileCount)
-        downloadedFileCount = try container.decodeIfPresent(Int.self, forKey: .downloadedFileCount)
-        skippedFileCount = try container.decodeIfPresent(Int.self, forKey: .skippedFileCount)
-        skippedFolderCount = try container.decodeIfPresent(Int.self, forKey: .skippedFolderCount)
+        totalFileCount = try container.decodeIfPresent(Int64.self, forKey: .totalFileCount)
+        downloadedFileCount = try container.decodeIfPresent(Int64.self, forKey: .downloadedFileCount)
+        skippedFileCount = try container.decodeIfPresent(Int64.self, forKey: .skippedFileCount)
+        skippedFolderCount = try container.decodeIfPresent(Int64.self, forKey: .skippedFolderCount)
         state = try container.decodeIfPresent(ZipDownloadStatusStateField.self, forKey: .state)
     }
 

@@ -39,7 +39,7 @@ public class SignRequestBase: Codable {
     /// When a document contains sign related tags in the content, you can prefill them using this `prefill_tags` by referencing the 'id' of the tag as the `external_id` field of the prefill tag.
     public let prefillTags: [SignRequestPrefillTag]?
     /// Set the number of days after which the created signature request will automatically expire if not completed. By default, we do not apply any expiration date on signature requests, and the signature request does not expire.
-    public let daysValid: Int?
+    public let daysValid: Int64?
     /// This can be used to reference an ID in an external system that the sign request is related to.
     public let externalId: String?
     /// Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.
@@ -64,7 +64,7 @@ public class SignRequestBase: Codable {
     ///   - externalId: This can be used to reference an ID in an external system that the sign request is related to.
     ///   - isPhoneVerificationRequiredToView: Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.
     ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
-    public init(parentFolder: FolderMini, isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil) {
+    public init(parentFolder: FolderMini, isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil) {
         self.parentFolder = parentFolder
         self.isDocumentPreparationNeeded = isDocumentPreparationNeeded
         self.redirectUrl = redirectUrl
@@ -93,7 +93,7 @@ public class SignRequestBase: Codable {
         areRemindersEnabled = try container.decodeIfPresent(Bool.self, forKey: .areRemindersEnabled)
         name = try container.decodeIfPresent(String.self, forKey: .name)
         prefillTags = try container.decodeIfPresent([SignRequestPrefillTag].self, forKey: .prefillTags)
-        daysValid = try container.decodeIfPresent(Int.self, forKey: .daysValid)
+        daysValid = try container.decodeIfPresent(Int64.self, forKey: .daysValid)
         externalId = try container.decodeIfPresent(String.self, forKey: .externalId)
         isPhoneVerificationRequiredToView = try container.decodeIfPresent(Bool.self, forKey: .isPhoneVerificationRequiredToView)
         templateId = try container.decodeIfPresent(String.self, forKey: .templateId)

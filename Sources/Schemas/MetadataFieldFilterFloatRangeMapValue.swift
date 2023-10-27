@@ -10,12 +10,12 @@ public class MetadataFieldFilterFloatRangeMapValue: Codable {
     /// value. The value of a field must be lower than (`lt`) or
     /// equal to this value for the search query to match this
     /// template.
-    public let lt: Int?
+    public let lt: Double?
     /// Specifies the (inclusive) lower bound for the metadata field
     /// value. The value of a field must be greater than (`gt`) or
     /// equal to this value for the search query to match this
     /// template.
-    public let gt: Int?
+    public let gt: Double?
 
     /// Initializer for a MetadataFieldFilterFloatRangeMapValue.
     ///
@@ -28,15 +28,15 @@ public class MetadataFieldFilterFloatRangeMapValue: Codable {
     ///     value. The value of a field must be greater than (`gt`) or
     ///     equal to this value for the search query to match this
     ///     template.
-    public init(lt: Int? = nil, gt: Int? = nil) {
+    public init(lt: Double? = nil, gt: Double? = nil) {
         self.lt = lt
         self.gt = gt
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        lt = try container.decodeIfPresent(Int.self, forKey: .lt)
-        gt = try container.decodeIfPresent(Int.self, forKey: .gt)
+        lt = try container.decodeIfPresent(Double.self, forKey: .lt)
+        gt = try container.decodeIfPresent(Double.self, forKey: .gt)
     }
 
     public func encode(to encoder: Encoder) throws {

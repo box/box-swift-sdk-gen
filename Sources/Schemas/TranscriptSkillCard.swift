@@ -33,7 +33,7 @@ public class TranscriptSkillCard: Codable {
     /// 
     /// Used with a `skill_card_type` of `transcript` or
     /// `timeline`.
-    public let duration: Int?
+    public let duration: Int64?
 
     /// Initializer for a TranscriptSkillCard.
     ///
@@ -51,7 +51,7 @@ public class TranscriptSkillCard: Codable {
     ///     
     ///     Used with a `skill_card_type` of `transcript` or
     ///     `timeline`.
-    public init(type: TranscriptSkillCardTypeField, skillCardType: TranscriptSkillCardSkillCardTypeField, skill: TranscriptSkillCardSkillField, invocation: TranscriptSkillCardInvocationField, entries: [TranscriptSkillCardEntriesField], createdAt: String? = nil, skillCardTitle: TranscriptSkillCardSkillCardTitleField? = nil, duration: Int? = nil) {
+    public init(type: TranscriptSkillCardTypeField, skillCardType: TranscriptSkillCardSkillCardTypeField, skill: TranscriptSkillCardSkillField, invocation: TranscriptSkillCardInvocationField, entries: [TranscriptSkillCardEntriesField], createdAt: String? = nil, skillCardTitle: TranscriptSkillCardSkillCardTitleField? = nil, duration: Int64? = nil) {
         self.type = type
         self.skillCardType = skillCardType
         self.skill = skill
@@ -71,7 +71,7 @@ public class TranscriptSkillCard: Codable {
         entries = try container.decode([TranscriptSkillCardEntriesField].self, forKey: .entries)
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
         skillCardTitle = try container.decodeIfPresent(TranscriptSkillCardSkillCardTitleField.self, forKey: .skillCardTitle)
-        duration = try container.decodeIfPresent(Int.self, forKey: .duration)
+        duration = try container.decodeIfPresent(Int64.self, forKey: .duration)
     }
 
     public func encode(to encoder: Encoder) throws {

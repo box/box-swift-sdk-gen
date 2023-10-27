@@ -45,7 +45,7 @@ public class TrashFile: Codable {
     public let description: String
     /// The file size in bytes. Be careful parsing this integer as it can
     /// get very large and cause an integer overflow.
-    public let size: Int
+    public let size: Int64
     public let pathCollection: TrashFilePathCollectionField
     /// The date and time when the file was created on Box.
     public let createdAt: String
@@ -128,7 +128,7 @@ public class TrashFile: Codable {
     ///     be `null` if a file has been trashed, since the link will no longer
     ///     be active.
     ///   - parent: FolderMini?
-    public init(id: String, type: TrashFileTypeField, sequenceId: String, sha1: String, description: String, size: Int, pathCollection: TrashFilePathCollectionField, createdAt: String, modifiedAt: String, modifiedBy: UserMini, ownedBy: UserMini, itemStatus: TrashFileItemStatusField, etag: String? = nil, name: String? = nil, fileVersion: FileVersionMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, createdBy: UserMini? = nil, sharedLink: String? = nil, parent: FolderMini? = nil) {
+    public init(id: String, type: TrashFileTypeField, sequenceId: String, sha1: String, description: String, size: Int64, pathCollection: TrashFilePathCollectionField, createdAt: String, modifiedAt: String, modifiedBy: UserMini, ownedBy: UserMini, itemStatus: TrashFileItemStatusField, etag: String? = nil, name: String? = nil, fileVersion: FileVersionMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, createdBy: UserMini? = nil, sharedLink: String? = nil, parent: FolderMini? = nil) {
         self.id = id
         self.type = type
         self.sequenceId = sequenceId
@@ -160,7 +160,7 @@ public class TrashFile: Codable {
         sequenceId = try container.decode(String.self, forKey: .sequenceId)
         sha1 = try container.decode(String.self, forKey: .sha1)
         description = try container.decode(String.self, forKey: .description)
-        size = try container.decode(Int.self, forKey: .size)
+        size = try container.decode(Int64.self, forKey: .size)
         pathCollection = try container.decode(TrashFilePathCollectionField.self, forKey: .pathCollection)
         createdAt = try container.decode(String.self, forKey: .createdAt)
         modifiedAt = try container.decode(String.self, forKey: .modifiedAt)

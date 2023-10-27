@@ -37,9 +37,9 @@ public class WebLinkSharedLinkField: Codable {
     /// Defines if the shared link requires a password to access the item.
     public let isPasswordEnabled: Bool
     /// The number of times this item has been downloaded.
-    public let downloadCount: Int
+    public let downloadCount: Int64
     /// The number of times this item has been previewed.
-    public let previewCount: Int
+    public let previewCount: Int64
     /// A URL that can be used to download the file. This URL can be used in
     /// a browser to download the file. This URL includes the file
     /// extension so that the file will be saved with the right file type.
@@ -112,7 +112,7 @@ public class WebLinkSharedLinkField: Codable {
     ///   - permissions: Defines if this link allows a user to preview, edit, and download an item.
     ///     These permissions refer to the shared link only and
     ///     do not supersede permissions applied to the item itself.
-    public init(url: String, effectiveAccess: WebLinkSharedLinkFieldEffectiveAccessField, effectivePermission: WebLinkSharedLinkFieldEffectivePermissionField, isPasswordEnabled: Bool, downloadCount: Int, previewCount: Int, downloadUrl: String? = nil, vanityUrl: String? = nil, vanityName: String? = nil, access: WebLinkSharedLinkFieldAccessField? = nil, unsharedAt: String? = nil, permissions: WebLinkSharedLinkFieldPermissionsField? = nil) {
+    public init(url: String, effectiveAccess: WebLinkSharedLinkFieldEffectiveAccessField, effectivePermission: WebLinkSharedLinkFieldEffectivePermissionField, isPasswordEnabled: Bool, downloadCount: Int64, previewCount: Int64, downloadUrl: String? = nil, vanityUrl: String? = nil, vanityName: String? = nil, access: WebLinkSharedLinkFieldAccessField? = nil, unsharedAt: String? = nil, permissions: WebLinkSharedLinkFieldPermissionsField? = nil) {
         self.url = url
         self.effectiveAccess = effectiveAccess
         self.effectivePermission = effectivePermission
@@ -133,8 +133,8 @@ public class WebLinkSharedLinkField: Codable {
         effectiveAccess = try container.decode(WebLinkSharedLinkFieldEffectiveAccessField.self, forKey: .effectiveAccess)
         effectivePermission = try container.decode(WebLinkSharedLinkFieldEffectivePermissionField.self, forKey: .effectivePermission)
         isPasswordEnabled = try container.decode(Bool.self, forKey: .isPasswordEnabled)
-        downloadCount = try container.decode(Int.self, forKey: .downloadCount)
-        previewCount = try container.decode(Int.self, forKey: .previewCount)
+        downloadCount = try container.decode(Int64.self, forKey: .downloadCount)
+        previewCount = try container.decode(Int64.self, forKey: .previewCount)
         downloadUrl = try container.decodeIfPresent(String.self, forKey: .downloadUrl)
         vanityUrl = try container.decodeIfPresent(String.self, forKey: .vanityUrl)
         vanityName = try container.decodeIfPresent(String.self, forKey: .vanityName)

@@ -1,6 +1,6 @@
 import Foundation
 
-public class CreateWebLinkByIdQueryParamsArg {
+public class RestoreWeblinkFromTrashQueryParamsArg {
     /// A comma-separated list of attributes to include in the
     /// response. This can be used to request fields that are
     /// not normally returned in a standard response.
@@ -12,7 +12,7 @@ public class CreateWebLinkByIdQueryParamsArg {
     /// to the fields requested.
     public let fields: [String]?
 
-    /// Initializer for a CreateWebLinkByIdQueryParamsArg.
+    /// Initializer for a RestoreWeblinkFromTrashQueryParamsArg.
     ///
     /// - Parameters:
     ///   - fields: A comma-separated list of attributes to include in the

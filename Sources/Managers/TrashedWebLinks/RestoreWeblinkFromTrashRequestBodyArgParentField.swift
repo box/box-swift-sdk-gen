@@ -1,6 +1,6 @@
 import Foundation
 
-public class CreateWebLinkByIdRequestBodyArgParentField: Codable {
+public class RestoreWeblinkFromTrashRequestBodyArgParentField: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
     }
@@ -8,7 +8,7 @@ public class CreateWebLinkByIdRequestBodyArgParentField: Codable {
     /// The ID of parent item
     public let id: String?
 
-    /// Initializer for a CreateWebLinkByIdRequestBodyArgParentField.
+    /// Initializer for a RestoreWeblinkFromTrashRequestBodyArgParentField.
     ///
     /// - Parameters:
     ///   - id: The ID of parent item

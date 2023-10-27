@@ -1,10 +1,10 @@
 import Foundation
 
-public class CreateWebLinkByIdHeadersArg {
+public class RestoreWeblinkFromTrashHeadersArg {
     /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
-    /// Initializer for a CreateWebLinkByIdHeadersArg.
+    /// Initializer for a RestoreWeblinkFromTrashHeadersArg.
     ///
     /// - Parameters:
     ///   - extraHeaders: Extra headers that will be included in the HTTP request.

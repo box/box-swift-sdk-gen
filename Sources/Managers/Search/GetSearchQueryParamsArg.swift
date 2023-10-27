@@ -83,7 +83,7 @@ public class GetSearchQueryParamsArg {
     /// and upper byte size limit (inclusive).
     /// 
     /// The upper and lower bound can be omitted to create open ranges.
-    public let sizeRange: [Int]?
+    public let sizeRange: [Int64]?
     /// Limits the search results to any items that are owned
     /// by the given list of owners, defined as a list of comma separated
     /// user IDs.
@@ -470,7 +470,7 @@ public class GetSearchQueryParamsArg {
     ///     is returned.
     ///     
     ///     Data available from 2023-02-01 onwards.
-    public init(query: String? = nil, scope: GetSearchQueryParamsArgScopeField? = nil, fileExtensions: [String]? = nil, createdAtRange: [String]? = nil, updatedAtRange: [String]? = nil, sizeRange: [Int]? = nil, ownerUserIds: [String]? = nil, recentUpdaterUserIds: [String]? = nil, ancestorFolderIds: [String]? = nil, contentTypes: [GetSearchQueryParamsArgContentTypesField]? = nil, type: GetSearchQueryParamsArgTypeField? = nil, trashContent: GetSearchQueryParamsArgTrashContentField? = nil, mdfilters: [MetadataFilter]? = nil, sort: GetSearchQueryParamsArgSortField? = nil, direction: GetSearchQueryParamsArgDirectionField? = nil, limit: Int64? = nil, includeRecentSharedLinks: Bool? = nil, fields: [String]? = nil, offset: Int64? = nil, deletedUserIds: [String]? = nil, deletedAtRange: [String]? = nil) {
+    public init(query: String? = nil, scope: GetSearchQueryParamsArgScopeField? = nil, fileExtensions: [String]? = nil, createdAtRange: [String]? = nil, updatedAtRange: [String]? = nil, sizeRange: [Int64]? = nil, ownerUserIds: [String]? = nil, recentUpdaterUserIds: [String]? = nil, ancestorFolderIds: [String]? = nil, contentTypes: [GetSearchQueryParamsArgContentTypesField]? = nil, type: GetSearchQueryParamsArgTypeField? = nil, trashContent: GetSearchQueryParamsArgTrashContentField? = nil, mdfilters: [MetadataFilter]? = nil, sort: GetSearchQueryParamsArgSortField? = nil, direction: GetSearchQueryParamsArgDirectionField? = nil, limit: Int64? = nil, includeRecentSharedLinks: Bool? = nil, fields: [String]? = nil, offset: Int64? = nil, deletedUserIds: [String]? = nil, deletedAtRange: [String]? = nil) {
         self.query = query
         self.scope = scope
         self.fileExtensions = fileExtensions
