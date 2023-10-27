@@ -10,14 +10,14 @@ public class Metadatas: Codable {
     /// A list of metadata instances, as applied to this file or folder.
     public let entries: [Metadata]?
     /// The limit that was used for this page of results.
-    public let limit: Int?
+    public let limit: Int64?
 
     /// Initializer for a Metadatas.
     ///
     /// - Parameters:
     ///   - entries: A list of metadata instances, as applied to this file or folder.
     ///   - limit: The limit that was used for this page of results.
-    public init(entries: [Metadata]? = nil, limit: Int? = nil) {
+    public init(entries: [Metadata]? = nil, limit: Int64? = nil) {
         self.entries = entries
         self.limit = limit
     }
@@ -25,7 +25,7 @@ public class Metadatas: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         entries = try container.decodeIfPresent([Metadata].self, forKey: .entries)
-        limit = try container.decodeIfPresent(Int.self, forKey: .limit)
+        limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
     }
 
     public func encode(to encoder: Encoder) throws {

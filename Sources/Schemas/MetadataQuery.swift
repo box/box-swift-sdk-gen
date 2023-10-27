@@ -45,7 +45,7 @@ public class MetadataQuery: Codable {
     /// to return for a single request. This only specifies a maximum
     /// boundary and will not guarantee the minimum number of results
     /// returned.
-    public let limit: Int?
+    public let limit: Int64?
     /// Marker to use for requesting the next page.
     public let marker: String?
     /// By default, this endpoint returns only the most basic info about the items for
@@ -114,7 +114,7 @@ public class MetadataQuery: Codable {
     ///     of the metadata instance identified by the `scope` and `templateKey` plus
     ///     the field specified by the `field` name. Multiple fields for the same
     ///     `scope` and `templateKey` can be defined.
-    public init(from: String, ancestorFolderId: String, query: String? = nil, queryParams: [String: String]? = nil, orderBy: [MetadataQueryOrderByField]? = nil, limit: Int? = nil, marker: String? = nil, fields: [String]? = nil) {
+    public init(from: String, ancestorFolderId: String, query: String? = nil, queryParams: [String: String]? = nil, orderBy: [MetadataQueryOrderByField]? = nil, limit: Int64? = nil, marker: String? = nil, fields: [String]? = nil) {
         self.from = from
         self.ancestorFolderId = ancestorFolderId
         self.query = query
@@ -132,7 +132,7 @@ public class MetadataQuery: Codable {
         query = try container.decodeIfPresent(String.self, forKey: .query)
         queryParams = try container.decodeIfPresent([String: String].self, forKey: .queryParams)
         orderBy = try container.decodeIfPresent([MetadataQueryOrderByField].self, forKey: .orderBy)
-        limit = try container.decodeIfPresent(Int.self, forKey: .limit)
+        limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         marker = try container.decodeIfPresent(String.self, forKey: .marker)
         fields = try container.decodeIfPresent([String].self, forKey: .fields)
     }

@@ -24,7 +24,7 @@ public class TemplateSigner: Codable {
     /// redirected to the next `in_person` signer.
     public let isInPerson: Bool?
     /// Order of the signer
-    public let order: Int?
+    public let order: Int64?
 
     /// Initializer for a TemplateSigner.
     ///
@@ -40,7 +40,7 @@ public class TemplateSigner: Codable {
     ///     After the sender signs, they will be
     ///     redirected to the next `in_person` signer.
     ///   - order: Order of the signer
-    public init(inputs: [TemplateSignerInput]? = nil, email: String? = nil, role: TemplateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int? = nil) {
+    public init(inputs: [TemplateSignerInput]? = nil, email: String? = nil, role: TemplateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil) {
         self.inputs = inputs
         self.email = email
         self.role = role
@@ -54,7 +54,7 @@ public class TemplateSigner: Codable {
         email = try container.decodeIfPresent(String.self, forKey: .email)
         role = try container.decodeIfPresent(TemplateSignerRoleField.self, forKey: .role)
         isInPerson = try container.decodeIfPresent(Bool.self, forKey: .isInPerson)
-        order = try container.decodeIfPresent(Int.self, forKey: .order)
+        order = try container.decodeIfPresent(Int64.self, forKey: .order)
     }
 
     public func encode(to encoder: Encoder) throws {

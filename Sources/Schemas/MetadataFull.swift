@@ -22,7 +22,7 @@ public class MetadataFull: Metadata {
     /// The last-known version of the template of the object. This is an
     /// internal system property and should not be used by a client
     /// application.
-    public let typeVersion: Int?
+    public let typeVersion: Int64?
     public let extraData: [String: String]?
 
     /// Initializer for a MetadataFull.
@@ -47,7 +47,7 @@ public class MetadataFull: Metadata {
     ///     internal system property and should not be used by a client
     ///     application.
     ///   - extraData: [String: String]?
-    public init(parent: String? = nil, template: String? = nil, scope: String? = nil, version: Int? = nil, canEdit: Bool? = nil, id: String? = nil, type: String? = nil, typeVersion: Int? = nil, extraData: [String: String]? = nil) {
+    public init(parent: String? = nil, template: String? = nil, scope: String? = nil, version: Int64? = nil, canEdit: Bool? = nil, id: String? = nil, type: String? = nil, typeVersion: Int64? = nil, extraData: [String: String]? = nil) {
         self.canEdit = canEdit
         self.id = id
         self.type = type
@@ -61,7 +61,7 @@ public class MetadataFull: Metadata {
         canEdit = try container.decodeIfPresent(Bool.self, forKey: .canEdit)
         id = try container.decodeIfPresent(String.self, forKey: .id)
         type = try container.decodeIfPresent(String.self, forKey: .type)
-        typeVersion = try container.decodeIfPresent(Int.self, forKey: .typeVersion)
+        typeVersion = try container.decodeIfPresent(Int64.self, forKey: .typeVersion)
         extraData = try container.decodeIfPresent([String: String].self, forKey: .extraData)
         try super.init(from:decoder)
     }

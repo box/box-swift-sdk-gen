@@ -16,7 +16,7 @@ public class Metadata: MetadataBase {
     ///     that are available to all enterprises using Box.
     ///   - version: The version of the metadata instance. This version starts at 0 and
     ///     increases every time a user-defined property is modified.
-    public override init(parent: String? = nil, template: String? = nil, scope: String? = nil, version: Int? = nil) {
+    public override init(parent: String? = nil, template: String? = nil, scope: String? = nil, version: Int64? = nil) {
         super.init(parent: parent, template: template, scope: scope, version: version)
     }
 

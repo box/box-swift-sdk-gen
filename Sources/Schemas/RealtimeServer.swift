@@ -16,18 +16,18 @@ public class RealtimeServer: Codable {
     /// The URL for the server.
     public let url: String?
     /// The time in minutes for which this server is available
-    public let ttl: Int?
+    public let ttl: Int64?
     /// The maximum number of retries this server will
     /// allow before a new long poll should be started by
     /// getting a [new list of server](#options-events).
-    public let maxRetries: Int?
+    public let maxRetries: Int64?
     /// The maximum number of seconds without a response
     /// after which you should retry the long poll connection.
     /// 
     /// This helps to overcome network issues where the long
     /// poll looks to be working but no packages are coming
     /// through.
-    public let retryTimeout: Int?
+    public let retryTimeout: Int64?
 
     /// Initializer for a RealtimeServer.
     ///
@@ -44,7 +44,7 @@ public class RealtimeServer: Codable {
     ///     This helps to overcome network issues where the long
     ///     poll looks to be working but no packages are coming
     ///     through.
-    public init(type: String? = nil, url: String? = nil, ttl: Int? = nil, maxRetries: Int? = nil, retryTimeout: Int? = nil) {
+    public init(type: String? = nil, url: String? = nil, ttl: Int64? = nil, maxRetries: Int64? = nil, retryTimeout: Int64? = nil) {
         self.type = type
         self.url = url
         self.ttl = ttl
@@ -56,9 +56,9 @@ public class RealtimeServer: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         type = try container.decodeIfPresent(String.self, forKey: .type)
         url = try container.decodeIfPresent(String.self, forKey: .url)
-        ttl = try container.decodeIfPresent(Int.self, forKey: .ttl)
-        maxRetries = try container.decodeIfPresent(Int.self, forKey: .maxRetries)
-        retryTimeout = try container.decodeIfPresent(Int.self, forKey: .retryTimeout)
+        ttl = try container.decodeIfPresent(Int64.self, forKey: .ttl)
+        maxRetries = try container.decodeIfPresent(Int64.self, forKey: .maxRetries)
+        retryTimeout = try container.decodeIfPresent(Int64.self, forKey: .retryTimeout)
     }
 
     public func encode(to encoder: Encoder) throws {

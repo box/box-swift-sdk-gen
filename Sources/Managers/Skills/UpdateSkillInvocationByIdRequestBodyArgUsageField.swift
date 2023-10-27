@@ -9,14 +9,14 @@ public class UpdateSkillInvocationByIdRequestBodyArgUsageField: Codable {
     /// `file`
     public let unit: String?
     /// `1`
-    public let value: Int?
+    public let value: Double?
 
     /// Initializer for a UpdateSkillInvocationByIdRequestBodyArgUsageField.
     ///
     /// - Parameters:
     ///   - unit: `file`
     ///   - value: `1`
-    public init(unit: String? = nil, value: Int? = nil) {
+    public init(unit: String? = nil, value: Double? = nil) {
         self.unit = unit
         self.value = value
     }
@@ -24,7 +24,7 @@ public class UpdateSkillInvocationByIdRequestBodyArgUsageField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         unit = try container.decodeIfPresent(String.self, forKey: .unit)
-        value = try container.decodeIfPresent(Int.self, forKey: .value)
+        value = try container.decodeIfPresent(Double.self, forKey: .value)
     }
 
     public func encode(to encoder: Encoder) throws {

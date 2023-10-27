@@ -30,7 +30,7 @@ public class TimelineSkillCard: Codable {
     /// The title of the card.
     public let skillCardTitle: TimelineSkillCardSkillCardTitleField?
     /// An total duration in seconds of the timeline.
-    public let duration: Int?
+    public let duration: Int64?
 
     /// Initializer for a TimelineSkillCard.
     ///
@@ -44,7 +44,7 @@ public class TimelineSkillCard: Codable {
     ///   - createdAt: The optional date and time this card was created at.
     ///   - skillCardTitle: The title of the card.
     ///   - duration: An total duration in seconds of the timeline.
-    public init(type: TimelineSkillCardTypeField, skillCardType: TimelineSkillCardSkillCardTypeField, skill: TimelineSkillCardSkillField, invocation: TimelineSkillCardInvocationField, entries: [TimelineSkillCardEntriesField], createdAt: String? = nil, skillCardTitle: TimelineSkillCardSkillCardTitleField? = nil, duration: Int? = nil) {
+    public init(type: TimelineSkillCardTypeField, skillCardType: TimelineSkillCardSkillCardTypeField, skill: TimelineSkillCardSkillField, invocation: TimelineSkillCardInvocationField, entries: [TimelineSkillCardEntriesField], createdAt: String? = nil, skillCardTitle: TimelineSkillCardSkillCardTitleField? = nil, duration: Int64? = nil) {
         self.type = type
         self.skillCardType = skillCardType
         self.skill = skill
@@ -64,7 +64,7 @@ public class TimelineSkillCard: Codable {
         entries = try container.decode([TimelineSkillCardEntriesField].self, forKey: .entries)
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
         skillCardTitle = try container.decodeIfPresent(TimelineSkillCardSkillCardTitleField.self, forKey: .skillCardTitle)
-        duration = try container.decodeIfPresent(Int.self, forKey: .duration)
+        duration = try container.decodeIfPresent(Int64.self, forKey: .duration)
     }
 
     public func encode(to encoder: Encoder) throws {

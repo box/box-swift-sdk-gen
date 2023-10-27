@@ -7,24 +7,24 @@ public class TemplateSignerInputCoordinatesField: Codable {
     }
 
     /// Relative x coordinate to the page the input is on, ranging from 0 to 1.
-    public let x: Int?
+    public let x: Double?
     /// Relative y coordinate to the page the input is on, ranging from 0 to 1.
-    public let y: Int?
+    public let y: Double?
 
     /// Initializer for a TemplateSignerInputCoordinatesField.
     ///
     /// - Parameters:
     ///   - x: Relative x coordinate to the page the input is on, ranging from 0 to 1.
     ///   - y: Relative y coordinate to the page the input is on, ranging from 0 to 1.
-    public init(x: Int? = nil, y: Int? = nil) {
+    public init(x: Double? = nil, y: Double? = nil) {
         self.x = x
         self.y = y
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        x = try container.decodeIfPresent(Int.self, forKey: .x)
-        y = try container.decodeIfPresent(Int.self, forKey: .y)
+        x = try container.decodeIfPresent(Double.self, forKey: .x)
+        y = try container.decodeIfPresent(Double.self, forKey: .y)
     }
 
     public func encode(to encoder: Encoder) throws {

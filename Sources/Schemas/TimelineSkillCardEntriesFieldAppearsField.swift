@@ -8,10 +8,10 @@ public class TimelineSkillCardEntriesFieldAppearsField: Codable {
 
     /// The time in seconds when an
     /// entry should start appearing on a timeline.
-    public let start: Int?
+    public let start: Int64?
     /// The time in seconds when an
     /// entry should stop appearing on a timeline.
-    public let end: Int?
+    public let end: Int64?
 
     /// Initializer for a TimelineSkillCardEntriesFieldAppearsField.
     ///
@@ -20,15 +20,15 @@ public class TimelineSkillCardEntriesFieldAppearsField: Codable {
     ///     entry should start appearing on a timeline.
     ///   - end: The time in seconds when an
     ///     entry should stop appearing on a timeline.
-    public init(start: Int? = nil, end: Int? = nil) {
+    public init(start: Int64? = nil, end: Int64? = nil) {
         self.start = start
         self.end = end
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        start = try container.decodeIfPresent(Int.self, forKey: .start)
-        end = try container.decodeIfPresent(Int.self, forKey: .end)
+        start = try container.decodeIfPresent(Int64.self, forKey: .start)
+        end = try container.decodeIfPresent(Int64.self, forKey: .end)
     }
 
     public func encode(to encoder: Encoder) throws {
