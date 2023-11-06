@@ -73,8 +73,8 @@ See the endpoint docs at
 
 ### Arguments
 
-- zipDownloadId `String`
-  - The unique identifier that represent this `zip` archive. Example: "Lu6fA9Ob-jyysp3AAvMF4AkLEwZwAYbL=tgj2zIC=eK9RvJnJbjJl9rNh2qBgHDpyOCAOhpM=vajg2mKq8Mdd"
+- downloadUrl `String`
+  - The URL that can be used to download created `zip` archive.  Example: `https://dl.boxcloud.com/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/content`
 - downloadDestinationURL `URL`
   - The URL on disk where the file will be saved once it has been downloaded.
 - headers `GetZipDownloadContentHeadersArg`
@@ -113,8 +113,8 @@ See the endpoint docs at
 
 ### Arguments
 
-- zipDownloadId `String`
-  - The unique identifier that represent this `zip` archive. Example: "Lu6fA9Ob-jyysp3AAvMF4AkLEwZwAYbL=tgj2zIC=eK9RvJnJbjJl9rNh2qBgHDpyOCAOhpM=vajg2mKq8Mdd"
+- statusUrl `String`
+  - The URL that can be used to get the status of the `zip` archive being downloaded.  Example: `https://dl.boxcloud.com/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/status`
 - headers `GetZipDownloadStatusHeadersArg`
   - Headers of getZipDownloadStatus method
 

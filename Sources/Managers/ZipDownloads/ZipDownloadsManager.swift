@@ -52,15 +52,15 @@ public class ZipDownloadsManager {
     /// this endpoint.
     ///
     /// - Parameters:
-    ///   - zipDownloadId: The unique identifier that represent this `zip` archive.
-    ///     Example: "Lu6fA9Ob-jyysp3AAvMF4AkLEwZwAYbL=tgj2zIC=eK9RvJnJbjJl9rNh2qBgHDpyOCAOhpM=vajg2mKq8Mdd"
+    ///   - downloadUrl: The URL that can be used to download created `zip` archive.
+    ///      Example: `https://dl.boxcloud.com/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/content`
     ///   - downloadDestinationURL: The URL on disk where the file will be saved once it has been downloaded.
     ///   - headers: Headers of getZipDownloadContent method
     /// - Returns: The `URL`.
     /// - Throws: The `GeneralError`.
-    public func getZipDownloadContent(zipDownloadId: String, downloadDestinationURL: URL, headers: GetZipDownloadContentHeadersArg = GetZipDownloadContentHeadersArg()) async throws -> URL {
+    public func getZipDownloadContent(downloadUrl: String, downloadDestinationURL: URL, headers: GetZipDownloadContentHeadersArg = GetZipDownloadContentHeadersArg()) async throws -> URL {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://dl.boxcloud.com/2.0/zip_downloads/")\(zipDownloadId)\("/content")", options: FetchOptions(method: "GET", headers: headersMap, downloadDestinationURL: downloadDestinationURL, responseFormat: "binary", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: downloadUrl, options: FetchOptions(method: "GET", headers: headersMap, downloadDestinationURL: downloadDestinationURL, responseFormat: "binary", auth: self.auth, networkSession: self.networkSession))
         return response.downloadDestinationURL!
     }
 
@@ -78,14 +78,14 @@ public class ZipDownloadsManager {
     /// this endpoint.
     ///
     /// - Parameters:
-    ///   - zipDownloadId: The unique identifier that represent this `zip` archive.
-    ///     Example: "Lu6fA9Ob-jyysp3AAvMF4AkLEwZwAYbL=tgj2zIC=eK9RvJnJbjJl9rNh2qBgHDpyOCAOhpM=vajg2mKq8Mdd"
+    ///   - statusUrl: The URL that can be used to get the status of the `zip` archive being downloaded.
+    ///      Example: `https://dl.boxcloud.com/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/status`
     ///   - headers: Headers of getZipDownloadStatus method
     /// - Returns: The `ZipDownloadStatus`.
     /// - Throws: The `GeneralError`.
-    public func getZipDownloadStatus(zipDownloadId: String, headers: GetZipDownloadStatusHeadersArg = GetZipDownloadStatusHeadersArg()) async throws -> ZipDownloadStatus {
+    public func getZipDownloadStatus(statusUrl: String, headers: GetZipDownloadStatusHeadersArg = GetZipDownloadStatusHeadersArg()) async throws -> ZipDownloadStatus {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/zip_downloads/")\(zipDownloadId)\("/status")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: statusUrl, options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ZipDownloadStatus.deserialize(from: response.text)
     }
 

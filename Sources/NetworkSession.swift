@@ -7,10 +7,19 @@ import FoundationNetworking
 open class NetworkSession {
 
     /// Provides an API  for downloading data from and uploading data to endpoints indicated by URL.
+#if os(Linux)
+    public var session: URLSession {
+        return URLSession(configuration: configuration, delegate: nil, delegateQueue: nil)
+    }
+#else
     public let session: URLSession
+#endif
 
     /// Additional network settings.
     public let networkSettings: NetworkSettings
+
+    /// url session configuration.
+    public let configuration: URLSessionConfiguration
 
     /// Initializer
     ///
@@ -21,7 +30,10 @@ open class NetworkSession {
         configuration: URLSessionConfiguration = URLSessionConfiguration.default,
         networkSettings: NetworkSettings = NetworkSettings()
     ) {
+#if !os(Linux)
         self.session = URLSession(configuration: configuration, delegate: nil, delegateQueue: nil)
+#endif
+        self.configuration = configuration
         self.networkSettings = networkSettings
     }
 }

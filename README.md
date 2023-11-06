@@ -27,6 +27,11 @@ Embrace the new generation of Box SDKs and unlock the full potential of the Box 
   - [Swift Package Manager](#swift-package-manager)
   - [Carthage](#carthage)
 - [Getting Started](#getting-started)
+- [Integration Tests](#integration-tests)
+  - [Running integration tests locally](#running-integration-tests-locally)
+    - [Create Custom Application](#create-custom-application)
+    - [Export configuration](#export-configuration)
+    - [Running tests](#running-tests)
 - [Questions, Bugs, and Feature Requests?](#questions-bugs-and-feature-requests)
 - [Copyright and License](#copyright-and-license)
 
@@ -100,6 +105,37 @@ if let entries = items.entries {
 The usage docs that show how to make calls to the Box API with the SDK can be found [here](https://github.com/box/box-swift-sdk-gen/tree/main/docs).
 
 We recommend, familiarizing yourself with the remaining [authentication methods](https://github.com/box/box-swift-sdk-gen/tree/main/docs/Authentication.md), [uploading files](https://github.com/box/box-swift-sdk-gen/tree/main/docs/Uploads.md) and [downloading files](https://github.com/box/box-swift-sdk-gen/tree/main/docs/Downloads.md).
+
+# Integration Tests
+
+## Running integration tests locally
+
+### Create Custom Application
+
+To run integration tests locally you will need a `Custom App` created at https://cloud.app.box.com/developers/console
+with `Server Authentication (Client Credentials Grant)` selected as authentication method.
+Once created you can edit properties of the application:
+
+- In section `App Access Level` select `App + Enterprise Access`. You can enable all `Application Scopes`.
+- In section `Advanced Features` enable `Make API calls using the as-user header` and `Generate user access tokens`.
+
+Now select `Authorization` and submit application to be reviewed by account admin.
+
+### Export configuration
+
+To run integration tests, you need several environment variables specifying your account and the Box application you've created.
+
+1. Set the `CLIENT_ID` environment variable to its corresponding value from the `Configuration` tab in the section `OAuth 2.0 Credentials` of your application.
+2. Set the `CLIENT_SECRET` environment variable to its corresponding value from the `Configuration` tab in the section `OAuth 2.0 Credentials` of your application.
+3. Set the `ENTERPRISE_ID` environment variable to its corresponding value from the `General Settings` tab the section `App Info` of your application.
+4. Set the `USER_ID` environment variable to its corresponding value from the `General Settings` tab the section `App Info` of your application.
+5. Set the `BOX_FILE_REQUEST_ID` environment variable to the ID of file request already created in the user account.
+
+### Running tests
+
+To run integration tests locally:
+
+1. `swift test`
 
 # Questions, Bugs, and Feature Requests?
 
