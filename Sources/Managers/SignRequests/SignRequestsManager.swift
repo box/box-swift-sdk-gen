@@ -20,7 +20,7 @@ public class SignRequestsManager {
     public func cancelSignRequest(signRequestId: String, headers: CancelSignRequestHeadersArg = CancelSignRequestHeadersArg()) async throws -> SignRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/sign_requests/")\(signRequestId)\("/cancel")", options: FetchOptions(method: "POST", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try SignRequest.deserialize(from: response.text)
+        return try SignRequest.deserialize(from: response.data)
     }
 
     /// Resends a sign request email to all outstanding signers.
@@ -46,7 +46,7 @@ public class SignRequestsManager {
     public func getSignRequestById(signRequestId: String, headers: GetSignRequestByIdHeadersArg = GetSignRequestByIdHeadersArg()) async throws -> SignRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/sign_requests/")\(signRequestId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try SignRequest.deserialize(from: response.text)
+        return try SignRequest.deserialize(from: response.data)
     }
 
     /// Gets sign requests created by a user. If the `sign_files` and/or
@@ -61,7 +61,7 @@ public class SignRequestsManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/sign_requests")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try SignRequests.deserialize(from: response.text)
+        return try SignRequests.deserialize(from: response.data)
     }
 
     /// Creates a sign request. This involves preparing a document for signing and
@@ -74,8 +74,8 @@ public class SignRequestsManager {
     /// - Throws: The `GeneralError`.
     public func createSignRequest(requestBody: SignRequestCreateRequest, headers: CreateSignRequestHeadersArg = CreateSignRequestHeadersArg()) async throws -> SignRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/sign_requests")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try SignRequest.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/sign_requests")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try SignRequest.deserialize(from: response.data)
     }
 
 }

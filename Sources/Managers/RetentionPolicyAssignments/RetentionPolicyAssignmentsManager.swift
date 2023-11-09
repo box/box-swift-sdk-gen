@@ -23,7 +23,7 @@ public class RetentionPolicyAssignmentsManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["type": Utils.Strings.toString(value: queryParams.type), "fields": Utils.Strings.toString(value: queryParams.fields), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/retention_policies/")\(retentionPolicyId)\("/assignments")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try RetentionPolicyAssignments.deserialize(from: response.text)
+        return try RetentionPolicyAssignments.deserialize(from: response.data)
     }
 
     /// Assigns a retention policy to an item.
@@ -35,8 +35,8 @@ public class RetentionPolicyAssignmentsManager {
     /// - Throws: The `GeneralError`.
     public func createRetentionPolicyAssignment(requestBody: CreateRetentionPolicyAssignmentRequestBodyArg, headers: CreateRetentionPolicyAssignmentHeadersArg = CreateRetentionPolicyAssignmentHeadersArg()) async throws -> RetentionPolicyAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/retention_policy_assignments")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try RetentionPolicyAssignment.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/retention_policy_assignments")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try RetentionPolicyAssignment.deserialize(from: response.data)
     }
 
     /// Retrieves a retention policy assignment
@@ -52,7 +52,7 @@ public class RetentionPolicyAssignmentsManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/retention_policy_assignments/")\(retentionPolicyAssignmentId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try RetentionPolicyAssignment.deserialize(from: response.text)
+        return try RetentionPolicyAssignment.deserialize(from: response.data)
     }
 
     /// Removes a retention policy assignment
@@ -81,7 +81,7 @@ public class RetentionPolicyAssignmentsManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/retention_policy_assignments/")\(retentionPolicyAssignmentId)\("/files_under_retention")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FilesUnderRetention.deserialize(from: response.text)
+        return try FilesUnderRetention.deserialize(from: response.data)
     }
 
     /// Returns a list of file versions under retention for a retention policy
@@ -98,7 +98,7 @@ public class RetentionPolicyAssignmentsManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/retention_policy_assignments/")\(retentionPolicyAssignmentId)\("/file_versions_under_retention")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FilesUnderRetention.deserialize(from: response.text)
+        return try FilesUnderRetention.deserialize(from: response.data)
     }
 
 }

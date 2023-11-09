@@ -21,7 +21,7 @@ public class EmailAliasesManager {
     public func getUserEmailAliases(userId: String, headers: GetUserEmailAliasesHeadersArg = GetUserEmailAliasesHeadersArg()) async throws -> EmailAliases {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)\("/email_aliases")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try EmailAliases.deserialize(from: response.text)
+        return try EmailAliases.deserialize(from: response.data)
     }
 
     /// Adds a new email alias to a user account..
@@ -35,8 +35,8 @@ public class EmailAliasesManager {
     /// - Throws: The `GeneralError`.
     public func createUserEmailAlias(userId: String, requestBody: CreateUserEmailAliasRequestBodyArg, headers: CreateUserEmailAliasHeadersArg = CreateUserEmailAliasHeadersArg()) async throws -> EmailAlias {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)\("/email_aliases")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try EmailAlias.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)\("/email_aliases")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try EmailAlias.deserialize(from: response.data)
     }
 
     /// Removes an email alias from a user.

@@ -31,7 +31,7 @@ public class FileClassificationsManager {
     public func getFileMetadataEnterpriseSecurityClassification6VmVochwUWo(fileId: String, headers: GetFileMetadataEnterpriseSecurityClassification6VmVochwUWoHeadersArg = GetFileMetadataEnterpriseSecurityClassification6VmVochwUWoHeadersArg()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Classification.deserialize(from: response.text)
+        return try Classification.deserialize(from: response.data)
     }
 
     /// Adds a classification to a file by specifying the label of the
@@ -56,8 +56,8 @@ public class FileClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func createFileMetadataEnterpriseSecurityClassification(fileId: String, requestBody: CreateFileMetadataEnterpriseSecurityClassificationRequestBodyArg = CreateFileMetadataEnterpriseSecurityClassificationRequestBodyArg(), headers: CreateFileMetadataEnterpriseSecurityClassificationHeadersArg = CreateFileMetadataEnterpriseSecurityClassificationHeadersArg()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Classification.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try Classification.deserialize(from: response.data)
     }
 
     /// Updates a classification on a file.
@@ -81,8 +81,8 @@ public class FileClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func updateFileMetadataEnterpriseSecurityClassification(fileId: String, requestBody: [UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArg], headers: UpdateFileMetadataEnterpriseSecurityClassificationHeadersArg = UpdateFileMetadataEnterpriseSecurityClassificationHeadersArg()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "PUT", headers: headersMap, body: requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Classification.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try Classification.deserialize(from: response.data)
     }
 
     /// Removes any classifications from a file.

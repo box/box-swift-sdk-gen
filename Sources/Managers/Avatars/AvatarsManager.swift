@@ -36,7 +36,7 @@ public class AvatarsManager {
     public func createUserAvatar(userId: String, requestBody: CreateUserAvatarRequestBodyArg, headers: CreateUserAvatarHeadersArg = CreateUserAvatarHeadersArg()) async throws -> UserAvatar {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)\("/avatar")", options: FetchOptions(method: "POST", headers: headersMap, multipartData: [MultipartItem(partName: "pic", fileStream: requestBody.pic, fileName: requestBody.picFileName, contentType: requestBody.picContentType)], contentType: "multipart/form-data", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try UserAvatar.deserialize(from: response.text)
+        return try UserAvatar.deserialize(from: response.data)
     }
 
     /// Removes an existing user avatar.

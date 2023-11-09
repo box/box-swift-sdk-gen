@@ -21,7 +21,7 @@ public class LegalHoldPoliciesManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["policy_name": Utils.Strings.toString(value: queryParams.policyName), "fields": Utils.Strings.toString(value: queryParams.fields), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/legal_hold_policies")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try LegalHoldPolicies.deserialize(from: response.text)
+        return try LegalHoldPolicies.deserialize(from: response.data)
     }
 
     /// Create a new legal hold policy.
@@ -33,8 +33,8 @@ public class LegalHoldPoliciesManager {
     /// - Throws: The `GeneralError`.
     public func createLegalHoldPolicy(requestBody: CreateLegalHoldPolicyRequestBodyArg, headers: CreateLegalHoldPolicyHeadersArg = CreateLegalHoldPolicyHeadersArg()) async throws -> LegalHoldPolicy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/legal_hold_policies")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try LegalHoldPolicy.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/legal_hold_policies")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try LegalHoldPolicy.deserialize(from: response.data)
     }
 
     /// Retrieve a legal hold policy.
@@ -48,7 +48,7 @@ public class LegalHoldPoliciesManager {
     public func getLegalHoldPolicyById(legalHoldPolicyId: String, headers: GetLegalHoldPolicyByIdHeadersArg = GetLegalHoldPolicyByIdHeadersArg()) async throws -> LegalHoldPolicy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/legal_hold_policies/")\(legalHoldPolicyId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try LegalHoldPolicy.deserialize(from: response.text)
+        return try LegalHoldPolicy.deserialize(from: response.data)
     }
 
     /// Update legal hold policy.
@@ -62,8 +62,8 @@ public class LegalHoldPoliciesManager {
     /// - Throws: The `GeneralError`.
     public func updateLegalHoldPolicyById(legalHoldPolicyId: String, requestBody: UpdateLegalHoldPolicyByIdRequestBodyArg = UpdateLegalHoldPolicyByIdRequestBodyArg(), headers: UpdateLegalHoldPolicyByIdHeadersArg = UpdateLegalHoldPolicyByIdHeadersArg()) async throws -> LegalHoldPolicy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/legal_hold_policies/")\(legalHoldPolicyId)", options: FetchOptions(method: "PUT", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try LegalHoldPolicy.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/legal_hold_policies/")\(legalHoldPolicyId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try LegalHoldPolicy.deserialize(from: response.data)
     }
 
     /// Delete an existing legal hold policy.

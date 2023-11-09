@@ -30,7 +30,7 @@ public class ListCollaborationsManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "limit": Utils.Strings.toString(value: queryParams.limit), "marker": Utils.Strings.toString(value: queryParams.marker)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/collaborations")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Collaborations.deserialize(from: response.text)
+        return try Collaborations.deserialize(from: response.data)
     }
 
     /// Retrieves a list of pending and active collaborations for a
@@ -54,7 +54,7 @@ public class ListCollaborationsManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/collaborations")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Collaborations.deserialize(from: response.text)
+        return try Collaborations.deserialize(from: response.data)
     }
 
     /// Retrieves all pending collaboration invites for this user.
@@ -68,7 +68,7 @@ public class ListCollaborationsManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["status": Utils.Strings.toString(value: queryParams.status), "fields": Utils.Strings.toString(value: queryParams.fields), "offset": Utils.Strings.toString(value: queryParams.offset), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/collaborations")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Collaborations.deserialize(from: response.text)
+        return try Collaborations.deserialize(from: response.data)
     }
 
     /// Retrieves all the collaborations for a group. The user
@@ -88,7 +88,7 @@ public class ListCollaborationsManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["limit": Utils.Strings.toString(value: queryParams.limit), "offset": Utils.Strings.toString(value: queryParams.offset)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/groups/")\(groupId)\("/collaborations")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Collaborations.deserialize(from: response.text)
+        return try Collaborations.deserialize(from: response.data)
     }
 
 }

@@ -184,13 +184,13 @@ public class BoxOAuth: Authentication {
             url: "https://api.box.com/oauth2/token",
             options: FetchOptions(
                 method: .post,
-                body: Utils.Url.urlEncodeFrom(dictionary: body),
-                contentType: "application/x-www-form-urlencoded",
+                data: body.serialize(),
+                contentType: HTTPHeaderContentTypeValue.urlEncoded,
                 networkSession: networkSession
             )
         )
 
-        return try AccessToken.decode(from: response.content)
+        return try AccessToken.deserialize(from: response.data)
     }
 
 #if os(iOS) || os(macOS)

@@ -31,8 +31,8 @@ public class TrashedFilesManager {
     public func restoreFileFromTrash(fileId: String, requestBody: RestoreFileFromTrashRequestBodyArg = RestoreFileFromTrashRequestBodyArg(), queryParams: RestoreFileFromTrashQueryParamsArg = RestoreFileFromTrashQueryParamsArg(), headers: RestoreFileFromTrashHeadersArg = RestoreFileFromTrashHeadersArg()) async throws -> TrashFileRestored {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try TrashFileRestored.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try TrashFileRestored.deserialize(from: response.data)
     }
 
     /// Retrieves a file that has been moved to the trash.
@@ -64,7 +64,7 @@ public class TrashedFilesManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/trash")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try TrashFile.deserialize(from: response.text)
+        return try TrashFile.deserialize(from: response.data)
     }
 
     /// Permanently deletes a file that is in the trash.

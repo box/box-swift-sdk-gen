@@ -44,9 +44,9 @@ class FetchConversation {
     func convertToFetchResponse() -> FetchResponse {
         switch self.responseType {
         case let .data(data):
-            return FetchResponse(status: urlResponse.statusCode, text: String(decoding: data, as: UTF8.self), content: data)
+            return FetchResponse(status: urlResponse.statusCode, data: SerializedData(data: data))
         case let .url(url):
-            return FetchResponse(status: urlResponse.statusCode, text: "" , content: Data(), downloadDestinationURL: url)
+            return FetchResponse(status: urlResponse.statusCode, data: SerializedData(data: Data()), downloadDestinationURL: url)
         }
     }
 }

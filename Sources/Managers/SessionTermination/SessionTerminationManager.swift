@@ -21,8 +21,8 @@ public class SessionTerminationManager {
     /// - Throws: The `GeneralError`.
     public func createUserTerminateSession(requestBody: CreateUserTerminateSessionRequestBodyArg, headers: CreateUserTerminateSessionHeadersArg = CreateUserTerminateSessionHeadersArg()) async throws -> SessionTerminationMessage {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/terminate_sessions")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try SessionTerminationMessage.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/terminate_sessions")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try SessionTerminationMessage.deserialize(from: response.data)
     }
 
     /// Validates the roles and permissions of the group,
@@ -37,8 +37,8 @@ public class SessionTerminationManager {
     /// - Throws: The `GeneralError`.
     public func createGroupTerminateSession(requestBody: CreateGroupTerminateSessionRequestBodyArg, headers: CreateGroupTerminateSessionHeadersArg = CreateGroupTerminateSessionHeadersArg()) async throws -> SessionTerminationMessage {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/groups/terminate_sessions")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try SessionTerminationMessage.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/groups/terminate_sessions")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try SessionTerminationMessage.deserialize(from: response.data)
     }
 
 }

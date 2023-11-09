@@ -21,7 +21,7 @@ public class CollaborationAllowlistExemptTargetsManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/collaboration_whitelist_exempt_targets")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try CollaborationAllowlistExemptTargets.deserialize(from: response.text)
+        return try CollaborationAllowlistExemptTargets.deserialize(from: response.data)
     }
 
     /// Exempts a user from the restrictions set out by the allowed list of domains
@@ -34,8 +34,8 @@ public class CollaborationAllowlistExemptTargetsManager {
     /// - Throws: The `GeneralError`.
     public func createCollaborationWhitelistExemptTarget(requestBody: CreateCollaborationWhitelistExemptTargetRequestBodyArg, headers: CreateCollaborationWhitelistExemptTargetHeadersArg = CreateCollaborationWhitelistExemptTargetHeadersArg()) async throws -> CollaborationAllowlistExemptTarget {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/collaboration_whitelist_exempt_targets")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try CollaborationAllowlistExemptTarget.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/collaboration_whitelist_exempt_targets")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try CollaborationAllowlistExemptTarget.deserialize(from: response.data)
     }
 
     /// Returns a users who has been exempt from the collaboration
@@ -50,7 +50,7 @@ public class CollaborationAllowlistExemptTargetsManager {
     public func getCollaborationWhitelistExemptTargetById(collaborationWhitelistExemptTargetId: String, headers: GetCollaborationWhitelistExemptTargetByIdHeadersArg = GetCollaborationWhitelistExemptTargetByIdHeadersArg()) async throws -> CollaborationAllowlistExemptTarget {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/collaboration_whitelist_exempt_targets/")\(collaborationWhitelistExemptTargetId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try CollaborationAllowlistExemptTarget.deserialize(from: response.text)
+        return try CollaborationAllowlistExemptTarget.deserialize(from: response.data)
     }
 
     /// Removes a user's exemption from the restrictions set out by the allowed list

@@ -2,7 +2,7 @@ import Foundation
 
 public class BoxClient {
     public let auth: Authentication
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
     public let authorization: AuthorizationManager
     public let files: FilesManager
     public let trashedFiles: TrashedFilesManager
@@ -72,7 +72,7 @@ public class BoxClient {
     public let signTemplates: SignTemplatesManager
     public let integrationMappings: IntegrationMappingsManager
 
-    public init(auth: Authentication, networkSession: NetworkSession? = NetworkSession()) {
+    public init(auth: Authentication, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
         self.authorization = AuthorizationManager(auth: self.auth, networkSession: self.networkSession)
@@ -143,6 +143,29 @@ public class BoxClient {
         self.workflows = WorkflowsManager(auth: self.auth, networkSession: self.networkSession)
         self.signTemplates = SignTemplatesManager(auth: self.auth, networkSession: self.networkSession)
         self.integrationMappings = IntegrationMappingsManager(auth: self.auth, networkSession: self.networkSession)
+    }
+
+    /// Create a new client to impersonate user with the provided ID. All calls made with the new client will be made in context of the impersonated user, leaving the original client unmodified.
+    ///
+    /// - Parameters:
+    ///   - userId: ID of an user to impersonate
+    /// - Returns: The `BoxClient`.
+    public func withAsUserHeader(userId: String) -> BoxClient {
+        return BoxClient(auth: self.auth, networkSession: self.networkSession.withAdditionalHeaders(additionalHeaders: ["As-User": userId]))
+    }
+
+    /// Create a new client with suppressed notifications. Calls made with the new client will not trigger email or webhook notifications    /// - Returns: The `BoxClient`.
+    public func withSuppressedNotifications() -> BoxClient {
+        return BoxClient(auth: self.auth, networkSession: self.networkSession.withAdditionalHeaders(additionalHeaders: ["Box-Notifications": "off"]))
+    }
+
+    /// Create a new client with a custom set of headers that will be included in every API call
+    ///
+    /// - Parameters:
+    ///   - extraHeaders: Custom set of headers that will be included in every API call
+    /// - Returns: The `BoxClient`.
+    public func withExtraHeaders(extraHeaders: [String: String] = [:]) -> BoxClient {
+        return BoxClient(auth: self.auth, networkSession: self.networkSession.withAdditionalHeaders(additionalHeaders: extraHeaders))
     }
 
 }

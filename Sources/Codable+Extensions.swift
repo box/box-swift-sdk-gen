@@ -1,21 +1,33 @@
 import Foundation
 
 extension Encodable {
-    func encode(with encoder: JSONEncoder = JSONEncoder()) -> Data {
-        return try! encoder.encode(self)
+    public func encode(with encoder: JSONEncoder = JSONEncoder()) throws -> Data {
+        return try encoder.encode(self)
     }
 
-    func serialize(with encoder: JSONEncoder = JSONEncoder()) -> String {
-        return String(decoding: self.encode(with: encoder), as: UTF8.self)
+    public func serialize() throws -> SerializedData {
+        return SerializedData(data: try self.encode())
+    }
+
+    public func serializeToString(with encoder: JSONEncoder = JSONEncoder()) throws -> String {
+        return String(decoding: try self.encode(with: encoder), as: UTF8.self)
     }
 }
 
 extension Decodable {
-    static func decode(with decoder: JSONDecoder = JSONDecoder(), from data: Data) throws -> Self {
+    public static func decode(from data: Data, with decoder: JSONDecoder = JSONDecoder()) throws -> Self {
         return try decoder.decode(Self.self, from: data)
     }
 
-    static func deserialize(with decoder: JSONDecoder = JSONDecoder(), from string: String) throws -> Self {
-        return try self.decode(with: decoder, from: string.data(using: .utf8)!)
+    public static func decode(string: String, with decoder: JSONDecoder = JSONDecoder()) throws -> Self {
+        if let data = string.data(using: .utf8) {
+            return try self.decode(from: data, with: decoder)
+        }
+
+        throw GeneralError(message: .deserializationError("Could not in create `Data` from provided string"))
+    }
+
+    public static func deserialize(from serializedData: SerializedData, with decoder: JSONDecoder = JSONDecoder()) throws -> Self {
+        return try self.decode(from: serializedData.data, with: decoder)
     }
 }

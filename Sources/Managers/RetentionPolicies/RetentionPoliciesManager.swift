@@ -20,7 +20,7 @@ public class RetentionPoliciesManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["policy_name": Utils.Strings.toString(value: queryParams.policyName), "policy_type": Utils.Strings.toString(value: queryParams.policyType), "created_by_user_id": Utils.Strings.toString(value: queryParams.createdByUserId), "fields": Utils.Strings.toString(value: queryParams.fields), "limit": Utils.Strings.toString(value: queryParams.limit), "marker": Utils.Strings.toString(value: queryParams.marker)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/retention_policies")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try RetentionPolicies.deserialize(from: response.text)
+        return try RetentionPolicies.deserialize(from: response.data)
     }
 
     /// Creates a retention policy.
@@ -32,8 +32,8 @@ public class RetentionPoliciesManager {
     /// - Throws: The `GeneralError`.
     public func createRetentionPolicy(requestBody: CreateRetentionPolicyRequestBodyArg, headers: CreateRetentionPolicyHeadersArg = CreateRetentionPolicyHeadersArg()) async throws -> RetentionPolicy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/retention_policies")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try RetentionPolicy.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/retention_policies")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try RetentionPolicy.deserialize(from: response.data)
     }
 
     /// Retrieves a retention policy.
@@ -49,7 +49,7 @@ public class RetentionPoliciesManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/retention_policies/")\(retentionPolicyId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try RetentionPolicy.deserialize(from: response.text)
+        return try RetentionPolicy.deserialize(from: response.data)
     }
 
     /// Updates a retention policy.
@@ -63,8 +63,8 @@ public class RetentionPoliciesManager {
     /// - Throws: The `GeneralError`.
     public func updateRetentionPolicyById(retentionPolicyId: String, requestBody: UpdateRetentionPolicyByIdRequestBodyArg = UpdateRetentionPolicyByIdRequestBodyArg(), headers: UpdateRetentionPolicyByIdHeadersArg = UpdateRetentionPolicyByIdHeadersArg()) async throws -> RetentionPolicy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/retention_policies/")\(retentionPolicyId)", options: FetchOptions(method: "PUT", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try RetentionPolicy.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/retention_policies/")\(retentionPolicyId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try RetentionPolicy.deserialize(from: response.data)
     }
 
     /// Permanently deletes a retention policy.

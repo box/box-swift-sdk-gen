@@ -23,7 +23,7 @@ public class FolderLocksManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["folder_id": Utils.Strings.toString(value: queryParams.folderId)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folder_locks")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FolderLocks.deserialize(from: response.text)
+        return try FolderLocks.deserialize(from: response.data)
     }
 
     /// Creates a folder lock on a folder, preventing it from being moved and/or
@@ -39,8 +39,8 @@ public class FolderLocksManager {
     /// - Throws: The `GeneralError`.
     public func createFolderLock(requestBody: CreateFolderLockRequestBodyArg, headers: CreateFolderLockHeadersArg = CreateFolderLockHeadersArg()) async throws -> FolderLock {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folder_locks")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FolderLock.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folder_locks")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try FolderLock.deserialize(from: response.data)
     }
 
     /// Deletes a folder lock on a given folder.

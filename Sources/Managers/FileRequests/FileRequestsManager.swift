@@ -26,7 +26,7 @@ public class FileRequestsManager {
     public func getFileRequestById(fileRequestId: String, headers: GetFileRequestByIdHeadersArg = GetFileRequestByIdHeadersArg()) async throws -> FileRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/file_requests/")\(fileRequestId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileRequest.deserialize(from: response.text)
+        return try FileRequest.deserialize(from: response.data)
     }
 
     /// Updates a file request. This can be used to activate or
@@ -47,8 +47,8 @@ public class FileRequestsManager {
     /// - Throws: The `GeneralError`.
     public func updateFileRequestById(fileRequestId: String, requestBody: FileRequestUpdateRequest, headers: UpdateFileRequestByIdHeadersArg = UpdateFileRequestByIdHeadersArg()) async throws -> FileRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-match": Utils.Strings.toString(value: headers.ifMatch)], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/file_requests/")\(fileRequestId)", options: FetchOptions(method: "PUT", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileRequest.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/file_requests/")\(fileRequestId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try FileRequest.deserialize(from: response.data)
     }
 
     /// Deletes a file request permanently.
@@ -87,8 +87,8 @@ public class FileRequestsManager {
     /// - Throws: The `GeneralError`.
     public func createFileRequestCopy(fileRequestId: String, requestBody: FileRequestCopyRequest, headers: CreateFileRequestCopyHeadersArg = CreateFileRequestCopyHeadersArg()) async throws -> FileRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/file_requests/")\(fileRequestId)\("/copy")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileRequest.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/file_requests/")\(fileRequestId)\("/copy")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try FileRequest.deserialize(from: response.data)
     }
 
 }
