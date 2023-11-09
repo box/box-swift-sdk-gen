@@ -25,8 +25,8 @@ public class TrashedWebLinksManager {
     public func restoreWeblinkFromTrash(webLinkId: String, requestBody: RestoreWeblinkFromTrashRequestBodyArg = RestoreWeblinkFromTrashRequestBodyArg(), queryParams: RestoreWeblinkFromTrashQueryParamsArg = RestoreWeblinkFromTrashQueryParamsArg(), headers: RestoreWeblinkFromTrashHeadersArg = RestoreWeblinkFromTrashHeadersArg()) async throws -> TrashWebLinkRestored {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/web_links/")\(webLinkId)", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try TrashWebLinkRestored.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/web_links/")\(webLinkId)", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try TrashWebLinkRestored.deserialize(from: response.data)
     }
 
     /// Retrieves a web link that has been moved to the trash.
@@ -42,7 +42,7 @@ public class TrashedWebLinksManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/web_links/")\(webLinkId)\("/trash")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try TrashWebLink.deserialize(from: response.text)
+        return try TrashWebLink.deserialize(from: response.data)
     }
 
     /// Permanently deletes a web link that is in the trash.

@@ -28,7 +28,7 @@ public class FilesManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch), "boxapi": Utils.Strings.toString(value: headers.boxapi), "x-rep-hints": Utils.Strings.toString(value: headers.xRepHints)], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileFull.deserialize(from: response.text)
+        return try FileFull.deserialize(from: response.data)
     }
 
     /// Updates a file. This can be used to rename or move a file,
@@ -51,8 +51,8 @@ public class FilesManager {
     public func updateFileById(fileId: String, requestBody: UpdateFileByIdRequestBodyArg = UpdateFileByIdRequestBodyArg(), queryParams: UpdateFileByIdQueryParamsArg = UpdateFileByIdQueryParamsArg(), headers: UpdateFileByIdHeadersArg = UpdateFileByIdHeadersArg()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-match": Utils.Strings.toString(value: headers.ifMatch)], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileFull.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try FileFull.deserialize(from: response.data)
     }
 
     /// Deletes a file, either permanently or by moving it to
@@ -96,8 +96,8 @@ public class FilesManager {
     public func copyFile(fileId: String, requestBody: CopyFileRequestBodyArg, queryParams: CopyFileQueryParamsArg = CopyFileQueryParamsArg(), headers: CopyFileHeadersArg = CopyFileHeadersArg()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/copy")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileFull.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/copy")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try FileFull.deserialize(from: response.data)
     }
 
     /// Retrieves a thumbnail, or smaller image representation, of a file.

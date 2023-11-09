@@ -4,11 +4,11 @@ import Foundation
 /// from any file request API endpoints by default.
 public class FileRequest: Codable {
     private enum CodingKeys: String, CodingKey {
+        case id
+        case type
         case folder
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case id
-        case type
         case title
         case description
         case status
@@ -21,15 +21,15 @@ public class FileRequest: Codable {
         case updatedBy = "updated_by"
     }
 
+    /// The unique identifier for this file request.
+    public let id: String
+    /// `file_request`
+    public let type: FileRequestTypeField
     public let folder: FolderMini
     /// The date and time when the file request was created.
     public let createdAt: String
     /// The date and time when the file request was last updated.
     public let updatedAt: String
-    /// The unique identifier for this file request.
-    public let id: String?
-    /// `file_request`
-    public let type: FileRequestTypeField?
     /// The title of file request. This is shown
     /// in the Box UI to users uploading files.
     /// 
@@ -92,11 +92,11 @@ public class FileRequest: Codable {
     /// Initializer for a FileRequest.
     ///
     /// - Parameters:
+    ///   - id: The unique identifier for this file request.
+    ///   - type: `file_request`
     ///   - folder: FolderMini
     ///   - createdAt: The date and time when the file request was created.
     ///   - updatedAt: The date and time when the file request was last updated.
-    ///   - id: The unique identifier for this file request.
-    ///   - type: `file_request`
     ///   - title: The title of file request. This is shown
     ///     in the Box UI to users uploading files.
     ///     
@@ -147,12 +147,12 @@ public class FileRequest: Codable {
     ///     header.
     ///   - createdBy: UserMini?
     ///   - updatedBy: UserMini?
-    public init(folder: FolderMini, createdAt: String, updatedAt: String, id: String? = nil, type: FileRequestTypeField? = nil, title: String? = nil, description: String? = nil, status: FileRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: String? = nil, url: String? = nil, etag: String? = nil, createdBy: UserMini? = nil, updatedBy: UserMini? = nil) {
+    public init(id: String, type: FileRequestTypeField, folder: FolderMini, createdAt: String, updatedAt: String, title: String? = nil, description: String? = nil, status: FileRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: String? = nil, url: String? = nil, etag: String? = nil, createdBy: UserMini? = nil, updatedBy: UserMini? = nil) {
+        self.id = id
+        self.type = type
         self.folder = folder
         self.createdAt = createdAt
         self.updatedAt = updatedAt
-        self.id = id
-        self.type = type
         self.title = title
         self.description = description
         self.status = status
@@ -167,11 +167,11 @@ public class FileRequest: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        type = try container.decode(FileRequestTypeField.self, forKey: .type)
         folder = try container.decode(FolderMini.self, forKey: .folder)
         createdAt = try container.decode(String.self, forKey: .createdAt)
         updatedAt = try container.decode(String.self, forKey: .updatedAt)
-        id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(FileRequestTypeField.self, forKey: .type)
         title = try container.decodeIfPresent(String.self, forKey: .title)
         description = try container.decodeIfPresent(String.self, forKey: .description)
         status = try container.decodeIfPresent(FileRequestStatusField.self, forKey: .status)
@@ -186,11 +186,11 @@ public class FileRequest: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(type, forKey: .type)
         try container.encode(folder, forKey: .folder)
         try container.encode(createdAt, forKey: .createdAt)
         try container.encode(updatedAt, forKey: .updatedAt)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(status, forKey: .status)

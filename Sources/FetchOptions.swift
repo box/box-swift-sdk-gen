@@ -30,7 +30,7 @@ public class FetchOptions {
     public internal(set) var headers:  [String: ParameterConvertible?]
 
     /// Body of the request.
-    public let body: String?
+    public let data: SerializedData?
 
     /// A stream containing the file contents.
     public let fileStream: InputStream?
@@ -59,7 +59,7 @@ public class FetchOptions {
     ///   - method: The HTTP request method (e.g. GET, POST, DELETE).
     ///   - params: Additional parameters to be passed in the URL that is called.
     ///   - headers: Additional information to be passed in the HTTP headers of the request.
-    ///   - body: Body of the request.
+    ///   - data: Body of the request.
     ///   - fileStream: A stream containing the file contents.
     ///   - multipartData: Parts of multipart data.
     ///   - downloadDestinationURL: The URL on disk where the data will be saved
@@ -71,7 +71,7 @@ public class FetchOptions {
         method: HTTPMethod = HTTPMethod.get,
         params: [String : ParameterConvertible?] = [:],
         headers: [String : ParameterConvertible?] = [:],
-        body: String? = nil,
+        data: SerializedData? = nil,
         fileStream: InputStream? = nil,
         multipartData: [MultipartItem]? = nil,
         downloadDestinationURL: URL? = nil,
@@ -83,7 +83,7 @@ public class FetchOptions {
         self.method = method
         self.headers = headers
         self.params = params
-        self.body = body
+        self.data = data
         self.fileStream = fileStream
         self.multipartData = multipartData
         self.downloadDestinationURL = downloadDestinationURL

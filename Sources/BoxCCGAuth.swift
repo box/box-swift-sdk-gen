@@ -145,13 +145,13 @@ public class BoxCCGAuth: Authentication {
             url: "https://api.box.com/oauth2/token",
             options: FetchOptions(
                 method: .post,
-                body: Utils.Url.urlEncodeFrom(dictionary: params),
-                contentType: "application/x-www-form-urlencoded",
+                data: params.serialize(),
+                contentType: HTTPHeaderContentTypeValue.urlEncoded,
                 networkSession: networkSession
             )
         )
 
-        let newToken = try AccessToken.decode(from: response.content)
+        let newToken = try AccessToken.deserialize(from: response.data)
         try await self.tokenStorage.store(token: newToken)
         return newToken
     }

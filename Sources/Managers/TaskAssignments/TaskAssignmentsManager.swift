@@ -20,7 +20,7 @@ public class TaskAssignmentsManager {
     public func getTaskAssignments(taskId: String, headers: GetTaskAssignmentsHeadersArg = GetTaskAssignmentsHeadersArg()) async throws -> TaskAssignments {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/tasks/")\(taskId)\("/assignments")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try TaskAssignments.deserialize(from: response.text)
+        return try TaskAssignments.deserialize(from: response.data)
     }
 
     /// Assigns a task to a user.
@@ -35,8 +35,8 @@ public class TaskAssignmentsManager {
     /// - Throws: The `GeneralError`.
     public func createTaskAssignment(requestBody: CreateTaskAssignmentRequestBodyArg, headers: CreateTaskAssignmentHeadersArg = CreateTaskAssignmentHeadersArg()) async throws -> TaskAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/task_assignments")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try TaskAssignment.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/task_assignments")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try TaskAssignment.deserialize(from: response.data)
     }
 
     /// Retrieves information about a task assignment.
@@ -50,7 +50,7 @@ public class TaskAssignmentsManager {
     public func getTaskAssignmentById(taskAssignmentId: String, headers: GetTaskAssignmentByIdHeadersArg = GetTaskAssignmentByIdHeadersArg()) async throws -> TaskAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/task_assignments/")\(taskAssignmentId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try TaskAssignment.deserialize(from: response.text)
+        return try TaskAssignment.deserialize(from: response.data)
     }
 
     /// Updates a task assignment. This endpoint can be
@@ -65,8 +65,8 @@ public class TaskAssignmentsManager {
     /// - Throws: The `GeneralError`.
     public func updateTaskAssignmentById(taskAssignmentId: String, requestBody: UpdateTaskAssignmentByIdRequestBodyArg = UpdateTaskAssignmentByIdRequestBodyArg(), headers: UpdateTaskAssignmentByIdHeadersArg = UpdateTaskAssignmentByIdHeadersArg()) async throws -> TaskAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/task_assignments/")\(taskAssignmentId)", options: FetchOptions(method: "PUT", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try TaskAssignment.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/task_assignments/")\(taskAssignmentId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try TaskAssignment.deserialize(from: response.data)
     }
 
     /// Deletes a specific task assignment.

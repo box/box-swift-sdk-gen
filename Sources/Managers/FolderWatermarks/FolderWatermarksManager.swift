@@ -29,7 +29,7 @@ public class FolderWatermarksManager {
     public func getFolderWatermark(folderId: String, headers: GetFolderWatermarkHeadersArg = GetFolderWatermarkHeadersArg()) async throws -> Watermark {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/watermark")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Watermark.deserialize(from: response.text)
+        return try Watermark.deserialize(from: response.data)
     }
 
     /// Applies or update a watermark on a folder.
@@ -52,8 +52,8 @@ public class FolderWatermarksManager {
     /// - Throws: The `GeneralError`.
     public func updateFolderWatermark(folderId: String, requestBody: UpdateFolderWatermarkRequestBodyArg, headers: UpdateFolderWatermarkHeadersArg = UpdateFolderWatermarkHeadersArg()) async throws -> Watermark {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/watermark")", options: FetchOptions(method: "PUT", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Watermark.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/watermark")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try Watermark.deserialize(from: response.data)
     }
 
     /// Removes the watermark from a folder.

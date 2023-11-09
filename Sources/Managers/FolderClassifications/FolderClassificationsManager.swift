@@ -34,7 +34,7 @@ public class FolderClassificationsManager {
     public func getFolderMetadataEnterpriseSecurityClassification6VmVochwUWo(folderId: String, headers: GetFolderMetadataEnterpriseSecurityClassification6VmVochwUWoHeadersArg = GetFolderMetadataEnterpriseSecurityClassification6VmVochwUWoHeadersArg()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Classification.deserialize(from: response.text)
+        return try Classification.deserialize(from: response.data)
     }
 
     /// Adds a classification to a folder by specifying the label of the
@@ -62,8 +62,8 @@ public class FolderClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func createFolderMetadataEnterpriseSecurityClassification(folderId: String, requestBody: CreateFolderMetadataEnterpriseSecurityClassificationRequestBodyArg = CreateFolderMetadataEnterpriseSecurityClassificationRequestBodyArg(), headers: CreateFolderMetadataEnterpriseSecurityClassificationHeadersArg = CreateFolderMetadataEnterpriseSecurityClassificationHeadersArg()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "POST", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Classification.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try Classification.deserialize(from: response.data)
     }
 
     /// Updates a classification on a folder.
@@ -90,8 +90,8 @@ public class FolderClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func updateFolderMetadataEnterpriseSecurityClassification(folderId: String, requestBody: [UpdateFolderMetadataEnterpriseSecurityClassificationRequestBodyArg], headers: UpdateFolderMetadataEnterpriseSecurityClassificationHeadersArg = UpdateFolderMetadataEnterpriseSecurityClassificationHeadersArg()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "PUT", headers: headersMap, body: requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Classification.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try Classification.deserialize(from: response.data)
     }
 
     /// Removes any classifications from a folder.

@@ -56,7 +56,12 @@ public struct RequestDescription {
         self.method = conversation.options.method.rawValue
         self.url = conversation.urlRequest.url?.absoluteString ?? conversation.url
         self.headers = conversation.options.headers.compactMapValues { $0?.paramValue }
-        self.body = conversation.options.body
+
+        if headers[HTTPHeaderKey.contentType, default: ""] == HTTPHeaderContentTypeValue.urlEncoded {
+            self.body = try? conversation.options.data?.toUrlParams()
+        } else {
+            self.body = try? Utils.Strings.from(data: conversation.options.data?.toJson() ?? Data())
+        }
     }
 
     /// Get a dictionary representing a `RequestDescription`.

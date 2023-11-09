@@ -9,6 +9,10 @@ enum HTTPHeaderKey {
     static let retryAfter = "Retry-After"
 }
 
+enum HTTPHeaderContentTypeValue {
+    static let urlEncoded = "application/x-www-form-urlencoded"
+}
+
 /// Networking layer interface
 public class NetworkClient {
     public static let shared = NetworkClient()
@@ -162,9 +166,15 @@ public class NetworkClient {
         if let fileStream = options.fileStream {
             urlRequest.httpBodyStream = fileStream
         } else if let multipartData = options.multipartData {
-            updateRequestWithMultipartData(&urlRequest, multipartData: multipartData)
-        } else if let body = options.body {
-            urlRequest.httpBody = body.data(using: .utf8)
+            try updateRequestWithMultipartData(&urlRequest, multipartData: multipartData)
+        }
+
+        if let serializedData = options.data {
+            if HTTPHeaderContentTypeValue.urlEncoded == options.contentType {
+                urlRequest.httpBody = (try serializedData.toUrlParams()).data(using: .utf8)
+            } else {
+                urlRequest.httpBody = try serializedData.toJson()
+            }
         }
 
         return urlRequest
@@ -179,6 +189,10 @@ public class NetworkClient {
     /// - Throws: An error if the operation fails for any reason.
     private func updateRequestWithHeaders(_ urlRequest: inout URLRequest, options: FetchOptions, networkSession: NetworkSession) async throws {
         urlRequest.allHTTPHeaderFields = options.headers.compactMapValues { $0?.paramValue }
+
+        for (key, value) in networkSession.additionalHeaders {
+            urlRequest.setValue(value, forHTTPHeaderField: key)
+        }
 
         if let contentType = options.contentType {
             urlRequest.setValue(contentType, forHTTPHeaderField: HTTPHeaderKey.contentType)
@@ -209,7 +223,7 @@ public class NetworkClient {
     /// - Parameters:
     ///   - urlRequest: The request object.
     ///   - multipartData: An array of `MultipartItem` which will be used to create the body of the request.
-    private func updateRequestWithMultipartData(_ urlRequest: inout URLRequest, multipartData: [MultipartItem]) {
+    private func updateRequestWithMultipartData(_ urlRequest: inout URLRequest, multipartData: [MultipartItem]) throws {
         var parameters: [String: Any] = [:]
         var partName = ""
         var fileName = ""
@@ -217,8 +231,8 @@ public class NetworkClient {
         var bodyStream = InputStream(data: Data())
         let boundary = "Boundary-\(UUID().uuidString)"
         for part in multipartData {
-            if let body = part.body {
-                parameters[part.partName] = body
+            if let body = part.data {
+                parameters[part.partName] = Utils.Strings.from(data: try body.toJson())
             } else if let fileStream = part.fileStream {
                 let unwrapFileName = part.fileName ?? ""
                 let unwrapMimeType = part.contentType ?? ""

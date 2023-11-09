@@ -21,7 +21,7 @@ public class FileVersionLegalHoldsManager {
     public func getFileVersionLegalHoldById(fileVersionLegalHoldId: String, headers: GetFileVersionLegalHoldByIdHeadersArg = GetFileVersionLegalHoldByIdHeadersArg()) async throws -> FileVersionLegalHold {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/file_version_legal_holds/")\(fileVersionLegalHoldId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileVersionLegalHold.deserialize(from: response.text)
+        return try FileVersionLegalHold.deserialize(from: response.data)
     }
 
     /// Get a list of file versions on legal hold for a legal hold
@@ -54,7 +54,7 @@ public class FileVersionLegalHoldsManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["policy_id": Utils.Strings.toString(value: queryParams.policyId), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/file_version_legal_holds")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileVersionLegalHolds.deserialize(from: response.text)
+        return try FileVersionLegalHolds.deserialize(from: response.data)
     }
 
 }

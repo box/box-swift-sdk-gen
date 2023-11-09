@@ -24,6 +24,10 @@ public enum GeneralErrorFailureReason: LosslessStringConvertible {
     case keychainDataConversionError
     /// Unhandled keychain error
     case keychainUnhandledError(String)
+    /// Couldn't serialize data
+    case serializationError(String)
+    /// Couldn't deserialize data
+    case deserializationError(String)
     /// Custom error message
     case customValue(String)
 
@@ -74,6 +78,10 @@ public enum GeneralErrorFailureReason: LosslessStringConvertible {
             return "Unhandled keychain error: \(message)"
         case .keychainDataConversionError:
             return "Could not decode or encode data for or from keychain"
+        case let .serializationError(message):
+            return "Could not serialize data: \(message)"
+        case let .deserializationError(message):
+            return "Could not deserialize data: \(message)"
         case let .customValue(value):
             return value
         }

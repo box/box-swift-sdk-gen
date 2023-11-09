@@ -7,7 +7,7 @@ public class MultipartItem {
     public let partName: String
 
     /// The content of the part body.
-    public let body: String?
+    public let data: SerializedData?
 
     /// A stream containing the file contents.
     public let fileStream: InputStream?
@@ -28,13 +28,13 @@ public class MultipartItem {
     ///   - contentType: The content type of the part.
     public init(
         partName: String,
-        body: String? = nil,
+        data: SerializedData? = nil,
         fileStream: InputStream? = nil,
         fileName: String? = nil,
         contentType: String? = nil
     ) {
         self.partName = partName
-        self.body = body
+        self.data = data
         self.fileStream = fileStream
         self.fileName = fileName
         self.contentType = contentType

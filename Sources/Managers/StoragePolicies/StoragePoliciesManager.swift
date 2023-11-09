@@ -20,7 +20,7 @@ public class StoragePoliciesManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/storage_policies")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try StoragePolicies.deserialize(from: response.text)
+        return try StoragePolicies.deserialize(from: response.data)
     }
 
     /// Fetches a specific storage policy.
@@ -34,7 +34,7 @@ public class StoragePoliciesManager {
     public func getStoragePolicyById(storagePolicyId: String, headers: GetStoragePolicyByIdHeadersArg = GetStoragePolicyByIdHeadersArg()) async throws -> StoragePolicy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/storage_policies/")\(storagePolicyId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try StoragePolicy.deserialize(from: response.text)
+        return try StoragePolicy.deserialize(from: response.data)
     }
 
 }

@@ -31,7 +31,7 @@ public class FileVersionsManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "limit": Utils.Strings.toString(value: queryParams.limit), "offset": Utils.Strings.toString(value: queryParams.offset)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/versions")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileVersions.deserialize(from: response.text)
+        return try FileVersions.deserialize(from: response.data)
     }
 
     /// Retrieve a specific version of a file.
@@ -57,7 +57,7 @@ public class FileVersionsManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/versions/")\(fileVersionId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileVersionFull.deserialize(from: response.text)
+        return try FileVersionFull.deserialize(from: response.data)
     }
 
     /// Restores a specific version of a file after it was deleted.
@@ -82,8 +82,8 @@ public class FileVersionsManager {
     /// - Throws: The `GeneralError`.
     public func updateFileVersionById(fileId: String, fileVersionId: String, requestBody: UpdateFileVersionByIdRequestBodyArg = UpdateFileVersionByIdRequestBodyArg(), headers: UpdateFileVersionByIdHeadersArg = UpdateFileVersionByIdHeadersArg()) async throws -> FileVersionFull {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/versions/")\(fileVersionId)", options: FetchOptions(method: "PUT", headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileVersionFull.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/versions/")\(fileVersionId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try FileVersionFull.deserialize(from: response.data)
     }
 
     /// Move a file version to the trash.
@@ -142,8 +142,8 @@ public class FileVersionsManager {
     public func promoteFileVersion(fileId: String, requestBody: PromoteFileVersionRequestBodyArg = PromoteFileVersionRequestBodyArg(), queryParams: PromoteFileVersionQueryParamsArg = PromoteFileVersionQueryParamsArg(), headers: PromoteFileVersionHeadersArg = PromoteFileVersionHeadersArg()) async throws -> FileVersionFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/versions/current")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileVersionFull.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/versions/current")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try FileVersionFull.deserialize(from: response.data)
     }
 
 }

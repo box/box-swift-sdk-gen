@@ -43,8 +43,8 @@ public class TrashedFoldersManager {
     public func restoreFolderFromTrash(folderId: String, requestBody: RestoreFolderFromTrashRequestBodyArg = RestoreFolderFromTrashRequestBodyArg(), queryParams: RestoreFolderFromTrashQueryParamsArg = RestoreFolderFromTrashQueryParamsArg(), headers: RestoreFolderFromTrashHeadersArg = RestoreFolderFromTrashHeadersArg()) async throws -> TrashFolderRestored {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, body: requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try TrashFolderRestored.deserialize(from: response.text)
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try TrashFolderRestored.deserialize(from: response.data)
     }
 
     /// Retrieves a folder that has been moved to the trash.
@@ -79,7 +79,7 @@ public class TrashedFoldersManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/trash")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try TrashFolder.deserialize(from: response.text)
+        return try TrashFolder.deserialize(from: response.data)
     }
 
     /// Permanently deletes a folder that is in the trash.
