@@ -7,20 +7,24 @@ public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaDeleteR
         case enumOptionKey
     }
 
-    /// `removeEnumOption`
-    public let op: String
-    /// `Box__Security__Classification__Key`
-    public let fieldKey: String
+    /// The type of change to perform on the classification
+    /// object.
+    public let op: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaDeleteRequestBodyArgOpField
+    /// Defines classifications 
+    /// available in the enterprise.
+    public let fieldKey: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaDeleteRequestBodyArgFieldKeyField
     /// The label of the classification to remove.
     public let enumOptionKey: String
 
     /// Initializer for a UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaDeleteRequestBodyArg.
     ///
     /// - Parameters:
-    ///   - op: `removeEnumOption`
-    ///   - fieldKey: `Box__Security__Classification__Key`
+    ///   - op: The type of change to perform on the classification
+    ///     object.
+    ///   - fieldKey: Defines classifications 
+    ///     available in the enterprise.
     ///   - enumOptionKey: The label of the classification to remove.
-    public init(op: String, fieldKey: String, enumOptionKey: String) {
+    public init(op: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaDeleteRequestBodyArgOpField, fieldKey: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaDeleteRequestBodyArgFieldKeyField, enumOptionKey: String) {
         self.op = op
         self.fieldKey = fieldKey
         self.enumOptionKey = enumOptionKey
@@ -28,8 +32,8 @@ public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaDeleteR
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        op = try container.decode(String.self, forKey: .op)
-        fieldKey = try container.decode(String.self, forKey: .fieldKey)
+        op = try container.decode(UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaDeleteRequestBodyArgOpField.self, forKey: .op)
+        fieldKey = try container.decode(UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaDeleteRequestBodyArgFieldKeyField.self, forKey: .fieldKey)
         enumOptionKey = try container.decode(String.self, forKey: .enumOptionKey)
     }
 

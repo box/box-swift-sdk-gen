@@ -10,14 +10,14 @@ public class Files: Codable {
     /// The number of files.
     public let totalCount: Int64?
     /// A list of files
-    public let entries: [File]?
+    public let entries: [FileFull]?
 
     /// Initializer for a Files.
     ///
     /// - Parameters:
     ///   - totalCount: The number of files.
     ///   - entries: A list of files
-    public init(totalCount: Int64? = nil, entries: [File]? = nil) {
+    public init(totalCount: Int64? = nil, entries: [FileFull]? = nil) {
         self.totalCount = totalCount
         self.entries = entries
     }
@@ -25,7 +25,7 @@ public class Files: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         totalCount = try container.decodeIfPresent(Int64.self, forKey: .totalCount)
-        entries = try container.decodeIfPresent([File].self, forKey: .entries)
+        entries = try container.decodeIfPresent([FileFull].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {

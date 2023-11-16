@@ -1,9 +1,9 @@
 import Foundation
 
-public enum FileMiniOrFolderMiniOrWebLinkMini: Codable {
+public enum FileMiniOrFolderMiniOrWebLink: Codable {
     case fileMini(FileMini)
     case folderMini(FolderMini)
-    case webLinkMini(WebLinkMini)
+    case webLink(WebLink)
 
     private enum DeterminerCodingKey: String, CodingKey {
         case type
@@ -24,12 +24,12 @@ public enum FileMiniOrFolderMiniOrWebLinkMini: Codable {
                     return
                 }
             case "web_link":
-                if let content = try? WebLinkMini(from: decoder) {
-                    self = .webLinkMini(content)
+                if let content = try? WebLink(from: decoder) {
+                    self = .webLink(content)
                     return
                 }
             default:
-                throw DecodingError.typeMismatch(FileMiniOrFolderMiniOrWebLinkMini.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpeted value for key type"))
+                throw DecodingError.typeMismatch(FileMiniOrFolderMiniOrWebLink.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpeted value for key type"))
             }
         }
 
@@ -42,8 +42,8 @@ public enum FileMiniOrFolderMiniOrWebLinkMini: Codable {
             try fileMini.encode(to: encoder)
         case .folderMini(let folderMini):
             try folderMini.encode(to: encoder)
-        case .webLinkMini(let webLinkMini):
-            try webLinkMini.encode(to: encoder)
+        case .webLink(let webLink):
+            try webLink.encode(to: encoder)
         }
     }
 }

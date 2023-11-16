@@ -33,7 +33,7 @@ public class Users: Codable {
     /// For marker-based paginated APIs, this field will be omitted.
     public let order: [UsersOrderField]?
     /// A list of users
-    public let entries: [User]?
+    public let entries: [UserFull]?
 
     /// Initializer for a Users.
     ///
@@ -57,7 +57,7 @@ public class Users: Codable {
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
     ///   - entries: A list of users
-    public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [UsersOrderField]? = nil, entries: [User]? = nil) {
+    public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [UsersOrderField]? = nil, entries: [UserFull]? = nil) {
         self.totalCount = totalCount
         self.limit = limit
         self.offset = offset
@@ -71,7 +71,7 @@ public class Users: Codable {
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         offset = try container.decodeIfPresent(Int64.self, forKey: .offset)
         order = try container.decodeIfPresent([UsersOrderField].self, forKey: .order)
-        entries = try container.decodeIfPresent([User].self, forKey: .entries)
+        entries = try container.decodeIfPresent([UserFull].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {

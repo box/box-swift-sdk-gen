@@ -82,7 +82,7 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
     ///   - filterEndedAt: User-specified, optional date filter applies to
     ///     Custodian assignments only
     ///   - releaseNotes: Optional notes about why the policy was created.
-    public init(id: String? = nil, type: LegalHoldPolicyMiniTypeField? = nil, policyName: String? = nil, description: String? = nil, status: LegalHoldPolicyStatusField? = nil, assignmentCounts: LegalHoldPolicyAssignmentCountsField? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, modifiedAt: String? = nil, deletedAt: String? = nil, filterStartedAt: String? = nil, filterEndedAt: String? = nil, releaseNotes: String? = nil) {
+    public init(id: String, type: LegalHoldPolicyMiniTypeField, policyName: String? = nil, description: String? = nil, status: LegalHoldPolicyStatusField? = nil, assignmentCounts: LegalHoldPolicyAssignmentCountsField? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, modifiedAt: String? = nil, deletedAt: String? = nil, filterStartedAt: String? = nil, filterEndedAt: String? = nil, releaseNotes: String? = nil) {
         self.policyName = policyName
         self.description = description
         self.status = status

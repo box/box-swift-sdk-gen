@@ -8,10 +8,12 @@ public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateR
         case data
     }
 
-    /// `editEnumOption`
-    public let op: String
-    /// `Box__Security__Classification__Key`
-    public let fieldKey: String
+    /// The type of change to perform on the classification
+    /// object.
+    public let op: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArgOpField
+    /// Defines classifications 
+    /// available in the enterprise.
+    public let fieldKey: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArgFieldKeyField
     /// The original label of the classification to change.
     public let enumOptionKey: String
     /// The details of the updated classification.
@@ -20,11 +22,13 @@ public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateR
     /// Initializer for a UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArg.
     ///
     /// - Parameters:
-    ///   - op: `editEnumOption`
-    ///   - fieldKey: `Box__Security__Classification__Key`
+    ///   - op: The type of change to perform on the classification
+    ///     object.
+    ///   - fieldKey: Defines classifications 
+    ///     available in the enterprise.
     ///   - enumOptionKey: The original label of the classification to change.
     ///   - data: The details of the updated classification.
-    public init(op: String, fieldKey: String, enumOptionKey: String, data: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArgDataField) {
+    public init(op: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArgOpField, fieldKey: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArgFieldKeyField, enumOptionKey: String, data: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArgDataField) {
         self.op = op
         self.fieldKey = fieldKey
         self.enumOptionKey = enumOptionKey
@@ -33,8 +37,8 @@ public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateR
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        op = try container.decode(String.self, forKey: .op)
-        fieldKey = try container.decode(String.self, forKey: .fieldKey)
+        op = try container.decode(UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArgOpField.self, forKey: .op)
+        fieldKey = try container.decode(UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArgFieldKeyField.self, forKey: .fieldKey)
         enumOptionKey = try container.decode(String.self, forKey: .enumOptionKey)
         data = try container.decode(UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaUpdateRequestBodyArgDataField.self, forKey: .data)
     }

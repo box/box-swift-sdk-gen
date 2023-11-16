@@ -9,7 +9,8 @@ public class UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArg: C
 
     /// `replace`
     public let op: UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArgOpField?
-    /// `/Box__Security__Classification__Key`
+    /// Defines classifications 
+    /// available in the enterprise.
     public let path: UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArgPathField?
     /// The name of the classification to apply to this file.
     /// 
@@ -23,7 +24,8 @@ public class UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArg: C
     ///
     /// - Parameters:
     ///   - op: `replace`
-    ///   - path: `/Box__Security__Classification__Key`
+    ///   - path: Defines classifications 
+    ///     available in the enterprise.
     ///   - value: The name of the classification to apply to this file.
     ///     
     ///     To list the available classifications in an enterprise,

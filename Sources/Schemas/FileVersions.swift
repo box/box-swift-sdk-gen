@@ -33,7 +33,7 @@ public class FileVersions: Codable {
     /// For marker-based paginated APIs, this field will be omitted.
     public let order: [FileVersionsOrderField]?
     /// A list of file versions
-    public let entries: [FileVersion]?
+    public let entries: [FileVersionFull]?
 
     /// Initializer for a FileVersions.
     ///
@@ -57,7 +57,7 @@ public class FileVersions: Codable {
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
     ///   - entries: A list of file versions
-    public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [FileVersionsOrderField]? = nil, entries: [FileVersion]? = nil) {
+    public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [FileVersionsOrderField]? = nil, entries: [FileVersionFull]? = nil) {
         self.totalCount = totalCount
         self.limit = limit
         self.offset = offset
@@ -71,7 +71,7 @@ public class FileVersions: Codable {
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         offset = try container.decodeIfPresent(Int64.self, forKey: .offset)
         order = try container.decodeIfPresent([FileVersionsOrderField].self, forKey: .order)
-        entries = try container.decodeIfPresent([FileVersion].self, forKey: .entries)
+        entries = try container.decodeIfPresent([FileVersionFull].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {

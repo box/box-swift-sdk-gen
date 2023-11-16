@@ -59,7 +59,7 @@ See the endpoint docs at
 
 ### Returns
 
-This function returns a value of type `Group`.
+This function returns a value of type `GroupFull`.
 
 Returns the new group object.
 

@@ -23,7 +23,7 @@ public class ClassificationTemplateFieldsFieldOptionsFieldStaticConfigFieldClass
     /// * `5`: Dark blue
     /// * `6`: Light green
     /// * `7`: Gray
-    public let colorId: Double?
+    public let colorId: Int64?
 
     /// Initializer for a ClassificationTemplateFieldsFieldOptionsFieldStaticConfigFieldClassificationField.
     ///
@@ -44,7 +44,7 @@ public class ClassificationTemplateFieldsFieldOptionsFieldStaticConfigFieldClass
     ///     * `5`: Dark blue
     ///     * `6`: Light green
     ///     * `7`: Gray
-    public init(classificationDefinition: String? = nil, colorId: Double? = nil) {
+    public init(classificationDefinition: String? = nil, colorId: Int64? = nil) {
         self.classificationDefinition = classificationDefinition
         self.colorId = colorId
     }
@@ -52,7 +52,7 @@ public class ClassificationTemplateFieldsFieldOptionsFieldStaticConfigFieldClass
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         classificationDefinition = try container.decodeIfPresent(String.self, forKey: .classificationDefinition)
-        colorId = try container.decodeIfPresent(Double.self, forKey: .colorId)
+        colorId = try container.decodeIfPresent(Int64.self, forKey: .colorId)
     }
 
     public func encode(to encoder: Encoder) throws {
