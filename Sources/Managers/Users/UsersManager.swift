@@ -36,13 +36,13 @@ public class UsersManager {
     ///   - requestBody: Request body of createUser method
     ///   - queryParams: Query parameters of createUser method
     ///   - headers: Headers of createUser method
-    /// - Returns: The `User`.
+    /// - Returns: The `UserFull`.
     /// - Throws: The `GeneralError`.
-    public func createUser(requestBody: CreateUserRequestBodyArg, queryParams: CreateUserQueryParamsArg = CreateUserQueryParamsArg(), headers: CreateUserHeadersArg = CreateUserHeadersArg()) async throws -> User {
+    public func createUser(requestBody: CreateUserRequestBodyArg, queryParams: CreateUserQueryParamsArg = CreateUserQueryParamsArg(), headers: CreateUserHeadersArg = CreateUserHeadersArg()) async throws -> UserFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try User.deserialize(from: response.data)
+        return try UserFull.deserialize(from: response.data)
     }
 
     /// Retrieves information about the user who is currently authenticated.

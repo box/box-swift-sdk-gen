@@ -34,7 +34,7 @@ public class Items: Codable {
     /// For marker-based paginated APIs, this field will be omitted.
     public let order: [ItemsOrderField]?
     /// The items in this collection.
-    public let entries: [FileMiniOrFolderMiniOrWebLinkMini]?
+    public let entries: [FileMiniOrFolderMiniOrWebLink]?
 
     /// Initializer for a Items.
     ///
@@ -58,7 +58,7 @@ public class Items: Codable {
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
     ///   - entries: The items in this collection.
-    public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [ItemsOrderField]? = nil, entries: [FileMiniOrFolderMiniOrWebLinkMini]? = nil) {
+    public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [ItemsOrderField]? = nil, entries: [FileMiniOrFolderMiniOrWebLink]? = nil) {
         self.totalCount = totalCount
         self.limit = limit
         self.offset = offset
@@ -72,7 +72,7 @@ public class Items: Codable {
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         offset = try container.decodeIfPresent(Int64.self, forKey: .offset)
         order = try container.decodeIfPresent([ItemsOrderField].self, forKey: .order)
-        entries = try container.decodeIfPresent([FileMiniOrFolderMiniOrWebLinkMini].self, forKey: .entries)
+        entries = try container.decodeIfPresent([FileMiniOrFolderMiniOrWebLink].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {

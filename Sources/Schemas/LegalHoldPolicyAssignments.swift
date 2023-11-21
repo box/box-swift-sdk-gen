@@ -19,7 +19,7 @@ public class LegalHoldPolicyAssignments: Codable {
     public let prevMarker: Int64?
     /// A list of legal hold
     /// policy assignments
-    public let entries: [LegalHoldPolicyAssignmentBase]?
+    public let entries: [LegalHoldPolicyAssignment]?
 
     /// Initializer for a LegalHoldPolicyAssignments.
     ///
@@ -31,7 +31,7 @@ public class LegalHoldPolicyAssignments: Codable {
     ///   - prevMarker: The marker for the start of the previous page of results.
     ///   - entries: A list of legal hold
     ///     policy assignments
-    public init(limit: Int64? = nil, nextMarker: Int64? = nil, prevMarker: Int64? = nil, entries: [LegalHoldPolicyAssignmentBase]? = nil) {
+    public init(limit: Int64? = nil, nextMarker: Int64? = nil, prevMarker: Int64? = nil, entries: [LegalHoldPolicyAssignment]? = nil) {
         self.limit = limit
         self.nextMarker = nextMarker
         self.prevMarker = prevMarker
@@ -43,7 +43,7 @@ public class LegalHoldPolicyAssignments: Codable {
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         nextMarker = try container.decodeIfPresent(Int64.self, forKey: .nextMarker)
         prevMarker = try container.decodeIfPresent(Int64.self, forKey: .prevMarker)
-        entries = try container.decodeIfPresent([LegalHoldPolicyAssignmentBase].self, forKey: .entries)
+        entries = try container.decodeIfPresent([LegalHoldPolicyAssignment].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -51,7 +51,7 @@ public class ClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func updateMetadataTemplateEnterpriseSecurityClassificationSchemaAdd(requestBody: [UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArg], headers: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddHeadersArg = UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddHeadersArg()) async throws -> ClassificationTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema#add")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema#add")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ClassificationTemplate.deserialize(from: response.data)
     }
 

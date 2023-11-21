@@ -84,13 +84,13 @@ public class CommentsManager {
     ///   - requestBody: Request body of createComment method
     ///   - queryParams: Query parameters of createComment method
     ///   - headers: Headers of createComment method
-    /// - Returns: The `Comment`.
+    /// - Returns: The `CommentFull`.
     /// - Throws: The `GeneralError`.
-    public func createComment(requestBody: CreateCommentRequestBodyArg, queryParams: CreateCommentQueryParamsArg = CreateCommentQueryParamsArg(), headers: CreateCommentHeadersArg = CreateCommentHeadersArg()) async throws -> Comment {
+    public func createComment(requestBody: CreateCommentRequestBodyArg, queryParams: CreateCommentQueryParamsArg = CreateCommentQueryParamsArg(), headers: CreateCommentHeadersArg = CreateCommentHeadersArg()) async throws -> CommentFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/comments")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Comment.deserialize(from: response.data)
+        return try CommentFull.deserialize(from: response.data)
     }
 
 }

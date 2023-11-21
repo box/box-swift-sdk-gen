@@ -7,20 +7,24 @@ public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequ
         case data
     }
 
-    /// `addEnumOption`
-    public let op: String
-    /// `Box__Security__Classification__Key`
-    public let fieldKey: String
+    /// The type of change to perform on the classification
+    /// object.
+    public let op: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgOpField
+    /// Defines classifications 
+    /// available in the enterprise.
+    public let fieldKey: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgFieldKeyField
     /// The details of the classification to add.
     public let data: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataField
 
     /// Initializer for a UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArg.
     ///
     /// - Parameters:
-    ///   - op: `addEnumOption`
-    ///   - fieldKey: `Box__Security__Classification__Key`
+    ///   - op: The type of change to perform on the classification
+    ///     object.
+    ///   - fieldKey: Defines classifications 
+    ///     available in the enterprise.
     ///   - data: The details of the classification to add.
-    public init(op: String, fieldKey: String, data: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataField) {
+    public init(op: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgOpField, fieldKey: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgFieldKeyField, data: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataField) {
         self.op = op
         self.fieldKey = fieldKey
         self.data = data
@@ -28,8 +32,8 @@ public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequ
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        op = try container.decode(String.self, forKey: .op)
-        fieldKey = try container.decode(String.self, forKey: .fieldKey)
+        op = try container.decode(UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgOpField.self, forKey: .op)
+        fieldKey = try container.decode(UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgFieldKeyField.self, forKey: .fieldKey)
         data = try container.decode(UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataField.self, forKey: .data)
     }
 

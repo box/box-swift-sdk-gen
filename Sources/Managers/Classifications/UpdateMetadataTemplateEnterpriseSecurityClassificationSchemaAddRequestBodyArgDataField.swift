@@ -3,15 +3,15 @@ import Foundation
 public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataField: Codable {
     private enum CodingKeys: String, CodingKey {
         case key
-        case classification
+        case staticConfig
     }
 
     /// The label of the classification as shown in the web and
     /// mobile interfaces. This is the only field required to
     /// add a classification.
     public let key: String
-    /// Additional details for the classification.
-    public let classification: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataFieldClassificationField?
+    /// A static configuration for the classification.
+    public let staticConfig: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataFieldStaticConfigField?
 
     /// Initializer for a UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataField.
     ///
@@ -19,21 +19,21 @@ public class UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequ
     ///   - key: The label of the classification as shown in the web and
     ///     mobile interfaces. This is the only field required to
     ///     add a classification.
-    ///   - classification: Additional details for the classification.
-    public init(key: String, classification: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataFieldClassificationField? = nil) {
+    ///   - staticConfig: A static configuration for the classification.
+    public init(key: String, staticConfig: UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataFieldStaticConfigField? = nil) {
         self.key = key
-        self.classification = classification
+        self.staticConfig = staticConfig
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         key = try container.decode(String.self, forKey: .key)
-        classification = try container.decodeIfPresent(UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataFieldClassificationField.self, forKey: .classification)
+        staticConfig = try container.decodeIfPresent(UpdateMetadataTemplateEnterpriseSecurityClassificationSchemaAddRequestBodyArgDataFieldStaticConfigField.self, forKey: .staticConfig)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(key, forKey: .key)
-        try container.encodeIfPresent(classification, forKey: .classification)
+        try container.encodeIfPresent(staticConfig, forKey: .staticConfig)
     }
 }

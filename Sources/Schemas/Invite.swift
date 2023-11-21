@@ -14,9 +14,9 @@ public class Invite: Codable {
     }
 
     /// The unique identifier for this invite
-    public let id: String?
+    public let id: String
     /// `invite`
-    public let type: InviteTypeField?
+    public let type: InviteTypeField
     /// A representation of a Box enterprise
     public let invitedTo: InviteInvitedToField?
     public let actionableBy: UserMini?
@@ -39,7 +39,7 @@ public class Invite: Codable {
     ///   - status: The status of the invite
     ///   - createdAt: When the invite was created
     ///   - modifiedAt: When the invite was modified.
-    public init(id: String? = nil, type: InviteTypeField? = nil, invitedTo: InviteInvitedToField? = nil, actionableBy: UserMini? = nil, invitedBy: UserMini? = nil, status: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
+    public init(id: String, type: InviteTypeField, invitedTo: InviteInvitedToField? = nil, actionableBy: UserMini? = nil, invitedBy: UserMini? = nil, status: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
         self.id = id
         self.type = type
         self.invitedTo = invitedTo
@@ -52,8 +52,8 @@ public class Invite: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(InviteTypeField.self, forKey: .type)
+        id = try container.decode(String.self, forKey: .id)
+        type = try container.decode(InviteTypeField.self, forKey: .type)
         invitedTo = try container.decodeIfPresent(InviteInvitedToField.self, forKey: .invitedTo)
         actionableBy = try container.decodeIfPresent(UserMini.self, forKey: .actionableBy)
         invitedBy = try container.decodeIfPresent(UserMini.self, forKey: .invitedBy)
@@ -64,8 +64,8 @@ public class Invite: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encode(id, forKey: .id)
+        try container.encode(type, forKey: .type)
         try container.encodeIfPresent(invitedTo, forKey: .invitedTo)
         try container.encodeIfPresent(actionableBy, forKey: .actionableBy)
         try container.encodeIfPresent(invitedBy, forKey: .invitedBy)

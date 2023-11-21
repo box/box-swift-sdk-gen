@@ -64,7 +64,7 @@ See the endpoint docs at
 
 ### Returns
 
-This function returns a value of type `User`.
+This function returns a value of type `UserFull`.
 
 Returns a user object for the newly created user.
 
