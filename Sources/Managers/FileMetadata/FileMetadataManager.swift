@@ -75,12 +75,12 @@ public class FileMetadataManager {
     ///     Example: "properties"
     ///   - requestBody: Request body of createFileMetadataById method
     ///   - headers: Headers of createFileMetadataById method
-    /// - Returns: The `Metadata`.
+    /// - Returns: The `MetadataFull`.
     /// - Throws: The `GeneralError`.
-    public func createFileMetadataById(fileId: String, scope: CreateFileMetadataByIdScopeArg, templateKey: String, requestBody: CreateFileMetadataByIdRequestBodyArg, headers: CreateFileMetadataByIdHeadersArg = CreateFileMetadataByIdHeadersArg()) async throws -> Metadata {
+    public func createFileMetadataById(fileId: String, scope: CreateFileMetadataByIdScopeArg, templateKey: String, requestBody: CreateFileMetadataByIdRequestBodyArg, headers: CreateFileMetadataByIdHeadersArg = CreateFileMetadataByIdHeadersArg()) async throws -> MetadataFull {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/")\(scope)\("/")\(templateKey)", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Metadata.deserialize(from: response.data)
+        return try MetadataFull.deserialize(from: response.data)
     }
 
     /// Updates a piece of metadata on a file.
@@ -107,12 +107,12 @@ public class FileMetadataManager {
     ///     Example: "properties"
     ///   - requestBody: Request body of updateFileMetadataById method
     ///   - headers: Headers of updateFileMetadataById method
-    /// - Returns: The `Metadata`.
+    /// - Returns: The `MetadataFull`.
     /// - Throws: The `GeneralError`.
-    public func updateFileMetadataById(fileId: String, scope: UpdateFileMetadataByIdScopeArg, templateKey: String, requestBody: [UpdateFileMetadataByIdRequestBodyArg], headers: UpdateFileMetadataByIdHeadersArg = UpdateFileMetadataByIdHeadersArg()) async throws -> Metadata {
+    public func updateFileMetadataById(fileId: String, scope: UpdateFileMetadataByIdScopeArg, templateKey: String, requestBody: [UpdateFileMetadataByIdRequestBodyArg], headers: UpdateFileMetadataByIdHeadersArg = UpdateFileMetadataByIdHeadersArg()) async throws -> MetadataFull {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/")\(scope)\("/")\(templateKey)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Metadata.deserialize(from: response.data)
+        return try MetadataFull.deserialize(from: response.data)
     }
 
     /// Deletes a piece of file metadata.

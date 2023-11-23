@@ -3,8 +3,8 @@ import Foundation
 /// A template for metadata that can be applied to files and folders
 public class MetadataTemplate: Codable {
     private enum CodingKeys: String, CodingKey {
-        case type
         case id
+        case type
         case scope
         case templateKey
         case displayName
@@ -13,10 +13,10 @@ public class MetadataTemplate: Codable {
         case copyInstanceOnItemCopy
     }
 
+    /// The ID of the metadata template.
+    public let id: String
     /// `metadata_template`
     public let type: MetadataTemplateTypeField
-    /// The ID of the metadata template.
-    public let id: String?
     /// The scope of the metadata template can either be `global` or
     /// `enterprise_*`. The `global` scope is used for templates that are
     /// available to any Box enterprise. The `enterprise_*` scope represents
@@ -43,8 +43,8 @@ public class MetadataTemplate: Codable {
     /// Initializer for a MetadataTemplate.
     ///
     /// - Parameters:
-    ///   - type: `metadata_template`
     ///   - id: The ID of the metadata template.
+    ///   - type: `metadata_template`
     ///   - scope: The scope of the metadata template can either be `global` or
     ///     `enterprise_*`. The `global` scope is used for templates that are
     ///     available to any Box enterprise. The `enterprise_*` scope represents
@@ -61,9 +61,9 @@ public class MetadataTemplate: Codable {
     ///     field can be a regular text field, date field, number field, as well as a
     ///     single or multi-select list.
     ///   - copyInstanceOnItemCopy: Whether or not to include the metadata when a file or folder is copied.
-    public init(type: MetadataTemplateTypeField, id: String? = nil, scope: String? = nil, templateKey: String? = nil, displayName: String? = nil, hidden: Bool? = nil, fields: [MetadataTemplateFieldsField]? = nil, copyInstanceOnItemCopy: Bool? = nil) {
-        self.type = type
+    public init(id: String, type: MetadataTemplateTypeField, scope: String? = nil, templateKey: String? = nil, displayName: String? = nil, hidden: Bool? = nil, fields: [MetadataTemplateFieldsField]? = nil, copyInstanceOnItemCopy: Bool? = nil) {
         self.id = id
+        self.type = type
         self.scope = scope
         self.templateKey = templateKey
         self.displayName = displayName
@@ -74,8 +74,8 @@ public class MetadataTemplate: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
         type = try container.decode(MetadataTemplateTypeField.self, forKey: .type)
-        id = try container.decodeIfPresent(String.self, forKey: .id)
         scope = try container.decodeIfPresent(String.self, forKey: .scope)
         templateKey = try container.decodeIfPresent(String.self, forKey: .templateKey)
         displayName = try container.decodeIfPresent(String.self, forKey: .displayName)
@@ -86,8 +86,8 @@ public class MetadataTemplate: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
         try container.encode(type, forKey: .type)
-        try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(scope, forKey: .scope)
         try container.encodeIfPresent(templateKey, forKey: .templateKey)
         try container.encodeIfPresent(displayName, forKey: .displayName)

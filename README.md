@@ -130,7 +130,7 @@ To run integration tests, you need several environment variables specifying your
 2. Set the `CLIENT_SECRET` environment variable to its corresponding value from the `Configuration` tab in the section `OAuth 2.0 Credentials` of your application.
 3. Set the `ENTERPRISE_ID` environment variable to its corresponding value from the `General Settings` tab the section `App Info` of your application.
 4. Set the `USER_ID` environment variable to its corresponding value from the `General Settings` tab the section `App Info` of your application.
-5. Set the `BOX_FILE_REQUEST_ID` environment variable to the ID of file request already created in the user account.
+5. Set the `BOX_FILE_REQUEST_ID` environment variable to the ID of file request already created in the user account, `BOX_EXTERNAL_USER_EMAIL` with email of free external user which not belongs to any enterprise.
 
 ### Running tests
 

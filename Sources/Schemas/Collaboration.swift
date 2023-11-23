@@ -23,9 +23,9 @@ public class Collaboration: Codable {
     }
 
     /// The unique identifier for this collaboration.
-    public let id: String?
+    public let id: String
     /// `collaboration`
-    public let type: CollaborationTypeField?
+    public let type: CollaborationTypeField
     public let item: FileOrFolderOrWebLink?
     public let accessibleBy: GroupMiniOrUserCollaborations?
     /// The email address used to invite an unregistered collaborator, if
@@ -80,7 +80,7 @@ public class Collaboration: Codable {
     ///   - createdAt: When the collaboration object was created.
     ///   - modifiedAt: When the collaboration object was last modified.
     ///   - acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField?
-    public init(id: String? = nil, type: CollaborationTypeField? = nil, item: FileOrFolderOrWebLink? = nil, accessibleBy: GroupMiniOrUserCollaborations? = nil, inviteEmail: String? = nil, role: CollaborationRoleField? = nil, expiresAt: String? = nil, isAccessOnly: Bool? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: String? = nil, createdBy: UserCollaborations? = nil, createdAt: String? = nil, modifiedAt: String? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
+    public init(id: String, type: CollaborationTypeField, item: FileOrFolderOrWebLink? = nil, accessibleBy: GroupMiniOrUserCollaborations? = nil, inviteEmail: String? = nil, role: CollaborationRoleField? = nil, expiresAt: String? = nil, isAccessOnly: Bool? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: String? = nil, createdBy: UserCollaborations? = nil, createdAt: String? = nil, modifiedAt: String? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
         self.id = id
         self.type = type
         self.item = item
@@ -99,8 +99,8 @@ public class Collaboration: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(CollaborationTypeField.self, forKey: .type)
+        id = try container.decode(String.self, forKey: .id)
+        type = try container.decode(CollaborationTypeField.self, forKey: .type)
         item = try container.decodeIfPresent(FileOrFolderOrWebLink.self, forKey: .item)
         accessibleBy = try container.decodeIfPresent(GroupMiniOrUserCollaborations.self, forKey: .accessibleBy)
         inviteEmail = try container.decodeIfPresent(String.self, forKey: .inviteEmail)
@@ -117,8 +117,8 @@ public class Collaboration: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encode(id, forKey: .id)
+        try container.encode(type, forKey: .type)
         try container.encodeIfPresent(item, forKey: .item)
         try container.encodeIfPresent(accessibleBy, forKey: .accessibleBy)
         try container.encodeIfPresent(inviteEmail, forKey: .inviteEmail)
