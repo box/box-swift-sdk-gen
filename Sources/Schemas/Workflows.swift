@@ -17,9 +17,9 @@ public class Workflows: Codable {
     /// allowed. The maximum value varies by API.
     public let limit: Int64?
     /// The marker for the start of the next page of results.
-    public let nextMarker: Int64?
+    public let nextMarker: String?
     /// The marker for the start of the previous page of results.
-    public let prevMarker: Int64?
+    public let prevMarker: String?
     /// A list of workflows
     public let entries: [Workflow]?
 
@@ -32,7 +32,7 @@ public class Workflows: Codable {
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
     ///   - entries: A list of workflows
-    public init(limit: Int64? = nil, nextMarker: Int64? = nil, prevMarker: Int64? = nil, entries: [Workflow]? = nil) {
+    public init(limit: Int64? = nil, nextMarker: String? = nil, prevMarker: String? = nil, entries: [Workflow]? = nil) {
         self.limit = limit
         self.nextMarker = nextMarker
         self.prevMarker = prevMarker
@@ -42,8 +42,8 @@ public class Workflows: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
-        nextMarker = try container.decodeIfPresent(Int64.self, forKey: .nextMarker)
-        prevMarker = try container.decodeIfPresent(Int64.self, forKey: .prevMarker)
+        nextMarker = try container.decodeIfPresent(String.self, forKey: .nextMarker)
+        prevMarker = try container.decodeIfPresent(String.self, forKey: .prevMarker)
         entries = try container.decodeIfPresent([Workflow].self, forKey: .entries)
     }
 

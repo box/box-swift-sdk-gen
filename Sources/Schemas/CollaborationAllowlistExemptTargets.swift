@@ -15,9 +15,9 @@ public class CollaborationAllowlistExemptTargets: Codable {
     /// allowed. The maximum value varies by API.
     public let limit: Int64?
     /// The marker for the start of the next page of results.
-    public let nextMarker: Int64?
+    public let nextMarker: String?
     /// The marker for the start of the previous page of results.
-    public let prevMarker: Int64?
+    public let prevMarker: String?
     /// A list of users exempt from any of the restrictions
     /// imposed by the list of allowed collaboration domains
     /// for this enterprise.
@@ -34,7 +34,7 @@ public class CollaborationAllowlistExemptTargets: Codable {
     ///   - entries: A list of users exempt from any of the restrictions
     ///     imposed by the list of allowed collaboration domains
     ///     for this enterprise.
-    public init(limit: Int64? = nil, nextMarker: Int64? = nil, prevMarker: Int64? = nil, entries: [CollaborationAllowlistExemptTarget]? = nil) {
+    public init(limit: Int64? = nil, nextMarker: String? = nil, prevMarker: String? = nil, entries: [CollaborationAllowlistExemptTarget]? = nil) {
         self.limit = limit
         self.nextMarker = nextMarker
         self.prevMarker = prevMarker
@@ -44,8 +44,8 @@ public class CollaborationAllowlistExemptTargets: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
-        nextMarker = try container.decodeIfPresent(Int64.self, forKey: .nextMarker)
-        prevMarker = try container.decodeIfPresent(Int64.self, forKey: .prevMarker)
+        nextMarker = try container.decodeIfPresent(String.self, forKey: .nextMarker)
+        prevMarker = try container.decodeIfPresent(String.self, forKey: .prevMarker)
         entries = try container.decodeIfPresent([CollaborationAllowlistExemptTarget].self, forKey: .entries)
     }
 

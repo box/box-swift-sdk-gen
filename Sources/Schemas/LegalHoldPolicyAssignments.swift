@@ -14,9 +14,9 @@ public class LegalHoldPolicyAssignments: Codable {
     /// allowed. The maximum value varies by API.
     public let limit: Int64?
     /// The marker for the start of the next page of results.
-    public let nextMarker: Int64?
+    public let nextMarker: String?
     /// The marker for the start of the previous page of results.
-    public let prevMarker: Int64?
+    public let prevMarker: String?
     /// A list of legal hold
     /// policy assignments
     public let entries: [LegalHoldPolicyAssignment]?
@@ -31,7 +31,7 @@ public class LegalHoldPolicyAssignments: Codable {
     ///   - prevMarker: The marker for the start of the previous page of results.
     ///   - entries: A list of legal hold
     ///     policy assignments
-    public init(limit: Int64? = nil, nextMarker: Int64? = nil, prevMarker: Int64? = nil, entries: [LegalHoldPolicyAssignment]? = nil) {
+    public init(limit: Int64? = nil, nextMarker: String? = nil, prevMarker: String? = nil, entries: [LegalHoldPolicyAssignment]? = nil) {
         self.limit = limit
         self.nextMarker = nextMarker
         self.prevMarker = prevMarker
@@ -41,8 +41,8 @@ public class LegalHoldPolicyAssignments: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
-        nextMarker = try container.decodeIfPresent(Int64.self, forKey: .nextMarker)
-        prevMarker = try container.decodeIfPresent(Int64.self, forKey: .prevMarker)
+        nextMarker = try container.decodeIfPresent(String.self, forKey: .nextMarker)
+        prevMarker = try container.decodeIfPresent(String.self, forKey: .prevMarker)
         entries = try container.decodeIfPresent([LegalHoldPolicyAssignment].self, forKey: .entries)
     }
 
