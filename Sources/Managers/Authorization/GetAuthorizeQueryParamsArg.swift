@@ -25,7 +25,7 @@ public class GetAuthorizeQueryParamsArg {
     /// can be used to identify a user on redirect, as well as protect
     /// against hijacked sessions and other exploits.
     public let state: String?
-    /// A comma-separated list of application scopes you'd like to
+    /// A space-separated list of application scopes you'd like to
     /// authenticate the user for. This defaults to all the scopes configured
     /// for the application in its configuration page.
     public let scope: String?
@@ -53,7 +53,7 @@ public class GetAuthorizeQueryParamsArg {
     ///     the redirect URL when authentication is complete. This parameter
     ///     can be used to identify a user on redirect, as well as protect
     ///     against hijacked sessions and other exploits.
-    ///   - scope: A comma-separated list of application scopes you'd like to
+    ///   - scope: A space-separated list of application scopes you'd like to
     ///     authenticate the user for. This defaults to all the scopes configured
     ///     for the application in its configuration page.
     public init(responseType: GetAuthorizeQueryParamsArgResponseTypeField, clientId: String, redirectUri: String? = nil, state: String? = nil, scope: String? = nil) {

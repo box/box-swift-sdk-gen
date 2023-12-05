@@ -12,3 +12,7 @@ public enum TokenGrantType: String, CodableStringEnum {
     case urnIetfParamsOauthGrantTypeJwtBearer = "urn:ietf:params:oauth:grant-type:jwt-bearer"
     case urnIetfParamsOauthGrantTypeTokenExchange = "urn:ietf:params:oauth:grant-type:token-exchange"
 }
+
+public enum SubjectTokenType: String, CodableStringEnum {
+    case urnIetfParamsOauthTokenTypeAccessToken = "urn:ietf:params:oauth:token-type:access_token"
+}

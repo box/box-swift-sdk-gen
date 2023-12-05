@@ -18,7 +18,7 @@ public class FoldersManager {
     /// [folder items](r://folder--full#param-item-collection).
     /// 
     /// To fetch more items within the folder, use the
-    /// [Get items in a folder](#get-folders-id-items) endpoint.
+    /// [Get items in a folder](e://get-folders-id-items) endpoint.
     ///
     /// - Parameters:
     ///   - folderId: The unique identifier that represent a folder.
