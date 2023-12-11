@@ -8,6 +8,7 @@ public class TemplateSignerInputCoordinatesField: Codable {
 
     /// Relative x coordinate to the page the input is on, ranging from 0 to 1.
     public let x: Double?
+
     /// Relative y coordinate to the page the input is on, ranging from 0 to 1.
     public let y: Double?
 
@@ -32,4 +33,5 @@ public class TemplateSignerInputCoordinatesField: Codable {
         try container.encodeIfPresent(x, forKey: .x)
         try container.encodeIfPresent(y, forKey: .y)
     }
+
 }

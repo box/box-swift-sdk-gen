@@ -10,6 +10,7 @@ public class EnterpriseBase: Codable {
 
     /// The unique identifier for this enterprise
     public let id: String?
+
     /// `enterprise`
     public let type: EnterpriseBaseTypeField?
 
@@ -34,4 +35,5 @@ public class EnterpriseBase: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

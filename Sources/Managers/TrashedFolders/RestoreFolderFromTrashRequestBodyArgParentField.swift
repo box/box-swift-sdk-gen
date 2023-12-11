@@ -25,4 +25,5 @@ public class RestoreFolderFromTrashRequestBodyArgParentField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(id, forKey: .id)
     }
+
 }

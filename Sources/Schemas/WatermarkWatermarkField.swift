@@ -8,6 +8,7 @@ public class WatermarkWatermarkField: Codable {
 
     /// When this watermark was created
     public let createdAt: String?
+
     /// When this task was modified
     public let modifiedAt: String?
 
@@ -32,4 +33,5 @@ public class WatermarkWatermarkField: Codable {
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
     }
+
 }

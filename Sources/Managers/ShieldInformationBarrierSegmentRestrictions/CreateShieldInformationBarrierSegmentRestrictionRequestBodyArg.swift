@@ -11,12 +11,15 @@ public class CreateShieldInformationBarrierSegmentRestrictionRequestBodyArg: Cod
     /// The type of the shield barrier segment
     /// restriction for this member.
     public let type: CreateShieldInformationBarrierSegmentRestrictionRequestBodyArgTypeField
+
     /// The `type` and `id` of the requested
     /// shield information barrier segment.
     public let shieldInformationBarrierSegment: CreateShieldInformationBarrierSegmentRestrictionRequestBodyArgShieldInformationBarrierSegmentField
+
     /// The `type` and `id` of the restricted
     /// shield information barrier segment.
     public let restrictedSegment: CreateShieldInformationBarrierSegmentRestrictionRequestBodyArgRestrictedSegmentField
+
     public let shieldInformationBarrier: ShieldInformationBarrierBase?
 
     /// Initializer for a CreateShieldInformationBarrierSegmentRestrictionRequestBodyArg.
@@ -28,7 +31,7 @@ public class CreateShieldInformationBarrierSegmentRestrictionRequestBodyArg: Cod
     ///     shield information barrier segment.
     ///   - restrictedSegment: The `type` and `id` of the restricted
     ///     shield information barrier segment.
-    ///   - shieldInformationBarrier: ShieldInformationBarrierBase?
+    ///   - shieldInformationBarrier: 
     public init(type: CreateShieldInformationBarrierSegmentRestrictionRequestBodyArgTypeField, shieldInformationBarrierSegment: CreateShieldInformationBarrierSegmentRestrictionRequestBodyArgShieldInformationBarrierSegmentField, restrictedSegment: CreateShieldInformationBarrierSegmentRestrictionRequestBodyArgRestrictedSegmentField, shieldInformationBarrier: ShieldInformationBarrierBase? = nil) {
         self.type = type
         self.shieldInformationBarrierSegment = shieldInformationBarrierSegment
@@ -51,4 +54,5 @@ public class CreateShieldInformationBarrierSegmentRestrictionRequestBodyArg: Cod
         try container.encode(restrictedSegment, forKey: .restrictedSegment)
         try container.encodeIfPresent(shieldInformationBarrier, forKey: .shieldInformationBarrier)
     }
+
 }

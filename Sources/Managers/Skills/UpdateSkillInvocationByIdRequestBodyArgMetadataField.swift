@@ -25,4 +25,5 @@ public class UpdateSkillInvocationByIdRequestBodyArgMetadataField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(cards, forKey: .cards)
     }
+
 }

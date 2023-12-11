@@ -24,48 +24,65 @@ public class CreateUserRequestBodyArg: Codable {
 
     /// The name of the user
     public let name: String
+
     /// The email address the user uses to log in
     /// 
     /// Required, unless `is_platform_access_only`
     /// is set to `true`.
     public let login: String?
+
     /// Specifies that the user is an app user.
     public let isPlatformAccessOnly: Bool?
+
     /// The user’s enterprise role
     public let role: CreateUserRequestBodyArgRoleField?
+
     /// The language of the user, formatted in modified version of the
     /// [ISO 639-1](/guides/api-calls/language-codes) format.
     public let language: String?
+
     /// Whether the user can use Box Sync
     public let isSyncEnabled: Bool?
+
     /// The user’s job title
     public let jobTitle: String?
+
     /// The user’s phone number
     public let phone: String?
+
     /// The user’s address
     public let address: String?
+
     /// The user’s total available space in bytes. Set this to `-1` to
     /// indicate unlimited storage.
     public let spaceAmount: Int64?
+
     /// Tracking codes allow an admin to generate reports from the
     /// admin console and assign an attribute to a specific group
     /// of users. This setting must be enabled for an enterprise before it
     /// can be used.
     public let trackingCodes: [TrackingCode]?
+
     /// Whether the user can see other enterprise users in their
     /// contact list
     public let canSeeManagedUsers: Bool?
+
     /// The user's timezone
     public let timezone: String?
+
     /// Whether the user is allowed to collaborate with users outside
     /// their enterprise
     public let isExternalCollabRestricted: Bool?
+
     /// Whether to exempt the user from enterprise device limits
     public let isExemptFromDeviceLimits: Bool?
+
     /// Whether the user must use two-factor authentication
     public let isExemptFromLoginVerification: Bool?
+
     /// The user's account status
     public let status: CreateUserRequestBodyArgStatusField?
+
     /// An external identifier for an app user, which can be used to look
     /// up the user. This can be used to tie user IDs from external
     /// identity providers to Box users.
@@ -168,4 +185,5 @@ public class CreateUserRequestBodyArg: Codable {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(externalAppUserId, forKey: .externalAppUserId)
     }
+
 }

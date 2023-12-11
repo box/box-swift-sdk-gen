@@ -9,10 +9,12 @@ public class CreateTermOfServiceRequestBodyArg: Codable {
 
     /// Whether this terms of service is active.
     public let status: CreateTermOfServiceRequestBodyArgStatusField
+
     /// The terms of service text to display to users.
     /// 
     /// The text can be set to empty if the `status` is set to `disabled`.
     public let text: String
+
     /// The type of user to set the terms of
     /// service for.
     public let tosType: CreateTermOfServiceRequestBodyArgTosTypeField?
@@ -45,4 +47,5 @@ public class CreateTermOfServiceRequestBodyArg: Codable {
         try container.encode(text, forKey: .text)
         try container.encodeIfPresent(tosType, forKey: .tosType)
     }
+
 }

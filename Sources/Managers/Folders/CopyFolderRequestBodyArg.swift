@@ -8,6 +8,7 @@ public class CopyFolderRequestBodyArg: Codable {
 
     /// The destination folder to copy the folder to.
     public let parent: CopyFolderRequestBodyArgParentField
+
     /// An optional new name for the copied folder.
     /// 
     /// There are some restrictions to the file name. Names containing
@@ -48,4 +49,5 @@ public class CopyFolderRequestBodyArg: Codable {
         try container.encode(parent, forKey: .parent)
         try container.encodeIfPresent(name, forKey: .name)
     }
+
 }

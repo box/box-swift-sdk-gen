@@ -8,6 +8,7 @@ public class TrashFilePathCollectionField: Codable {
 
     /// The number of folders in this list.
     public let totalCount: Int64
+
     /// Array of folders for this item's path collection
     public let entries: [TrashFilePathCollectionFieldEntriesField]
 
@@ -32,4 +33,5 @@ public class TrashFilePathCollectionField: Codable {
         try container.encode(totalCount, forKey: .totalCount)
         try container.encode(entries, forKey: .entries)
     }
+
 }

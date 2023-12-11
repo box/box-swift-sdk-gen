@@ -20,6 +20,7 @@ public class FolderFolderUploadEmailField: Codable {
     /// When set to `open` it will accept emails from any email
     /// address.
     public let access: FolderFolderUploadEmailFieldAccessField?
+
     /// The optional upload email address for this folder.
     public let email: String?
 
@@ -56,4 +57,5 @@ public class FolderFolderUploadEmailField: Codable {
         try container.encodeIfPresent(access, forKey: .access)
         try container.encodeIfPresent(email, forKey: .email)
     }
+
 }

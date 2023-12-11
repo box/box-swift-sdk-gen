@@ -8,6 +8,7 @@ public class AddClassificationRequestBodyArgDataFieldStaticConfigFieldClassifica
 
     /// A longer description of the classification.
     public let classificationDefinition: String?
+
     /// An internal Box identifier used to assign a color to
     /// a classification label.
     /// 
@@ -60,4 +61,5 @@ public class AddClassificationRequestBodyArgDataFieldStaticConfigFieldClassifica
         try container.encodeIfPresent(classificationDefinition, forKey: .classificationDefinition)
         try container.encodeIfPresent(colorId, forKey: .colorId)
     }
+
 }

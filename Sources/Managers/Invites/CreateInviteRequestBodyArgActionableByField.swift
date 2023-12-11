@@ -25,4 +25,5 @@ public class CreateInviteRequestBodyArgActionableByField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(login, forKey: .login)
     }
+
 }

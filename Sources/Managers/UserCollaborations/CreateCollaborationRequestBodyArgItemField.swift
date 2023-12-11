@@ -9,6 +9,7 @@ public class CreateCollaborationRequestBodyArgItemField: Codable {
     /// The type of the item that this collaboration will be
     /// granted access to
     public let type: CreateCollaborationRequestBodyArgItemFieldTypeField?
+
     /// The ID of the item that will be granted access to
     public let id: String?
 
@@ -34,4 +35,5 @@ public class CreateCollaborationRequestBodyArgItemField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(id, forKey: .id)
     }
+
 }

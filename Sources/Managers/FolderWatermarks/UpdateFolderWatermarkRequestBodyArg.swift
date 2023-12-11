@@ -25,4 +25,5 @@ public class UpdateFolderWatermarkRequestBodyArg: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(watermark, forKey: .watermark)
     }
+
 }

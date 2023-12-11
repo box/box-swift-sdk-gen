@@ -8,6 +8,7 @@ public class CreateStoragePolicyAssignmentRequestBodyArgAssignedToField: Codable
 
     /// The type to assign the policy to.
     public let type: CreateStoragePolicyAssignmentRequestBodyArgAssignedToFieldTypeField
+
     /// The ID of the user or enterprise
     public let id: String
 
@@ -32,4 +33,5 @@ public class CreateStoragePolicyAssignmentRequestBodyArgAssignedToField: Codable
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

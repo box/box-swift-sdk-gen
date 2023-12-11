@@ -31,4 +31,5 @@ public class UpdateFolderAddSharedLinkRequestBodyArg: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
     }
+
 }

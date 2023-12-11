@@ -14,18 +14,23 @@ public class MetadataCascadePolicy: Codable {
 
     /// The ID of the metadata cascade policy object
     public let id: String
+
     /// `metadata_cascade_policy`
     public let type: MetadataCascadePolicyTypeField
+
     /// The enterprise that owns this policy.
     public let ownerEnterprise: MetadataCascadePolicyOwnerEnterpriseField?
+
     /// Represent the folder the policy is applied to.
     public let parent: MetadataCascadePolicyParentField?
+
     /// The scope of the metadata cascade policy can either be `global` or
     /// `enterprise_*`. The `global` scope is used for policies that are
     /// available to any Box enterprise. The `enterprise_*` scope represents
     /// policies that have been created within a specific enterprise, where `*`
     /// will be the ID of that enterprise.
     public let scope: String?
+
     /// The key of the template that is cascaded down to the folder's
     /// children.
     /// 
@@ -98,4 +103,5 @@ public class MetadataCascadePolicy: Codable {
         try container.encodeIfPresent(scope, forKey: .scope)
         try container.encodeIfPresent(templateKey, forKey: .templateKey)
     }
+
 }

@@ -15,10 +15,12 @@ public class MetadataQueryResults: Codable {
     /// items. To get additional fields for each item, including any of the
     /// metadata, use the `fields` attribute in the query.
     public let entries: [FileOrFolder]?
+
     /// The limit that was used for this search. This will be the same as the
     /// `limit` query parameter unless that value exceeded the maximum value
     /// allowed.
     public let limit: Int64?
+
     /// The marker for the start of the next page of results.
     public let nextMarker: String?
 
@@ -54,4 +56,5 @@ public class MetadataQueryResults: Codable {
         try container.encodeIfPresent(limit, forKey: .limit)
         try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
     }
+
 }

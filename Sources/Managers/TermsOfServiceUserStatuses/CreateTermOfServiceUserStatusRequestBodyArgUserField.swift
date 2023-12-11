@@ -8,6 +8,7 @@ public class CreateTermOfServiceUserStatusRequestBodyArgUserField: Codable {
 
     /// The type of object.
     public let type: CreateTermOfServiceUserStatusRequestBodyArgUserFieldTypeField
+
     /// The ID of user
     public let id: String
 
@@ -32,4 +33,5 @@ public class CreateTermOfServiceUserStatusRequestBodyArgUserField: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

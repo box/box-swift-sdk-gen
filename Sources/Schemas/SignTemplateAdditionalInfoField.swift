@@ -8,6 +8,7 @@ public class SignTemplateAdditionalInfoField: Codable {
 
     /// Non editable fields.
     public let nonEditable: [SignTemplateAdditionalInfoFieldNonEditableField]?
+
     /// Required fields.
     public let required: SignTemplateAdditionalInfoFieldRequiredField?
 
@@ -32,4 +33,5 @@ public class SignTemplateAdditionalInfoField: Codable {
         try container.encodeIfPresent(nonEditable, forKey: .nonEditable)
         try container.encodeIfPresent(required, forKey: .required)
     }
+
 }

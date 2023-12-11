@@ -25,4 +25,5 @@ public class AddClassificationRequestBodyArgDataFieldStaticConfigField: Codable 
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(classification, forKey: .classification)
     }
+
 }

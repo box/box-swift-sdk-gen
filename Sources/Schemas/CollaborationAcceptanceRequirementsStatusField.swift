@@ -8,7 +8,9 @@ public class CollaborationAcceptanceRequirementsStatusField: Codable {
     }
 
     public let termsOfServiceRequirement: CollaborationAcceptanceRequirementsStatusFieldTermsOfServiceRequirementField?
+
     public let strongPasswordRequirement: CollaborationAcceptanceRequirementsStatusFieldStrongPasswordRequirementField?
+
     public let twoFactorAuthenticationRequirement: CollaborationAcceptanceRequirementsStatusFieldTwoFactorAuthenticationRequirementField?
 
     public init(termsOfServiceRequirement: CollaborationAcceptanceRequirementsStatusFieldTermsOfServiceRequirementField? = nil, strongPasswordRequirement: CollaborationAcceptanceRequirementsStatusFieldStrongPasswordRequirementField? = nil, twoFactorAuthenticationRequirement: CollaborationAcceptanceRequirementsStatusFieldTwoFactorAuthenticationRequirementField? = nil) {
@@ -30,4 +32,5 @@ public class CollaborationAcceptanceRequirementsStatusField: Codable {
         try container.encodeIfPresent(strongPasswordRequirement, forKey: .strongPasswordRequirement)
         try container.encodeIfPresent(twoFactorAuthenticationRequirement, forKey: .twoFactorAuthenticationRequirement)
     }
+
 }

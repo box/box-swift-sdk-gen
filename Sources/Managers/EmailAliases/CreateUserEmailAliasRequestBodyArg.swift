@@ -37,4 +37,5 @@ public class CreateUserEmailAliasRequestBodyArg: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(email, forKey: .email)
     }
+
 }

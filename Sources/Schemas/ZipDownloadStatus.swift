@@ -12,18 +12,22 @@ public class ZipDownloadStatus: Codable {
 
     /// The total number of files in the archive.
     public let totalFileCount: Int64?
+
     /// The number of files that have already been downloaded.
     public let downloadedFileCount: Int64?
+
     /// The number of files that have been skipped as they could not be
     /// downloaded. In many cases this is due to permission issues that have
     /// surfaced between the creation of the request for the archive and the
     /// archive being downloaded.
     public let skippedFileCount: Int64?
+
     /// The number of folders that have been skipped as they could not be
     /// downloaded. In many cases this is due to permission issues that have
     /// surfaced between the creation of the request for the archive and the
     /// archive being downloaded.
     public let skippedFolderCount: Int64?
+
     /// The state of the archive being downloaded.
     public let state: ZipDownloadStatusStateField?
 
@@ -66,4 +70,5 @@ public class ZipDownloadStatus: Codable {
         try container.encodeIfPresent(skippedFolderCount, forKey: .skippedFolderCount)
         try container.encodeIfPresent(state, forKey: .state)
     }
+
 }

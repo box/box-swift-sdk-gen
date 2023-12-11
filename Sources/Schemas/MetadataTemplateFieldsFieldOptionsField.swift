@@ -9,6 +9,7 @@ public class MetadataTemplateFieldsFieldOptionsField: Codable {
     /// The text value of the option. This represents both the display name of the
     /// option and the internal key used when updating templates.
     public let key: String
+
     /// The internal unique identifier of the the option.
     public let id: String?
 
@@ -34,4 +35,5 @@ public class MetadataTemplateFieldsFieldOptionsField: Codable {
         try container.encode(key, forKey: .key)
         try container.encodeIfPresent(id, forKey: .id)
     }
+
 }

@@ -8,6 +8,7 @@ public class UpdateFileByIdRequestBodyArgCollectionsField: Codable {
 
     /// The unique identifier for this object
     public let id: String?
+
     /// The type for this object
     public let type: String?
 
@@ -32,4 +33,5 @@ public class UpdateFileByIdRequestBodyArgCollectionsField: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

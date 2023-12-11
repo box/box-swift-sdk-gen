@@ -13,6 +13,7 @@ public class UploadFilePartHeadersArg {
     /// 
     /// [1]: https://tools.ietf.org/html/rfc3230
     public let digest: String
+
     /// The byte range of the chunk.
     /// 
     /// Must not overlap with the range of a part already
@@ -27,6 +28,7 @@ public class UploadFilePartHeadersArg {
     ///   must be a multiple of the part size.
     /// * The higher bound must be a multiple of the part size - 1.
     public let contentRange: String
+
     /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 

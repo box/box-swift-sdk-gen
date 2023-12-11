@@ -16,24 +16,31 @@ public class UpdateFileByIdRequestBodyArg: Codable {
     /// An optional different name for the file. This can be used to
     /// rename the file.
     public let name: String?
+
     /// The description for a file. This can be seen in the right-hand sidebar panel
     /// when viewing a file in the Box web app. Additionally, this index is used in
     /// the search index of the file, allowing users to find the file by the content
     /// in the description.
     public let description: String?
+
     public let parent: UpdateFileByIdRequestBodyArgParentField?
+
     public let sharedLink: UpdateFileByIdRequestBodyArgSharedLinkField?
+
     /// Defines a lock on an item. This prevents the item from being
     /// moved, renamed, or otherwise changed by anyone other than the user
     /// who created the lock.
     /// 
     /// Set this to `null` to remove the lock.
     public let lock: UpdateFileByIdRequestBodyArgLockField?
+
     /// The retention expiration timestamp for the given file. This
     /// date cannot be shortened once set on a file.
     public let dispositionAt: String?
+
     /// Defines who can download a file.
     public let permissions: UpdateFileByIdRequestBodyArgPermissionsField?
+
     /// An array of collections to make this file
     /// a member of. Currently
     /// we only support the `favorites` collection.
@@ -46,6 +53,7 @@ public class UpdateFileByIdRequestBodyArg: Codable {
     /// 
     /// [1]: e://get-collections
     public let collections: [UpdateFileByIdRequestBodyArgCollectionsField]?
+
     /// The tags for this item. These tags are shown in
     /// the Box web app and mobile apps next to an item.
     /// 
@@ -65,8 +73,8 @@ public class UpdateFileByIdRequestBodyArg: Codable {
     ///     when viewing a file in the Box web app. Additionally, this index is used in
     ///     the search index of the file, allowing users to find the file by the content
     ///     in the description.
-    ///   - parent: UpdateFileByIdRequestBodyArgParentField?
-    ///   - sharedLink: UpdateFileByIdRequestBodyArgSharedLinkField?
+    ///   - parent: 
+    ///   - sharedLink: 
     ///   - lock: Defines a lock on an item. This prevents the item from being
     ///     moved, renamed, or otherwise changed by anyone other than the user
     ///     who created the lock.
@@ -131,4 +139,5 @@ public class UpdateFileByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(collections, forKey: .collections)
         try container.encodeIfPresent(tags, forKey: .tags)
     }
+
 }

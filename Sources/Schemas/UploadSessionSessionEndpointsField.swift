@@ -12,14 +12,19 @@ public class UploadSessionSessionEndpointsField: Codable {
 
     /// The URL to upload parts to
     public let uploadPart: String?
+
     /// The URL used to commit the file
     public let commit: String?
+
     /// The URL for used to abort the session.
     public let abort: String?
+
     /// The URL users to list all parts.
     public let listParts: String?
+
     /// The URL used to get the status of the upload.
     public let status: String?
+
     /// The URL used to get the upload log from.
     public let logEvent: String?
 
@@ -60,4 +65,5 @@ public class UploadSessionSessionEndpointsField: Codable {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(logEvent, forKey: .logEvent)
     }
+
 }

@@ -8,6 +8,7 @@ public class UpdateGroupMembershipByIdRequestBodyArg: Codable {
 
     /// The role of the user in the group.
     public let role: UpdateGroupMembershipByIdRequestBodyArgRoleField?
+
     /// Custom configuration for the permissions an admin
     /// if a group will receive. This option has no effect
     /// on members with a role of `member`.
@@ -50,4 +51,5 @@ public class UpdateGroupMembershipByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(role, forKey: .role)
         try container.encodeIfPresent(configurablePermissions, forKey: .configurablePermissions)
     }
+
 }

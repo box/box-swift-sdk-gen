@@ -14,7 +14,9 @@ public class WebLinkMini: WebLinkBase {
 
     /// The URL this web link points to
     public let url: String?
+
     public let sequenceId: String?
+
     /// The name of the web link
     public let name: String?
 
@@ -26,12 +28,13 @@ public class WebLinkMini: WebLinkBase {
     ///   - etag: The entity tag of this web link. Used with `If-Match`
     ///     headers.
     ///   - url: The URL this web link points to
-    ///   - sequenceId: String?
+    ///   - sequenceId: 
     ///   - name: The name of the web link
     public init(id: String, type: WebLinkBaseTypeField, etag: String? = nil, url: String? = nil, sequenceId: String? = nil, name: String? = nil) {
         self.url = url
         self.sequenceId = sequenceId
         self.name = name
+
         super.init(id: id, type: type, etag: etag)
     }
 
@@ -40,7 +43,8 @@ public class WebLinkMini: WebLinkBase {
         url = try container.decodeIfPresent(String.self, forKey: .url)
         sequenceId = try container.decodeIfPresent(String.self, forKey: .sequenceId)
         name = try container.decodeIfPresent(String.self, forKey: .name)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -50,4 +54,5 @@ public class WebLinkMini: WebLinkBase {
         try container.encodeIfPresent(name, forKey: .name)
         try super.encode(to: encoder)
     }
+
 }

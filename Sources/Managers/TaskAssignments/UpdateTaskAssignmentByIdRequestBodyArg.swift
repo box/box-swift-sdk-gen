@@ -8,6 +8,7 @@ public class UpdateTaskAssignmentByIdRequestBodyArg: Codable {
 
     /// An optional message by the assignee that can be added to the task.
     public let message: String?
+
     /// The state of the task assigned to the user.
     /// 
     /// * For a task with an `action` value of `complete` this can be
@@ -42,4 +43,5 @@ public class UpdateTaskAssignmentByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(message, forKey: .message)
         try container.encodeIfPresent(resolutionState, forKey: .resolutionState)
     }
+
 }

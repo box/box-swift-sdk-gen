@@ -18,21 +18,31 @@ public class FileVersion: FileVersionMini {
 
     /// The name of the file version
     public let name: String?
+
     /// Size of the file version in bytes
     public let size: Int64?
+
     /// When the file version object was created
     public let createdAt: String?
+
     /// When the file version object was last updated
     public let modifiedAt: String?
+
     public let modifiedBy: UserMini?
+
     /// When the file version object was trashed.
     public let trashedAt: String?
+
     public let trashedBy: UserMini?
+
     /// When the file version was restored from the trash.
     public let restoredAt: String?
+
     public let restoredBy: UserMini?
+
     /// When the file version object will be permanently deleted.
     public let purgedAt: String?
+
     public let uploaderDisplayName: String?
 
     /// Initializer for a FileVersion.
@@ -45,13 +55,13 @@ public class FileVersion: FileVersionMini {
     ///   - size: Size of the file version in bytes
     ///   - createdAt: When the file version object was created
     ///   - modifiedAt: When the file version object was last updated
-    ///   - modifiedBy: UserMini?
+    ///   - modifiedBy: 
     ///   - trashedAt: When the file version object was trashed.
-    ///   - trashedBy: UserMini?
+    ///   - trashedBy: 
     ///   - restoredAt: When the file version was restored from the trash.
-    ///   - restoredBy: UserMini?
+    ///   - restoredBy: 
     ///   - purgedAt: When the file version object will be permanently deleted.
-    ///   - uploaderDisplayName: String?
+    ///   - uploaderDisplayName: 
     public init(id: String, type: FileVersionBaseTypeField, sha1: String? = nil, name: String? = nil, size: Int64? = nil, createdAt: String? = nil, modifiedAt: String? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, trashedBy: UserMini? = nil, restoredAt: String? = nil, restoredBy: UserMini? = nil, purgedAt: String? = nil, uploaderDisplayName: String? = nil) {
         self.name = name
         self.size = size
@@ -64,6 +74,7 @@ public class FileVersion: FileVersionMini {
         self.restoredBy = restoredBy
         self.purgedAt = purgedAt
         self.uploaderDisplayName = uploaderDisplayName
+
         super.init(id: id, type: type, sha1: sha1)
     }
 
@@ -80,7 +91,8 @@ public class FileVersion: FileVersionMini {
         restoredBy = try container.decodeIfPresent(UserMini.self, forKey: .restoredBy)
         purgedAt = try container.decodeIfPresent(String.self, forKey: .purgedAt)
         uploaderDisplayName = try container.decodeIfPresent(String.self, forKey: .uploaderDisplayName)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -98,4 +110,5 @@ public class FileVersion: FileVersionMini {
         try container.encodeIfPresent(uploaderDisplayName, forKey: .uploaderDisplayName)
         try super.encode(to: encoder)
     }
+
 }

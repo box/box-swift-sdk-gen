@@ -10,10 +10,13 @@ public class SkillInvocationTokenFieldWriteField: Codable {
 
     /// The requested access token.
     public let accessToken: String?
+
     /// The time in seconds by which this token will expire.
     public let expiresIn: Int64?
+
     /// The type of access token returned.
     public let tokenType: SkillInvocationTokenFieldWriteFieldTokenTypeField?
+
     /// The permissions that this access token permits,
     /// providing a list of resources (files, folders, etc)
     /// and the scopes permitted for each of those resources.
@@ -50,4 +53,5 @@ public class SkillInvocationTokenFieldWriteField: Codable {
         try container.encodeIfPresent(tokenType, forKey: .tokenType)
         try container.encodeIfPresent(restrictedTo, forKey: .restrictedTo)
     }
+
 }

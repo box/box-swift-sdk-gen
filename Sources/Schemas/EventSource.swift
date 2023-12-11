@@ -16,18 +16,23 @@ public class EventSource: Codable {
     /// represents. Can be `file` or `folder`.
     /// 
     public let itemType: EventSourceItemTypeField
+
     /// The unique identifier that represents the
     /// item.
     /// 
     public let itemId: String
+
     /// The name of the item.
     /// 
     public let itemName: String
+
     /// The object containing classification information for the item that
     /// triggered the event. This field will not appear if the item does not
     /// have a classification set.
     public let classification: EventSourceClassificationField?
+
     public let parent: FolderMini?
+
     public let ownedBy: UserMini?
 
     /// Initializer for a EventSource.
@@ -44,8 +49,8 @@ public class EventSource: Codable {
     ///   - classification: The object containing classification information for the item that
     ///     triggered the event. This field will not appear if the item does not
     ///     have a classification set.
-    ///   - parent: FolderMini?
-    ///   - ownedBy: UserMini?
+    ///   - parent: 
+    ///   - ownedBy: 
     public init(itemType: EventSourceItemTypeField, itemId: String, itemName: String, classification: EventSourceClassificationField? = nil, parent: FolderMini? = nil, ownedBy: UserMini? = nil) {
         self.itemType = itemType
         self.itemId = itemId
@@ -74,4 +79,5 @@ public class EventSource: Codable {
         try container.encodeIfPresent(parent, forKey: .parent)
         try container.encodeIfPresent(ownedBy, forKey: .ownedBy)
     }
+
 }

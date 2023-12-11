@@ -11,12 +11,14 @@ public class GetCollectionsQueryParamsArg {
     /// fields for the mini representation are returned, additional
     /// to the fields requested.
     public let fields: [String]?
+
     /// The offset of the item at which to begin the response.
     /// 
     /// Queries with offset parameter value
     /// exceeding 10000 will be rejected
     /// with a 400 response.
     public let offset: Int64?
+
     /// The maximum number of items to return per page.
     public let limit: Int64?
 

@@ -29,4 +29,5 @@ public class UpdateFileWatermarkRequestBodyArgWatermarkField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(imprint, forKey: .imprint)
     }
+
 }

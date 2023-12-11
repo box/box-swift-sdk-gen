@@ -25,4 +25,5 @@ public class FileFullRepresentationsField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
+
 }

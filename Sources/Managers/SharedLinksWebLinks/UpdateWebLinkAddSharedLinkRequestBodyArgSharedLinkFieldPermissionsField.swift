@@ -11,10 +11,12 @@ public class UpdateWebLinkAddSharedLinkRequestBodyArgSharedLinkFieldPermissionsF
     /// This can only be set when `access` is set to
     /// `open` or `company`.
     public let canDownload: Bool?
+
     /// If the shared link allows for previewing of files.
     /// This value is always `true`. For shared links on folders
     /// this also applies to any items in the folder.
     public let canPreview: Bool?
+
     /// This value can only be `true` is `type` is `file`.
     public let canEdit: Bool?
 
@@ -47,4 +49,5 @@ public class UpdateWebLinkAddSharedLinkRequestBodyArgSharedLinkFieldPermissionsF
         try container.encodeIfPresent(canPreview, forKey: .canPreview)
         try container.encodeIfPresent(canEdit, forKey: .canEdit)
     }
+
 }

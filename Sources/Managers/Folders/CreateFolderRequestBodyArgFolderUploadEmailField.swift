@@ -49,4 +49,5 @@ public class CreateFolderRequestBodyArgFolderUploadEmailField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(access, forKey: .access)
     }
+
 }

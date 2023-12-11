@@ -23,30 +23,44 @@ public class File: FileMini {
 
     /// The optional description of this file
     public let description: String?
+
     /// The file size in bytes. Be careful parsing this integer as it can
     /// get very large and cause an integer overflow.
     public let size: Int64?
+
     public let pathCollection: FilePathCollectionField?
+
     /// The date and time when the file was created on Box.
     public let createdAt: String?
+
     /// The date and time when the file was last updated on Box.
     public let modifiedAt: String?
+
     /// The time at which this file was put in the trash.
     public let trashedAt: String?
+
     /// The time at which this file is expected to be purged
     /// from the trash.
     public let purgedAt: String?
+
     /// The date and time at which this file was originally
     /// created, which might be before it was uploaded to Box.
     public let contentCreatedAt: String?
+
     /// The date and time at which this file was last updated,
     /// which might be before it was uploaded to Box.
     public let contentModifiedAt: String?
+
     public let createdBy: UserMini?
+
     public let modifiedBy: UserMini?
+
     public let ownedBy: UserMini?
+
     public let sharedLink: FileSharedLinkField?
+
     public let parent: FolderMini?
+
     /// Defines if this item has been deleted or not.
     /// 
     /// * `active` when the item has is not in the trash
@@ -68,15 +82,15 @@ public class File: FileMini {
     ///   - etag: The HTTP `etag` of this file. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the file if (no) changes have happened.
-    ///   - sequenceId: String?
+    ///   - sequenceId: 
     ///   - name: The name of the file
     ///   - sha1: The SHA1 hash of the file. This can be used to compare the contents
     ///     of a file on Box with a local file.
-    ///   - fileVersion: FileVersionMini?
+    ///   - fileVersion: 
     ///   - description: The optional description of this file
     ///   - size: The file size in bytes. Be careful parsing this integer as it can
     ///     get very large and cause an integer overflow.
-    ///   - pathCollection: FilePathCollectionField?
+    ///   - pathCollection: 
     ///   - createdAt: The date and time when the file was created on Box.
     ///   - modifiedAt: The date and time when the file was last updated on Box.
     ///   - trashedAt: The time at which this file was put in the trash.
@@ -86,11 +100,11 @@ public class File: FileMini {
     ///     created, which might be before it was uploaded to Box.
     ///   - contentModifiedAt: The date and time at which this file was last updated,
     ///     which might be before it was uploaded to Box.
-    ///   - createdBy: UserMini?
-    ///   - modifiedBy: UserMini?
-    ///   - ownedBy: UserMini?
-    ///   - sharedLink: FileSharedLinkField?
-    ///   - parent: FolderMini?
+    ///   - createdBy: 
+    ///   - modifiedBy: 
+    ///   - ownedBy: 
+    ///   - sharedLink: 
+    ///   - parent: 
     ///   - itemStatus: Defines if this item has been deleted or not.
     ///     
     ///     * `active` when the item has is not in the trash
@@ -112,6 +126,7 @@ public class File: FileMini {
         self.sharedLink = sharedLink
         self.parent = parent
         self.itemStatus = itemStatus
+
         super.init(id: id, type: type, etag: etag, sequenceId: sequenceId, name: name, sha1: sha1, fileVersion: fileVersion)
     }
 
@@ -132,7 +147,8 @@ public class File: FileMini {
         sharedLink = try container.decodeIfPresent(FileSharedLinkField.self, forKey: .sharedLink)
         parent = try container.decodeIfPresent(FolderMini.self, forKey: .parent)
         itemStatus = try container.decodeIfPresent(FileItemStatusField.self, forKey: .itemStatus)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -154,4 +170,5 @@ public class File: FileMini {
         try container.encodeIfPresent(itemStatus, forKey: .itemStatus)
         try super.encode(to: encoder)
     }
+
 }

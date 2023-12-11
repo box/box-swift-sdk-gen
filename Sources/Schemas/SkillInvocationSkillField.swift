@@ -10,10 +10,13 @@ public class SkillInvocationSkillField: Codable {
 
     /// The unique identifier for this skill
     public let id: String?
+
     /// `skill`
     public let type: SkillInvocationSkillFieldTypeField?
+
     /// The name of the skill
     public let name: String?
+
     /// The client ID of the application
     public let apiKey: String?
 
@@ -46,4 +49,5 @@ public class SkillInvocationSkillField: Codable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(apiKey, forKey: .apiKey)
     }
+
 }

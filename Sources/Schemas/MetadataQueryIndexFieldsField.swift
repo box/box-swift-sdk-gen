@@ -8,6 +8,7 @@ public class MetadataQueryIndexFieldsField: Codable {
 
     /// The metadata template field key.
     public let key: String?
+
     /// The sort direction of the field.
     public let sortDirection: MetadataQueryIndexFieldsFieldSortDirectionField?
 
@@ -32,4 +33,5 @@ public class MetadataQueryIndexFieldsField: Codable {
         try container.encodeIfPresent(key, forKey: .key)
         try container.encodeIfPresent(sortDirection, forKey: .sortDirection)
     }
+
 }

@@ -13,10 +13,13 @@ public class MetadataCascadePolicies: Codable {
     /// `limit` query parameter unless that value exceeded the maximum value
     /// allowed. The maximum value varies by API.
     public let limit: Int64?
+
     /// The marker for the start of the next page of results.
     public let nextMarker: String?
+
     /// The marker for the start of the previous page of results.
     public let prevMarker: String?
+
     /// A list of metadata cascade policies
     public let entries: [MetadataCascadePolicy]?
 
@@ -51,4 +54,5 @@ public class MetadataCascadePolicies: Codable {
         try container.encodeIfPresent(prevMarker, forKey: .prevMarker)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
+
 }

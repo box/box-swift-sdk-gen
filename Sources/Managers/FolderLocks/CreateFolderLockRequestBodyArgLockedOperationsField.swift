@@ -8,6 +8,7 @@ public class CreateFolderLockRequestBodyArgLockedOperationsField: Codable {
 
     /// Whether moving the folder should be locked.
     public let move: Bool
+
     /// Whether deleting the folder should be locked.
     public let delete: Bool
 
@@ -32,4 +33,5 @@ public class CreateFolderLockRequestBodyArgLockedOperationsField: Codable {
         try container.encode(move, forKey: .move)
         try container.encode(delete, forKey: .delete)
     }
+
 }

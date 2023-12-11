@@ -14,6 +14,7 @@ public class MetadataFilter: Codable {
     /// for use in this enterprise, and `global` for general templates
     /// that are available to all enterprises using Box.
     public let scope: MetadataFilterScopeField?
+
     /// The key of the template to filter search results by.
     /// 
     /// In many cases the template key is automatically derived
@@ -29,6 +30,7 @@ public class MetadataFilter: Codable {
     /// [file]: e://get-files-id-metadata
     /// [folder]: e://get-folders-id-metadata
     public let templateKey: String?
+
     public let filters: MetadataFilterFiltersField?
 
     /// Initializer for a MetadataFilter.
@@ -53,7 +55,7 @@ public class MetadataFilter: Codable {
     ///     [list]: e://get-metadata-templates-enterprise
     ///     [file]: e://get-files-id-metadata
     ///     [folder]: e://get-folders-id-metadata
-    ///   - filters: MetadataFilterFiltersField?
+    ///   - filters: 
     public init(scope: MetadataFilterScopeField? = nil, templateKey: String? = nil, filters: MetadataFilterFiltersField? = nil) {
         self.scope = scope
         self.templateKey = templateKey
@@ -73,4 +75,5 @@ public class MetadataFilter: Codable {
         try container.encodeIfPresent(templateKey, forKey: .templateKey)
         try container.encodeIfPresent(filters, forKey: .filters)
     }
+
 }

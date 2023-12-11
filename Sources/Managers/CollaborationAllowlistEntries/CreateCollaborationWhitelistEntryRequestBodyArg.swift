@@ -8,6 +8,7 @@ public class CreateCollaborationWhitelistEntryRequestBodyArg: Codable {
 
     /// The domain to add to the list of allowed domains.
     public let domain: String
+
     /// The direction in which to allow collaborations.
     public let direction: CreateCollaborationWhitelistEntryRequestBodyArgDirectionField
 
@@ -32,4 +33,5 @@ public class CreateCollaborationWhitelistEntryRequestBodyArg: Codable {
         try container.encode(domain, forKey: .domain)
         try container.encode(direction, forKey: .direction)
     }
+
 }

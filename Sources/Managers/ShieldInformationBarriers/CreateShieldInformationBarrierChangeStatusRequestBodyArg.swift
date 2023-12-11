@@ -8,6 +8,7 @@ public class CreateShieldInformationBarrierChangeStatusRequestBodyArg: Codable {
 
     /// The ID of the shield information barrier.
     public let id: String
+
     /// The desired status for the shield information barrier.
     public let status: CreateShieldInformationBarrierChangeStatusRequestBodyArgStatusField
 
@@ -32,4 +33,5 @@ public class CreateShieldInformationBarrierChangeStatusRequestBodyArg: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(status, forKey: .status)
     }
+
 }

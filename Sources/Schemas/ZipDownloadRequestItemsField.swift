@@ -8,6 +8,7 @@ public class ZipDownloadRequestItemsField: Codable {
 
     /// The type of the item to add to the archive.
     public let type: ZipDownloadRequestItemsFieldTypeField
+
     /// The identifier of the item to add to the archive. When this item is
     /// a folder then this can not be the root folder with ID `0`.
     public let id: String
@@ -34,4 +35,5 @@ public class ZipDownloadRequestItemsField: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

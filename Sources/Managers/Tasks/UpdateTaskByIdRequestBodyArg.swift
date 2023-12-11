@@ -14,10 +14,13 @@ public class UpdateTaskByIdRequestBodyArg: Codable {
     /// rejected
     /// * `complete` defines a general task which can be completed
     public let action: UpdateTaskByIdRequestBodyArgActionField?
+
     /// The message included with the task.
     public let message: String?
+
     /// When the task is due at.
     public let dueAt: String?
+
     /// Defines which assignees need to complete this task before the task
     /// is considered completed.
     /// 
@@ -66,4 +69,5 @@ public class UpdateTaskByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(dueAt, forKey: .dueAt)
         try container.encodeIfPresent(completionRule, forKey: .completionRule)
     }
+
 }

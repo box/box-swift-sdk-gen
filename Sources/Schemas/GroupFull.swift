@@ -19,6 +19,7 @@ public class GroupFull: Group {
     /// and its members directly via the Box web application.
     /// This is desirable for one-way syncing of groups.
     public let provenance: String?
+
     /// An arbitrary identifier that can be used by
     /// external group sync tools to link this Box Group to
     /// an external group. Example values of this field
@@ -27,8 +28,10 @@ public class GroupFull: Group {
     /// order to avoid issues when group names are updated in
     /// either Box or external systems.
     public let externalSyncIdentifier: String?
+
     /// Human readable description of the group.
     public let description: String?
+
     /// Specifies who can invite the group to collaborate
     /// on items.
     /// 
@@ -41,6 +44,7 @@ public class GroupFull: Group {
     /// When set to `all_managed_users` all managed users in the
     /// enterprise can invite the group.
     public let invitabilityLevel: GroupFullInvitabilityLevelField?
+
     /// Specifies who can view the members of the group
     /// (Get Memberships for Group).
     /// 
@@ -50,6 +54,7 @@ public class GroupFull: Group {
     /// * `all_managed_users` - all managed users in the
     ///   enterprise
     public let memberViewabilityLevel: GroupFullMemberViewabilityLevelField?
+
     public let permissions: GroupFullPermissionsField?
 
     /// Initializer for a GroupFull.
@@ -94,7 +99,7 @@ public class GroupFull: Group {
     ///     * `admins_and_members` - all admins and group members
     ///     * `all_managed_users` - all managed users in the
     ///       enterprise
-    ///   - permissions: GroupFullPermissionsField?
+    ///   - permissions: 
     public init(id: String, type: GroupBaseTypeField, name: String? = nil, groupType: GroupMiniGroupTypeField? = nil, createdAt: String? = nil, modifiedAt: String? = nil, provenance: String? = nil, externalSyncIdentifier: String? = nil, description: String? = nil, invitabilityLevel: GroupFullInvitabilityLevelField? = nil, memberViewabilityLevel: GroupFullMemberViewabilityLevelField? = nil, permissions: GroupFullPermissionsField? = nil) {
         self.provenance = provenance
         self.externalSyncIdentifier = externalSyncIdentifier
@@ -102,6 +107,7 @@ public class GroupFull: Group {
         self.invitabilityLevel = invitabilityLevel
         self.memberViewabilityLevel = memberViewabilityLevel
         self.permissions = permissions
+
         super.init(id: id, type: type, name: name, groupType: groupType, createdAt: createdAt, modifiedAt: modifiedAt)
     }
 
@@ -113,7 +119,8 @@ public class GroupFull: Group {
         invitabilityLevel = try container.decodeIfPresent(GroupFullInvitabilityLevelField.self, forKey: .invitabilityLevel)
         memberViewabilityLevel = try container.decodeIfPresent(GroupFullMemberViewabilityLevelField.self, forKey: .memberViewabilityLevel)
         permissions = try container.decodeIfPresent(GroupFullPermissionsField.self, forKey: .permissions)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -126,4 +133,5 @@ public class GroupFull: Group {
         try container.encodeIfPresent(permissions, forKey: .permissions)
         try super.encode(to: encoder)
     }
+
 }

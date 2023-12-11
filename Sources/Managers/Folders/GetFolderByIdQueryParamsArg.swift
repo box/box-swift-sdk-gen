@@ -16,6 +16,7 @@ public class GetFolderByIdQueryParamsArg {
     /// as the scope and key of the template to retrieve, for example
     /// `?field=metadata.enterprise_12345.contractTemplate`.
     public let fields: [String]?
+
     /// Defines the **second** attribute by which items
     /// are sorted.
     /// 
@@ -45,15 +46,18 @@ public class GetFolderByIdQueryParamsArg {
     ///   and files listed
     ///   before web links.
     public let sort: GetFolderByIdQueryParamsArgSortField?
+
     /// The direction to sort results in. This can be either in alphabetical ascending
     /// (`ASC`) or descending (`DESC`) order.
     public let direction: GetFolderByIdQueryParamsArgDirectionField?
+
     /// The offset of the item at which to begin the response.
     /// 
     /// Queries with offset parameter value
     /// exceeding 10000 will be rejected
     /// with a 400 response.
     public let offset: Int64?
+
     /// The maximum number of items to return per page.
     public let limit: Int64?
 

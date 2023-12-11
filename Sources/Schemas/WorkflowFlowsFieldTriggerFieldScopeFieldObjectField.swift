@@ -8,6 +8,7 @@ public class WorkflowFlowsFieldTriggerFieldScopeFieldObjectField: Codable {
 
     /// The type of the object
     public let type: WorkflowFlowsFieldTriggerFieldScopeFieldObjectFieldTypeField?
+
     /// The id of the object
     public let id: String?
 
@@ -32,4 +33,5 @@ public class WorkflowFlowsFieldTriggerFieldScopeFieldObjectField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(id, forKey: .id)
     }
+
 }

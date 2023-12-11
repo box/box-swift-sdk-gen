@@ -11,17 +11,21 @@ public class CreateTaskRequestBodyArg: Codable {
 
     /// The file to attach the task to.
     public let item: CreateTaskRequestBodyArgItemField
+
     /// The action the task assignee will be prompted to do. Must be
     /// 
     /// * `review` defines an approval task that can be approved or
     /// rejected
     /// * `complete` defines a general task which can be completed
     public let action: CreateTaskRequestBodyArgActionField?
+
     /// An optional message to include with the task.
     public let message: String?
+
     /// Defines when the task is due. Defaults to `null` if not
     /// provided.
     public let dueAt: String?
+
     /// Defines which assignees need to complete this task before the task
     /// is considered completed.
     /// 
@@ -75,4 +79,5 @@ public class CreateTaskRequestBodyArg: Codable {
         try container.encodeIfPresent(dueAt, forKey: .dueAt)
         try container.encodeIfPresent(completionRule, forKey: .completionRule)
     }
+
 }

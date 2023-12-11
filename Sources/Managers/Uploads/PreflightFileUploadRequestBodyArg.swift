@@ -9,8 +9,10 @@ public class PreflightFileUploadRequestBodyArg: Codable {
 
     /// The name for the file
     public let name: String?
+
     /// The size of the file in bytes
     public let size: Int?
+
     public let parent: PreflightFileUploadRequestBodyArgParentField?
 
     /// Initializer for a PreflightFileUploadRequestBodyArg.
@@ -18,7 +20,7 @@ public class PreflightFileUploadRequestBodyArg: Codable {
     /// - Parameters:
     ///   - name: The name for the file
     ///   - size: The size of the file in bytes
-    ///   - parent: PreflightFileUploadRequestBodyArgParentField?
+    ///   - parent: 
     public init(name: String? = nil, size: Int? = nil, parent: PreflightFileUploadRequestBodyArgParentField? = nil) {
         self.name = name
         self.size = size
@@ -38,4 +40,5 @@ public class PreflightFileUploadRequestBodyArg: Codable {
         try container.encodeIfPresent(size, forKey: .size)
         try container.encodeIfPresent(parent, forKey: .parent)
     }
+
 }

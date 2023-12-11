@@ -9,6 +9,7 @@ public class IntegrationMappingBoxItemSlack: Codable {
 
     /// Type of the mapped item referenced in `id`
     public let type: IntegrationMappingBoxItemSlackTypeField
+
     /// ID of the mapped item (of type referenced in `type`)
     public let id: String
 
@@ -33,4 +34,5 @@ public class IntegrationMappingBoxItemSlack: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

@@ -25,4 +25,5 @@ public class UpdateUserByIdRequestBodyArgNotificationEmailField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(email, forKey: .email)
     }
+
 }

@@ -9,6 +9,7 @@ public class LegalHoldPolicyMini: Codable {
 
     /// The unique identifier for this legal hold policy
     public let id: String
+
     /// `legal_hold_policy`
     public let type: LegalHoldPolicyMiniTypeField
 
@@ -33,4 +34,5 @@ public class LegalHoldPolicyMini: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(type, forKey: .type)
     }
+
 }

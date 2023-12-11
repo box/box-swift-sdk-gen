@@ -9,6 +9,7 @@ public class CollaborationAcceptanceRequirementsStatusFieldTermsOfServiceRequire
     /// Whether or not the terms of service have been accepted.  The
     /// field is `null` when there is no terms of service required.
     public let isAccepted: Bool?
+
     public let termsOfService: TermsOfServiceBase?
 
     /// Initializer for a CollaborationAcceptanceRequirementsStatusFieldTermsOfServiceRequirementField.
@@ -16,7 +17,7 @@ public class CollaborationAcceptanceRequirementsStatusFieldTermsOfServiceRequire
     /// - Parameters:
     ///   - isAccepted: Whether or not the terms of service have been accepted.  The
     ///     field is `null` when there is no terms of service required.
-    ///   - termsOfService: TermsOfServiceBase?
+    ///   - termsOfService: 
     public init(isAccepted: Bool? = nil, termsOfService: TermsOfServiceBase? = nil) {
         self.isAccepted = isAccepted
         self.termsOfService = termsOfService
@@ -33,4 +34,5 @@ public class CollaborationAcceptanceRequirementsStatusFieldTermsOfServiceRequire
         try container.encodeIfPresent(isAccepted, forKey: .isAccepted)
         try container.encodeIfPresent(termsOfService, forKey: .termsOfService)
     }
+
 }

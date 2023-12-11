@@ -9,9 +9,11 @@ public class FileFullRepresentationsFieldEntriesFieldPropertiesField: Codable {
 
     /// The width by height size of this representation in pixels.
     public let dimensions: String?
+
     /// Indicates if the representation is build up out of multiple
     /// pages.
     public let paged: Bool?
+
     /// Indicates if the representation can be used as a thumbnail of
     /// the file.
     public let thumb: Bool?
@@ -43,4 +45,5 @@ public class FileFullRepresentationsFieldEntriesFieldPropertiesField: Codable {
         try container.encodeIfPresent(paged, forKey: .paged)
         try container.encodeIfPresent(thumb, forKey: .thumb)
     }
+
 }

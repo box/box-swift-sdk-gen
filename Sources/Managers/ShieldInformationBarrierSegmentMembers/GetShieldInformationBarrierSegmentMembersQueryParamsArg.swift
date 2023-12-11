@@ -3,11 +3,13 @@ import Foundation
 public class GetShieldInformationBarrierSegmentMembersQueryParamsArg {
     /// The ID of the shield information barrier segment.
     public let shieldInformationBarrierSegmentId: String
+
     /// Defines the position marker at which to begin returning results. This is
     /// used when paginating using marker-based pagination.
     /// 
     /// This requires `usemarker` to be set to `true`.
     public let marker: String?
+
     /// The maximum number of items to return per page.
     public let limit: Int64?
 

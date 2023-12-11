@@ -9,6 +9,7 @@ public class ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentFiel
     /// The ID reference of the
     /// restricted shield information barrier segment.
     public let id: String?
+
     /// The type of the shield information segment
     public let type: ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentFieldTypeField?
 
@@ -34,4 +35,5 @@ public class ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentFiel
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

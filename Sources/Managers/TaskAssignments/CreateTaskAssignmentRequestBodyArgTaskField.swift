@@ -8,6 +8,7 @@ public class CreateTaskAssignmentRequestBodyArgTaskField: Codable {
 
     /// The ID of the task
     public let id: String
+
     /// The type of the item to assign.
     public let type: CreateTaskAssignmentRequestBodyArgTaskFieldTypeField
 
@@ -32,4 +33,5 @@ public class CreateTaskAssignmentRequestBodyArgTaskField: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(type, forKey: .type)
     }
+
 }

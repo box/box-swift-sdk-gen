@@ -3,6 +3,7 @@ import Foundation
 public class GetGroupMembershipsQueryParamsArg {
     /// The maximum number of items to return per page.
     public let limit: Int64?
+
     /// The offset of the item at which to begin the response.
     /// 
     /// Queries with offset parameter value

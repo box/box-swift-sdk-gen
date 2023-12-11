@@ -8,6 +8,7 @@ public class CreateFolderLockRequestBodyArg: Codable {
 
     /// The folder to apply the lock to.
     public let folder: CreateFolderLockRequestBodyArgFolderField
+
     /// The operations to lock for the folder. If `locked_operations` is
     /// included in the request, both `move` and `delete` must also be
     /// included and both set to `true`.
@@ -36,4 +37,5 @@ public class CreateFolderLockRequestBodyArg: Codable {
         try container.encode(folder, forKey: .folder)
         try container.encodeIfPresent(lockedOperations, forKey: .lockedOperations)
     }
+
 }

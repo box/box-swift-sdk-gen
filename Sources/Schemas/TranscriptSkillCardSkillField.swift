@@ -8,6 +8,7 @@ public class TranscriptSkillCardSkillField: Codable {
 
     /// `service`
     public let type: TranscriptSkillCardSkillFieldTypeField
+
     /// A custom identifier that represent the service that
     /// applied this metadata.
     public let id: String
@@ -34,4 +35,5 @@ public class TranscriptSkillCardSkillField: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

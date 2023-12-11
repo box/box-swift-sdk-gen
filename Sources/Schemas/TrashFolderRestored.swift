@@ -34,53 +34,73 @@ public class TrashFolderRestored: Codable {
     /// for the URL `https://*.app.box.com/folders/123`
     /// the `folder_id` is `123`.
     public let id: String?
+
     /// The HTTP `etag` of this folder. This can be used within some API
     /// endpoints in the `If-Match` and `If-None-Match` headers to only
     /// perform changes on the folder if (no) changes have happened.
     public let etag: String?
+
     /// `folder`
     public let type: TrashFolderRestoredTypeField?
+
     public let sequenceId: String?
+
     /// The name of the folder.
     public let name: String?
+
     /// The date and time when the folder was created. This value may
     /// be `null` for some folders such as the root folder or the trash
     /// folder.
     public let createdAt: String?
+
     /// The date and time when the folder was last updated. This value may
     /// be `null` for some folders such as the root folder or the trash
     /// folder.
     public let modifiedAt: String?
+
     public let description: String?
+
     /// The folder size in bytes.
     /// 
     /// Be careful parsing this integer as its
     /// value can get very large.
     public let size: Int64?
+
     public let pathCollection: TrashFolderRestoredPathCollectionField?
+
     public let createdBy: UserMini?
+
     public let modifiedBy: UserMini?
+
     /// The time at which this folder was put in the
     /// trash - becomes `null` after restore.
     public let trashedAt: String?
+
     /// The time at which this folder is expected to be purged
     /// from the trash  - becomes `null` after restore.
     public let purgedAt: String?
+
     /// The date and time at which this folder was originally
     /// created.
     public let contentCreatedAt: String?
+
     /// The date and time at which this folder was last updated.
     public let contentModifiedAt: String?
+
     public let ownedBy: UserMini?
+
     /// The shared link for this file. This will
     /// be `null` if a folder had been trashed, even though the original shared
     /// link does become active again.
     public let sharedLink: String?
+
     /// The folder upload email for this folder. This will
     /// be `null` if a folder has been trashed, even though the original upload
     /// email does become active again.
     public let folderUploadEmail: String?
+
     public let parent: FolderMini?
+
     /// Defines if this item has been deleted or not.
     /// 
     /// * `active` when the item has is not in the trash
@@ -102,7 +122,7 @@ public class TrashFolderRestored: Codable {
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
     ///   - type: `folder`
-    ///   - sequenceId: String?
+    ///   - sequenceId: 
     ///   - name: The name of the folder.
     ///   - createdAt: The date and time when the folder was created. This value may
     ///     be `null` for some folders such as the root folder or the trash
@@ -110,14 +130,14 @@ public class TrashFolderRestored: Codable {
     ///   - modifiedAt: The date and time when the folder was last updated. This value may
     ///     be `null` for some folders such as the root folder or the trash
     ///     folder.
-    ///   - description: String?
+    ///   - description: 
     ///   - size: The folder size in bytes.
     ///     
     ///     Be careful parsing this integer as its
     ///     value can get very large.
-    ///   - pathCollection: TrashFolderRestoredPathCollectionField?
-    ///   - createdBy: UserMini?
-    ///   - modifiedBy: UserMini?
+    ///   - pathCollection: 
+    ///   - createdBy: 
+    ///   - modifiedBy: 
     ///   - trashedAt: The time at which this folder was put in the
     ///     trash - becomes `null` after restore.
     ///   - purgedAt: The time at which this folder is expected to be purged
@@ -125,14 +145,14 @@ public class TrashFolderRestored: Codable {
     ///   - contentCreatedAt: The date and time at which this folder was originally
     ///     created.
     ///   - contentModifiedAt: The date and time at which this folder was last updated.
-    ///   - ownedBy: UserMini?
+    ///   - ownedBy: 
     ///   - sharedLink: The shared link for this file. This will
     ///     be `null` if a folder had been trashed, even though the original shared
     ///     link does become active again.
     ///   - folderUploadEmail: The folder upload email for this folder. This will
     ///     be `null` if a folder has been trashed, even though the original upload
     ///     email does become active again.
-    ///   - parent: FolderMini?
+    ///   - parent: 
     ///   - itemStatus: Defines if this item has been deleted or not.
     ///     
     ///     * `active` when the item has is not in the trash
@@ -211,4 +231,5 @@ public class TrashFolderRestored: Codable {
         try container.encodeIfPresent(parent, forKey: .parent)
         try container.encodeIfPresent(itemStatus, forKey: .itemStatus)
     }
+
 }

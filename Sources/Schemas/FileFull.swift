@@ -28,39 +28,58 @@ public class FileFull: File {
 
     /// The version number of this file
     public let versionNumber: String?
+
     /// The number of comments on this file
     public let commentCount: Int64?
+
     public let permissions: FileFullPermissionsField?
+
     public let tags: [String]?
+
     public let lock: FileFullLockField?
+
     /// Indicates the (optional) file extension for this file. By default,
     /// this is set to an empty string.
     public let extension_: String?
+
     /// Indicates if the file is a package. Packages are commonly used
     /// by Mac Applications and can include iWork files.
     public let isPackage: Bool?
+
     public let expiringEmbedLink: FileFullExpiringEmbedLinkField?
+
     public let watermarkInfo: FileFullWatermarkInfoField?
+
     /// Specifies if the file can be accessed
     /// via the direct shared link or a shared link
     /// to a parent folder.
     public let isAccessibleViaSharedLink: Bool?
+
     /// A list of the types of roles that user can be invited at
     /// when sharing this file.
     public let allowedInviteeRoles: [FileFullAllowedInviteeRolesField]?
+
     /// Specifies if this file is owned by a user outside of the
     /// authenticated enterprise.
     public let isExternallyOwned: Bool?
+
     /// Specifies if this file has any other collaborators.
     public let hasCollaborations: Bool?
+
     public let metadata: FileFullMetadataField?
+
     /// When the file will automatically be deleted
     public let expiresAt: String?
+
     public let representations: FileFullRepresentationsField?
+
     public let classification: FileFullClassificationField?
+
     public let uploaderDisplayName: String?
+
     /// The retention expiration timestamp for the given file
     public let dispositionAt: String?
+
     /// A list of the types of roles that user can be invited at
     /// when sharing this file.
     public let sharedLinkPermissionOptions: [FileFullSharedLinkPermissionOptionsField]?
@@ -79,15 +98,15 @@ public class FileFull: File {
     ///   - etag: The HTTP `etag` of this file. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the file if (no) changes have happened.
-    ///   - sequenceId: String?
+    ///   - sequenceId: 
     ///   - name: The name of the file
     ///   - sha1: The SHA1 hash of the file. This can be used to compare the contents
     ///     of a file on Box with a local file.
-    ///   - fileVersion: FileVersionMini?
+    ///   - fileVersion: 
     ///   - description: The optional description of this file
     ///   - size: The file size in bytes. Be careful parsing this integer as it can
     ///     get very large and cause an integer overflow.
-    ///   - pathCollection: FilePathCollectionField?
+    ///   - pathCollection: 
     ///   - createdAt: The date and time when the file was created on Box.
     ///   - modifiedAt: The date and time when the file was last updated on Box.
     ///   - trashedAt: The time at which this file was put in the trash.
@@ -97,11 +116,11 @@ public class FileFull: File {
     ///     created, which might be before it was uploaded to Box.
     ///   - contentModifiedAt: The date and time at which this file was last updated,
     ///     which might be before it was uploaded to Box.
-    ///   - createdBy: UserMini?
-    ///   - modifiedBy: UserMini?
-    ///   - ownedBy: UserMini?
-    ///   - sharedLink: FileSharedLinkField?
-    ///   - parent: FolderMini?
+    ///   - createdBy: 
+    ///   - modifiedBy: 
+    ///   - ownedBy: 
+    ///   - sharedLink: 
+    ///   - parent: 
     ///   - itemStatus: Defines if this item has been deleted or not.
     ///     
     ///     * `active` when the item has is not in the trash
@@ -109,15 +128,15 @@ public class FileFull: File {
     ///     * `deleted` when the item has been permanently deleted.
     ///   - versionNumber: The version number of this file
     ///   - commentCount: The number of comments on this file
-    ///   - permissions: FileFullPermissionsField?
-    ///   - tags: [String]?
-    ///   - lock: FileFullLockField?
+    ///   - permissions: 
+    ///   - tags: 
+    ///   - lock: 
     ///   - extension_: Indicates the (optional) file extension for this file. By default,
     ///     this is set to an empty string.
     ///   - isPackage: Indicates if the file is a package. Packages are commonly used
     ///     by Mac Applications and can include iWork files.
-    ///   - expiringEmbedLink: FileFullExpiringEmbedLinkField?
-    ///   - watermarkInfo: FileFullWatermarkInfoField?
+    ///   - expiringEmbedLink: 
+    ///   - watermarkInfo: 
     ///   - isAccessibleViaSharedLink: Specifies if the file can be accessed
     ///     via the direct shared link or a shared link
     ///     to a parent folder.
@@ -126,11 +145,11 @@ public class FileFull: File {
     ///   - isExternallyOwned: Specifies if this file is owned by a user outside of the
     ///     authenticated enterprise.
     ///   - hasCollaborations: Specifies if this file has any other collaborators.
-    ///   - metadata: FileFullMetadataField?
+    ///   - metadata: 
     ///   - expiresAt: When the file will automatically be deleted
-    ///   - representations: FileFullRepresentationsField?
-    ///   - classification: FileFullClassificationField?
-    ///   - uploaderDisplayName: String?
+    ///   - representations: 
+    ///   - classification: 
+    ///   - uploaderDisplayName: 
     ///   - dispositionAt: The retention expiration timestamp for the given file
     ///   - sharedLinkPermissionOptions: A list of the types of roles that user can be invited at
     ///     when sharing this file.
@@ -155,6 +174,7 @@ public class FileFull: File {
         self.uploaderDisplayName = uploaderDisplayName
         self.dispositionAt = dispositionAt
         self.sharedLinkPermissionOptions = sharedLinkPermissionOptions
+
         super.init(id: id, type: type, etag: etag, sequenceId: sequenceId, name: name, sha1: sha1, fileVersion: fileVersion, description: description, size: size, pathCollection: pathCollection, createdAt: createdAt, modifiedAt: modifiedAt, trashedAt: trashedAt, purgedAt: purgedAt, contentCreatedAt: contentCreatedAt, contentModifiedAt: contentModifiedAt, createdBy: createdBy, modifiedBy: modifiedBy, ownedBy: ownedBy, sharedLink: sharedLink, parent: parent, itemStatus: itemStatus)
     }
 
@@ -180,7 +200,8 @@ public class FileFull: File {
         uploaderDisplayName = try container.decodeIfPresent(String.self, forKey: .uploaderDisplayName)
         dispositionAt = try container.decodeIfPresent(String.self, forKey: .dispositionAt)
         sharedLinkPermissionOptions = try container.decodeIfPresent([FileFullSharedLinkPermissionOptionsField].self, forKey: .sharedLinkPermissionOptions)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -207,4 +228,5 @@ public class FileFull: File {
         try container.encodeIfPresent(sharedLinkPermissionOptions, forKey: .sharedLinkPermissionOptions)
         try super.encode(to: encoder)
     }
+
 }

@@ -10,6 +10,7 @@ public class RetentionPolicyAssignmentAssignedToField: Codable {
     /// the policy is assigned to.
     /// Set to null or omit when type is set to enterprise.
     public let id: String?
+
     /// The type of resource the policy is assigned to.
     public let type: RetentionPolicyAssignmentAssignedToFieldTypeField?
 
@@ -36,4 +37,5 @@ public class RetentionPolicyAssignmentAssignedToField: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

@@ -22,6 +22,7 @@ public class UpdateFolderAddSharedLinkRequestBodyArgSharedLinkField: Codable {
     /// The `company` access level is only available to paid
     /// accounts.
     public let access: UpdateFolderAddSharedLinkRequestBodyArgSharedLinkFieldAccessField?
+
     /// The password required to access the shared link. Set the
     /// password to `null` to remove it.
     /// Passwords must now be at least eight characters
@@ -29,6 +30,7 @@ public class UpdateFolderAddSharedLinkRequestBodyArgSharedLinkField: Codable {
     /// a non-numeric or non-alphabetic character.
     /// A password can only be set when `access` is set to `open`.
     public let password: String?
+
     /// Defines a custom vanity name to use in the shared link URL,
     /// for example `https://app.box.com/v/my-shared-link`.
     /// 
@@ -36,11 +38,13 @@ public class UpdateFolderAddSharedLinkRequestBodyArgSharedLinkField: Codable {
     /// as vanity URLs are a lot easier to guess than regular shared
     /// links.
     public let vanityName: String?
+
     /// The timestamp at which this shared link will
     /// expire. This field can only be set by
     /// users with paid accounts. The value must be greater than the
     /// current date and time.
     public let unsharedAt: String?
+
     public let permissions: UpdateFolderAddSharedLinkRequestBodyArgSharedLinkFieldPermissionsField?
 
     /// Initializer for a UpdateFolderAddSharedLinkRequestBodyArgSharedLinkField.
@@ -74,7 +78,7 @@ public class UpdateFolderAddSharedLinkRequestBodyArgSharedLinkField: Codable {
     ///     expire. This field can only be set by
     ///     users with paid accounts. The value must be greater than the
     ///     current date and time.
-    ///   - permissions: UpdateFolderAddSharedLinkRequestBodyArgSharedLinkFieldPermissionsField?
+    ///   - permissions: 
     public init(access: UpdateFolderAddSharedLinkRequestBodyArgSharedLinkFieldAccessField? = nil, password: String? = nil, vanityName: String? = nil, unsharedAt: String? = nil, permissions: UpdateFolderAddSharedLinkRequestBodyArgSharedLinkFieldPermissionsField? = nil) {
         self.access = access
         self.password = password
@@ -100,4 +104,5 @@ public class UpdateFolderAddSharedLinkRequestBodyArgSharedLinkField: Codable {
         try container.encodeIfPresent(unsharedAt, forKey: .unsharedAt)
         try container.encodeIfPresent(permissions, forKey: .permissions)
     }
+
 }

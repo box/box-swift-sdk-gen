@@ -14,24 +14,30 @@ public class UploadSession: Codable {
 
     /// The unique identifier for this session
     public let id: String?
+
     /// `upload_session`
     public let type: UploadSessionTypeField?
+
     /// The date and time when this session expires.
     public let sessionExpiresAt: String?
+
     /// The  size in bytes that must be used for all parts of of the
     /// upload.
     /// 
     /// Only the last part is allowed to be of a smaller size.
     public let partSize: Int64?
+
     /// The total number of parts expected in this upload session,
     /// as determined by the file size and part size.
     public let totalParts: Int?
+
     /// The number of parts that have been uploaded and processed
     /// by the server. This starts at `0`.
     /// 
     /// When committing a file files, inspecting this property can
     /// provide insight if all parts have been uploaded correctly.
     public let numPartsProcessed: Int?
+
     public let sessionEndpoints: UploadSessionSessionEndpointsField?
 
     /// Initializer for a UploadSession.
@@ -51,7 +57,7 @@ public class UploadSession: Codable {
     ///     
     ///     When committing a file files, inspecting this property can
     ///     provide insight if all parts have been uploaded correctly.
-    ///   - sessionEndpoints: UploadSessionSessionEndpointsField?
+    ///   - sessionEndpoints: 
     public init(id: String? = nil, type: UploadSessionTypeField? = nil, sessionExpiresAt: String? = nil, partSize: Int64? = nil, totalParts: Int? = nil, numPartsProcessed: Int? = nil, sessionEndpoints: UploadSessionSessionEndpointsField? = nil) {
         self.id = id
         self.type = type
@@ -83,4 +89,5 @@ public class UploadSession: Codable {
         try container.encodeIfPresent(numPartsProcessed, forKey: .numPartsProcessed)
         try container.encodeIfPresent(sessionEndpoints, forKey: .sessionEndpoints)
     }
+
 }

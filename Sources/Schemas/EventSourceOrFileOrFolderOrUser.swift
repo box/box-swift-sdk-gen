@@ -13,4 +13,5 @@ public enum EventSourceOrFileOrFolderOrUser: Codable {
     public func encode(to encoder: Encoder) throws {
         throw EncodingError.invalidValue(EventSourceOrFileOrFolderOrUser.self, EncodingError.Context(codingPath: [], debugDescription: "The rules determining the encoding cannot be established."))
     }
+
 }

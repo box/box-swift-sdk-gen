@@ -11,10 +11,12 @@ public class UploadPartMini: Codable {
 
     /// The unique ID of the chunk.
     public let partId: String?
+
     /// The offset of the chunk within the file
     /// in bytes. The lower bound of the position
     /// of the chunk within the file.
     public let offset: Int64?
+
     /// The size of the chunk in bytes.
     public let size: Int64?
 
@@ -45,4 +47,5 @@ public class UploadPartMini: Codable {
         try container.encodeIfPresent(offset, forKey: .offset)
         try container.encodeIfPresent(size, forKey: .size)
     }
+
 }

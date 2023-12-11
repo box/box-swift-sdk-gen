@@ -9,6 +9,7 @@ public class TermsOfServices: Codable {
 
     /// The total number of objects.
     public let totalCount: Int64?
+
     /// A list of terms of service objects
     public let entries: [TermsOfService]?
 
@@ -33,4 +34,5 @@ public class TermsOfServices: Codable {
         try container.encodeIfPresent(totalCount, forKey: .totalCount)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
+
 }

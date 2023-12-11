@@ -20,16 +20,22 @@ public class FileVersionRetention: Codable {
 
     /// The unique identifier for this file version retention.
     public let id: String?
+
     /// `file_version_retention`
     public let type: FileVersionRetentionTypeField?
+
     public let fileVersion: FileVersionMini?
+
     public let file: FileMini?
+
     /// When this file version retention object was
     /// created
     public let appliedAt: String?
+
     /// When the retention expires on this file
     /// version retention
     public let dispositionAt: String?
+
     public let winningRetentionPolicy: RetentionPolicyMini?
 
     /// Initializer for a FileVersionRetention.
@@ -37,13 +43,13 @@ public class FileVersionRetention: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this file version retention.
     ///   - type: `file_version_retention`
-    ///   - fileVersion: FileVersionMini?
-    ///   - file: FileMini?
+    ///   - fileVersion: 
+    ///   - file: 
     ///   - appliedAt: When this file version retention object was
     ///     created
     ///   - dispositionAt: When the retention expires on this file
     ///     version retention
-    ///   - winningRetentionPolicy: RetentionPolicyMini?
+    ///   - winningRetentionPolicy: 
     public init(id: String? = nil, type: FileVersionRetentionTypeField? = nil, fileVersion: FileVersionMini? = nil, file: FileMini? = nil, appliedAt: String? = nil, dispositionAt: String? = nil, winningRetentionPolicy: RetentionPolicyMini? = nil) {
         self.id = id
         self.type = type
@@ -75,4 +81,5 @@ public class FileVersionRetention: Codable {
         try container.encodeIfPresent(dispositionAt, forKey: .dispositionAt)
         try container.encodeIfPresent(winningRetentionPolicy, forKey: .winningRetentionPolicy)
     }
+
 }

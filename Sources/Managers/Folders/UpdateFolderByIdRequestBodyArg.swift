@@ -17,20 +17,27 @@ public class UpdateFolderByIdRequestBodyArg: Codable {
 
     /// The optional new name for this folder.
     public let name: String?
+
     /// The optional description of this folder
     public let description: String?
+
     /// Specifies whether a folder should be synced to a
     /// user's device or not. This is used by Box Sync
     /// (discontinued) and is not used by Box Drive.
     public let syncState: UpdateFolderByIdRequestBodyArgSyncStateField?
+
     /// Specifies if users who are not the owner
     /// of the folder can invite new collaborators to the folder.
     public let canNonOwnersInvite: Bool?
+
     /// The parent folder for this folder. Use this to move
     /// the folder or to restore it out of the trash.
     public let parent: UpdateFolderByIdRequestBodyArgParentField?
+
     public let sharedLink: UpdateFolderByIdRequestBodyArgSharedLinkField?
+
     public let folderUploadEmail: UpdateFolderByIdRequestBodyArgFolderUploadEmailField?
+
     /// The tags for this item. These tags are shown in
     /// the Box web app and mobile apps next to an item.
     /// 
@@ -40,10 +47,12 @@ public class UpdateFolderByIdRequestBodyArg: Codable {
     /// There is a limit of 100 tags per item, and 10,000
     /// unique tags per enterprise.
     public let tags: [String]?
+
     /// Specifies if new invites to this folder are restricted to users
     /// within the enterprise. This does not affect existing
     /// collaborations.
     public let isCollaborationRestrictedToEnterprise: Bool?
+
     /// An array of collections to make this folder
     /// a member of. Currently
     /// we only support the `favorites` collection.
@@ -56,6 +65,7 @@ public class UpdateFolderByIdRequestBodyArg: Codable {
     /// 
     /// [1]: e://get-collections
     public let collections: [UpdateFolderByIdRequestBodyArgCollectionsField]?
+
     /// Restricts collaborators who are not the owner of
     /// this folder from viewing other collaborations on
     /// this folder.
@@ -80,8 +90,8 @@ public class UpdateFolderByIdRequestBodyArg: Codable {
     ///     of the folder can invite new collaborators to the folder.
     ///   - parent: The parent folder for this folder. Use this to move
     ///     the folder or to restore it out of the trash.
-    ///   - sharedLink: UpdateFolderByIdRequestBodyArgSharedLinkField?
-    ///   - folderUploadEmail: UpdateFolderByIdRequestBodyArgFolderUploadEmailField?
+    ///   - sharedLink: 
+    ///   - folderUploadEmail: 
     ///   - tags: The tags for this item. These tags are shown in
     ///     the Box web app and mobile apps next to an item.
     ///     
@@ -157,4 +167,5 @@ public class UpdateFolderByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(collections, forKey: .collections)
         try container.encodeIfPresent(canNonOwnersViewCollaborators, forKey: .canNonOwnersViewCollaborators)
     }
+
 }

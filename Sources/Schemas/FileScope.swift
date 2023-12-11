@@ -9,13 +9,14 @@ public class FileScope: Codable {
 
     /// The file scopes for the file access
     public let scope: FileScopeScopeField?
+
     public let object: FileMini?
 
     /// Initializer for a FileScope.
     ///
     /// - Parameters:
     ///   - scope: The file scopes for the file access
-    ///   - object: FileMini?
+    ///   - object: 
     public init(scope: FileScopeScopeField? = nil, object: FileMini? = nil) {
         self.scope = scope
         self.object = object
@@ -32,4 +33,5 @@ public class FileScope: Codable {
         try container.encodeIfPresent(scope, forKey: .scope)
         try container.encodeIfPresent(object, forKey: .object)
     }
+
 }

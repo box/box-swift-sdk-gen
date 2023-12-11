@@ -17,13 +17,16 @@ public enum GroupMiniOrUserCollaborations: Codable {
                     self = .groupMini(content)
                     return
                 }
+
             case "user":
                 if let content = try? UserCollaborations(from: decoder) {
                     self = .userCollaborations(content)
                     return
                 }
+
             default:
                 throw DecodingError.typeMismatch(GroupMiniOrUserCollaborations.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpeted value for key type"))
+
             }
         }
 
@@ -38,4 +41,5 @@ public enum GroupMiniOrUserCollaborations: Codable {
             try userCollaborations.encode(to: encoder)
         }
     }
+
 }

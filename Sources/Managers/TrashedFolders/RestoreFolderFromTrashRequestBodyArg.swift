@@ -8,13 +8,14 @@ public class RestoreFolderFromTrashRequestBodyArg: Codable {
 
     /// An optional new name for the folder.
     public let name: String?
+
     public let parent: RestoreFolderFromTrashRequestBodyArgParentField?
 
     /// Initializer for a RestoreFolderFromTrashRequestBodyArg.
     ///
     /// - Parameters:
     ///   - name: An optional new name for the folder.
-    ///   - parent: RestoreFolderFromTrashRequestBodyArgParentField?
+    ///   - parent: 
     public init(name: String? = nil, parent: RestoreFolderFromTrashRequestBodyArgParentField? = nil) {
         self.name = name
         self.parent = parent
@@ -31,4 +32,5 @@ public class RestoreFolderFromTrashRequestBodyArg: Codable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(parent, forKey: .parent)
     }
+
 }

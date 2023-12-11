@@ -12,12 +12,16 @@ public class RecentItem: Codable {
 
     /// `recent_item`
     public let type: String?
+
     public let item: FileFullOrFolderFullOrWebLink?
+
     /// The most recent type of access the user performed on
     /// the item.
     public let interactionType: RecentItemInteractionTypeField?
+
     /// The time of the most recent interaction.
     public let interactedAt: String?
+
     /// If the item was accessed through a shared link it will appear here,
     /// otherwise this will be null.
     public let interactionSharedLink: String?
@@ -26,7 +30,7 @@ public class RecentItem: Codable {
     ///
     /// - Parameters:
     ///   - type: `recent_item`
-    ///   - item: FileFullOrFolderFullOrWebLink?
+    ///   - item: 
     ///   - interactionType: The most recent type of access the user performed on
     ///     the item.
     ///   - interactedAt: The time of the most recent interaction.
@@ -57,4 +61,5 @@ public class RecentItem: Codable {
         try container.encodeIfPresent(interactedAt, forKey: .interactedAt)
         try container.encodeIfPresent(interactionSharedLink, forKey: .interactionSharedLink)
     }
+
 }

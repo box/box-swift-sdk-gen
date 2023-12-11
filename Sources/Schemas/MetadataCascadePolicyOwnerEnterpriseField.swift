@@ -8,6 +8,7 @@ public class MetadataCascadePolicyOwnerEnterpriseField: Codable {
 
     /// `enterprise`
     public let type: MetadataCascadePolicyOwnerEnterpriseFieldTypeField?
+
     /// The ID of the enterprise that owns the policy.
     public let id: String?
 
@@ -32,4 +33,5 @@ public class MetadataCascadePolicyOwnerEnterpriseField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(id, forKey: .id)
     }
+
 }

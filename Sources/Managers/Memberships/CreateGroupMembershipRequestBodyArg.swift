@@ -10,10 +10,13 @@ public class CreateGroupMembershipRequestBodyArg: Codable {
 
     /// The user to add to the group.
     public let user: CreateGroupMembershipRequestBodyArgUserField
+
     /// The group to add the user to.
     public let group: CreateGroupMembershipRequestBodyArgGroupField
+
     /// The role of the user in the group.
     public let role: CreateGroupMembershipRequestBodyArgRoleField?
+
     /// Custom configuration for the permissions an admin
     /// if a group will receive. This option has no effect
     /// on members with a role of `member`.
@@ -64,4 +67,5 @@ public class CreateGroupMembershipRequestBodyArg: Codable {
         try container.encodeIfPresent(role, forKey: .role)
         try container.encodeIfPresent(configurablePermissions, forKey: .configurablePermissions)
     }
+
 }

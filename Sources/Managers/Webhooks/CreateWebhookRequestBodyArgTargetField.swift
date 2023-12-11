@@ -8,6 +8,7 @@ public class CreateWebhookRequestBodyArgTargetField: Codable {
 
     /// The ID of the item to trigger a webhook
     public let id: String?
+
     /// The type of item to trigger a webhook
     public let type: CreateWebhookRequestBodyArgTargetFieldTypeField?
 
@@ -32,4 +33,5 @@ public class CreateWebhookRequestBodyArgTargetField: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

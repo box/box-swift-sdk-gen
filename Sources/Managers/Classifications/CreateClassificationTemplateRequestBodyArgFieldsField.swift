@@ -12,14 +12,18 @@ public class CreateClassificationTemplateRequestBodyArgFieldsField: Codable {
     /// The type of the field
     /// that is always enum.
     public let type: CreateClassificationTemplateRequestBodyArgFieldsFieldTypeField
+
     /// Defines classifications 
     /// available in the enterprise.
     public let key: CreateClassificationTemplateRequestBodyArgFieldsFieldKeyField
+
     /// A display name for the classification.
     public let displayName: CreateClassificationTemplateRequestBodyArgFieldsFieldDisplayNameField
+
     /// The actual list of classifications that are present on
     /// this template.
     public let options: [CreateClassificationTemplateRequestBodyArgFieldsFieldOptionsField]
+
     /// Determines if the classification
     /// template is
     /// hidden or available on
@@ -67,4 +71,5 @@ public class CreateClassificationTemplateRequestBodyArgFieldsField: Codable {
         try container.encode(options, forKey: .options)
         try container.encodeIfPresent(hidden, forKey: .hidden)
     }
+
 }

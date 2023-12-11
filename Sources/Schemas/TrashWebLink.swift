@@ -25,37 +25,54 @@ public class TrashWebLink: Codable {
 
     /// `web_link`
     public let type: TrashWebLinkTypeField?
+
     /// The unique identifier for this web link
     public let id: String?
+
     public let sequenceId: String?
+
     /// The entity tag of this web link. Used with `If-Match`
     /// headers.
     public let etag: String?
+
     /// The name of the web link
     public let name: String?
+
     /// The URL this web link points to
     public let url: String?
+
     public let parent: FolderMini?
+
     /// The description accompanying the web link. This is
     /// visible within the Box web application.
     public let description: String?
+
     public let pathCollection: TrashWebLinkPathCollectionField?
+
     /// When this file was created on Box’s servers.
     public let createdAt: String?
+
     /// When this file was last updated on the Box
     /// servers.
     public let modifiedAt: String?
+
     /// When this file was last moved to the trash.
     public let trashedAt: String?
+
     /// When this file will be permanently deleted.
     public let purgedAt: String?
+
     public let createdBy: UserMini?
+
     public let modifiedBy: UserMini?
+
     public let ownedBy: UserMini?
+
     /// The shared link for this bookmark. This will
     /// be `null` if a bookmark has been trashed, since the link will no longer
     /// be active.
     public let sharedLink: String?
+
     /// Whether this item is deleted or not. Values include `active`,
     /// `trashed` if the file has been moved to the trash, and `deleted` if
     /// the file has been permanently deleted
@@ -66,23 +83,23 @@ public class TrashWebLink: Codable {
     /// - Parameters:
     ///   - type: `web_link`
     ///   - id: The unique identifier for this web link
-    ///   - sequenceId: String?
+    ///   - sequenceId: 
     ///   - etag: The entity tag of this web link. Used with `If-Match`
     ///     headers.
     ///   - name: The name of the web link
     ///   - url: The URL this web link points to
-    ///   - parent: FolderMini?
+    ///   - parent: 
     ///   - description: The description accompanying the web link. This is
     ///     visible within the Box web application.
-    ///   - pathCollection: TrashWebLinkPathCollectionField?
+    ///   - pathCollection: 
     ///   - createdAt: When this file was created on Box’s servers.
     ///   - modifiedAt: When this file was last updated on the Box
     ///     servers.
     ///   - trashedAt: When this file was last moved to the trash.
     ///   - purgedAt: When this file will be permanently deleted.
-    ///   - createdBy: UserMini?
-    ///   - modifiedBy: UserMini?
-    ///   - ownedBy: UserMini?
+    ///   - createdBy: 
+    ///   - modifiedBy: 
+    ///   - ownedBy: 
     ///   - sharedLink: The shared link for this bookmark. This will
     ///     be `null` if a bookmark has been trashed, since the link will no longer
     ///     be active.
@@ -153,4 +170,5 @@ public class TrashWebLink: Codable {
         try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
         try container.encodeIfPresent(itemStatus, forKey: .itemStatus)
     }
+
 }

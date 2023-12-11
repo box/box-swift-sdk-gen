@@ -3,26 +3,42 @@ import Foundation
 /// An instance of a metadata template, which has been applied to a file or
 /// folder.
 public class MetadataFull: Metadata {
-    private enum CodingKeys: String, CodingKey {
-        case canEdit = "$canEdit"
-        case id = "$id"
-        case type = "$type"
-        case typeVersion = "$typeVersion"
-        case extraData
+    private struct CodingKeys: CodingKey {
+        static let canEdit = CodingKeys(stringValue: "$canEdit")
+        static let id = CodingKeys(stringValue: "$id")
+        static let type = CodingKeys(stringValue: "$type")
+        static let typeVersion = CodingKeys(stringValue: "$typeVersion")
+
+        var intValue: Int?
+
+        var stringValue: String
+
+        init?(intValue: Int) {
+            return nil
+        }
+
+        init(stringValue: String) {
+            self.stringValue = stringValue
+        }
+
     }
 
     /// Whether the user can edit this metadata instance.
     public let canEdit: Bool?
+
     /// A UUID to identify the metadata instance.
     public let id: String?
+
     /// A unique identifier for the "type" of this instance. This is an
     /// internal system property and should not be used by a client
     /// application.
     public let type: String?
+
     /// The last-known version of the template of the object. This is an
     /// internal system property and should not be used by a client
     /// application.
     public let typeVersion: Int64?
+
     public let extraData: [String: String]?
 
     /// Initializer for a MetadataFull.
@@ -46,13 +62,14 @@ public class MetadataFull: Metadata {
     ///   - typeVersion: The last-known version of the template of the object. This is an
     ///     internal system property and should not be used by a client
     ///     application.
-    ///   - extraData: [String: String]?
+    ///   - extraData: 
     public init(parent: String? = nil, template: String? = nil, scope: String? = nil, version: Int64? = nil, canEdit: Bool? = nil, id: String? = nil, type: String? = nil, typeVersion: Int64? = nil, extraData: [String: String]? = nil) {
         self.canEdit = canEdit
         self.id = id
         self.type = type
         self.typeVersion = typeVersion
         self.extraData = extraData
+
         super.init(parent: parent, template: template, scope: scope, version: version)
     }
 
@@ -62,8 +79,27 @@ public class MetadataFull: Metadata {
         id = try container.decodeIfPresent(String.self, forKey: .id)
         type = try container.decodeIfPresent(String.self, forKey: .type)
         typeVersion = try container.decodeIfPresent(Int64.self, forKey: .typeVersion)
-        extraData = try container.decodeIfPresent([String: String].self, forKey: .extraData)
-        try super.init(from:decoder)
+
+        let allKeys: [CodingKeys] = container.allKeys
+        let definedKeys: [CodingKeys] = [.canEdit, .id, .type, .typeVersion]
+        let additionalKeys: [CodingKeys] = allKeys.filter({ (parent: CodingKeys) in !definedKeys.contains(where: { (child: CodingKeys) in child.stringValue == parent.stringValue }) })
+
+        if !additionalKeys.isEmpty {
+            var additionalProperties: [String: String] = [:]
+            for key in additionalKeys {
+                if let value = try? container.decode(String.self, forKey: key) {
+                    additionalProperties[key.stringValue] = value
+                }
+
+            }
+
+            extraData = additionalProperties
+        } else {
+            extraData = nil
+        }
+
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -72,7 +108,15 @@ public class MetadataFull: Metadata {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(typeVersion, forKey: .typeVersion)
-        try container.encodeIfPresent(extraData, forKey: .extraData)
+
+        if let extraData {
+            for (key,value) in extraData {
+                try container.encodeIfPresent(value, forKey: CodingKeys(stringValue: key))
+            }
+
+        }
+
         try super.encode(to: encoder)
     }
+
 }

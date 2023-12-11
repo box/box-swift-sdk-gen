@@ -16,22 +16,29 @@ public class ClassificationTemplate: Codable {
 
     /// The ID of the classification template.
     public let id: String
+
     /// `metadata_template`
     public let type: ClassificationTemplateTypeField
+
     /// The scope of the classification template. This is in the format
     /// `enterprise_{id}` where the `id` is the enterprise ID.
     public let scope: String
+
     /// `securityClassification-6VMVochwUWo`
     public let templateKey: ClassificationTemplateTemplateKeyField
+
     /// The name of this template as shown in web and mobile interfaces.
     public let displayName: ClassificationTemplateDisplayNameField
+
     /// A list of fields for this classification template. This includes
     /// only one field, the `Box__Security__Classification__Key`, which defines
     /// the different classifications available in this enterprise.
     public let fields: [ClassificationTemplateFieldsField]
+
     /// Determines if the
     /// template is always available in web and mobile interfaces.
     public let hidden: Bool?
+
     /// Determines if 
     /// classifications are
     /// copied along when the file or folder is
@@ -90,4 +97,5 @@ public class ClassificationTemplate: Codable {
         try container.encodeIfPresent(hidden, forKey: .hidden)
         try container.encodeIfPresent(copyInstanceOnItemCopy, forKey: .copyInstanceOnItemCopy)
     }
+
 }

@@ -10,10 +10,12 @@ public class UpdateCollaborationByIdRequestBodyArg: Codable {
 
     /// The level of access granted.
     public let role: UpdateCollaborationByIdRequestBodyArgRoleField
+
     /// <!--alex ignore reject-->
     /// Set the status of a `pending` collaboration invitation,
     /// effectively accepting, or rejecting the invite.
     public let status: UpdateCollaborationByIdRequestBodyArgStatusField?
+
     /// Update the expiration date for the collaboration. At this date,
     /// the collaboration will be automatically removed from the item.
     /// 
@@ -28,6 +30,7 @@ public class UpdateCollaborationByIdRequestBodyArg: Codable {
     /// expiration if it was created after the **Automatically remove
     /// invited collaborator** setting was enabled.
     public let expiresAt: String?
+
     /// Determines if the invited users can see the entire parent path to
     /// the associated folder. The user will not gain privileges in any
     /// parent folder and therefore can not see content the user is not
@@ -98,4 +101,5 @@ public class UpdateCollaborationByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
         try container.encodeIfPresent(canViewPath, forKey: .canViewPath)
     }
+
 }

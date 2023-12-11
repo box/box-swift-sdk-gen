@@ -7,6 +7,7 @@ public class UpdateIntegrationMappingSlackByIdRequestBodyArg: Codable {
     }
 
     public let boxItem: IntegrationMappingBoxItemSlack?
+
     public let options: IntegrationMappingSlackOptions?
 
     public init(boxItem: IntegrationMappingBoxItemSlack? = nil, options: IntegrationMappingSlackOptions? = nil) {
@@ -25,4 +26,5 @@ public class UpdateIntegrationMappingSlackByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(boxItem, forKey: .boxItem)
         try container.encodeIfPresent(options, forKey: .options)
     }
+
 }

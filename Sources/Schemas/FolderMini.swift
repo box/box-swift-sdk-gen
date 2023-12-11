@@ -9,6 +9,7 @@ public class FolderMini: FolderBase {
     }
 
     public let sequenceId: String?
+
     /// The name of the folder.
     public let name: String?
 
@@ -26,11 +27,12 @@ public class FolderMini: FolderBase {
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
-    ///   - sequenceId: String?
+    ///   - sequenceId: 
     ///   - name: The name of the folder.
     public init(id: String, type: FolderBaseTypeField, etag: String? = nil, sequenceId: String? = nil, name: String? = nil) {
         self.sequenceId = sequenceId
         self.name = name
+
         super.init(id: id, type: type, etag: etag)
     }
 
@@ -38,7 +40,8 @@ public class FolderMini: FolderBase {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         sequenceId = try container.decodeIfPresent(String.self, forKey: .sequenceId)
         name = try container.decodeIfPresent(String.self, forKey: .name)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -47,4 +50,5 @@ public class FolderMini: FolderBase {
         try container.encodeIfPresent(name, forKey: .name)
         try super.encode(to: encoder)
     }
+
 }

@@ -8,6 +8,7 @@ public class CreateRetentionPolicyAssignmentRequestBodyArgFilterFieldsField: Cod
 
     /// The metadata attribute key id.
     public let field: String?
+
     /// The metadata attribute field id. For value, only
     /// enum and multiselect types are supported.
     public let value: String?
@@ -34,4 +35,5 @@ public class CreateRetentionPolicyAssignmentRequestBodyArgFilterFieldsField: Cod
         try container.encodeIfPresent(field, forKey: .field)
         try container.encodeIfPresent(value, forKey: .value)
     }
+
 }

@@ -9,10 +9,12 @@ public class UpdateFileMetadataGlobalBoxSkillsCardRequestBodyArg: Codable {
 
     /// `replace`
     public let op: UpdateFileMetadataGlobalBoxSkillsCardRequestBodyArgOpField?
+
     /// The JSON Path that represents the card to replace. In most cases
     /// this will be in the format `/cards/{index}` where `index` is the
     /// zero-indexed position of the card in the list of cards.
     public let path: String?
+
     public let value: KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard?
 
     /// Initializer for a UpdateFileMetadataGlobalBoxSkillsCardRequestBodyArg.
@@ -22,7 +24,7 @@ public class UpdateFileMetadataGlobalBoxSkillsCardRequestBodyArg: Codable {
     ///   - path: The JSON Path that represents the card to replace. In most cases
     ///     this will be in the format `/cards/{index}` where `index` is the
     ///     zero-indexed position of the card in the list of cards.
-    ///   - value: KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard?
+    ///   - value: 
     public init(op: UpdateFileMetadataGlobalBoxSkillsCardRequestBodyArgOpField? = nil, path: String? = nil, value: KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard? = nil) {
         self.op = op
         self.path = path
@@ -42,4 +44,5 @@ public class UpdateFileMetadataGlobalBoxSkillsCardRequestBodyArg: Codable {
         try container.encodeIfPresent(path, forKey: .path)
         try container.encodeIfPresent(value, forKey: .value)
     }
+
 }

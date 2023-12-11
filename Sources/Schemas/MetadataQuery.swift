@@ -19,11 +19,13 @@ public class MetadataQuery: Codable {
     /// most notably the built-in, Box-provided classification templates
     /// can not be used in a query.
     public let from: String
+
     /// The ID of the folder that you are restricting the query to. A
     /// value of zero will return results from all folders you have access
     /// to. A non-zero value will only return results found in the folder
     /// corresponding to the ID or in any of its subfolders.
     public let ancestorFolderId: String
+
     /// The query to perform. A query is a logical expression that is very similar
     /// to a SQL `SELECT` statement. Values in the search query can be turned into
     /// parameters specified in the `query_param` arguments list to prevent having
@@ -32,22 +34,27 @@ public class MetadataQuery: Codable {
     /// For example, a value of `:amount` would represent the `amount` value in
     /// `query_params` object.
     public let query: String?
+
     /// Set of arguments corresponding to the parameters specified in the
     /// `query`. The type of each parameter used in the `query_params` must match
     /// the type of the corresponding metadata template field.
     public let queryParams: [String: String]?
+
     /// A list of template fields and directions to sort the metadata query
     /// results by.
     /// 
     /// The ordering `direction` must be the same for each item in the array.
     public let orderBy: [MetadataQueryOrderByField]?
+
     /// A value between 0 and 100 that indicates the maximum number of results
     /// to return for a single request. This only specifies a maximum
     /// boundary and will not guarantee the minimum number of results
     /// returned.
     public let limit: Int64?
+
     /// Marker to use for requesting the next page.
     public let marker: String?
+
     /// By default, this endpoint returns only the most basic info about the items for
     /// which the query matches. This attribute can be used to specify a list of
     /// additional attributes to return for any item, including its metadata.
@@ -148,4 +155,5 @@ public class MetadataQuery: Codable {
         try container.encodeIfPresent(marker, forKey: .marker)
         try container.encodeIfPresent(fields, forKey: .fields)
     }
+
 }

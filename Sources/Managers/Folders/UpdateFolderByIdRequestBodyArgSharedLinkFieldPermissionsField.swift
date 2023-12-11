@@ -29,4 +29,5 @@ public class UpdateFolderByIdRequestBodyArgSharedLinkFieldPermissionsField: Coda
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(canDownload, forKey: .canDownload)
     }
+
 }

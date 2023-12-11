@@ -8,6 +8,7 @@ public class DevicePinnersOrderField: Codable {
 
     /// The field that is ordered by
     public let by: DevicePinnersOrderFieldByField?
+
     /// The direction to order by, either ascending or descending
     public let direction: DevicePinnersOrderFieldDirectionField?
 
@@ -32,4 +33,5 @@ public class DevicePinnersOrderField: Codable {
         try container.encodeIfPresent(by, forKey: .by)
         try container.encodeIfPresent(direction, forKey: .direction)
     }
+
 }

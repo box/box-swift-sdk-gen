@@ -19,10 +19,13 @@ public class SkillInvocationStatusField: Codable {
     /// * `permanent_failure` -  Encountered a permanent issue and
     ///   retry would not help.
     public let state: SkillInvocationStatusFieldStateField?
+
     /// Status information
     public let message: String?
+
     /// Error code information, if error occurred.
     public let errorCode: String?
+
     /// Additional status information.
     public let additionalInfo: String?
 
@@ -64,4 +67,5 @@ public class SkillInvocationStatusField: Codable {
         try container.encodeIfPresent(errorCode, forKey: .errorCode)
         try container.encodeIfPresent(additionalInfo, forKey: .additionalInfo)
     }
+
 }

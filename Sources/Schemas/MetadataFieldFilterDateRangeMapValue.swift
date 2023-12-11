@@ -11,6 +11,7 @@ public class MetadataFieldFilterDateRangeMapValue: Codable {
     /// equal to this value for the search query to match this
     /// template.
     public let lt: String?
+
     /// Specifies the (inclusive) lower bound for the metadata field
     /// value. The value of a field must be greater than (`gt`) or
     /// equal to this value for the search query to match this
@@ -44,4 +45,5 @@ public class MetadataFieldFilterDateRangeMapValue: Codable {
         try container.encodeIfPresent(lt, forKey: .lt)
         try container.encodeIfPresent(gt, forKey: .gt)
     }
+
 }

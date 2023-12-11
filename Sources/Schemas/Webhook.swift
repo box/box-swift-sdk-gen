@@ -10,11 +10,14 @@ public class Webhook: WebhookMini {
     }
 
     public let createdBy: UserMini?
+
     /// A timestamp identifying the time that
     /// the webhook was created.
     public let createdAt: String?
+
     /// The URL that is notified by this webhook
     public let address: String?
+
     /// An array of event names that this webhook is
     /// to be triggered for
     public let triggers: [WebhookTriggersField]?
@@ -25,7 +28,7 @@ public class Webhook: WebhookMini {
     ///   - id: The unique identifier for this webhook.
     ///   - type: `webhook`
     ///   - target: The item that will trigger the webhook
-    ///   - createdBy: UserMini?
+    ///   - createdBy: 
     ///   - createdAt: A timestamp identifying the time that
     ///     the webhook was created.
     ///   - address: The URL that is notified by this webhook
@@ -36,6 +39,7 @@ public class Webhook: WebhookMini {
         self.createdAt = createdAt
         self.address = address
         self.triggers = triggers
+
         super.init(id: id, type: type, target: target)
     }
 
@@ -45,7 +49,8 @@ public class Webhook: WebhookMini {
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
         address = try container.decodeIfPresent(String.self, forKey: .address)
         triggers = try container.decodeIfPresent([WebhookTriggersField].self, forKey: .triggers)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -56,4 +61,5 @@ public class Webhook: WebhookMini {
         try container.encodeIfPresent(triggers, forKey: .triggers)
         try super.encode(to: encoder)
     }
+
 }

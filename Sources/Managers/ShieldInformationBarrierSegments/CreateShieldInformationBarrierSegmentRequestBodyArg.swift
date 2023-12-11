@@ -8,15 +8,17 @@ public class CreateShieldInformationBarrierSegmentRequestBodyArg: Codable {
     }
 
     public let shieldInformationBarrier: ShieldInformationBarrierBase
+
     /// Name of the shield information barrier segment
     public let name: String
+
     /// Description of the shield information barrier segment
     public let description: String?
 
     /// Initializer for a CreateShieldInformationBarrierSegmentRequestBodyArg.
     ///
     /// - Parameters:
-    ///   - shieldInformationBarrier: ShieldInformationBarrierBase
+    ///   - shieldInformationBarrier: 
     ///   - name: Name of the shield information barrier segment
     ///   - description: Description of the shield information barrier segment
     public init(shieldInformationBarrier: ShieldInformationBarrierBase, name: String, description: String? = nil) {
@@ -38,4 +40,5 @@ public class CreateShieldInformationBarrierSegmentRequestBodyArg: Codable {
         try container.encode(name, forKey: .name)
         try container.encodeIfPresent(description, forKey: .description)
     }
+
 }

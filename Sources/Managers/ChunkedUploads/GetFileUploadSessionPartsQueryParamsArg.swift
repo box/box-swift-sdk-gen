@@ -7,6 +7,7 @@ public class GetFileUploadSessionPartsQueryParamsArg {
     /// exceeding 10000 will be rejected
     /// with a 400 response.
     public let offset: Int64?
+
     /// The maximum number of items to return per page.
     public let limit: Int64?
 

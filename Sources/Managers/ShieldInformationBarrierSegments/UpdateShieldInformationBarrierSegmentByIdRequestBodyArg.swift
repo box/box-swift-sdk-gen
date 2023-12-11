@@ -8,6 +8,7 @@ public class UpdateShieldInformationBarrierSegmentByIdRequestBodyArg: Codable {
 
     /// The updated name for the shield information barrier segment.
     public let name: String?
+
     /// The updated description for
     /// the shield information barrier segment.
     public let description: String?
@@ -34,4 +35,5 @@ public class UpdateShieldInformationBarrierSegmentByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(description, forKey: .description)
     }
+
 }

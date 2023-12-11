@@ -16,11 +16,15 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
     }
 
     public let legalHoldPolicy: LegalHoldPolicyMini?
+
     public let assignedTo: FileOrFolderOrWebLink?
+
     public let assignedBy: UserMini?
+
     /// When the legal hold policy assignment object was
     /// created
     public let assignedAt: String?
+
     /// When the assignment release request was sent.
     /// (Because it can take time for an assignment to fully
     /// delete, this isn't quite the same time that the
@@ -33,9 +37,9 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
     /// - Parameters:
     ///   - id: The unique identifier for this legal hold assignment
     ///   - type: `legal_hold_policy_assignment`
-    ///   - legalHoldPolicy: LegalHoldPolicyMini?
-    ///   - assignedTo: FileOrFolderOrWebLink?
-    ///   - assignedBy: UserMini?
+    ///   - legalHoldPolicy: 
+    ///   - assignedTo: 
+    ///   - assignedBy: 
     ///   - assignedAt: When the legal hold policy assignment object was
     ///     created
     ///   - deletedAt: When the assignment release request was sent.
@@ -49,6 +53,7 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
         self.assignedBy = assignedBy
         self.assignedAt = assignedAt
         self.deletedAt = deletedAt
+
         super.init(id: id, type: type)
     }
 
@@ -59,7 +64,8 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
         assignedBy = try container.decodeIfPresent(UserMini.self, forKey: .assignedBy)
         assignedAt = try container.decodeIfPresent(String.self, forKey: .assignedAt)
         deletedAt = try container.decodeIfPresent(String.self, forKey: .deletedAt)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -71,4 +77,5 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
         try container.encodeIfPresent(deletedAt, forKey: .deletedAt)
         try super.encode(to: encoder)
     }
+
 }

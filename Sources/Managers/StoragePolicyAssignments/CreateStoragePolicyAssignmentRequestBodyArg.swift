@@ -9,6 +9,7 @@ public class CreateStoragePolicyAssignmentRequestBodyArg: Codable {
     /// The storage policy to assign to the user or
     /// enterprise
     public let storagePolicy: CreateStoragePolicyAssignmentRequestBodyArgStoragePolicyField
+
     /// The user or enterprise to assign the storage
     /// policy to.
     public let assignedTo: CreateStoragePolicyAssignmentRequestBodyArgAssignedToField
@@ -36,4 +37,5 @@ public class CreateStoragePolicyAssignmentRequestBodyArg: Codable {
         try container.encode(storagePolicy, forKey: .storagePolicy)
         try container.encode(assignedTo, forKey: .assignedTo)
     }
+
 }

@@ -9,6 +9,7 @@ public class CreateFileUploadSessionCommitHeadersArg {
     /// 
     /// [1]: https://tools.ietf.org/html/rfc3230
     public let digest: String
+
     /// Ensures this item hasn't recently changed before
     /// making changes.
     /// 
@@ -17,6 +18,7 @@ public class CreateFileUploadSessionCommitHeadersArg {
     /// with a `412 Precondition Failed` if it
     /// has changed since.
     public let ifMatch: String?
+
     /// Ensures an item is only returned if it has changed.
     /// 
     /// Pass in the item's last observed `etag` value
@@ -24,6 +26,7 @@ public class CreateFileUploadSessionCommitHeadersArg {
     /// with a `304 Not Modified` if the item has not
     /// changed since.
     public let ifNoneMatch: String?
+
     /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 

@@ -11,6 +11,7 @@ public class MetadataQueryOrderByField: Codable {
     /// The `field_key` represents the `key` value of a field from the
     /// metadata template being searched for.
     public let fieldKey: String?
+
     /// The direction to order by, either ascending or descending.
     /// 
     /// The `ordering` direction must be the same for each item in the
@@ -44,4 +45,5 @@ public class MetadataQueryOrderByField: Codable {
         try container.encodeIfPresent(fieldKey, forKey: .fieldKey)
         try container.encodeIfPresent(direction, forKey: .direction)
     }
+
 }

@@ -9,8 +9,10 @@ public class WorkflowFlowsFieldTriggerField: Codable {
 
     /// The trigger's resource type
     public let type: WorkflowFlowsFieldTriggerFieldTypeField?
+
     /// The type of trigger selected for this flow
     public let triggerType: WorkflowFlowsFieldTriggerFieldTriggerTypeField?
+
     /// List of trigger scopes
     public let scope: [WorkflowFlowsFieldTriggerFieldScopeField]?
 
@@ -39,4 +41,5 @@ public class WorkflowFlowsFieldTriggerField: Codable {
         try container.encodeIfPresent(triggerType, forKey: .triggerType)
         try container.encodeIfPresent(scope, forKey: .scope)
     }
+
 }

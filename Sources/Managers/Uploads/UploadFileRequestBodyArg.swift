@@ -14,6 +14,7 @@ public class UploadFileRequestBodyArg {
     /// 
     /// </Message>
     public let attributes: UploadFileRequestBodyArgAttributesField
+
     /// The content of the file to upload to Box.
     /// 
     /// <Message warning>
@@ -25,7 +26,9 @@ public class UploadFileRequestBodyArg {
     /// 
     /// </Message>
     public let file: InputStream
+
     public let fileFileName: String?
+
     public let fileContentType: String?
 
     /// Initializer for a UploadFileRequestBodyArg.
@@ -53,8 +56,8 @@ public class UploadFileRequestBodyArg {
     ///       `metadata_after_file_contents` error code.
     ///     
     ///     </Message>
-    ///   - fileFileName: String?
-    ///   - fileContentType: String?
+    ///   - fileFileName: 
+    ///   - fileContentType: 
     public init(attributes: UploadFileRequestBodyArgAttributesField, file: InputStream, fileFileName: String? = nil, fileContentType: String? = nil) {
         self.attributes = attributes
         self.file = file

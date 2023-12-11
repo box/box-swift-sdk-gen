@@ -15,16 +15,23 @@ public class Invite: Codable {
 
     /// The unique identifier for this invite
     public let id: String
+
     /// `invite`
     public let type: InviteTypeField
+
     /// A representation of a Box enterprise
     public let invitedTo: InviteInvitedToField?
+
     public let actionableBy: UserMini?
+
     public let invitedBy: UserMini?
+
     /// The status of the invite
     public let status: String?
+
     /// When the invite was created
     public let createdAt: String?
+
     /// When the invite was modified.
     public let modifiedAt: String?
 
@@ -34,8 +41,8 @@ public class Invite: Codable {
     ///   - id: The unique identifier for this invite
     ///   - type: `invite`
     ///   - invitedTo: A representation of a Box enterprise
-    ///   - actionableBy: UserMini?
-    ///   - invitedBy: UserMini?
+    ///   - actionableBy: 
+    ///   - invitedBy: 
     ///   - status: The status of the invite
     ///   - createdAt: When the invite was created
     ///   - modifiedAt: When the invite was modified.
@@ -73,4 +80,5 @@ public class Invite: Codable {
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
     }
+
 }

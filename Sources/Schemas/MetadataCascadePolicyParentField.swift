@@ -8,6 +8,7 @@ public class MetadataCascadePolicyParentField: Codable {
 
     /// `folder`
     public let type: MetadataCascadePolicyParentFieldTypeField?
+
     /// The ID of the folder the policy is applied to.
     public let id: String?
 
@@ -32,4 +33,5 @@ public class MetadataCascadePolicyParentField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(id, forKey: .id)
     }
+
 }

@@ -16,24 +16,32 @@ public class SkillCardsMetadata: Codable {
 
     /// Whether the user can edit this metadata
     public let canEdit: Bool?
+
     /// A UUID to identify the metadata object
     public let id: String?
+
     /// An ID for the parent folder
     public let parent: String?
+
     /// An ID for the scope in which this template
     /// has been applied
     public let scope: String?
+
     /// The name of the template
     public let template: String?
+
     /// A unique identifier for the "type" of this instance. This is an internal
     /// system property and should not be used by a client application.
     public let type: String?
+
     /// The last-known version of the template of the object. This is an internal
     /// system property and should not be used by a client application.
     public let typeVersion: Int64?
+
     /// The version of the metadata object. Starts at 0 and increases every time
     /// a user-defined property is modified.
     public let version: Int64?
+
     /// A list of Box Skill cards that have been applied to this file.
     public let cards: [KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard]?
 
@@ -90,4 +98,5 @@ public class SkillCardsMetadata: Codable {
         try container.encodeIfPresent(version, forKey: .version)
         try container.encodeIfPresent(cards, forKey: .cards)
     }
+
 }

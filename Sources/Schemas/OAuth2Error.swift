@@ -9,6 +9,7 @@ public class OAuth2Error: Codable {
 
     /// The type of the error returned.
     public let error: String?
+
     /// The type of the error returned.
     public let errorDescription: String?
 
@@ -33,4 +34,5 @@ public class OAuth2Error: Codable {
         try container.encodeIfPresent(error, forKey: .error)
         try container.encodeIfPresent(errorDescription, forKey: .errorDescription)
     }
+
 }

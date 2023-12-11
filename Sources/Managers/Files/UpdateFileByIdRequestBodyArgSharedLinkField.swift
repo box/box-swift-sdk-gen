@@ -22,6 +22,7 @@ public class UpdateFileByIdRequestBodyArgSharedLinkField: Codable {
     /// The `company` access level is only available to paid
     /// accounts.
     public let access: UpdateFileByIdRequestBodyArgSharedLinkFieldAccessField?
+
     /// The password required to access the shared link. Set the
     /// password to `null` to remove it.
     /// Passwords must now be at least eight characters
@@ -29,16 +30,19 @@ public class UpdateFileByIdRequestBodyArgSharedLinkField: Codable {
     /// a non-numeric or non-alphabetic character.
     /// A password can only be set when `access` is set to `open`.
     public let password: String?
+
     /// Defines a custom vanity name to use in the shared link URL,
     /// for example `https://app.box.com/v/my-shared-link`.
     /// 
     /// Custom URLs should not be used when sharing sensitive content
     /// as vanity URLs are a lot easier to guess than regular shared links.
     public let vanityName: String?
+
     /// The timestamp at which this shared link will
     /// expire. This field can only be set by
     /// users with paid accounts.
     public let unsharedAt: String?
+
     public let permissions: UpdateFileByIdRequestBodyArgSharedLinkFieldPermissionsField?
 
     /// Initializer for a UpdateFileByIdRequestBodyArgSharedLinkField.
@@ -70,7 +74,7 @@ public class UpdateFileByIdRequestBodyArgSharedLinkField: Codable {
     ///   - unsharedAt: The timestamp at which this shared link will
     ///     expire. This field can only be set by
     ///     users with paid accounts.
-    ///   - permissions: UpdateFileByIdRequestBodyArgSharedLinkFieldPermissionsField?
+    ///   - permissions: 
     public init(access: UpdateFileByIdRequestBodyArgSharedLinkFieldAccessField? = nil, password: String? = nil, vanityName: String? = nil, unsharedAt: String? = nil, permissions: UpdateFileByIdRequestBodyArgSharedLinkFieldPermissionsField? = nil) {
         self.access = access
         self.password = password
@@ -96,4 +100,5 @@ public class UpdateFileByIdRequestBodyArgSharedLinkField: Codable {
         try container.encodeIfPresent(unsharedAt, forKey: .unsharedAt)
         try container.encodeIfPresent(permissions, forKey: .permissions)
     }
+
 }

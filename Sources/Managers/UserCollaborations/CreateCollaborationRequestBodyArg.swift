@@ -12,16 +12,20 @@ public class CreateCollaborationRequestBodyArg: Codable {
 
     /// The item to attach the comment to.
     public let item: CreateCollaborationRequestBodyArgItemField
+
     /// The user or group to give access to the item.
     public let accessibleBy: CreateCollaborationRequestBodyArgAccessibleByField
+
     /// The level of access granted.
     public let role: CreateCollaborationRequestBodyArgRoleField
+
     /// If set to `true`, collaborators have access to
     /// shared items, but such items won't be visible in the
     /// All Files list. Additionally, collaborators won't
     /// see the the path to the root folder for the
     /// shared item.
     public let isAccessOnly: Bool?
+
     /// Determines if the invited users can see the entire parent path to
     /// the associated folder. The user will not gain privileges in any
     /// parent folder and therefore can not see content the user is not
@@ -36,6 +40,7 @@ public class CreateCollaborationRequestBodyArg: Codable {
     /// 
     /// `can_view_path` can only be used for folder collaborations.
     public let canViewPath: Bool?
+
     /// Set the expiration date for the collaboration. At this date, the
     /// collaboration will be automatically removed from the item.
     /// 
@@ -108,4 +113,5 @@ public class CreateCollaborationRequestBodyArg: Codable {
         try container.encodeIfPresent(canViewPath, forKey: .canViewPath)
         try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
     }
+
 }

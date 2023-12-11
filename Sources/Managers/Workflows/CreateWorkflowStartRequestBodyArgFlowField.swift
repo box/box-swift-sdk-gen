@@ -8,6 +8,7 @@ public class CreateWorkflowStartRequestBodyArgFlowField: Codable {
 
     /// The type of the flow object
     public let type: String?
+
     /// The id of the flow
     public let id: String?
 
@@ -32,4 +33,5 @@ public class CreateWorkflowStartRequestBodyArgFlowField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(id, forKey: .id)
     }
+
 }

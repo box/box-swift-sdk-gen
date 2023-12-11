@@ -25,4 +25,5 @@ public class CreateGroupMembershipRequestBodyArgGroupField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
     }
+
 }

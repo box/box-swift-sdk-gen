@@ -12,6 +12,7 @@ public class GetWebLinkByIdHeadersArg {
     /// This header can be used on the file or folder shared, as well as on any files
     /// or folders nested within the item.
     public let boxapi: String?
+
     /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 

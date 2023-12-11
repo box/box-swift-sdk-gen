@@ -10,7 +10,9 @@ public class IntegrationMappingSlackCreateRequest: Codable {
     }
 
     public let partnerItem: IntegrationMappingPartnerItemSlack
+
     public let boxItem: IntegrationMappingBoxItemSlack
+
     public let options: IntegrationMappingSlackOptions?
 
     public init(partnerItem: IntegrationMappingPartnerItemSlack, boxItem: IntegrationMappingBoxItemSlack, options: IntegrationMappingSlackOptions? = nil) {
@@ -32,4 +34,5 @@ public class IntegrationMappingSlackCreateRequest: Codable {
         try container.encode(boxItem, forKey: .boxItem)
         try container.encodeIfPresent(options, forKey: .options)
     }
+
 }

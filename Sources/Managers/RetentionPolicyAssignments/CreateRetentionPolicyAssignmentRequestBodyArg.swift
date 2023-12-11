@@ -10,13 +10,16 @@ public class CreateRetentionPolicyAssignmentRequestBodyArg: Codable {
 
     /// The ID of the retention policy to assign
     public let policyId: String
+
     /// The item to assign the policy to
     public let assignTo: CreateRetentionPolicyAssignmentRequestBodyArgAssignToField
+
     /// If the `assign_to` type is `metadata_template`,
     /// then optionally add the `filter_fields` parameter which will
     /// require an array of objects with a field entry and a value entry.
     /// Currently only one object of `field` and `value` is supported.
     public let filterFields: [CreateRetentionPolicyAssignmentRequestBodyArgFilterFieldsField]?
+
     /// The date the retention policy assignment begins.
     /// 
     /// If the `assigned_to` type is `metadata_template`,
@@ -58,4 +61,5 @@ public class CreateRetentionPolicyAssignmentRequestBodyArg: Codable {
         try container.encodeIfPresent(filterFields, forKey: .filterFields)
         try container.encodeIfPresent(startDateField, forKey: .startDateField)
     }
+
 }

@@ -24,35 +24,48 @@ public class Collaboration: Codable {
 
     /// The unique identifier for this collaboration.
     public let id: String
+
     /// `collaboration`
     public let type: CollaborationTypeField
+
     public let item: FileOrFolderOrWebLink?
+
     public let accessibleBy: GroupMiniOrUserCollaborations?
+
     /// The email address used to invite an unregistered collaborator, if
     /// they are not a registered user.
     public let inviteEmail: String?
+
     /// The level of access granted.
     public let role: CollaborationRoleField?
+
     /// When the collaboration will expire, or `null` if no expiration
     /// date is set.
     public let expiresAt: String?
+
     /// If set to `true`, collaborators have access to
     /// shared items, but such items won't be visible in the
     /// All Files list. Additionally, collaborators won't
     /// see the the path to the root folder for the
     /// shared item.
     public let isAccessOnly: Bool?
+
     /// The status of the collaboration invitation. If the status
     /// is `pending`, `login` and `name` return an empty string.
     public let status: CollaborationStatusField?
+
     /// When the `status` of the collaboration object changed to
     /// `accepted` or `rejected`.
     public let acknowledgedAt: String?
+
     public let createdBy: UserCollaborations?
+
     /// When the collaboration object was created.
     public let createdAt: String?
+
     /// When the collaboration object was last modified.
     public let modifiedAt: String?
+
     public let acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField?
 
     /// Initializer for a Collaboration.
@@ -60,8 +73,8 @@ public class Collaboration: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this collaboration.
     ///   - type: `collaboration`
-    ///   - item: FileOrFolderOrWebLink?
-    ///   - accessibleBy: GroupMiniOrUserCollaborations?
+    ///   - item: 
+    ///   - accessibleBy: 
     ///   - inviteEmail: The email address used to invite an unregistered collaborator, if
     ///     they are not a registered user.
     ///   - role: The level of access granted.
@@ -76,10 +89,10 @@ public class Collaboration: Codable {
     ///     is `pending`, `login` and `name` return an empty string.
     ///   - acknowledgedAt: When the `status` of the collaboration object changed to
     ///     `accepted` or `rejected`.
-    ///   - createdBy: UserCollaborations?
+    ///   - createdBy: 
     ///   - createdAt: When the collaboration object was created.
     ///   - modifiedAt: When the collaboration object was last modified.
-    ///   - acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField?
+    ///   - acceptanceRequirementsStatus: 
     public init(id: String, type: CollaborationTypeField, item: FileOrFolderOrWebLink? = nil, accessibleBy: GroupMiniOrUserCollaborations? = nil, inviteEmail: String? = nil, role: CollaborationRoleField? = nil, expiresAt: String? = nil, isAccessOnly: Bool? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: String? = nil, createdBy: UserCollaborations? = nil, createdAt: String? = nil, modifiedAt: String? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
         self.id = id
         self.type = type
@@ -132,4 +145,5 @@ public class Collaboration: Codable {
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
         try container.encodeIfPresent(acceptanceRequirementsStatus, forKey: .acceptanceRequirementsStatus)
     }
+
 }

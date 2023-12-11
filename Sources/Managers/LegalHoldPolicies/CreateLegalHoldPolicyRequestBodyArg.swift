@@ -11,8 +11,10 @@ public class CreateLegalHoldPolicyRequestBodyArg: Codable {
 
     /// The name of the policy.
     public let policyName: String
+
     /// A description for the policy.
     public let description: String?
+
     /// The filter start date.
     /// 
     /// When this policy is applied using a `custodian` legal
@@ -23,6 +25,7 @@ public class CreateLegalHoldPolicyRequestBodyArg: Codable {
     /// 
     /// Required if `is_ongoing` is set to `false`.
     public let filterStartedAt: String?
+
     /// The filter end date.
     /// 
     /// When this policy is applied using a `custodian` legal
@@ -33,6 +36,7 @@ public class CreateLegalHoldPolicyRequestBodyArg: Codable {
     /// 
     /// Required if `is_ongoing` is set to `false`.
     public let filterEndedAt: String?
+
     /// Whether new assignments under this policy should
     /// continue applying to files even after initialization.
     /// 
@@ -107,4 +111,5 @@ public class CreateLegalHoldPolicyRequestBodyArg: Codable {
         try container.encodeIfPresent(filterEndedAt, forKey: .filterEndedAt)
         try container.encodeIfPresent(isOngoing, forKey: .isOngoing)
     }
+
 }

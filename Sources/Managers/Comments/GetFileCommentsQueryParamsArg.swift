@@ -11,8 +11,10 @@ public class GetFileCommentsQueryParamsArg {
     /// fields for the mini representation are returned, additional
     /// to the fields requested.
     public let fields: [String]?
+
     /// The maximum number of items to return per page.
     public let limit: Int64?
+
     /// The offset of the item at which to begin the response.
     /// 
     /// Queries with offset parameter value

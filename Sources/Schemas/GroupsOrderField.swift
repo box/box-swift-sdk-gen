@@ -8,6 +8,7 @@ public class GroupsOrderField: Codable {
 
     /// The field to order by
     public let by: String?
+
     /// The direction to order by, either ascending or descending
     public let direction: GroupsOrderFieldDirectionField?
 
@@ -32,4 +33,5 @@ public class GroupsOrderField: Codable {
         try container.encodeIfPresent(by, forKey: .by)
         try container.encodeIfPresent(direction, forKey: .direction)
     }
+
 }

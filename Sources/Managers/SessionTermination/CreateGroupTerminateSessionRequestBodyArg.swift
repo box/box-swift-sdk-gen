@@ -25,4 +25,5 @@ public class CreateGroupTerminateSessionRequestBodyArg: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(groupIds, forKey: .groupIds)
     }
+
 }

@@ -15,12 +15,14 @@ public class CreateRetentionPolicyRequestBodyArg: Codable {
 
     /// The name for the retention policy
     public let policyName: String
+
     /// The type of the retention policy. A retention
     /// policy type can either be `finite`, where a
     /// specific amount of time to retain the content is known
     /// upfront, or `indefinite`, where the amount of time
     /// to retain the content is still unknown.
     public let policyType: CreateRetentionPolicyRequestBodyArgPolicyTypeField
+
     /// The disposition action of the retention policy.
     /// `permanently_delete` deletes the content
     /// retained by the policy permanently.
@@ -28,8 +30,10 @@ public class CreateRetentionPolicyRequestBodyArg: Codable {
     /// from the content, allowing it to be deleted
     /// by users once the retention policy has expired.
     public let dispositionAction: CreateRetentionPolicyRequestBodyArgDispositionActionField
+
     /// The additional text description of the retention policy.
     public let description: String?
+
     /// The length of the retention policy. This value
     /// specifies the duration in days that the retention
     /// policy will be active for after being assigned to
@@ -37,6 +41,7 @@ public class CreateRetentionPolicyRequestBodyArg: Codable {
     /// `indefinite`, the `retention_length` will also be
     /// `indefinite`.
     public let retentionLength: String?
+
     /// Specifies the retention type:
     /// 
     /// * `modifiable`: You can modify the retention policy. For example,
@@ -53,12 +58,15 @@ public class CreateRetentionPolicyRequestBodyArg: Codable {
     /// policy duration. Use this type to ensure
     /// compliance with regulatory retention policies.
     public let retentionType: CreateRetentionPolicyRequestBodyArgRetentionTypeField?
+
     /// Whether the owner of a file will be allowed to
     /// extend the retention.
     public let canOwnerExtendRetention: Bool?
+
     /// Whether owner and co-owners of a file are notified
     /// when the policy nears expiration.
     public let areOwnersNotified: Bool?
+
     /// A list of users notified when
     /// the retention policy duration is about to end.
     public let customNotificationRecipients: [UserMini]?
@@ -143,4 +151,5 @@ public class CreateRetentionPolicyRequestBodyArg: Codable {
         try container.encodeIfPresent(areOwnersNotified, forKey: .areOwnersNotified)
         try container.encodeIfPresent(customNotificationRecipients, forKey: .customNotificationRecipients)
     }
+
 }

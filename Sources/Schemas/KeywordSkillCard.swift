@@ -14,17 +14,23 @@ public class KeywordSkillCard: Codable {
 
     /// `skill_card`
     public let type: KeywordSkillCardTypeField
+
     /// `keyword`
     public let skillCardType: KeywordSkillCardSkillCardTypeField
+
     /// The service that applied this metadata.
     public let skill: KeywordSkillCardSkillField
+
     /// The invocation of this service, used to track
     /// which instance of a service applied the metadata.
     public let invocation: KeywordSkillCardInvocationField
+
     /// An list of entries in the metadata card.
     public let entries: [KeywordSkillCardEntriesField]
+
     /// The optional date and time this card was created at.
     public let createdAt: String?
+
     /// The title of the card.
     public let skillCardTitle: KeywordSkillCardSkillCardTitleField?
 
@@ -70,4 +76,5 @@ public class KeywordSkillCard: Codable {
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(skillCardTitle, forKey: .skillCardTitle)
     }
+
 }

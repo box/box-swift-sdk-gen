@@ -9,6 +9,7 @@ public class CreateClassificationTemplateRequestBodyArgFieldsFieldOptionsField: 
     /// The display name and key this classification. This
     /// will be show in the Box UI.
     public let key: String
+
     /// Additional information about the classification.
     public let staticConfig: CreateClassificationTemplateRequestBodyArgFieldsFieldOptionsFieldStaticConfigField?
 
@@ -34,4 +35,5 @@ public class CreateClassificationTemplateRequestBodyArgFieldsFieldOptionsField: 
         try container.encode(key, forKey: .key)
         try container.encodeIfPresent(staticConfig, forKey: .staticConfig)
     }
+
 }

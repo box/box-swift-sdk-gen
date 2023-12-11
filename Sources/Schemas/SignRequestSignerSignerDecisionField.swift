@@ -9,8 +9,10 @@ public class SignRequestSignerSignerDecisionField: Codable {
 
     /// Type of decision made by the signer
     public let type: SignRequestSignerSignerDecisionFieldTypeField?
+
     /// Date and Time that the decision was made
     public let finalizedAt: String?
+
     /// Additional info about the decision, such as the decline reason from the signer
     public let additionalInfo: String?
 
@@ -39,4 +41,5 @@ public class SignRequestSignerSignerDecisionField: Codable {
         try container.encodeIfPresent(finalizedAt, forKey: .finalizedAt)
         try container.encodeIfPresent(additionalInfo, forKey: .additionalInfo)
     }
+
 }

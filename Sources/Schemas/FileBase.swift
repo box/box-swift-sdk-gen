@@ -18,8 +18,10 @@ public class FileBase: Codable {
     /// for the URL `https://*.app.box.com/files/123`
     /// the `file_id` is `123`.
     public let id: String
+
     /// `file`
     public let type: FileBaseTypeField
+
     /// The HTTP `etag` of this file. This can be used within some API
     /// endpoints in the `If-Match` and `If-None-Match` headers to only
     /// perform changes on the file if (no) changes have happened.
@@ -58,4 +60,5 @@ public class FileBase: Codable {
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(etag, forKey: .etag)
     }
+
 }

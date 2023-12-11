@@ -21,29 +21,41 @@ public class User: UserMini {
 
     /// When the user object was created
     public let createdAt: String?
+
     /// When the user object was last modified
     public let modifiedAt: String?
+
     /// The language of the user, formatted in modified version of the
     /// [ISO 639-1](/guides/api-calls/language-codes) format.
     public let language: String?
+
     /// The user's timezone
     public let timezone: String?
+
     /// The user’s total available space amount in bytes
     public let spaceAmount: Int64?
+
     /// The amount of space in use by the user
     public let spaceUsed: Int64?
+
     /// The maximum individual file size in bytes the user can have
     public let maxUploadSize: Int64?
+
     /// The user's account status
     public let status: UserStatusField?
+
     /// The user’s job title
     public let jobTitle: String?
+
     /// The user’s phone number
     public let phone: String?
+
     /// The user’s address
     public let address: String?
+
     /// URL of the user’s avatar image
     public let avatarUrl: String?
+
     /// An alternate notification email address to which email
     /// notifications are sent. When it's confirmed, this will be
     /// the email address to which notifications are sent instead of
@@ -88,6 +100,7 @@ public class User: UserMini {
         self.address = address
         self.avatarUrl = avatarUrl
         self.notificationEmail = notificationEmail
+
         super.init(id: id, type: type, name: name, login: login)
     }
 
@@ -106,7 +119,8 @@ public class User: UserMini {
         address = try container.decodeIfPresent(String.self, forKey: .address)
         avatarUrl = try container.decodeIfPresent(String.self, forKey: .avatarUrl)
         notificationEmail = try container.decodeIfPresent(UserNotificationEmailField.self, forKey: .notificationEmail)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -126,4 +140,5 @@ public class User: UserMini {
         try container.encodeIfPresent(notificationEmail, forKey: .notificationEmail)
         try super.encode(to: encoder)
     }
+
 }

@@ -25,4 +25,5 @@ public class UpdateTermOfServiceUserStatusByIdRequestBodyArg: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(isAccepted, forKey: .isAccepted)
     }
+
 }

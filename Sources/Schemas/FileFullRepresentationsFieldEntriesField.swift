@@ -12,13 +12,17 @@ public class FileFullRepresentationsFieldEntriesField: Codable {
     /// An object containing the URL that can be used to actually fetch
     /// the representation.
     public let content: FileFullRepresentationsFieldEntriesFieldContentField?
+
     /// An object containing the URL that can be used to fetch more info
     /// on this representation.
     public let info: FileFullRepresentationsFieldEntriesFieldInfoField?
+
     /// An object containing the size and type of this presentation.
     public let properties: FileFullRepresentationsFieldEntriesFieldPropertiesField?
+
     /// Indicates the file type of the returned representation.
     public let representation: String?
+
     /// An object containing the status of this representation.
     public let status: FileFullRepresentationsFieldEntriesFieldStatusField?
 
@@ -57,4 +61,5 @@ public class FileFullRepresentationsFieldEntriesField: Codable {
         try container.encodeIfPresent(representation, forKey: .representation)
         try container.encodeIfPresent(status, forKey: .status)
     }
+
 }

@@ -9,8 +9,10 @@ public class UpdateWebhookByIdRequestBodyArg: Codable {
 
     /// The item that will trigger the webhook
     public let target: UpdateWebhookByIdRequestBodyArgTargetField?
+
     /// The URL that is notified by this webhook
     public let address: String?
+
     /// An array of event names that this webhook is
     /// to be triggered for
     public let triggers: [UpdateWebhookByIdRequestBodyArgTriggersField]?
@@ -41,4 +43,5 @@ public class UpdateWebhookByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(address, forKey: .address)
         try container.encodeIfPresent(triggers, forKey: .triggers)
     }
+
 }

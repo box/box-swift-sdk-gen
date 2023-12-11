@@ -14,19 +14,24 @@ public class CreateClassificationTemplateRequestBodyArg: Codable {
     /// be `enterprise` or `enterprise_{id}` where `id` is the unique
     /// ID of the enterprise.
     public let scope: CreateClassificationTemplateRequestBodyArgScopeField
+
     /// Defines the list of metadata templates.
     public let templateKey: CreateClassificationTemplateRequestBodyArgTemplateKeyField
+
     /// The name of the
     /// template as shown in web and mobile interfaces.
     public let displayName: CreateClassificationTemplateRequestBodyArgDisplayNameField
+
     /// The classification template requires exactly
     /// one field, which holds
     /// all the valid classification values.
     public let fields: [CreateClassificationTemplateRequestBodyArgFieldsField]
+
     /// Determines if the classification template is
     /// hidden or available on web and mobile
     /// devices.
     public let hidden: Bool?
+
     /// Determines if classifications are
     /// copied along when the file or folder is
     /// copied.
@@ -78,4 +83,5 @@ public class CreateClassificationTemplateRequestBodyArg: Codable {
         try container.encodeIfPresent(hidden, forKey: .hidden)
         try container.encodeIfPresent(copyInstanceOnItemCopy, forKey: .copyInstanceOnItemCopy)
     }
+
 }

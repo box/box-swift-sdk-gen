@@ -22,4 +22,5 @@ public class UploadedPart: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(part, forKey: .part)
     }
+
 }

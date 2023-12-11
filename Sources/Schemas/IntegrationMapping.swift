@@ -17,25 +17,33 @@ public class IntegrationMapping: IntegrationMappingBase {
 
     /// Mapping type
     public let type: IntegrationMappingTypeField
+
     /// Mapped item object for Slack
     public let partnerItem: IntegrationMappingPartnerItemSlack
+
     /// The Box folder, to which the object from the
     /// partner app domain (referenced in `partner_item_id`) is mapped
     public let boxItem: FolderMini
+
     /// Identifies whether the mapping has
     /// been manually set
     /// (as opposed to being automatically created)
     public let isManuallyCreated: Bool?
+
     /// Integration mapping options for Slack
     public let options: IntegrationMappingSlackOptions?
+
     /// An object representing the user who
     /// created the integration mapping
     public let createdBy: UserIntegrationMappings?
+
     /// The user who
     /// last modified the integration mapping
     public let modifiedBy: UserIntegrationMappings?
+
     /// When the integration mapping object was created
     public let createdAt: String?
+
     /// When the integration mapping object was last modified
     public let modifiedAt: String?
 
@@ -73,6 +81,7 @@ public class IntegrationMapping: IntegrationMappingBase {
         self.modifiedBy = modifiedBy
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+
         super.init(id: id, integrationType: integrationType)
     }
 
@@ -87,7 +96,8 @@ public class IntegrationMapping: IntegrationMappingBase {
         modifiedBy = try container.decodeIfPresent(UserIntegrationMappings.self, forKey: .modifiedBy)
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
         modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -103,4 +113,5 @@ public class IntegrationMapping: IntegrationMappingBase {
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
         try super.encode(to: encoder)
     }
+
 }

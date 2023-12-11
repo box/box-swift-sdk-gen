@@ -25,4 +25,5 @@ public class GroupFullPermissionsField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(canInviteAsCollaborator, forKey: .canInviteAsCollaborator)
     }
+
 }

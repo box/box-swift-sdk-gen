@@ -8,6 +8,7 @@ public class PromoteFileVersionRequestBodyArg: Codable {
 
     /// The file version ID
     public let id: String?
+
     /// The type to promote
     public let type: PromoteFileVersionRequestBodyArgTypeField?
 
@@ -32,4 +33,5 @@ public class PromoteFileVersionRequestBodyArg: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

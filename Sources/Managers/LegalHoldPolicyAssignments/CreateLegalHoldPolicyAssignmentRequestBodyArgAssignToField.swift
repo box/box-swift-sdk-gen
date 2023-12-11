@@ -8,6 +8,7 @@ public class CreateLegalHoldPolicyAssignmentRequestBodyArgAssignToField: Codable
 
     /// The type of item to assign the policy to
     public let type: CreateLegalHoldPolicyAssignmentRequestBodyArgAssignToFieldTypeField
+
     /// The ID of item to assign the policy to
     public let id: String
 
@@ -32,4 +33,5 @@ public class CreateLegalHoldPolicyAssignmentRequestBodyArgAssignToField: Codable
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

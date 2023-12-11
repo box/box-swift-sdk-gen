@@ -9,6 +9,7 @@ public class Metadatas: Codable {
 
     /// A list of metadata instances, as applied to this file or folder.
     public let entries: [Metadata]?
+
     /// The limit that was used for this page of results.
     public let limit: Int64?
 
@@ -33,4 +34,5 @@ public class Metadatas: Codable {
         try container.encodeIfPresent(entries, forKey: .entries)
         try container.encodeIfPresent(limit, forKey: .limit)
     }
+
 }

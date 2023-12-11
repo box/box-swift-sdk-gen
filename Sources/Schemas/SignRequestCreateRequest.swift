@@ -10,15 +10,17 @@ public class SignRequestCreateRequest: SignRequestBase {
 
     /// Array of signers for the sign request. 35 is the max number of signers permitted.
     public let signers: [SignRequestCreateSigner]
+
     /// List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
     public let sourceFiles: [FileBase]?
+
     /// Force a specific color for the signature (blue, black, or red)
     public let signatureColor: SignRequestCreateRequestSignatureColorField?
 
     /// Initializer for a SignRequestCreateRequest.
     ///
     /// - Parameters:
-    ///   - parentFolder: FolderMini
+    ///   - parentFolder: 
     ///   - signers: Array of signers for the sign request. 35 is the max number of signers permitted.
     ///   - isDocumentPreparationNeeded: Indicates if the sender should receive a `prepare_url` in the response to complete document preparation via UI.
     ///   - redirectUrl: When specified, signature request will be redirected to this url when a document is signed.
@@ -39,6 +41,7 @@ public class SignRequestCreateRequest: SignRequestBase {
         self.signers = signers
         self.sourceFiles = sourceFiles
         self.signatureColor = signatureColor
+
         super.init(parentFolder: parentFolder, isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, isPhoneVerificationRequiredToView: isPhoneVerificationRequiredToView, templateId: templateId)
     }
 
@@ -47,7 +50,8 @@ public class SignRequestCreateRequest: SignRequestBase {
         signers = try container.decode([SignRequestCreateSigner].self, forKey: .signers)
         sourceFiles = try container.decodeIfPresent([FileBase].self, forKey: .sourceFiles)
         signatureColor = try container.decodeIfPresent(SignRequestCreateRequestSignatureColorField.self, forKey: .signatureColor)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -57,4 +61,5 @@ public class SignRequestCreateRequest: SignRequestBase {
         try container.encodeIfPresent(signatureColor, forKey: .signatureColor)
         try super.encode(to: encoder)
     }
+
 }

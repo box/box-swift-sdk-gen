@@ -8,6 +8,7 @@ public class SkillInvocationTokenField: Codable {
 
     /// The basics of an access token
     public let read: SkillInvocationTokenFieldReadField?
+
     /// The basics of an access token
     public let write: SkillInvocationTokenFieldWriteField?
 
@@ -32,4 +33,5 @@ public class SkillInvocationTokenField: Codable {
         try container.encodeIfPresent(read, forKey: .read)
         try container.encodeIfPresent(write, forKey: .write)
     }
+
 }

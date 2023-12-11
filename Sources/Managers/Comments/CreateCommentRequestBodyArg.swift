@@ -12,8 +12,10 @@ public class CreateCommentRequestBodyArg: Codable {
     /// To mention a user, use the `tagged_message`
     /// parameter instead.
     public let message: String
+
     /// The item to attach the comment to.
     public let item: CreateCommentRequestBodyArgItemField
+
     /// The text of the comment, including `@[user_id:name]`
     /// somewhere in the message to mention another user, which
     /// will send them an email notification, letting them know
@@ -65,4 +67,5 @@ public class CreateCommentRequestBodyArg: Codable {
         try container.encode(item, forKey: .item)
         try container.encodeIfPresent(taggedMessage, forKey: .taggedMessage)
     }
+
 }

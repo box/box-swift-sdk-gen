@@ -6,8 +6,10 @@ public class GetEnterpriseDevicePinnersQueryParamsArg {
     /// 
     /// This requires `usemarker` to be set to `true`.
     public let marker: String?
+
     /// The maximum number of items to return per page.
     public let limit: Int64?
+
     /// The direction to sort results in. This can be either in alphabetical ascending
     /// (`ASC`) or descending (`DESC`) order.
     public let direction: GetEnterpriseDevicePinnersQueryParamsArgDirectionField?

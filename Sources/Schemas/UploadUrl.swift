@@ -10,6 +10,7 @@ public class UploadUrl: Codable {
     /// A URL for an upload session that can be used to upload
     /// the file.
     public let uploadUrl: String?
+
     /// An optional access token to use to upload the file
     public let uploadToken: String?
 
@@ -35,4 +36,5 @@ public class UploadUrl: Codable {
         try container.encodeIfPresent(uploadUrl, forKey: .uploadUrl)
         try container.encodeIfPresent(uploadToken, forKey: .uploadToken)
     }
+
 }

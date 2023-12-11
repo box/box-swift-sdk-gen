@@ -18,18 +18,22 @@ public enum FileFullOrFolderMiniOrWebLink: Codable {
                     self = .fileFull(content)
                     return
                 }
+
             case "folder":
                 if let content = try? FolderMini(from: decoder) {
                     self = .folderMini(content)
                     return
                 }
+
             case "web_link":
                 if let content = try? WebLink(from: decoder) {
                     self = .webLink(content)
                     return
                 }
+
             default:
                 throw DecodingError.typeMismatch(FileFullOrFolderMiniOrWebLink.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpeted value for key type"))
+
             }
         }
 
@@ -46,4 +50,5 @@ public enum FileFullOrFolderMiniOrWebLink: Codable {
             try webLink.encode(to: encoder)
         }
     }
+
 }

@@ -9,6 +9,7 @@ public class EmailAliases: Codable {
 
     /// The number of email aliases.
     public let totalCount: Int64?
+
     /// A list of email aliases
     public let entries: [EmailAlias]?
 
@@ -33,4 +34,5 @@ public class EmailAliases: Codable {
         try container.encodeIfPresent(totalCount, forKey: .totalCount)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
+
 }

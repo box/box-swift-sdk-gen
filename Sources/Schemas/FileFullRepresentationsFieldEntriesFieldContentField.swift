@@ -73,4 +73,5 @@ public class FileFullRepresentationsFieldEntriesFieldContentField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(urlTemplate, forKey: .urlTemplate)
     }
+
 }

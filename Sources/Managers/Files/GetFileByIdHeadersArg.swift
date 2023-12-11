@@ -8,6 +8,7 @@ public class GetFileByIdHeadersArg {
     /// with a `304 Not Modified` if the item has not
     /// changed since.
     public let ifNoneMatch: String?
+
     /// The URL, and optional password, for the shared link of this item.
     /// 
     /// This header can be used to access items that have not been
@@ -19,6 +20,7 @@ public class GetFileByIdHeadersArg {
     /// This header can be used on the file or folder shared, as well as on any files
     /// or folders nested within the item.
     public let boxapi: String?
+
     /// A header required to request specific `representations`
     /// of a file. Use this in combination with the `fields` query
     /// parameter to request a specific file representation.
@@ -39,6 +41,7 @@ public class GetFileByIdHeadersArg {
     /// 
     /// `x-rep-hints: [extracted_text]`
     public let xRepHints: String?
+
     /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 

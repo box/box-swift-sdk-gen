@@ -12,11 +12,15 @@ public class UpdateWebLinkByIdRequestBodyArg: Codable {
     /// The new URL that the web link links to. Must start with
     /// `"http://"` or `"https://"`.
     public let url: String?
+
     public let parent: UpdateWebLinkByIdRequestBodyArgParentField?
+
     /// A new name for the web link. Defaults to the URL if not set.
     public let name: String?
+
     /// A new description of the web link.
     public let description: String?
+
     /// The settings for the shared link to update.
     public let sharedLink: UpdateWebLinkByIdRequestBodyArgSharedLinkField?
 
@@ -25,7 +29,7 @@ public class UpdateWebLinkByIdRequestBodyArg: Codable {
     /// - Parameters:
     ///   - url: The new URL that the web link links to. Must start with
     ///     `"http://"` or `"https://"`.
-    ///   - parent: UpdateWebLinkByIdRequestBodyArgParentField?
+    ///   - parent: 
     ///   - name: A new name for the web link. Defaults to the URL if not set.
     ///   - description: A new description of the web link.
     ///   - sharedLink: The settings for the shared link to update.
@@ -54,4 +58,5 @@ public class UpdateWebLinkByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
     }
+
 }

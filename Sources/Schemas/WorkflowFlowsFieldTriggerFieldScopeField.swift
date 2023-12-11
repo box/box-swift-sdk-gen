@@ -9,8 +9,10 @@ public class WorkflowFlowsFieldTriggerFieldScopeField: Codable {
 
     /// The trigger scope's resource type
     public let type: WorkflowFlowsFieldTriggerFieldScopeFieldTypeField?
+
     /// Indicates the path of the condition value to check
     public let ref: String?
+
     /// The object the `ref` points to
     public let object: WorkflowFlowsFieldTriggerFieldScopeFieldObjectField?
 
@@ -39,4 +41,5 @@ public class WorkflowFlowsFieldTriggerFieldScopeField: Codable {
         try container.encodeIfPresent(ref, forKey: .ref)
         try container.encodeIfPresent(object, forKey: .object)
     }
+
 }

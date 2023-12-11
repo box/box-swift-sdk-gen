@@ -10,12 +10,15 @@ public class UploadFileRequestBodyArgAttributesField: Codable {
 
     /// The name of the file
     public let name: String
+
     /// The parent folder to upload the file to
     public let parent: UploadFileRequestBodyArgAttributesFieldParentField
+
     /// Defines the time the file was originally created at.
     /// 
     /// If not set, the upload time will be used.
     public let contentCreatedAt: String?
+
     /// Defines the time the file was last modified at.
     /// 
     /// If not set, the upload time will be used.
@@ -54,4 +57,5 @@ public class UploadFileRequestBodyArgAttributesField: Codable {
         try container.encodeIfPresent(contentCreatedAt, forKey: .contentCreatedAt)
         try container.encodeIfPresent(contentModifiedAt, forKey: .contentModifiedAt)
     }
+
 }

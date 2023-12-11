@@ -8,6 +8,7 @@ public class KeywordSkillCardSkillField: Codable {
 
     /// `service`
     public let type: KeywordSkillCardSkillFieldTypeField
+
     /// A custom identifier that represent the service that
     /// applied this metadata.
     public let id: String
@@ -34,4 +35,5 @@ public class KeywordSkillCardSkillField: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

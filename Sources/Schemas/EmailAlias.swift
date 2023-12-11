@@ -11,10 +11,13 @@ public class EmailAlias: Codable {
 
     /// The unique identifier for this object
     public let id: String?
+
     /// `email_alias`
     public let type: EmailAliasTypeField?
+
     /// The email address
     public let email: String?
+
     /// Whether the email address has been confirmed
     public let isConfirmed: Bool?
 
@@ -47,4 +50,5 @@ public class EmailAlias: Codable {
         try container.encodeIfPresent(email, forKey: .email)
         try container.encodeIfPresent(isConfirmed, forKey: .isConfirmed)
     }
+
 }

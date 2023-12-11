@@ -17,32 +17,41 @@ public class SignRequest: SignRequestBase {
 
     /// object type
     public let type: SignRequestTypeField?
+
     /// List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
     public let sourceFiles: [FileBase]?
+
     /// Array of signers for the sign request
     public let signers: [SignRequestSigner]?
+
     /// Force a specific color for the signature (blue, black, or red).
     public let signatureColor: String?
+
     /// Sign request ID
     public let id: String?
+
     /// This URL is returned if `is_document_preparation_needed` is
     /// set to `true` in the request. It is used to prepare the sign request
     /// via UI. The sign request is not sent until preparation is complete.
     public let prepareUrl: String?
+
     public let signingLog: FileMini?
+
     /// Describes the status of the sign request
     public let status: SignRequestStatusField?
+
     /// List of files that will be signed, which are copies of the original
     /// source files. A new version of these files are created as signers sign
     /// and can be downloaded at any point in the signing process.
     public let signFiles: SignRequestSignFilesField?
+
     /// Uses `days_valid` to calculate the date and time, in GMT, the sign request will expire if unsigned.
     public let autoExpireAt: String?
 
     /// Initializer for a SignRequest.
     ///
     /// - Parameters:
-    ///   - parentFolder: FolderMini
+    ///   - parentFolder: 
     ///   - isDocumentPreparationNeeded: Indicates if the sender should receive a `prepare_url` in the response to complete document preparation via UI.
     ///   - redirectUrl: When specified, signature request will be redirected to this url when a document is signed.
     ///   - declinedRedirectUrl: The uri that a signer will be redirected to after declining to sign a document.
@@ -64,7 +73,7 @@ public class SignRequest: SignRequestBase {
     ///   - prepareUrl: This URL is returned if `is_document_preparation_needed` is
     ///     set to `true` in the request. It is used to prepare the sign request
     ///     via UI. The sign request is not sent until preparation is complete.
-    ///   - signingLog: FileMini?
+    ///   - signingLog: 
     ///   - status: Describes the status of the sign request
     ///   - signFiles: List of files that will be signed, which are copies of the original
     ///     source files. A new version of these files are created as signers sign
@@ -81,6 +90,7 @@ public class SignRequest: SignRequestBase {
         self.status = status
         self.signFiles = signFiles
         self.autoExpireAt = autoExpireAt
+
         super.init(parentFolder: parentFolder, isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, isPhoneVerificationRequiredToView: isPhoneVerificationRequiredToView, templateId: templateId)
     }
 
@@ -96,7 +106,8 @@ public class SignRequest: SignRequestBase {
         status = try container.decodeIfPresent(SignRequestStatusField.self, forKey: .status)
         signFiles = try container.decodeIfPresent(SignRequestSignFilesField.self, forKey: .signFiles)
         autoExpireAt = try container.decodeIfPresent(String.self, forKey: .autoExpireAt)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -113,4 +124,5 @@ public class SignRequest: SignRequestBase {
         try container.encodeIfPresent(autoExpireAt, forKey: .autoExpireAt)
         try super.encode(to: encoder)
     }
+
 }

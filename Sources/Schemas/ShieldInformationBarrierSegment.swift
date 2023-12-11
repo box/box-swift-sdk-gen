@@ -16,20 +16,28 @@ public class ShieldInformationBarrierSegment: Codable {
 
     /// The unique identifier for the shield information barrier segment
     public let id: String?
+
     /// The type of the shield information barrier segment
     public let type: ShieldInformationBarrierSegmentTypeField?
+
     public let shieldInformationBarrier: ShieldInformationBarrierBase?
+
     /// Name of the shield information barrier segment
     public let name: String?
+
     /// Description of the shield information barrier segment
     public let description: String?
+
     /// ISO date time string when this shield information
     /// barrier object was created.
     public let createdAt: String?
+
     public let createdBy: UserBase?
+
     /// ISO date time string when this
     /// shield information barrier segment was updated.
     public let updatedAt: String?
+
     public let updatedBy: UserBase?
 
     /// Initializer for a ShieldInformationBarrierSegment.
@@ -37,15 +45,15 @@ public class ShieldInformationBarrierSegment: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for the shield information barrier segment
     ///   - type: The type of the shield information barrier segment
-    ///   - shieldInformationBarrier: ShieldInformationBarrierBase?
+    ///   - shieldInformationBarrier: 
     ///   - name: Name of the shield information barrier segment
     ///   - description: Description of the shield information barrier segment
     ///   - createdAt: ISO date time string when this shield information
     ///     barrier object was created.
-    ///   - createdBy: UserBase?
+    ///   - createdBy: 
     ///   - updatedAt: ISO date time string when this
     ///     shield information barrier segment was updated.
-    ///   - updatedBy: UserBase?
+    ///   - updatedBy: 
     public init(id: String? = nil, type: ShieldInformationBarrierSegmentTypeField? = nil, shieldInformationBarrier: ShieldInformationBarrierBase? = nil, name: String? = nil, description: String? = nil, createdAt: String? = nil, createdBy: UserBase? = nil, updatedAt: String? = nil, updatedBy: UserBase? = nil) {
         self.id = id
         self.type = type
@@ -83,4 +91,5 @@ public class ShieldInformationBarrierSegment: Codable {
         try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
         try container.encodeIfPresent(updatedBy, forKey: .updatedBy)
     }
+
 }

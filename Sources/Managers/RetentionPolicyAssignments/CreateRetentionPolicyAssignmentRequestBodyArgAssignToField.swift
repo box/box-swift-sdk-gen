@@ -8,6 +8,7 @@ public class CreateRetentionPolicyAssignmentRequestBodyArgAssignToField: Codable
 
     /// The type of item to assign the policy to.
     public let type: CreateRetentionPolicyAssignmentRequestBodyArgAssignToFieldTypeField
+
     /// The ID of item to assign the policy to.
     /// Set to `null` or omit when `type` is set to
     /// `enterprise`.
@@ -36,4 +37,5 @@ public class CreateRetentionPolicyAssignmentRequestBodyArgAssignToField: Codable
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(id, forKey: .id)
     }
+
 }

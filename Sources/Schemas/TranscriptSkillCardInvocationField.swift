@@ -8,6 +8,7 @@ public class TranscriptSkillCardInvocationField: Codable {
 
     /// `skill_invocation`
     public let type: TranscriptSkillCardInvocationFieldTypeField
+
     /// A custom identifier that represent the instance of
     /// the service that applied this metadata. For example,
     /// if your `image-recognition-service` runs on multiple
@@ -40,4 +41,5 @@ public class TranscriptSkillCardInvocationField: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

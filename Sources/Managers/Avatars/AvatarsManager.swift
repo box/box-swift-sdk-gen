@@ -2,6 +2,7 @@ import Foundation
 
 public class AvatarsManager {
     public let auth: Authentication?
+
     public let networkSession: NetworkSession?
 
     public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {

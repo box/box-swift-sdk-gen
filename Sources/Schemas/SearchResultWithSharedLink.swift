@@ -18,7 +18,9 @@ public class SearchResultWithSharedLink: Codable {
     /// recently accessed the file through a shared link. For all other
     /// items this value will return `null`.
     public let accessibleViaSharedLink: String?
+
     public let item: FileFullOrFolderFullOrWebLink?
+
     /// The result type. The value is always `search_result`.
     public let type: String?
 
@@ -29,7 +31,7 @@ public class SearchResultWithSharedLink: Codable {
     ///     item. This value is only returned for items for which the user has
     ///     recently accessed the file through a shared link. For all other
     ///     items this value will return `null`.
-    ///   - item: FileFullOrFolderFullOrWebLink?
+    ///   - item: 
     ///   - type: The result type. The value is always `search_result`.
     public init(accessibleViaSharedLink: String? = nil, item: FileFullOrFolderFullOrWebLink? = nil, type: String? = nil) {
         self.accessibleViaSharedLink = accessibleViaSharedLink
@@ -50,4 +52,5 @@ public class SearchResultWithSharedLink: Codable {
         try container.encodeIfPresent(item, forKey: .item)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

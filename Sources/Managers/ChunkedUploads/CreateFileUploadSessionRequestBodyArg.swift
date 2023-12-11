@@ -9,8 +9,10 @@ public class CreateFileUploadSessionRequestBodyArg: Codable {
 
     /// The ID of the folder to upload the new file to.
     public let folderId: String
+
     /// The total number of bytes of the file to be uploaded
     public let fileSize: Int64
+
     /// The name of new file
     public let fileName: String
 
@@ -39,4 +41,5 @@ public class CreateFileUploadSessionRequestBodyArg: Codable {
         try container.encode(fileSize, forKey: .fileSize)
         try container.encode(fileName, forKey: .fileName)
     }
+
 }

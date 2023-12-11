@@ -14,28 +14,34 @@ public class FolderLock: Codable {
     }
 
     public let folder: FolderMini?
+
     /// The unique identifier for this folder lock.
     public let id: String?
+
     /// The object type, always `folder_lock`.
     public let type: String?
+
     public let createdBy: UserBase?
+
     /// When the folder lock object was created.
     public let createdAt: String?
+
     /// The operations that have been locked. Currently the `move`
     /// and `delete` operations cannot be locked separately, and both need to be
     /// set to `true`.
     /// 
     public let lockedOperations: FolderLockLockedOperationsField?
+
     /// The lock type, always `freeze`.
     public let lockType: String?
 
     /// Initializer for a FolderLock.
     ///
     /// - Parameters:
-    ///   - folder: FolderMini?
+    ///   - folder: 
     ///   - id: The unique identifier for this folder lock.
     ///   - type: The object type, always `folder_lock`.
-    ///   - createdBy: UserBase?
+    ///   - createdBy: 
     ///   - createdAt: When the folder lock object was created.
     ///   - lockedOperations: The operations that have been locked. Currently the `move`
     ///     and `delete` operations cannot be locked separately, and both need to be
@@ -73,4 +79,5 @@ public class FolderLock: Codable {
         try container.encodeIfPresent(lockedOperations, forKey: .lockedOperations)
         try container.encodeIfPresent(lockType, forKey: .lockType)
     }
+
 }

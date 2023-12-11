@@ -11,10 +11,13 @@ public class CreateWebLinkRequestBodyArg: Codable {
     /// The URL that this web link links to. Must start with
     /// `"http://"` or `"https://"`.
     public let url: String
+
     /// The parent folder to create the web link within.
     public let parent: CreateWebLinkRequestBodyArgParentField
+
     /// Name of the web link. Defaults to the URL if not set.
     public let name: String?
+
     /// Description of the web link.
     public let description: String?
 
@@ -48,4 +51,5 @@ public class CreateWebLinkRequestBodyArg: Codable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(description, forKey: .description)
     }
+
 }

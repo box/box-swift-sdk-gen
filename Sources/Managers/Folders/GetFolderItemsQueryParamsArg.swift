@@ -16,6 +16,7 @@ public class GetFolderItemsQueryParamsArg {
     /// as the scope and key of the template to retrieve, for example
     /// `?field=metadata.enterprise_12345.contractTemplate`.
     public let fields: [String]?
+
     /// Specifies whether to use marker-based pagination instead of
     /// offset-based pagination. Only one pagination method can
     /// be used at a time.
@@ -24,19 +25,23 @@ public class GetFolderItemsQueryParamsArg {
     /// that can be passed as a parameter to this endpoint to get the next
     /// page of the response.
     public let usemarker: Bool?
+
     /// Defines the position marker at which to begin returning results. This is
     /// used when paginating using marker-based pagination.
     /// 
     /// This requires `usemarker` to be set to `true`.
     public let marker: String?
+
     /// The offset of the item at which to begin the response.
     /// 
     /// Queries with offset parameter value
     /// exceeding 10000 will be rejected
     /// with a 400 response.
     public let offset: Int64?
+
     /// The maximum number of items to return per page.
     public let limit: Int64?
+
     /// Defines the **second** attribute by which items
     /// are sorted.
     /// 
@@ -66,6 +71,7 @@ public class GetFolderItemsQueryParamsArg {
     ///   and files listed
     ///   before web links.
     public let sort: GetFolderItemsQueryParamsArgSortField?
+
     /// The direction to sort results in. This can be either in alphabetical ascending
     /// (`ASC`) or descending (`DESC`) order.
     public let direction: GetFolderItemsQueryParamsArgDirectionField?

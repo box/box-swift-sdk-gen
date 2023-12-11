@@ -8,6 +8,7 @@ public class CreateInviteRequestBodyArg: Codable {
 
     /// The enterprise to invite the user to
     public let enterprise: CreateInviteRequestBodyArgEnterpriseField
+
     /// The user to invite
     public let actionableBy: CreateInviteRequestBodyArgActionableByField
 
@@ -32,4 +33,5 @@ public class CreateInviteRequestBodyArg: Codable {
         try container.encode(enterprise, forKey: .enterprise)
         try container.encode(actionableBy, forKey: .actionableBy)
     }
+
 }

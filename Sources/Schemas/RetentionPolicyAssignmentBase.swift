@@ -9,6 +9,7 @@ public class RetentionPolicyAssignmentBase: Codable {
 
     /// The unique identifier that represents a file version.
     public let id: String
+
     /// `retention_policy_assignment`
     public let type: RetentionPolicyAssignmentBaseTypeField
 
@@ -33,4 +34,5 @@ public class RetentionPolicyAssignmentBase: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(type, forKey: .type)
     }
+
 }

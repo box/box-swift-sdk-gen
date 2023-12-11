@@ -41,4 +41,5 @@ public class FileFullRepresentationsFieldEntriesFieldStatusField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(state, forKey: .state)
     }
+
 }

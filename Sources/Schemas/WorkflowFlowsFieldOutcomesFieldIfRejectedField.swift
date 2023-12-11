@@ -10,10 +10,13 @@ public class WorkflowFlowsFieldOutcomesFieldIfRejectedField: Codable {
 
     /// The identifier of the outcome
     public let id: String?
+
     /// The outcomes resource type
     public let type: WorkflowFlowsFieldOutcomesFieldIfRejectedFieldTypeField?
+
     /// The name of the outcome
     public let name: String?
+
     public let actionType: WorkflowFlowsFieldOutcomesFieldIfRejectedFieldActionTypeField?
 
     /// Initializer for a WorkflowFlowsFieldOutcomesFieldIfRejectedField.
@@ -22,7 +25,7 @@ public class WorkflowFlowsFieldOutcomesFieldIfRejectedField: Codable {
     ///   - id: The identifier of the outcome
     ///   - type: The outcomes resource type
     ///   - name: The name of the outcome
-    ///   - actionType: WorkflowFlowsFieldOutcomesFieldIfRejectedFieldActionTypeField?
+    ///   - actionType: 
     public init(id: String? = nil, type: WorkflowFlowsFieldOutcomesFieldIfRejectedFieldTypeField? = nil, name: String? = nil, actionType: WorkflowFlowsFieldOutcomesFieldIfRejectedFieldActionTypeField? = nil) {
         self.id = id
         self.type = type
@@ -45,4 +48,5 @@ public class WorkflowFlowsFieldOutcomesFieldIfRejectedField: Codable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(actionType, forKey: .actionType)
     }
+
 }

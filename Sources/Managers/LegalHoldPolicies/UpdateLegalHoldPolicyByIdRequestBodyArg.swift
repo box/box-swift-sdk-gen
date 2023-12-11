@@ -9,8 +9,10 @@ public class UpdateLegalHoldPolicyByIdRequestBodyArg: Codable {
 
     /// The name of the policy.
     public let policyName: String?
+
     /// A description for the policy.
     public let description: String?
+
     /// Notes around why the policy was released.
     public let releaseNotes: String?
 
@@ -39,4 +41,5 @@ public class UpdateLegalHoldPolicyByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(releaseNotes, forKey: .releaseNotes)
     }
+
 }

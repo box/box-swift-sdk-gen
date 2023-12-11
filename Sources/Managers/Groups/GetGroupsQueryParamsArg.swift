@@ -4,6 +4,7 @@ public class GetGroupsQueryParamsArg {
     /// Limits the results to only groups whose `name` starts
     /// with the search term.
     public let filterTerm: String?
+
     /// A comma-separated list of attributes to include in the
     /// response. This can be used to request fields that are
     /// not normally returned in a standard response.
@@ -14,8 +15,10 @@ public class GetGroupsQueryParamsArg {
     /// fields for the mini representation are returned, additional
     /// to the fields requested.
     public let fields: [String]?
+
     /// The maximum number of items to return per page.
     public let limit: Int64?
+
     /// The offset of the item at which to begin the response.
     /// 
     /// Queries with offset parameter value

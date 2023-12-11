@@ -12,6 +12,7 @@ public class IntegrationMappingBase: Codable {
     /// (part of a composite key together
     /// with `integration_type`)
     public let id: String?
+
     /// Identifies the Box partner app,
     /// with which the mapping is associated.
     /// Currently only supports Slack.
@@ -44,4 +45,5 @@ public class IntegrationMappingBase: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(integrationType, forKey: .integrationType)
     }
+
 }

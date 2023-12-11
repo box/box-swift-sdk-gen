@@ -6,6 +6,7 @@ public class GetRetentionPolicyAssignmentFileVersionUnderRetentionQueryParamsArg
     /// 
     /// This requires `usemarker` to be set to `true`.
     public let marker: String?
+
     /// The maximum number of items to return per page.
     public let limit: Int64?
 

@@ -17,25 +17,34 @@ public class TaskAssignment: Codable {
 
     /// The unique identifier for this task assignment
     public let id: String?
+
     /// `task_assignment`
     public let type: TaskAssignmentTypeField?
+
     public let item: FileMini?
+
     public let assignedTo: UserMini?
+
     /// A message that will is included with the task
     /// assignment. This is visible to the assigned user in the web and mobile
     /// UI.
     public let message: String?
+
     /// The date at which this task assignment was
     /// completed. This will be `null` if the task is not completed yet.
     public let completedAt: String?
+
     /// The date at which this task was assigned to the user.
     public let assignedAt: String?
+
     /// The date at which the assigned user was reminded of this task
     /// assignment.
     public let remindedAt: String?
+
     /// The current state of the assignment. The available states depend on
     /// the `action` value of the task object.
     public let resolutionState: TaskAssignmentResolutionStateField?
+
     public let assignedBy: UserMini?
 
     /// Initializer for a TaskAssignment.
@@ -43,8 +52,8 @@ public class TaskAssignment: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this task assignment
     ///   - type: `task_assignment`
-    ///   - item: FileMini?
-    ///   - assignedTo: UserMini?
+    ///   - item: 
+    ///   - assignedTo: 
     ///   - message: A message that will is included with the task
     ///     assignment. This is visible to the assigned user in the web and mobile
     ///     UI.
@@ -55,7 +64,7 @@ public class TaskAssignment: Codable {
     ///     assignment.
     ///   - resolutionState: The current state of the assignment. The available states depend on
     ///     the `action` value of the task object.
-    ///   - assignedBy: UserMini?
+    ///   - assignedBy: 
     public init(id: String? = nil, type: TaskAssignmentTypeField? = nil, item: FileMini? = nil, assignedTo: UserMini? = nil, message: String? = nil, completedAt: String? = nil, assignedAt: String? = nil, remindedAt: String? = nil, resolutionState: TaskAssignmentResolutionStateField? = nil, assignedBy: UserMini? = nil) {
         self.id = id
         self.type = type
@@ -96,4 +105,5 @@ public class TaskAssignment: Codable {
         try container.encodeIfPresent(resolutionState, forKey: .resolutionState)
         try container.encodeIfPresent(assignedBy, forKey: .assignedBy)
     }
+
 }

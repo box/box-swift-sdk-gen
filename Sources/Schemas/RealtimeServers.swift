@@ -10,6 +10,7 @@ public class RealtimeServers: Codable {
 
     /// The number of items in this response.
     public let chunkSize: Int64?
+
     /// A list of real-time servers
     public let entries: [RealtimeServer]?
 
@@ -34,4 +35,5 @@ public class RealtimeServers: Codable {
         try container.encodeIfPresent(chunkSize, forKey: .chunkSize)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
+
 }

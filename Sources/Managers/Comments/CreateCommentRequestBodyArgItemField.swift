@@ -8,6 +8,7 @@ public class CreateCommentRequestBodyArgItemField: Codable {
 
     /// The ID of the item
     public let id: String
+
     /// The type of the item that this comment will be placed on.
     public let type: CreateCommentRequestBodyArgItemFieldTypeField
 
@@ -32,4 +33,5 @@ public class CreateCommentRequestBodyArgItemField: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(type, forKey: .type)
     }
+
 }

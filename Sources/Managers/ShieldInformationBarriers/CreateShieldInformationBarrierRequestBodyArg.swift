@@ -25,4 +25,5 @@ public class CreateShieldInformationBarrierRequestBodyArg: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(enterprise, forKey: .enterprise)
     }
+
 }

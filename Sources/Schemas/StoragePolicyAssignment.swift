@@ -8,6 +8,7 @@ public class StoragePolicyAssignment: Codable {
     }
 
     public let storagePolicy: StoragePolicyMini?
+
     public let assignedTo: StoragePolicyAssignmentAssignedToField?
 
     public init(storagePolicy: StoragePolicyMini? = nil, assignedTo: StoragePolicyAssignmentAssignedToField? = nil) {
@@ -26,4 +27,5 @@ public class StoragePolicyAssignment: Codable {
         try container.encodeIfPresent(storagePolicy, forKey: .storagePolicy)
         try container.encodeIfPresent(assignedTo, forKey: .assignedTo)
     }
+
 }

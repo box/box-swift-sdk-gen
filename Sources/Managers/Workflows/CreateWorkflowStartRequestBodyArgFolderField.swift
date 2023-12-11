@@ -8,6 +8,7 @@ public class CreateWorkflowStartRequestBodyArgFolderField: Codable {
 
     /// The type of the folder object
     public let type: CreateWorkflowStartRequestBodyArgFolderFieldTypeField?
+
     /// The id of the folder
     public let id: String?
 
@@ -32,4 +33,5 @@ public class CreateWorkflowStartRequestBodyArgFolderField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(id, forKey: .id)
     }
+
 }

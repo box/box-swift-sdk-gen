@@ -10,10 +10,13 @@ public class ZipDownloadNameConflictsField: Codable {
 
     /// The identifier of the item
     public let id: String?
+
     /// The type of this item
     public let type: ZipDownloadNameConflictsFieldTypeField?
+
     /// The original name of this item
     public let originalName: String?
+
     /// The new name of this item as it will appear in the
     /// downloaded `zip` archive.
     public let downloadName: String?
@@ -48,4 +51,5 @@ public class ZipDownloadNameConflictsField: Codable {
         try container.encodeIfPresent(originalName, forKey: .originalName)
         try container.encodeIfPresent(downloadName, forKey: .downloadName)
     }
+
 }

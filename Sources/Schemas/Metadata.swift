@@ -21,8 +21,7 @@ public class Metadata: MetadataBase {
     }
 
     required public init(from decoder: Decoder) throws {
-
-        try super.init(from:decoder)
+        try super.init(from: decoder)
     }
 
 }

@@ -9,8 +9,10 @@ public class CollaborationAllowlistExemptTargetEnterpriseField: Codable {
 
     /// The unique identifier for this enterprise.
     public let id: String?
+
     /// `enterprise`
     public let type: CollaborationAllowlistExemptTargetEnterpriseFieldTypeField?
+
     /// The name of the enterprise
     public let name: String?
 
@@ -39,4 +41,5 @@ public class CollaborationAllowlistExemptTargetEnterpriseField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(name, forKey: .name)
     }
+
 }

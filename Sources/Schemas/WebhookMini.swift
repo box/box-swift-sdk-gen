@@ -10,8 +10,10 @@ public class WebhookMini: Codable {
 
     /// The unique identifier for this webhook.
     public let id: String?
+
     /// `webhook`
     public let type: WebhookMiniTypeField?
+
     /// The item that will trigger the webhook
     public let target: WebhookMiniTargetField?
 
@@ -40,4 +42,5 @@ public class WebhookMini: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(target, forKey: .target)
     }
+
 }

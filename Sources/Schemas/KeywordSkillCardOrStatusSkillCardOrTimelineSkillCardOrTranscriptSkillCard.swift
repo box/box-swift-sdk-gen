@@ -7,39 +7,44 @@ public enum KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkil
     case transcriptSkillCard(TranscriptSkillCard)
 
     private enum DeterminerCodingKey: String, CodingKey {
-        case skill_card_type
+        case skillCardType = "skill_card_type"
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DeterminerCodingKey.self)
-        if let skill_card_type = try? container.decode(String.self, forKey: .skill_card_type) {
-            switch skill_card_type {
+        if let skillCardType = try? container.decode(String.self, forKey: .skillCardType) {
+            switch skillCardType {
             case "keyword":
                 if let content = try? KeywordSkillCard(from: decoder) {
                     self = .keywordSkillCard(content)
                     return
                 }
+
             case "status":
                 if let content = try? StatusSkillCard(from: decoder) {
                     self = .statusSkillCard(content)
                     return
                 }
+
             case "timeline":
                 if let content = try? TimelineSkillCard(from: decoder) {
                     self = .timelineSkillCard(content)
                     return
                 }
+
             case "transcript":
                 if let content = try? TranscriptSkillCard(from: decoder) {
                     self = .transcriptSkillCard(content)
                     return
                 }
+
             default:
                 throw DecodingError.typeMismatch(KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpeted value for key skill_card_type"))
+
             }
         }
 
-        throw DecodingError.keyNotFound(DeterminerCodingKey.skill_card_type, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object doesn't contain entry with skill_card_type key"))
+        throw DecodingError.keyNotFound(DeterminerCodingKey.skillCardType, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object doesn't contain entry with skill_card_type key"))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -54,4 +59,5 @@ public enum KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkil
             try transcriptSkillCard.encode(to: encoder)
         }
     }
+
 }

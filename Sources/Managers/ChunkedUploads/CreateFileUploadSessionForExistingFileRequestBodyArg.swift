@@ -8,6 +8,7 @@ public class CreateFileUploadSessionForExistingFileRequestBodyArg: Codable {
 
     /// The total number of bytes of the file to be uploaded
     public let fileSize: Int64
+
     /// The optional new name of new file
     public let fileName: String?
 
@@ -32,4 +33,5 @@ public class CreateFileUploadSessionForExistingFileRequestBodyArg: Codable {
         try container.encode(fileSize, forKey: .fileSize)
         try container.encodeIfPresent(fileName, forKey: .fileName)
     }
+
 }

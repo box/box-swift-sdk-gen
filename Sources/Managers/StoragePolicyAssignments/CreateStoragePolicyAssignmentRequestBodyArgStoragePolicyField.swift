@@ -8,6 +8,7 @@ public class CreateStoragePolicyAssignmentRequestBodyArgStoragePolicyField: Coda
 
     /// The type to assign.
     public let type: CreateStoragePolicyAssignmentRequestBodyArgStoragePolicyFieldTypeField
+
     /// The ID of the storage policy to assign.
     public let id: String
 
@@ -32,4 +33,5 @@ public class CreateStoragePolicyAssignmentRequestBodyArgStoragePolicyField: Coda
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

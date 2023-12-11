@@ -1,6 +1,6 @@
 import Foundation
 
-public class UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArg: Codable {
+public class UpdateClassificationOnFileRequestBodyArg: Codable {
     private enum CodingKeys: String, CodingKey {
         case op
         case path
@@ -8,19 +8,21 @@ public class UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArg: C
     }
 
     /// `replace`
-    public let op: UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArgOpField?
+    public let op: UpdateClassificationOnFileRequestBodyArgOpField
+
     /// Defines classifications 
     /// available in the enterprise.
-    public let path: UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArgPathField?
+    public let path: UpdateClassificationOnFileRequestBodyArgPathField
+
     /// The name of the classification to apply to this file.
     /// 
     /// To list the available classifications in an enterprise,
     /// use the classification API to retrieve the
     /// [classification template](e://get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema)
     /// which lists all available classification keys.
-    public let value: String?
+    public let value: String
 
-    /// Initializer for a UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArg.
+    /// Initializer for a UpdateClassificationOnFileRequestBodyArg.
     ///
     /// - Parameters:
     ///   - op: `replace`
@@ -32,7 +34,7 @@ public class UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArg: C
     ///     use the classification API to retrieve the
     ///     [classification template](e://get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema)
     ///     which lists all available classification keys.
-    public init(op: UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArgOpField? = nil, path: UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArgPathField? = nil, value: String? = nil) {
+    public init(op: UpdateClassificationOnFileRequestBodyArgOpField, path: UpdateClassificationOnFileRequestBodyArgPathField, value: String) {
         self.op = op
         self.path = path
         self.value = value
@@ -40,15 +42,16 @@ public class UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArg: C
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        op = try container.decodeIfPresent(UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArgOpField.self, forKey: .op)
-        path = try container.decodeIfPresent(UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArgPathField.self, forKey: .path)
-        value = try container.decodeIfPresent(String.self, forKey: .value)
+        op = try container.decode(UpdateClassificationOnFileRequestBodyArgOpField.self, forKey: .op)
+        path = try container.decode(UpdateClassificationOnFileRequestBodyArgPathField.self, forKey: .path)
+        value = try container.decode(String.self, forKey: .value)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(op, forKey: .op)
-        try container.encodeIfPresent(path, forKey: .path)
-        try container.encodeIfPresent(value, forKey: .value)
+        try container.encode(op, forKey: .op)
+        try container.encode(path, forKey: .path)
+        try container.encode(value, forKey: .value)
     }
+
 }

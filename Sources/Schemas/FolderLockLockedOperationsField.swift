@@ -8,6 +8,7 @@ public class FolderLockLockedOperationsField: Codable {
 
     /// Whether moving the folder is restricted.
     public let move: Bool
+
     /// Whether deleting the folder is restricted.
     public let delete: Bool
 
@@ -32,4 +33,5 @@ public class FolderLockLockedOperationsField: Codable {
         try container.encode(move, forKey: .move)
         try container.encode(delete, forKey: .delete)
     }
+
 }

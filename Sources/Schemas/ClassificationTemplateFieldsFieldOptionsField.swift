@@ -9,8 +9,10 @@ public class ClassificationTemplateFieldsFieldOptionsField: Codable {
 
     /// The unique ID of this classification.
     public let id: String
+
     /// The display name and key for this classification.
     public let key: String
+
     /// Additional information about the classification.
     public let staticConfig: ClassificationTemplateFieldsFieldOptionsFieldStaticConfigField?
 
@@ -39,4 +41,5 @@ public class ClassificationTemplateFieldsFieldOptionsField: Codable {
         try container.encode(key, forKey: .key)
         try container.encodeIfPresent(staticConfig, forKey: .staticConfig)
     }
+
 }

@@ -9,6 +9,7 @@ public class TranscriptSkillCardEntriesField: Codable {
     /// The text of the entry. This would be the transcribed text assigned
     /// to the entry on the timeline.
     public let text: String?
+
     /// Defines when a transcribed bit of text appears. This only includes a
     /// start time and no end time.
     public let appears: [TranscriptSkillCardEntriesFieldAppearsField]?
@@ -36,4 +37,5 @@ public class TranscriptSkillCardEntriesField: Codable {
         try container.encodeIfPresent(text, forKey: .text)
         try container.encodeIfPresent(appears, forKey: .appears)
     }
+
 }

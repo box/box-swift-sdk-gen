@@ -3,8 +3,10 @@ import Foundation
 public class GetStoragePolicyAssignmentsQueryParamsArg {
     /// The target type to return assignments for
     public let resolvedForType: GetStoragePolicyAssignmentsQueryParamsArgResolvedForTypeField
+
     /// The ID of the user or enterprise to return assignments for
     public let resolvedForId: String
+
     /// Defines the position marker at which to begin returning results. This is
     /// used when paginating using marker-based pagination.
     /// 

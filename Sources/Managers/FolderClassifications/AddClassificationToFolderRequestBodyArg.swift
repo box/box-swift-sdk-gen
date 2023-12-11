@@ -1,6 +1,6 @@
 import Foundation
 
-public class CreateFolderMetadataEnterpriseSecurityClassificationRequestBodyArg: Codable {
+public class AddClassificationToFolderRequestBodyArg: Codable {
     private enum CodingKeys: String, CodingKey {
         case boxSecurityClassificationKey = "Box__Security__Classification__Key"
     }
@@ -13,7 +13,7 @@ public class CreateFolderMetadataEnterpriseSecurityClassificationRequestBodyArg:
     /// which lists all available classification keys.
     public let boxSecurityClassificationKey: String?
 
-    /// Initializer for a CreateFolderMetadataEnterpriseSecurityClassificationRequestBodyArg.
+    /// Initializer for a AddClassificationToFolderRequestBodyArg.
     ///
     /// - Parameters:
     ///   - boxSecurityClassificationKey: The name of the classification to apply to this folder.
@@ -35,4 +35,5 @@ public class CreateFolderMetadataEnterpriseSecurityClassificationRequestBodyArg:
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(boxSecurityClassificationKey, forKey: .boxSecurityClassificationKey)
     }
+
 }

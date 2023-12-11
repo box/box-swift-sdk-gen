@@ -15,8 +15,10 @@ public class UpdateRetentionPolicyByIdRequestBodyArg: Codable {
 
     /// The name for the retention policy
     public let policyName: String?
+
     /// The additional text description of the retention policy.
     public let description: String?
+
     /// The disposition action of the retention policy.
     /// This action can be `permanently_delete`, which
     /// will cause the content retained by the policy
@@ -26,6 +28,7 @@ public class UpdateRetentionPolicyByIdRequestBodyArg: Codable {
     /// once the retention policy has expired.
     /// You can use "null" if you don't want to change `disposition_action`.
     public let dispositionAction: String?
+
     /// Specifies the retention type:
     /// 
     /// * `modifiable`: You can modify the retention policy. For example,
@@ -46,6 +49,7 @@ public class UpdateRetentionPolicyByIdRequestBodyArg: Codable {
     /// `modifiable` policy to `non-modifiable`, but
     /// not the other way around.
     public let retentionType: String?
+
     /// The length of the retention policy. This value
     /// specifies the duration in days that the retention
     /// policy will be active for after being assigned to
@@ -53,19 +57,23 @@ public class UpdateRetentionPolicyByIdRequestBodyArg: Codable {
     /// `indefinite`, the `retention_length` will also be
     /// `indefinite`.
     public let retentionLength: String?
+
     /// Used to retire a retention policy.
     /// 
     /// If not retiring a policy, do not include this parameter
     /// or set it to `null`.
     public let status: String?
+
     /// Determines if the owner of items under the policy
     /// can extend the retention when the original retention
     /// duration is about to end.
     public let canOwnerExtendRetention: Bool?
+
     /// Determines if owners and co-owners of items
     /// under the policy are notified when
     /// the retention duration is about to end.
     public let areOwnersNotified: Bool?
+
     /// A list of users notified when the retention duration is about to end.
     public let customNotificationRecipients: [UserBase]?
 
@@ -155,4 +163,5 @@ public class UpdateRetentionPolicyByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(areOwnersNotified, forKey: .areOwnersNotified)
         try container.encodeIfPresent(customNotificationRecipients, forKey: .customNotificationRecipients)
     }
+
 }

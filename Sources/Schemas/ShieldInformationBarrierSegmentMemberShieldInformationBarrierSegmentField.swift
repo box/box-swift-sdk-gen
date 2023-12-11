@@ -9,6 +9,7 @@ public class ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmen
     /// The ID reference of the requesting
     /// shield information barrier segment.
     public let id: String?
+
     /// The type of the shield information barrier segment
     public let type: ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentFieldTypeField?
 
@@ -34,4 +35,5 @@ public class ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmen
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

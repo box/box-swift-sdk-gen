@@ -13,11 +13,13 @@ public class FolderSharedLinkFieldPermissionsField: Codable {
     /// This value can be set to `true` when the effective access level is
     /// set to `open` or `company`, not `collaborators`.
     public let canDownload: Bool
+
     /// Defines if the shared link allows for the item to be previewed.
     /// 
     /// This value is always `true`. For shared links on folders this also
     /// applies to any items in the folder.
     public let canPreview: Bool
+
     /// Defines if the shared link allows for the item to be edited.
     /// 
     /// This value can only be `true` if `can_download` is also `true` and if
@@ -59,4 +61,5 @@ public class FolderSharedLinkFieldPermissionsField: Codable {
         try container.encode(canPreview, forKey: .canPreview)
         try container.encode(canEdit, forKey: .canEdit)
     }
+
 }

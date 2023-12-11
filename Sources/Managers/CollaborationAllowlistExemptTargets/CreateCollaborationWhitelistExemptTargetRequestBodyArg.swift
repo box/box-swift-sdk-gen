@@ -25,4 +25,5 @@ public class CreateCollaborationWhitelistExemptTargetRequestBodyArg: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(user, forKey: .user)
     }
+
 }

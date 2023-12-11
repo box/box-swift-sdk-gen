@@ -20,9 +20,11 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
 
     /// Name of the legal hold policy.
     public let policyName: String?
+
     /// Description of the legal hold policy. Optional
     /// property with a 500 character limit.
     public let description: String?
+
     /// * 'active' - the policy is not in a transition state
     /// * 'applying' - that the policy is in the process of
     ///   being applied
@@ -30,26 +32,34 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
     ///   of being released
     /// * 'released' - the policy is no longer active
     public let status: LegalHoldPolicyStatusField?
+
     /// Counts of assignments within this a legal hold policy by item type
     public let assignmentCounts: LegalHoldPolicyAssignmentCountsField?
+
     public let createdBy: UserMini?
+
     /// When the legal hold policy object was created
     public let createdAt: String?
+
     /// When the legal hold policy object was modified.
     /// Does not update when assignments are added or removed.
     public let modifiedAt: String?
+
     /// When the policy release request was sent. (Because
     /// it can take time for a policy to fully delete, this
     /// isn't quite the same time that the policy is fully deleted).
     /// 
     /// If `null`, the policy was not deleted.
     public let deletedAt: String?
+
     /// User-specified, optional date filter applies to
     /// Custodian assignments only
     public let filterStartedAt: String?
+
     /// User-specified, optional date filter applies to
     /// Custodian assignments only
     public let filterEndedAt: String?
+
     /// Optional notes about why the policy was created.
     public let releaseNotes: String?
 
@@ -68,7 +78,7 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
     ///       of being released
     ///     * 'released' - the policy is no longer active
     ///   - assignmentCounts: Counts of assignments within this a legal hold policy by item type
-    ///   - createdBy: UserMini?
+    ///   - createdBy: 
     ///   - createdAt: When the legal hold policy object was created
     ///   - modifiedAt: When the legal hold policy object was modified.
     ///     Does not update when assignments are added or removed.
@@ -94,6 +104,7 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
         self.filterStartedAt = filterStartedAt
         self.filterEndedAt = filterEndedAt
         self.releaseNotes = releaseNotes
+
         super.init(id: id, type: type)
     }
 
@@ -110,7 +121,8 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
         filterStartedAt = try container.decodeIfPresent(String.self, forKey: .filterStartedAt)
         filterEndedAt = try container.decodeIfPresent(String.self, forKey: .filterEndedAt)
         releaseNotes = try container.decodeIfPresent(String.self, forKey: .releaseNotes)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -128,4 +140,5 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
         try container.encodeIfPresent(releaseNotes, forKey: .releaseNotes)
         try super.encode(to: encoder)
     }
+
 }

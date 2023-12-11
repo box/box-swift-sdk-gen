@@ -9,6 +9,7 @@ public class FileRequestCopyRequestFolderField: Codable {
     /// The ID of the folder to associate the new
     /// file request to.
     public let id: String
+
     /// `folder`
     public let type: FileRequestCopyRequestFolderFieldTypeField?
 
@@ -34,4 +35,5 @@ public class FileRequestCopyRequestFolderField: Codable {
         try container.encode(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

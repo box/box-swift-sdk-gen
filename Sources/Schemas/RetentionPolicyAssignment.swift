@@ -18,20 +18,27 @@ public class RetentionPolicyAssignment: Codable {
 
     /// The unique identifier for a retention policy assignment.
     public let id: String
+
     /// `retention_policy_assignment`
     public let type: RetentionPolicyAssignmentTypeField
+
     public let retentionPolicy: RetentionPolicyMini?
+
     /// The `type` and `id` of the content that is under
     /// retention. The `type` can either be `folder`
     /// `enterprise`, or `metadata_template`.
     public let assignedTo: RetentionPolicyAssignmentAssignedToField?
+
     /// An array of field objects. Values are only returned if the `assigned_to`
     /// type is `metadata_template`. Otherwise, the array is blank.
     public let filterFields: [RetentionPolicyAssignmentFilterFieldsField]?
+
     public let assignedBy: UserMini?
+
     /// When the retention policy assignment object was
     /// created.
     public let assignedAt: String?
+
     /// The date the retention policy assignment begins.
     /// If the `assigned_to` type is `metadata_template`,
     /// this field can be a date field's metadata attribute key id.
@@ -42,13 +49,13 @@ public class RetentionPolicyAssignment: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for a retention policy assignment.
     ///   - type: `retention_policy_assignment`
-    ///   - retentionPolicy: RetentionPolicyMini?
+    ///   - retentionPolicy: 
     ///   - assignedTo: The `type` and `id` of the content that is under
     ///     retention. The `type` can either be `folder`
     ///     `enterprise`, or `metadata_template`.
     ///   - filterFields: An array of field objects. Values are only returned if the `assigned_to`
     ///     type is `metadata_template`. Otherwise, the array is blank.
-    ///   - assignedBy: UserMini?
+    ///   - assignedBy: 
     ///   - assignedAt: When the retention policy assignment object was
     ///     created.
     ///   - startDateField: The date the retention policy assignment begins.
@@ -88,4 +95,5 @@ public class RetentionPolicyAssignment: Codable {
         try container.encodeIfPresent(assignedAt, forKey: .assignedAt)
         try container.encodeIfPresent(startDateField, forKey: .startDateField)
     }
+
 }

@@ -18,9 +18,12 @@ public class CreateFolderRequestBodyArg: Codable {
     /// Additionally, the names `.` and `..` are
     /// not allowed either.
     public let name: String
+
     /// The parent folder to create the new folder within.
     public let parent: CreateFolderRequestBodyArgParentField
+
     public let folderUploadEmail: CreateFolderRequestBodyArgFolderUploadEmailField?
+
     /// Specifies whether a folder should be synced to a
     /// user's device or not. This is used by Box Sync
     /// (discontinued) and is not used by Box Drive.
@@ -39,7 +42,7 @@ public class CreateFolderRequestBodyArg: Codable {
     ///     Additionally, the names `.` and `..` are
     ///     not allowed either.
     ///   - parent: The parent folder to create the new folder within.
-    ///   - folderUploadEmail: CreateFolderRequestBodyArgFolderUploadEmailField?
+    ///   - folderUploadEmail: 
     ///   - syncState: Specifies whether a folder should be synced to a
     ///     user's device or not. This is used by Box Sync
     ///     (discontinued) and is not used by Box Drive.
@@ -65,4 +68,5 @@ public class CreateFolderRequestBodyArg: Codable {
         try container.encodeIfPresent(folderUploadEmail, forKey: .folderUploadEmail)
         try container.encodeIfPresent(syncState, forKey: .syncState)
     }
+
 }

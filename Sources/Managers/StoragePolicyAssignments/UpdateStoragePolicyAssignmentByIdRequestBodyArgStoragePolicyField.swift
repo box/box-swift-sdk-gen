@@ -8,6 +8,7 @@ public class UpdateStoragePolicyAssignmentByIdRequestBodyArgStoragePolicyField: 
 
     /// The type to assign.
     public let type: UpdateStoragePolicyAssignmentByIdRequestBodyArgStoragePolicyFieldTypeField
+
     /// The ID of the storage policy to assign.
     public let id: String
 
@@ -32,4 +33,5 @@ public class UpdateStoragePolicyAssignmentByIdRequestBodyArgStoragePolicyField: 
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

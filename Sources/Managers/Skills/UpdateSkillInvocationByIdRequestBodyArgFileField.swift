@@ -8,6 +8,7 @@ public class UpdateSkillInvocationByIdRequestBodyArgFileField: Codable {
 
     /// `file`
     public let type: UpdateSkillInvocationByIdRequestBodyArgFileFieldTypeField?
+
     /// The ID of the file
     public let id: String?
 
@@ -32,4 +33,5 @@ public class UpdateSkillInvocationByIdRequestBodyArgFileField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(id, forKey: .id)
     }
+
 }

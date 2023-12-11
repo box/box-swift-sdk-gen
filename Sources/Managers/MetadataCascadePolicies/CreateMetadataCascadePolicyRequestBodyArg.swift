@@ -11,9 +11,11 @@ public class CreateMetadataCascadePolicyRequestBodyArg: Codable {
     /// need to already have an instance of the targeted metadata
     /// template applied to it.
     public let folderId: String
+
     /// The scope of the targeted metadata template. This template will
     /// need to already have an instance applied to the targeted folder.
     public let scope: CreateMetadataCascadePolicyRequestBodyArgScopeField
+
     /// The key of the targeted metadata template. This template will
     /// need to already have an instance applied to the targeted folder.
     /// 
@@ -73,4 +75,5 @@ public class CreateMetadataCascadePolicyRequestBodyArg: Codable {
         try container.encode(scope, forKey: .scope)
         try container.encode(templateKey, forKey: .templateKey)
     }
+
 }

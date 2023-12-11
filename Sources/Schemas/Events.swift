@@ -10,9 +10,11 @@ public class Events: Codable {
 
     /// The number of events returned in this response.
     public let chunkSize: Int64?
+
     /// The stream position of the start of the next page (chunk)
     /// of events.
     public let nextStreamPosition: String?
+
     /// A list of events
     public let entries: [Event]?
 
@@ -42,4 +44,5 @@ public class Events: Codable {
         try container.encodeIfPresent(nextStreamPosition, forKey: .nextStreamPosition)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
+
 }

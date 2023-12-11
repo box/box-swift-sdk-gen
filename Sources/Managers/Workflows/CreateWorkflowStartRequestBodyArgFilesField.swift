@@ -8,6 +8,7 @@ public class CreateWorkflowStartRequestBodyArgFilesField: Codable {
 
     /// The type of the file object
     public let type: CreateWorkflowStartRequestBodyArgFilesFieldTypeField?
+
     /// The id of the file
     public let id: String?
 
@@ -32,4 +33,5 @@ public class CreateWorkflowStartRequestBodyArgFilesField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(id, forKey: .id)
     }
+
 }

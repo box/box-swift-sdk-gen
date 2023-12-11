@@ -29,4 +29,5 @@ public class UpdateFileByIdRequestBodyArgSharedLinkFieldPermissionsField: Codabl
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(canDownload, forKey: .canDownload)
     }
+
 }

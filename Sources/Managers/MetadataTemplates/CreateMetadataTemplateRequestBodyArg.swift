@@ -17,8 +17,10 @@ public class CreateMetadataTemplateRequestBodyArg: Codable {
     /// This value needs to be set to `enterprise`, as `global` scopes can
     /// not be created by applications.
     public let scope: String
+
     /// The display name of the template.
     public let displayName: String
+
     /// A unique identifier for the template. This identifier needs to be
     /// unique across the enterprise for which the metadata template is
     /// being created.
@@ -26,13 +28,16 @@ public class CreateMetadataTemplateRequestBodyArg: Codable {
     /// When not provided, the API will create a unique `templateKey`
     /// based on the value of the `displayName`.
     public let templateKey: String?
+
     /// Defines if this template is visible in the Box web app UI, or if
     /// it is purely intended for usage through the API.
     public let hidden: Bool?
+
     /// An ordered list of template fields which are part of the template.
     /// Each field can be a regular text field, date field, number field,
     /// as well as a single or multi-select list.
     public let fields: [CreateMetadataTemplateRequestBodyArgFieldsField]?
+
     /// Whether or not to copy any metadata attached to a file or folder
     /// when it is copied. By default, metadata is not copied along with a
     /// file or folder when it is copied.
@@ -90,4 +95,5 @@ public class CreateMetadataTemplateRequestBodyArg: Codable {
         try container.encodeIfPresent(fields, forKey: .fields)
         try container.encodeIfPresent(copyInstanceOnItemCopy, forKey: .copyInstanceOnItemCopy)
     }
+
 }

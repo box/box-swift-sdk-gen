@@ -11,10 +11,12 @@ public class UpdateFileAddSharedLinkRequestBodyArgSharedLinkFieldPermissionsFiel
     /// This can only be set when `access` is set to
     /// `open` or `company`.
     public let canDownload: Bool?
+
     /// If the shared link allows for previewing of files.
     /// This value is always `true`. For shared links on folders
     /// this also applies to any items in the folder.
     public let canPreview: Bool?
+
     /// If the shared link allows for editing of files.
     /// This can only be set when `access` is set to
     /// `open` or `company`.
@@ -55,4 +57,5 @@ public class UpdateFileAddSharedLinkRequestBodyArgSharedLinkFieldPermissionsFiel
         try container.encodeIfPresent(canPreview, forKey: .canPreview)
         try container.encodeIfPresent(canEdit, forKey: .canEdit)
     }
+
 }

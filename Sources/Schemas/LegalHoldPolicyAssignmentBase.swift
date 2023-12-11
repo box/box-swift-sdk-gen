@@ -14,6 +14,7 @@ public class LegalHoldPolicyAssignmentBase: Codable {
 
     /// The unique identifier for this legal hold assignment
     public let id: String?
+
     /// `legal_hold_policy_assignment`
     public let type: LegalHoldPolicyAssignmentBaseTypeField?
 
@@ -38,4 +39,5 @@ public class LegalHoldPolicyAssignmentBase: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

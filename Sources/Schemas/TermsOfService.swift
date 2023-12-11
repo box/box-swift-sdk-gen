@@ -14,14 +14,19 @@ public class TermsOfService: TermsOfServiceBase {
 
     /// Whether these terms are enabled or not
     public let status: TermsOfServiceStatusField?
+
     public let enterprise: TermsOfServiceEnterpriseField?
+
     /// Whether to apply these terms to managed users or external users
     public let tosType: TermsOfServiceTosTypeField?
+
     /// The text for your terms and conditions. This text could be
     /// empty if the `status` is set to `disabled`.
     public let text: String?
+
     /// When the legal item was created
     public let createdAt: String?
+
     /// When the legal item was modified.
     public let modifiedAt: String?
 
@@ -31,7 +36,7 @@ public class TermsOfService: TermsOfServiceBase {
     ///   - id: The unique identifier for this terms of service.
     ///   - type: `terms_of_service`
     ///   - status: Whether these terms are enabled or not
-    ///   - enterprise: TermsOfServiceEnterpriseField?
+    ///   - enterprise: 
     ///   - tosType: Whether to apply these terms to managed users or external users
     ///   - text: The text for your terms and conditions. This text could be
     ///     empty if the `status` is set to `disabled`.
@@ -44,6 +49,7 @@ public class TermsOfService: TermsOfServiceBase {
         self.text = text
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+
         super.init(id: id, type: type)
     }
 
@@ -55,7 +61,8 @@ public class TermsOfService: TermsOfServiceBase {
         text = try container.decodeIfPresent(String.self, forKey: .text)
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
         modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -68,4 +75,5 @@ public class TermsOfService: TermsOfServiceBase {
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
         try super.encode(to: encoder)
     }
+
 }

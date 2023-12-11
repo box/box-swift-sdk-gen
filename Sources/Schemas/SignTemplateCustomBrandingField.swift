@@ -10,10 +10,13 @@ public class SignTemplateCustomBrandingField: Codable {
 
     /// Name of the company
     public let companyName: String?
+
     /// Custom branding logo URI in the form of a base64 image.
     public let logoUri: String?
+
     /// Custom branding color in hex.
     public let brandingColor: String?
+
     /// Content of the email footer.
     public let emailFooterText: String?
 
@@ -46,4 +49,5 @@ public class SignTemplateCustomBrandingField: Codable {
         try container.encodeIfPresent(brandingColor, forKey: .brandingColor)
         try container.encodeIfPresent(emailFooterText, forKey: .emailFooterText)
     }
+
 }

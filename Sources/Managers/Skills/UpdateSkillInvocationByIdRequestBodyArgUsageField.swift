@@ -8,6 +8,7 @@ public class UpdateSkillInvocationByIdRequestBodyArgUsageField: Codable {
 
     /// `file`
     public let unit: String?
+
     /// `1`
     public let value: Double?
 
@@ -32,4 +33,5 @@ public class UpdateSkillInvocationByIdRequestBodyArgUsageField: Codable {
         try container.encodeIfPresent(unit, forKey: .unit)
         try container.encodeIfPresent(value, forKey: .value)
     }
+
 }

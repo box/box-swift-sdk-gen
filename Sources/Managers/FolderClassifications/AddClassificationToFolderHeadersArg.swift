@@ -1,10 +1,10 @@
 import Foundation
 
-public class GetFileMetadataEnterpriseSecurityClassification6VmVochwUWoHeadersArg {
+public class AddClassificationToFolderHeadersArg {
     /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
-    /// Initializer for a GetFileMetadataEnterpriseSecurityClassification6VmVochwUWoHeadersArg.
+    /// Initializer for a AddClassificationToFolderHeadersArg.
     ///
     /// - Parameters:
     ///   - extraHeaders: Extra headers that will be included in the HTTP request.

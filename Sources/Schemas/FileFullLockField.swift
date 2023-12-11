@@ -13,15 +13,21 @@ public class FileFullLockField: Codable {
 
     /// The unique identifier for this lock
     public let id: String?
+
     /// `lock`
     public let type: FileFullLockFieldTypeField?
+
     public let createdBy: UserMini?
+
     /// The time this lock was created at.
     public let createdAt: String?
+
     /// The time this lock is to expire at, which might be in the past.
     public let expiredAt: String?
+
     /// Whether or not the file can be downloaded while locked.
     public let isDownloadPrevented: Bool?
+
     /// If the lock is managed by an application rather than a user, this
     /// field identifies the type of the application that holds the lock.
     /// This is an open enum and may be extended with additional values in
@@ -33,7 +39,7 @@ public class FileFullLockField: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this lock
     ///   - type: `lock`
-    ///   - createdBy: UserMini?
+    ///   - createdBy: 
     ///   - createdAt: The time this lock was created at.
     ///   - expiredAt: The time this lock is to expire at, which might be in the past.
     ///   - isDownloadPrevented: Whether or not the file can be downloaded while locked.
@@ -72,4 +78,5 @@ public class FileFullLockField: Codable {
         try container.encodeIfPresent(isDownloadPrevented, forKey: .isDownloadPrevented)
         try container.encodeIfPresent(appType, forKey: .appType)
     }
+
 }

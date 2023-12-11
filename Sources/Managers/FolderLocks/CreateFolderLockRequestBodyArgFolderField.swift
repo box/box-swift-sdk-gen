@@ -9,6 +9,7 @@ public class CreateFolderLockRequestBodyArgFolderField: Codable {
     /// The content type the lock is being applied to. Only `folder`
     /// is supported.
     public let type: String
+
     /// The ID of the folder.
     public let id: String
 
@@ -34,4 +35,5 @@ public class CreateFolderLockRequestBodyArgFolderField: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

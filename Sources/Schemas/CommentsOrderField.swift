@@ -8,6 +8,7 @@ public class CommentsOrderField: Codable {
 
     /// The field to order by
     public let by: String?
+
     /// The direction to order by, either ascending or descending
     public let direction: CommentsOrderFieldDirectionField?
 
@@ -32,4 +33,5 @@ public class CommentsOrderField: Codable {
         try container.encodeIfPresent(by, forKey: .by)
         try container.encodeIfPresent(direction, forKey: .direction)
     }
+
 }

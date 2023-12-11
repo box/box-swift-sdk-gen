@@ -12,10 +12,13 @@ public class GetWorkflowsQueryParamsArg {
     /// The root folder of a Box account is
     /// always represented by the ID `0`.
     public let folderId: String
+
     /// Type of trigger to search for.
     public let triggerType: String?
+
     /// The maximum number of items to return per page.
     public let limit: Int64?
+
     /// Defines the position marker at which to begin returning results. This is
     /// used when paginating using marker-based pagination.
     /// 

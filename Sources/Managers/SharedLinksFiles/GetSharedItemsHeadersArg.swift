@@ -8,6 +8,7 @@ public class GetSharedItemsHeadersArg {
     /// 
     /// `shared_link=[link]&shared_link_password=[password]`
     public let boxapi: String
+
     /// Ensures an item is only returned if it has changed.
     /// 
     /// Pass in the item's last observed `etag` value
@@ -15,6 +16,7 @@ public class GetSharedItemsHeadersArg {
     /// with a `304 Not Modified` if the item has not
     /// changed since.
     public let ifNoneMatch: String?
+
     /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 

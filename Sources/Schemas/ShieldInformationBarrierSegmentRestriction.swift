@@ -13,15 +13,19 @@ public class ShieldInformationBarrierSegmentRestriction: ShieldInformationBarrie
     }
 
     public let shieldInformationBarrier: ShieldInformationBarrierBase?
+
     /// ISO date time string when this
     /// shield information barrier
     /// Segment Restriction object was created.
     public let createdAt: String?
+
     public let createdBy: UserBase?
+
     /// ISO date time string when this
     /// shield information barrier segment
     /// Restriction was updated.
     public let updatedAt: String?
+
     public let updatedBy: UserBase?
 
     /// Initializer for a ShieldInformationBarrierSegmentRestriction.
@@ -34,21 +38,22 @@ public class ShieldInformationBarrierSegmentRestriction: ShieldInformationBarrie
     ///   - type: Shield information barrier segment restriction
     ///   - id: The unique identifier for the
     ///     shield information barrier segment restriction.
-    ///   - shieldInformationBarrier: ShieldInformationBarrierBase?
+    ///   - shieldInformationBarrier: 
     ///   - createdAt: ISO date time string when this
     ///     shield information barrier
     ///     Segment Restriction object was created.
-    ///   - createdBy: UserBase?
+    ///   - createdBy: 
     ///   - updatedAt: ISO date time string when this
     ///     shield information barrier segment
     ///     Restriction was updated.
-    ///   - updatedBy: UserBase?
+    ///   - updatedBy: 
     public init(shieldInformationBarrierSegment: ShieldInformationBarrierSegmentRestrictionMiniShieldInformationBarrierSegmentField, restrictedSegment: ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentField, type: ShieldInformationBarrierSegmentRestrictionBaseTypeField? = nil, id: String? = nil, shieldInformationBarrier: ShieldInformationBarrierBase? = nil, createdAt: String? = nil, createdBy: UserBase? = nil, updatedAt: String? = nil, updatedBy: UserBase? = nil) {
         self.shieldInformationBarrier = shieldInformationBarrier
         self.createdAt = createdAt
         self.createdBy = createdBy
         self.updatedAt = updatedAt
         self.updatedBy = updatedBy
+
         super.init(shieldInformationBarrierSegment: shieldInformationBarrierSegment, restrictedSegment: restrictedSegment, type: type, id: id)
     }
 
@@ -59,7 +64,8 @@ public class ShieldInformationBarrierSegmentRestriction: ShieldInformationBarrie
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
         updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt)
         updatedBy = try container.decodeIfPresent(UserBase.self, forKey: .updatedBy)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -71,4 +77,5 @@ public class ShieldInformationBarrierSegmentRestriction: ShieldInformationBarrie
         try container.encodeIfPresent(updatedBy, forKey: .updatedBy)
         try super.encode(to: encoder)
     }
+
 }

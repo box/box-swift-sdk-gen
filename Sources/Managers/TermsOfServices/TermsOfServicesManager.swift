@@ -2,6 +2,7 @@ import Foundation
 
 public class TermsOfServicesManager {
     public let auth: Authentication?
+
     public let networkSession: NetworkSession?
 
     public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {

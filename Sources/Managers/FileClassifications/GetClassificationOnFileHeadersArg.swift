@@ -1,10 +1,10 @@
 import Foundation
 
-public class DeleteFileMetadataEnterpriseSecurityClassificationHeadersArg {
+public class GetClassificationOnFileHeadersArg {
     /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
-    /// Initializer for a DeleteFileMetadataEnterpriseSecurityClassificationHeadersArg.
+    /// Initializer for a GetClassificationOnFileHeadersArg.
     ///
     /// - Parameters:
     ///   - extraHeaders: Extra headers that will be included in the HTTP request.

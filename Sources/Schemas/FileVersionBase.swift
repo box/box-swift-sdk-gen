@@ -11,6 +11,7 @@ public class FileVersionBase: Codable {
 
     /// The unique identifier that represent a file version.
     public let id: String
+
     /// `file_version`
     public let type: FileVersionBaseTypeField
 
@@ -35,4 +36,5 @@ public class FileVersionBase: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(type, forKey: .type)
     }
+
 }

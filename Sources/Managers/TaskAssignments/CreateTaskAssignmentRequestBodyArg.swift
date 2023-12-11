@@ -8,6 +8,7 @@ public class CreateTaskAssignmentRequestBodyArg: Codable {
 
     /// The task to assign to a user.
     public let task: CreateTaskAssignmentRequestBodyArgTaskField
+
     /// The user to assign the task to.
     public let assignTo: CreateTaskAssignmentRequestBodyArgAssignToField
 
@@ -32,4 +33,5 @@ public class CreateTaskAssignmentRequestBodyArg: Codable {
         try container.encode(task, forKey: .task)
         try container.encode(assignTo, forKey: .assignTo)
     }
+
 }

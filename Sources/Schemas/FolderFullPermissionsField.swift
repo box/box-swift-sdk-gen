@@ -13,20 +13,26 @@ public class FolderFullPermissionsField: Codable {
 
     /// Specifies if the current user can delete this item.
     public let canDelete: Bool
+
     /// Specifies if the current user can download this item.
     public let canDownload: Bool
+
     /// Specifies if the current user can invite new
     /// users to collaborate on this item, and if the user can
     /// update the role of a user already collaborated on this
     /// item.
     public let canInviteCollaborator: Bool
+
     /// Specifies if the user can rename this item.
     public let canRename: Bool
+
     /// Specifies if the user can change the access level of an
     /// existing shared link on this item.
     public let canSetShareAccess: Bool
+
     /// Specifies if the user can create a shared link for this item.
     public let canShare: Bool
+
     /// Specifies if the user can upload into this folder.
     public let canUpload: Bool?
 
@@ -75,4 +81,5 @@ public class FolderFullPermissionsField: Codable {
         try container.encode(canShare, forKey: .canShare)
         try container.encodeIfPresent(canUpload, forKey: .canUpload)
     }
+
 }

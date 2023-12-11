@@ -9,6 +9,7 @@ public class CreateShieldInformationBarrierSegmentRestrictionRequestBodyArgShiel
     /// The ID reference of the requesting
     /// shield information barrier segment.
     public let id: String?
+
     /// The type of the shield barrier segment for this member.
     public let type: CreateShieldInformationBarrierSegmentRestrictionRequestBodyArgShieldInformationBarrierSegmentFieldTypeField?
 
@@ -34,4 +35,5 @@ public class CreateShieldInformationBarrierSegmentRestrictionRequestBodyArgShiel
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

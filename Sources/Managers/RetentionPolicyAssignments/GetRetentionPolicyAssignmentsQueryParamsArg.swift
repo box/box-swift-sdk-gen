@@ -3,6 +3,7 @@ import Foundation
 public class GetRetentionPolicyAssignmentsQueryParamsArg {
     /// The type of the retention policy assignment to retrieve.
     public let type: GetRetentionPolicyAssignmentsQueryParamsArgTypeField?
+
     /// A comma-separated list of attributes to include in the
     /// response. This can be used to request fields that are
     /// not normally returned in a standard response.
@@ -13,9 +14,11 @@ public class GetRetentionPolicyAssignmentsQueryParamsArg {
     /// fields for the mini representation are returned, additional
     /// to the fields requested.
     public let fields: [String]?
+
     /// Defines the position marker at which to begin returning results. This is
     /// used when paginating using marker-based pagination.
     public let marker: String?
+
     /// The maximum number of items to return per page.
     public let limit: Int64?
 

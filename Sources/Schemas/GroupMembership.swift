@@ -15,14 +15,20 @@ public class GroupMembership: Codable {
 
     /// The unique identifier for this group membership
     public let id: String?
+
     /// `group_membership`
     public let type: GroupMembershipTypeField?
+
     public let user: UserMini?
+
     public let group: GroupMini?
+
     /// The role of the user in the group.
     public let role: GroupMembershipRoleField?
+
     /// The time this membership was created.
     public let createdAt: String?
+
     /// The time this membership was last modified.
     public let modifiedAt: String?
 
@@ -31,8 +37,8 @@ public class GroupMembership: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this group membership
     ///   - type: `group_membership`
-    ///   - user: UserMini?
-    ///   - group: GroupMini?
+    ///   - user: 
+    ///   - group: 
     ///   - role: The role of the user in the group.
     ///   - createdAt: The time this membership was created.
     ///   - modifiedAt: The time this membership was last modified.
@@ -67,4 +73,5 @@ public class GroupMembership: Codable {
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
     }
+
 }

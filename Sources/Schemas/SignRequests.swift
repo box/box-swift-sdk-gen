@@ -13,8 +13,10 @@ public class SignRequests: Codable {
     /// `limit` query parameter unless that value exceeded the maximum value
     /// allowed. The maximum value varies by API.
     public let limit: Int64?
+
     /// The marker for the start of the next page of results.
     public let nextMarker: String?
+
     /// A list of sign requests
     public let entries: [SignRequest]?
 
@@ -45,4 +47,5 @@ public class SignRequests: Codable {
         try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
+
 }

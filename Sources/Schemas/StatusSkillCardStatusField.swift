@@ -11,6 +11,7 @@ public class StatusSkillCardStatusField: Codable {
     /// messages. These can be adjusted by setting the `message`
     /// value on this object.
     public let code: StatusSkillCardStatusFieldCodeField
+
     /// A custom message that can be provided with this status.
     /// This will be shown in the web app to the end user.
     public let message: String?
@@ -40,4 +41,5 @@ public class StatusSkillCardStatusField: Codable {
         try container.encode(code, forKey: .code)
         try container.encodeIfPresent(message, forKey: .message)
     }
+
 }

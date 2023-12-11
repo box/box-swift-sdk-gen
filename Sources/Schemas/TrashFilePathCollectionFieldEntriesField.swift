@@ -11,12 +11,16 @@ public class TrashFilePathCollectionFieldEntriesField: Codable {
 
     /// `folder`
     public let type: TrashFilePathCollectionFieldEntriesFieldTypeField?
+
     /// The unique identifier that represent a folder.
     public let id: String?
+
     /// This field is null for the Trash folder
     public let sequenceId: String?
+
     /// This field is null for the Trash folder
     public let etag: String?
+
     /// The name of the Trash folder.
     public let name: String?
 
@@ -53,4 +57,5 @@ public class TrashFilePathCollectionFieldEntriesField: Codable {
         try container.encodeIfPresent(etag, forKey: .etag)
         try container.encodeIfPresent(name, forKey: .name)
     }
+
 }

@@ -37,4 +37,5 @@ public class CreateMetadataCascadePolicyApplyRequestBodyArg: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(conflictResolution, forKey: .conflictResolution)
     }
+
 }

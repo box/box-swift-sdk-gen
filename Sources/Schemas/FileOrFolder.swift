@@ -17,13 +17,16 @@ public enum FileOrFolder: Codable {
                     self = .file(content)
                     return
                 }
+
             case "folder":
                 if let content = try? Folder(from: decoder) {
                     self = .folder(content)
                     return
                 }
+
             default:
                 throw DecodingError.typeMismatch(FileOrFolder.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpeted value for key type"))
+
             }
         }
 
@@ -38,4 +41,5 @@ public enum FileOrFolder: Codable {
             try folder.encode(to: encoder)
         }
     }
+
 }

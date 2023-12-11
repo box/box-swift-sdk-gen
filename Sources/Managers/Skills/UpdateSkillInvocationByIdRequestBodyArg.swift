@@ -11,14 +11,18 @@ public class UpdateSkillInvocationByIdRequestBodyArg: Codable {
 
     /// Defines the status of this invocation. Set this to `success` when setting Skill cards.
     public let status: UpdateSkillInvocationByIdRequestBodyArgStatusField
+
     /// The metadata to set for this skill. This is a list of
     /// Box Skills cards. These cards will overwrite any existing Box
     /// skill cards on the file.
     public let metadata: UpdateSkillInvocationByIdRequestBodyArgMetadataField
+
     /// The file to assign the cards to.
     public let file: UpdateSkillInvocationByIdRequestBodyArgFileField
+
     /// The optional file version to assign the cards to.
     public let fileVersion: UpdateSkillInvocationByIdRequestBodyArgFileVersionField?
+
     /// A descriptor that defines what items are affected by this call.
     /// 
     /// Set this to the default values when setting a card to a `success`
@@ -63,4 +67,5 @@ public class UpdateSkillInvocationByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
         try container.encodeIfPresent(usage, forKey: .usage)
     }
+
 }

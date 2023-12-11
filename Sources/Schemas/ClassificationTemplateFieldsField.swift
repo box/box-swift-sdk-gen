@@ -12,15 +12,20 @@ public class ClassificationTemplateFieldsField: Codable {
 
     /// The unique ID of the field.
     public let id: String
+
     /// The array item type.
     public let type: ClassificationTemplateFieldsFieldTypeField
+
     /// Defines classifications 
     /// available in the enterprise.
     public let key: ClassificationTemplateFieldsFieldKeyField
+
     /// `Classification`
     public let displayName: ClassificationTemplateFieldsFieldDisplayNameField
+
     /// A list of classifications available in this enterprise.
     public let options: [ClassificationTemplateFieldsFieldOptionsField]
+
     /// Classifications are always visible to web and mobile users.
     public let hidden: Bool?
 
@@ -62,4 +67,5 @@ public class ClassificationTemplateFieldsField: Codable {
         try container.encode(options, forKey: .options)
         try container.encodeIfPresent(hidden, forKey: .hidden)
     }
+
 }

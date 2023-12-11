@@ -11,11 +11,14 @@ public class UpdateClassificationRequestBodyArg: Codable {
     /// The type of change to perform on the classification
     /// object.
     public let op: UpdateClassificationRequestBodyArgOpField
+
     /// Defines classifications 
     /// available in the enterprise.
     public let fieldKey: UpdateClassificationRequestBodyArgFieldKeyField
+
     /// The original label of the classification to change.
     public let enumOptionKey: String
+
     /// The details of the updated classification.
     public let data: UpdateClassificationRequestBodyArgDataField
 
@@ -50,4 +53,5 @@ public class UpdateClassificationRequestBodyArg: Codable {
         try container.encode(enumOptionKey, forKey: .enumOptionKey)
         try container.encode(data, forKey: .data)
     }
+
 }

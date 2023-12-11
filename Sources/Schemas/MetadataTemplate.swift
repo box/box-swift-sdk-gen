@@ -15,28 +15,35 @@ public class MetadataTemplate: Codable {
 
     /// The ID of the metadata template.
     public let id: String
+
     /// `metadata_template`
     public let type: MetadataTemplateTypeField
+
     /// The scope of the metadata template can either be `global` or
     /// `enterprise_*`. The `global` scope is used for templates that are
     /// available to any Box enterprise. The `enterprise_*` scope represents
     /// templates that have been created within a specific enterprise, where `*`
     /// will be the ID of that enterprise.
     public let scope: String?
+
     /// A unique identifier for the template. This identifier is unique across
     /// the `scope` of the enterprise to which the metadata template is being
     /// applied, yet is not necessarily unique across different enterprises.
     public let templateKey: String?
+
     /// The display name of the template. This can be seen in the Box web app
     /// and mobile apps.
     public let displayName: String?
+
     /// Defines if this template is visible in the Box web app UI, or if
     /// it is purely intended for usage through the API.
     public let hidden: Bool?
+
     /// An ordered list of template fields which are part of the template. Each
     /// field can be a regular text field, date field, number field, as well as a
     /// single or multi-select list.
     public let fields: [MetadataTemplateFieldsField]?
+
     /// Whether or not to include the metadata when a file or folder is copied.
     public let copyInstanceOnItemCopy: Bool?
 
@@ -95,4 +102,5 @@ public class MetadataTemplate: Codable {
         try container.encodeIfPresent(fields, forKey: .fields)
         try container.encodeIfPresent(copyInstanceOnItemCopy, forKey: .copyInstanceOnItemCopy)
     }
+
 }

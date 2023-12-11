@@ -25,4 +25,5 @@ public class ConflictErrorContextInfoField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(conflicts, forKey: .conflicts)
     }
+
 }

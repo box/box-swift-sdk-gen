@@ -9,8 +9,10 @@ public class CreateTermOfServiceUserStatusRequestBodyArg: Codable {
 
     /// The terms of service to set the status for.
     public let tos: CreateTermOfServiceUserStatusRequestBodyArgTosField
+
     /// The user to set the status for.
     public let user: CreateTermOfServiceUserStatusRequestBodyArgUserField
+
     /// Whether the user has accepted the terms.
     public let isAccepted: Bool
 
@@ -39,4 +41,5 @@ public class CreateTermOfServiceUserStatusRequestBodyArg: Codable {
         try container.encode(user, forKey: .user)
         try container.encode(isAccepted, forKey: .isAccepted)
     }
+
 }

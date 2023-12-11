@@ -11,6 +11,7 @@ public class UpdateFileMetadataByIdRequestBodyArg: Codable {
     /// The type of change to perform on the template. Some
     /// of these are hazardous as they will change existing templates.
     public let op: UpdateFileMetadataByIdRequestBodyArgOpField?
+
     /// The location in the metadata JSON object
     /// to apply the changes to, in the format of a
     /// [JSON-Pointer](https://tools.ietf.org/html/rfc6901).
@@ -19,6 +20,7 @@ public class UpdateFileMetadataByIdRequestBodyArg: Codable {
     /// of the template. The characters `~` and `/` are reserved
     /// characters and must be escaped in the key.
     public let path: String?
+
     /// The value to be set or tested.
     /// 
     /// Required for `add`, `replace`, and `test` operations. For `add`,
@@ -29,6 +31,7 @@ public class UpdateFileMetadataByIdRequestBodyArg: Codable {
     /// For `test`, the existing value at the `path` location must match
     /// the specified value.
     public let value: String?
+
     /// The location in the metadata JSON object to move or copy a value
     /// from. Required for `move` or `copy` operations and must be in the
     /// format of a [JSON-Pointer](https://tools.ietf.org/html/rfc6901).
@@ -80,4 +83,5 @@ public class UpdateFileMetadataByIdRequestBodyArg: Codable {
         try container.encodeIfPresent(value, forKey: .value)
         try container.encodeIfPresent(from, forKey: .from)
     }
+
 }

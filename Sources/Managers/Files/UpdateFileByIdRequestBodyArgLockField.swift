@@ -9,8 +9,10 @@ public class UpdateFileByIdRequestBodyArgLockField: Codable {
 
     /// The type of this object.
     public let access: UpdateFileByIdRequestBodyArgLockFieldAccessField?
+
     /// Defines the time at which the lock expires.
     public let expiresAt: String?
+
     /// Defines if the file can be downloaded while it is locked.
     public let isDownloadPrevented: Bool?
 
@@ -39,4 +41,5 @@ public class UpdateFileByIdRequestBodyArgLockField: Codable {
         try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
         try container.encodeIfPresent(isDownloadPrevented, forKey: .isDownloadPrevented)
     }
+
 }

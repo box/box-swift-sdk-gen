@@ -10,6 +10,7 @@ public class ShieldInformationBarrierBase: Codable {
 
     /// The unique identifier for the shield information barrier
     public let id: String?
+
     /// The type of the shield information barrier
     public let type: ShieldInformationBarrierBaseTypeField?
 
@@ -34,4 +35,5 @@ public class ShieldInformationBarrierBase: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

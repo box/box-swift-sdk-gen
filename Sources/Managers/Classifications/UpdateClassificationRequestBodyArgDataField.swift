@@ -9,6 +9,7 @@ public class UpdateClassificationRequestBodyArgDataField: Codable {
     /// A new label for the classification, as it will be
     /// shown in the web and mobile interfaces.
     public let key: String
+
     /// A static configuration for the classification.
     public let staticConfig: UpdateClassificationRequestBodyArgDataFieldStaticConfigField?
 
@@ -34,4 +35,5 @@ public class UpdateClassificationRequestBodyArgDataField: Codable {
         try container.encode(key, forKey: .key)
         try container.encodeIfPresent(staticConfig, forKey: .staticConfig)
     }
+
 }

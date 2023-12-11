@@ -8,6 +8,7 @@ public class CreateTaskRequestBodyArgItemField: Codable {
 
     /// The ID of the file
     public let id: String?
+
     /// `file`
     public let type: CreateTaskRequestBodyArgItemFieldTypeField?
 
@@ -32,4 +33,5 @@ public class CreateTaskRequestBodyArgItemField: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

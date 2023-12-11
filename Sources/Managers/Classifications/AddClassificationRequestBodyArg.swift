@@ -10,9 +10,11 @@ public class AddClassificationRequestBodyArg: Codable {
     /// The type of change to perform on the classification
     /// object.
     public let op: AddClassificationRequestBodyArgOpField
+
     /// Defines classifications 
     /// available in the enterprise.
     public let fieldKey: AddClassificationRequestBodyArgFieldKeyField
+
     /// The details of the classification to add.
     public let data: AddClassificationRequestBodyArgDataField
 
@@ -43,4 +45,5 @@ public class AddClassificationRequestBodyArg: Codable {
         try container.encode(fieldKey, forKey: .fieldKey)
         try container.encode(data, forKey: .data)
     }
+
 }

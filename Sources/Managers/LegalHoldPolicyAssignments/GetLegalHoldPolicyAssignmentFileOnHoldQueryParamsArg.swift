@@ -6,8 +6,10 @@ public class GetLegalHoldPolicyAssignmentFileOnHoldQueryParamsArg {
     /// 
     /// This requires `usemarker` to be set to `true`.
     public let marker: String?
+
     /// The maximum number of items to return per page.
     public let limit: Int64?
+
     /// A comma-separated list of attributes to include in the
     /// response. This can be used to request fields that are
     /// not normally returned in a standard response.

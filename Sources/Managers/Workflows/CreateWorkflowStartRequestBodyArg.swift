@@ -11,13 +11,17 @@ public class CreateWorkflowStartRequestBodyArg: Codable {
 
     /// The flow that will be triggered
     public let flow: CreateWorkflowStartRequestBodyArgFlowField
+
     /// The array of files for which the workflow should start. All files
     /// must be in the workflow's configured folder.
     public let files: [CreateWorkflowStartRequestBodyArgFilesField]
+
     /// The folder object for which the workflow is configured.
     public let folder: CreateWorkflowStartRequestBodyArgFolderField
+
     /// The type of the parameters object
     public let type: CreateWorkflowStartRequestBodyArgTypeField?
+
     /// A list of outcomes required to be configured at start time.
     public let outcomes: [CreateWorkflowStartRequestBodyArgOutcomesField]?
 
@@ -55,4 +59,5 @@ public class CreateWorkflowStartRequestBodyArg: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(outcomes, forKey: .outcomes)
     }
+
 }

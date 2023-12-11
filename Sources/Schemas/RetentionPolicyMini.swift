@@ -11,6 +11,7 @@ public class RetentionPolicyMini: RetentionPolicyBase {
 
     /// The name given to the retention policy.
     public let policyName: String?
+
     /// The length of the retention policy. This value
     /// specifies the duration in days that the retention
     /// policy will be active for after being assigned to
@@ -18,6 +19,7 @@ public class RetentionPolicyMini: RetentionPolicyBase {
     /// `indefinite`, the `retention_length` will also be
     /// `indefinite`.
     public let retentionLength: String?
+
     /// The disposition action of the retention policy.
     /// This action can be `permanently_delete`, which
     /// will cause the content retained by the policy
@@ -50,6 +52,7 @@ public class RetentionPolicyMini: RetentionPolicyBase {
         self.policyName = policyName
         self.retentionLength = retentionLength
         self.dispositionAction = dispositionAction
+
         super.init(id: id, type: type)
     }
 
@@ -58,7 +61,8 @@ public class RetentionPolicyMini: RetentionPolicyBase {
         policyName = try container.decodeIfPresent(String.self, forKey: .policyName)
         retentionLength = try container.decodeIfPresent(String.self, forKey: .retentionLength)
         dispositionAction = try container.decodeIfPresent(RetentionPolicyMiniDispositionActionField.self, forKey: .dispositionAction)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -68,4 +72,5 @@ public class RetentionPolicyMini: RetentionPolicyBase {
         try container.encodeIfPresent(dispositionAction, forKey: .dispositionAction)
         try super.encode(to: encoder)
     }
+
 }

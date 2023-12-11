@@ -39,4 +39,5 @@ public class UpdateFileByIdRequestBodyArgPermissionsField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(canDownload, forKey: .canDownload)
     }
+
 }

@@ -9,6 +9,7 @@ public class TimelineSkillCardEntriesFieldAppearsField: Codable {
     /// The time in seconds when an
     /// entry should start appearing on a timeline.
     public let start: Int64?
+
     /// The time in seconds when an
     /// entry should stop appearing on a timeline.
     public let end: Int64?
@@ -36,4 +37,5 @@ public class TimelineSkillCardEntriesFieldAppearsField: Codable {
         try container.encodeIfPresent(start, forKey: .start)
         try container.encodeIfPresent(end, forKey: .end)
     }
+
 }

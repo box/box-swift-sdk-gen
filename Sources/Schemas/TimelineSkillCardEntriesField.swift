@@ -11,9 +11,11 @@ public class TimelineSkillCardEntriesField: Codable {
     /// name for an item being placed on the timeline, for example the name
     /// of the person who was detected in a video.
     public let text: String?
+
     /// Defines a list of timestamps for when this item should appear on the
     /// timeline.
     public let appears: [TimelineSkillCardEntriesFieldAppearsField]?
+
     /// The image to show on a for an entry that appears
     /// on a timeline. This image URL is required for every entry.
     /// 
@@ -57,4 +59,5 @@ public class TimelineSkillCardEntriesField: Codable {
         try container.encodeIfPresent(appears, forKey: .appears)
         try container.encodeIfPresent(imageUrl, forKey: .imageUrl)
     }
+
 }

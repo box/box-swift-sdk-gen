@@ -10,8 +10,10 @@ public class MetadataQueryIndices: Codable {
 
     /// A collection of metadata query indices.
     public let entries: [MetadataQueryIndex]?
+
     /// The limit that was used for this request.
     public let limit: Int64?
+
     /// The marker for the start of the next page of results.
     public let nextMarker: String?
 
@@ -40,4 +42,5 @@ public class MetadataQueryIndices: Codable {
         try container.encodeIfPresent(limit, forKey: .limit)
         try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
     }
+
 }

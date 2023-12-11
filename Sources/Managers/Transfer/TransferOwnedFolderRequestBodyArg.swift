@@ -25,4 +25,5 @@ public class TransferOwnedFolderRequestBodyArg: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(ownedBy, forKey: .ownedBy)
     }
+
 }

@@ -10,6 +10,7 @@ public class AddClassificationRequestBodyArgDataField: Codable {
     /// mobile interfaces. This is the only field required to
     /// add a classification.
     public let key: String
+
     /// A static configuration for the classification.
     public let staticConfig: AddClassificationRequestBodyArgDataFieldStaticConfigField?
 
@@ -36,4 +37,5 @@ public class AddClassificationRequestBodyArgDataField: Codable {
         try container.encode(key, forKey: .key)
         try container.encodeIfPresent(staticConfig, forKey: .staticConfig)
     }
+
 }

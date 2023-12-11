@@ -12,6 +12,7 @@ public class CreateTaskAssignmentRequestBodyArgAssignToField: Codable {
     /// To specify a user by their email
     /// address use the `login` parameter.
     public let id: String?
+
     /// The email address of the user to assign to the task.
     /// To specify a user by their user ID please use the `id` parameter.
     public let login: String?
@@ -42,4 +43,5 @@ public class CreateTaskAssignmentRequestBodyArgAssignToField: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(login, forKey: .login)
     }
+
 }

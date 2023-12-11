@@ -9,6 +9,7 @@ public class CopyFileRequestBodyArg: Codable {
 
     /// The destination folder to copy the file to.
     public let parent: CopyFileRequestBodyArgParentField
+
     /// An optional new name for the copied file.
     /// 
     /// There are some restrictions to the file name. Names containing
@@ -17,6 +18,7 @@ public class CopyFileRequestBodyArg: Codable {
     /// automatically sanitized by removing the non-allowed
     /// characters.
     public let name: String?
+
     /// An optional ID of the specific file version to copy.
     public let version: String?
 
@@ -51,4 +53,5 @@ public class CopyFileRequestBodyArg: Codable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(version, forKey: .version)
     }
+
 }

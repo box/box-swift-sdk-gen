@@ -25,4 +25,5 @@ public class CreateFileUploadSessionCommitRequestBodyArg: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(parts, forKey: .parts)
     }
+
 }

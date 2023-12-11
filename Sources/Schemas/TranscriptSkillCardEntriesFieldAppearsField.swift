@@ -27,4 +27,5 @@ public class TranscriptSkillCardEntriesFieldAppearsField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(start, forKey: .start)
     }
+
 }

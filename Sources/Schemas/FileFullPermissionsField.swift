@@ -18,30 +18,41 @@ public class FileFullPermissionsField: Codable {
 
     /// Specifies if the current user can delete this item.
     public let canDelete: Bool
+
     /// Specifies if the current user can download this item.
     public let canDownload: Bool
+
     /// Specifies if the current user can invite new
     /// users to collaborate on this item, and if the user can
     /// update the role of a user already collaborated on this
     /// item.
     public let canInviteCollaborator: Bool
+
     /// Specifies if the user can rename this item.
     public let canRename: Bool
+
     /// Specifies if the user can change the access level of an
     /// existing shared link on this item.
     public let canSetShareAccess: Bool
+
     /// Specifies if the user can create a shared link for this item.
     public let canShare: Bool
+
     /// Specifies if the user can place annotations on this file.
     public let canAnnotate: Bool?
+
     /// Specifies if the user can place comments on this file.
     public let canComment: Bool?
+
     /// Specifies if the user can preview this file.
     public let canPreview: Bool?
+
     /// Specifies if the user can upload a new version of this file.
     public let canUpload: Bool?
+
     /// Specifies if the user view all annotations placed on this file
     public let canViewAnnotationsAll: Bool?
+
     /// Specifies if the user view annotations placed by themselves
     /// on this file
     public let canViewAnnotationsSelf: Bool?
@@ -112,4 +123,5 @@ public class FileFullPermissionsField: Codable {
         try container.encodeIfPresent(canViewAnnotationsAll, forKey: .canViewAnnotationsAll)
         try container.encodeIfPresent(canViewAnnotationsSelf, forKey: .canViewAnnotationsSelf)
     }
+
 }

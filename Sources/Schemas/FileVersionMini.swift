@@ -18,13 +18,15 @@ public class FileVersionMini: FileVersionBase {
     ///   - sha1: The SHA1 hash of this version of the file.
     public init(id: String, type: FileVersionBaseTypeField, sha1: String? = nil) {
         self.sha1 = sha1
+
         super.init(id: id, type: type)
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         sha1 = try container.decodeIfPresent(String.self, forKey: .sha1)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -32,4 +34,5 @@ public class FileVersionMini: FileVersionBase {
         try container.encodeIfPresent(sha1, forKey: .sha1)
         try super.encode(to: encoder)
     }
+
 }

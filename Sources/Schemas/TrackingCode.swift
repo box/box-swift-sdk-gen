@@ -12,9 +12,11 @@ public class TrackingCode: Codable {
 
     /// `tracking_code`
     public let type: TrackingCodeTypeField?
+
     /// The name of the tracking code, which must be preconfigured in
     /// the Admin Console
     public let name: String?
+
     /// The value of the tracking code
     public let value: String?
 
@@ -44,4 +46,5 @@ public class TrackingCode: Codable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(value, forKey: .value)
     }
+
 }

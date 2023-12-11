@@ -8,6 +8,7 @@ public class UpdateTermOfServiceByIdRequestBodyArg: Codable {
 
     /// Whether this terms of service is active.
     public let status: UpdateTermOfServiceByIdRequestBodyArgStatusField
+
     /// The terms of service text to display to users.
     /// 
     /// The text can be set to empty if the `status` is set to `disabled`.
@@ -36,4 +37,5 @@ public class UpdateTermOfServiceByIdRequestBodyArg: Codable {
         try container.encode(status, forKey: .status)
         try container.encode(text, forKey: .text)
     }
+
 }

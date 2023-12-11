@@ -8,13 +8,14 @@ public class RestoreWeblinkFromTrashRequestBodyArg: Codable {
 
     /// An optional new name for the web link.
     public let name: String?
+
     public let parent: RestoreWeblinkFromTrashRequestBodyArgParentField?
 
     /// Initializer for a RestoreWeblinkFromTrashRequestBodyArg.
     ///
     /// - Parameters:
     ///   - name: An optional new name for the web link.
-    ///   - parent: RestoreWeblinkFromTrashRequestBodyArgParentField?
+    ///   - parent: 
     public init(name: String? = nil, parent: RestoreWeblinkFromTrashRequestBodyArgParentField? = nil) {
         self.name = name
         self.parent = parent
@@ -31,4 +32,5 @@ public class RestoreWeblinkFromTrashRequestBodyArg: Codable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(parent, forKey: .parent)
     }
+
 }

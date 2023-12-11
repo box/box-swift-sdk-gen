@@ -52,13 +52,15 @@ public class FileRequestCopyRequest: FileRequestUpdateRequest {
     ///     This will default to the value on the existing file request.
     public init(folder: FileRequestCopyRequestFolderField, title: String? = nil, description: String? = nil, status: FileRequestUpdateRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: String? = nil) {
         self.folder = folder
+
         super.init(title: title, description: description, status: status, isEmailRequired: isEmailRequired, isDescriptionRequired: isDescriptionRequired, expiresAt: expiresAt)
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         folder = try container.decode(FileRequestCopyRequestFolderField.self, forKey: .folder)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -66,4 +68,5 @@ public class FileRequestCopyRequest: FileRequestUpdateRequest {
         try container.encode(folder, forKey: .folder)
         try super.encode(to: encoder)
     }
+
 }

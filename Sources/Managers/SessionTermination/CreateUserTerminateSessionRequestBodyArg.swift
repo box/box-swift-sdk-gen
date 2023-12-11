@@ -8,6 +8,7 @@ public class CreateUserTerminateSessionRequestBodyArg: Codable {
 
     /// A list of user IDs
     public let userIds: [String]
+
     /// A list of user logins
     public let userLogins: [String]
 
@@ -32,4 +33,5 @@ public class CreateUserTerminateSessionRequestBodyArg: Codable {
         try container.encode(userIds, forKey: .userIds)
         try container.encode(userLogins, forKey: .userLogins)
     }
+
 }
