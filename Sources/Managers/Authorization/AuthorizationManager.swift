@@ -3,9 +3,9 @@ import Foundation
 public class AuthorizationManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -22,10 +22,10 @@ public class AuthorizationManager {
     ///   - queryParams: Query parameters of getAuthorize method
     ///   - headers: Headers of getAuthorize method
     /// - Throws: The `GeneralError`.
-    public func getAuthorize(queryParams: GetAuthorizeQueryParamsArg, headers: GetAuthorizeHeadersArg = GetAuthorizeHeadersArg()) async throws {
+    public func getAuthorize(queryParams: GetAuthorizeQueryParams, headers: GetAuthorizeHeaders = GetAuthorizeHeaders()) async throws {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["response_type": Utils.Strings.toString(value: queryParams.responseType), "client_id": Utils.Strings.toString(value: queryParams.clientId), "redirect_uri": Utils.Strings.toString(value: queryParams.redirectUri), "state": Utils.Strings.toString(value: queryParams.state), "scope": Utils.Strings.toString(value: queryParams.scope)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://account.box.com/api/oauth2/authorize")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.oauth2Url)\("/authorize")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Request an Access Token using either a client-side obtained OAuth 2.0
@@ -46,7 +46,7 @@ public class AuthorizationManager {
     ///   - headers: Headers of createOauth2Token method
     /// - Returns: The `AccessToken`.
     /// - Throws: The `GeneralError`.
-    public func createOauth2Token(requestBody: PostOAuth2Token, headers: CreateOauth2TokenHeadersArg = CreateOauth2TokenHeadersArg()) async throws -> AccessToken {
+    public func createOauth2Token(requestBody: PostOAuth2Token, headers: CreateOauth2TokenHeaders = CreateOauth2TokenHeaders()) async throws -> AccessToken {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/oauth2/token")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/x-www-form-urlencoded", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try AccessToken.deserialize(from: response.data)
@@ -59,7 +59,7 @@ public class AuthorizationManager {
     ///   - headers: Headers of createOauth2TokenRefresh method
     /// - Returns: The `AccessToken`.
     /// - Throws: The `GeneralError`.
-    public func createOauth2TokenRefresh(requestBody: PostOAuth2TokenRefreshAccessToken, headers: CreateOauth2TokenRefreshHeadersArg = CreateOauth2TokenRefreshHeadersArg()) async throws -> AccessToken {
+    public func createOauth2TokenRefresh(requestBody: PostOAuth2TokenRefreshAccessToken, headers: CreateOauth2TokenRefreshHeaders = CreateOauth2TokenRefreshHeaders()) async throws -> AccessToken {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/oauth2/token#refresh")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/x-www-form-urlencoded", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try AccessToken.deserialize(from: response.data)
@@ -72,7 +72,7 @@ public class AuthorizationManager {
     ///   - requestBody: Request body of createOauth2Revoke method
     ///   - headers: Headers of createOauth2Revoke method
     /// - Throws: The `GeneralError`.
-    public func createOauth2Revoke(requestBody: PostOAuth2Revoke, headers: CreateOauth2RevokeHeadersArg = CreateOauth2RevokeHeadersArg()) async throws {
+    public func createOauth2Revoke(requestBody: PostOAuth2Revoke, headers: CreateOauth2RevokeHeaders = CreateOauth2RevokeHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/oauth2/revoke")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/x-www-form-urlencoded", responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }

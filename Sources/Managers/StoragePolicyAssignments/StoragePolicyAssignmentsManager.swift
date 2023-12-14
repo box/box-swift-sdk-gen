@@ -3,9 +3,9 @@ import Foundation
 public class StoragePolicyAssignmentsManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -17,10 +17,10 @@ public class StoragePolicyAssignmentsManager {
     ///   - headers: Headers of getStoragePolicyAssignments method
     /// - Returns: The `StoragePolicyAssignments`.
     /// - Throws: The `GeneralError`.
-    public func getStoragePolicyAssignments(queryParams: GetStoragePolicyAssignmentsQueryParamsArg, headers: GetStoragePolicyAssignmentsHeadersArg = GetStoragePolicyAssignmentsHeadersArg()) async throws -> StoragePolicyAssignments {
+    public func getStoragePolicyAssignments(queryParams: GetStoragePolicyAssignmentsQueryParams, headers: GetStoragePolicyAssignmentsHeaders = GetStoragePolicyAssignmentsHeaders()) async throws -> StoragePolicyAssignments {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "resolved_for_type": Utils.Strings.toString(value: queryParams.resolvedForType), "resolved_for_id": Utils.Strings.toString(value: queryParams.resolvedForId)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/storage_policy_assignments")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/storage_policy_assignments")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try StoragePolicyAssignments.deserialize(from: response.data)
     }
 
@@ -31,9 +31,9 @@ public class StoragePolicyAssignmentsManager {
     ///   - headers: Headers of createStoragePolicyAssignment method
     /// - Returns: The `StoragePolicyAssignment`.
     /// - Throws: The `GeneralError`.
-    public func createStoragePolicyAssignment(requestBody: CreateStoragePolicyAssignmentRequestBodyArg, headers: CreateStoragePolicyAssignmentHeadersArg = CreateStoragePolicyAssignmentHeadersArg()) async throws -> StoragePolicyAssignment {
+    public func createStoragePolicyAssignment(requestBody: CreateStoragePolicyAssignmentRequestBody, headers: CreateStoragePolicyAssignmentHeaders = CreateStoragePolicyAssignmentHeaders()) async throws -> StoragePolicyAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/storage_policy_assignments")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/storage_policy_assignments")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try StoragePolicyAssignment.deserialize(from: response.data)
     }
 
@@ -45,9 +45,9 @@ public class StoragePolicyAssignmentsManager {
     ///   - headers: Headers of getStoragePolicyAssignmentById method
     /// - Returns: The `StoragePolicyAssignment`.
     /// - Throws: The `GeneralError`.
-    public func getStoragePolicyAssignmentById(storagePolicyAssignmentId: String, headers: GetStoragePolicyAssignmentByIdHeadersArg = GetStoragePolicyAssignmentByIdHeadersArg()) async throws -> StoragePolicyAssignment {
+    public func getStoragePolicyAssignmentById(storagePolicyAssignmentId: String, headers: GetStoragePolicyAssignmentByIdHeaders = GetStoragePolicyAssignmentByIdHeaders()) async throws -> StoragePolicyAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/storage_policy_assignments/")\(storagePolicyAssignmentId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/storage_policy_assignments/")\(storagePolicyAssignmentId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try StoragePolicyAssignment.deserialize(from: response.data)
     }
 
@@ -60,9 +60,9 @@ public class StoragePolicyAssignmentsManager {
     ///   - headers: Headers of updateStoragePolicyAssignmentById method
     /// - Returns: The `StoragePolicyAssignment`.
     /// - Throws: The `GeneralError`.
-    public func updateStoragePolicyAssignmentById(storagePolicyAssignmentId: String, requestBody: UpdateStoragePolicyAssignmentByIdRequestBodyArg, headers: UpdateStoragePolicyAssignmentByIdHeadersArg = UpdateStoragePolicyAssignmentByIdHeadersArg()) async throws -> StoragePolicyAssignment {
+    public func updateStoragePolicyAssignmentById(storagePolicyAssignmentId: String, requestBody: UpdateStoragePolicyAssignmentByIdRequestBody, headers: UpdateStoragePolicyAssignmentByIdHeaders = UpdateStoragePolicyAssignmentByIdHeaders()) async throws -> StoragePolicyAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/storage_policy_assignments/")\(storagePolicyAssignmentId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/storage_policy_assignments/")\(storagePolicyAssignmentId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try StoragePolicyAssignment.deserialize(from: response.data)
     }
 
@@ -80,9 +80,9 @@ public class StoragePolicyAssignmentsManager {
     ///     Example: "932483"
     ///   - headers: Headers of deleteStoragePolicyAssignmentById method
     /// - Throws: The `GeneralError`.
-    public func deleteStoragePolicyAssignmentById(storagePolicyAssignmentId: String, headers: DeleteStoragePolicyAssignmentByIdHeadersArg = DeleteStoragePolicyAssignmentByIdHeadersArg()) async throws {
+    public func deleteStoragePolicyAssignmentById(storagePolicyAssignmentId: String, headers: DeleteStoragePolicyAssignmentByIdHeaders = DeleteStoragePolicyAssignmentByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/storage_policy_assignments/")\(storagePolicyAssignmentId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/storage_policy_assignments/")\(storagePolicyAssignmentId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

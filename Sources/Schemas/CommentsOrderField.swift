@@ -10,14 +10,14 @@ public class CommentsOrderField: Codable {
     public let by: String?
 
     /// The direction to order by, either ascending or descending
-    public let direction: CommentsOrderFieldDirectionField?
+    public let direction: CommentsOrderDirectionField?
 
     /// Initializer for a CommentsOrderField.
     ///
     /// - Parameters:
     ///   - by: The field to order by
     ///   - direction: The direction to order by, either ascending or descending
-    public init(by: String? = nil, direction: CommentsOrderFieldDirectionField? = nil) {
+    public init(by: String? = nil, direction: CommentsOrderDirectionField? = nil) {
         self.by = by
         self.direction = direction
     }
@@ -25,7 +25,7 @@ public class CommentsOrderField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         by = try container.decodeIfPresent(String.self, forKey: .by)
-        direction = try container.decodeIfPresent(CommentsOrderFieldDirectionField.self, forKey: .direction)
+        direction = try container.decodeIfPresent(CommentsOrderDirectionField.self, forKey: .direction)
     }
 
     public func encode(to encoder: Encoder) throws {

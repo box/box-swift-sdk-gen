@@ -3,9 +3,9 @@ import Foundation
 public class TermsOfServicesManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -18,10 +18,10 @@ public class TermsOfServicesManager {
     ///   - headers: Headers of getTermOfServices method
     /// - Returns: The `TermsOfServices`.
     /// - Throws: The `GeneralError`.
-    public func getTermOfServices(queryParams: GetTermOfServicesQueryParamsArg = GetTermOfServicesQueryParamsArg(), headers: GetTermOfServicesHeadersArg = GetTermOfServicesHeadersArg()) async throws -> TermsOfServices {
+    public func getTermOfServices(queryParams: GetTermOfServicesQueryParams = GetTermOfServicesQueryParams(), headers: GetTermOfServicesHeaders = GetTermOfServicesHeaders()) async throws -> TermsOfServices {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["tos_type": Utils.Strings.toString(value: queryParams.tosType)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/terms_of_services")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/terms_of_services")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try TermsOfServices.deserialize(from: response.data)
     }
 
@@ -33,9 +33,9 @@ public class TermsOfServicesManager {
     ///   - headers: Headers of createTermOfService method
     /// - Returns: The `Task`.
     /// - Throws: The `GeneralError`.
-    public func createTermOfService(requestBody: CreateTermOfServiceRequestBodyArg, headers: CreateTermOfServiceHeadersArg = CreateTermOfServiceHeadersArg()) async throws -> Task {
+    public func createTermOfService(requestBody: CreateTermOfServiceRequestBody, headers: CreateTermOfServiceHeaders = CreateTermOfServiceHeaders()) async throws -> Task {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/terms_of_services")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/terms_of_services")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Task.deserialize(from: response.data)
     }
 
@@ -47,9 +47,9 @@ public class TermsOfServicesManager {
     ///   - headers: Headers of getTermOfServiceById method
     /// - Returns: The `TermsOfService`.
     /// - Throws: The `GeneralError`.
-    public func getTermOfServiceById(termsOfServiceId: String, headers: GetTermOfServiceByIdHeadersArg = GetTermOfServiceByIdHeadersArg()) async throws -> TermsOfService {
+    public func getTermOfServiceById(termsOfServiceId: String, headers: GetTermOfServiceByIdHeaders = GetTermOfServiceByIdHeaders()) async throws -> TermsOfService {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/terms_of_services/")\(termsOfServiceId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/terms_of_services/")\(termsOfServiceId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try TermsOfService.deserialize(from: response.data)
     }
 
@@ -62,9 +62,9 @@ public class TermsOfServicesManager {
     ///   - headers: Headers of updateTermOfServiceById method
     /// - Returns: The `TermsOfService`.
     /// - Throws: The `GeneralError`.
-    public func updateTermOfServiceById(termsOfServiceId: String, requestBody: UpdateTermOfServiceByIdRequestBodyArg, headers: UpdateTermOfServiceByIdHeadersArg = UpdateTermOfServiceByIdHeadersArg()) async throws -> TermsOfService {
+    public func updateTermOfServiceById(termsOfServiceId: String, requestBody: UpdateTermOfServiceByIdRequestBody, headers: UpdateTermOfServiceByIdHeaders = UpdateTermOfServiceByIdHeaders()) async throws -> TermsOfService {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/terms_of_services/")\(termsOfServiceId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/terms_of_services/")\(termsOfServiceId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try TermsOfService.deserialize(from: response.data)
     }
 

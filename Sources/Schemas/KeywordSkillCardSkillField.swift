@@ -7,7 +7,7 @@ public class KeywordSkillCardSkillField: Codable {
     }
 
     /// `service`
-    public let type: KeywordSkillCardSkillFieldTypeField
+    public let type: KeywordSkillCardSkillTypeField
 
     /// A custom identifier that represent the service that
     /// applied this metadata.
@@ -19,14 +19,14 @@ public class KeywordSkillCardSkillField: Codable {
     ///   - type: `service`
     ///   - id: A custom identifier that represent the service that
     ///     applied this metadata.
-    public init(type: KeywordSkillCardSkillFieldTypeField, id: String) {
+    public init(type: KeywordSkillCardSkillTypeField, id: String) {
         self.type = type
         self.id = id
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decode(KeywordSkillCardSkillFieldTypeField.self, forKey: .type)
+        type = try container.decode(KeywordSkillCardSkillTypeField.self, forKey: .type)
         id = try container.decode(String.self, forKey: .id)
     }
 

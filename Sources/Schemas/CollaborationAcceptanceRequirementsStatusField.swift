@@ -7,13 +7,13 @@ public class CollaborationAcceptanceRequirementsStatusField: Codable {
         case twoFactorAuthenticationRequirement = "two_factor_authentication_requirement"
     }
 
-    public let termsOfServiceRequirement: CollaborationAcceptanceRequirementsStatusFieldTermsOfServiceRequirementField?
+    public let termsOfServiceRequirement: CollaborationAcceptanceRequirementsStatusTermsOfServiceRequirementField?
 
-    public let strongPasswordRequirement: CollaborationAcceptanceRequirementsStatusFieldStrongPasswordRequirementField?
+    public let strongPasswordRequirement: CollaborationAcceptanceRequirementsStatusStrongPasswordRequirementField?
 
-    public let twoFactorAuthenticationRequirement: CollaborationAcceptanceRequirementsStatusFieldTwoFactorAuthenticationRequirementField?
+    public let twoFactorAuthenticationRequirement: CollaborationAcceptanceRequirementsStatusTwoFactorAuthenticationRequirementField?
 
-    public init(termsOfServiceRequirement: CollaborationAcceptanceRequirementsStatusFieldTermsOfServiceRequirementField? = nil, strongPasswordRequirement: CollaborationAcceptanceRequirementsStatusFieldStrongPasswordRequirementField? = nil, twoFactorAuthenticationRequirement: CollaborationAcceptanceRequirementsStatusFieldTwoFactorAuthenticationRequirementField? = nil) {
+    public init(termsOfServiceRequirement: CollaborationAcceptanceRequirementsStatusTermsOfServiceRequirementField? = nil, strongPasswordRequirement: CollaborationAcceptanceRequirementsStatusStrongPasswordRequirementField? = nil, twoFactorAuthenticationRequirement: CollaborationAcceptanceRequirementsStatusTwoFactorAuthenticationRequirementField? = nil) {
         self.termsOfServiceRequirement = termsOfServiceRequirement
         self.strongPasswordRequirement = strongPasswordRequirement
         self.twoFactorAuthenticationRequirement = twoFactorAuthenticationRequirement
@@ -21,9 +21,9 @@ public class CollaborationAcceptanceRequirementsStatusField: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        termsOfServiceRequirement = try container.decodeIfPresent(CollaborationAcceptanceRequirementsStatusFieldTermsOfServiceRequirementField.self, forKey: .termsOfServiceRequirement)
-        strongPasswordRequirement = try container.decodeIfPresent(CollaborationAcceptanceRequirementsStatusFieldStrongPasswordRequirementField.self, forKey: .strongPasswordRequirement)
-        twoFactorAuthenticationRequirement = try container.decodeIfPresent(CollaborationAcceptanceRequirementsStatusFieldTwoFactorAuthenticationRequirementField.self, forKey: .twoFactorAuthenticationRequirement)
+        termsOfServiceRequirement = try container.decodeIfPresent(CollaborationAcceptanceRequirementsStatusTermsOfServiceRequirementField.self, forKey: .termsOfServiceRequirement)
+        strongPasswordRequirement = try container.decodeIfPresent(CollaborationAcceptanceRequirementsStatusStrongPasswordRequirementField.self, forKey: .strongPasswordRequirement)
+        twoFactorAuthenticationRequirement = try container.decodeIfPresent(CollaborationAcceptanceRequirementsStatusTwoFactorAuthenticationRequirementField.self, forKey: .twoFactorAuthenticationRequirement)
     }
 
     public func encode(to encoder: Encoder) throws {

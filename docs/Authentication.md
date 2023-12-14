@@ -305,7 +305,7 @@ For example to exchange the token for a new token with only `item_preview` scope
 <!-- sample post_oauth2_token downscope_token -->
 
 ```swift
-let resource = "https://api.box.com/2.0/files/123456789";
+let resource = "https://api.box.com/2.0/files/123456789"
 let accessToken: AccessToken = try await auth.downscopeToken(scopes: ["item_preview"], resource: resource)
 // accessToken contains the new downscoped access token
 ```

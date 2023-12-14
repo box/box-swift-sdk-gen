@@ -15,7 +15,7 @@ public class FileFullLockField: Codable {
     public let id: String?
 
     /// `lock`
-    public let type: FileFullLockFieldTypeField?
+    public let type: FileFullLockTypeField?
 
     public let createdBy: UserMini?
 
@@ -32,7 +32,7 @@ public class FileFullLockField: Codable {
     /// field identifies the type of the application that holds the lock.
     /// This is an open enum and may be extended with additional values in
     /// the future.
-    public let appType: FileFullLockFieldAppTypeField?
+    public let appType: FileFullLockAppTypeField?
 
     /// Initializer for a FileFullLockField.
     ///
@@ -47,7 +47,7 @@ public class FileFullLockField: Codable {
     ///     field identifies the type of the application that holds the lock.
     ///     This is an open enum and may be extended with additional values in
     ///     the future.
-    public init(id: String? = nil, type: FileFullLockFieldTypeField? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, expiredAt: String? = nil, isDownloadPrevented: Bool? = nil, appType: FileFullLockFieldAppTypeField? = nil) {
+    public init(id: String? = nil, type: FileFullLockTypeField? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, expiredAt: String? = nil, isDownloadPrevented: Bool? = nil, appType: FileFullLockAppTypeField? = nil) {
         self.id = id
         self.type = type
         self.createdBy = createdBy
@@ -60,12 +60,12 @@ public class FileFullLockField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(FileFullLockFieldTypeField.self, forKey: .type)
+        type = try container.decodeIfPresent(FileFullLockTypeField.self, forKey: .type)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
         expiredAt = try container.decodeIfPresent(String.self, forKey: .expiredAt)
         isDownloadPrevented = try container.decodeIfPresent(Bool.self, forKey: .isDownloadPrevented)
-        appType = try container.decodeIfPresent(FileFullLockFieldAppTypeField.self, forKey: .appType)
+        appType = try container.decodeIfPresent(FileFullLockAppTypeField.self, forKey: .appType)
     }
 
     public func encode(to encoder: Encoder) throws {

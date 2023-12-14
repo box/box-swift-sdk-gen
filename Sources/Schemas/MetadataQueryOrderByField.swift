@@ -16,7 +16,7 @@ public class MetadataQueryOrderByField: Codable {
     /// 
     /// The `ordering` direction must be the same for each item in the
     /// array.
-    public let direction: MetadataQueryOrderByFieldDirectionField?
+    public let direction: MetadataQueryOrderByDirectionField?
 
     /// Initializer for a MetadataQueryOrderByField.
     ///
@@ -29,7 +29,7 @@ public class MetadataQueryOrderByField: Codable {
     ///     
     ///     The `ordering` direction must be the same for each item in the
     ///     array.
-    public init(fieldKey: String? = nil, direction: MetadataQueryOrderByFieldDirectionField? = nil) {
+    public init(fieldKey: String? = nil, direction: MetadataQueryOrderByDirectionField? = nil) {
         self.fieldKey = fieldKey
         self.direction = direction
     }
@@ -37,7 +37,7 @@ public class MetadataQueryOrderByField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         fieldKey = try container.decodeIfPresent(String.self, forKey: .fieldKey)
-        direction = try container.decodeIfPresent(MetadataQueryOrderByFieldDirectionField.self, forKey: .direction)
+        direction = try container.decodeIfPresent(MetadataQueryOrderByDirectionField.self, forKey: .direction)
     }
 
     public func encode(to encoder: Encoder) throws {

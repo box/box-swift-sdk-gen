@@ -3,9 +3,9 @@ import Foundation
 public class TasksManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -25,9 +25,9 @@ public class TasksManager {
     ///   - headers: Headers of getFileTasks method
     /// - Returns: The `Tasks`.
     /// - Throws: The `GeneralError`.
-    public func getFileTasks(fileId: String, headers: GetFileTasksHeadersArg = GetFileTasksHeadersArg()) async throws -> Tasks {
+    public func getFileTasks(fileId: String, headers: GetFileTasksHeaders = GetFileTasksHeaders()) async throws -> Tasks {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/tasks")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/tasks")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Tasks.deserialize(from: response.data)
     }
 
@@ -39,9 +39,9 @@ public class TasksManager {
     ///   - headers: Headers of createTask method
     /// - Returns: The `Task`.
     /// - Throws: The `GeneralError`.
-    public func createTask(requestBody: CreateTaskRequestBodyArg, headers: CreateTaskHeadersArg = CreateTaskHeadersArg()) async throws -> Task {
+    public func createTask(requestBody: CreateTaskRequestBody, headers: CreateTaskHeaders = CreateTaskHeaders()) async throws -> Task {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/tasks")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/tasks")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Task.deserialize(from: response.data)
     }
 
@@ -53,9 +53,9 @@ public class TasksManager {
     ///   - headers: Headers of getTaskById method
     /// - Returns: The `Task`.
     /// - Throws: The `GeneralError`.
-    public func getTaskById(taskId: String, headers: GetTaskByIdHeadersArg = GetTaskByIdHeadersArg()) async throws -> Task {
+    public func getTaskById(taskId: String, headers: GetTaskByIdHeaders = GetTaskByIdHeaders()) async throws -> Task {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/tasks/")\(taskId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/tasks/")\(taskId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Task.deserialize(from: response.data)
     }
 
@@ -69,9 +69,9 @@ public class TasksManager {
     ///   - headers: Headers of updateTaskById method
     /// - Returns: The `Task`.
     /// - Throws: The `GeneralError`.
-    public func updateTaskById(taskId: String, requestBody: UpdateTaskByIdRequestBodyArg = UpdateTaskByIdRequestBodyArg(), headers: UpdateTaskByIdHeadersArg = UpdateTaskByIdHeadersArg()) async throws -> Task {
+    public func updateTaskById(taskId: String, requestBody: UpdateTaskByIdRequestBody = UpdateTaskByIdRequestBody(), headers: UpdateTaskByIdHeaders = UpdateTaskByIdHeaders()) async throws -> Task {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/tasks/")\(taskId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/tasks/")\(taskId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Task.deserialize(from: response.data)
     }
 
@@ -82,9 +82,9 @@ public class TasksManager {
     ///     Example: "12345"
     ///   - headers: Headers of deleteTaskById method
     /// - Throws: The `GeneralError`.
-    public func deleteTaskById(taskId: String, headers: DeleteTaskByIdHeadersArg = DeleteTaskByIdHeadersArg()) async throws {
+    public func deleteTaskById(taskId: String, headers: DeleteTaskByIdHeaders = DeleteTaskByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/tasks/")\(taskId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/tasks/")\(taskId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

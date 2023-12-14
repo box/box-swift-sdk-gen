@@ -141,7 +141,7 @@ public class BoxClient {
 
     public let integrationMappings: IntegrationMappingsManager
 
-    public init(auth: Authentication, networkSession: NetworkSession = NetworkSession()) {
+    public init(auth: Authentication, networkSession: NetworkSession = NetworkSession(baseUrls: BaseUrls())) {
         self.auth = auth
         self.networkSession = networkSession
         self.authorization = AuthorizationManager(auth: self.auth, networkSession: self.networkSession)
@@ -236,6 +236,15 @@ public class BoxClient {
     /// - Returns: The `BoxClient`.
     public func withExtraHeaders(extraHeaders: [String: String] = [:]) -> BoxClient {
         return BoxClient(auth: self.auth, networkSession: self.networkSession.withAdditionalHeaders(additionalHeaders: extraHeaders))
+    }
+
+    /// Create a new client with a custom set of base urls that will be used for every API call
+    ///
+    /// - Parameters:
+    ///   - baseUrls: Custom set of base urls that will be used for every API call
+    /// - Returns: The `BoxClient`.
+    public func withCustomBaseUrls(baseUrls: BaseUrls) -> BoxClient {
+        return BoxClient(auth: self.auth, networkSession: self.networkSession.withCustomBaseUrls(baseUrls: baseUrls))
     }
 
 }

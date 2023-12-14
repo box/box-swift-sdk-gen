@@ -3,9 +3,9 @@ import Foundation
 public class ClassificationsManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -21,9 +21,9 @@ public class ClassificationsManager {
     ///   - headers: Headers of getClassificationTemplate method
     /// - Returns: The `ClassificationTemplate`.
     /// - Throws: The `GeneralError`.
-    public func getClassificationTemplate(headers: GetClassificationTemplateHeadersArg = GetClassificationTemplateHeadersArg()) async throws -> ClassificationTemplate {
+    public func getClassificationTemplate(headers: GetClassificationTemplateHeaders = GetClassificationTemplateHeaders()) async throws -> ClassificationTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ClassificationTemplate.deserialize(from: response.data)
     }
 
@@ -39,9 +39,9 @@ public class ClassificationsManager {
     ///   - headers: Headers of addClassification method
     /// - Returns: The `ClassificationTemplate`.
     /// - Throws: The `GeneralError`.
-    public func addClassification(requestBody: [AddClassificationRequestBodyArg], headers: AddClassificationHeadersArg = AddClassificationHeadersArg()) async throws -> ClassificationTemplate {
+    public func addClassification(requestBody: [AddClassificationRequestBody], headers: AddClassificationHeaders = AddClassificationHeaders()) async throws -> ClassificationTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema#add")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema#add")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ClassificationTemplate.deserialize(from: response.data)
     }
 
@@ -57,9 +57,9 @@ public class ClassificationsManager {
     ///   - headers: Headers of updateClassification method
     /// - Returns: The `ClassificationTemplate`.
     /// - Throws: The `GeneralError`.
-    public func updateClassification(requestBody: [UpdateClassificationRequestBodyArg], headers: UpdateClassificationHeadersArg = UpdateClassificationHeadersArg()) async throws -> ClassificationTemplate {
+    public func updateClassification(requestBody: [UpdateClassificationRequestBody], headers: UpdateClassificationHeaders = UpdateClassificationHeaders()) async throws -> ClassificationTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema#update")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema#update")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ClassificationTemplate.deserialize(from: response.data)
     }
 
@@ -76,9 +76,9 @@ public class ClassificationsManager {
     ///   - headers: Headers of createClassificationTemplate method
     /// - Returns: The `ClassificationTemplate`.
     /// - Throws: The `GeneralError`.
-    public func createClassificationTemplate(requestBody: CreateClassificationTemplateRequestBodyArg, headers: CreateClassificationTemplateHeadersArg = CreateClassificationTemplateHeadersArg()) async throws -> ClassificationTemplate {
+    public func createClassificationTemplate(requestBody: CreateClassificationTemplateRequestBody, headers: CreateClassificationTemplateHeaders = CreateClassificationTemplateHeaders()) async throws -> ClassificationTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates/schema#classifications")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_templates/schema#classifications")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ClassificationTemplate.deserialize(from: response.data)
     }
 

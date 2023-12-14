@@ -7,7 +7,7 @@ public class TimelineSkillCardInvocationField: Codable {
     }
 
     /// `skill_invocation`
-    public let type: TimelineSkillCardInvocationFieldTypeField
+    public let type: TimelineSkillCardInvocationTypeField
 
     /// A custom identifier that represent the instance of
     /// the service that applied this metadata. For example,
@@ -25,14 +25,14 @@ public class TimelineSkillCardInvocationField: Codable {
     ///     if your `image-recognition-service` runs on multiple
     ///     nodes, this field can be used to identify the ID of
     ///     the node that was used to apply the metadata.
-    public init(type: TimelineSkillCardInvocationFieldTypeField, id: String) {
+    public init(type: TimelineSkillCardInvocationTypeField, id: String) {
         self.type = type
         self.id = id
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decode(TimelineSkillCardInvocationFieldTypeField.self, forKey: .type)
+        type = try container.decode(TimelineSkillCardInvocationTypeField.self, forKey: .type)
         id = try container.decode(String.self, forKey: .id)
     }
 

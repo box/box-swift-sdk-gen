@@ -3,9 +3,9 @@ import Foundation
 public class CollaborationAllowlistEntriesManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -18,10 +18,10 @@ public class CollaborationAllowlistEntriesManager {
     ///   - headers: Headers of getCollaborationWhitelistEntries method
     /// - Returns: The `CollaborationAllowlistEntries`.
     /// - Throws: The `GeneralError`.
-    public func getCollaborationWhitelistEntries(queryParams: GetCollaborationWhitelistEntriesQueryParamsArg = GetCollaborationWhitelistEntriesQueryParamsArg(), headers: GetCollaborationWhitelistEntriesHeadersArg = GetCollaborationWhitelistEntriesHeadersArg()) async throws -> CollaborationAllowlistEntries {
+    public func getCollaborationWhitelistEntries(queryParams: GetCollaborationWhitelistEntriesQueryParams = GetCollaborationWhitelistEntriesQueryParams(), headers: GetCollaborationWhitelistEntriesHeaders = GetCollaborationWhitelistEntriesHeaders()) async throws -> CollaborationAllowlistEntries {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/collaboration_whitelist_entries")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/collaboration_whitelist_entries")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try CollaborationAllowlistEntries.deserialize(from: response.data)
     }
 
@@ -33,9 +33,9 @@ public class CollaborationAllowlistEntriesManager {
     ///   - headers: Headers of createCollaborationWhitelistEntry method
     /// - Returns: The `CollaborationAllowlistEntry`.
     /// - Throws: The `GeneralError`.
-    public func createCollaborationWhitelistEntry(requestBody: CreateCollaborationWhitelistEntryRequestBodyArg, headers: CreateCollaborationWhitelistEntryHeadersArg = CreateCollaborationWhitelistEntryHeadersArg()) async throws -> CollaborationAllowlistEntry {
+    public func createCollaborationWhitelistEntry(requestBody: CreateCollaborationWhitelistEntryRequestBody, headers: CreateCollaborationWhitelistEntryHeaders = CreateCollaborationWhitelistEntryHeaders()) async throws -> CollaborationAllowlistEntry {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/collaboration_whitelist_entries")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/collaboration_whitelist_entries")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try CollaborationAllowlistEntry.deserialize(from: response.data)
     }
 
@@ -48,9 +48,9 @@ public class CollaborationAllowlistEntriesManager {
     ///   - headers: Headers of getCollaborationWhitelistEntryById method
     /// - Returns: The `CollaborationAllowlistEntry`.
     /// - Throws: The `GeneralError`.
-    public func getCollaborationWhitelistEntryById(collaborationWhitelistEntryId: String, headers: GetCollaborationWhitelistEntryByIdHeadersArg = GetCollaborationWhitelistEntryByIdHeadersArg()) async throws -> CollaborationAllowlistEntry {
+    public func getCollaborationWhitelistEntryById(collaborationWhitelistEntryId: String, headers: GetCollaborationWhitelistEntryByIdHeaders = GetCollaborationWhitelistEntryByIdHeaders()) async throws -> CollaborationAllowlistEntry {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/collaboration_whitelist_entries/")\(collaborationWhitelistEntryId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/collaboration_whitelist_entries/")\(collaborationWhitelistEntryId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try CollaborationAllowlistEntry.deserialize(from: response.data)
     }
 
@@ -62,9 +62,9 @@ public class CollaborationAllowlistEntriesManager {
     ///     Example: "213123"
     ///   - headers: Headers of deleteCollaborationWhitelistEntryById method
     /// - Throws: The `GeneralError`.
-    public func deleteCollaborationWhitelistEntryById(collaborationWhitelistEntryId: String, headers: DeleteCollaborationWhitelistEntryByIdHeadersArg = DeleteCollaborationWhitelistEntryByIdHeadersArg()) async throws {
+    public func deleteCollaborationWhitelistEntryById(collaborationWhitelistEntryId: String, headers: DeleteCollaborationWhitelistEntryByIdHeaders = DeleteCollaborationWhitelistEntryByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/collaboration_whitelist_entries/")\(collaborationWhitelistEntryId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/collaboration_whitelist_entries/")\(collaborationWhitelistEntryId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

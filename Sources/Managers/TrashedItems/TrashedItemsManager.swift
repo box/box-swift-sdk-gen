@@ -3,9 +3,9 @@ import Foundation
 public class TrashedItemsManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -25,10 +25,10 @@ public class TrashedItemsManager {
     ///   - headers: Headers of getFolderTrashItems method
     /// - Returns: The `Items`.
     /// - Throws: The `GeneralError`.
-    public func getFolderTrashItems(queryParams: GetFolderTrashItemsQueryParamsArg = GetFolderTrashItemsQueryParamsArg(), headers: GetFolderTrashItemsHeadersArg = GetFolderTrashItemsHeadersArg()) async throws -> Items {
+    public func getFolderTrashItems(queryParams: GetFolderTrashItemsQueryParams = GetFolderTrashItemsQueryParams(), headers: GetFolderTrashItemsHeaders = GetFolderTrashItemsHeaders()) async throws -> Items {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "limit": Utils.Strings.toString(value: queryParams.limit), "offset": Utils.Strings.toString(value: queryParams.offset), "usemarker": Utils.Strings.toString(value: queryParams.usemarker), "marker": Utils.Strings.toString(value: queryParams.marker), "direction": Utils.Strings.toString(value: queryParams.direction), "sort": Utils.Strings.toString(value: queryParams.sort)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/trash/items")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/trash/items")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Items.deserialize(from: response.data)
     }
 

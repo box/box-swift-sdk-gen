@@ -7,7 +7,7 @@ public class KeywordSkillCardInvocationField: Codable {
     }
 
     /// `skill_invocation`
-    public let type: KeywordSkillCardInvocationFieldTypeField
+    public let type: KeywordSkillCardInvocationTypeField
 
     /// A custom identifier that represent the instance of
     /// the service that applied this metadata. For example,
@@ -25,14 +25,14 @@ public class KeywordSkillCardInvocationField: Codable {
     ///     if your `image-recognition-service` runs on multiple
     ///     nodes, this field can be used to identify the ID of
     ///     the node that was used to apply the metadata.
-    public init(type: KeywordSkillCardInvocationFieldTypeField, id: String) {
+    public init(type: KeywordSkillCardInvocationTypeField, id: String) {
         self.type = type
         self.id = id
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decode(KeywordSkillCardInvocationFieldTypeField.self, forKey: .type)
+        type = try container.decode(KeywordSkillCardInvocationTypeField.self, forKey: .type)
         id = try container.decode(String.self, forKey: .id)
     }
 

@@ -3,9 +3,9 @@ import Foundation
 public class MetadataTemplatesManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -18,10 +18,10 @@ public class MetadataTemplatesManager {
     ///   - headers: Headers of getMetadataTemplatesByInstanceId method
     /// - Returns: The `MetadataTemplates`.
     /// - Throws: The `GeneralError`.
-    public func getMetadataTemplatesByInstanceId(queryParams: GetMetadataTemplatesByInstanceIdQueryParamsArg, headers: GetMetadataTemplatesByInstanceIdHeadersArg = GetMetadataTemplatesByInstanceIdHeadersArg()) async throws -> MetadataTemplates {
+    public func getMetadataTemplatesByInstanceId(queryParams: GetMetadataTemplatesByInstanceIdQueryParams, headers: GetMetadataTemplatesByInstanceIdHeaders = GetMetadataTemplatesByInstanceIdHeaders()) async throws -> MetadataTemplates {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["metadata_instance_id": Utils.Strings.toString(value: queryParams.metadataInstanceId)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_templates")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataTemplates.deserialize(from: response.data)
     }
 
@@ -38,9 +38,9 @@ public class MetadataTemplatesManager {
     ///   - headers: Headers of getMetadataTemplate method
     /// - Returns: The `MetadataTemplate`.
     /// - Throws: The `GeneralError`.
-    public func getMetadataTemplate(scope: GetMetadataTemplateScopeArg, templateKey: String, headers: GetMetadataTemplateHeadersArg = GetMetadataTemplateHeadersArg()) async throws -> MetadataTemplate {
+    public func getMetadataTemplate(scope: GetMetadataTemplateScope, templateKey: String, headers: GetMetadataTemplateHeaders = GetMetadataTemplateHeaders()) async throws -> MetadataTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates/")\(scope)\("/")\(templateKey)\("/schema")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_templates/")\(scope)\("/")\(templateKey)\("/schema")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataTemplate.deserialize(from: response.data)
     }
 
@@ -61,9 +61,9 @@ public class MetadataTemplatesManager {
     ///   - headers: Headers of updateMetadataTemplate method
     /// - Returns: The `MetadataTemplate`.
     /// - Throws: The `GeneralError`.
-    public func updateMetadataTemplate(scope: UpdateMetadataTemplateScopeArg, templateKey: String, requestBody: [UpdateMetadataTemplateRequestBodyArg], headers: UpdateMetadataTemplateHeadersArg = UpdateMetadataTemplateHeadersArg()) async throws -> MetadataTemplate {
+    public func updateMetadataTemplate(scope: UpdateMetadataTemplateScope, templateKey: String, requestBody: [UpdateMetadataTemplateRequestBody], headers: UpdateMetadataTemplateHeaders = UpdateMetadataTemplateHeaders()) async throws -> MetadataTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates/")\(scope)\("/")\(templateKey)\("/schema")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_templates/")\(scope)\("/")\(templateKey)\("/schema")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataTemplate.deserialize(from: response.data)
     }
 
@@ -77,9 +77,9 @@ public class MetadataTemplatesManager {
     ///     Example: "properties"
     ///   - headers: Headers of deleteMetadataTemplate method
     /// - Throws: The `GeneralError`.
-    public func deleteMetadataTemplate(scope: DeleteMetadataTemplateScopeArg, templateKey: String, headers: DeleteMetadataTemplateHeadersArg = DeleteMetadataTemplateHeadersArg()) async throws {
+    public func deleteMetadataTemplate(scope: DeleteMetadataTemplateScope, templateKey: String, headers: DeleteMetadataTemplateHeaders = DeleteMetadataTemplateHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates/")\(scope)\("/")\(templateKey)\("/schema")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_templates/")\(scope)\("/")\(templateKey)\("/schema")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Retrieves a metadata template by its ID.
@@ -90,9 +90,9 @@ public class MetadataTemplatesManager {
     ///   - headers: Headers of getMetadataTemplateById method
     /// - Returns: The `MetadataTemplate`.
     /// - Throws: The `GeneralError`.
-    public func getMetadataTemplateById(templateId: String, headers: GetMetadataTemplateByIdHeadersArg = GetMetadataTemplateByIdHeadersArg()) async throws -> MetadataTemplate {
+    public func getMetadataTemplateById(templateId: String, headers: GetMetadataTemplateByIdHeaders = GetMetadataTemplateByIdHeaders()) async throws -> MetadataTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates/")\(templateId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_templates/")\(templateId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataTemplate.deserialize(from: response.data)
     }
 
@@ -104,10 +104,10 @@ public class MetadataTemplatesManager {
     ///   - headers: Headers of getGlobalMetadataTemplates method
     /// - Returns: The `MetadataTemplates`.
     /// - Throws: The `GeneralError`.
-    public func getGlobalMetadataTemplates(queryParams: GetGlobalMetadataTemplatesQueryParamsArg = GetGlobalMetadataTemplatesQueryParamsArg(), headers: GetGlobalMetadataTemplatesHeadersArg = GetGlobalMetadataTemplatesHeadersArg()) async throws -> MetadataTemplates {
+    public func getGlobalMetadataTemplates(queryParams: GetGlobalMetadataTemplatesQueryParams = GetGlobalMetadataTemplatesQueryParams(), headers: GetGlobalMetadataTemplatesHeaders = GetGlobalMetadataTemplatesHeaders()) async throws -> MetadataTemplates {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates/global")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_templates/global")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataTemplates.deserialize(from: response.data)
     }
 
@@ -119,10 +119,10 @@ public class MetadataTemplatesManager {
     ///   - headers: Headers of getEnterpriseMetadataTemplates method
     /// - Returns: The `MetadataTemplates`.
     /// - Throws: The `GeneralError`.
-    public func getEnterpriseMetadataTemplates(queryParams: GetEnterpriseMetadataTemplatesQueryParamsArg = GetEnterpriseMetadataTemplatesQueryParamsArg(), headers: GetEnterpriseMetadataTemplatesHeadersArg = GetEnterpriseMetadataTemplatesHeadersArg()) async throws -> MetadataTemplates {
+    public func getEnterpriseMetadataTemplates(queryParams: GetEnterpriseMetadataTemplatesQueryParams = GetEnterpriseMetadataTemplatesQueryParams(), headers: GetEnterpriseMetadataTemplatesHeaders = GetEnterpriseMetadataTemplatesHeaders()) async throws -> MetadataTemplates {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates/enterprise")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_templates/enterprise")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataTemplates.deserialize(from: response.data)
     }
 
@@ -134,9 +134,9 @@ public class MetadataTemplatesManager {
     ///   - headers: Headers of createMetadataTemplate method
     /// - Returns: The `MetadataTemplate`.
     /// - Throws: The `GeneralError`.
-    public func createMetadataTemplate(requestBody: CreateMetadataTemplateRequestBodyArg, headers: CreateMetadataTemplateHeadersArg = CreateMetadataTemplateHeadersArg()) async throws -> MetadataTemplate {
+    public func createMetadataTemplate(requestBody: CreateMetadataTemplateRequestBody, headers: CreateMetadataTemplateHeaders = CreateMetadataTemplateHeaders()) async throws -> MetadataTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/metadata_templates/schema")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_templates/schema")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataTemplate.deserialize(from: response.data)
     }
 

@@ -3,9 +3,9 @@ import Foundation
 public class FolderClassificationsManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -32,9 +32,9 @@ public class FolderClassificationsManager {
     ///   - headers: Headers of getClassificationOnFolder method
     /// - Returns: The `Classification`.
     /// - Throws: The `GeneralError`.
-    public func getClassificationOnFolder(folderId: String, headers: GetClassificationOnFolderHeadersArg = GetClassificationOnFolderHeadersArg()) async throws -> Classification {
+    public func getClassificationOnFolder(folderId: String, headers: GetClassificationOnFolderHeaders = GetClassificationOnFolderHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Classification.deserialize(from: response.data)
     }
 
@@ -61,9 +61,9 @@ public class FolderClassificationsManager {
     ///   - headers: Headers of addClassificationToFolder method
     /// - Returns: The `Classification`.
     /// - Throws: The `GeneralError`.
-    public func addClassificationToFolder(folderId: String, requestBody: AddClassificationToFolderRequestBodyArg = AddClassificationToFolderRequestBodyArg(), headers: AddClassificationToFolderHeadersArg = AddClassificationToFolderHeadersArg()) async throws -> Classification {
+    public func addClassificationToFolder(folderId: String, requestBody: AddClassificationToFolderRequestBody = AddClassificationToFolderRequestBody(), headers: AddClassificationToFolderHeaders = AddClassificationToFolderHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Classification.deserialize(from: response.data)
     }
 
@@ -89,9 +89,9 @@ public class FolderClassificationsManager {
     ///   - headers: Headers of updateClassificationOnFolder method
     /// - Returns: The `Classification`.
     /// - Throws: The `GeneralError`.
-    public func updateClassificationOnFolder(folderId: String, requestBody: [UpdateClassificationOnFolderRequestBodyArg], headers: UpdateClassificationOnFolderHeadersArg = UpdateClassificationOnFolderHeadersArg()) async throws -> Classification {
+    public func updateClassificationOnFolder(folderId: String, requestBody: [UpdateClassificationOnFolderRequestBody], headers: UpdateClassificationOnFolderHeaders = UpdateClassificationOnFolderHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Classification.deserialize(from: response.data)
     }
 
@@ -115,9 +115,9 @@ public class FolderClassificationsManager {
     ///     Example: "12345"
     ///   - headers: Headers of deleteClassificationFromFolder method
     /// - Throws: The `GeneralError`.
-    public func deleteClassificationFromFolder(folderId: String, headers: DeleteClassificationFromFolderHeadersArg = DeleteClassificationFromFolderHeadersArg()) async throws {
+    public func deleteClassificationFromFolder(folderId: String, headers: DeleteClassificationFromFolderHeaders = DeleteClassificationFromFolderHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

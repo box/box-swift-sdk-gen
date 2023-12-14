@@ -14,11 +14,11 @@ public class WorkflowFlowsField: Codable {
     public let id: String?
 
     /// The flow's resource type
-    public let type: WorkflowFlowsFieldTypeField?
+    public let type: WorkflowFlowsTypeField?
 
-    public let trigger: WorkflowFlowsFieldTriggerField?
+    public let trigger: WorkflowFlowsTriggerField?
 
-    public let outcomes: [WorkflowFlowsFieldOutcomesField]?
+    public let outcomes: [WorkflowFlowsOutcomesField]?
 
     /// When this flow was created
     public let createdAt: String?
@@ -34,7 +34,7 @@ public class WorkflowFlowsField: Codable {
     ///   - outcomes: 
     ///   - createdAt: When this flow was created
     ///   - createdBy: 
-    public init(id: String? = nil, type: WorkflowFlowsFieldTypeField? = nil, trigger: WorkflowFlowsFieldTriggerField? = nil, outcomes: [WorkflowFlowsFieldOutcomesField]? = nil, createdAt: String? = nil, createdBy: UserBase? = nil) {
+    public init(id: String? = nil, type: WorkflowFlowsTypeField? = nil, trigger: WorkflowFlowsTriggerField? = nil, outcomes: [WorkflowFlowsOutcomesField]? = nil, createdAt: String? = nil, createdBy: UserBase? = nil) {
         self.id = id
         self.type = type
         self.trigger = trigger
@@ -46,9 +46,9 @@ public class WorkflowFlowsField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(WorkflowFlowsFieldTypeField.self, forKey: .type)
-        trigger = try container.decodeIfPresent(WorkflowFlowsFieldTriggerField.self, forKey: .trigger)
-        outcomes = try container.decodeIfPresent([WorkflowFlowsFieldOutcomesField].self, forKey: .outcomes)
+        type = try container.decodeIfPresent(WorkflowFlowsTypeField.self, forKey: .type)
+        trigger = try container.decodeIfPresent(WorkflowFlowsTriggerField.self, forKey: .trigger)
+        outcomes = try container.decodeIfPresent([WorkflowFlowsOutcomesField].self, forKey: .outcomes)
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
     }

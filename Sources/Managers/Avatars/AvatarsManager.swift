@@ -3,9 +3,9 @@ import Foundation
 public class AvatarsManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -19,9 +19,9 @@ public class AvatarsManager {
     ///   - headers: Headers of getUserAvatar method
     /// - Returns: The `URL`.
     /// - Throws: The `GeneralError`.
-    public func getUserAvatar(userId: String, downloadDestinationURL: URL, headers: GetUserAvatarHeadersArg = GetUserAvatarHeadersArg()) async throws -> URL {
+    public func getUserAvatar(userId: String, downloadDestinationURL: URL, headers: GetUserAvatarHeaders = GetUserAvatarHeaders()) async throws -> URL {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)\("/avatar")", options: FetchOptions(method: "GET", headers: headersMap, downloadDestinationURL: downloadDestinationURL, responseFormat: "binary", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)\("/avatar")", options: FetchOptions(method: "GET", headers: headersMap, downloadDestinationURL: downloadDestinationURL, responseFormat: "binary", auth: self.auth, networkSession: self.networkSession))
         return response.downloadDestinationURL!
     }
 
@@ -34,9 +34,9 @@ public class AvatarsManager {
     ///   - headers: Headers of createUserAvatar method
     /// - Returns: The `UserAvatar`.
     /// - Throws: The `GeneralError`.
-    public func createUserAvatar(userId: String, requestBody: CreateUserAvatarRequestBodyArg, headers: CreateUserAvatarHeadersArg = CreateUserAvatarHeadersArg()) async throws -> UserAvatar {
+    public func createUserAvatar(userId: String, requestBody: CreateUserAvatarRequestBody, headers: CreateUserAvatarHeaders = CreateUserAvatarHeaders()) async throws -> UserAvatar {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)\("/avatar")", options: FetchOptions(method: "POST", headers: headersMap, multipartData: [MultipartItem(partName: "pic", fileStream: requestBody.pic, fileName: requestBody.picFileName, contentType: requestBody.picContentType)], contentType: "multipart/form-data", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)\("/avatar")", options: FetchOptions(method: "POST", headers: headersMap, multipartData: [MultipartItem(partName: "pic", fileStream: requestBody.pic, fileName: requestBody.picFileName, contentType: requestBody.picContentType)], contentType: "multipart/form-data", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UserAvatar.deserialize(from: response.data)
     }
 
@@ -48,9 +48,9 @@ public class AvatarsManager {
     ///     Example: "12345"
     ///   - headers: Headers of deleteUserAvatar method
     /// - Throws: The `GeneralError`.
-    public func deleteUserAvatar(userId: String, headers: DeleteUserAvatarHeadersArg = DeleteUserAvatarHeadersArg()) async throws {
+    public func deleteUserAvatar(userId: String, headers: DeleteUserAvatarHeaders = DeleteUserAvatarHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)\("/avatar")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)\("/avatar")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

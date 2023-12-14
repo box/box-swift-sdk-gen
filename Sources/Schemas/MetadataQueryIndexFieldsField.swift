@@ -10,14 +10,14 @@ public class MetadataQueryIndexFieldsField: Codable {
     public let key: String?
 
     /// The sort direction of the field.
-    public let sortDirection: MetadataQueryIndexFieldsFieldSortDirectionField?
+    public let sortDirection: MetadataQueryIndexFieldsSortDirectionField?
 
     /// Initializer for a MetadataQueryIndexFieldsField.
     ///
     /// - Parameters:
     ///   - key: The metadata template field key.
     ///   - sortDirection: The sort direction of the field.
-    public init(key: String? = nil, sortDirection: MetadataQueryIndexFieldsFieldSortDirectionField? = nil) {
+    public init(key: String? = nil, sortDirection: MetadataQueryIndexFieldsSortDirectionField? = nil) {
         self.key = key
         self.sortDirection = sortDirection
     }
@@ -25,7 +25,7 @@ public class MetadataQueryIndexFieldsField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         key = try container.decodeIfPresent(String.self, forKey: .key)
-        sortDirection = try container.decodeIfPresent(MetadataQueryIndexFieldsFieldSortDirectionField.self, forKey: .sortDirection)
+        sortDirection = try container.decodeIfPresent(MetadataQueryIndexFieldsSortDirectionField.self, forKey: .sortDirection)
     }
 
     public func encode(to encoder: Encoder) throws {

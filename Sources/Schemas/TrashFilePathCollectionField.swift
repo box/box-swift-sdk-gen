@@ -10,14 +10,14 @@ public class TrashFilePathCollectionField: Codable {
     public let totalCount: Int64
 
     /// Array of folders for this item's path collection
-    public let entries: [TrashFilePathCollectionFieldEntriesField]
+    public let entries: [TrashFilePathCollectionEntriesField]
 
     /// Initializer for a TrashFilePathCollectionField.
     ///
     /// - Parameters:
     ///   - totalCount: The number of folders in this list.
     ///   - entries: Array of folders for this item's path collection
-    public init(totalCount: Int64, entries: [TrashFilePathCollectionFieldEntriesField]) {
+    public init(totalCount: Int64, entries: [TrashFilePathCollectionEntriesField]) {
         self.totalCount = totalCount
         self.entries = entries
     }
@@ -25,7 +25,7 @@ public class TrashFilePathCollectionField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         totalCount = try container.decode(Int64.self, forKey: .totalCount)
-        entries = try container.decode([TrashFilePathCollectionFieldEntriesField].self, forKey: .entries)
+        entries = try container.decode([TrashFilePathCollectionEntriesField].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {

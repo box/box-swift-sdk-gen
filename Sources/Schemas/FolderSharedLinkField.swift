@@ -28,14 +28,14 @@ public class FolderSharedLinkField: Codable {
     /// The effective access level for the shared link. This can be a more
     /// restrictive access level than the value in the `access` field when the
     /// enterprise settings restrict the allowed access levels.
-    public let effectiveAccess: FolderSharedLinkFieldEffectiveAccessField
+    public let effectiveAccess: FolderSharedLinkEffectiveAccessField
 
     /// The effective permissions for this shared link.
     /// These result in the more restrictive combination of
     /// the share link permissions and the item permissions set
     /// by the administrator, the owner, and any ancestor item
     /// such as a folder.
-    public let effectivePermission: FolderSharedLinkFieldEffectivePermissionField
+    public let effectivePermission: FolderSharedLinkEffectivePermissionField
 
     /// Defines if the shared link requires a password to access the item.
     public let isPasswordEnabled: Bool
@@ -69,7 +69,7 @@ public class FolderSharedLinkField: Codable {
     /// 
     /// If this field is omitted when creating the shared link, the access level
     /// will be set to the default access level specified by the enterprise admin.
-    public let access: FolderSharedLinkFieldAccessField?
+    public let access: FolderSharedLinkAccessField?
 
     /// The date and time when this link will be unshared. This field can only be
     /// set by users with paid accounts.
@@ -78,7 +78,7 @@ public class FolderSharedLinkField: Codable {
     /// Defines if this link allows a user to preview, edit, and download an item.
     /// These permissions refer to the shared link only and
     /// do not supersede permissions applied to the item itself.
-    public let permissions: FolderSharedLinkFieldPermissionsField?
+    public let permissions: FolderSharedLinkPermissionsField?
 
     /// Initializer for a FolderSharedLinkField.
     ///
@@ -123,7 +123,7 @@ public class FolderSharedLinkField: Codable {
     ///   - permissions: Defines if this link allows a user to preview, edit, and download an item.
     ///     These permissions refer to the shared link only and
     ///     do not supersede permissions applied to the item itself.
-    public init(url: String, effectiveAccess: FolderSharedLinkFieldEffectiveAccessField, effectivePermission: FolderSharedLinkFieldEffectivePermissionField, isPasswordEnabled: Bool, downloadCount: Int64, previewCount: Int64, downloadUrl: String? = nil, vanityUrl: String? = nil, vanityName: String? = nil, access: FolderSharedLinkFieldAccessField? = nil, unsharedAt: String? = nil, permissions: FolderSharedLinkFieldPermissionsField? = nil) {
+    public init(url: String, effectiveAccess: FolderSharedLinkEffectiveAccessField, effectivePermission: FolderSharedLinkEffectivePermissionField, isPasswordEnabled: Bool, downloadCount: Int64, previewCount: Int64, downloadUrl: String? = nil, vanityUrl: String? = nil, vanityName: String? = nil, access: FolderSharedLinkAccessField? = nil, unsharedAt: String? = nil, permissions: FolderSharedLinkPermissionsField? = nil) {
         self.url = url
         self.effectiveAccess = effectiveAccess
         self.effectivePermission = effectivePermission
@@ -141,17 +141,17 @@ public class FolderSharedLinkField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         url = try container.decode(String.self, forKey: .url)
-        effectiveAccess = try container.decode(FolderSharedLinkFieldEffectiveAccessField.self, forKey: .effectiveAccess)
-        effectivePermission = try container.decode(FolderSharedLinkFieldEffectivePermissionField.self, forKey: .effectivePermission)
+        effectiveAccess = try container.decode(FolderSharedLinkEffectiveAccessField.self, forKey: .effectiveAccess)
+        effectivePermission = try container.decode(FolderSharedLinkEffectivePermissionField.self, forKey: .effectivePermission)
         isPasswordEnabled = try container.decode(Bool.self, forKey: .isPasswordEnabled)
         downloadCount = try container.decode(Int64.self, forKey: .downloadCount)
         previewCount = try container.decode(Int64.self, forKey: .previewCount)
         downloadUrl = try container.decodeIfPresent(String.self, forKey: .downloadUrl)
         vanityUrl = try container.decodeIfPresent(String.self, forKey: .vanityUrl)
         vanityName = try container.decodeIfPresent(String.self, forKey: .vanityName)
-        access = try container.decodeIfPresent(FolderSharedLinkFieldAccessField.self, forKey: .access)
+        access = try container.decodeIfPresent(FolderSharedLinkAccessField.self, forKey: .access)
         unsharedAt = try container.decodeIfPresent(String.self, forKey: .unsharedAt)
-        permissions = try container.decodeIfPresent(FolderSharedLinkFieldPermissionsField.self, forKey: .permissions)
+        permissions = try container.decodeIfPresent(FolderSharedLinkPermissionsField.self, forKey: .permissions)
     }
 
     public func encode(to encoder: Encoder) throws {

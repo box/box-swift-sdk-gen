@@ -7,7 +7,7 @@ public class MetadataCascadePolicyParentField: Codable {
     }
 
     /// `folder`
-    public let type: MetadataCascadePolicyParentFieldTypeField?
+    public let type: MetadataCascadePolicyParentTypeField?
 
     /// The ID of the folder the policy is applied to.
     public let id: String?
@@ -17,14 +17,14 @@ public class MetadataCascadePolicyParentField: Codable {
     /// - Parameters:
     ///   - type: `folder`
     ///   - id: The ID of the folder the policy is applied to.
-    public init(type: MetadataCascadePolicyParentFieldTypeField? = nil, id: String? = nil) {
+    public init(type: MetadataCascadePolicyParentTypeField? = nil, id: String? = nil) {
         self.type = type
         self.id = id
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decodeIfPresent(MetadataCascadePolicyParentFieldTypeField.self, forKey: .type)
+        type = try container.decodeIfPresent(MetadataCascadePolicyParentTypeField.self, forKey: .type)
         id = try container.decodeIfPresent(String.self, forKey: .id)
     }
 

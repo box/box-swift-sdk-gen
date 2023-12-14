@@ -7,7 +7,7 @@ public class MetadataCascadePolicyOwnerEnterpriseField: Codable {
     }
 
     /// `enterprise`
-    public let type: MetadataCascadePolicyOwnerEnterpriseFieldTypeField?
+    public let type: MetadataCascadePolicyOwnerEnterpriseTypeField?
 
     /// The ID of the enterprise that owns the policy.
     public let id: String?
@@ -17,14 +17,14 @@ public class MetadataCascadePolicyOwnerEnterpriseField: Codable {
     /// - Parameters:
     ///   - type: `enterprise`
     ///   - id: The ID of the enterprise that owns the policy.
-    public init(type: MetadataCascadePolicyOwnerEnterpriseFieldTypeField? = nil, id: String? = nil) {
+    public init(type: MetadataCascadePolicyOwnerEnterpriseTypeField? = nil, id: String? = nil) {
         self.type = type
         self.id = id
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decodeIfPresent(MetadataCascadePolicyOwnerEnterpriseFieldTypeField.self, forKey: .type)
+        type = try container.decodeIfPresent(MetadataCascadePolicyOwnerEnterpriseTypeField.self, forKey: .type)
         id = try container.decodeIfPresent(String.self, forKey: .id)
     }
 

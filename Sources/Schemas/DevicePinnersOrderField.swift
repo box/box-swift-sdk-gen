@@ -7,25 +7,25 @@ public class DevicePinnersOrderField: Codable {
     }
 
     /// The field that is ordered by
-    public let by: DevicePinnersOrderFieldByField?
+    public let by: DevicePinnersOrderByField?
 
     /// The direction to order by, either ascending or descending
-    public let direction: DevicePinnersOrderFieldDirectionField?
+    public let direction: DevicePinnersOrderDirectionField?
 
     /// Initializer for a DevicePinnersOrderField.
     ///
     /// - Parameters:
     ///   - by: The field that is ordered by
     ///   - direction: The direction to order by, either ascending or descending
-    public init(by: DevicePinnersOrderFieldByField? = nil, direction: DevicePinnersOrderFieldDirectionField? = nil) {
+    public init(by: DevicePinnersOrderByField? = nil, direction: DevicePinnersOrderDirectionField? = nil) {
         self.by = by
         self.direction = direction
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        by = try container.decodeIfPresent(DevicePinnersOrderFieldByField.self, forKey: .by)
-        direction = try container.decodeIfPresent(DevicePinnersOrderFieldDirectionField.self, forKey: .direction)
+        by = try container.decodeIfPresent(DevicePinnersOrderByField.self, forKey: .by)
+        direction = try container.decodeIfPresent(DevicePinnersOrderDirectionField.self, forKey: .direction)
     }
 
     public func encode(to encoder: Encoder) throws {

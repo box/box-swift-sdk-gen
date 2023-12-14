@@ -11,7 +11,7 @@ public class CollaborationAllowlistExemptTargetEnterpriseField: Codable {
     public let id: String?
 
     /// `enterprise`
-    public let type: CollaborationAllowlistExemptTargetEnterpriseFieldTypeField?
+    public let type: CollaborationAllowlistExemptTargetEnterpriseTypeField?
 
     /// The name of the enterprise
     public let name: String?
@@ -22,7 +22,7 @@ public class CollaborationAllowlistExemptTargetEnterpriseField: Codable {
     ///   - id: The unique identifier for this enterprise.
     ///   - type: `enterprise`
     ///   - name: The name of the enterprise
-    public init(id: String? = nil, type: CollaborationAllowlistExemptTargetEnterpriseFieldTypeField? = nil, name: String? = nil) {
+    public init(id: String? = nil, type: CollaborationAllowlistExemptTargetEnterpriseTypeField? = nil, name: String? = nil) {
         self.id = id
         self.type = type
         self.name = name
@@ -31,7 +31,7 @@ public class CollaborationAllowlistExemptTargetEnterpriseField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(CollaborationAllowlistExemptTargetEnterpriseFieldTypeField.self, forKey: .type)
+        type = try container.decodeIfPresent(CollaborationAllowlistExemptTargetEnterpriseTypeField.self, forKey: .type)
         name = try container.decodeIfPresent(String.self, forKey: .name)
     }
 

@@ -3,9 +3,9 @@ import Foundation
 public class UserCollaborationsManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -19,10 +19,10 @@ public class UserCollaborationsManager {
     ///   - headers: Headers of getCollaborationById method
     /// - Returns: The `Collaboration`.
     /// - Throws: The `GeneralError`.
-    public func getCollaborationById(collaborationId: String, queryParams: GetCollaborationByIdQueryParamsArg = GetCollaborationByIdQueryParamsArg(), headers: GetCollaborationByIdHeadersArg = GetCollaborationByIdHeadersArg()) async throws -> Collaboration {
+    public func getCollaborationById(collaborationId: String, queryParams: GetCollaborationByIdQueryParams = GetCollaborationByIdQueryParams(), headers: GetCollaborationByIdHeaders = GetCollaborationByIdHeaders()) async throws -> Collaboration {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/collaborations/")\(collaborationId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/collaborations/")\(collaborationId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Collaboration.deserialize(from: response.data)
     }
 
@@ -37,9 +37,9 @@ public class UserCollaborationsManager {
     ///   - headers: Headers of updateCollaborationById method
     /// - Returns: The `Collaboration`.
     /// - Throws: The `GeneralError`.
-    public func updateCollaborationById(collaborationId: String, requestBody: UpdateCollaborationByIdRequestBodyArg, headers: UpdateCollaborationByIdHeadersArg = UpdateCollaborationByIdHeadersArg()) async throws -> Collaboration {
+    public func updateCollaborationById(collaborationId: String, requestBody: UpdateCollaborationByIdRequestBody, headers: UpdateCollaborationByIdHeaders = UpdateCollaborationByIdHeaders()) async throws -> Collaboration {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/collaborations/")\(collaborationId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/collaborations/")\(collaborationId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Collaboration.deserialize(from: response.data)
     }
 
@@ -50,9 +50,9 @@ public class UserCollaborationsManager {
     ///     Example: "1234"
     ///   - headers: Headers of deleteCollaborationById method
     /// - Throws: The `GeneralError`.
-    public func deleteCollaborationById(collaborationId: String, headers: DeleteCollaborationByIdHeadersArg = DeleteCollaborationByIdHeadersArg()) async throws {
+    public func deleteCollaborationById(collaborationId: String, headers: DeleteCollaborationByIdHeaders = DeleteCollaborationByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/collaborations/")\(collaborationId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/collaborations/")\(collaborationId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Adds a collaboration for a single user or a single group to a file
@@ -76,10 +76,10 @@ public class UserCollaborationsManager {
     ///   - headers: Headers of createCollaboration method
     /// - Returns: The `Collaboration`.
     /// - Throws: The `GeneralError`.
-    public func createCollaboration(requestBody: CreateCollaborationRequestBodyArg, queryParams: CreateCollaborationQueryParamsArg = CreateCollaborationQueryParamsArg(), headers: CreateCollaborationHeadersArg = CreateCollaborationHeadersArg()) async throws -> Collaboration {
+    public func createCollaboration(requestBody: CreateCollaborationRequestBody, queryParams: CreateCollaborationQueryParams = CreateCollaborationQueryParams(), headers: CreateCollaborationHeaders = CreateCollaborationHeaders()) async throws -> Collaboration {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "notify": Utils.Strings.toString(value: queryParams.notify)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/collaborations")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/collaborations")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Collaboration.deserialize(from: response.data)
     }
 

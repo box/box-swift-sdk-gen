@@ -3,9 +3,9 @@ import Foundation
 public class ZipDownloadsManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -32,9 +32,9 @@ public class ZipDownloadsManager {
     ///   - headers: Headers of createZipDownload method
     /// - Returns: The `ZipDownload`.
     /// - Throws: The `GeneralError`.
-    public func createZipDownload(requestBody: ZipDownloadRequest, headers: CreateZipDownloadHeadersArg = CreateZipDownloadHeadersArg()) async throws -> ZipDownload {
+    public func createZipDownload(requestBody: ZipDownloadRequest, headers: CreateZipDownloadHeaders = CreateZipDownloadHeaders()) async throws -> ZipDownload {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/zip_downloads")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/zip_downloads")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ZipDownload.deserialize(from: response.data)
     }
 
@@ -59,7 +59,7 @@ public class ZipDownloadsManager {
     ///   - headers: Headers of getZipDownloadContent method
     /// - Returns: The `URL`.
     /// - Throws: The `GeneralError`.
-    public func getZipDownloadContent(downloadUrl: String, downloadDestinationURL: URL, headers: GetZipDownloadContentHeadersArg = GetZipDownloadContentHeadersArg()) async throws -> URL {
+    public func getZipDownloadContent(downloadUrl: String, downloadDestinationURL: URL, headers: GetZipDownloadContentHeaders = GetZipDownloadContentHeaders()) async throws -> URL {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: downloadUrl, options: FetchOptions(method: "GET", headers: headersMap, downloadDestinationURL: downloadDestinationURL, responseFormat: "binary", auth: self.auth, networkSession: self.networkSession))
         return response.downloadDestinationURL!
@@ -84,7 +84,7 @@ public class ZipDownloadsManager {
     ///   - headers: Headers of getZipDownloadStatus method
     /// - Returns: The `ZipDownloadStatus`.
     /// - Throws: The `GeneralError`.
-    public func getZipDownloadStatus(statusUrl: String, headers: GetZipDownloadStatusHeadersArg = GetZipDownloadStatusHeadersArg()) async throws -> ZipDownloadStatus {
+    public func getZipDownloadStatus(statusUrl: String, headers: GetZipDownloadStatusHeaders = GetZipDownloadStatusHeaders()) async throws -> ZipDownloadStatus {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: statusUrl, options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ZipDownloadStatus.deserialize(from: response.data)

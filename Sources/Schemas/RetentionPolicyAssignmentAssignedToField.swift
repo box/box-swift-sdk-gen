@@ -12,7 +12,7 @@ public class RetentionPolicyAssignmentAssignedToField: Codable {
     public let id: String?
 
     /// The type of resource the policy is assigned to.
-    public let type: RetentionPolicyAssignmentAssignedToFieldTypeField?
+    public let type: RetentionPolicyAssignmentAssignedToTypeField?
 
     /// Initializer for a RetentionPolicyAssignmentAssignedToField.
     ///
@@ -21,7 +21,7 @@ public class RetentionPolicyAssignmentAssignedToField: Codable {
     ///     the policy is assigned to.
     ///     Set to null or omit when type is set to enterprise.
     ///   - type: The type of resource the policy is assigned to.
-    public init(id: String? = nil, type: RetentionPolicyAssignmentAssignedToFieldTypeField? = nil) {
+    public init(id: String? = nil, type: RetentionPolicyAssignmentAssignedToTypeField? = nil) {
         self.id = id
         self.type = type
     }
@@ -29,7 +29,7 @@ public class RetentionPolicyAssignmentAssignedToField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(RetentionPolicyAssignmentAssignedToFieldTypeField.self, forKey: .type)
+        type = try container.decodeIfPresent(RetentionPolicyAssignmentAssignedToTypeField.self, forKey: .type)
     }
 
     public func encode(to encoder: Encoder) throws {

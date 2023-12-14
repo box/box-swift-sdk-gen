@@ -11,7 +11,7 @@ public class ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmen
     public let id: String?
 
     /// The type of the shield information barrier segment
-    public let type: ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentFieldTypeField?
+    public let type: ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentTypeField?
 
     /// Initializer for a ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentField.
     ///
@@ -19,7 +19,7 @@ public class ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmen
     ///   - id: The ID reference of the requesting
     ///     shield information barrier segment.
     ///   - type: The type of the shield information barrier segment
-    public init(id: String? = nil, type: ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentFieldTypeField? = nil) {
+    public init(id: String? = nil, type: ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentTypeField? = nil) {
         self.id = id
         self.type = type
     }
@@ -27,7 +27,7 @@ public class ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmen
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentFieldTypeField.self, forKey: .type)
+        type = try container.decodeIfPresent(ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentTypeField.self, forKey: .type)
     }
 
     public func encode(to encoder: Encoder) throws {

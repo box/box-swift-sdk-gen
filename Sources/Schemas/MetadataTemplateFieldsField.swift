@@ -22,7 +22,7 @@ public class MetadataTemplateFieldsField: Codable {
     /// **Note**: The `integer` value is deprecated.
     /// It is still present in the response,
     /// but cannot be used in the POST request.
-    public let type: MetadataTemplateFieldsFieldTypeField
+    public let type: MetadataTemplateFieldsTypeField
 
     /// A unique identifier for the field. The identifier must
     /// be unique within the template to which it belongs.
@@ -41,7 +41,7 @@ public class MetadataTemplateFieldsField: Codable {
 
     /// A list of options for this field. This is used in combination
     /// with the `enum` and `multiSelect` field types.
-    public let options: [MetadataTemplateFieldsFieldOptionsField]?
+    public let options: [MetadataTemplateFieldsOptionsField]?
 
     /// The unique ID of the metadata template field.
     public let id: String?
@@ -70,7 +70,7 @@ public class MetadataTemplateFieldsField: Codable {
     ///   - options: A list of options for this field. This is used in combination
     ///     with the `enum` and `multiSelect` field types.
     ///   - id: The unique ID of the metadata template field.
-    public init(type: MetadataTemplateFieldsFieldTypeField, key: String, displayName: String, description: String? = nil, hidden: Bool? = nil, options: [MetadataTemplateFieldsFieldOptionsField]? = nil, id: String? = nil) {
+    public init(type: MetadataTemplateFieldsTypeField, key: String, displayName: String, description: String? = nil, hidden: Bool? = nil, options: [MetadataTemplateFieldsOptionsField]? = nil, id: String? = nil) {
         self.type = type
         self.key = key
         self.displayName = displayName
@@ -82,12 +82,12 @@ public class MetadataTemplateFieldsField: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decode(MetadataTemplateFieldsFieldTypeField.self, forKey: .type)
+        type = try container.decode(MetadataTemplateFieldsTypeField.self, forKey: .type)
         key = try container.decode(String.self, forKey: .key)
         displayName = try container.decode(String.self, forKey: .displayName)
         description = try container.decodeIfPresent(String.self, forKey: .description)
         hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden)
-        options = try container.decodeIfPresent([MetadataTemplateFieldsFieldOptionsField].self, forKey: .options)
+        options = try container.decodeIfPresent([MetadataTemplateFieldsOptionsField].self, forKey: .options)
         id = try container.decodeIfPresent(String.self, forKey: .id)
     }
 

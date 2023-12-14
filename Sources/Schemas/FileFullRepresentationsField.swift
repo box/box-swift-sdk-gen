@@ -6,19 +6,19 @@ public class FileFullRepresentationsField: Codable {
     }
 
     /// A list of files
-    public let entries: [FileFullRepresentationsFieldEntriesField]?
+    public let entries: [FileFullRepresentationsEntriesField]?
 
     /// Initializer for a FileFullRepresentationsField.
     ///
     /// - Parameters:
     ///   - entries: A list of files
-    public init(entries: [FileFullRepresentationsFieldEntriesField]? = nil) {
+    public init(entries: [FileFullRepresentationsEntriesField]? = nil) {
         self.entries = entries
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        entries = try container.decodeIfPresent([FileFullRepresentationsFieldEntriesField].self, forKey: .entries)
+        entries = try container.decodeIfPresent([FileFullRepresentationsEntriesField].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {

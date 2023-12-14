@@ -3,9 +3,9 @@ import Foundation
 public class FileMetadataManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -24,9 +24,9 @@ public class FileMetadataManager {
     ///   - headers: Headers of getFileMetadata method
     /// - Returns: The `Metadatas`.
     /// - Throws: The `GeneralError`.
-    public func getFileMetadata(fileId: String, headers: GetFileMetadataHeadersArg = GetFileMetadataHeadersArg()) async throws -> Metadatas {
+    public func getFileMetadata(fileId: String, headers: GetFileMetadataHeaders = GetFileMetadataHeaders()) async throws -> Metadatas {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/metadata")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Metadatas.deserialize(from: response.data)
     }
 
@@ -49,9 +49,9 @@ public class FileMetadataManager {
     ///   - headers: Headers of getFileMetadataById method
     /// - Returns: The `MetadataFull`.
     /// - Throws: The `GeneralError`.
-    public func getFileMetadataById(fileId: String, scope: GetFileMetadataByIdScopeArg, templateKey: String, headers: GetFileMetadataByIdHeadersArg = GetFileMetadataByIdHeadersArg()) async throws -> MetadataFull {
+    public func getFileMetadataById(fileId: String, scope: GetFileMetadataByIdScope, templateKey: String, headers: GetFileMetadataByIdHeaders = GetFileMetadataByIdHeaders()) async throws -> MetadataFull {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/")\(scope)\("/")\(templateKey)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/metadata/")\(scope)\("/")\(templateKey)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataFull.deserialize(from: response.data)
     }
 
@@ -78,9 +78,9 @@ public class FileMetadataManager {
     ///   - headers: Headers of createFileMetadataById method
     /// - Returns: The `MetadataFull`.
     /// - Throws: The `GeneralError`.
-    public func createFileMetadataById(fileId: String, scope: CreateFileMetadataByIdScopeArg, templateKey: String, requestBody: CreateFileMetadataByIdRequestBodyArg, headers: CreateFileMetadataByIdHeadersArg = CreateFileMetadataByIdHeadersArg()) async throws -> MetadataFull {
+    public func createFileMetadataById(fileId: String, scope: CreateFileMetadataByIdScope, templateKey: String, requestBody: CreateFileMetadataByIdRequestBody, headers: CreateFileMetadataByIdHeaders = CreateFileMetadataByIdHeaders()) async throws -> MetadataFull {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/")\(scope)\("/")\(templateKey)", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/metadata/")\(scope)\("/")\(templateKey)", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataFull.deserialize(from: response.data)
     }
 
@@ -110,9 +110,9 @@ public class FileMetadataManager {
     ///   - headers: Headers of updateFileMetadataById method
     /// - Returns: The `MetadataFull`.
     /// - Throws: The `GeneralError`.
-    public func updateFileMetadataById(fileId: String, scope: UpdateFileMetadataByIdScopeArg, templateKey: String, requestBody: [UpdateFileMetadataByIdRequestBodyArg], headers: UpdateFileMetadataByIdHeadersArg = UpdateFileMetadataByIdHeadersArg()) async throws -> MetadataFull {
+    public func updateFileMetadataById(fileId: String, scope: UpdateFileMetadataByIdScope, templateKey: String, requestBody: [UpdateFileMetadataByIdRequestBody], headers: UpdateFileMetadataByIdHeaders = UpdateFileMetadataByIdHeaders()) async throws -> MetadataFull {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/")\(scope)\("/")\(templateKey)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/metadata/")\(scope)\("/")\(templateKey)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataFull.deserialize(from: response.data)
     }
 
@@ -133,9 +133,9 @@ public class FileMetadataManager {
     ///     Example: "properties"
     ///   - headers: Headers of deleteFileMetadataById method
     /// - Throws: The `GeneralError`.
-    public func deleteFileMetadataById(fileId: String, scope: DeleteFileMetadataByIdScopeArg, templateKey: String, headers: DeleteFileMetadataByIdHeadersArg = DeleteFileMetadataByIdHeadersArg()) async throws {
+    public func deleteFileMetadataById(fileId: String, scope: DeleteFileMetadataByIdScope, templateKey: String, headers: DeleteFileMetadataByIdHeaders = DeleteFileMetadataByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/")\(scope)\("/")\(templateKey)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/metadata/")\(scope)\("/")\(templateKey)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

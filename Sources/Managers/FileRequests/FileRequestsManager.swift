@@ -3,9 +3,9 @@ import Foundation
 public class FileRequestsManager {
     public let auth: Authentication?
 
-    public let networkSession: NetworkSession?
+    public let networkSession: NetworkSession
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -24,9 +24,9 @@ public class FileRequestsManager {
     ///   - headers: Headers of getFileRequestById method
     /// - Returns: The `FileRequest`.
     /// - Throws: The `GeneralError`.
-    public func getFileRequestById(fileRequestId: String, headers: GetFileRequestByIdHeadersArg = GetFileRequestByIdHeadersArg()) async throws -> FileRequest {
+    public func getFileRequestById(fileRequestId: String, headers: GetFileRequestByIdHeaders = GetFileRequestByIdHeaders()) async throws -> FileRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/file_requests/")\(fileRequestId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/file_requests/")\(fileRequestId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try FileRequest.deserialize(from: response.data)
     }
 
@@ -46,9 +46,9 @@ public class FileRequestsManager {
     ///   - headers: Headers of updateFileRequestById method
     /// - Returns: The `FileRequest`.
     /// - Throws: The `GeneralError`.
-    public func updateFileRequestById(fileRequestId: String, requestBody: FileRequestUpdateRequest, headers: UpdateFileRequestByIdHeadersArg = UpdateFileRequestByIdHeadersArg()) async throws -> FileRequest {
+    public func updateFileRequestById(fileRequestId: String, requestBody: FileRequestUpdateRequest, headers: UpdateFileRequestByIdHeaders = UpdateFileRequestByIdHeaders()) async throws -> FileRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-match": Utils.Strings.toString(value: headers.ifMatch)], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/file_requests/")\(fileRequestId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/file_requests/")\(fileRequestId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try FileRequest.deserialize(from: response.data)
     }
 
@@ -65,9 +65,9 @@ public class FileRequestsManager {
     ///     Example: "123"
     ///   - headers: Headers of deleteFileRequestById method
     /// - Throws: The `GeneralError`.
-    public func deleteFileRequestById(fileRequestId: String, headers: DeleteFileRequestByIdHeadersArg = DeleteFileRequestByIdHeadersArg()) async throws {
+    public func deleteFileRequestById(fileRequestId: String, headers: DeleteFileRequestByIdHeaders = DeleteFileRequestByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/file_requests/")\(fileRequestId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/file_requests/")\(fileRequestId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Copies an existing file request that is already present on one folder,
@@ -86,9 +86,9 @@ public class FileRequestsManager {
     ///   - headers: Headers of createFileRequestCopy method
     /// - Returns: The `FileRequest`.
     /// - Throws: The `GeneralError`.
-    public func createFileRequestCopy(fileRequestId: String, requestBody: FileRequestCopyRequest, headers: CreateFileRequestCopyHeadersArg = CreateFileRequestCopyHeadersArg()) async throws -> FileRequest {
+    public func createFileRequestCopy(fileRequestId: String, requestBody: FileRequestCopyRequest, headers: CreateFileRequestCopyHeaders = CreateFileRequestCopyHeaders()) async throws -> FileRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/file_requests/")\(fileRequestId)\("/copy")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/file_requests/")\(fileRequestId)\("/copy")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try FileRequest.deserialize(from: response.data)
     }
 
