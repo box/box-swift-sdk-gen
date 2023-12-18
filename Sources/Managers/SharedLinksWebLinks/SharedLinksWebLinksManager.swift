@@ -19,11 +19,11 @@ public class SharedLinksWebLinksManager {
     /// shared web link when only given a shared link.
     ///
     /// - Parameters:
-    ///   - queryParams: Query parameters of getSharedItemWebLinks method
-    ///   - headers: Headers of getSharedItemWebLinks method
+    ///   - queryParams: Query parameters of findWebLinkForSharedLink method
+    ///   - headers: Headers of findWebLinkForSharedLink method
     /// - Returns: The `WebLink`.
     /// - Throws: The `GeneralError`.
-    public func getSharedItemWebLinks(queryParams: GetSharedItemWebLinksQueryParams = GetSharedItemWebLinksQueryParams(), headers: GetSharedItemWebLinksHeaders) async throws -> WebLink {
+    public func findWebLinkForSharedLink(queryParams: FindWebLinkForSharedLinkQueryParams = FindWebLinkForSharedLinkQueryParams(), headers: FindWebLinkForSharedLinkHeaders) async throws -> WebLink {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch), "boxapi": Utils.Strings.toString(value: headers.boxapi)], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/shared_items#web_links")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -35,11 +35,11 @@ public class SharedLinksWebLinksManager {
     /// - Parameters:
     ///   - webLinkId: The ID of the web link.
     ///     Example: "12345"
-    ///   - queryParams: Query parameters of getWebLinkGetSharedLink method
-    ///   - headers: Headers of getWebLinkGetSharedLink method
+    ///   - queryParams: Query parameters of getSharedLinkForWebLink method
+    ///   - headers: Headers of getSharedLinkForWebLink method
     /// - Returns: The `WebLink`.
     /// - Throws: The `GeneralError`.
-    public func getWebLinkGetSharedLink(webLinkId: String, queryParams: GetWebLinkGetSharedLinkQueryParams, headers: GetWebLinkGetSharedLinkHeaders = GetWebLinkGetSharedLinkHeaders()) async throws -> WebLink {
+    public func getSharedLinkForWebLink(webLinkId: String, queryParams: GetSharedLinkForWebLinkQueryParams, headers: GetSharedLinkForWebLinkHeaders = GetSharedLinkForWebLinkHeaders()) async throws -> WebLink {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/web_links/")\(webLinkId)\("#get_shared_link")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -51,12 +51,12 @@ public class SharedLinksWebLinksManager {
     /// - Parameters:
     ///   - webLinkId: The ID of the web link.
     ///     Example: "12345"
-    ///   - requestBody: Request body of updateWebLinkAddSharedLink method
-    ///   - queryParams: Query parameters of updateWebLinkAddSharedLink method
-    ///   - headers: Headers of updateWebLinkAddSharedLink method
+    ///   - requestBody: Request body of addShareLinkToWebLink method
+    ///   - queryParams: Query parameters of addShareLinkToWebLink method
+    ///   - headers: Headers of addShareLinkToWebLink method
     /// - Returns: The `WebLink`.
     /// - Throws: The `GeneralError`.
-    public func updateWebLinkAddSharedLink(webLinkId: String, requestBody: UpdateWebLinkAddSharedLinkRequestBody = UpdateWebLinkAddSharedLinkRequestBody(), queryParams: UpdateWebLinkAddSharedLinkQueryParams, headers: UpdateWebLinkAddSharedLinkHeaders = UpdateWebLinkAddSharedLinkHeaders()) async throws -> WebLink {
+    public func addShareLinkToWebLink(webLinkId: String, requestBody: AddShareLinkToWebLinkRequestBody = AddShareLinkToWebLinkRequestBody(), queryParams: AddShareLinkToWebLinkQueryParams, headers: AddShareLinkToWebLinkHeaders = AddShareLinkToWebLinkHeaders()) async throws -> WebLink {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/web_links/")\(webLinkId)\("#add_shared_link")", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -68,12 +68,12 @@ public class SharedLinksWebLinksManager {
     /// - Parameters:
     ///   - webLinkId: The ID of the web link.
     ///     Example: "12345"
-    ///   - requestBody: Request body of updateWebLinkUpdateSharedLink method
-    ///   - queryParams: Query parameters of updateWebLinkUpdateSharedLink method
-    ///   - headers: Headers of updateWebLinkUpdateSharedLink method
+    ///   - requestBody: Request body of updateSharedLinkOnWebLink method
+    ///   - queryParams: Query parameters of updateSharedLinkOnWebLink method
+    ///   - headers: Headers of updateSharedLinkOnWebLink method
     /// - Returns: The `WebLink`.
     /// - Throws: The `GeneralError`.
-    public func updateWebLinkUpdateSharedLink(webLinkId: String, requestBody: UpdateWebLinkUpdateSharedLinkRequestBody = UpdateWebLinkUpdateSharedLinkRequestBody(), queryParams: UpdateWebLinkUpdateSharedLinkQueryParams, headers: UpdateWebLinkUpdateSharedLinkHeaders = UpdateWebLinkUpdateSharedLinkHeaders()) async throws -> WebLink {
+    public func updateSharedLinkOnWebLink(webLinkId: String, requestBody: UpdateSharedLinkOnWebLinkRequestBody = UpdateSharedLinkOnWebLinkRequestBody(), queryParams: UpdateSharedLinkOnWebLinkQueryParams, headers: UpdateSharedLinkOnWebLinkHeaders = UpdateSharedLinkOnWebLinkHeaders()) async throws -> WebLink {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/web_links/")\(webLinkId)\("#update_shared_link")", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -85,12 +85,12 @@ public class SharedLinksWebLinksManager {
     /// - Parameters:
     ///   - webLinkId: The ID of the web link.
     ///     Example: "12345"
-    ///   - requestBody: Request body of updateWebLinkRemoveSharedLink method
-    ///   - queryParams: Query parameters of updateWebLinkRemoveSharedLink method
-    ///   - headers: Headers of updateWebLinkRemoveSharedLink method
+    ///   - requestBody: Request body of removeSharedLinkFromWebLink method
+    ///   - queryParams: Query parameters of removeSharedLinkFromWebLink method
+    ///   - headers: Headers of removeSharedLinkFromWebLink method
     /// - Returns: The `WebLink`.
     /// - Throws: The `GeneralError`.
-    public func updateWebLinkRemoveSharedLink(webLinkId: String, requestBody: UpdateWebLinkRemoveSharedLinkRequestBody = UpdateWebLinkRemoveSharedLinkRequestBody(), queryParams: UpdateWebLinkRemoveSharedLinkQueryParams, headers: UpdateWebLinkRemoveSharedLinkHeaders = UpdateWebLinkRemoveSharedLinkHeaders()) async throws -> WebLink {
+    public func removeSharedLinkFromWebLink(webLinkId: String, requestBody: RemoveSharedLinkFromWebLinkRequestBody = RemoveSharedLinkFromWebLinkRequestBody(), queryParams: RemoveSharedLinkFromWebLinkQueryParams, headers: RemoveSharedLinkFromWebLinkHeaders = RemoveSharedLinkFromWebLinkHeaders()) async throws -> WebLink {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/web_links/")\(webLinkId)\("#remove_shared_link")", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))

@@ -74,11 +74,11 @@ public class RetentionPolicyAssignmentsManager {
     /// - Parameters:
     ///   - retentionPolicyAssignmentId: The ID of the retention policy assignment.
     ///     Example: "1233123"
-    ///   - queryParams: Query parameters of getRetentionPolicyAssignmentFileUnderRetention method
-    ///   - headers: Headers of getRetentionPolicyAssignmentFileUnderRetention method
+    ///   - queryParams: Query parameters of getFilesUnderRetentionPolicyAssignment method
+    ///   - headers: Headers of getFilesUnderRetentionPolicyAssignment method
     /// - Returns: The `FilesUnderRetention`.
     /// - Throws: The `GeneralError`.
-    public func getRetentionPolicyAssignmentFileUnderRetention(retentionPolicyAssignmentId: String, queryParams: GetRetentionPolicyAssignmentFileUnderRetentionQueryParams = GetRetentionPolicyAssignmentFileUnderRetentionQueryParams(), headers: GetRetentionPolicyAssignmentFileUnderRetentionHeaders = GetRetentionPolicyAssignmentFileUnderRetentionHeaders()) async throws -> FilesUnderRetention {
+    public func getFilesUnderRetentionPolicyAssignment(retentionPolicyAssignmentId: String, queryParams: GetFilesUnderRetentionPolicyAssignmentQueryParams = GetFilesUnderRetentionPolicyAssignmentQueryParams(), headers: GetFilesUnderRetentionPolicyAssignmentHeaders = GetFilesUnderRetentionPolicyAssignmentHeaders()) async throws -> FilesUnderRetention {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/retention_policy_assignments/")\(retentionPolicyAssignmentId)\("/files_under_retention")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -91,11 +91,11 @@ public class RetentionPolicyAssignmentsManager {
     /// - Parameters:
     ///   - retentionPolicyAssignmentId: The ID of the retention policy assignment.
     ///     Example: "1233123"
-    ///   - queryParams: Query parameters of getRetentionPolicyAssignmentFileVersionUnderRetention method
-    ///   - headers: Headers of getRetentionPolicyAssignmentFileVersionUnderRetention method
+    ///   - queryParams: Query parameters of getFileVersionsUnderRetentionPolicyAssignment method
+    ///   - headers: Headers of getFileVersionsUnderRetentionPolicyAssignment method
     /// - Returns: The `FilesUnderRetention`.
     /// - Throws: The `GeneralError`.
-    public func getRetentionPolicyAssignmentFileVersionUnderRetention(retentionPolicyAssignmentId: String, queryParams: GetRetentionPolicyAssignmentFileVersionUnderRetentionQueryParams = GetRetentionPolicyAssignmentFileVersionUnderRetentionQueryParams(), headers: GetRetentionPolicyAssignmentFileVersionUnderRetentionHeaders = GetRetentionPolicyAssignmentFileVersionUnderRetentionHeaders()) async throws -> FilesUnderRetention {
+    public func getFileVersionsUnderRetentionPolicyAssignment(retentionPolicyAssignmentId: String, queryParams: GetFileVersionsUnderRetentionPolicyAssignmentQueryParams = GetFileVersionsUnderRetentionPolicyAssignmentQueryParams(), headers: GetFileVersionsUnderRetentionPolicyAssignmentHeaders = GetFileVersionsUnderRetentionPolicyAssignmentHeaders()) async throws -> FilesUnderRetention {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/retention_policy_assignments/")\(retentionPolicyAssignmentId)\("/file_versions_under_retention")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))

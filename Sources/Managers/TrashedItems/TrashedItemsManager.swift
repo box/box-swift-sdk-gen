@@ -21,11 +21,11 @@ public class TrashedItemsManager {
     /// marker-based pagination using the `marker` parameter.
     ///
     /// - Parameters:
-    ///   - queryParams: Query parameters of getFolderTrashItems method
-    ///   - headers: Headers of getFolderTrashItems method
+    ///   - queryParams: Query parameters of getTrashedItems method
+    ///   - headers: Headers of getTrashedItems method
     /// - Returns: The `Items`.
     /// - Throws: The `GeneralError`.
-    public func getFolderTrashItems(queryParams: GetFolderTrashItemsQueryParams = GetFolderTrashItemsQueryParams(), headers: GetFolderTrashItemsHeaders = GetFolderTrashItemsHeaders()) async throws -> Items {
+    public func getTrashedItems(queryParams: GetTrashedItemsQueryParams = GetTrashedItemsQueryParams(), headers: GetTrashedItemsHeaders = GetTrashedItemsHeaders()) async throws -> Items {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "limit": Utils.Strings.toString(value: queryParams.limit), "offset": Utils.Strings.toString(value: queryParams.offset), "usemarker": Utils.Strings.toString(value: queryParams.usemarker), "marker": Utils.Strings.toString(value: queryParams.marker), "direction": Utils.Strings.toString(value: queryParams.direction), "sort": Utils.Strings.toString(value: queryParams.sort)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/trash/items")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))

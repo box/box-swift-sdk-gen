@@ -18,11 +18,11 @@ public class SearchManager {
     /// of the metadata, use the `fields` attribute in the query.
     ///
     /// - Parameters:
-    ///   - requestBody: Request body of createMetadataQueryExecuteRead method
-    ///   - headers: Headers of createMetadataQueryExecuteRead method
+    ///   - requestBody: Request body of searchByMetadataQuery method
+    ///   - headers: Headers of searchByMetadataQuery method
     /// - Returns: The `MetadataQueryResults`.
     /// - Throws: The `GeneralError`.
-    public func createMetadataQueryExecuteRead(requestBody: MetadataQuery, headers: CreateMetadataQueryExecuteReadHeaders = CreateMetadataQueryExecuteReadHeaders()) async throws -> MetadataQueryResults {
+    public func searchByMetadataQuery(requestBody: MetadataQuery, headers: SearchByMetadataQueryHeaders = SearchByMetadataQueryHeaders()) async throws -> MetadataQueryResults {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_queries/execute_read")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataQueryResults.deserialize(from: response.data)
@@ -46,11 +46,11 @@ public class SearchManager {
     /// users content or across the entire enterprise.
     ///
     /// - Parameters:
-    ///   - queryParams: Query parameters of getSearch method
-    ///   - headers: Headers of getSearch method
+    ///   - queryParams: Query parameters of searchForContent method
+    ///   - headers: Headers of searchForContent method
     /// - Returns: The `SearchResultsOrSearchResultsWithSharedLinks`.
     /// - Throws: The `GeneralError`.
-    public func getSearch(queryParams: GetSearchQueryParams = GetSearchQueryParams(), headers: GetSearchHeaders = GetSearchHeaders()) async throws -> SearchResultsOrSearchResultsWithSharedLinks {
+    public func searchForContent(queryParams: SearchForContentQueryParams = SearchForContentQueryParams(), headers: SearchForContentHeaders = SearchForContentHeaders()) async throws -> SearchResultsOrSearchResultsWithSharedLinks {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["query": Utils.Strings.toString(value: queryParams.query), "scope": Utils.Strings.toString(value: queryParams.scope), "file_extensions": Utils.Strings.toString(value: queryParams.fileExtensions), "created_at_range": Utils.Strings.toString(value: queryParams.createdAtRange), "updated_at_range": Utils.Strings.toString(value: queryParams.updatedAtRange), "size_range": Utils.Strings.toString(value: queryParams.sizeRange), "owner_user_ids": Utils.Strings.toString(value: queryParams.ownerUserIds), "recent_updater_user_ids": Utils.Strings.toString(value: queryParams.recentUpdaterUserIds), "ancestor_folder_ids": Utils.Strings.toString(value: queryParams.ancestorFolderIds), "content_types": Utils.Strings.toString(value: queryParams.contentTypes), "type": Utils.Strings.toString(value: queryParams.type), "trash_content": Utils.Strings.toString(value: queryParams.trashContent), "mdfilters": Utils.Strings.toString(value: queryParams.mdfilters), "sort": Utils.Strings.toString(value: queryParams.sort), "direction": Utils.Strings.toString(value: queryParams.direction), "limit": Utils.Strings.toString(value: queryParams.limit), "include_recent_shared_links": Utils.Strings.toString(value: queryParams.includeRecentSharedLinks), "fields": Utils.Strings.toString(value: queryParams.fields), "offset": Utils.Strings.toString(value: queryParams.offset), "deleted_user_ids": Utils.Strings.toString(value: queryParams.deletedUserIds), "deleted_at_range": Utils.Strings.toString(value: queryParams.deletedAtRange)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/search")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))

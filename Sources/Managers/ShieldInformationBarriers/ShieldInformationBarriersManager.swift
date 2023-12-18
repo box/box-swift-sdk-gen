@@ -27,11 +27,11 @@ public class ShieldInformationBarriersManager {
     /// Change status of shield information barrier with the specified ID.
     ///
     /// - Parameters:
-    ///   - requestBody: Request body of createShieldInformationBarrierChangeStatus method
-    ///   - headers: Headers of createShieldInformationBarrierChangeStatus method
+    ///   - requestBody: Request body of updateShieldInformationBarrierStatus method
+    ///   - headers: Headers of updateShieldInformationBarrierStatus method
     /// - Returns: The `ShieldInformationBarrier`.
     /// - Throws: The `GeneralError`.
-    public func createShieldInformationBarrierChangeStatus(requestBody: CreateShieldInformationBarrierChangeStatusRequestBody, headers: CreateShieldInformationBarrierChangeStatusHeaders = CreateShieldInformationBarrierChangeStatusHeaders()) async throws -> ShieldInformationBarrier {
+    public func updateShieldInformationBarrierStatus(requestBody: UpdateShieldInformationBarrierStatusRequestBody, headers: UpdateShieldInformationBarrierStatusHeaders = UpdateShieldInformationBarrierStatusHeaders()) async throws -> ShieldInformationBarrier {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/shield_information_barriers/change_status")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ShieldInformationBarrier.deserialize(from: response.data)
