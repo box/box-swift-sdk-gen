@@ -2,9 +2,10 @@ import Foundation
 
 public class LegalHoldPolicyAssignmentsManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -16,10 +17,10 @@ public class LegalHoldPolicyAssignmentsManager {
     ///   - headers: Headers of getLegalHoldPolicyAssignments method
     /// - Returns: The `LegalHoldPolicyAssignments`.
     /// - Throws: The `GeneralError`.
-    public func getLegalHoldPolicyAssignments(queryParams: GetLegalHoldPolicyAssignmentsQueryParamsArg, headers: GetLegalHoldPolicyAssignmentsHeadersArg = GetLegalHoldPolicyAssignmentsHeadersArg()) async throws -> LegalHoldPolicyAssignments {
+    public func getLegalHoldPolicyAssignments(queryParams: GetLegalHoldPolicyAssignmentsQueryParams, headers: GetLegalHoldPolicyAssignmentsHeaders = GetLegalHoldPolicyAssignmentsHeaders()) async throws -> LegalHoldPolicyAssignments {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["policy_id": Utils.Strings.toString(value: queryParams.policyId), "assign_to_type": Utils.Strings.toString(value: queryParams.assignToType), "assign_to_id": Utils.Strings.toString(value: queryParams.assignToId), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit), "fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/legal_hold_policy_assignments")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/legal_hold_policy_assignments")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try LegalHoldPolicyAssignments.deserialize(from: response.data)
     }
 
@@ -30,9 +31,9 @@ public class LegalHoldPolicyAssignmentsManager {
     ///   - headers: Headers of createLegalHoldPolicyAssignment method
     /// - Returns: The `LegalHoldPolicyAssignment`.
     /// - Throws: The `GeneralError`.
-    public func createLegalHoldPolicyAssignment(requestBody: CreateLegalHoldPolicyAssignmentRequestBodyArg, headers: CreateLegalHoldPolicyAssignmentHeadersArg = CreateLegalHoldPolicyAssignmentHeadersArg()) async throws -> LegalHoldPolicyAssignment {
+    public func createLegalHoldPolicyAssignment(requestBody: CreateLegalHoldPolicyAssignmentRequestBody, headers: CreateLegalHoldPolicyAssignmentHeaders = CreateLegalHoldPolicyAssignmentHeaders()) async throws -> LegalHoldPolicyAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/legal_hold_policy_assignments")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/legal_hold_policy_assignments")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try LegalHoldPolicyAssignment.deserialize(from: response.data)
     }
 
@@ -44,9 +45,9 @@ public class LegalHoldPolicyAssignmentsManager {
     ///   - headers: Headers of getLegalHoldPolicyAssignmentById method
     /// - Returns: The `LegalHoldPolicyAssignment`.
     /// - Throws: The `GeneralError`.
-    public func getLegalHoldPolicyAssignmentById(legalHoldPolicyAssignmentId: String, headers: GetLegalHoldPolicyAssignmentByIdHeadersArg = GetLegalHoldPolicyAssignmentByIdHeadersArg()) async throws -> LegalHoldPolicyAssignment {
+    public func getLegalHoldPolicyAssignmentById(legalHoldPolicyAssignmentId: String, headers: GetLegalHoldPolicyAssignmentByIdHeaders = GetLegalHoldPolicyAssignmentByIdHeaders()) async throws -> LegalHoldPolicyAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/legal_hold_policy_assignments/")\(legalHoldPolicyAssignmentId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/legal_hold_policy_assignments/")\(legalHoldPolicyAssignmentId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try LegalHoldPolicyAssignment.deserialize(from: response.data)
     }
 
@@ -60,9 +61,9 @@ public class LegalHoldPolicyAssignmentsManager {
     ///     Example: "753465"
     ///   - headers: Headers of deleteLegalHoldPolicyAssignmentById method
     /// - Throws: The `GeneralError`.
-    public func deleteLegalHoldPolicyAssignmentById(legalHoldPolicyAssignmentId: String, headers: DeleteLegalHoldPolicyAssignmentByIdHeadersArg = DeleteLegalHoldPolicyAssignmentByIdHeadersArg()) async throws {
+    public func deleteLegalHoldPolicyAssignmentById(legalHoldPolicyAssignmentId: String, headers: DeleteLegalHoldPolicyAssignmentByIdHeaders = DeleteLegalHoldPolicyAssignmentByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/legal_hold_policy_assignments/")\(legalHoldPolicyAssignmentId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/legal_hold_policy_assignments/")\(legalHoldPolicyAssignmentId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Get a list of current file versions for a legal hold
@@ -89,10 +90,10 @@ public class LegalHoldPolicyAssignmentsManager {
     ///   - headers: Headers of getLegalHoldPolicyAssignmentFileOnHold method
     /// - Returns: The `FileVersionLegalHolds`.
     /// - Throws: The `GeneralError`.
-    public func getLegalHoldPolicyAssignmentFileOnHold(legalHoldPolicyAssignmentId: String, queryParams: GetLegalHoldPolicyAssignmentFileOnHoldQueryParamsArg = GetLegalHoldPolicyAssignmentFileOnHoldQueryParamsArg(), headers: GetLegalHoldPolicyAssignmentFileOnHoldHeadersArg = GetLegalHoldPolicyAssignmentFileOnHoldHeadersArg()) async throws -> FileVersionLegalHolds {
+    public func getLegalHoldPolicyAssignmentFileOnHold(legalHoldPolicyAssignmentId: String, queryParams: GetLegalHoldPolicyAssignmentFileOnHoldQueryParams = GetLegalHoldPolicyAssignmentFileOnHoldQueryParams(), headers: GetLegalHoldPolicyAssignmentFileOnHoldHeaders = GetLegalHoldPolicyAssignmentFileOnHoldHeaders()) async throws -> FileVersionLegalHolds {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit), "fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/legal_hold_policy_assignments/")\(legalHoldPolicyAssignmentId)\("/files_on_hold")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/legal_hold_policy_assignments/")\(legalHoldPolicyAssignmentId)\("/files_on_hold")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try FileVersionLegalHolds.deserialize(from: response.data)
     }
 
@@ -120,10 +121,10 @@ public class LegalHoldPolicyAssignmentsManager {
     ///   - headers: Headers of getLegalHoldPolicyAssignmentFileVersionOnHold method
     /// - Returns: The `FileVersionLegalHolds`.
     /// - Throws: The `GeneralError`.
-    public func getLegalHoldPolicyAssignmentFileVersionOnHold(legalHoldPolicyAssignmentId: String, queryParams: GetLegalHoldPolicyAssignmentFileVersionOnHoldQueryParamsArg = GetLegalHoldPolicyAssignmentFileVersionOnHoldQueryParamsArg(), headers: GetLegalHoldPolicyAssignmentFileVersionOnHoldHeadersArg = GetLegalHoldPolicyAssignmentFileVersionOnHoldHeadersArg()) async throws -> FileVersionLegalHolds {
+    public func getLegalHoldPolicyAssignmentFileVersionOnHold(legalHoldPolicyAssignmentId: String, queryParams: GetLegalHoldPolicyAssignmentFileVersionOnHoldQueryParams = GetLegalHoldPolicyAssignmentFileVersionOnHoldQueryParams(), headers: GetLegalHoldPolicyAssignmentFileVersionOnHoldHeaders = GetLegalHoldPolicyAssignmentFileVersionOnHoldHeaders()) async throws -> FileVersionLegalHolds {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit), "fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/legal_hold_policy_assignments/")\(legalHoldPolicyAssignmentId)\("/file_versions_on_hold")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/legal_hold_policy_assignments/")\(legalHoldPolicyAssignmentId)\("/file_versions_on_hold")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try FileVersionLegalHolds.deserialize(from: response.data)
     }
 

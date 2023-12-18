@@ -16,11 +16,13 @@ public class FileRequestUpdateRequest: Codable {
     /// 
     /// This will default to the value on the existing file request.
     public let title: String?
+
     /// An optional new description for the file request. This can be
     /// used to change the description of the file request.
     /// 
     /// This will default to the value on the existing file request.
     public let description: String?
+
     /// An optional new status of the file request.
     /// 
     /// When the status is set to `inactive`, the file request
@@ -30,6 +32,7 @@ public class FileRequestUpdateRequest: Codable {
     /// 
     /// This will default to the value on the existing file request.
     public let status: FileRequestUpdateRequestStatusField?
+
     /// Whether a file request submitter is required to provide
     /// their email address.
     /// 
@@ -38,6 +41,7 @@ public class FileRequestUpdateRequest: Codable {
     /// 
     /// This will default to the value on the existing file request.
     public let isEmailRequired: Bool?
+
     /// Whether a file request submitter is required to provide
     /// a description of the files they are submitting.
     /// 
@@ -46,6 +50,7 @@ public class FileRequestUpdateRequest: Codable {
     /// 
     /// This will default to the value on the existing file request.
     public let isDescriptionRequired: Bool?
+
     /// The date after which a file request will no longer accept new
     /// submissions.
     /// 
@@ -123,4 +128,5 @@ public class FileRequestUpdateRequest: Codable {
         try container.encodeIfPresent(isDescriptionRequired, forKey: .isDescriptionRequired)
         try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
     }
+
 }

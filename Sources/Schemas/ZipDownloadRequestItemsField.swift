@@ -7,7 +7,8 @@ public class ZipDownloadRequestItemsField: Codable {
     }
 
     /// The type of the item to add to the archive.
-    public let type: ZipDownloadRequestItemsFieldTypeField
+    public let type: ZipDownloadRequestItemsTypeField
+
     /// The identifier of the item to add to the archive. When this item is
     /// a folder then this can not be the root folder with ID `0`.
     public let id: String
@@ -18,14 +19,14 @@ public class ZipDownloadRequestItemsField: Codable {
     ///   - type: The type of the item to add to the archive.
     ///   - id: The identifier of the item to add to the archive. When this item is
     ///     a folder then this can not be the root folder with ID `0`.
-    public init(type: ZipDownloadRequestItemsFieldTypeField, id: String) {
+    public init(type: ZipDownloadRequestItemsTypeField, id: String) {
         self.type = type
         self.id = id
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decode(ZipDownloadRequestItemsFieldTypeField.self, forKey: .type)
+        type = try container.decode(ZipDownloadRequestItemsTypeField.self, forKey: .type)
         id = try container.decode(String.self, forKey: .id)
     }
 
@@ -34,4 +35,5 @@ public class ZipDownloadRequestItemsField: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

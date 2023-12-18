@@ -9,6 +9,7 @@ public class GroupBase: Codable {
 
     /// The unique identifier for this object
     public let id: String
+
     /// `group`
     public let type: GroupBaseTypeField
 
@@ -33,4 +34,5 @@ public class GroupBase: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(type, forKey: .type)
     }
+
 }

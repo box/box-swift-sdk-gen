@@ -10,6 +10,7 @@ public class ZipDownloadRequest: Codable {
     /// A list of items to add to the `zip` archive. These can
     /// be folders or files.
     public let items: [ZipDownloadRequestItemsField]
+
     /// The optional name of the `zip` archive. This name will be appended by the
     /// `.zip` file extension, for example `January Financials.zip`.
     public let downloadFileName: String?
@@ -37,4 +38,5 @@ public class ZipDownloadRequest: Codable {
         try container.encode(items, forKey: .items)
         try container.encodeIfPresent(downloadFileName, forKey: .downloadFileName)
     }
+
 }

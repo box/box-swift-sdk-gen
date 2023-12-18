@@ -2,9 +2,10 @@ import Foundation
 
 public class TaskAssignmentsManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -17,9 +18,9 @@ public class TaskAssignmentsManager {
     ///   - headers: Headers of getTaskAssignments method
     /// - Returns: The `TaskAssignments`.
     /// - Throws: The `GeneralError`.
-    public func getTaskAssignments(taskId: String, headers: GetTaskAssignmentsHeadersArg = GetTaskAssignmentsHeadersArg()) async throws -> TaskAssignments {
+    public func getTaskAssignments(taskId: String, headers: GetTaskAssignmentsHeaders = GetTaskAssignmentsHeaders()) async throws -> TaskAssignments {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/tasks/")\(taskId)\("/assignments")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/tasks/")\(taskId)\("/assignments")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try TaskAssignments.deserialize(from: response.data)
     }
 
@@ -33,9 +34,9 @@ public class TaskAssignmentsManager {
     ///   - headers: Headers of createTaskAssignment method
     /// - Returns: The `TaskAssignment`.
     /// - Throws: The `GeneralError`.
-    public func createTaskAssignment(requestBody: CreateTaskAssignmentRequestBodyArg, headers: CreateTaskAssignmentHeadersArg = CreateTaskAssignmentHeadersArg()) async throws -> TaskAssignment {
+    public func createTaskAssignment(requestBody: CreateTaskAssignmentRequestBody, headers: CreateTaskAssignmentHeaders = CreateTaskAssignmentHeaders()) async throws -> TaskAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/task_assignments")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/task_assignments")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try TaskAssignment.deserialize(from: response.data)
     }
 
@@ -47,9 +48,9 @@ public class TaskAssignmentsManager {
     ///   - headers: Headers of getTaskAssignmentById method
     /// - Returns: The `TaskAssignment`.
     /// - Throws: The `GeneralError`.
-    public func getTaskAssignmentById(taskAssignmentId: String, headers: GetTaskAssignmentByIdHeadersArg = GetTaskAssignmentByIdHeadersArg()) async throws -> TaskAssignment {
+    public func getTaskAssignmentById(taskAssignmentId: String, headers: GetTaskAssignmentByIdHeaders = GetTaskAssignmentByIdHeaders()) async throws -> TaskAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/task_assignments/")\(taskAssignmentId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/task_assignments/")\(taskAssignmentId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try TaskAssignment.deserialize(from: response.data)
     }
 
@@ -63,9 +64,9 @@ public class TaskAssignmentsManager {
     ///   - headers: Headers of updateTaskAssignmentById method
     /// - Returns: The `TaskAssignment`.
     /// - Throws: The `GeneralError`.
-    public func updateTaskAssignmentById(taskAssignmentId: String, requestBody: UpdateTaskAssignmentByIdRequestBodyArg = UpdateTaskAssignmentByIdRequestBodyArg(), headers: UpdateTaskAssignmentByIdHeadersArg = UpdateTaskAssignmentByIdHeadersArg()) async throws -> TaskAssignment {
+    public func updateTaskAssignmentById(taskAssignmentId: String, requestBody: UpdateTaskAssignmentByIdRequestBody = UpdateTaskAssignmentByIdRequestBody(), headers: UpdateTaskAssignmentByIdHeaders = UpdateTaskAssignmentByIdHeaders()) async throws -> TaskAssignment {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/task_assignments/")\(taskAssignmentId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/task_assignments/")\(taskAssignmentId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try TaskAssignment.deserialize(from: response.data)
     }
 
@@ -76,9 +77,9 @@ public class TaskAssignmentsManager {
     ///     Example: "12345"
     ///   - headers: Headers of deleteTaskAssignmentById method
     /// - Throws: The `GeneralError`.
-    public func deleteTaskAssignmentById(taskAssignmentId: String, headers: DeleteTaskAssignmentByIdHeadersArg = DeleteTaskAssignmentByIdHeadersArg()) async throws {
+    public func deleteTaskAssignmentById(taskAssignmentId: String, headers: DeleteTaskAssignmentByIdHeaders = DeleteTaskAssignmentByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/task_assignments/")\(taskAssignmentId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/task_assignments/")\(taskAssignmentId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

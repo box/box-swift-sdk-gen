@@ -11,14 +11,18 @@ public class FileFullExpiringEmbedLinkField: Codable {
 
     /// The requested access token.
     public let accessToken: String?
+
     /// The time in seconds by which this token will expire.
     public let expiresIn: Int64?
+
     /// The type of access token returned.
-    public let tokenType: FileFullExpiringEmbedLinkFieldTokenTypeField?
+    public let tokenType: FileFullExpiringEmbedLinkTokenTypeField?
+
     /// The permissions that this access token permits,
     /// providing a list of resources (files, folders, etc)
     /// and the scopes permitted for each of those resources.
     public let restrictedTo: [FileScope]?
+
     /// The actual expiring embed URL for this file, constructed
     /// from the file ID and access tokens specified in this object.
     public let url: String?
@@ -34,7 +38,7 @@ public class FileFullExpiringEmbedLinkField: Codable {
     ///     and the scopes permitted for each of those resources.
     ///   - url: The actual expiring embed URL for this file, constructed
     ///     from the file ID and access tokens specified in this object.
-    public init(accessToken: String? = nil, expiresIn: Int64? = nil, tokenType: FileFullExpiringEmbedLinkFieldTokenTypeField? = nil, restrictedTo: [FileScope]? = nil, url: String? = nil) {
+    public init(accessToken: String? = nil, expiresIn: Int64? = nil, tokenType: FileFullExpiringEmbedLinkTokenTypeField? = nil, restrictedTo: [FileScope]? = nil, url: String? = nil) {
         self.accessToken = accessToken
         self.expiresIn = expiresIn
         self.tokenType = tokenType
@@ -46,7 +50,7 @@ public class FileFullExpiringEmbedLinkField: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         accessToken = try container.decodeIfPresent(String.self, forKey: .accessToken)
         expiresIn = try container.decodeIfPresent(Int64.self, forKey: .expiresIn)
-        tokenType = try container.decodeIfPresent(FileFullExpiringEmbedLinkFieldTokenTypeField.self, forKey: .tokenType)
+        tokenType = try container.decodeIfPresent(FileFullExpiringEmbedLinkTokenTypeField.self, forKey: .tokenType)
         restrictedTo = try container.decodeIfPresent([FileScope].self, forKey: .restrictedTo)
         url = try container.decodeIfPresent(String.self, forKey: .url)
     }
@@ -59,4 +63,5 @@ public class FileFullExpiringEmbedLinkField: Codable {
         try container.encodeIfPresent(restrictedTo, forKey: .restrictedTo)
         try container.encodeIfPresent(url, forKey: .url)
     }
+
 }

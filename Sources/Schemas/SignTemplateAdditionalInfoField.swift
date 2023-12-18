@@ -7,24 +7,25 @@ public class SignTemplateAdditionalInfoField: Codable {
     }
 
     /// Non editable fields.
-    public let nonEditable: [SignTemplateAdditionalInfoFieldNonEditableField]?
+    public let nonEditable: [SignTemplateAdditionalInfoNonEditableField]?
+
     /// Required fields.
-    public let required: SignTemplateAdditionalInfoFieldRequiredField?
+    public let required: SignTemplateAdditionalInfoRequiredField?
 
     /// Initializer for a SignTemplateAdditionalInfoField.
     ///
     /// - Parameters:
     ///   - nonEditable: Non editable fields.
     ///   - required: Required fields.
-    public init(nonEditable: [SignTemplateAdditionalInfoFieldNonEditableField]? = nil, required: SignTemplateAdditionalInfoFieldRequiredField? = nil) {
+    public init(nonEditable: [SignTemplateAdditionalInfoNonEditableField]? = nil, required: SignTemplateAdditionalInfoRequiredField? = nil) {
         self.nonEditable = nonEditable
         self.required = required
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        nonEditable = try container.decodeIfPresent([SignTemplateAdditionalInfoFieldNonEditableField].self, forKey: .nonEditable)
-        required = try container.decodeIfPresent(SignTemplateAdditionalInfoFieldRequiredField.self, forKey: .required)
+        nonEditable = try container.decodeIfPresent([SignTemplateAdditionalInfoNonEditableField].self, forKey: .nonEditable)
+        required = try container.decodeIfPresent(SignTemplateAdditionalInfoRequiredField.self, forKey: .required)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -32,4 +33,5 @@ public class SignTemplateAdditionalInfoField: Codable {
         try container.encodeIfPresent(nonEditable, forKey: .nonEditable)
         try container.encodeIfPresent(required, forKey: .required)
     }
+
 }

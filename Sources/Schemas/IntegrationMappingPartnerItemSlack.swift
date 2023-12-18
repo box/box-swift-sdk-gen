@@ -15,10 +15,13 @@ public class IntegrationMappingPartnerItemSlack: Codable {
 
     /// Type of the mapped item referenced in `id`
     public let type: IntegrationMappingPartnerItemSlackTypeField
+
     /// ID of the mapped item (of type referenced in `type`)
     public let id: String
+
     /// ID of the Slack workspace with which the item is associated. Use this parameter if Box for Slack is installed at a workspace level. Do not use `slack_org_id` at the same time.
     public let slackWorkspaceId: String?
+
     /// ID of the Slack org with which the item is associated. Use this parameter if Box for Slack is installed at the org level. Do not use `slack_workspace_id` at the same time.
     public let slackOrgId: String?
 
@@ -51,4 +54,5 @@ public class IntegrationMappingPartnerItemSlack: Codable {
         try container.encodeIfPresent(slackWorkspaceId, forKey: .slackWorkspaceId)
         try container.encodeIfPresent(slackOrgId, forKey: .slackOrgId)
     }
+
 }

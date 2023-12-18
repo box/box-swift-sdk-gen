@@ -10,10 +10,12 @@ public class RetentionPolicies: Codable {
 
     /// A list in which each entry represents a retention policy object.
     public let entries: [RetentionPolicy]?
+
     /// The limit that was used for these entries. This will be the same as the
     /// `limit` query parameter unless that value exceeded the maximum value
     /// allowed. The maximum value varies by API.
     public let limit: Int64?
+
     /// The marker for the start of the next page of results.
     public let nextMarker: String?
 
@@ -44,4 +46,5 @@ public class RetentionPolicies: Codable {
         try container.encodeIfPresent(limit, forKey: .limit)
         try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
     }
+
 }

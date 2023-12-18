@@ -14,9 +14,12 @@ public class WorkflowFull: Workflow {
 
     /// The date and time when the workflow was created on Box
     public let createdAt: String?
+
     /// The date and time when the workflow was last updated on Box
     public let modifiedAt: String?
+
     public let createdBy: UserBase?
+
     public let modifiedBy: UserBase?
 
     /// Initializer for a WorkflowFull.
@@ -30,13 +33,14 @@ public class WorkflowFull: Workflow {
     ///   - flows: A list of flows assigned to a workflow.
     ///   - createdAt: The date and time when the workflow was created on Box
     ///   - modifiedAt: The date and time when the workflow was last updated on Box
-    ///   - createdBy: UserBase?
-    ///   - modifiedBy: UserBase?
+    ///   - createdBy: 
+    ///   - modifiedBy: 
     public init(id: String? = nil, type: WorkflowMiniTypeField? = nil, name: String? = nil, description: String? = nil, isEnabled: Bool? = nil, flows: [WorkflowFlowsField]? = nil, createdAt: String? = nil, modifiedAt: String? = nil, createdBy: UserBase? = nil, modifiedBy: UserBase? = nil) {
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
         self.createdBy = createdBy
         self.modifiedBy = modifiedBy
+
         super.init(id: id, type: type, name: name, description: description, isEnabled: isEnabled, flows: flows)
     }
 
@@ -46,7 +50,8 @@ public class WorkflowFull: Workflow {
         modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
         modifiedBy = try container.decodeIfPresent(UserBase.self, forKey: .modifiedBy)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -57,4 +62,5 @@ public class WorkflowFull: Workflow {
         try container.encodeIfPresent(modifiedBy, forKey: .modifiedBy)
         try super.encode(to: encoder)
     }
+
 }

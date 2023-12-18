@@ -9,8 +9,10 @@ public class RetentionPolicyAssignmentCountsField: Codable {
 
     /// The number of enterprise assignments this policy has. The maximum value is 1.
     public let enterprise: Int64?
+
     /// The number of folder assignments this policy has.
     public let folder: Int64?
+
     /// The number of metadata template assignments this policy has.
     public let metadataTemplate: Int64?
 
@@ -39,4 +41,5 @@ public class RetentionPolicyAssignmentCountsField: Codable {
         try container.encodeIfPresent(folder, forKey: .folder)
         try container.encodeIfPresent(metadataTemplate, forKey: .metadataTemplate)
     }
+
 }

@@ -15,16 +15,18 @@ public class ShieldInformationBarrierSegmentMemberMini: ShieldInformationBarrier
     ///   - id: The unique identifier for the
     ///     shield information barrier segment member
     ///   - type: The type of the shield information barrier segment member
-    ///   - user: UserBase?
+    ///   - user: 
     public init(id: String? = nil, type: ShieldInformationBarrierSegmentMemberBaseTypeField? = nil, user: UserBase? = nil) {
         self.user = user
+
         super.init(id: id, type: type)
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         user = try container.decodeIfPresent(UserBase.self, forKey: .user)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -32,4 +34,5 @@ public class ShieldInformationBarrierSegmentMemberMini: ShieldInformationBarrier
         try container.encodeIfPresent(user, forKey: .user)
         try super.encode(to: encoder)
     }
+
 }

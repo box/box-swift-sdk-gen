@@ -11,6 +11,7 @@ public class ShieldInformationBarrierSegmentRestrictionBase: Codable {
 
     /// Shield information barrier segment restriction
     public let type: ShieldInformationBarrierSegmentRestrictionBaseTypeField?
+
     /// The unique identifier for the
     /// shield information barrier segment restriction.
     public let id: String?
@@ -37,4 +38,5 @@ public class ShieldInformationBarrierSegmentRestrictionBase: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(id, forKey: .id)
     }
+
 }

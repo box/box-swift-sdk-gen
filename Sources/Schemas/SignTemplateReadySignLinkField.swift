@@ -12,19 +12,24 @@ public class SignTemplateReadySignLinkField: Codable {
 
     /// The URL that can be sent to signers.
     public let url: String?
+
     /// Request name.
     public let name: String?
+
     /// Extra instructions for all signers.
     public let instructions: String?
+
     /// The destination folder to place final,
     /// signed document and signing
     /// log. Only `ID` and `type` fields are required.
     /// The root folder,
     /// folder ID `0`, cannot be used.
     public let folderId: String?
+
     /// Whether to disable notifications when
     /// a signer has signed.
     public let isNotificationDisabled: Bool?
+
     /// Whether the ready sign link is enabled or not.
     public let isActive: Bool?
 
@@ -70,4 +75,5 @@ public class SignTemplateReadySignLinkField: Codable {
         try container.encodeIfPresent(isNotificationDisabled, forKey: .isNotificationDisabled)
         try container.encodeIfPresent(isActive, forKey: .isActive)
     }
+
 }

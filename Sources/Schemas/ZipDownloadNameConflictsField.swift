@@ -10,10 +10,13 @@ public class ZipDownloadNameConflictsField: Codable {
 
     /// The identifier of the item
     public let id: String?
+
     /// The type of this item
-    public let type: ZipDownloadNameConflictsFieldTypeField?
+    public let type: ZipDownloadNameConflictsTypeField?
+
     /// The original name of this item
     public let originalName: String?
+
     /// The new name of this item as it will appear in the
     /// downloaded `zip` archive.
     public let downloadName: String?
@@ -26,7 +29,7 @@ public class ZipDownloadNameConflictsField: Codable {
     ///   - originalName: The original name of this item
     ///   - downloadName: The new name of this item as it will appear in the
     ///     downloaded `zip` archive.
-    public init(id: String? = nil, type: ZipDownloadNameConflictsFieldTypeField? = nil, originalName: String? = nil, downloadName: String? = nil) {
+    public init(id: String? = nil, type: ZipDownloadNameConflictsTypeField? = nil, originalName: String? = nil, downloadName: String? = nil) {
         self.id = id
         self.type = type
         self.originalName = originalName
@@ -36,7 +39,7 @@ public class ZipDownloadNameConflictsField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(ZipDownloadNameConflictsFieldTypeField.self, forKey: .type)
+        type = try container.decodeIfPresent(ZipDownloadNameConflictsTypeField.self, forKey: .type)
         originalName = try container.decodeIfPresent(String.self, forKey: .originalName)
         downloadName = try container.decodeIfPresent(String.self, forKey: .downloadName)
     }
@@ -48,4 +51,5 @@ public class ZipDownloadNameConflictsField: Codable {
         try container.encodeIfPresent(originalName, forKey: .originalName)
         try container.encodeIfPresent(downloadName, forKey: .downloadName)
     }
+
 }

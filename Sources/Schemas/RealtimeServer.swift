@@ -13,14 +13,18 @@ public class RealtimeServer: Codable {
 
     /// `realtime_server`
     public let type: String?
+
     /// The URL for the server.
     public let url: String?
+
     /// The time in minutes for which this server is available
     public let ttl: Int64?
+
     /// The maximum number of retries this server will
     /// allow before a new long poll should be started by
     /// getting a [new list of server](#options-events).
     public let maxRetries: Int64?
+
     /// The maximum number of seconds without a response
     /// after which you should retry the long poll connection.
     /// 
@@ -69,4 +73,5 @@ public class RealtimeServer: Codable {
         try container.encodeIfPresent(maxRetries, forKey: .maxRetries)
         try container.encodeIfPresent(retryTimeout, forKey: .retryTimeout)
     }
+
 }

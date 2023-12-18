@@ -12,10 +12,13 @@ public class SignRequestPrefillTag: Codable {
 
     /// This references the ID of a specific tag contained in a file of the sign request.
     public let documentTagId: String?
+
     /// Text prefill value
     public let textValue: String?
+
     /// Checkbox prefill value
     public let checkboxValue: Bool?
+
     /// Date prefill value
     public let dateValue: String?
 
@@ -48,4 +51,5 @@ public class SignRequestPrefillTag: Codable {
         try container.encodeIfPresent(checkboxValue, forKey: .checkboxValue)
         try container.encodeIfPresent(dateValue, forKey: .dateValue)
     }
+
 }

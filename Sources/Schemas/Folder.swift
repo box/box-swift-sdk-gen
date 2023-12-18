@@ -27,39 +27,55 @@ public class Folder: FolderMini {
     /// be `null` for some folders such as the root folder or the trash
     /// folder.
     public let createdAt: String?
+
     /// The date and time when the folder was last updated. This value may
     /// be `null` for some folders such as the root folder or the trash
     /// folder.
     public let modifiedAt: String?
+
     public let description: String?
+
     /// The folder size in bytes.
     /// 
     /// Be careful parsing this integer as its
     /// value can get very large.
     public let size: Int64?
+
     public let pathCollection: FolderPathCollectionField?
+
     public let createdBy: UserMini?
+
     public let modifiedBy: UserMini?
+
     /// The time at which this folder was put in the trash.
     public let trashedAt: String?
+
     /// The time at which this folder is expected to be purged
     /// from the trash.
     public let purgedAt: String?
+
     /// The date and time at which this folder was originally
     /// created.
     public let contentCreatedAt: String?
+
     /// The date and time at which this folder was last updated.
     public let contentModifiedAt: String?
+
     public let ownedBy: UserMini?
+
     public let sharedLink: FolderSharedLinkField?
+
     public let folderUploadEmail: FolderFolderUploadEmailField?
+
     public let parent: FolderMini?
+
     /// Defines if this item has been deleted or not.
     /// 
     /// * `active` when the item has is not in the trash
     /// * `trashed` when the item has been moved to the trash but not deleted
     /// * `deleted` when the item has been permanently deleted.
     public let itemStatus: FolderItemStatusField?
+
     public let itemCollection: Items?
 
     /// Initializer for a Folder.
@@ -76,7 +92,7 @@ public class Folder: FolderMini {
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
-    ///   - sequenceId: String?
+    ///   - sequenceId: 
     ///   - name: The name of the folder.
     ///   - createdAt: The date and time when the folder was created. This value may
     ///     be `null` for some folders such as the root folder or the trash
@@ -84,30 +100,30 @@ public class Folder: FolderMini {
     ///   - modifiedAt: The date and time when the folder was last updated. This value may
     ///     be `null` for some folders such as the root folder or the trash
     ///     folder.
-    ///   - description: String?
+    ///   - description: 
     ///   - size: The folder size in bytes.
     ///     
     ///     Be careful parsing this integer as its
     ///     value can get very large.
-    ///   - pathCollection: FolderPathCollectionField?
-    ///   - createdBy: UserMini?
-    ///   - modifiedBy: UserMini?
+    ///   - pathCollection: 
+    ///   - createdBy: 
+    ///   - modifiedBy: 
     ///   - trashedAt: The time at which this folder was put in the trash.
     ///   - purgedAt: The time at which this folder is expected to be purged
     ///     from the trash.
     ///   - contentCreatedAt: The date and time at which this folder was originally
     ///     created.
     ///   - contentModifiedAt: The date and time at which this folder was last updated.
-    ///   - ownedBy: UserMini?
-    ///   - sharedLink: FolderSharedLinkField?
-    ///   - folderUploadEmail: FolderFolderUploadEmailField?
-    ///   - parent: FolderMini?
+    ///   - ownedBy: 
+    ///   - sharedLink: 
+    ///   - folderUploadEmail: 
+    ///   - parent: 
     ///   - itemStatus: Defines if this item has been deleted or not.
     ///     
     ///     * `active` when the item has is not in the trash
     ///     * `trashed` when the item has been moved to the trash but not deleted
     ///     * `deleted` when the item has been permanently deleted.
-    ///   - itemCollection: Items?
+    ///   - itemCollection: 
     public init(id: String, type: FolderBaseTypeField, etag: String? = nil, sequenceId: String? = nil, name: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FolderPathCollectionField? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, ownedBy: UserMini? = nil, sharedLink: FolderSharedLinkField? = nil, folderUploadEmail: FolderFolderUploadEmailField? = nil, parent: FolderMini? = nil, itemStatus: FolderItemStatusField? = nil, itemCollection: Items? = nil) {
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
@@ -126,6 +142,7 @@ public class Folder: FolderMini {
         self.parent = parent
         self.itemStatus = itemStatus
         self.itemCollection = itemCollection
+
         super.init(id: id, type: type, etag: etag, sequenceId: sequenceId, name: name)
     }
 
@@ -148,7 +165,8 @@ public class Folder: FolderMini {
         parent = try container.decodeIfPresent(FolderMini.self, forKey: .parent)
         itemStatus = try container.decodeIfPresent(FolderItemStatusField.self, forKey: .itemStatus)
         itemCollection = try container.decodeIfPresent(Items.self, forKey: .itemCollection)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -172,4 +190,5 @@ public class Folder: FolderMini {
         try container.encodeIfPresent(itemCollection, forKey: .itemCollection)
         try super.encode(to: encoder)
     }
+
 }

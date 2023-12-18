@@ -18,23 +18,27 @@ public class Items: Codable {
     /// This field is only returned for calls that use offset-based pagination.
     /// For marker-based paginated APIs, this field will be omitted.
     public let totalCount: Int64?
+
     /// The limit that was used for these entries. This will be the same as the
     /// `limit` query parameter unless that value exceeded the maximum value
     /// allowed. The maximum value varies by API.
     public let limit: Int64?
+
     /// The 0-based offset of the first entry in this set. This will be the same
     /// as the `offset` query parameter.
     /// 
     /// This field is only returned for calls that use offset-based pagination.
     /// For marker-based paginated APIs, this field will be omitted.
     public let offset: Int64?
+
     /// The order by which items are returned.
     /// 
     /// This field is only returned for calls that use offset-based pagination.
     /// For marker-based paginated APIs, this field will be omitted.
     public let order: [ItemsOrderField]?
+
     /// The items in this collection.
-    public let entries: [FileMiniOrFolderMiniOrWebLink]?
+    public let entries: [FileFullOrFolderMiniOrWebLink]?
 
     /// Initializer for a Items.
     ///
@@ -58,7 +62,7 @@ public class Items: Codable {
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
     ///   - entries: The items in this collection.
-    public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [ItemsOrderField]? = nil, entries: [FileMiniOrFolderMiniOrWebLink]? = nil) {
+    public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [ItemsOrderField]? = nil, entries: [FileFullOrFolderMiniOrWebLink]? = nil) {
         self.totalCount = totalCount
         self.limit = limit
         self.offset = offset
@@ -72,7 +76,7 @@ public class Items: Codable {
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         offset = try container.decodeIfPresent(Int64.self, forKey: .offset)
         order = try container.decodeIfPresent([ItemsOrderField].self, forKey: .order)
-        entries = try container.decodeIfPresent([FileMiniOrFolderMiniOrWebLink].self, forKey: .entries)
+        entries = try container.decodeIfPresent([FileFullOrFolderMiniOrWebLink].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -83,4 +87,5 @@ public class Items: Codable {
         try container.encodeIfPresent(order, forKey: .order)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
+
 }

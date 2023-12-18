@@ -9,8 +9,10 @@ public class UserAvatarPicUrlsField: Codable {
 
     /// The location of a small-sized avatar.
     public let small: String?
+
     /// The location of a large-sized avatar.
     public let large: String?
+
     /// The location of the avatar preview.
     public let preview: String?
 
@@ -39,4 +41,5 @@ public class UserAvatarPicUrlsField: Codable {
         try container.encodeIfPresent(large, forKey: .large)
         try container.encodeIfPresent(preview, forKey: .preview)
     }
+
 }

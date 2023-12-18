@@ -13,16 +13,21 @@ public class ShieldInformationBarrierSegmentMember: ShieldInformationBarrierSegm
     }
 
     public let shieldInformationBarrier: ShieldInformationBarrierBase?
+
     /// The `type` and `id` of the requested
     /// shield information barrier segment.
     public let shieldInformationBarrierSegment: ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentField?
+
     /// ISO date time string when this shield
     /// information barrier object was created.
     public let createdAt: String?
+
     public let createdBy: UserBase?
+
     /// ISO date time string when this
     /// shield information barrier segment Member was updated.
     public let updatedAt: String?
+
     public let updatedBy: UserBase?
 
     /// Initializer for a ShieldInformationBarrierSegmentMember.
@@ -31,16 +36,16 @@ public class ShieldInformationBarrierSegmentMember: ShieldInformationBarrierSegm
     ///   - id: The unique identifier for the
     ///     shield information barrier segment member
     ///   - type: The type of the shield information barrier segment member
-    ///   - user: UserBase?
-    ///   - shieldInformationBarrier: ShieldInformationBarrierBase?
+    ///   - user: 
+    ///   - shieldInformationBarrier: 
     ///   - shieldInformationBarrierSegment: The `type` and `id` of the requested
     ///     shield information barrier segment.
     ///   - createdAt: ISO date time string when this shield
     ///     information barrier object was created.
-    ///   - createdBy: UserBase?
+    ///   - createdBy: 
     ///   - updatedAt: ISO date time string when this
     ///     shield information barrier segment Member was updated.
-    ///   - updatedBy: UserBase?
+    ///   - updatedBy: 
     public init(id: String? = nil, type: ShieldInformationBarrierSegmentMemberBaseTypeField? = nil, user: UserBase? = nil, shieldInformationBarrier: ShieldInformationBarrierBase? = nil, shieldInformationBarrierSegment: ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentField? = nil, createdAt: String? = nil, createdBy: UserBase? = nil, updatedAt: String? = nil, updatedBy: UserBase? = nil) {
         self.shieldInformationBarrier = shieldInformationBarrier
         self.shieldInformationBarrierSegment = shieldInformationBarrierSegment
@@ -48,6 +53,7 @@ public class ShieldInformationBarrierSegmentMember: ShieldInformationBarrierSegm
         self.createdBy = createdBy
         self.updatedAt = updatedAt
         self.updatedBy = updatedBy
+
         super.init(id: id, type: type, user: user)
     }
 
@@ -59,7 +65,8 @@ public class ShieldInformationBarrierSegmentMember: ShieldInformationBarrierSegm
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
         updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt)
         updatedBy = try container.decodeIfPresent(UserBase.self, forKey: .updatedBy)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -72,4 +79,5 @@ public class ShieldInformationBarrierSegmentMember: ShieldInformationBarrierSegm
         try container.encodeIfPresent(updatedBy, forKey: .updatedBy)
         try super.encode(to: encoder)
     }
+
 }

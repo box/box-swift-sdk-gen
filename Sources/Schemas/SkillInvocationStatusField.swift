@@ -18,11 +18,14 @@ public class SkillInvocationStatusField: Codable {
     ///   retried.
     /// * `permanent_failure` -  Encountered a permanent issue and
     ///   retry would not help.
-    public let state: SkillInvocationStatusFieldStateField?
+    public let state: SkillInvocationStatusStateField?
+
     /// Status information
     public let message: String?
+
     /// Error code information, if error occurred.
     public let errorCode: String?
+
     /// Additional status information.
     public let additionalInfo: String?
 
@@ -42,7 +45,7 @@ public class SkillInvocationStatusField: Codable {
     ///   - message: Status information
     ///   - errorCode: Error code information, if error occurred.
     ///   - additionalInfo: Additional status information.
-    public init(state: SkillInvocationStatusFieldStateField? = nil, message: String? = nil, errorCode: String? = nil, additionalInfo: String? = nil) {
+    public init(state: SkillInvocationStatusStateField? = nil, message: String? = nil, errorCode: String? = nil, additionalInfo: String? = nil) {
         self.state = state
         self.message = message
         self.errorCode = errorCode
@@ -51,7 +54,7 @@ public class SkillInvocationStatusField: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        state = try container.decodeIfPresent(SkillInvocationStatusFieldStateField.self, forKey: .state)
+        state = try container.decodeIfPresent(SkillInvocationStatusStateField.self, forKey: .state)
         message = try container.decodeIfPresent(String.self, forKey: .message)
         errorCode = try container.decodeIfPresent(String.self, forKey: .errorCode)
         additionalInfo = try container.decodeIfPresent(String.self, forKey: .additionalInfo)
@@ -64,4 +67,5 @@ public class SkillInvocationStatusField: Codable {
         try container.encodeIfPresent(errorCode, forKey: .errorCode)
         try container.encodeIfPresent(additionalInfo, forKey: .additionalInfo)
     }
+
 }

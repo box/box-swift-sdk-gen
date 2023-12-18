@@ -15,20 +15,27 @@ public class TranscriptSkillCard: Codable {
 
     /// `skill_card`
     public let type: TranscriptSkillCardTypeField
+
     /// `transcript`
     public let skillCardType: TranscriptSkillCardSkillCardTypeField
+
     /// The service that applied this metadata.
     public let skill: TranscriptSkillCardSkillField
+
     /// The invocation of this service, used to track
     /// which instance of a service applied the metadata.
     public let invocation: TranscriptSkillCardInvocationField
+
     /// An list of entries for the card. This represents the individual entries of
     /// the transcription.
     public let entries: [TranscriptSkillCardEntriesField]
+
     /// The optional date and time this card was created at.
     public let createdAt: String?
+
     /// The title of the card.
     public let skillCardTitle: TranscriptSkillCardSkillCardTitleField?
+
     /// An optional total duration in seconds.
     /// 
     /// Used with a `skill_card_type` of `transcript` or
@@ -85,4 +92,5 @@ public class TranscriptSkillCard: Codable {
         try container.encodeIfPresent(skillCardTitle, forKey: .skillCardTitle)
         try container.encodeIfPresent(duration, forKey: .duration)
     }
+
 }

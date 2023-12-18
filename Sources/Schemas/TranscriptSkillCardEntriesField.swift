@@ -9,9 +9,10 @@ public class TranscriptSkillCardEntriesField: Codable {
     /// The text of the entry. This would be the transcribed text assigned
     /// to the entry on the timeline.
     public let text: String?
+
     /// Defines when a transcribed bit of text appears. This only includes a
     /// start time and no end time.
-    public let appears: [TranscriptSkillCardEntriesFieldAppearsField]?
+    public let appears: [TranscriptSkillCardEntriesAppearsField]?
 
     /// Initializer for a TranscriptSkillCardEntriesField.
     ///
@@ -20,7 +21,7 @@ public class TranscriptSkillCardEntriesField: Codable {
     ///     to the entry on the timeline.
     ///   - appears: Defines when a transcribed bit of text appears. This only includes a
     ///     start time and no end time.
-    public init(text: String? = nil, appears: [TranscriptSkillCardEntriesFieldAppearsField]? = nil) {
+    public init(text: String? = nil, appears: [TranscriptSkillCardEntriesAppearsField]? = nil) {
         self.text = text
         self.appears = appears
     }
@@ -28,7 +29,7 @@ public class TranscriptSkillCardEntriesField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         text = try container.decodeIfPresent(String.self, forKey: .text)
-        appears = try container.decodeIfPresent([TranscriptSkillCardEntriesFieldAppearsField].self, forKey: .appears)
+        appears = try container.decodeIfPresent([TranscriptSkillCardEntriesAppearsField].self, forKey: .appears)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -36,4 +37,5 @@ public class TranscriptSkillCardEntriesField: Codable {
         try container.encodeIfPresent(text, forKey: .text)
         try container.encodeIfPresent(appears, forKey: .appears)
     }
+
 }

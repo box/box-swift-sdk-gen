@@ -2,9 +2,10 @@ import Foundation
 
 public class FileClassificationsManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -25,12 +26,12 @@ public class FileClassificationsManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - headers: Headers of getFileMetadataEnterpriseSecurityClassification6VmVochwUWo method
+    ///   - headers: Headers of getClassificationOnFile method
     /// - Returns: The `Classification`.
     /// - Throws: The `GeneralError`.
-    public func getFileMetadataEnterpriseSecurityClassification6VmVochwUWo(fileId: String, headers: GetFileMetadataEnterpriseSecurityClassification6VmVochwUWoHeadersArg = GetFileMetadataEnterpriseSecurityClassification6VmVochwUWoHeadersArg()) async throws -> Classification {
+    public func getClassificationOnFile(fileId: String, headers: GetClassificationOnFileHeaders = GetClassificationOnFileHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Classification.deserialize(from: response.data)
     }
 
@@ -50,13 +51,13 @@ public class FileClassificationsManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - requestBody: Request body of createFileMetadataEnterpriseSecurityClassification method
-    ///   - headers: Headers of createFileMetadataEnterpriseSecurityClassification method
+    ///   - requestBody: Request body of addClassificationToFile method
+    ///   - headers: Headers of addClassificationToFile method
     /// - Returns: The `Classification`.
     /// - Throws: The `GeneralError`.
-    public func createFileMetadataEnterpriseSecurityClassification(fileId: String, requestBody: CreateFileMetadataEnterpriseSecurityClassificationRequestBodyArg = CreateFileMetadataEnterpriseSecurityClassificationRequestBodyArg(), headers: CreateFileMetadataEnterpriseSecurityClassificationHeadersArg = CreateFileMetadataEnterpriseSecurityClassificationHeadersArg()) async throws -> Classification {
+    public func addClassificationToFile(fileId: String, requestBody: AddClassificationToFileRequestBody = AddClassificationToFileRequestBody(), headers: AddClassificationToFileHeaders = AddClassificationToFileHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Classification.deserialize(from: response.data)
     }
 
@@ -75,13 +76,13 @@ public class FileClassificationsManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - requestBody: Request body of updateFileMetadataEnterpriseSecurityClassification method
-    ///   - headers: Headers of updateFileMetadataEnterpriseSecurityClassification method
+    ///   - requestBody: Request body of updateClassificationOnFile method
+    ///   - headers: Headers of updateClassificationOnFile method
     /// - Returns: The `Classification`.
     /// - Throws: The `GeneralError`.
-    public func updateFileMetadataEnterpriseSecurityClassification(fileId: String, requestBody: [UpdateFileMetadataEnterpriseSecurityClassificationRequestBodyArg], headers: UpdateFileMetadataEnterpriseSecurityClassificationHeadersArg = UpdateFileMetadataEnterpriseSecurityClassificationHeadersArg()) async throws -> Classification {
+    public func updateClassificationOnFile(fileId: String, requestBody: [UpdateClassificationOnFileRequestBody], headers: UpdateClassificationOnFileHeaders = UpdateClassificationOnFileHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Classification.deserialize(from: response.data)
     }
 
@@ -100,11 +101,11 @@ public class FileClassificationsManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - headers: Headers of deleteFileMetadataEnterpriseSecurityClassification method
+    ///   - headers: Headers of deleteClassificationFromFile method
     /// - Throws: The `GeneralError`.
-    public func deleteFileMetadataEnterpriseSecurityClassification(fileId: String, headers: DeleteFileMetadataEnterpriseSecurityClassificationHeadersArg = DeleteFileMetadataEnterpriseSecurityClassificationHeadersArg()) async throws {
+    public func deleteClassificationFromFile(fileId: String, headers: DeleteClassificationFromFileHeaders = DeleteClassificationFromFileHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

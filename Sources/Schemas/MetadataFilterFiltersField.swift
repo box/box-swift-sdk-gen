@@ -14,4 +14,5 @@ public enum MetadataFilterFiltersField: Codable {
     public func encode(to encoder: Encoder) throws {
         throw EncodingError.invalidValue(MetadataFilterFiltersField.self, EncodingError.Context(codingPath: [], debugDescription: "The rules determining the encoding cannot be established."))
     }
+
 }

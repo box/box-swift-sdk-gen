@@ -14,14 +14,20 @@ public class TermsOfServiceUserStatus: Codable {
 
     /// The unique identifier for this terms of service user status
     public let id: String?
+
     /// `terms_of_service_user_status`
     public let type: TermsOfServiceUserStatusTypeField?
+
     public let tos: TermsOfServiceBase?
+
     public let user: UserMini?
+
     /// If the user has accepted the terms of services
     public let isAccepted: Bool?
+
     /// When the legal item was created
     public let createdAt: String?
+
     /// When the legal item was modified.
     public let modifiedAt: String?
 
@@ -30,8 +36,8 @@ public class TermsOfServiceUserStatus: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this terms of service user status
     ///   - type: `terms_of_service_user_status`
-    ///   - tos: TermsOfServiceBase?
-    ///   - user: UserMini?
+    ///   - tos: 
+    ///   - user: 
     ///   - isAccepted: If the user has accepted the terms of services
     ///   - createdAt: When the legal item was created
     ///   - modifiedAt: When the legal item was modified.
@@ -66,4 +72,5 @@ public class TermsOfServiceUserStatus: Codable {
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
     }
+
 }

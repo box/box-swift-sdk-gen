@@ -2,9 +2,10 @@ import Foundation
 
 public class DownloadsManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -25,10 +26,10 @@ public class DownloadsManager {
     ///   - headers: Headers of downloadFile method
     /// - Returns: The `URL`.
     /// - Throws: The `GeneralError`.
-    public func downloadFile(fileId: String, downloadDestinationURL: URL, queryParams: DownloadFileQueryParamsArg = DownloadFileQueryParamsArg(), headers: DownloadFileHeadersArg = DownloadFileHeadersArg()) async throws -> URL {
+    public func downloadFile(fileId: String, downloadDestinationURL: URL, queryParams: DownloadFileQueryParams = DownloadFileQueryParams(), headers: DownloadFileHeaders = DownloadFileHeaders()) async throws -> URL {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["version": Utils.Strings.toString(value: queryParams.version), "access_token": Utils.Strings.toString(value: queryParams.accessToken)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["range": Utils.Strings.toString(value: headers.range), "boxapi": Utils.Strings.toString(value: headers.boxapi)], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/content")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, downloadDestinationURL: downloadDestinationURL, responseFormat: "binary", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/content")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, downloadDestinationURL: downloadDestinationURL, responseFormat: "binary", auth: self.auth, networkSession: self.networkSession))
         return response.downloadDestinationURL!
     }
 

@@ -20,22 +20,32 @@ public class Task: Codable {
 
     /// The unique identifier for this task
     public let id: String?
+
     /// `task`
     public let type: TaskTypeField?
+
     public let item: FileMini?
+
     /// When the task is due
     public let dueAt: String?
+
     /// The type of task the task assignee will be prompted to
     /// perform.
     public let action: TaskActionField?
+
     /// A message that will be included with the task
     public let message: String?
+
     public let taskAssignmentCollection: TaskAssignments?
+
     /// Whether the task has been completed
     public let isCompleted: Bool?
+
     public let createdBy: UserMini?
+
     /// When the task object was created
     public let createdAt: String?
+
     /// Defines which assignees need to complete this task before the task
     /// is considered completed.
     /// 
@@ -50,14 +60,14 @@ public class Task: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this task
     ///   - type: `task`
-    ///   - item: FileMini?
+    ///   - item: 
     ///   - dueAt: When the task is due
     ///   - action: The type of task the task assignee will be prompted to
     ///     perform.
     ///   - message: A message that will be included with the task
-    ///   - taskAssignmentCollection: TaskAssignments?
+    ///   - taskAssignmentCollection: 
     ///   - isCompleted: Whether the task has been completed
-    ///   - createdBy: UserMini?
+    ///   - createdBy: 
     ///   - createdAt: When the task object was created
     ///   - completionRule: Defines which assignees need to complete this task before the task
     ///     is considered completed.
@@ -109,4 +119,5 @@ public class Task: Codable {
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(completionRule, forKey: .completionRule)
     }
+
 }

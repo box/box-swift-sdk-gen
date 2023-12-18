@@ -16,18 +16,26 @@ public class Event: Codable {
 
     /// `event`
     public let type: String?
+
     /// When the event object was created
     public let createdAt: String?
+
     /// When the event object was recorded in database
     public let recordedAt: String?
+
     /// The ID of the event object. You can use this to detect duplicate events
     public let eventId: String?
+
     public let createdBy: UserMini?
+
     public let eventType: EventEventTypeField?
+
     /// The session of the user that performed the action. Not all events will
     /// populate this attribute.
     public let sessionId: String?
+
     public let source: EventSourceOrFileOrFolderOrUser?
+
     /// This object provides additional information about the event if available.
     /// 
     /// This can include how a user performed an event as well as additional
@@ -43,11 +51,11 @@ public class Event: Codable {
     ///   - createdAt: When the event object was created
     ///   - recordedAt: When the event object was recorded in database
     ///   - eventId: The ID of the event object. You can use this to detect duplicate events
-    ///   - createdBy: UserMini?
-    ///   - eventType: EventEventTypeField?
+    ///   - createdBy: 
+    ///   - eventType: 
     ///   - sessionId: The session of the user that performed the action. Not all events will
     ///     populate this attribute.
-    ///   - source: EventSourceOrFileOrFolderOrUser?
+    ///   - source: 
     ///   - additionalDetails: This object provides additional information about the event if available.
     ///     
     ///     This can include how a user performed an event as well as additional
@@ -91,4 +99,5 @@ public class Event: Codable {
         try container.encodeIfPresent(source, forKey: .source)
         try container.encodeIfPresent(additionalDetails, forKey: .additionalDetails)
     }
+
 }

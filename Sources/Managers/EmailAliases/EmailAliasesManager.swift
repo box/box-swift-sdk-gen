@@ -2,9 +2,10 @@ import Foundation
 
 public class EmailAliasesManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -18,9 +19,9 @@ public class EmailAliasesManager {
     ///   - headers: Headers of getUserEmailAliases method
     /// - Returns: The `EmailAliases`.
     /// - Throws: The `GeneralError`.
-    public func getUserEmailAliases(userId: String, headers: GetUserEmailAliasesHeadersArg = GetUserEmailAliasesHeadersArg()) async throws -> EmailAliases {
+    public func getUserEmailAliases(userId: String, headers: GetUserEmailAliasesHeaders = GetUserEmailAliasesHeaders()) async throws -> EmailAliases {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)\("/email_aliases")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)\("/email_aliases")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try EmailAliases.deserialize(from: response.data)
     }
 
@@ -33,9 +34,9 @@ public class EmailAliasesManager {
     ///   - headers: Headers of createUserEmailAlias method
     /// - Returns: The `EmailAlias`.
     /// - Throws: The `GeneralError`.
-    public func createUserEmailAlias(userId: String, requestBody: CreateUserEmailAliasRequestBodyArg, headers: CreateUserEmailAliasHeadersArg = CreateUserEmailAliasHeadersArg()) async throws -> EmailAlias {
+    public func createUserEmailAlias(userId: String, requestBody: CreateUserEmailAliasRequestBody, headers: CreateUserEmailAliasHeaders = CreateUserEmailAliasHeaders()) async throws -> EmailAlias {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)\("/email_aliases")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)\("/email_aliases")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try EmailAlias.deserialize(from: response.data)
     }
 
@@ -48,9 +49,9 @@ public class EmailAliasesManager {
     ///     Example: "23432"
     ///   - headers: Headers of deleteUserEmailAliasById method
     /// - Throws: The `GeneralError`.
-    public func deleteUserEmailAliasById(userId: String, emailAliasId: String, headers: DeleteUserEmailAliasByIdHeadersArg = DeleteUserEmailAliasByIdHeadersArg()) async throws {
+    public func deleteUserEmailAliasById(userId: String, emailAliasId: String, headers: DeleteUserEmailAliasByIdHeaders = DeleteUserEmailAliasByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)\("/email_aliases/")\(emailAliasId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)\("/email_aliases/")\(emailAliasId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

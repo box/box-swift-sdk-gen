@@ -19,27 +19,34 @@ public class Classification: Codable {
 
     /// The name of the classification applied to the item.
     public let boxSecurityClassificationKey: String?
+
     /// The identifier of the item that this metadata instance
     /// has been attached to. This combines the `type` and the `id`
     /// of the parent in the form `{type}_{id}`.
     public let parent: String?
+
     /// `securityClassification-6VMVochwUWo`
     public let template: ClassificationTemplateField?
+
     /// The scope of the enterprise that this classification has been
     /// applied for.
     /// 
     /// This will be in the format `enterprise_{enterprise_id}`.
     public let scope: String?
+
     /// The version of the metadata instance. This version starts at 0 and
     /// increases every time a classification is updated.
     public let version: Int64?
+
     /// The unique ID of this classification instance. This will be include
     /// the name of the classification template and a unique ID.
     public let type: String?
+
     /// The version of the metadata template. This version starts at 0 and
     /// increases every time the template is updated. This is mostly for internal
     /// use.
     public let typeVersion: Double?
+
     /// Whether an end user can change the classification.
     public let canEdit: Bool?
 
@@ -97,4 +104,5 @@ public class Classification: Codable {
         try container.encodeIfPresent(typeVersion, forKey: .typeVersion)
         try container.encodeIfPresent(canEdit, forKey: .canEdit)
     }
+
 }

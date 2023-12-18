@@ -8,15 +8,16 @@ public class GroupMembershipsOrderField: Codable {
 
     /// The field to order by
     public let by: String?
+
     /// The direction to order by, either ascending or descending
-    public let direction: GroupMembershipsOrderFieldDirectionField?
+    public let direction: GroupMembershipsOrderDirectionField?
 
     /// Initializer for a GroupMembershipsOrderField.
     ///
     /// - Parameters:
     ///   - by: The field to order by
     ///   - direction: The direction to order by, either ascending or descending
-    public init(by: String? = nil, direction: GroupMembershipsOrderFieldDirectionField? = nil) {
+    public init(by: String? = nil, direction: GroupMembershipsOrderDirectionField? = nil) {
         self.by = by
         self.direction = direction
     }
@@ -24,7 +25,7 @@ public class GroupMembershipsOrderField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         by = try container.decodeIfPresent(String.self, forKey: .by)
-        direction = try container.decodeIfPresent(GroupMembershipsOrderFieldDirectionField.self, forKey: .direction)
+        direction = try container.decodeIfPresent(GroupMembershipsOrderDirectionField.self, forKey: .direction)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -32,4 +33,5 @@ public class GroupMembershipsOrderField: Codable {
         try container.encodeIfPresent(by, forKey: .by)
         try container.encodeIfPresent(direction, forKey: .direction)
     }
+
 }

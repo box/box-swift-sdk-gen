@@ -11,6 +11,7 @@ public class Tasks: Codable {
     /// The total number of entries in the collection may be less than
     /// `total_count`.
     public let totalCount: Int64?
+
     /// A list of tasks
     public let entries: [Task]?
 
@@ -37,4 +38,5 @@ public class Tasks: Codable {
         try container.encodeIfPresent(totalCount, forKey: .totalCount)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
+
 }

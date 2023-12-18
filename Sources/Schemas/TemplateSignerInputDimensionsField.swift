@@ -8,6 +8,7 @@ public class TemplateSignerInputDimensionsField: Codable {
 
     /// Relative width to the page the input is on, ranging from 0 to 1.
     public let width: Double?
+
     /// Relative height to the page the input is on, ranging from 0 to 1.
     public let height: Double?
 
@@ -32,4 +33,5 @@ public class TemplateSignerInputDimensionsField: Codable {
         try container.encodeIfPresent(width, forKey: .width)
         try container.encodeIfPresent(height, forKey: .height)
     }
+
 }

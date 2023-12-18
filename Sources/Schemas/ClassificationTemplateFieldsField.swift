@@ -12,15 +12,20 @@ public class ClassificationTemplateFieldsField: Codable {
 
     /// The unique ID of the field.
     public let id: String
+
     /// The array item type.
-    public let type: ClassificationTemplateFieldsFieldTypeField
+    public let type: ClassificationTemplateFieldsTypeField
+
     /// Defines classifications 
     /// available in the enterprise.
-    public let key: ClassificationTemplateFieldsFieldKeyField
+    public let key: ClassificationTemplateFieldsKeyField
+
     /// `Classification`
-    public let displayName: ClassificationTemplateFieldsFieldDisplayNameField
+    public let displayName: ClassificationTemplateFieldsDisplayNameField
+
     /// A list of classifications available in this enterprise.
-    public let options: [ClassificationTemplateFieldsFieldOptionsField]
+    public let options: [ClassificationTemplateFieldsOptionsField]
+
     /// Classifications are always visible to web and mobile users.
     public let hidden: Bool?
 
@@ -34,7 +39,7 @@ public class ClassificationTemplateFieldsField: Codable {
     ///   - displayName: `Classification`
     ///   - options: A list of classifications available in this enterprise.
     ///   - hidden: Classifications are always visible to web and mobile users.
-    public init(id: String, type: ClassificationTemplateFieldsFieldTypeField, key: ClassificationTemplateFieldsFieldKeyField, displayName: ClassificationTemplateFieldsFieldDisplayNameField, options: [ClassificationTemplateFieldsFieldOptionsField], hidden: Bool? = nil) {
+    public init(id: String, type: ClassificationTemplateFieldsTypeField, key: ClassificationTemplateFieldsKeyField, displayName: ClassificationTemplateFieldsDisplayNameField, options: [ClassificationTemplateFieldsOptionsField], hidden: Bool? = nil) {
         self.id = id
         self.type = type
         self.key = key
@@ -46,10 +51,10 @@ public class ClassificationTemplateFieldsField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
-        type = try container.decode(ClassificationTemplateFieldsFieldTypeField.self, forKey: .type)
-        key = try container.decode(ClassificationTemplateFieldsFieldKeyField.self, forKey: .key)
-        displayName = try container.decode(ClassificationTemplateFieldsFieldDisplayNameField.self, forKey: .displayName)
-        options = try container.decode([ClassificationTemplateFieldsFieldOptionsField].self, forKey: .options)
+        type = try container.decode(ClassificationTemplateFieldsTypeField.self, forKey: .type)
+        key = try container.decode(ClassificationTemplateFieldsKeyField.self, forKey: .key)
+        displayName = try container.decode(ClassificationTemplateFieldsDisplayNameField.self, forKey: .displayName)
+        options = try container.decode([ClassificationTemplateFieldsOptionsField].self, forKey: .options)
         hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden)
     }
 
@@ -62,4 +67,5 @@ public class ClassificationTemplateFieldsField: Codable {
         try container.encode(options, forKey: .options)
         try container.encodeIfPresent(hidden, forKey: .hidden)
     }
+
 }

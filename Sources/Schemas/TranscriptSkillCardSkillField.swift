@@ -7,7 +7,8 @@ public class TranscriptSkillCardSkillField: Codable {
     }
 
     /// `service`
-    public let type: TranscriptSkillCardSkillFieldTypeField
+    public let type: TranscriptSkillCardSkillTypeField
+
     /// A custom identifier that represent the service that
     /// applied this metadata.
     public let id: String
@@ -18,14 +19,14 @@ public class TranscriptSkillCardSkillField: Codable {
     ///   - type: `service`
     ///   - id: A custom identifier that represent the service that
     ///     applied this metadata.
-    public init(type: TranscriptSkillCardSkillFieldTypeField, id: String) {
+    public init(type: TranscriptSkillCardSkillTypeField, id: String) {
         self.type = type
         self.id = id
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decode(TranscriptSkillCardSkillFieldTypeField.self, forKey: .type)
+        type = try container.decode(TranscriptSkillCardSkillTypeField.self, forKey: .type)
         id = try container.decode(String.self, forKey: .id)
     }
 
@@ -34,4 +35,5 @@ public class TranscriptSkillCardSkillField: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

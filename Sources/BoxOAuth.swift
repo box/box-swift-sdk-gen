@@ -172,6 +172,80 @@ public class BoxOAuth: Authentication {
         return newToken
     }
 
+    /// Revoke an active Access Token, effectively logging a user out that has been previously authenticated.
+    ///
+    /// - Parameters:
+    ///   - networkSession: The Networking Session object  which  provides the URLSession
+    /// - Throws: An error if for any reason the token cannot be revoked.
+    public func revokeToken(networkSession: NetworkSession? = nil) async throws {
+        let token = try await self.tokenStorage.get()
+        guard let accessToken = token?.accessToken else {
+            return
+        }
+
+        let params: [String: String] = [
+            "client_id": self.config.clientId,
+            "client_secret": self.config.clientSecret,
+            "token": accessToken
+        ]
+
+        _ = try await NetworkClient.shared.fetch(
+            url: "https://api.box.com/oauth2/revoke",
+            options: FetchOptions(
+                method: .post,
+                data: params.serialize(),
+                contentType: HTTPHeaderContentTypeValue.urlEncoded,
+                networkSession: networkSession
+            )
+        )
+
+        try await tokenStorage.clear()
+    }
+
+    /// Downscope access token for the app user.
+    ///
+    /// The invocation of this method does not invalidate the token in the `tokenStorage`,
+    /// it just returns a new downscope token which you can use to create a new authorization instance.
+    ///
+    /// A downscoped token does not include a refresh token.
+    /// To get a new downscoped token, refresh the original refresh token and use that new token to get a downscoped token.
+    ///
+    /// - Parameters:
+    ///   - scopes: Scope or scopes that you want to apply to the resulting token.
+    ///   - resource: Full url path to the file that the token should be generated for, eg: https://api.box.com/2.0/files/{file_id}
+    ///   - sharedLink: Shared link to get a token for.
+    ///   - networkSession: The Networking Session object  which  provides the URLSession
+    /// - Returns: The downscoped access token.
+    /// - Throws: An error if for any reason the token cannot be downscoped.
+    public func downscopeToken(
+        scopes: [String],
+        resource: String? = nil,
+        sharedLink: String? = nil,
+        networkSession: NetworkSession? = nil
+    ) async throws -> AccessToken {
+        let token = try await self.tokenStorage.get()
+        guard let accessToken = token?.accessToken else {
+            throw AuthError(message: .tokenRetrieval)
+        }
+
+        var params: [String: String] = [
+            "subject_token": accessToken,
+            "subject_token_type": SubjectTokenType.urnIetfParamsOauthTokenTypeAccessToken.rawValue,
+            "grant_type": TokenGrantType.urnIetfParamsOauthGrantTypeTokenExchange.rawValue,
+            "scope": scopes.joined(separator: " ")
+        ]
+
+        if let resource {
+            params["resource"] = resource
+        }
+
+        if let sharedLink {
+            params["box_shared_link"] = sharedLink
+        }
+
+        return try await sendTokenRequest(body: params, networkSession: networkSession)
+    }
+
     /// Acquires a token based on the passed parameters.
     ///
     /// - Parameters:

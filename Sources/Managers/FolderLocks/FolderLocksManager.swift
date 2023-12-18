@@ -2,9 +2,10 @@ import Foundation
 
 public class FolderLocksManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -19,10 +20,10 @@ public class FolderLocksManager {
     ///   - headers: Headers of getFolderLocks method
     /// - Returns: The `FolderLocks`.
     /// - Throws: The `GeneralError`.
-    public func getFolderLocks(queryParams: GetFolderLocksQueryParamsArg, headers: GetFolderLocksHeadersArg = GetFolderLocksHeadersArg()) async throws -> FolderLocks {
+    public func getFolderLocks(queryParams: GetFolderLocksQueryParams, headers: GetFolderLocksHeaders = GetFolderLocksHeaders()) async throws -> FolderLocks {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["folder_id": Utils.Strings.toString(value: queryParams.folderId)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folder_locks")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folder_locks")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try FolderLocks.deserialize(from: response.data)
     }
 
@@ -37,9 +38,9 @@ public class FolderLocksManager {
     ///   - headers: Headers of createFolderLock method
     /// - Returns: The `FolderLock`.
     /// - Throws: The `GeneralError`.
-    public func createFolderLock(requestBody: CreateFolderLockRequestBodyArg, headers: CreateFolderLockHeadersArg = CreateFolderLockHeadersArg()) async throws -> FolderLock {
+    public func createFolderLock(requestBody: CreateFolderLockRequestBody, headers: CreateFolderLockHeaders = CreateFolderLockHeaders()) async throws -> FolderLock {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folder_locks")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folder_locks")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try FolderLock.deserialize(from: response.data)
     }
 
@@ -53,9 +54,9 @@ public class FolderLocksManager {
     ///     Example: "12345"
     ///   - headers: Headers of deleteFolderLockById method
     /// - Throws: The `GeneralError`.
-    public func deleteFolderLockById(folderLockId: String, headers: DeleteFolderLockByIdHeadersArg = DeleteFolderLockByIdHeadersArg()) async throws {
+    public func deleteFolderLockById(folderLockId: String, headers: DeleteFolderLockByIdHeaders = DeleteFolderLockByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folder_locks/")\(folderLockId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folder_locks/")\(folderLockId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

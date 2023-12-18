@@ -7,6 +7,7 @@ public class SignRequestSignFilesField: Codable {
     }
 
     public let files: [FileMini]?
+
     /// Indicates whether the `sign_files` documents are processing
     /// and the PDFs may be out of date. A change to any document
     /// requires processing on all `sign_files`. We
@@ -17,7 +18,7 @@ public class SignRequestSignFilesField: Codable {
     /// Initializer for a SignRequestSignFilesField.
     ///
     /// - Parameters:
-    ///   - files: [FileMini]?
+    ///   - files: 
     ///   - isReadyForDownload: Indicates whether the `sign_files` documents are processing
     ///     and the PDFs may be out of date. A change to any document
     ///     requires processing on all `sign_files`. We
@@ -39,4 +40,5 @@ public class SignRequestSignFilesField: Codable {
         try container.encodeIfPresent(files, forKey: .files)
         try container.encodeIfPresent(isReadyForDownload, forKey: .isReadyForDownload)
     }
+
 }

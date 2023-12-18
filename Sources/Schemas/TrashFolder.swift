@@ -34,57 +34,77 @@ public class TrashFolder: Codable {
     /// for the URL `https://*.app.box.com/folders/123`
     /// the `folder_id` is `123`.
     public let id: String
+
     /// `folder`
     public let type: TrashFolderTypeField
+
     /// The name of the folder.
     public let name: String
+
     public let description: String
+
     /// The folder size in bytes.
     /// 
     /// Be careful parsing this integer as its
     /// value can get very large.
     public let size: Int64
+
     public let pathCollection: TrashFolderPathCollectionField
+
     public let createdBy: UserMini
+
     public let modifiedBy: UserMini
+
     public let ownedBy: UserMini
+
     /// Defines if this item has been deleted or not.
     /// 
     /// * `active` when the item has is not in the trash
     /// * `trashed` when the item has been moved to the trash but not deleted
     /// * `deleted` when the item has been permanently deleted.
     public let itemStatus: TrashFolderItemStatusField
+
     /// The HTTP `etag` of this folder. This can be used within some API
     /// endpoints in the `If-Match` and `If-None-Match` headers to only
     /// perform changes on the folder if (no) changes have happened.
     public let etag: String?
+
     public let sequenceId: String?
+
     /// The date and time when the folder was created. This value may
     /// be `null` for some folders such as the root folder or the trash
     /// folder.
     public let createdAt: String?
+
     /// The date and time when the folder was last updated. This value may
     /// be `null` for some folders such as the root folder or the trash
     /// folder.
     public let modifiedAt: String?
+
     /// The time at which this folder was put in the trash.
     public let trashedAt: String?
+
     /// The time at which this folder is expected to be purged
     /// from the trash.
     public let purgedAt: String?
+
     /// The date and time at which this folder was originally
     /// created.
     public let contentCreatedAt: String?
+
     /// The date and time at which this folder was last updated.
     public let contentModifiedAt: String?
+
     /// The shared link for this folder. This will
     /// be `null` if a folder has been trashed, since the link will no longer
     /// be active.
     public let sharedLink: String?
+
     /// The folder upload email for this folder. This will
     /// be `null` if a folder has been trashed, since the upload will no longer
     /// work.
     public let folderUploadEmail: String?
+
     public let parent: FolderMini?
 
     /// Initializer for a TrashFolder.
@@ -99,15 +119,15 @@ public class TrashFolder: Codable {
     ///     the `folder_id` is `123`.
     ///   - type: `folder`
     ///   - name: The name of the folder.
-    ///   - description: String
+    ///   - description: 
     ///   - size: The folder size in bytes.
     ///     
     ///     Be careful parsing this integer as its
     ///     value can get very large.
-    ///   - pathCollection: TrashFolderPathCollectionField
-    ///   - createdBy: UserMini
-    ///   - modifiedBy: UserMini
-    ///   - ownedBy: UserMini
+    ///   - pathCollection: 
+    ///   - createdBy: 
+    ///   - modifiedBy: 
+    ///   - ownedBy: 
     ///   - itemStatus: Defines if this item has been deleted or not.
     ///     
     ///     * `active` when the item has is not in the trash
@@ -116,7 +136,7 @@ public class TrashFolder: Codable {
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
-    ///   - sequenceId: String?
+    ///   - sequenceId: 
     ///   - createdAt: The date and time when the folder was created. This value may
     ///     be `null` for some folders such as the root folder or the trash
     ///     folder.
@@ -135,7 +155,7 @@ public class TrashFolder: Codable {
     ///   - folderUploadEmail: The folder upload email for this folder. This will
     ///     be `null` if a folder has been trashed, since the upload will no longer
     ///     work.
-    ///   - parent: FolderMini?
+    ///   - parent: 
     public init(id: String, type: TrashFolderTypeField, name: String, description: String, size: Int64, pathCollection: TrashFolderPathCollectionField, createdBy: UserMini, modifiedBy: UserMini, ownedBy: UserMini, itemStatus: TrashFolderItemStatusField, etag: String? = nil, sequenceId: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, sharedLink: String? = nil, folderUploadEmail: String? = nil, parent: FolderMini? = nil) {
         self.id = id
         self.type = type
@@ -209,4 +229,5 @@ public class TrashFolder: Codable {
         try container.encodeIfPresent(folderUploadEmail, forKey: .folderUploadEmail)
         try container.encodeIfPresent(parent, forKey: .parent)
     }
+
 }

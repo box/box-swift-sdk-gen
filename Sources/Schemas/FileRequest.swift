@@ -23,25 +23,32 @@ public class FileRequest: Codable {
 
     /// The unique identifier for this file request.
     public let id: String
+
     /// `file_request`
     public let type: FileRequestTypeField
+
     public let folder: FolderMini
+
     /// The date and time when the file request was created.
     public let createdAt: String
+
     /// The date and time when the file request was last updated.
     public let updatedAt: String
+
     /// The title of file request. This is shown
     /// in the Box UI to users uploading files.
     /// 
     /// This defaults to title of the file request that was
     /// copied to create this file request.
     public let title: String?
+
     /// The optional description of this file request. This is
     /// shown in the Box UI to users uploading files.
     /// 
     /// This defaults to description of the file request that was
     /// copied to create this file request.
     public let description: String?
+
     /// The status of the file request. This defaults
     /// to `active`.
     /// 
@@ -53,6 +60,7 @@ public class FileRequest: Codable {
     /// This defaults to status of file request that was
     /// copied to create this file request.
     public let status: FileRequestStatusField?
+
     /// Whether a file request submitter is required to provide
     /// their email address.
     /// 
@@ -62,6 +70,7 @@ public class FileRequest: Codable {
     /// This defaults to setting of file request that was
     /// copied to create this file request.
     public let isEmailRequired: Bool?
+
     /// Whether a file request submitter is required to provide
     /// a description of the files they are submitting.
     /// 
@@ -71,22 +80,27 @@ public class FileRequest: Codable {
     /// This defaults to setting of file request that was
     /// copied to create this file request.
     public let isDescriptionRequired: Bool?
+
     /// The date after which a file request will no longer accept new
     /// submissions.
     /// 
     /// After this date, the `status` will automatically be set to
     /// `inactive`.
     public let expiresAt: String?
+
     /// The generated URL for this file request. This URL can be shared
     /// with users to let them upload files to the associated folder.
     public let url: String?
+
     /// The HTTP `etag` of this file. This can be used in combination with
     /// the `If-Match` header when updating a file request. By providing that
     /// header, a change will only be performed on the  file request if the `etag`
     /// on the file request still matches the `etag` provided in the `If-Match`
     /// header.
     public let etag: String?
+
     public let createdBy: UserMini?
+
     public let updatedBy: UserMini?
 
     /// Initializer for a FileRequest.
@@ -94,7 +108,7 @@ public class FileRequest: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this file request.
     ///   - type: `file_request`
-    ///   - folder: FolderMini
+    ///   - folder: 
     ///   - createdAt: The date and time when the file request was created.
     ///   - updatedAt: The date and time when the file request was last updated.
     ///   - title: The title of file request. This is shown
@@ -145,8 +159,8 @@ public class FileRequest: Codable {
     ///     header, a change will only be performed on the  file request if the `etag`
     ///     on the file request still matches the `etag` provided in the `If-Match`
     ///     header.
-    ///   - createdBy: UserMini?
-    ///   - updatedBy: UserMini?
+    ///   - createdBy: 
+    ///   - updatedBy: 
     public init(id: String, type: FileRequestTypeField, folder: FolderMini, createdAt: String, updatedAt: String, title: String? = nil, description: String? = nil, status: FileRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: String? = nil, url: String? = nil, etag: String? = nil, createdBy: UserMini? = nil, updatedBy: UserMini? = nil) {
         self.id = id
         self.type = type
@@ -202,4 +216,5 @@ public class FileRequest: Codable {
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(updatedBy, forKey: .updatedBy)
     }
+
 }

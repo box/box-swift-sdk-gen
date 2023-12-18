@@ -11,12 +11,15 @@ public class DevicePinners: Codable {
 
     /// A list of device pins
     public let entries: [DevicePinner]?
+
     /// The limit that was used for these entries. This will be the same as the
     /// `limit` query parameter unless that value exceeded the maximum value
     /// allowed.
     public let limit: Int64?
+
     /// The marker for the start of the next page of results.
     public let nextMarker: Int64?
+
     /// The order by which items are returned.
     public let order: [DevicePinnersOrderField]?
 
@@ -51,4 +54,5 @@ public class DevicePinners: Codable {
         try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
         try container.encodeIfPresent(order, forKey: .order)
     }
+
 }

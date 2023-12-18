@@ -12,8 +12,10 @@ public class ShieldInformationBarrierReports: Codable {
     /// `limit` query parameter unless that value exceeded the maximum value
     /// allowed. The maximum value varies by API.
     public let limit: Int64?
+
     /// The marker for the start of the next page of results.
     public let nextMarker: String?
+
     /// A list of shield information
     /// barrier reports.
     public let entries: [ShieldInformationBarrierReport]?
@@ -46,4 +48,5 @@ public class ShieldInformationBarrierReports: Codable {
         try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
+
 }

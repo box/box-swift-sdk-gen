@@ -18,19 +18,28 @@ public class SkillInvocation: Codable {
 
     /// `skill_invocation`
     public let type: SkillInvocationTypeField?
+
     /// Unique identifier for the invocation request.
     public let id: String?
+
     public let skill: SkillInvocationSkillField?
+
     /// The read-only and read-write access tokens for this item
     public let token: SkillInvocationTokenField?
+
     /// The details status of this event.
     public let status: SkillInvocationStatusField?
+
     /// The time this invocation was created.
     public let createdAt: String?
+
     /// Action that triggered the invocation
     public let trigger: String?
+
     public let enterprise: SkillInvocationEnterpriseField?
+
     public let source: FileOrFolder?
+
     public let event: Event?
 
     /// Initializer for a SkillInvocation.
@@ -38,14 +47,14 @@ public class SkillInvocation: Codable {
     /// - Parameters:
     ///   - type: `skill_invocation`
     ///   - id: Unique identifier for the invocation request.
-    ///   - skill: SkillInvocationSkillField?
+    ///   - skill: 
     ///   - token: The read-only and read-write access tokens for this item
     ///   - status: The details status of this event.
     ///   - createdAt: The time this invocation was created.
     ///   - trigger: Action that triggered the invocation
-    ///   - enterprise: SkillInvocationEnterpriseField?
-    ///   - source: FileOrFolder?
-    ///   - event: Event?
+    ///   - enterprise: 
+    ///   - source: 
+    ///   - event: 
     public init(type: SkillInvocationTypeField? = nil, id: String? = nil, skill: SkillInvocationSkillField? = nil, token: SkillInvocationTokenField? = nil, status: SkillInvocationStatusField? = nil, createdAt: String? = nil, trigger: String? = nil, enterprise: SkillInvocationEnterpriseField? = nil, source: FileOrFolder? = nil, event: Event? = nil) {
         self.type = type
         self.id = id
@@ -86,4 +95,5 @@ public class SkillInvocation: Codable {
         try container.encodeIfPresent(source, forKey: .source)
         try container.encodeIfPresent(event, forKey: .event)
     }
+
 }

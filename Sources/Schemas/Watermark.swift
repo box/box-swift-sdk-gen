@@ -23,4 +23,5 @@ public class Watermark: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(watermark, forKey: .watermark)
     }
+
 }

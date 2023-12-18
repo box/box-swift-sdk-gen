@@ -25,4 +25,5 @@ public class FolderFullWatermarkInfoField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(isWatermarked, forKey: .isWatermarked)
     }
+
 }

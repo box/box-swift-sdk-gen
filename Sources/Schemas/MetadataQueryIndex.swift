@@ -11,10 +11,13 @@ public class MetadataQueryIndex: Codable {
 
     /// Value is always `metadata_query_index`
     public let type: String
+
     /// The status of the metadata query index
     public let status: MetadataQueryIndexStatusField
+
     /// The ID of the metadata query index.
     public let id: String?
+
     /// A list of template fields which make up the index.
     public let fields: [MetadataQueryIndexFieldsField]?
 
@@ -47,4 +50,5 @@ public class MetadataQueryIndex: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(fields, forKey: .fields)
     }
+
 }

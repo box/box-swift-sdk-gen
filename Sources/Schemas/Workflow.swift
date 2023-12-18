@@ -23,13 +23,15 @@ public class Workflow: WorkflowMini {
     ///   - flows: A list of flows assigned to a workflow.
     public init(id: String? = nil, type: WorkflowMiniTypeField? = nil, name: String? = nil, description: String? = nil, isEnabled: Bool? = nil, flows: [WorkflowFlowsField]? = nil) {
         self.flows = flows
+
         super.init(id: id, type: type, name: name, description: description, isEnabled: isEnabled)
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         flows = try container.decodeIfPresent([WorkflowFlowsField].self, forKey: .flows)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -37,4 +39,5 @@ public class Workflow: WorkflowMini {
         try container.encodeIfPresent(flows, forKey: .flows)
         try super.encode(to: encoder)
     }
+
 }

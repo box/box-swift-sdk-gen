@@ -17,22 +17,31 @@ public class TemplateSignerInput: SignRequestPrefillTag {
 
     /// Index of page that the input is on.
     public let pageIndex: Int64
+
     /// Type of input
     public let type: TemplateSignerInputTypeField?
+
     /// Content type of input
     public let contentType: TemplateSignerInputContentTypeField?
+
     /// Whether or not the input is required.
     public let isRequired: Bool?
+
     /// Document identifier.
     public let documentId: String?
+
     /// When the input is of the type `dropdown` this values will be filled with all the dropdown options.
     public let dropdownChoices: [String]?
+
     /// When the input is of type `radio` they can be grouped to gather with this identifier.
     public let groupId: String?
+
     /// Where the input is located on a page.
     public let coordinates: TemplateSignerInputCoordinatesField?
+
     /// The size of the input.
     public let dimensions: TemplateSignerInputDimensionsField?
+
     /// The label field is used especially for text, attachment, radio, and checkbox type inputs.
     public let label: String?
 
@@ -64,6 +73,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
         self.coordinates = coordinates
         self.dimensions = dimensions
         self.label = label
+
         super.init(documentTagId: documentTagId, textValue: textValue, checkboxValue: checkboxValue, dateValue: dateValue)
     }
 
@@ -79,7 +89,8 @@ public class TemplateSignerInput: SignRequestPrefillTag {
         coordinates = try container.decodeIfPresent(TemplateSignerInputCoordinatesField.self, forKey: .coordinates)
         dimensions = try container.decodeIfPresent(TemplateSignerInputDimensionsField.self, forKey: .dimensions)
         label = try container.decodeIfPresent(String.self, forKey: .label)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -96,4 +107,5 @@ public class TemplateSignerInput: SignRequestPrefillTag {
         try container.encodeIfPresent(label, forKey: .label)
         try super.encode(to: encoder)
     }
+
 }

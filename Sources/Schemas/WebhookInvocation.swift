@@ -14,14 +14,20 @@ public class WebhookInvocation: Codable {
 
     /// The unique identifier for this webhook invocation
     public let id: String?
+
     /// `webhook_event`
     public let type: WebhookInvocationTypeField?
+
     public let webhook: Webhook?
+
     public let createdBy: UserMini?
+
     /// A timestamp identifying the time that
     /// the webhook event was triggered.
     public let createdAt: String?
+
     public let trigger: WebhookInvocationTriggerField?
+
     public let source: FileOrFolder?
 
     /// Initializer for a WebhookInvocation.
@@ -29,12 +35,12 @@ public class WebhookInvocation: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this webhook invocation
     ///   - type: `webhook_event`
-    ///   - webhook: Webhook?
-    ///   - createdBy: UserMini?
+    ///   - webhook: 
+    ///   - createdBy: 
     ///   - createdAt: A timestamp identifying the time that
     ///     the webhook event was triggered.
-    ///   - trigger: WebhookInvocationTriggerField?
-    ///   - source: FileOrFolder?
+    ///   - trigger: 
+    ///   - source: 
     public init(id: String? = nil, type: WebhookInvocationTypeField? = nil, webhook: Webhook? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, trigger: WebhookInvocationTriggerField? = nil, source: FileOrFolder? = nil) {
         self.id = id
         self.type = type
@@ -66,4 +72,5 @@ public class WebhookInvocation: Codable {
         try container.encodeIfPresent(trigger, forKey: .trigger)
         try container.encodeIfPresent(source, forKey: .source)
     }
+
 }

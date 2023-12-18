@@ -35,54 +35,75 @@ public class TrashFileRestored: Codable {
     /// for the URL `https://*.app.box.com/files/123`
     /// the `file_id` is `123`.
     public let id: String
+
     /// `file`
     public let type: TrashFileRestoredTypeField
+
     public let sequenceId: String
+
     /// The SHA1 hash of the file. This can be used to compare the contents
     /// of a file on Box with a local file.
     public let sha1: String
+
     /// The optional description of this file
     public let description: String
+
     /// The file size in bytes. Be careful parsing this integer as it can
     /// get very large and cause an integer overflow.
     public let size: Int64
+
     public let pathCollection: TrashFileRestoredPathCollectionField
+
     /// The date and time when the file was created on Box.
     public let createdAt: String
+
     /// The date and time when the file was last updated on Box.
     public let modifiedAt: String
+
     public let modifiedBy: UserMini
+
     public let ownedBy: UserMini
+
     /// Defines if this item has been deleted or not.
     /// 
     /// * `active` when the item has is not in the trash
     /// * `trashed` when the item has been moved to the trash but not deleted
     /// * `deleted` when the item has been permanently deleted.
     public let itemStatus: TrashFileRestoredItemStatusField
+
     /// The HTTP `etag` of this file. This can be used within some API
     /// endpoints in the `If-Match` and `If-None-Match` headers to only
     /// perform changes on the file if (no) changes have happened.
     public let etag: String?
+
     /// The name of the file
     public let name: String?
+
     public let fileVersion: FileVersionMini?
+
     /// The time at which this file was put in the
     /// trash - becomes `null` after restore.
     public let trashedAt: String?
+
     /// The time at which this file is expected to be purged
     /// from the trash  - becomes `null` after restore.
     public let purgedAt: String?
+
     /// The date and time at which this file was originally
     /// created, which might be before it was uploaded to Box.
     public let contentCreatedAt: String?
+
     /// The date and time at which this file was last updated,
     /// which might be before it was uploaded to Box.
     public let contentModifiedAt: String?
+
     public let createdBy: UserMini?
+
     /// The shared link for this file. This will
     /// be `null` if a file had been trashed, even though the original shared
     /// link does become active again.
     public let sharedLink: String?
+
     public let parent: FolderMini?
 
     /// Initializer for a TrashFileRestored.
@@ -96,17 +117,17 @@ public class TrashFileRestored: Codable {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///   - type: `file`
-    ///   - sequenceId: String
+    ///   - sequenceId: 
     ///   - sha1: The SHA1 hash of the file. This can be used to compare the contents
     ///     of a file on Box with a local file.
     ///   - description: The optional description of this file
     ///   - size: The file size in bytes. Be careful parsing this integer as it can
     ///     get very large and cause an integer overflow.
-    ///   - pathCollection: TrashFileRestoredPathCollectionField
+    ///   - pathCollection: 
     ///   - createdAt: The date and time when the file was created on Box.
     ///   - modifiedAt: The date and time when the file was last updated on Box.
-    ///   - modifiedBy: UserMini
-    ///   - ownedBy: UserMini
+    ///   - modifiedBy: 
+    ///   - ownedBy: 
     ///   - itemStatus: Defines if this item has been deleted or not.
     ///     
     ///     * `active` when the item has is not in the trash
@@ -116,7 +137,7 @@ public class TrashFileRestored: Codable {
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the file if (no) changes have happened.
     ///   - name: The name of the file
-    ///   - fileVersion: FileVersionMini?
+    ///   - fileVersion: 
     ///   - trashedAt: The time at which this file was put in the
     ///     trash - becomes `null` after restore.
     ///   - purgedAt: The time at which this file is expected to be purged
@@ -125,11 +146,11 @@ public class TrashFileRestored: Codable {
     ///     created, which might be before it was uploaded to Box.
     ///   - contentModifiedAt: The date and time at which this file was last updated,
     ///     which might be before it was uploaded to Box.
-    ///   - createdBy: UserMini?
+    ///   - createdBy: 
     ///   - sharedLink: The shared link for this file. This will
     ///     be `null` if a file had been trashed, even though the original shared
     ///     link does become active again.
-    ///   - parent: FolderMini?
+    ///   - parent: 
     public init(id: String, type: TrashFileRestoredTypeField, sequenceId: String, sha1: String, description: String, size: Int64, pathCollection: TrashFileRestoredPathCollectionField, createdAt: String, modifiedAt: String, modifiedBy: UserMini, ownedBy: UserMini, itemStatus: TrashFileRestoredItemStatusField, etag: String? = nil, name: String? = nil, fileVersion: FileVersionMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, createdBy: UserMini? = nil, sharedLink: String? = nil, parent: FolderMini? = nil) {
         self.id = id
         self.type = type
@@ -206,4 +227,5 @@ public class TrashFileRestored: Codable {
         try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
         try container.encodeIfPresent(parent, forKey: .parent)
     }
+
 }

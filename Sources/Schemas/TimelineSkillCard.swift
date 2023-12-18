@@ -16,19 +16,26 @@ public class TimelineSkillCard: Codable {
 
     /// `skill_card`
     public let type: TimelineSkillCardTypeField
+
     /// `timeline`
     public let skillCardType: TimelineSkillCardSkillCardTypeField
+
     /// The service that applied this metadata.
     public let skill: TimelineSkillCardSkillField
+
     /// The invocation of this service, used to track
     /// which instance of a service applied the metadata.
     public let invocation: TimelineSkillCardInvocationField
+
     /// A list of entries on the timeline.
     public let entries: [TimelineSkillCardEntriesField]
+
     /// The optional date and time this card was created at.
     public let createdAt: String?
+
     /// The title of the card.
     public let skillCardTitle: TimelineSkillCardSkillCardTitleField?
+
     /// An total duration in seconds of the timeline.
     public let duration: Int64?
 
@@ -78,4 +85,5 @@ public class TimelineSkillCard: Codable {
         try container.encodeIfPresent(skillCardTitle, forKey: .skillCardTitle)
         try container.encodeIfPresent(duration, forKey: .duration)
     }
+
 }

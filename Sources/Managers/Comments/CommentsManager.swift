@@ -2,9 +2,10 @@ import Foundation
 
 public class CommentsManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -24,10 +25,10 @@ public class CommentsManager {
     ///   - headers: Headers of getFileComments method
     /// - Returns: The `Comments`.
     /// - Throws: The `GeneralError`.
-    public func getFileComments(fileId: String, queryParams: GetFileCommentsQueryParamsArg = GetFileCommentsQueryParamsArg(), headers: GetFileCommentsHeadersArg = GetFileCommentsHeadersArg()) async throws -> Comments {
+    public func getFileComments(fileId: String, queryParams: GetFileCommentsQueryParams = GetFileCommentsQueryParams(), headers: GetFileCommentsHeaders = GetFileCommentsHeaders()) async throws -> Comments {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "limit": Utils.Strings.toString(value: queryParams.limit), "offset": Utils.Strings.toString(value: queryParams.offset)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/comments")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/comments")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Comments.deserialize(from: response.data)
     }
 
@@ -41,10 +42,10 @@ public class CommentsManager {
     ///   - headers: Headers of getCommentById method
     /// - Returns: The `CommentFull`.
     /// - Throws: The `GeneralError`.
-    public func getCommentById(commentId: String, queryParams: GetCommentByIdQueryParamsArg = GetCommentByIdQueryParamsArg(), headers: GetCommentByIdHeadersArg = GetCommentByIdHeadersArg()) async throws -> CommentFull {
+    public func getCommentById(commentId: String, queryParams: GetCommentByIdQueryParams = GetCommentByIdQueryParams(), headers: GetCommentByIdHeaders = GetCommentByIdHeaders()) async throws -> CommentFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/comments/")\(commentId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/comments/")\(commentId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try CommentFull.deserialize(from: response.data)
     }
 
@@ -58,10 +59,10 @@ public class CommentsManager {
     ///   - headers: Headers of updateCommentById method
     /// - Returns: The `CommentFull`.
     /// - Throws: The `GeneralError`.
-    public func updateCommentById(commentId: String, requestBody: UpdateCommentByIdRequestBodyArg = UpdateCommentByIdRequestBodyArg(), queryParams: UpdateCommentByIdQueryParamsArg = UpdateCommentByIdQueryParamsArg(), headers: UpdateCommentByIdHeadersArg = UpdateCommentByIdHeadersArg()) async throws -> CommentFull {
+    public func updateCommentById(commentId: String, requestBody: UpdateCommentByIdRequestBody = UpdateCommentByIdRequestBody(), queryParams: UpdateCommentByIdQueryParams = UpdateCommentByIdQueryParams(), headers: UpdateCommentByIdHeaders = UpdateCommentByIdHeaders()) async throws -> CommentFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/comments/")\(commentId)", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/comments/")\(commentId)", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try CommentFull.deserialize(from: response.data)
     }
 
@@ -72,9 +73,9 @@ public class CommentsManager {
     ///     Example: "12345"
     ///   - headers: Headers of deleteCommentById method
     /// - Throws: The `GeneralError`.
-    public func deleteCommentById(commentId: String, headers: DeleteCommentByIdHeadersArg = DeleteCommentByIdHeadersArg()) async throws {
+    public func deleteCommentById(commentId: String, headers: DeleteCommentByIdHeaders = DeleteCommentByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/comments/")\(commentId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/comments/")\(commentId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Adds a comment by the user to a specific file, or
@@ -86,10 +87,10 @@ public class CommentsManager {
     ///   - headers: Headers of createComment method
     /// - Returns: The `CommentFull`.
     /// - Throws: The `GeneralError`.
-    public func createComment(requestBody: CreateCommentRequestBodyArg, queryParams: CreateCommentQueryParamsArg = CreateCommentQueryParamsArg(), headers: CreateCommentHeadersArg = CreateCommentHeadersArg()) async throws -> CommentFull {
+    public func createComment(requestBody: CreateCommentRequestBody, queryParams: CreateCommentQueryParams = CreateCommentQueryParams(), headers: CreateCommentHeaders = CreateCommentHeaders()) async throws -> CommentFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/comments")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/comments")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try CommentFull.deserialize(from: response.data)
     }
 

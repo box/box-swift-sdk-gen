@@ -10,7 +10,8 @@ public class StatusSkillCardStatusField: Codable {
     /// default each of these will have their own accompanied
     /// messages. These can be adjusted by setting the `message`
     /// value on this object.
-    public let code: StatusSkillCardStatusFieldCodeField
+    public let code: StatusSkillCardStatusCodeField
+
     /// A custom message that can be provided with this status.
     /// This will be shown in the web app to the end user.
     public let message: String?
@@ -24,14 +25,14 @@ public class StatusSkillCardStatusField: Codable {
     ///     value on this object.
     ///   - message: A custom message that can be provided with this status.
     ///     This will be shown in the web app to the end user.
-    public init(code: StatusSkillCardStatusFieldCodeField, message: String? = nil) {
+    public init(code: StatusSkillCardStatusCodeField, message: String? = nil) {
         self.code = code
         self.message = message
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        code = try container.decode(StatusSkillCardStatusFieldCodeField.self, forKey: .code)
+        code = try container.decode(StatusSkillCardStatusCodeField.self, forKey: .code)
         message = try container.decodeIfPresent(String.self, forKey: .message)
     }
 
@@ -40,4 +41,5 @@ public class StatusSkillCardStatusField: Codable {
         try container.encode(code, forKey: .code)
         try container.encodeIfPresent(message, forKey: .message)
     }
+
 }

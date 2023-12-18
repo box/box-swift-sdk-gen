@@ -2,9 +2,10 @@ import Foundation
 
 public class TransferManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -51,10 +52,10 @@ public class TransferManager {
     ///   - headers: Headers of transferOwnedFolder method
     /// - Returns: The `FolderFull`.
     /// - Throws: The `GeneralError`.
-    public func transferOwnedFolder(userId: String, requestBody: TransferOwnedFolderRequestBodyArg, queryParams: TransferOwnedFolderQueryParamsArg = TransferOwnedFolderQueryParamsArg(), headers: TransferOwnedFolderHeadersArg = TransferOwnedFolderHeadersArg()) async throws -> FolderFull {
+    public func transferOwnedFolder(userId: String, requestBody: TransferOwnedFolderRequestBody, queryParams: TransferOwnedFolderQueryParams = TransferOwnedFolderQueryParams(), headers: TransferOwnedFolderHeaders = TransferOwnedFolderHeaders()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "notify": Utils.Strings.toString(value: queryParams.notify)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)\("/folders/0")", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)\("/folders/0")", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try FolderFull.deserialize(from: response.data)
     }
 

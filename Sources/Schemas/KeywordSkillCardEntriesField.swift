@@ -25,4 +25,5 @@ public class KeywordSkillCardEntriesField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(text, forKey: .text)
     }
+
 }

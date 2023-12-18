@@ -14,17 +14,23 @@ public class StatusSkillCard: Codable {
 
     /// `skill_card`
     public let type: StatusSkillCardTypeField
+
     /// `status`
     public let skillCardType: StatusSkillCardSkillCardTypeField
+
     /// Sets the status of the skill. This can be used to show a message to the user while the Skill is processing the data, or if it was not able to process the file.
     public let status: StatusSkillCardStatusField
+
     /// The service that applied this metadata.
     public let skill: StatusSkillCardSkillField
+
     /// The invocation of this service, used to track
     /// which instance of a service applied the metadata.
     public let invocation: StatusSkillCardInvocationField
+
     /// The optional date and time this card was created at.
     public let createdAt: String?
+
     /// The title of the card.
     public let skillCardTitle: StatusSkillCardSkillCardTitleField?
 
@@ -70,4 +76,5 @@ public class StatusSkillCard: Codable {
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(skillCardTitle, forKey: .skillCardTitle)
     }
+
 }

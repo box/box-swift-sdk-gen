@@ -2,9 +2,10 @@ import Foundation
 
 public class SessionTerminationManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -19,9 +20,9 @@ public class SessionTerminationManager {
     ///   - headers: Headers of createUserTerminateSession method
     /// - Returns: The `SessionTerminationMessage`.
     /// - Throws: The `GeneralError`.
-    public func createUserTerminateSession(requestBody: CreateUserTerminateSessionRequestBodyArg, headers: CreateUserTerminateSessionHeadersArg = CreateUserTerminateSessionHeadersArg()) async throws -> SessionTerminationMessage {
+    public func createUserTerminateSession(requestBody: CreateUserTerminateSessionRequestBody, headers: CreateUserTerminateSessionHeaders = CreateUserTerminateSessionHeaders()) async throws -> SessionTerminationMessage {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/terminate_sessions")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/terminate_sessions")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SessionTerminationMessage.deserialize(from: response.data)
     }
 
@@ -35,9 +36,9 @@ public class SessionTerminationManager {
     ///   - headers: Headers of createGroupTerminateSession method
     /// - Returns: The `SessionTerminationMessage`.
     /// - Throws: The `GeneralError`.
-    public func createGroupTerminateSession(requestBody: CreateGroupTerminateSessionRequestBodyArg, headers: CreateGroupTerminateSessionHeadersArg = CreateGroupTerminateSessionHeadersArg()) async throws -> SessionTerminationMessage {
+    public func createGroupTerminateSession(requestBody: CreateGroupTerminateSessionRequestBody, headers: CreateGroupTerminateSessionHeaders = CreateGroupTerminateSessionHeaders()) async throws -> SessionTerminationMessage {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/groups/terminate_sessions")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/groups/terminate_sessions")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SessionTerminationMessage.deserialize(from: response.data)
     }
 

@@ -2,9 +2,10 @@ import Foundation
 
 public class SkillsManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -23,9 +24,9 @@ public class SkillsManager {
     ///   - headers: Headers of getFileMetadataGlobalBoxSkillsCards method
     /// - Returns: The `SkillCardsMetadata`.
     /// - Throws: The `GeneralError`.
-    public func getFileMetadataGlobalBoxSkillsCards(fileId: String, headers: GetFileMetadataGlobalBoxSkillsCardsHeadersArg = GetFileMetadataGlobalBoxSkillsCardsHeadersArg()) async throws -> SkillCardsMetadata {
+    public func getFileMetadataGlobalBoxSkillsCards(fileId: String, headers: GetFileMetadataGlobalBoxSkillsCardsHeaders = GetFileMetadataGlobalBoxSkillsCardsHeaders()) async throws -> SkillCardsMetadata {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/global/boxSkillsCards")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/metadata/global/boxSkillsCards")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SkillCardsMetadata.deserialize(from: response.data)
     }
 
@@ -44,9 +45,9 @@ public class SkillsManager {
     ///   - headers: Headers of createFileMetadataGlobalBoxSkillsCard method
     /// - Returns: The `SkillCardsMetadata`.
     /// - Throws: The `GeneralError`.
-    public func createFileMetadataGlobalBoxSkillsCard(fileId: String, requestBody: CreateFileMetadataGlobalBoxSkillsCardRequestBodyArg, headers: CreateFileMetadataGlobalBoxSkillsCardHeadersArg = CreateFileMetadataGlobalBoxSkillsCardHeadersArg()) async throws -> SkillCardsMetadata {
+    public func createFileMetadataGlobalBoxSkillsCard(fileId: String, requestBody: CreateFileMetadataGlobalBoxSkillsCardRequestBody, headers: CreateFileMetadataGlobalBoxSkillsCardHeaders = CreateFileMetadataGlobalBoxSkillsCardHeaders()) async throws -> SkillCardsMetadata {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/global/boxSkillsCards")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/metadata/global/boxSkillsCards")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SkillCardsMetadata.deserialize(from: response.data)
     }
 
@@ -65,9 +66,9 @@ public class SkillsManager {
     ///   - headers: Headers of updateFileMetadataGlobalBoxSkillsCard method
     /// - Returns: The `SkillCardsMetadata`.
     /// - Throws: The `GeneralError`.
-    public func updateFileMetadataGlobalBoxSkillsCard(fileId: String, requestBody: [UpdateFileMetadataGlobalBoxSkillsCardRequestBodyArg], headers: UpdateFileMetadataGlobalBoxSkillsCardHeadersArg = UpdateFileMetadataGlobalBoxSkillsCardHeadersArg()) async throws -> SkillCardsMetadata {
+    public func updateFileMetadataGlobalBoxSkillsCard(fileId: String, requestBody: [UpdateFileMetadataGlobalBoxSkillsCardRequestBody], headers: UpdateFileMetadataGlobalBoxSkillsCardHeaders = UpdateFileMetadataGlobalBoxSkillsCardHeaders()) async throws -> SkillCardsMetadata {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/global/boxSkillsCards")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/metadata/global/boxSkillsCards")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SkillCardsMetadata.deserialize(from: response.data)
     }
 
@@ -84,9 +85,9 @@ public class SkillsManager {
     ///     Example: "12345"
     ///   - headers: Headers of deleteFileMetadataGlobalBoxSkillsCard method
     /// - Throws: The `GeneralError`.
-    public func deleteFileMetadataGlobalBoxSkillsCard(fileId: String, headers: DeleteFileMetadataGlobalBoxSkillsCardHeadersArg = DeleteFileMetadataGlobalBoxSkillsCardHeadersArg()) async throws {
+    public func deleteFileMetadataGlobalBoxSkillsCard(fileId: String, headers: DeleteFileMetadataGlobalBoxSkillsCardHeaders = DeleteFileMetadataGlobalBoxSkillsCardHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/files/")\(fileId)\("/metadata/global/boxSkillsCards")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/metadata/global/boxSkillsCards")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// An alternative method that can be used to overwrite and update all Box Skill
@@ -98,9 +99,9 @@ public class SkillsManager {
     ///   - requestBody: Request body of updateSkillInvocationById method
     ///   - headers: Headers of updateSkillInvocationById method
     /// - Throws: The `GeneralError`.
-    public func updateSkillInvocationById(skillId: String, requestBody: UpdateSkillInvocationByIdRequestBodyArg, headers: UpdateSkillInvocationByIdHeadersArg = UpdateSkillInvocationByIdHeadersArg()) async throws {
+    public func updateSkillInvocationById(skillId: String, requestBody: UpdateSkillInvocationByIdRequestBody, headers: UpdateSkillInvocationByIdHeaders = UpdateSkillInvocationByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/skill_invocations/")\(skillId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/skill_invocations/")\(skillId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

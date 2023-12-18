@@ -8,6 +8,7 @@ public class TrashWebLinkRestoredPathCollectionField: Codable {
 
     /// The number of folders in this list.
     public let totalCount: Int64
+
     /// The parent folders for this item
     public let entries: [FolderMini]
 
@@ -32,4 +33,5 @@ public class TrashWebLinkRestoredPathCollectionField: Codable {
         try container.encode(totalCount, forKey: .totalCount)
         try container.encode(entries, forKey: .entries)
     }
+
 }

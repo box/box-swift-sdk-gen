@@ -9,6 +9,9 @@ open class NetworkSession {
     /// Additional headers, which are appended to each API request
     public let additionalHeaders: [String: String]
 
+    /// Custom base urls
+    public let baseUrls: BaseUrls
+
     /// Provides an API  for downloading data from and uploading data to endpoints indicated by URL.
     public let session: URLSession
 
@@ -27,12 +30,14 @@ open class NetworkSession {
     public init(
         additionalHeaders: [String: String] = [:],
         configuration: URLSessionConfiguration = URLSessionConfiguration.default,
-        networkSettings: NetworkSettings = NetworkSettings()
+        networkSettings: NetworkSettings = NetworkSettings(),
+        baseUrls: BaseUrls = BaseUrls()
     ) {
         self.additionalHeaders = additionalHeaders
         self.configuration = configuration
         self.session = URLSession(configuration: configuration, delegate: nil, delegateQueue: nil)
         self.networkSettings = networkSettings
+        self.baseUrls = baseUrls
     }
 
     /// Generate a fresh network session by duplicating the existing configuration and network parameters,
@@ -41,6 +46,15 @@ open class NetworkSession {
     /// - Parameters:
     ///   - additionalHeaders: Dictionary of headers, which are appended to each API request
     public func withAdditionalHeaders(additionalHeaders: [String: String]) -> NetworkSession {
-        return NetworkSession(additionalHeaders: Utils.Dictionary.merge(self.additionalHeaders, additionalHeaders), configuration: self.configuration, networkSettings: networkSettings)
+        return NetworkSession(additionalHeaders: Utils.Dictionary.merge(self.additionalHeaders, additionalHeaders), configuration: self.configuration, networkSettings: networkSettings, baseUrls: baseUrls)
+    }
+
+    /// Generate a fresh network session by duplicating the existing configuration and network parameters,
+    /// while also including custom base urls to be used for every API call.
+    ///
+    /// - Parameters:
+    ///   - baseUrls: Custom base urls
+    public func withCustomBaseUrls(baseUrls: BaseUrls) -> NetworkSession {
+        return NetworkSession(additionalHeaders: self.additionalHeaders, configuration: self.configuration, networkSettings: networkSettings, baseUrls: baseUrls)
     }
 }

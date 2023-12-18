@@ -13,13 +13,18 @@ public class ShieldInformationBarrierReport: ShieldInformationBarrierReportBase 
     }
 
     public let shieldInformationBarrier: ShieldInformationBarrierReference?
+
     /// Status of the shield information report
     public let status: ShieldInformationBarrierReportStatusField?
+
     public let details: ShieldInformationBarrierReportDetails?
+
     /// ISO date time string when this
     /// shield information barrier report object was created.
     public let createdAt: String?
+
     public let createdBy: UserBase?
+
     /// ISO date time string when this
     /// shield information barrier report was updated.
     public let updatedAt: String?
@@ -29,12 +34,12 @@ public class ShieldInformationBarrierReport: ShieldInformationBarrierReportBase 
     /// - Parameters:
     ///   - id: The unique identifier for the shield information barrier report
     ///   - type: The type of the shield information barrier report
-    ///   - shieldInformationBarrier: ShieldInformationBarrierReference?
+    ///   - shieldInformationBarrier: 
     ///   - status: Status of the shield information report
-    ///   - details: ShieldInformationBarrierReportDetails?
+    ///   - details: 
     ///   - createdAt: ISO date time string when this
     ///     shield information barrier report object was created.
-    ///   - createdBy: UserBase?
+    ///   - createdBy: 
     ///   - updatedAt: ISO date time string when this
     ///     shield information barrier report was updated.
     public init(id: String? = nil, type: ShieldInformationBarrierReportBaseTypeField? = nil, shieldInformationBarrier: ShieldInformationBarrierReference? = nil, status: ShieldInformationBarrierReportStatusField? = nil, details: ShieldInformationBarrierReportDetails? = nil, createdAt: String? = nil, createdBy: UserBase? = nil, updatedAt: String? = nil) {
@@ -44,6 +49,7 @@ public class ShieldInformationBarrierReport: ShieldInformationBarrierReportBase 
         self.createdAt = createdAt
         self.createdBy = createdBy
         self.updatedAt = updatedAt
+
         super.init(id: id, type: type)
     }
 
@@ -55,7 +61,8 @@ public class ShieldInformationBarrierReport: ShieldInformationBarrierReportBase 
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
         updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -68,4 +75,5 @@ public class ShieldInformationBarrierReport: ShieldInformationBarrierReportBase 
         try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
         try super.encode(to: encoder)
     }
+
 }

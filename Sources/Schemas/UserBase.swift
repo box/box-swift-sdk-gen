@@ -10,6 +10,7 @@ public class UserBase: Codable {
 
     /// The unique identifier for this user
     public let id: String
+
     /// `user`
     public let type: UserBaseTypeField
 
@@ -34,4 +35,5 @@ public class UserBase: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(type, forKey: .type)
     }
+
 }

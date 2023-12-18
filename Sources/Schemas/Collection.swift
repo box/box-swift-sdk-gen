@@ -18,10 +18,13 @@ public class Collection: Codable {
 
     /// The unique identifier for this collection.
     public let id: String?
+
     /// `collection`
     public let type: CollectionTypeField?
+
     /// The name of the collection.
     public let name: CollectionNameField?
+
     /// The type of the collection. This is used to
     /// determine the proper visual treatment for
     /// collections.
@@ -58,4 +61,5 @@ public class Collection: Codable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(collectionType, forKey: .collectionType)
     }
+
 }

@@ -2,9 +2,10 @@ import Foundation
 
 public class UsersManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -21,10 +22,10 @@ public class UsersManager {
     ///   - headers: Headers of getUsers method
     /// - Returns: The `Users`.
     /// - Throws: The `GeneralError`.
-    public func getUsers(queryParams: GetUsersQueryParamsArg = GetUsersQueryParamsArg(), headers: GetUsersHeadersArg = GetUsersHeadersArg()) async throws -> Users {
+    public func getUsers(queryParams: GetUsersQueryParams = GetUsersQueryParams(), headers: GetUsersHeaders = GetUsersHeaders()) async throws -> Users {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["filter_term": Utils.Strings.toString(value: queryParams.filterTerm), "user_type": Utils.Strings.toString(value: queryParams.userType), "external_app_user_id": Utils.Strings.toString(value: queryParams.externalAppUserId), "fields": Utils.Strings.toString(value: queryParams.fields), "offset": Utils.Strings.toString(value: queryParams.offset), "limit": Utils.Strings.toString(value: queryParams.limit), "usemarker": Utils.Strings.toString(value: queryParams.usemarker), "marker": Utils.Strings.toString(value: queryParams.marker)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Users.deserialize(from: response.data)
     }
 
@@ -38,10 +39,10 @@ public class UsersManager {
     ///   - headers: Headers of createUser method
     /// - Returns: The `UserFull`.
     /// - Throws: The `GeneralError`.
-    public func createUser(requestBody: CreateUserRequestBodyArg, queryParams: CreateUserQueryParamsArg = CreateUserQueryParamsArg(), headers: CreateUserHeadersArg = CreateUserHeadersArg()) async throws -> UserFull {
+    public func createUser(requestBody: CreateUserRequestBody, queryParams: CreateUserQueryParams = CreateUserQueryParams(), headers: CreateUserHeaders = CreateUserHeaders()) async throws -> UserFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UserFull.deserialize(from: response.data)
     }
 
@@ -61,10 +62,10 @@ public class UsersManager {
     ///   - headers: Headers of getUserMe method
     /// - Returns: The `UserFull`.
     /// - Throws: The `GeneralError`.
-    public func getUserMe(queryParams: GetUserMeQueryParamsArg = GetUserMeQueryParamsArg(), headers: GetUserMeHeadersArg = GetUserMeHeadersArg()) async throws -> UserFull {
+    public func getUserMe(queryParams: GetUserMeQueryParams = GetUserMeQueryParams(), headers: GetUserMeHeaders = GetUserMeHeaders()) async throws -> UserFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/me")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/me")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UserFull.deserialize(from: response.data)
     }
 
@@ -87,10 +88,10 @@ public class UsersManager {
     ///   - headers: Headers of getUserById method
     /// - Returns: The `UserFull`.
     /// - Throws: The `GeneralError`.
-    public func getUserById(userId: String, queryParams: GetUserByIdQueryParamsArg = GetUserByIdQueryParamsArg(), headers: GetUserByIdHeadersArg = GetUserByIdHeadersArg()) async throws -> UserFull {
+    public func getUserById(userId: String, queryParams: GetUserByIdQueryParams = GetUserByIdQueryParams(), headers: GetUserByIdHeaders = GetUserByIdHeaders()) async throws -> UserFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UserFull.deserialize(from: response.data)
     }
 
@@ -106,10 +107,10 @@ public class UsersManager {
     ///   - headers: Headers of updateUserById method
     /// - Returns: The `UserFull`.
     /// - Throws: The `GeneralError`.
-    public func updateUserById(userId: String, requestBody: UpdateUserByIdRequestBodyArg = UpdateUserByIdRequestBodyArg(), queryParams: UpdateUserByIdQueryParamsArg = UpdateUserByIdQueryParamsArg(), headers: UpdateUserByIdHeadersArg = UpdateUserByIdHeadersArg()) async throws -> UserFull {
+    public func updateUserById(userId: String, requestBody: UpdateUserByIdRequestBody = UpdateUserByIdRequestBody(), queryParams: UpdateUserByIdQueryParams = UpdateUserByIdQueryParams(), headers: UpdateUserByIdHeaders = UpdateUserByIdHeaders()) async throws -> UserFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UserFull.deserialize(from: response.data)
     }
 
@@ -124,10 +125,10 @@ public class UsersManager {
     ///   - queryParams: Query parameters of deleteUserById method
     ///   - headers: Headers of deleteUserById method
     /// - Throws: The `GeneralError`.
-    public func deleteUserById(userId: String, queryParams: DeleteUserByIdQueryParamsArg = DeleteUserByIdQueryParamsArg(), headers: DeleteUserByIdHeadersArg = DeleteUserByIdHeadersArg()) async throws {
+    public func deleteUserById(userId: String, queryParams: DeleteUserByIdQueryParams = DeleteUserByIdQueryParams(), headers: DeleteUserByIdHeaders = DeleteUserByIdHeaders()) async throws {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["notify": Utils.Strings.toString(value: queryParams.notify), "force": Utils.Strings.toString(value: queryParams.force)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/users/")\(userId)", options: FetchOptions(method: "DELETE", params: queryParamsMap, headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)", options: FetchOptions(method: "DELETE", params: queryParamsMap, headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

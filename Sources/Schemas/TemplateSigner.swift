@@ -11,25 +11,29 @@ public class TemplateSigner: Codable {
     }
 
     public let inputs: [TemplateSignerInput]?
+
     /// Email address of the signer
     public let email: String?
+
     /// Defines the role of the signer in the signature request. A role of
     /// `signer` needs to sign the document, a role `approver`
     /// approves the document and
     /// a `final_copy_reader` role only
     /// receives the final signed document and signing log.
     public let role: TemplateSignerRoleField?
+
     /// Used in combination with an embed URL for a sender.
     /// After the sender signs, they will be
     /// redirected to the next `in_person` signer.
     public let isInPerson: Bool?
+
     /// Order of the signer
     public let order: Int64?
 
     /// Initializer for a TemplateSigner.
     ///
     /// - Parameters:
-    ///   - inputs: [TemplateSignerInput]?
+    ///   - inputs: 
     ///   - email: Email address of the signer
     ///   - role: Defines the role of the signer in the signature request. A role of
     ///     `signer` needs to sign the document, a role `approver`
@@ -65,4 +69,5 @@ public class TemplateSigner: Codable {
         try container.encodeIfPresent(isInPerson, forKey: .isInPerson)
         try container.encodeIfPresent(order, forKey: .order)
     }
+
 }

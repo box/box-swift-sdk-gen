@@ -14,13 +14,18 @@ public class CollaborationAllowlistEntry: Codable {
 
     /// The unique identifier for this entry
     public let id: String?
+
     /// `collaboration_whitelist_entry`
     public let type: CollaborationAllowlistEntryTypeField?
+
     /// The whitelisted domain
     public let domain: String?
+
     /// The direction of the collaborations to allow.
     public let direction: CollaborationAllowlistEntryDirectionField?
+
     public let enterprise: CollaborationAllowlistEntryEnterpriseField?
+
     /// The time the entry was created at
     public let createdAt: String?
 
@@ -31,7 +36,7 @@ public class CollaborationAllowlistEntry: Codable {
     ///   - type: `collaboration_whitelist_entry`
     ///   - domain: The whitelisted domain
     ///   - direction: The direction of the collaborations to allow.
-    ///   - enterprise: CollaborationAllowlistEntryEnterpriseField?
+    ///   - enterprise: 
     ///   - createdAt: The time the entry was created at
     public init(id: String? = nil, type: CollaborationAllowlistEntryTypeField? = nil, domain: String? = nil, direction: CollaborationAllowlistEntryDirectionField? = nil, enterprise: CollaborationAllowlistEntryEnterpriseField? = nil, createdAt: String? = nil) {
         self.id = id
@@ -61,4 +66,5 @@ public class CollaborationAllowlistEntry: Codable {
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
     }
+
 }

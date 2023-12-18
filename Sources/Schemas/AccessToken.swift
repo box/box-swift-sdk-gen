@@ -13,17 +13,22 @@ public class AccessToken: Codable {
 
     /// The requested access token.
     public let accessToken: String?
+
     /// The time in seconds by which this token will expire.
     public let expiresIn: Int64?
+
     /// The type of access token returned.
     public let tokenType: AccessTokenTokenTypeField?
+
     /// The permissions that this access token permits,
     /// providing a list of resources (files, folders, etc)
     /// and the scopes permitted for each of those resources.
     public let restrictedTo: [FileScope]?
+
     /// The refresh token for this access token, which can be used
     /// to request a new access token when the current one expires.
     public let refreshToken: String?
+
     /// The type of downscoped access token returned. This is only
     /// returned if an access token has been downscoped.
     public let issuedTokenType: AccessTokenIssuedTokenTypeField?
@@ -69,4 +74,5 @@ public class AccessToken: Codable {
         try container.encodeIfPresent(refreshToken, forKey: .refreshToken)
         try container.encodeIfPresent(issuedTokenType, forKey: .issuedTokenType)
     }
+
 }

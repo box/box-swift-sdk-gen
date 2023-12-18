@@ -9,6 +9,7 @@ public class TaskAssignments: Codable {
 
     /// The total number of items in this collection.
     public let totalCount: Int64?
+
     /// A list of task assignments
     public let entries: [TaskAssignment]?
 
@@ -33,4 +34,5 @@ public class TaskAssignments: Codable {
         try container.encodeIfPresent(totalCount, forKey: .totalCount)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
+
 }

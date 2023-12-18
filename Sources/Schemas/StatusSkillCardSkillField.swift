@@ -7,7 +7,8 @@ public class StatusSkillCardSkillField: Codable {
     }
 
     /// `service`
-    public let type: StatusSkillCardSkillFieldTypeField
+    public let type: StatusSkillCardSkillTypeField
+
     /// A custom identifier that represent the service that
     /// applied this metadata.
     public let id: String
@@ -18,14 +19,14 @@ public class StatusSkillCardSkillField: Codable {
     ///   - type: `service`
     ///   - id: A custom identifier that represent the service that
     ///     applied this metadata.
-    public init(type: StatusSkillCardSkillFieldTypeField, id: String) {
+    public init(type: StatusSkillCardSkillTypeField, id: String) {
         self.type = type
         self.id = id
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decode(StatusSkillCardSkillFieldTypeField.self, forKey: .type)
+        type = try container.decode(StatusSkillCardSkillTypeField.self, forKey: .type)
         id = try container.decode(String.self, forKey: .id)
     }
 
@@ -34,4 +35,5 @@ public class StatusSkillCardSkillField: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

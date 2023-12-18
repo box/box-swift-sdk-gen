@@ -9,6 +9,7 @@ public class CommentBase: Codable {
 
     /// The unique identifier for this comment.
     public let id: String?
+
     /// `comment`
     public let type: CommentBaseTypeField?
 
@@ -33,4 +34,5 @@ public class CommentBase: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

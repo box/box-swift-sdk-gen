@@ -22,23 +22,34 @@ public class WebLink: WebLinkMini {
     }
 
     public let parent: FolderMini?
+
     /// The description accompanying the web link. This is
     /// visible within the Box web application.
     public let description: String?
+
     public let pathCollection: WebLinkPathCollectionField?
+
     /// When this file was created on Box’s servers.
     public let createdAt: String?
+
     /// When this file was last updated on the Box
     /// servers.
     public let modifiedAt: String?
+
     /// When this file was moved to the trash.
     public let trashedAt: String?
+
     /// When this file will be permanently deleted.
     public let purgedAt: String?
+
     public let createdBy: UserMini?
+
     public let modifiedBy: UserMini?
+
     public let ownedBy: UserMini?
+
     public let sharedLink: WebLinkSharedLinkField?
+
     /// Whether this item is deleted or not. Values include `active`,
     /// `trashed` if the file has been moved to the trash, and `deleted` if
     /// the file has been permanently deleted
@@ -52,21 +63,21 @@ public class WebLink: WebLinkMini {
     ///   - etag: The entity tag of this web link. Used with `If-Match`
     ///     headers.
     ///   - url: The URL this web link points to
-    ///   - sequenceId: String?
+    ///   - sequenceId: 
     ///   - name: The name of the web link
-    ///   - parent: FolderMini?
+    ///   - parent: 
     ///   - description: The description accompanying the web link. This is
     ///     visible within the Box web application.
-    ///   - pathCollection: WebLinkPathCollectionField?
+    ///   - pathCollection: 
     ///   - createdAt: When this file was created on Box’s servers.
     ///   - modifiedAt: When this file was last updated on the Box
     ///     servers.
     ///   - trashedAt: When this file was moved to the trash.
     ///   - purgedAt: When this file will be permanently deleted.
-    ///   - createdBy: UserMini?
-    ///   - modifiedBy: UserMini?
-    ///   - ownedBy: UserMini?
-    ///   - sharedLink: WebLinkSharedLinkField?
+    ///   - createdBy: 
+    ///   - modifiedBy: 
+    ///   - ownedBy: 
+    ///   - sharedLink: 
     ///   - itemStatus: Whether this item is deleted or not. Values include `active`,
     ///     `trashed` if the file has been moved to the trash, and `deleted` if
     ///     the file has been permanently deleted
@@ -83,6 +94,7 @@ public class WebLink: WebLinkMini {
         self.ownedBy = ownedBy
         self.sharedLink = sharedLink
         self.itemStatus = itemStatus
+
         super.init(id: id, type: type, etag: etag, url: url, sequenceId: sequenceId, name: name)
     }
 
@@ -100,7 +112,8 @@ public class WebLink: WebLinkMini {
         ownedBy = try container.decodeIfPresent(UserMini.self, forKey: .ownedBy)
         sharedLink = try container.decodeIfPresent(WebLinkSharedLinkField.self, forKey: .sharedLink)
         itemStatus = try container.decodeIfPresent(WebLinkItemStatusField.self, forKey: .itemStatus)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -119,4 +132,5 @@ public class WebLink: WebLinkMini {
         try container.encodeIfPresent(itemStatus, forKey: .itemStatus)
         try super.encode(to: encoder)
     }
+
 }

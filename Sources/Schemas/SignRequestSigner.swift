@@ -12,11 +12,15 @@ public class SignRequestSigner: SignRequestCreateSigner {
 
     /// Set to `true` if the signer views the document
     public let hasViewedDocument: Bool?
+
     /// Final decision made by the signer
     public let signerDecision: SignRequestSignerSignerDecisionField?
+
     public let inputs: [SignRequestSignerInput]?
+
     /// URL to direct a signer to for signing
     public let embedUrl: String?
+
     /// This URL is specifically designed for
     /// signing documents within an HTML `iframe` tag.
     /// It will be returned in the response
@@ -59,7 +63,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     to sign a document. This field is write only.
     ///   - hasViewedDocument: Set to `true` if the signer views the document
     ///   - signerDecision: Final decision made by the signer
-    ///   - inputs: [SignRequestSignerInput]?
+    ///   - inputs: 
     ///   - embedUrl: URL to direct a signer to for signing
     ///   - iframeableEmbedUrl: This URL is specifically designed for
     ///     signing documents within an HTML `iframe` tag.
@@ -73,6 +77,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
         self.inputs = inputs
         self.embedUrl = embedUrl
         self.iframeableEmbedUrl = iframeableEmbedUrl
+
         super.init(email: email, role: role, isInPerson: isInPerson, order: order, embedUrlExternalUserId: embedUrlExternalUserId, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, loginRequired: loginRequired, verificationPhoneNumber: verificationPhoneNumber, password: password)
     }
 
@@ -83,7 +88,8 @@ public class SignRequestSigner: SignRequestCreateSigner {
         inputs = try container.decodeIfPresent([SignRequestSignerInput].self, forKey: .inputs)
         embedUrl = try container.decodeIfPresent(String.self, forKey: .embedUrl)
         iframeableEmbedUrl = try container.decodeIfPresent(String.self, forKey: .iframeableEmbedUrl)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -95,4 +101,5 @@ public class SignRequestSigner: SignRequestCreateSigner {
         try container.encodeIfPresent(iframeableEmbedUrl, forKey: .iframeableEmbedUrl)
         try super.encode(to: encoder)
     }
+
 }

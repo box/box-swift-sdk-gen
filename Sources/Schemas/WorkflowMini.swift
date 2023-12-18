@@ -15,12 +15,16 @@ public class WorkflowMini: Codable {
 
     /// The unique identifier for the workflow
     public let id: String?
+
     /// `workflow`
     public let type: WorkflowMiniTypeField?
+
     /// The name of the workflow
     public let name: String?
+
     /// The description for a workflow.
     public let description: String?
+
     /// Specifies if this workflow is enabled
     public let isEnabled: Bool?
 
@@ -57,4 +61,5 @@ public class WorkflowMini: Codable {
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(isEnabled, forKey: .isEnabled)
     }
+
 }

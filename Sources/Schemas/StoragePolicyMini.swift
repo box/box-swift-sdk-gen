@@ -9,6 +9,7 @@ public class StoragePolicyMini: Codable {
 
     /// The unique identifier for this storage policy
     public let id: String?
+
     /// `storage_policy`
     public let type: StoragePolicyMiniTypeField?
 
@@ -33,4 +34,5 @@ public class StoragePolicyMini: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

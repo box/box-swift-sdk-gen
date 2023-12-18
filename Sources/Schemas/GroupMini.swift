@@ -10,6 +10,7 @@ public class GroupMini: GroupBase {
 
     /// The name of the group
     public let name: String?
+
     /// The type of the group.
     public let groupType: GroupMiniGroupTypeField?
 
@@ -23,6 +24,7 @@ public class GroupMini: GroupBase {
     public init(id: String, type: GroupBaseTypeField, name: String? = nil, groupType: GroupMiniGroupTypeField? = nil) {
         self.name = name
         self.groupType = groupType
+
         super.init(id: id, type: type)
     }
 
@@ -30,7 +32,8 @@ public class GroupMini: GroupBase {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decodeIfPresent(String.self, forKey: .name)
         groupType = try container.decodeIfPresent(GroupMiniGroupTypeField.self, forKey: .groupType)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -39,4 +42,5 @@ public class GroupMini: GroupBase {
         try container.encodeIfPresent(groupType, forKey: .groupType)
         try super.encode(to: encoder)
     }
+
 }

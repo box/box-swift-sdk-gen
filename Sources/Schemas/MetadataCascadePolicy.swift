@@ -13,16 +13,24 @@ public class MetadataCascadePolicy: Codable {
     }
 
     /// The ID of the metadata cascade policy object
-    public let id: String?
+    public let id: String
+
     /// `metadata_cascade_policy`
-    public let type: MetadataCascadePolicyTypeField?
+    public let type: MetadataCascadePolicyTypeField
+
     /// The enterprise that owns this policy.
     public let ownerEnterprise: MetadataCascadePolicyOwnerEnterpriseField?
+
     /// Represent the folder the policy is applied to.
     public let parent: MetadataCascadePolicyParentField?
-    /// The scope of the of the template that is cascaded down to the folder's
-    /// children.
-    public let scope: MetadataCascadePolicyScopeField?
+
+    /// The scope of the metadata cascade policy can either be `global` or
+    /// `enterprise_*`. The `global` scope is used for policies that are
+    /// available to any Box enterprise. The `enterprise_*` scope represents
+    /// policies that have been created within a specific enterprise, where `*`
+    /// will be the ID of that enterprise.
+    public let scope: String?
+
     /// The key of the template that is cascaded down to the folder's
     /// children.
     /// 
@@ -47,8 +55,11 @@ public class MetadataCascadePolicy: Codable {
     ///   - type: `metadata_cascade_policy`
     ///   - ownerEnterprise: The enterprise that owns this policy.
     ///   - parent: Represent the folder the policy is applied to.
-    ///   - scope: The scope of the of the template that is cascaded down to the folder's
-    ///     children.
+    ///   - scope: The scope of the metadata cascade policy can either be `global` or
+    ///     `enterprise_*`. The `global` scope is used for policies that are
+    ///     available to any Box enterprise. The `enterprise_*` scope represents
+    ///     policies that have been created within a specific enterprise, where `*`
+    ///     will be the ID of that enterprise.
     ///   - templateKey: The key of the template that is cascaded down to the folder's
     ///     children.
     ///     
@@ -64,7 +75,7 @@ public class MetadataCascadePolicy: Codable {
     ///     [list]: e://get-metadata-templates-enterprise
     ///     [file]: e://get-files-id-metadata
     ///     [folder]: e://get-folders-id-metadata
-    public init(id: String? = nil, type: MetadataCascadePolicyTypeField? = nil, ownerEnterprise: MetadataCascadePolicyOwnerEnterpriseField? = nil, parent: MetadataCascadePolicyParentField? = nil, scope: MetadataCascadePolicyScopeField? = nil, templateKey: String? = nil) {
+    public init(id: String, type: MetadataCascadePolicyTypeField, ownerEnterprise: MetadataCascadePolicyOwnerEnterpriseField? = nil, parent: MetadataCascadePolicyParentField? = nil, scope: String? = nil, templateKey: String? = nil) {
         self.id = id
         self.type = type
         self.ownerEnterprise = ownerEnterprise
@@ -75,21 +86,22 @@ public class MetadataCascadePolicy: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(MetadataCascadePolicyTypeField.self, forKey: .type)
+        id = try container.decode(String.self, forKey: .id)
+        type = try container.decode(MetadataCascadePolicyTypeField.self, forKey: .type)
         ownerEnterprise = try container.decodeIfPresent(MetadataCascadePolicyOwnerEnterpriseField.self, forKey: .ownerEnterprise)
         parent = try container.decodeIfPresent(MetadataCascadePolicyParentField.self, forKey: .parent)
-        scope = try container.decodeIfPresent(MetadataCascadePolicyScopeField.self, forKey: .scope)
+        scope = try container.decodeIfPresent(String.self, forKey: .scope)
         templateKey = try container.decodeIfPresent(String.self, forKey: .templateKey)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encode(id, forKey: .id)
+        try container.encode(type, forKey: .type)
         try container.encodeIfPresent(ownerEnterprise, forKey: .ownerEnterprise)
         try container.encodeIfPresent(parent, forKey: .parent)
         try container.encodeIfPresent(scope, forKey: .scope)
         try container.encodeIfPresent(templateKey, forKey: .templateKey)
     }
+
 }

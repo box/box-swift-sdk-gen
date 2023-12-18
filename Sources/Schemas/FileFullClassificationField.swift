@@ -9,8 +9,10 @@ public class FileFullClassificationField: Codable {
 
     /// The name of the classification
     public let name: String?
+
     /// An explanation of the meaning of this classification.
     public let definition: String?
+
     /// The color that is used to display the
     /// classification label in a user-interface. Colors are defined by the admin
     /// or co-admin who created the classification in the Box web app.
@@ -43,4 +45,5 @@ public class FileFullClassificationField: Codable {
         try container.encodeIfPresent(definition, forKey: .definition)
         try container.encodeIfPresent(color, forKey: .color)
     }
+
 }

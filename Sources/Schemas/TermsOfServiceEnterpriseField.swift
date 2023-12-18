@@ -9,8 +9,10 @@ public class TermsOfServiceEnterpriseField: Codable {
 
     /// The unique identifier for this enterprise.
     public let id: String?
+
     /// `enterprise`
-    public let type: TermsOfServiceEnterpriseFieldTypeField?
+    public let type: TermsOfServiceEnterpriseTypeField?
+
     /// The name of the enterprise
     public let name: String?
 
@@ -20,7 +22,7 @@ public class TermsOfServiceEnterpriseField: Codable {
     ///   - id: The unique identifier for this enterprise.
     ///   - type: `enterprise`
     ///   - name: The name of the enterprise
-    public init(id: String? = nil, type: TermsOfServiceEnterpriseFieldTypeField? = nil, name: String? = nil) {
+    public init(id: String? = nil, type: TermsOfServiceEnterpriseTypeField? = nil, name: String? = nil) {
         self.id = id
         self.type = type
         self.name = name
@@ -29,7 +31,7 @@ public class TermsOfServiceEnterpriseField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(TermsOfServiceEnterpriseFieldTypeField.self, forKey: .type)
+        type = try container.decodeIfPresent(TermsOfServiceEnterpriseTypeField.self, forKey: .type)
         name = try container.decodeIfPresent(String.self, forKey: .name)
     }
 
@@ -39,4 +41,5 @@ public class TermsOfServiceEnterpriseField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(name, forKey: .name)
     }
+
 }

@@ -14,8 +14,10 @@ public class WebLinkBase: Codable {
 
     /// The unique identifier for this web link
     public let id: String
+
     /// `web_link`
     public let type: WebLinkBaseTypeField
+
     /// The entity tag of this web link. Used with `If-Match`
     /// headers.
     public let etag: String?
@@ -46,4 +48,5 @@ public class WebLinkBase: Codable {
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(etag, forKey: .etag)
     }
+
 }

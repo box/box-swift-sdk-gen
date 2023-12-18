@@ -9,6 +9,7 @@ public class Files: Codable {
 
     /// The number of files.
     public let totalCount: Int64?
+
     /// A list of files
     public let entries: [FileFull]?
 
@@ -33,4 +34,5 @@ public class Files: Codable {
         try container.encodeIfPresent(totalCount, forKey: .totalCount)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
+
 }

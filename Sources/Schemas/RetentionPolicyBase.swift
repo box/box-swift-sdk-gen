@@ -9,6 +9,7 @@ public class RetentionPolicyBase: Codable {
 
     /// The unique identifier that represents a retention policy.
     public let id: String
+
     /// `retention_policy`
     public let type: RetentionPolicyBaseTypeField
 
@@ -33,4 +34,5 @@ public class RetentionPolicyBase: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(type, forKey: .type)
     }
+
 }

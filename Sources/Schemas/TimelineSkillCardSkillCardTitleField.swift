@@ -8,6 +8,7 @@ public class TimelineSkillCardSkillCardTitleField: Codable {
 
     /// The actual title to show in the UI.
     public let message: String
+
     /// An optional identifier for the title.
     public let code: String?
 
@@ -32,4 +33,5 @@ public class TimelineSkillCardSkillCardTitleField: Codable {
         try container.encode(message, forKey: .message)
         try container.encodeIfPresent(code, forKey: .code)
     }
+
 }

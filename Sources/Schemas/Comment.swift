@@ -14,13 +14,18 @@ public class Comment: CommentBase {
     /// Whether or not this comment is a reply to another
     /// comment
     public let isReplyComment: Bool?
+
     /// The text of the comment, as provided by the user
     public let message: String?
+
     public let createdBy: UserMini?
+
     /// The time this comment was created
     public let createdAt: String?
+
     /// The time this comment was last modified
     public let modifiedAt: String?
+
     public let item: CommentItemField?
 
     /// Initializer for a Comment.
@@ -31,10 +36,10 @@ public class Comment: CommentBase {
     ///   - isReplyComment: Whether or not this comment is a reply to another
     ///     comment
     ///   - message: The text of the comment, as provided by the user
-    ///   - createdBy: UserMini?
+    ///   - createdBy: 
     ///   - createdAt: The time this comment was created
     ///   - modifiedAt: The time this comment was last modified
-    ///   - item: CommentItemField?
+    ///   - item: 
     public init(id: String? = nil, type: CommentBaseTypeField? = nil, isReplyComment: Bool? = nil, message: String? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, modifiedAt: String? = nil, item: CommentItemField? = nil) {
         self.isReplyComment = isReplyComment
         self.message = message
@@ -42,6 +47,7 @@ public class Comment: CommentBase {
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
         self.item = item
+
         super.init(id: id, type: type)
     }
 
@@ -53,7 +59,8 @@ public class Comment: CommentBase {
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
         modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
         item = try container.decodeIfPresent(CommentItemField.self, forKey: .item)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -66,4 +73,5 @@ public class Comment: CommentBase {
         try container.encodeIfPresent(item, forKey: .item)
         try super.encode(to: encoder)
     }
+
 }

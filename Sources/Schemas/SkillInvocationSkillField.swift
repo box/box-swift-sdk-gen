@@ -10,10 +10,13 @@ public class SkillInvocationSkillField: Codable {
 
     /// The unique identifier for this skill
     public let id: String?
+
     /// `skill`
-    public let type: SkillInvocationSkillFieldTypeField?
+    public let type: SkillInvocationSkillTypeField?
+
     /// The name of the skill
     public let name: String?
+
     /// The client ID of the application
     public let apiKey: String?
 
@@ -24,7 +27,7 @@ public class SkillInvocationSkillField: Codable {
     ///   - type: `skill`
     ///   - name: The name of the skill
     ///   - apiKey: The client ID of the application
-    public init(id: String? = nil, type: SkillInvocationSkillFieldTypeField? = nil, name: String? = nil, apiKey: String? = nil) {
+    public init(id: String? = nil, type: SkillInvocationSkillTypeField? = nil, name: String? = nil, apiKey: String? = nil) {
         self.id = id
         self.type = type
         self.name = name
@@ -34,7 +37,7 @@ public class SkillInvocationSkillField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(SkillInvocationSkillFieldTypeField.self, forKey: .type)
+        type = try container.decodeIfPresent(SkillInvocationSkillTypeField.self, forKey: .type)
         name = try container.decodeIfPresent(String.self, forKey: .name)
         apiKey = try container.decodeIfPresent(String.self, forKey: .apiKey)
     }
@@ -46,4 +49,5 @@ public class SkillInvocationSkillField: Codable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(apiKey, forKey: .apiKey)
     }
+
 }

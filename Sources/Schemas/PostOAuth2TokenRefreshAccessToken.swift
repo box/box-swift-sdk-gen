@@ -12,10 +12,13 @@ public class PostOAuth2TokenRefreshAccessToken: Codable {
 
     /// The type of request being made, in this case a refresh request.
     public let grantType: PostOAuth2TokenRefreshAccessTokenGrantTypeField
+
     /// The client ID of the application requesting to refresh the token.
     public let clientId: String
+
     /// The client secret of the application requesting to refresh the token.
     public let clientSecret: String
+
     /// The refresh token to refresh.
     public let refreshToken: String
 
@@ -48,4 +51,5 @@ public class PostOAuth2TokenRefreshAccessToken: Codable {
         try container.encode(clientSecret, forKey: .clientSecret)
         try container.encode(refreshToken, forKey: .refreshToken)
     }
+
 }

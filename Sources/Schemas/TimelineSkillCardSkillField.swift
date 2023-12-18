@@ -7,7 +7,8 @@ public class TimelineSkillCardSkillField: Codable {
     }
 
     /// `service`
-    public let type: TimelineSkillCardSkillFieldTypeField
+    public let type: TimelineSkillCardSkillTypeField
+
     /// A custom identifier that represent the service that
     /// applied this metadata.
     public let id: String
@@ -18,14 +19,14 @@ public class TimelineSkillCardSkillField: Codable {
     ///   - type: `service`
     ///   - id: A custom identifier that represent the service that
     ///     applied this metadata.
-    public init(type: TimelineSkillCardSkillFieldTypeField, id: String) {
+    public init(type: TimelineSkillCardSkillTypeField, id: String) {
         self.type = type
         self.id = id
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decode(TimelineSkillCardSkillFieldTypeField.self, forKey: .type)
+        type = try container.decode(TimelineSkillCardSkillTypeField.self, forKey: .type)
         id = try container.decode(String.self, forKey: .id)
     }
 
@@ -34,4 +35,5 @@ public class TimelineSkillCardSkillField: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
     }
+
 }

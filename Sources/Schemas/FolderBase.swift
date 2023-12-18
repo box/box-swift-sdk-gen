@@ -18,8 +18,10 @@ public class FolderBase: Codable {
     /// for the URL `https://*.app.box.com/folders/123`
     /// the `folder_id` is `123`.
     public let id: String
+
     /// `folder`
     public let type: FolderBaseTypeField
+
     /// The HTTP `etag` of this folder. This can be used within some API
     /// endpoints in the `If-Match` and `If-None-Match` headers to only
     /// perform changes on the folder if (no) changes have happened.
@@ -58,4 +60,5 @@ public class FolderBase: Codable {
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(etag, forKey: .etag)
     }
+
 }

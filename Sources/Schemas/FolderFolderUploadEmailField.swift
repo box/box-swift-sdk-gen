@@ -19,7 +19,8 @@ public class FolderFolderUploadEmailField: Codable {
     /// 
     /// When set to `open` it will accept emails from any email
     /// address.
-    public let access: FolderFolderUploadEmailFieldAccessField?
+    public let access: FolderFolderUploadEmailAccessField?
+
     /// The optional upload email address for this folder.
     public let email: String?
 
@@ -40,14 +41,14 @@ public class FolderFolderUploadEmailField: Codable {
     ///     When set to `open` it will accept emails from any email
     ///     address.
     ///   - email: The optional upload email address for this folder.
-    public init(access: FolderFolderUploadEmailFieldAccessField? = nil, email: String? = nil) {
+    public init(access: FolderFolderUploadEmailAccessField? = nil, email: String? = nil) {
         self.access = access
         self.email = email
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        access = try container.decodeIfPresent(FolderFolderUploadEmailFieldAccessField.self, forKey: .access)
+        access = try container.decodeIfPresent(FolderFolderUploadEmailAccessField.self, forKey: .access)
         email = try container.decodeIfPresent(String.self, forKey: .email)
     }
 
@@ -56,4 +57,5 @@ public class FolderFolderUploadEmailField: Codable {
         try container.encodeIfPresent(access, forKey: .access)
         try container.encodeIfPresent(email, forKey: .email)
     }
+
 }

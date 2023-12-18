@@ -10,6 +10,7 @@ public class TermsOfServiceBase: Codable {
 
     /// The unique identifier for this terms of service.
     public let id: String?
+
     /// `terms_of_service`
     public let type: TermsOfServiceBaseTypeField?
 
@@ -34,4 +35,5 @@ public class TermsOfServiceBase: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
+
 }

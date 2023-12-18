@@ -10,6 +10,7 @@ public class UserCollaborations: UserBase {
 
     /// The display name of this user. If the collaboration status is `pending`, an empty string is returned.
     public let name: String?
+
     /// The primary email address of this user. If the collaboration status is `pending`, an empty string is returned.
     public let login: String?
 
@@ -23,6 +24,7 @@ public class UserCollaborations: UserBase {
     public init(id: String, type: UserBaseTypeField, name: String? = nil, login: String? = nil) {
         self.name = name
         self.login = login
+
         super.init(id: id, type: type)
     }
 
@@ -30,7 +32,8 @@ public class UserCollaborations: UserBase {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decodeIfPresent(String.self, forKey: .name)
         login = try container.decodeIfPresent(String.self, forKey: .login)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -39,4 +42,5 @@ public class UserCollaborations: UserBase {
         try container.encodeIfPresent(login, forKey: .login)
         try super.encode(to: encoder)
     }
+
 }

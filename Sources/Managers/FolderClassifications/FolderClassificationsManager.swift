@@ -2,9 +2,10 @@ import Foundation
 
 public class FolderClassificationsManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -28,12 +29,12 @@ public class FolderClassificationsManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - headers: Headers of getFolderMetadataEnterpriseSecurityClassification6VmVochwUWo method
+    ///   - headers: Headers of getClassificationOnFolder method
     /// - Returns: The `Classification`.
     /// - Throws: The `GeneralError`.
-    public func getFolderMetadataEnterpriseSecurityClassification6VmVochwUWo(folderId: String, headers: GetFolderMetadataEnterpriseSecurityClassification6VmVochwUWoHeadersArg = GetFolderMetadataEnterpriseSecurityClassification6VmVochwUWoHeadersArg()) async throws -> Classification {
+    public func getClassificationOnFolder(folderId: String, headers: GetClassificationOnFolderHeaders = GetClassificationOnFolderHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Classification.deserialize(from: response.data)
     }
 
@@ -56,13 +57,13 @@ public class FolderClassificationsManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - requestBody: Request body of createFolderMetadataEnterpriseSecurityClassification method
-    ///   - headers: Headers of createFolderMetadataEnterpriseSecurityClassification method
+    ///   - requestBody: Request body of addClassificationToFolder method
+    ///   - headers: Headers of addClassificationToFolder method
     /// - Returns: The `Classification`.
     /// - Throws: The `GeneralError`.
-    public func createFolderMetadataEnterpriseSecurityClassification(folderId: String, requestBody: CreateFolderMetadataEnterpriseSecurityClassificationRequestBodyArg = CreateFolderMetadataEnterpriseSecurityClassificationRequestBodyArg(), headers: CreateFolderMetadataEnterpriseSecurityClassificationHeadersArg = CreateFolderMetadataEnterpriseSecurityClassificationHeadersArg()) async throws -> Classification {
+    public func addClassificationToFolder(folderId: String, requestBody: AddClassificationToFolderRequestBody = AddClassificationToFolderRequestBody(), headers: AddClassificationToFolderHeaders = AddClassificationToFolderHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Classification.deserialize(from: response.data)
     }
 
@@ -84,13 +85,13 @@ public class FolderClassificationsManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - requestBody: Request body of updateFolderMetadataEnterpriseSecurityClassification method
-    ///   - headers: Headers of updateFolderMetadataEnterpriseSecurityClassification method
+    ///   - requestBody: Request body of updateClassificationOnFolder method
+    ///   - headers: Headers of updateClassificationOnFolder method
     /// - Returns: The `Classification`.
     /// - Throws: The `GeneralError`.
-    public func updateFolderMetadataEnterpriseSecurityClassification(folderId: String, requestBody: [UpdateFolderMetadataEnterpriseSecurityClassificationRequestBodyArg], headers: UpdateFolderMetadataEnterpriseSecurityClassificationHeadersArg = UpdateFolderMetadataEnterpriseSecurityClassificationHeadersArg()) async throws -> Classification {
+    public func updateClassificationOnFolder(folderId: String, requestBody: [UpdateClassificationOnFolderRequestBody], headers: UpdateClassificationOnFolderHeaders = UpdateClassificationOnFolderHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Classification.deserialize(from: response.data)
     }
 
@@ -112,11 +113,11 @@ public class FolderClassificationsManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - headers: Headers of deleteFolderMetadataEnterpriseSecurityClassification method
+    ///   - headers: Headers of deleteClassificationFromFolder method
     /// - Throws: The `GeneralError`.
-    public func deleteFolderMetadataEnterpriseSecurityClassification(folderId: String, headers: DeleteFolderMetadataEnterpriseSecurityClassificationHeadersArg = DeleteFolderMetadataEnterpriseSecurityClassificationHeadersArg()) async throws {
+    public func deleteClassificationFromFolder(folderId: String, headers: DeleteClassificationFromFolderHeaders = DeleteClassificationFromFolderHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

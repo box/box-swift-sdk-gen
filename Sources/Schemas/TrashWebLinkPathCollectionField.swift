@@ -8,15 +8,16 @@ public class TrashWebLinkPathCollectionField: Codable {
 
     /// The number of folders in this list.
     public let totalCount: Int64
+
     /// Array of folders for this item's path collection
-    public let entries: [TrashWebLinkPathCollectionFieldEntriesField]
+    public let entries: [TrashWebLinkPathCollectionEntriesField]
 
     /// Initializer for a TrashWebLinkPathCollectionField.
     ///
     /// - Parameters:
     ///   - totalCount: The number of folders in this list.
     ///   - entries: Array of folders for this item's path collection
-    public init(totalCount: Int64, entries: [TrashWebLinkPathCollectionFieldEntriesField]) {
+    public init(totalCount: Int64, entries: [TrashWebLinkPathCollectionEntriesField]) {
         self.totalCount = totalCount
         self.entries = entries
     }
@@ -24,7 +25,7 @@ public class TrashWebLinkPathCollectionField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         totalCount = try container.decode(Int64.self, forKey: .totalCount)
-        entries = try container.decode([TrashWebLinkPathCollectionFieldEntriesField].self, forKey: .entries)
+        entries = try container.decode([TrashWebLinkPathCollectionEntriesField].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -32,4 +33,5 @@ public class TrashWebLinkPathCollectionField: Codable {
         try container.encode(totalCount, forKey: .totalCount)
         try container.encode(entries, forKey: .entries)
     }
+
 }

@@ -10,8 +10,10 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
 
     /// Index of page that the input is on
     public let pageIndex: Int64
+
     /// Type of input
     public let type: SignRequestSignerInputTypeField?
+
     /// Content type of input
     public let contentType: SignRequestSignerInputContentTypeField?
 
@@ -29,6 +31,7 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
         self.pageIndex = pageIndex
         self.type = type
         self.contentType = contentType
+
         super.init(documentTagId: documentTagId, textValue: textValue, checkboxValue: checkboxValue, dateValue: dateValue)
     }
 
@@ -37,7 +40,8 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
         pageIndex = try container.decode(Int64.self, forKey: .pageIndex)
         type = try container.decodeIfPresent(SignRequestSignerInputTypeField.self, forKey: .type)
         contentType = try container.decodeIfPresent(SignRequestSignerInputContentTypeField.self, forKey: .contentType)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -47,4 +51,5 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
         try container.encodeIfPresent(contentType, forKey: .contentType)
         try super.encode(to: encoder)
     }
+
 }

@@ -2,77 +2,146 @@ import Foundation
 
 public class BoxClient {
     public let auth: Authentication
+
     public let networkSession: NetworkSession
+
     public let authorization: AuthorizationManager
+
     public let files: FilesManager
+
     public let trashedFiles: TrashedFilesManager
+
     public let downloads: DownloadsManager
+
     public let uploads: UploadsManager
+
     public let chunkedUploads: ChunkedUploadsManager
+
     public let listCollaborations: ListCollaborationsManager
+
     public let comments: CommentsManager
+
     public let tasks: TasksManager
+
     public let fileVersions: FileVersionsManager
+
     public let fileMetadata: FileMetadataManager
+
     public let fileClassifications: FileClassificationsManager
+
     public let skills: SkillsManager
+
     public let fileWatermarks: FileWatermarksManager
+
     public let fileRequests: FileRequestsManager
+
     public let folders: FoldersManager
+
     public let trashedFolders: TrashedFoldersManager
+
     public let folderMetadata: FolderMetadataManager
+
     public let folderClassifications: FolderClassificationsManager
+
     public let trashedItems: TrashedItemsManager
+
     public let folderWatermarks: FolderWatermarksManager
+
     public let folderLocks: FolderLocksManager
+
     public let metadataTemplates: MetadataTemplatesManager
+
     public let classifications: ClassificationsManager
+
     public let metadataCascadePolicies: MetadataCascadePoliciesManager
+
     public let search: SearchManager
+
     public let userCollaborations: UserCollaborationsManager
+
     public let taskAssignments: TaskAssignmentsManager
+
     public let sharedLinksFiles: SharedLinksFilesManager
+
     public let sharedLinksFolders: SharedLinksFoldersManager
+
     public let webLinks: WebLinksManager
+
     public let trashedWebLinks: TrashedWebLinksManager
+
     public let sharedLinksWebLinks: SharedLinksWebLinksManager
+
     public let users: UsersManager
+
     public let sessionTermination: SessionTerminationManager
+
     public let avatars: AvatarsManager
+
     public let transfer: TransferManager
+
     public let emailAliases: EmailAliasesManager
+
     public let memberships: MembershipsManager
+
     public let invites: InvitesManager
+
     public let groups: GroupsManager
+
     public let webhooks: WebhooksManager
+
     public let events: EventsManager
+
     public let collections: CollectionsManager
+
     public let recentItems: RecentItemsManager
+
     public let retentionPolicies: RetentionPoliciesManager
+
     public let retentionPolicyAssignments: RetentionPolicyAssignmentsManager
+
     public let legalHoldPolicies: LegalHoldPoliciesManager
+
     public let legalHoldPolicyAssignments: LegalHoldPolicyAssignmentsManager
+
     public let fileVersionRetentions: FileVersionRetentionsManager
+
     public let fileVersionLegalHolds: FileVersionLegalHoldsManager
+
     public let shieldInformationBarriers: ShieldInformationBarriersManager
+
     public let shieldInformationBarrierReports: ShieldInformationBarrierReportsManager
+
     public let shieldInformationBarrierSegments: ShieldInformationBarrierSegmentsManager
+
     public let shieldInformationBarrierSegmentMembers: ShieldInformationBarrierSegmentMembersManager
+
     public let shieldInformationBarrierSegmentRestrictions: ShieldInformationBarrierSegmentRestrictionsManager
+
     public let devicePinners: DevicePinnersManager
+
     public let termsOfServices: TermsOfServicesManager
+
     public let termsOfServiceUserStatuses: TermsOfServiceUserStatusesManager
+
     public let collaborationAllowlistEntries: CollaborationAllowlistEntriesManager
+
     public let collaborationAllowlistExemptTargets: CollaborationAllowlistExemptTargetsManager
+
     public let storagePolicies: StoragePoliciesManager
+
     public let storagePolicyAssignments: StoragePolicyAssignmentsManager
+
     public let zipDownloads: ZipDownloadsManager
+
     public let signRequests: SignRequestsManager
+
     public let workflows: WorkflowsManager
+
     public let signTemplates: SignTemplatesManager
+
     public let integrationMappings: IntegrationMappingsManager
 
-    public init(auth: Authentication, networkSession: NetworkSession = NetworkSession()) {
+    public init(auth: Authentication, networkSession: NetworkSession = NetworkSession(baseUrls: BaseUrls())) {
         self.auth = auth
         self.networkSession = networkSession
         self.authorization = AuthorizationManager(auth: self.auth, networkSession: self.networkSession)
@@ -154,7 +223,8 @@ public class BoxClient {
         return BoxClient(auth: self.auth, networkSession: self.networkSession.withAdditionalHeaders(additionalHeaders: ["As-User": userId]))
     }
 
-    /// Create a new client with suppressed notifications. Calls made with the new client will not trigger email or webhook notifications    /// - Returns: The `BoxClient`.
+    /// Create a new client with suppressed notifications. Calls made with the new client will not trigger email or webhook notifications
+    /// - Returns: The `BoxClient`.
     public func withSuppressedNotifications() -> BoxClient {
         return BoxClient(auth: self.auth, networkSession: self.networkSession.withAdditionalHeaders(additionalHeaders: ["Box-Notifications": "off"]))
     }
@@ -166,6 +236,15 @@ public class BoxClient {
     /// - Returns: The `BoxClient`.
     public func withExtraHeaders(extraHeaders: [String: String] = [:]) -> BoxClient {
         return BoxClient(auth: self.auth, networkSession: self.networkSession.withAdditionalHeaders(additionalHeaders: extraHeaders))
+    }
+
+    /// Create a new client with a custom set of base urls that will be used for every API call
+    ///
+    /// - Parameters:
+    ///   - baseUrls: Custom set of base urls that will be used for every API call
+    /// - Returns: The `BoxClient`.
+    public func withCustomBaseUrls(baseUrls: BaseUrls) -> BoxClient {
+        return BoxClient(auth: self.auth, networkSession: self.networkSession.withCustomBaseUrls(baseUrls: baseUrls))
     }
 
 }

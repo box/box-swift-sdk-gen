@@ -22,23 +22,25 @@ public class CommentFull: Comment {
     ///   - isReplyComment: Whether or not this comment is a reply to another
     ///     comment
     ///   - message: The text of the comment, as provided by the user
-    ///   - createdBy: UserMini?
+    ///   - createdBy: 
     ///   - createdAt: The time this comment was created
     ///   - modifiedAt: The time this comment was last modified
-    ///   - item: CommentItemField?
+    ///   - item: 
     ///   - taggedMessage: The string representing the comment text with
     ///     @mentions included. @mention format is @[id:username]
     ///     where `id` is user's Box ID and `username` is
     ///     their display name.
     public init(id: String? = nil, type: CommentBaseTypeField? = nil, isReplyComment: Bool? = nil, message: String? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, modifiedAt: String? = nil, item: CommentItemField? = nil, taggedMessage: String? = nil) {
         self.taggedMessage = taggedMessage
+
         super.init(id: id, type: type, isReplyComment: isReplyComment, message: message, createdBy: createdBy, createdAt: createdAt, modifiedAt: modifiedAt, item: item)
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         taggedMessage = try container.decodeIfPresent(String.self, forKey: .taggedMessage)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -46,4 +48,5 @@ public class CommentFull: Comment {
         try container.encodeIfPresent(taggedMessage, forKey: .taggedMessage)
         try super.encode(to: encoder)
     }
+
 }

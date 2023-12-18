@@ -23,12 +23,14 @@ public class RetentionPolicy: RetentionPolicyMini {
 
     /// The additional text description of the retention policy.
     public let description: String?
+
     /// The type of the retention policy. A retention
     /// policy type can either be `finite`, where a
     /// specific amount of time to retain the content is known
     /// upfront, or `indefinite`, where the amount of time
     /// to retain the content is still unknown.
     public let policyType: RetentionPolicyPolicyTypeField?
+
     /// Specifies the retention type:
     /// 
     /// * `modifiable`: You can modify the retention policy. For example,
@@ -45,27 +47,35 @@ public class RetentionPolicy: RetentionPolicyMini {
     ///  policy duration. Use this type to ensure
     ///  compliance with regulatory retention policies.
     public let retentionType: RetentionPolicyRetentionTypeField?
+
     /// The status of the retention policy. The status of
     /// a policy will be `active`, unless explicitly retired by an
     /// administrator, in which case the status will be `retired`.
     /// Once a policy has been retired, it cannot become
     /// active again.
     public let status: RetentionPolicyStatusField?
+
     public let createdBy: UserMini?
+
     /// When the retention policy object was created.
     public let createdAt: String?
+
     /// When the retention policy object was last modified.
     public let modifiedAt: String?
+
     /// Determines if the owner of items under the policy
     /// can extend the retention when the original
     /// retention duration is about to end.
     public let canOwnerExtendRetention: Bool?
+
     /// Determines if owners and co-owners of items
     /// under the policy are notified when
     /// the retention duration is about to end.
     public let areOwnersNotified: Bool?
+
     /// A list of users notified when the retention policy duration is about to end.
     public let customNotificationRecipients: [UserMini]?
+
     /// Counts the retention policy assignments for each item type.
     public let assignmentCounts: RetentionPolicyAssignmentCountsField?
 
@@ -114,7 +124,7 @@ public class RetentionPolicy: RetentionPolicyMini {
     ///     administrator, in which case the status will be `retired`.
     ///     Once a policy has been retired, it cannot become
     ///     active again.
-    ///   - createdBy: UserMini?
+    ///   - createdBy: 
     ///   - createdAt: When the retention policy object was created.
     ///   - modifiedAt: When the retention policy object was last modified.
     ///   - canOwnerExtendRetention: Determines if the owner of items under the policy
@@ -137,6 +147,7 @@ public class RetentionPolicy: RetentionPolicyMini {
         self.areOwnersNotified = areOwnersNotified
         self.customNotificationRecipients = customNotificationRecipients
         self.assignmentCounts = assignmentCounts
+
         super.init(id: id, type: type, policyName: policyName, retentionLength: retentionLength, dispositionAction: dispositionAction)
     }
 
@@ -153,7 +164,8 @@ public class RetentionPolicy: RetentionPolicyMini {
         areOwnersNotified = try container.decodeIfPresent(Bool.self, forKey: .areOwnersNotified)
         customNotificationRecipients = try container.decodeIfPresent([UserMini].self, forKey: .customNotificationRecipients)
         assignmentCounts = try container.decodeIfPresent(RetentionPolicyAssignmentCountsField.self, forKey: .assignmentCounts)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -171,4 +183,5 @@ public class RetentionPolicy: RetentionPolicyMini {
         try container.encodeIfPresent(assignmentCounts, forKey: .assignmentCounts)
         try super.encode(to: encoder)
     }
+
 }

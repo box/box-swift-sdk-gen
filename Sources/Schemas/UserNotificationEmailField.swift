@@ -8,6 +8,7 @@ public class UserNotificationEmailField: Codable {
 
     /// The email address to send the notifications to.
     public let email: String?
+
     /// Specifies if this email address has been confirmed.
     public let isConfirmed: Bool?
 
@@ -32,4 +33,5 @@ public class UserNotificationEmailField: Codable {
         try container.encodeIfPresent(email, forKey: .email)
         try container.encodeIfPresent(isConfirmed, forKey: .isConfirmed)
     }
+
 }

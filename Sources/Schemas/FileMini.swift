@@ -11,11 +11,14 @@ public class FileMini: FileBase {
     }
 
     public let sequenceId: String?
+
     /// The name of the file
     public let name: String?
+
     /// The SHA1 hash of the file. This can be used to compare the contents
     /// of a file on Box with a local file.
     public let sha1: String?
+
     public let fileVersion: FileVersionMini?
 
     /// Initializer for a FileMini.
@@ -32,16 +35,17 @@ public class FileMini: FileBase {
     ///   - etag: The HTTP `etag` of this file. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the file if (no) changes have happened.
-    ///   - sequenceId: String?
+    ///   - sequenceId: 
     ///   - name: The name of the file
     ///   - sha1: The SHA1 hash of the file. This can be used to compare the contents
     ///     of a file on Box with a local file.
-    ///   - fileVersion: FileVersionMini?
+    ///   - fileVersion: 
     public init(id: String, type: FileBaseTypeField, etag: String? = nil, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil) {
         self.sequenceId = sequenceId
         self.name = name
         self.sha1 = sha1
         self.fileVersion = fileVersion
+
         super.init(id: id, type: type, etag: etag)
     }
 
@@ -51,7 +55,8 @@ public class FileMini: FileBase {
         name = try container.decodeIfPresent(String.self, forKey: .name)
         sha1 = try container.decodeIfPresent(String.self, forKey: .sha1)
         fileVersion = try container.decodeIfPresent(FileVersionMini.self, forKey: .fileVersion)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -62,4 +67,5 @@ public class FileMini: FileBase {
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
         try super.encode(to: encoder)
     }
+
 }

@@ -22,4 +22,5 @@ public class ShieldInformationBarrierReportDetails: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(details, forKey: .details)
     }
+
 }

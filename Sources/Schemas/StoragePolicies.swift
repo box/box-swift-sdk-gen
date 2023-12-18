@@ -13,10 +13,13 @@ public class StoragePolicies: Codable {
     /// `limit` query parameter unless that value exceeded the maximum value
     /// allowed. The maximum value varies by API.
     public let limit: Int64?
+
     /// The marker for the start of the next page of results.
-    public let nextMarker: Int64?
+    public let nextMarker: String?
+
     /// The marker for the start of the previous page of results.
-    public let prevMarker: Int64?
+    public let prevMarker: String?
+
     /// A list of storage policies
     public let entries: [StoragePolicy]?
 
@@ -29,7 +32,7 @@ public class StoragePolicies: Codable {
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
     ///   - entries: A list of storage policies
-    public init(limit: Int64? = nil, nextMarker: Int64? = nil, prevMarker: Int64? = nil, entries: [StoragePolicy]? = nil) {
+    public init(limit: Int64? = nil, nextMarker: String? = nil, prevMarker: String? = nil, entries: [StoragePolicy]? = nil) {
         self.limit = limit
         self.nextMarker = nextMarker
         self.prevMarker = prevMarker
@@ -39,8 +42,8 @@ public class StoragePolicies: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
-        nextMarker = try container.decodeIfPresent(Int64.self, forKey: .nextMarker)
-        prevMarker = try container.decodeIfPresent(Int64.self, forKey: .prevMarker)
+        nextMarker = try container.decodeIfPresent(String.self, forKey: .nextMarker)
+        prevMarker = try container.decodeIfPresent(String.self, forKey: .prevMarker)
         entries = try container.decodeIfPresent([StoragePolicy].self, forKey: .entries)
     }
 
@@ -51,4 +54,5 @@ public class StoragePolicies: Codable {
         try container.encodeIfPresent(prevMarker, forKey: .prevMarker)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
+
 }

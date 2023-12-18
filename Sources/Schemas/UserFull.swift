@@ -20,31 +20,42 @@ public class UserFull: User {
 
     /// The user’s enterprise role
     public let role: UserFullRoleField?
+
     /// Tracking codes allow an admin to generate reports from the
     /// admin console and assign an attribute to a specific group
     /// of users. This setting must be enabled for an enterprise
     /// before it can be used.
     public let trackingCodes: [TrackingCode]?
+
     /// Whether the user can see other enterprise users in their contact list
     public let canSeeManagedUsers: Bool?
+
     /// Whether the user can use Box Sync
     public let isSyncEnabled: Bool?
+
     /// Whether the user is allowed to collaborate with users outside their
     /// enterprise
     public let isExternalCollabRestricted: Bool?
+
     /// Whether to exempt the user from Enterprise device limits
     public let isExemptFromDeviceLimits: Bool?
+
     /// Whether the user must use two-factor authentication
     public let isExemptFromLoginVerification: Bool?
+
     public let enterprise: UserFullEnterpriseField?
+
     /// Tags for all files and folders owned by the user. Values returned
     /// will only contain tags that were set by the requester.
     public let myTags: [String]?
+
     /// The root (protocol, subdomain, domain) of any links that need to be
     /// generated for the user
     public let hostname: String?
+
     /// Whether the user is an App User
     public let isPlatformAccessOnly: Bool?
+
     /// An external identifier for an app user, which can be used to look up
     /// the user. This can be used to tie user IDs from external identity
     /// providers to Box users.
@@ -85,7 +96,7 @@ public class UserFull: User {
     ///     enterprise
     ///   - isExemptFromDeviceLimits: Whether to exempt the user from Enterprise device limits
     ///   - isExemptFromLoginVerification: Whether the user must use two-factor authentication
-    ///   - enterprise: UserFullEnterpriseField?
+    ///   - enterprise: 
     ///   - myTags: Tags for all files and folders owned by the user. Values returned
     ///     will only contain tags that were set by the requester.
     ///   - hostname: The root (protocol, subdomain, domain) of any links that need to be
@@ -107,6 +118,7 @@ public class UserFull: User {
         self.hostname = hostname
         self.isPlatformAccessOnly = isPlatformAccessOnly
         self.externalAppUserId = externalAppUserId
+
         super.init(id: id, type: type, name: name, login: login, createdAt: createdAt, modifiedAt: modifiedAt, language: language, timezone: timezone, spaceAmount: spaceAmount, spaceUsed: spaceUsed, maxUploadSize: maxUploadSize, status: status, jobTitle: jobTitle, phone: phone, address: address, avatarUrl: avatarUrl, notificationEmail: notificationEmail)
     }
 
@@ -124,7 +136,8 @@ public class UserFull: User {
         hostname = try container.decodeIfPresent(String.self, forKey: .hostname)
         isPlatformAccessOnly = try container.decodeIfPresent(Bool.self, forKey: .isPlatformAccessOnly)
         externalAppUserId = try container.decodeIfPresent(String.self, forKey: .externalAppUserId)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -143,4 +156,5 @@ public class UserFull: User {
         try container.encodeIfPresent(externalAppUserId, forKey: .externalAppUserId)
         try super.encode(to: encoder)
     }
+
 }

@@ -17,13 +17,16 @@ public enum SearchResultsOrSearchResultsWithSharedLinks: Codable {
                     self = .searchResults(content)
                     return
                 }
+
             case "search_results_with_shared_links":
                 if let content = try? SearchResultsWithSharedLinks(from: decoder) {
                     self = .searchResultsWithSharedLinks(content)
                     return
                 }
+
             default:
                 throw DecodingError.typeMismatch(SearchResultsOrSearchResultsWithSharedLinks.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpeted value for key type"))
+
             }
         }
 
@@ -38,4 +41,5 @@ public enum SearchResultsOrSearchResultsWithSharedLinks: Codable {
             try searchResultsWithSharedLinks.encode(to: encoder)
         }
     }
+
 }

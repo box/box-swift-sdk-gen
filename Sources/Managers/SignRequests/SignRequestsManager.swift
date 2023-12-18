@@ -2,9 +2,10 @@ import Foundation
 
 public class SignRequestsManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -17,9 +18,9 @@ public class SignRequestsManager {
     ///   - headers: Headers of cancelSignRequest method
     /// - Returns: The `SignRequest`.
     /// - Throws: The `GeneralError`.
-    public func cancelSignRequest(signRequestId: String, headers: CancelSignRequestHeadersArg = CancelSignRequestHeadersArg()) async throws -> SignRequest {
+    public func cancelSignRequest(signRequestId: String, headers: CancelSignRequestHeaders = CancelSignRequestHeaders()) async throws -> SignRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/sign_requests/")\(signRequestId)\("/cancel")", options: FetchOptions(method: "POST", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/sign_requests/")\(signRequestId)\("/cancel")", options: FetchOptions(method: "POST", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SignRequest.deserialize(from: response.data)
     }
 
@@ -30,9 +31,9 @@ public class SignRequestsManager {
     ///     Example: "33243242"
     ///   - headers: Headers of resendSignRequest method
     /// - Throws: The `GeneralError`.
-    public func resendSignRequest(signRequestId: String, headers: ResendSignRequestHeadersArg = ResendSignRequestHeadersArg()) async throws {
+    public func resendSignRequest(signRequestId: String, headers: ResendSignRequestHeaders = ResendSignRequestHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/sign_requests/")\(signRequestId)\("/resend")", options: FetchOptions(method: "POST", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/sign_requests/")\(signRequestId)\("/resend")", options: FetchOptions(method: "POST", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Gets a sign request by ID.
@@ -43,9 +44,9 @@ public class SignRequestsManager {
     ///   - headers: Headers of getSignRequestById method
     /// - Returns: The `SignRequest`.
     /// - Throws: The `GeneralError`.
-    public func getSignRequestById(signRequestId: String, headers: GetSignRequestByIdHeadersArg = GetSignRequestByIdHeadersArg()) async throws -> SignRequest {
+    public func getSignRequestById(signRequestId: String, headers: GetSignRequestByIdHeaders = GetSignRequestByIdHeaders()) async throws -> SignRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/sign_requests/")\(signRequestId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/sign_requests/")\(signRequestId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SignRequest.deserialize(from: response.data)
     }
 
@@ -57,10 +58,10 @@ public class SignRequestsManager {
     ///   - headers: Headers of getSignRequests method
     /// - Returns: The `SignRequests`.
     /// - Throws: The `GeneralError`.
-    public func getSignRequests(queryParams: GetSignRequestsQueryParamsArg = GetSignRequestsQueryParamsArg(), headers: GetSignRequestsHeadersArg = GetSignRequestsHeadersArg()) async throws -> SignRequests {
+    public func getSignRequests(queryParams: GetSignRequestsQueryParams = GetSignRequestsQueryParams(), headers: GetSignRequestsHeaders = GetSignRequestsHeaders()) async throws -> SignRequests {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/sign_requests")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/sign_requests")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SignRequests.deserialize(from: response.data)
     }
 
@@ -72,9 +73,9 @@ public class SignRequestsManager {
     ///   - headers: Headers of createSignRequest method
     /// - Returns: The `SignRequest`.
     /// - Throws: The `GeneralError`.
-    public func createSignRequest(requestBody: SignRequestCreateRequest, headers: CreateSignRequestHeadersArg = CreateSignRequestHeadersArg()) async throws -> SignRequest {
+    public func createSignRequest(requestBody: SignRequestCreateRequest, headers: CreateSignRequestHeaders = CreateSignRequestHeaders()) async throws -> SignRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/sign_requests")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/sign_requests")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SignRequest.deserialize(from: response.data)
     }
 

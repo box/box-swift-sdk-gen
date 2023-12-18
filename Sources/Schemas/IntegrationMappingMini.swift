@@ -12,10 +12,13 @@ public class IntegrationMappingMini: IntegrationMappingBase {
 
     /// ID of the mapped partner item
     public let partnerItemId: String?
+
     /// Domain-specific type of the mapped partner item
     public let partnerItemType: IntegrationMappingMiniPartnerItemTypeField?
+
     /// ID of the Box item mapped to the object referenced in `partner_item_id`
     public let boxItemId: String?
+
     /// Type of the Box object referenced in `box_item_id`
     public let boxItemType: IntegrationMappingMiniBoxItemTypeField?
 
@@ -38,6 +41,7 @@ public class IntegrationMappingMini: IntegrationMappingBase {
         self.partnerItemType = partnerItemType
         self.boxItemId = boxItemId
         self.boxItemType = boxItemType
+
         super.init(id: id, integrationType: integrationType)
     }
 
@@ -47,7 +51,8 @@ public class IntegrationMappingMini: IntegrationMappingBase {
         partnerItemType = try container.decodeIfPresent(IntegrationMappingMiniPartnerItemTypeField.self, forKey: .partnerItemType)
         boxItemId = try container.decodeIfPresent(String.self, forKey: .boxItemId)
         boxItemType = try container.decodeIfPresent(IntegrationMappingMiniBoxItemTypeField.self, forKey: .boxItemType)
-        try super.init(from:decoder)
+
+        try super.init(from: decoder)
     }
 
     public override func encode(to encoder: Encoder) throws {
@@ -58,4 +63,5 @@ public class IntegrationMappingMini: IntegrationMappingBase {
         try container.encodeIfPresent(boxItemType, forKey: .boxItemType)
         try super.encode(to: encoder)
     }
+
 }

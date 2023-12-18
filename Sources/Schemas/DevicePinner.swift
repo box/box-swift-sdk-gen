@@ -12,9 +12,12 @@ public class DevicePinner: Codable {
 
     /// The unique identifier for this device pin.
     public let id: String?
+
     /// `device_pinner`
     public let type: DevicePinnerTypeField?
+
     public let ownedBy: UserMini?
+
     /// The type of device being pinned
     public let productName: String?
 
@@ -23,7 +26,7 @@ public class DevicePinner: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this device pin.
     ///   - type: `device_pinner`
-    ///   - ownedBy: UserMini?
+    ///   - ownedBy: 
     ///   - productName: The type of device being pinned
     public init(id: String? = nil, type: DevicePinnerTypeField? = nil, ownedBy: UserMini? = nil, productName: String? = nil) {
         self.id = id
@@ -47,4 +50,5 @@ public class DevicePinner: Codable {
         try container.encodeIfPresent(ownedBy, forKey: .ownedBy)
         try container.encodeIfPresent(productName, forKey: .productName)
     }
+
 }

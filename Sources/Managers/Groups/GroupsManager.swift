@@ -2,9 +2,10 @@ import Foundation
 
 public class GroupsManager {
     public let auth: Authentication?
-    public let networkSession: NetworkSession?
 
-    public init(auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    public let networkSession: NetworkSession
+
+    public init(auth: Authentication? = nil, networkSession: NetworkSession = NetworkSession()) {
         self.auth = auth
         self.networkSession = networkSession
     }
@@ -17,10 +18,10 @@ public class GroupsManager {
     ///   - headers: Headers of getGroups method
     /// - Returns: The `Groups`.
     /// - Throws: The `GeneralError`.
-    public func getGroups(queryParams: GetGroupsQueryParamsArg = GetGroupsQueryParamsArg(), headers: GetGroupsHeadersArg = GetGroupsHeadersArg()) async throws -> Groups {
+    public func getGroups(queryParams: GetGroupsQueryParams = GetGroupsQueryParams(), headers: GetGroupsHeaders = GetGroupsHeaders()) async throws -> Groups {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["filter_term": Utils.Strings.toString(value: queryParams.filterTerm), "fields": Utils.Strings.toString(value: queryParams.fields), "limit": Utils.Strings.toString(value: queryParams.limit), "offset": Utils.Strings.toString(value: queryParams.offset)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/groups")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/groups")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Groups.deserialize(from: response.data)
     }
 
@@ -33,10 +34,10 @@ public class GroupsManager {
     ///   - headers: Headers of createGroup method
     /// - Returns: The `GroupFull`.
     /// - Throws: The `GeneralError`.
-    public func createGroup(requestBody: CreateGroupRequestBodyArg, queryParams: CreateGroupQueryParamsArg = CreateGroupQueryParamsArg(), headers: CreateGroupHeadersArg = CreateGroupHeadersArg()) async throws -> GroupFull {
+    public func createGroup(requestBody: CreateGroupRequestBody, queryParams: CreateGroupQueryParams = CreateGroupQueryParams(), headers: CreateGroupHeaders = CreateGroupHeaders()) async throws -> GroupFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/groups")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/groups")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try GroupFull.deserialize(from: response.data)
     }
 
@@ -51,10 +52,10 @@ public class GroupsManager {
     ///   - headers: Headers of getGroupById method
     /// - Returns: The `GroupFull`.
     /// - Throws: The `GeneralError`.
-    public func getGroupById(groupId: String, queryParams: GetGroupByIdQueryParamsArg = GetGroupByIdQueryParamsArg(), headers: GetGroupByIdHeadersArg = GetGroupByIdHeadersArg()) async throws -> GroupFull {
+    public func getGroupById(groupId: String, queryParams: GetGroupByIdQueryParams = GetGroupByIdQueryParams(), headers: GetGroupByIdHeaders = GetGroupByIdHeaders()) async throws -> GroupFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/groups/")\(groupId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/groups/")\(groupId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try GroupFull.deserialize(from: response.data)
     }
 
@@ -70,10 +71,10 @@ public class GroupsManager {
     ///   - headers: Headers of updateGroupById method
     /// - Returns: The `GroupFull`.
     /// - Throws: The `GeneralError`.
-    public func updateGroupById(groupId: String, requestBody: UpdateGroupByIdRequestBodyArg = UpdateGroupByIdRequestBodyArg(), queryParams: UpdateGroupByIdQueryParamsArg = UpdateGroupByIdQueryParamsArg(), headers: UpdateGroupByIdHeadersArg = UpdateGroupByIdHeadersArg()) async throws -> GroupFull {
+    public func updateGroupById(groupId: String, requestBody: UpdateGroupByIdRequestBody = UpdateGroupByIdRequestBody(), queryParams: UpdateGroupByIdQueryParams = UpdateGroupByIdQueryParams(), headers: UpdateGroupByIdHeaders = UpdateGroupByIdHeaders()) async throws -> GroupFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/groups/")\(groupId)", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/groups/")\(groupId)", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try GroupFull.deserialize(from: response.data)
     }
 
@@ -85,9 +86,9 @@ public class GroupsManager {
     ///     Example: "57645"
     ///   - headers: Headers of deleteGroupById method
     /// - Throws: The `GeneralError`.
-    public func deleteGroupById(groupId: String, headers: DeleteGroupByIdHeadersArg = DeleteGroupByIdHeadersArg()) async throws {
+    public func deleteGroupById(groupId: String, headers: DeleteGroupByIdHeaders = DeleteGroupByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://api.box.com/2.0/groups/")\(groupId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/groups/")\(groupId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

@@ -10,10 +10,13 @@ public class LegalHoldPolicyAssignmentCountsField: Codable {
 
     /// The number of users this policy is applied to
     public let user: Int64?
+
     /// The number of folders this policy is applied to
     public let folder: Int64?
+
     /// The number of files this policy is applied to
     public let file: Int64?
+
     /// The number of file versions this policy is applied to
     public let fileVersion: Int64?
 
@@ -46,4 +49,5 @@ public class LegalHoldPolicyAssignmentCountsField: Codable {
         try container.encodeIfPresent(file, forKey: .file)
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
     }
+
 }

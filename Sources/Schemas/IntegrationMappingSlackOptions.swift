@@ -34,4 +34,5 @@ public class IntegrationMappingSlackOptions: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(isAccessManagementDisabled, forKey: .isAccessManagementDisabled)
     }
+
 }
