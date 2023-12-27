@@ -68,11 +68,11 @@ public class UploadsManager {
     /// before you upload the entire file.
     ///
     /// - Parameters:
-    ///   - requestBody: Request body of preflightFileUpload method
-    ///   - headers: Headers of preflightFileUpload method
+    ///   - requestBody: Request body of preflightFileUploadCheck method
+    ///   - headers: Headers of preflightFileUploadCheck method
     /// - Returns: The `UploadUrl`.
     /// - Throws: The `GeneralError`.
-    public func preflightFileUpload(requestBody: PreflightFileUploadRequestBody = PreflightFileUploadRequestBody(), headers: PreflightFileUploadHeaders = PreflightFileUploadHeaders()) async throws -> UploadUrl {
+    public func preflightFileUploadCheck(requestBody: PreflightFileUploadCheckRequestBody = PreflightFileUploadCheckRequestBody(), headers: PreflightFileUploadCheckHeaders = PreflightFileUploadCheckHeaders()) async throws -> UploadUrl {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/content")", options: FetchOptions(method: "OPTIONS", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UploadUrl.deserialize(from: response.data)

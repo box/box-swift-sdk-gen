@@ -35,11 +35,11 @@ public class TrashedWebLinksManager {
     /// - Parameters:
     ///   - webLinkId: The ID of the web link.
     ///     Example: "12345"
-    ///   - queryParams: Query parameters of getWebLinkTrash method
-    ///   - headers: Headers of getWebLinkTrash method
+    ///   - queryParams: Query parameters of getTrashedWebLinkById method
+    ///   - headers: Headers of getTrashedWebLinkById method
     /// - Returns: The `TrashWebLink`.
     /// - Throws: The `GeneralError`.
-    public func getWebLinkTrash(webLinkId: String, queryParams: GetWebLinkTrashQueryParams = GetWebLinkTrashQueryParams(), headers: GetWebLinkTrashHeaders = GetWebLinkTrashHeaders()) async throws -> TrashWebLink {
+    public func getTrashedWebLinkById(webLinkId: String, queryParams: GetTrashedWebLinkByIdQueryParams = GetTrashedWebLinkByIdQueryParams(), headers: GetTrashedWebLinkByIdHeaders = GetTrashedWebLinkByIdHeaders()) async throws -> TrashWebLink {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/web_links/")\(webLinkId)\("/trash")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -52,9 +52,9 @@ public class TrashedWebLinksManager {
     /// - Parameters:
     ///   - webLinkId: The ID of the web link.
     ///     Example: "12345"
-    ///   - headers: Headers of deleteWebLinkTrash method
+    ///   - headers: Headers of deleteTrashedWebLinkById method
     /// - Throws: The `GeneralError`.
-    public func deleteWebLinkTrash(webLinkId: String, headers: DeleteWebLinkTrashHeaders = DeleteWebLinkTrashHeaders()) async throws {
+    public func deleteTrashedWebLinkById(webLinkId: String, headers: DeleteTrashedWebLinkByIdHeaders = DeleteTrashedWebLinkByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/web_links/")\(webLinkId)\("/trash")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }

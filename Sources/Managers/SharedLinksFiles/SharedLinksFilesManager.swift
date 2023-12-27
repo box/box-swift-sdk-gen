@@ -22,11 +22,11 @@ public class SharedLinksFilesManager {
     /// by requesting it in the `fields` query parameter.
     ///
     /// - Parameters:
-    ///   - queryParams: Query parameters of getSharedItems method
-    ///   - headers: Headers of getSharedItems method
+    ///   - queryParams: Query parameters of findFileForSharedLink method
+    ///   - headers: Headers of findFileForSharedLink method
     /// - Returns: The `FileFull`.
     /// - Throws: The `GeneralError`.
-    public func getSharedItems(queryParams: GetSharedItemsQueryParams = GetSharedItemsQueryParams(), headers: GetSharedItemsHeaders) async throws -> FileFull {
+    public func findFileForSharedLink(queryParams: FindFileForSharedLinkQueryParams = FindFileForSharedLinkQueryParams(), headers: FindFileForSharedLinkHeaders) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch), "boxapi": Utils.Strings.toString(value: headers.boxapi)], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/shared_items")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -44,11 +44,11 @@ public class SharedLinksFilesManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - queryParams: Query parameters of getFileGetSharedLink method
-    ///   - headers: Headers of getFileGetSharedLink method
+    ///   - queryParams: Query parameters of getSharedLinkForFile method
+    ///   - headers: Headers of getSharedLinkForFile method
     /// - Returns: The `FileFull`.
     /// - Throws: The `GeneralError`.
-    public func getFileGetSharedLink(fileId: String, queryParams: GetFileGetSharedLinkQueryParams, headers: GetFileGetSharedLinkHeaders = GetFileGetSharedLinkHeaders()) async throws -> FileFull {
+    public func getSharedLinkForFile(fileId: String, queryParams: GetSharedLinkForFileQueryParams, headers: GetSharedLinkForFileHeaders = GetSharedLinkForFileHeaders()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("#get_shared_link")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -66,12 +66,12 @@ public class SharedLinksFilesManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - requestBody: Request body of updateFileAddSharedLink method
-    ///   - queryParams: Query parameters of updateFileAddSharedLink method
-    ///   - headers: Headers of updateFileAddSharedLink method
+    ///   - requestBody: Request body of addShareLinkToFile method
+    ///   - queryParams: Query parameters of addShareLinkToFile method
+    ///   - headers: Headers of addShareLinkToFile method
     /// - Returns: The `FileFull`.
     /// - Throws: The `GeneralError`.
-    public func updateFileAddSharedLink(fileId: String, requestBody: UpdateFileAddSharedLinkRequestBody = UpdateFileAddSharedLinkRequestBody(), queryParams: UpdateFileAddSharedLinkQueryParams, headers: UpdateFileAddSharedLinkHeaders = UpdateFileAddSharedLinkHeaders()) async throws -> FileFull {
+    public func addShareLinkToFile(fileId: String, requestBody: AddShareLinkToFileRequestBody = AddShareLinkToFileRequestBody(), queryParams: AddShareLinkToFileQueryParams, headers: AddShareLinkToFileHeaders = AddShareLinkToFileHeaders()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("#add_shared_link")", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -89,12 +89,12 @@ public class SharedLinksFilesManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - requestBody: Request body of updateFileUpdateSharedLink method
-    ///   - queryParams: Query parameters of updateFileUpdateSharedLink method
-    ///   - headers: Headers of updateFileUpdateSharedLink method
+    ///   - requestBody: Request body of updateSharedLinkOnFile method
+    ///   - queryParams: Query parameters of updateSharedLinkOnFile method
+    ///   - headers: Headers of updateSharedLinkOnFile method
     /// - Returns: The `FileFull`.
     /// - Throws: The `GeneralError`.
-    public func updateFileUpdateSharedLink(fileId: String, requestBody: UpdateFileUpdateSharedLinkRequestBody = UpdateFileUpdateSharedLinkRequestBody(), queryParams: UpdateFileUpdateSharedLinkQueryParams, headers: UpdateFileUpdateSharedLinkHeaders = UpdateFileUpdateSharedLinkHeaders()) async throws -> FileFull {
+    public func updateSharedLinkOnFile(fileId: String, requestBody: UpdateSharedLinkOnFileRequestBody = UpdateSharedLinkOnFileRequestBody(), queryParams: UpdateSharedLinkOnFileQueryParams, headers: UpdateSharedLinkOnFileHeaders = UpdateSharedLinkOnFileHeaders()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("#update_shared_link")", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -112,12 +112,12 @@ public class SharedLinksFilesManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - requestBody: Request body of updateFileRemoveSharedLink method
-    ///   - queryParams: Query parameters of updateFileRemoveSharedLink method
-    ///   - headers: Headers of updateFileRemoveSharedLink method
+    ///   - requestBody: Request body of removeSharedLinkFromFile method
+    ///   - queryParams: Query parameters of removeSharedLinkFromFile method
+    ///   - headers: Headers of removeSharedLinkFromFile method
     /// - Returns: The `FileFull`.
     /// - Throws: The `GeneralError`.
-    public func updateFileRemoveSharedLink(fileId: String, requestBody: UpdateFileRemoveSharedLinkRequestBody = UpdateFileRemoveSharedLinkRequestBody(), queryParams: UpdateFileRemoveSharedLinkQueryParams, headers: UpdateFileRemoveSharedLinkHeaders = UpdateFileRemoveSharedLinkHeaders()) async throws -> FileFull {
+    public func removeSharedLinkFromFile(fileId: String, requestBody: RemoveSharedLinkFromFileRequestBody = RemoveSharedLinkFromFileRequestBody(), queryParams: RemoveSharedLinkFromFileQueryParams, headers: RemoveSharedLinkFromFileHeaders = RemoveSharedLinkFromFileHeaders()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("#remove_shared_link")", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))

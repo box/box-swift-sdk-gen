@@ -19,11 +19,11 @@ public class SharedLinksFoldersManager {
     /// shared folder when only given a shared link.
     ///
     /// - Parameters:
-    ///   - queryParams: Query parameters of getSharedItemFolders method
-    ///   - headers: Headers of getSharedItemFolders method
+    ///   - queryParams: Query parameters of findFolderForSharedLink method
+    ///   - headers: Headers of findFolderForSharedLink method
     /// - Returns: The `FolderFull`.
     /// - Throws: The `GeneralError`.
-    public func getSharedItemFolders(queryParams: GetSharedItemFoldersQueryParams = GetSharedItemFoldersQueryParams(), headers: GetSharedItemFoldersHeaders) async throws -> FolderFull {
+    public func findFolderForSharedLink(queryParams: FindFolderForSharedLinkQueryParams = FindFolderForSharedLinkQueryParams(), headers: FindFolderForSharedLinkHeaders) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch), "boxapi": Utils.Strings.toString(value: headers.boxapi)], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/shared_items#folders")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -44,11 +44,11 @@ public class SharedLinksFoldersManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - queryParams: Query parameters of getFolderGetSharedLink method
-    ///   - headers: Headers of getFolderGetSharedLink method
+    ///   - queryParams: Query parameters of getSharedLinkForFolder method
+    ///   - headers: Headers of getSharedLinkForFolder method
     /// - Returns: The `FolderFull`.
     /// - Throws: The `GeneralError`.
-    public func getFolderGetSharedLink(folderId: String, queryParams: GetFolderGetSharedLinkQueryParams, headers: GetFolderGetSharedLinkHeaders = GetFolderGetSharedLinkHeaders()) async throws -> FolderFull {
+    public func getSharedLinkForFolder(folderId: String, queryParams: GetSharedLinkForFolderQueryParams, headers: GetSharedLinkForFolderHeaders = GetSharedLinkForFolderHeaders()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("#get_shared_link")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -69,12 +69,12 @@ public class SharedLinksFoldersManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - requestBody: Request body of updateFolderAddSharedLink method
-    ///   - queryParams: Query parameters of updateFolderAddSharedLink method
-    ///   - headers: Headers of updateFolderAddSharedLink method
+    ///   - requestBody: Request body of addShareLinkToFolder method
+    ///   - queryParams: Query parameters of addShareLinkToFolder method
+    ///   - headers: Headers of addShareLinkToFolder method
     /// - Returns: The `FolderFull`.
     /// - Throws: The `GeneralError`.
-    public func updateFolderAddSharedLink(folderId: String, requestBody: UpdateFolderAddSharedLinkRequestBody = UpdateFolderAddSharedLinkRequestBody(), queryParams: UpdateFolderAddSharedLinkQueryParams, headers: UpdateFolderAddSharedLinkHeaders = UpdateFolderAddSharedLinkHeaders()) async throws -> FolderFull {
+    public func addShareLinkToFolder(folderId: String, requestBody: AddShareLinkToFolderRequestBody = AddShareLinkToFolderRequestBody(), queryParams: AddShareLinkToFolderQueryParams, headers: AddShareLinkToFolderHeaders = AddShareLinkToFolderHeaders()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("#add_shared_link")", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -95,12 +95,12 @@ public class SharedLinksFoldersManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - requestBody: Request body of updateFolderUpdateSharedLink method
-    ///   - queryParams: Query parameters of updateFolderUpdateSharedLink method
-    ///   - headers: Headers of updateFolderUpdateSharedLink method
+    ///   - requestBody: Request body of updateSharedLinkOnFolder method
+    ///   - queryParams: Query parameters of updateSharedLinkOnFolder method
+    ///   - headers: Headers of updateSharedLinkOnFolder method
     /// - Returns: The `FolderFull`.
     /// - Throws: The `GeneralError`.
-    public func updateFolderUpdateSharedLink(folderId: String, requestBody: UpdateFolderUpdateSharedLinkRequestBody = UpdateFolderUpdateSharedLinkRequestBody(), queryParams: UpdateFolderUpdateSharedLinkQueryParams, headers: UpdateFolderUpdateSharedLinkHeaders = UpdateFolderUpdateSharedLinkHeaders()) async throws -> FolderFull {
+    public func updateSharedLinkOnFolder(folderId: String, requestBody: UpdateSharedLinkOnFolderRequestBody = UpdateSharedLinkOnFolderRequestBody(), queryParams: UpdateSharedLinkOnFolderQueryParams, headers: UpdateSharedLinkOnFolderHeaders = UpdateSharedLinkOnFolderHeaders()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("#update_shared_link")", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -121,12 +121,12 @@ public class SharedLinksFoldersManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - requestBody: Request body of updateFolderRemoveSharedLink method
-    ///   - queryParams: Query parameters of updateFolderRemoveSharedLink method
-    ///   - headers: Headers of updateFolderRemoveSharedLink method
+    ///   - requestBody: Request body of removeSharedLinkFromFolder method
+    ///   - queryParams: Query parameters of removeSharedLinkFromFolder method
+    ///   - headers: Headers of removeSharedLinkFromFolder method
     /// - Returns: The `FolderFull`.
     /// - Throws: The `GeneralError`.
-    public func updateFolderRemoveSharedLink(folderId: String, requestBody: UpdateFolderRemoveSharedLinkRequestBody = UpdateFolderRemoveSharedLinkRequestBody(), queryParams: UpdateFolderRemoveSharedLinkQueryParams, headers: UpdateFolderRemoveSharedLinkHeaders = UpdateFolderRemoveSharedLinkHeaders()) async throws -> FolderFull {
+    public func removeSharedLinkFromFolder(folderId: String, requestBody: RemoveSharedLinkFromFolderRequestBody = RemoveSharedLinkFromFolderRequestBody(), queryParams: RemoveSharedLinkFromFolderQueryParams, headers: RemoveSharedLinkFromFolderHeaders = RemoveSharedLinkFromFolderHeaders()) async throws -> FolderFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("#remove_shared_link")", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))

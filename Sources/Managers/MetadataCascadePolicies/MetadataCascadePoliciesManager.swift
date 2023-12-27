@@ -78,10 +78,10 @@ public class MetadataCascadePoliciesManager {
     /// - Parameters:
     ///   - metadataCascadePolicyId: The ID of the cascade policy to force-apply.
     ///     Example: "6fd4ff89-8fc1-42cf-8b29-1890dedd26d7"
-    ///   - requestBody: Request body of createMetadataCascadePolicyApply method
-    ///   - headers: Headers of createMetadataCascadePolicyApply method
+    ///   - requestBody: Request body of applyMetadataCascadePolicy method
+    ///   - headers: Headers of applyMetadataCascadePolicy method
     /// - Throws: The `GeneralError`.
-    public func createMetadataCascadePolicyApply(metadataCascadePolicyId: String, requestBody: CreateMetadataCascadePolicyApplyRequestBody, headers: CreateMetadataCascadePolicyApplyHeaders = CreateMetadataCascadePolicyApplyHeaders()) async throws {
+    public func applyMetadataCascadePolicy(metadataCascadePolicyId: String, requestBody: ApplyMetadataCascadePolicyRequestBody, headers: ApplyMetadataCascadePolicyHeaders = ApplyMetadataCascadePolicyHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_cascade_policies/")\(metadataCascadePolicyId)\("/apply")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }

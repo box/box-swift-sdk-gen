@@ -36,10 +36,10 @@ public class WorkflowsManager {
     /// - Parameters:
     ///   - workflowId: The ID of the workflow.
     ///     Example: "12345"
-    ///   - requestBody: Request body of createWorkflowStart method
-    ///   - headers: Headers of createWorkflowStart method
+    ///   - requestBody: Request body of startWorkflow method
+    ///   - headers: Headers of startWorkflow method
     /// - Throws: The `GeneralError`.
-    public func createWorkflowStart(workflowId: String, requestBody: CreateWorkflowStartRequestBody, headers: CreateWorkflowStartHeaders = CreateWorkflowStartHeaders()) async throws {
+    public func startWorkflow(workflowId: String, requestBody: StartWorkflowRequestBody, headers: StartWorkflowHeaders = StartWorkflowHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/workflows/")\(workflowId)\("/start")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }

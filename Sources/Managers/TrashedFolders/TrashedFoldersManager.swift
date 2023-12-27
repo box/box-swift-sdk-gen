@@ -72,11 +72,11 @@ public class TrashedFoldersManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - queryParams: Query parameters of getFolderTrash method
-    ///   - headers: Headers of getFolderTrash method
+    ///   - queryParams: Query parameters of getTrashedFolderById method
+    ///   - headers: Headers of getTrashedFolderById method
     /// - Returns: The `TrashFolder`.
     /// - Throws: The `GeneralError`.
-    public func getFolderTrash(folderId: String, queryParams: GetFolderTrashQueryParams = GetFolderTrashQueryParams(), headers: GetFolderTrashHeaders = GetFolderTrashHeaders()) async throws -> TrashFolder {
+    public func getTrashedFolderById(folderId: String, queryParams: GetTrashedFolderByIdQueryParams = GetTrashedFolderByIdQueryParams(), headers: GetTrashedFolderByIdHeaders = GetTrashedFolderByIdHeaders()) async throws -> TrashFolder {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("/trash")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -98,9 +98,9 @@ public class TrashedFoldersManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - headers: Headers of deleteFolderTrash method
+    ///   - headers: Headers of deleteTrashedFolderById method
     /// - Throws: The `GeneralError`.
-    public func deleteFolderTrash(folderId: String, headers: DeleteFolderTrashHeaders = DeleteFolderTrashHeaders()) async throws {
+    public func deleteTrashedFolderById(folderId: String, headers: DeleteTrashedFolderByIdHeaders = DeleteTrashedFolderByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/folders/")\(folderId)\("/trash")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }

@@ -57,11 +57,11 @@ public class TrashedFilesManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - queryParams: Query parameters of getFileTrash method
-    ///   - headers: Headers of getFileTrash method
+    ///   - queryParams: Query parameters of getTrashedFileById method
+    ///   - headers: Headers of getTrashedFileById method
     /// - Returns: The `TrashFile`.
     /// - Throws: The `GeneralError`.
-    public func getFileTrash(fileId: String, queryParams: GetFileTrashQueryParams = GetFileTrashQueryParams(), headers: GetFileTrashHeaders = GetFileTrashHeaders()) async throws -> TrashFile {
+    public func getTrashedFileById(fileId: String, queryParams: GetTrashedFileByIdQueryParams = GetTrashedFileByIdQueryParams(), headers: GetTrashedFileByIdHeaders = GetTrashedFileByIdHeaders()) async throws -> TrashFile {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/trash")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -80,9 +80,9 @@ public class TrashedFilesManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - headers: Headers of deleteFileTrash method
+    ///   - headers: Headers of deleteTrashedFileById method
     /// - Throws: The `GeneralError`.
-    public func deleteFileTrash(fileId: String, headers: DeleteFileTrashHeaders = DeleteFileTrashHeaders()) async throws {
+    public func deleteTrashedFileById(fileId: String, headers: DeleteTrashedFileByIdHeaders = DeleteTrashedFileByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/")\(fileId)\("/trash")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
