@@ -61,6 +61,9 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     via two factor authentication before they are able to sign the document.
     ///   - password: If set, the signer is required to enter the password before they are able
     ///     to sign a document. This field is write only.
+    ///   - signerGroupId: If set, signers who have the same group ID will be assigned to the same input.
+    ///     A signer group is expected to have more than one signer. When a group contains fewer than two signers, 
+    ///     it will be converted to a single signer and the group will be removed. 
     ///   - hasViewedDocument: Set to `true` if the signer views the document
     ///   - signerDecision: Final decision made by the signer
     ///   - inputs: 
@@ -71,14 +74,14 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     only if the `embed_url_external_user_id`
     ///     parameter was passed in the
     ///     `create sign request` call.
-    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil, hasViewedDocument: Bool? = nil, signerDecision: SignRequestSignerSignerDecisionField? = nil, inputs: [SignRequestSignerInput]? = nil, embedUrl: String? = nil, iframeableEmbedUrl: String? = nil) {
+    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil, signerGroupId: String? = nil, hasViewedDocument: Bool? = nil, signerDecision: SignRequestSignerSignerDecisionField? = nil, inputs: [SignRequestSignerInput]? = nil, embedUrl: String? = nil, iframeableEmbedUrl: String? = nil) {
         self.hasViewedDocument = hasViewedDocument
         self.signerDecision = signerDecision
         self.inputs = inputs
         self.embedUrl = embedUrl
         self.iframeableEmbedUrl = iframeableEmbedUrl
 
-        super.init(email: email, role: role, isInPerson: isInPerson, order: order, embedUrlExternalUserId: embedUrlExternalUserId, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, loginRequired: loginRequired, verificationPhoneNumber: verificationPhoneNumber, password: password)
+        super.init(email: email, role: role, isInPerson: isInPerson, order: order, embedUrlExternalUserId: embedUrlExternalUserId, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, loginRequired: loginRequired, verificationPhoneNumber: verificationPhoneNumber, password: password, signerGroupId: signerGroupId)
     }
 
     required public init(from decoder: Decoder) throws {

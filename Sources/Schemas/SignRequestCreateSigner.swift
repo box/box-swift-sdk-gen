@@ -13,6 +13,7 @@ public class SignRequestCreateSigner: Codable {
         case loginRequired = "login_required"
         case verificationPhoneNumber = "verification_phone_number"
         case password
+        case signerGroupId = "signer_group_id"
     }
 
     /// Email address of the signer.
@@ -64,6 +65,11 @@ public class SignRequestCreateSigner: Codable {
     /// to sign a document. This field is write only.
     public let password: String?
 
+    /// If set, signers who have the same group ID will be assigned to the same input.
+    /// A signer group is expected to have more than one signer. When a group contains fewer than two signers, 
+    /// it will be converted to a single signer and the group will be removed. 
+    public let signerGroupId: String?
+
     /// Initializer for a SignRequestCreateSigner.
     ///
     /// - Parameters:
@@ -96,7 +102,10 @@ public class SignRequestCreateSigner: Codable {
     ///     via two factor authentication before they are able to sign the document.
     ///   - password: If set, the signer is required to enter the password before they are able
     ///     to sign a document. This field is write only.
-    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil) {
+    ///   - signerGroupId: If set, signers who have the same group ID will be assigned to the same input.
+    ///     A signer group is expected to have more than one signer. When a group contains fewer than two signers, 
+    ///     it will be converted to a single signer and the group will be removed. 
+    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil, signerGroupId: String? = nil) {
         self.email = email
         self.role = role
         self.isInPerson = isInPerson
@@ -107,6 +116,7 @@ public class SignRequestCreateSigner: Codable {
         self.loginRequired = loginRequired
         self.verificationPhoneNumber = verificationPhoneNumber
         self.password = password
+        self.signerGroupId = signerGroupId
     }
 
     required public init(from decoder: Decoder) throws {
@@ -121,6 +131,7 @@ public class SignRequestCreateSigner: Codable {
         loginRequired = try container.decodeIfPresent(Bool.self, forKey: .loginRequired)
         verificationPhoneNumber = try container.decodeIfPresent(String.self, forKey: .verificationPhoneNumber)
         password = try container.decodeIfPresent(String.self, forKey: .password)
+        signerGroupId = try container.decodeIfPresent(String.self, forKey: .signerGroupId)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -135,6 +146,7 @@ public class SignRequestCreateSigner: Codable {
         try container.encodeIfPresent(loginRequired, forKey: .loginRequired)
         try container.encodeIfPresent(verificationPhoneNumber, forKey: .verificationPhoneNumber)
         try container.encodeIfPresent(password, forKey: .password)
+        try container.encodeIfPresent(signerGroupId, forKey: .signerGroupId)
     }
 
 }

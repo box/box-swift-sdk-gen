@@ -13,7 +13,10 @@ This operation is performed by calling function `getStoragePolicies`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-storage-policies/).
 
-*Currently we don't have an example for calling `getStoragePolicies` in integration tests*
+<!-- sample get_storage_policies -->
+```
+try await client.storagePolicies.getStoragePolicies()
+```
 
 ### Arguments
 
@@ -39,7 +42,10 @@ This operation is performed by calling function `getStoragePolicyById`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-storage-policies-id/).
 
-*Currently we don't have an example for calling `getStoragePolicyById` in integration tests*
+<!-- sample get_storage_policies_id -->
+```
+try await client.storagePolicies.getStoragePolicyById(storagePolicyId: storagePolicy.id!)
+```
 
 ### Arguments
 
