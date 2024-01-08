@@ -23,7 +23,7 @@ public class AccessToken: Codable {
     /// The permissions that this access token permits,
     /// providing a list of resources (files, folders, etc)
     /// and the scopes permitted for each of those resources.
-    public let restrictedTo: [FileScope]?
+    public let restrictedTo: [FileOrFolderScope]?
 
     /// The refresh token for this access token, which can be used
     /// to request a new access token when the current one expires.
@@ -46,7 +46,7 @@ public class AccessToken: Codable {
     ///     to request a new access token when the current one expires.
     ///   - issuedTokenType: The type of downscoped access token returned. This is only
     ///     returned if an access token has been downscoped.
-    public init(accessToken: String? = nil, expiresIn: Int64? = nil, tokenType: AccessTokenTokenTypeField? = nil, restrictedTo: [FileScope]? = nil, refreshToken: String? = nil, issuedTokenType: AccessTokenIssuedTokenTypeField? = nil) {
+    public init(accessToken: String? = nil, expiresIn: Int64? = nil, tokenType: AccessTokenTokenTypeField? = nil, restrictedTo: [FileOrFolderScope]? = nil, refreshToken: String? = nil, issuedTokenType: AccessTokenIssuedTokenTypeField? = nil) {
         self.accessToken = accessToken
         self.expiresIn = expiresIn
         self.tokenType = tokenType
@@ -60,7 +60,7 @@ public class AccessToken: Codable {
         accessToken = try container.decodeIfPresent(String.self, forKey: .accessToken)
         expiresIn = try container.decodeIfPresent(Int64.self, forKey: .expiresIn)
         tokenType = try container.decodeIfPresent(AccessTokenTokenTypeField.self, forKey: .tokenType)
-        restrictedTo = try container.decodeIfPresent([FileScope].self, forKey: .restrictedTo)
+        restrictedTo = try container.decodeIfPresent([FileOrFolderScope].self, forKey: .restrictedTo)
         refreshToken = try container.decodeIfPresent(String.self, forKey: .refreshToken)
         issuedTokenType = try container.decodeIfPresent(AccessTokenIssuedTokenTypeField.self, forKey: .issuedTokenType)
     }

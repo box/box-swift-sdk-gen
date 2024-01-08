@@ -31,12 +31,12 @@ public class TermsOfServicesManager {
     /// - Parameters:
     ///   - requestBody: Request body of createTermsOfService method
     ///   - headers: Headers of createTermsOfService method
-    /// - Returns: The `Task`.
+    /// - Returns: The `TermsOfService`.
     /// - Throws: The `GeneralError`.
-    public func createTermsOfService(requestBody: CreateTermsOfServiceRequestBody, headers: CreateTermsOfServiceHeaders = CreateTermsOfServiceHeaders()) async throws -> Task {
+    public func createTermsOfService(requestBody: CreateTermsOfServiceRequestBody, headers: CreateTermsOfServiceHeaders = CreateTermsOfServiceHeaders()) async throws -> TermsOfService {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/terms_of_services")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Task.deserialize(from: response.data)
+        return try TermsOfService.deserialize(from: response.data)
     }
 
     /// Fetches a specific terms of service.

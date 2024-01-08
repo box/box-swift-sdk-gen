@@ -36,6 +36,17 @@ public class CommonsManager {
         return uploadedFiles.entries![0]
     }
 
+    public func getOrCreateTermsOfServices() async throws -> TermsOfService {
+        let client: BoxClient = CommonsManager().getDefaultClient()
+        let tos: TermsOfServices = try await client.termsOfServices.getTermsOfService()
+        let numberOfTos: Int = tos.entries!.count
+        if numberOfTos == 0 {
+            return try await client.termsOfServices.createTermsOfService(requestBody: CreateTermsOfServiceRequestBody(status: CreateTermsOfServiceRequestBodyStatusField.enabled, text: "Test TOS", tosType: CreateTermsOfServiceRequestBodyTosTypeField.managed))
+        }
+
+        return tos.entries![0]
+    }
+
     public func getOrCreateShieldInformationBarrier(client: BoxClient, enterpriseId: String) async throws -> ShieldInformationBarrier {
         let barriers: ShieldInformationBarriers = try await client.shieldInformationBarriers.getShieldInformationBarriers()
         let numberOfBarriers: Int = barriers.entries!.count

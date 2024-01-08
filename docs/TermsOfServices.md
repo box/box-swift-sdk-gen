@@ -16,7 +16,10 @@ This operation is performed by calling function `getTermsOfService`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-terms-of-services/).
 
-*Currently we don't have an example for calling `getTermsOfService` in integration tests*
+<!-- sample get_terms_of_services -->
+```
+try await client.termsOfServices.getTermsOfService()
+```
 
 ### Arguments
 
@@ -44,7 +47,10 @@ This operation is performed by calling function `createTermsOfService`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/post-terms-of-services/).
 
-*Currently we don't have an example for calling `createTermsOfService` in integration tests*
+<!-- sample post_terms_of_services -->
+```
+try await client.termsOfServices.createTermsOfService(requestBody: CreateTermsOfServiceRequestBody(status: CreateTermsOfServiceRequestBodyStatusField.enabled, tosType: CreateTermsOfServiceRequestBodyTosTypeField.managed, text: "Test TOS"))
+```
 
 ### Arguments
 
@@ -56,7 +62,7 @@ See the endpoint docs at
 
 ### Returns
 
-This function returns a value of type `Task`.
+This function returns a value of type `TermsOfService`.
 
 Returns a new task object
 
@@ -96,7 +102,10 @@ This operation is performed by calling function `updateTermsOfServiceById`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/put-terms-of-services-id/).
 
-*Currently we don't have an example for calling `updateTermsOfServiceById` in integration tests*
+<!-- sample put_terms_of_services_id -->
+```
+try await client.termsOfServices.updateTermsOfServiceById(termsOfServiceId: tos.id, requestBody: UpdateTermsOfServiceByIdRequestBody(status: UpdateTermsOfServiceByIdRequestBodyStatusField.disabled, text: "Disabled TOS"))
+```
 
 ### Arguments
 
