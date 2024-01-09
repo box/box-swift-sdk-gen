@@ -8,6 +8,7 @@ public class TemplateSigner: Codable {
         case role
         case isInPerson = "is_in_person"
         case order
+        case signerGroupId = "signer_group_id"
     }
 
     public let inputs: [TemplateSignerInput]?
@@ -30,6 +31,11 @@ public class TemplateSigner: Codable {
     /// Order of the signer
     public let order: Int64?
 
+    /// If set, signers who have the same group ID will be assigned to the same input.
+    /// A signer group is expected to have more than one signer. When a group contains fewer than two signers, 
+    /// it will be converted to a single signer and the group will be removed. 
+    public let signerGroupId: String?
+
     /// Initializer for a TemplateSigner.
     ///
     /// - Parameters:
@@ -44,12 +50,16 @@ public class TemplateSigner: Codable {
     ///     After the sender signs, they will be
     ///     redirected to the next `in_person` signer.
     ///   - order: Order of the signer
-    public init(inputs: [TemplateSignerInput]? = nil, email: String? = nil, role: TemplateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil) {
+    ///   - signerGroupId: If set, signers who have the same group ID will be assigned to the same input.
+    ///     A signer group is expected to have more than one signer. When a group contains fewer than two signers, 
+    ///     it will be converted to a single signer and the group will be removed. 
+    public init(inputs: [TemplateSignerInput]? = nil, email: String? = nil, role: TemplateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, signerGroupId: String? = nil) {
         self.inputs = inputs
         self.email = email
         self.role = role
         self.isInPerson = isInPerson
         self.order = order
+        self.signerGroupId = signerGroupId
     }
 
     required public init(from decoder: Decoder) throws {
@@ -59,6 +69,7 @@ public class TemplateSigner: Codable {
         role = try container.decodeIfPresent(TemplateSignerRoleField.self, forKey: .role)
         isInPerson = try container.decodeIfPresent(Bool.self, forKey: .isInPerson)
         order = try container.decodeIfPresent(Int64.self, forKey: .order)
+        signerGroupId = try container.decodeIfPresent(String.self, forKey: .signerGroupId)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -68,6 +79,7 @@ public class TemplateSigner: Codable {
         try container.encodeIfPresent(role, forKey: .role)
         try container.encodeIfPresent(isInPerson, forKey: .isInPerson)
         try container.encodeIfPresent(order, forKey: .order)
+        try container.encodeIfPresent(signerGroupId, forKey: .signerGroupId)
     }
 
 }

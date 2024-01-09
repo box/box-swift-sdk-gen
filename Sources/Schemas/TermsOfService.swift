@@ -42,7 +42,7 @@ public class TermsOfService: TermsOfServiceBase {
     ///     empty if the `status` is set to `disabled`.
     ///   - createdAt: When the legal item was created
     ///   - modifiedAt: When the legal item was modified.
-    public init(id: String? = nil, type: TermsOfServiceBaseTypeField? = nil, status: TermsOfServiceStatusField? = nil, enterprise: TermsOfServiceEnterpriseField? = nil, tosType: TermsOfServiceTosTypeField? = nil, text: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
+    public init(id: String, type: TermsOfServiceBaseTypeField, status: TermsOfServiceStatusField? = nil, enterprise: TermsOfServiceEnterpriseField? = nil, tosType: TermsOfServiceTosTypeField? = nil, text: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
         self.status = status
         self.enterprise = enterprise
         self.tosType = tosType

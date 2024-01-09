@@ -1,6 +1,6 @@
 import Foundation
 
-public enum FileScopeScopeField: String, CodableStringEnum {
+public enum FileOrFolderScopeScopeField: String, CodableStringEnum {
     case annotationEdit = "annotation_edit"
     case annotationViewAll = "annotation_view_all"
     case annotationViewSelf = "annotation_view_self"
