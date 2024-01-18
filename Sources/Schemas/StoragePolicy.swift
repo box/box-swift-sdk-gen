@@ -15,7 +15,7 @@ public class StoragePolicy: StoragePolicyMini {
     ///   - id: The unique identifier for this storage policy
     ///   - type: `storage_policy`
     ///   - name: A descriptive name of the region
-    public init(id: String? = nil, type: StoragePolicyMiniTypeField? = nil, name: String? = nil) {
+    public init(id: String, type: StoragePolicyMiniTypeField, name: String? = nil) {
         self.name = name
 
         super.init(id: id, type: type)
