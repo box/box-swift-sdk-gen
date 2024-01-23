@@ -14,7 +14,7 @@ class StoragePoliciesManagerTests: XCTestCase {
         let storagePolicies: StoragePolicies = try await client.storagePolicies.getStoragePolicies()
         let storagePolicy: StoragePolicy = storagePolicies.entries![0]
         XCTAssertTrue(Utils.Strings.toString(value: storagePolicy.type) == "storage_policy")
-        let getStoragePolicy: StoragePolicy = try await client.storagePolicies.getStoragePolicyById(storagePolicyId: storagePolicy.id!)
+        let getStoragePolicy: StoragePolicy = try await client.storagePolicies.getStoragePolicyById(storagePolicyId: storagePolicy.id)
         XCTAssertTrue(getStoragePolicy.id == storagePolicy.id)
     }
 }

@@ -44,7 +44,7 @@ See the endpoint docs at
 
 <!-- sample get_storage_policies_id -->
 ```
-try await client.storagePolicies.getStoragePolicyById(storagePolicyId: storagePolicy.id!)
+try await client.storagePolicies.getStoragePolicyById(storagePolicyId: storagePolicy.id)
 ```
 
 ### Arguments
