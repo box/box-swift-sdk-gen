@@ -10,6 +10,7 @@ divided across resource managers.
   - [As-User header](#as-user-header)
   - [Suppress notifications](#suppress-notifications)
   - [Custom headers](#custom-headers)
+- [Custom Base URLs](#custom-base-urls)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -62,7 +63,7 @@ Calling the `client.withExtraHeaders()` method creates a new client, leaving the
 let newClient = client.withExtraHeaders(extraHeaders: ["customHeader": "customValue"])
 ```
 
-## Custom Base URLs
+# Custom Base URLs
 
 You can also specify the custom base URLs, which will be used for API calls made by client.
 Calling the `client.withCustomBaseUrls()` method creates a new client, leaving the original client unmodified.

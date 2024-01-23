@@ -47,7 +47,10 @@ This operation is performed by calling function `createRetentionPolicyAssignment
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/post-retention-policy-assignments/).
 
-*Currently we don't have an example for calling `createRetentionPolicyAssignment` in integration tests*
+<!-- sample post_retention_policy_assignments -->
+```
+try await client.retentionPolicyAssignments.createRetentionPolicyAssignment(requestBody: CreateRetentionPolicyAssignmentRequestBody(policyId: retentionPolicy.id, assignTo: CreateRetentionPolicyAssignmentRequestBodyAssignToField(id: folder.id, type: CreateRetentionPolicyAssignmentRequestBodyAssignToTypeField.folder)))
+```
 
 ### Arguments
 
