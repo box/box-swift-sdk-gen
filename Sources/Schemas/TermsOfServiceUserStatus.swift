@@ -13,10 +13,10 @@ public class TermsOfServiceUserStatus: Codable {
     }
 
     /// The unique identifier for this terms of service user status
-    public let id: String?
+    public let id: String
 
     /// `terms_of_service_user_status`
-    public let type: TermsOfServiceUserStatusTypeField?
+    public let type: TermsOfServiceUserStatusTypeField
 
     public let tos: TermsOfServiceBase?
 
@@ -41,7 +41,7 @@ public class TermsOfServiceUserStatus: Codable {
     ///   - isAccepted: If the user has accepted the terms of services
     ///   - createdAt: When the legal item was created
     ///   - modifiedAt: When the legal item was modified.
-    public init(id: String? = nil, type: TermsOfServiceUserStatusTypeField? = nil, tos: TermsOfServiceBase? = nil, user: UserMini? = nil, isAccepted: Bool? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
+    public init(id: String, type: TermsOfServiceUserStatusTypeField, tos: TermsOfServiceBase? = nil, user: UserMini? = nil, isAccepted: Bool? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
         self.id = id
         self.type = type
         self.tos = tos
@@ -53,8 +53,8 @@ public class TermsOfServiceUserStatus: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decodeIfPresent(String.self, forKey: .id)
-        type = try container.decodeIfPresent(TermsOfServiceUserStatusTypeField.self, forKey: .type)
+        id = try container.decode(String.self, forKey: .id)
+        type = try container.decode(TermsOfServiceUserStatusTypeField.self, forKey: .type)
         tos = try container.decodeIfPresent(TermsOfServiceBase.self, forKey: .tos)
         user = try container.decodeIfPresent(UserMini.self, forKey: .user)
         isAccepted = try container.decodeIfPresent(Bool.self, forKey: .isAccepted)
@@ -64,8 +64,8 @@ public class TermsOfServiceUserStatus: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encode(id, forKey: .id)
+        try container.encode(type, forKey: .type)
         try container.encodeIfPresent(tos, forKey: .tos)
         try container.encodeIfPresent(user, forKey: .user)
         try container.encodeIfPresent(isAccepted, forKey: .isAccepted)
