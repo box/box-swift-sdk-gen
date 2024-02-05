@@ -49,7 +49,7 @@ See the endpoint docs at
 
 <!-- sample post_terms_of_services -->
 ```
-try await client.termsOfServices.createTermsOfService(requestBody: CreateTermsOfServiceRequestBody(status: CreateTermsOfServiceRequestBodyStatusField.enabled, tosType: CreateTermsOfServiceRequestBodyTosTypeField.managed, text: "Test TOS"))
+try await client.termsOfServices.createTermsOfService(requestBody: CreateTermsOfServiceRequestBody(status: CreateTermsOfServiceRequestBodyStatusField.disabled, tosType: CreateTermsOfServiceRequestBodyTosTypeField.managed, text: "Test TOS"))
 ```
 
 ### Arguments

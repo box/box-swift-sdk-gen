@@ -40,11 +40,23 @@ public class CommonsManager {
         let client: BoxClient = CommonsManager().getDefaultClient()
         let tos: TermsOfServices = try await client.termsOfServices.getTermsOfService()
         let numberOfTos: Int = tos.entries!.count
-        if numberOfTos == 0 {
-            return try await client.termsOfServices.createTermsOfService(requestBody: CreateTermsOfServiceRequestBody(status: CreateTermsOfServiceRequestBodyStatusField.enabled, text: "Test TOS", tosType: CreateTermsOfServiceRequestBodyTosTypeField.managed))
+        if numberOfTos >= 1 {
+            let firstTos: TermsOfService = tos.entries![0]
+            if Utils.Strings.toString(value: firstTos.tosType) == "managed" {
+                return firstTos
+            }
+
         }
 
-        return tos.entries![0]
+        if numberOfTos >= 2 {
+            let secondTos: TermsOfService = tos.entries![1]
+            if Utils.Strings.toString(value: secondTos.tosType) == "managed" {
+                return secondTos
+            }
+
+        }
+
+        return try await client.termsOfServices.createTermsOfService(requestBody: CreateTermsOfServiceRequestBody(status: CreateTermsOfServiceRequestBodyStatusField.disabled, text: "Test TOS", tosType: CreateTermsOfServiceRequestBodyTosTypeField.managed))
     }
 
     public func getOrCreateShieldInformationBarrier(client: BoxClient, enterpriseId: String) async throws -> ShieldInformationBarrier {

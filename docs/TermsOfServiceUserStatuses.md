@@ -16,7 +16,10 @@ This operation is performed by calling function `getTermsOfServiceUserStatuses`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-terms-of-service-user-statuses/).
 
-*Currently we don't have an example for calling `getTermsOfServiceUserStatuses` in integration tests*
+<!-- sample get_terms_of_service_user_statuses -->
+```
+try await client.termsOfServiceUserStatuses.getTermsOfServiceUserStatuses(queryParams: GetTermsOfServiceUserStatusesQueryParams(tosId: tos.id, userId: user.id))
+```
 
 ### Arguments
 
@@ -42,7 +45,10 @@ This operation is performed by calling function `createTermsOfServiceStatusForUs
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/post-terms-of-service-user-statuses/).
 
-*Currently we don't have an example for calling `createTermsOfServiceStatusForUser` in integration tests*
+<!-- sample post_terms_of_service_user_statuses -->
+```
+try await client.termsOfServiceUserStatuses.createTermsOfServiceStatusForUser(requestBody: CreateTermsOfServiceStatusForUserRequestBody(tos: CreateTermsOfServiceStatusForUserRequestBodyTosField(type: CreateTermsOfServiceStatusForUserRequestBodyTosTypeField.termsOfService, id: tos.id), user: CreateTermsOfServiceStatusForUserRequestBodyUserField(type: CreateTermsOfServiceStatusForUserRequestBodyUserTypeField.user, id: user.id), isAccepted: false))
+```
 
 ### Arguments
 
@@ -68,7 +74,10 @@ This operation is performed by calling function `updateTermsOfServiceStatusForUs
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/put-terms-of-service-user-statuses-id/).
 
-*Currently we don't have an example for calling `updateTermsOfServiceStatusForUserById` in integration tests*
+<!-- sample put_terms_of_service_user_statuses_id -->
+```
+try await client.termsOfServiceUserStatuses.updateTermsOfServiceStatusForUserById(termsOfServiceUserStatusId: createdTosUserStatus.id, requestBody: UpdateTermsOfServiceStatusForUserByIdRequestBody(isAccepted: true))
+```
 
 ### Arguments
 
