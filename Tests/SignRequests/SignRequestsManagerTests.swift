@@ -28,4 +28,16 @@ class SignRequestsManagerTests: XCTestCase {
         try await client.folders.deleteFolderById(folderId: destinationFolder.id, queryParams: DeleteFolderByIdQueryParams(recursive: true))
         try await client.files.deleteFileById(fileId: fileToSign.id)
     }
+
+    public func testCreateSignRequestWithSignerGroupId() async throws {
+        let signer1Email: String = "\(Utils.getUUID())\("@box.com")"
+        let signer2Email: String = "\(Utils.getUUID())\("@box.com")"
+        let fileToSign: FileFull = try await CommonsManager().uploadNewFile()
+        let destinationFolder: FolderFull = try await CommonsManager().createNewFolder()
+        let createdSignRequest: SignRequest = try await client.signRequests.createSignRequest(requestBody: SignRequestCreateRequest(parentFolder: FolderMini(id: destinationFolder.id, type: FolderBaseTypeField.folder), signers: [SignRequestCreateSigner(email: signer1Email, signerGroupId: "user"), SignRequestCreateSigner(email: signer2Email, signerGroupId: "user")], sourceFiles: [FileBase(id: fileToSign.id, type: FileBaseTypeField.file)]))
+        XCTAssertTrue(createdSignRequest.signers!.count == 3)
+        XCTAssertTrue(createdSignRequest.signers![1].signerGroupId == createdSignRequest.signers![2].signerGroupId)
+        try await client.folders.deleteFolderById(folderId: destinationFolder.id, queryParams: DeleteFolderByIdQueryParams(recursive: true))
+        try await client.files.deleteFileById(fileId: fileToSign.id)
+    }
 }
