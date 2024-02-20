@@ -13,6 +13,7 @@ public class SignRequest: SignRequestBase {
         case status
         case signFiles = "sign_files"
         case autoExpireAt = "auto_expire_at"
+        case parentFolder = "parent_folder"
     }
 
     /// object type
@@ -48,10 +49,11 @@ public class SignRequest: SignRequestBase {
     /// Uses `days_valid` to calculate the date and time, in GMT, the sign request will expire if unsigned.
     public let autoExpireAt: String?
 
+    public let parentFolder: FolderMini?
+
     /// Initializer for a SignRequest.
     ///
     /// - Parameters:
-    ///   - parentFolder: 
     ///   - isDocumentPreparationNeeded: Indicates if the sender should receive a `prepare_url` in the response to complete document preparation via UI.
     ///   - redirectUrl: When specified, signature request will be redirected to this url when a document is signed.
     ///   - declinedRedirectUrl: The uri that a signer will be redirected to after declining to sign a document.
@@ -79,7 +81,8 @@ public class SignRequest: SignRequestBase {
     ///     source files. A new version of these files are created as signers sign
     ///     and can be downloaded at any point in the signing process.
     ///   - autoExpireAt: Uses `days_valid` to calculate the date and time, in GMT, the sign request will expire if unsigned.
-    public init(parentFolder: FolderMini, isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: String? = nil, id: String? = nil, prepareUrl: String? = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: String? = nil) {
+    ///   - parentFolder: 
+    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: String? = nil, id: String? = nil, prepareUrl: String? = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: String? = nil, parentFolder: FolderMini? = nil) {
         self.type = type
         self.sourceFiles = sourceFiles
         self.signers = signers
@@ -90,8 +93,9 @@ public class SignRequest: SignRequestBase {
         self.status = status
         self.signFiles = signFiles
         self.autoExpireAt = autoExpireAt
+        self.parentFolder = parentFolder
 
-        super.init(parentFolder: parentFolder, isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, isPhoneVerificationRequiredToView: isPhoneVerificationRequiredToView, templateId: templateId)
+        super.init(isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, isPhoneVerificationRequiredToView: isPhoneVerificationRequiredToView, templateId: templateId)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -106,6 +110,7 @@ public class SignRequest: SignRequestBase {
         status = try container.decodeIfPresent(SignRequestStatusField.self, forKey: .status)
         signFiles = try container.decodeIfPresent(SignRequestSignFilesField.self, forKey: .signFiles)
         autoExpireAt = try container.decodeIfPresent(String.self, forKey: .autoExpireAt)
+        parentFolder = try container.decodeIfPresent(FolderMini.self, forKey: .parentFolder)
 
         try super.init(from: decoder)
     }
@@ -122,6 +127,7 @@ public class SignRequest: SignRequestBase {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(signFiles, forKey: .signFiles)
         try container.encodeIfPresent(autoExpireAt, forKey: .autoExpireAt)
+        try container.encodeIfPresent(parentFolder, forKey: .parentFolder)
         try super.encode(to: encoder)
     }
 
