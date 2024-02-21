@@ -3,7 +3,6 @@ import Foundation
 /// A request to create a sign request object
 public class SignRequestBase: Codable {
     private enum CodingKeys: String, CodingKey {
-        case parentFolder = "parent_folder"
         case isDocumentPreparationNeeded = "is_document_preparation_needed"
         case redirectUrl = "redirect_url"
         case declinedRedirectUrl = "declined_redirect_url"
@@ -18,8 +17,6 @@ public class SignRequestBase: Codable {
         case isPhoneVerificationRequiredToView = "is_phone_verification_required_to_view"
         case templateId = "template_id"
     }
-
-    public let parentFolder: FolderMini
 
     /// Indicates if the sender should receive a `prepare_url` in the response to complete document preparation via UI.
     public let isDocumentPreparationNeeded: Bool?
@@ -63,7 +60,6 @@ public class SignRequestBase: Codable {
     /// Initializer for a SignRequestBase.
     ///
     /// - Parameters:
-    ///   - parentFolder: 
     ///   - isDocumentPreparationNeeded: Indicates if the sender should receive a `prepare_url` in the response to complete document preparation via UI.
     ///   - redirectUrl: When specified, signature request will be redirected to this url when a document is signed.
     ///   - declinedRedirectUrl: The uri that a signer will be redirected to after declining to sign a document.
@@ -77,8 +73,7 @@ public class SignRequestBase: Codable {
     ///   - externalId: This can be used to reference an ID in an external system that the sign request is related to.
     ///   - isPhoneVerificationRequiredToView: Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.
     ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
-    public init(parentFolder: FolderMini, isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil) {
-        self.parentFolder = parentFolder
+    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil) {
         self.isDocumentPreparationNeeded = isDocumentPreparationNeeded
         self.redirectUrl = redirectUrl
         self.declinedRedirectUrl = declinedRedirectUrl
@@ -96,7 +91,6 @@ public class SignRequestBase: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        parentFolder = try container.decode(FolderMini.self, forKey: .parentFolder)
         isDocumentPreparationNeeded = try container.decodeIfPresent(Bool.self, forKey: .isDocumentPreparationNeeded)
         redirectUrl = try container.decodeIfPresent(String.self, forKey: .redirectUrl)
         declinedRedirectUrl = try container.decodeIfPresent(String.self, forKey: .declinedRedirectUrl)
@@ -114,7 +108,6 @@ public class SignRequestBase: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(parentFolder, forKey: .parentFolder)
         try container.encodeIfPresent(isDocumentPreparationNeeded, forKey: .isDocumentPreparationNeeded)
         try container.encodeIfPresent(redirectUrl, forKey: .redirectUrl)
         try container.encodeIfPresent(declinedRedirectUrl, forKey: .declinedRedirectUrl)

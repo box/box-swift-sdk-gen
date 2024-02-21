@@ -28,20 +28,6 @@ public class SearchManager {
         return try MetadataQueryResults.deserialize(from: response.data)
     }
 
-    /// Retrieves the metadata query indices for a given scope and template key.
-    ///
-    /// - Parameters:
-    ///   - queryParams: Query parameters of getMetadataQueryIndices method
-    ///   - headers: Headers of getMetadataQueryIndices method
-    /// - Returns: The `MetadataQueryIndices`.
-    /// - Throws: The `GeneralError`.
-    public func getMetadataQueryIndices(queryParams: GetMetadataQueryIndicesQueryParams, headers: GetMetadataQueryIndicesHeaders = GetMetadataQueryIndicesHeaders()) async throws -> MetadataQueryIndices {
-        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["scope": Utils.Strings.toString(value: queryParams.scope), "template_key": Utils.Strings.toString(value: queryParams.templateKey)])
-        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/metadata_query_indices")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try MetadataQueryIndices.deserialize(from: response.data)
-    }
-
     /// Searches for files, folders, web links, and shared files across the
     /// users content or across the entire enterprise.
     ///

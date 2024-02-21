@@ -6,6 +6,7 @@ public class SignRequestCreateRequest: SignRequestBase {
         case signers
         case sourceFiles = "source_files"
         case signatureColor = "signature_color"
+        case parentFolder = "parent_folder"
     }
 
     /// Array of signers for the sign request. 35 is the max number of signers permitted.
@@ -17,10 +18,11 @@ public class SignRequestCreateRequest: SignRequestBase {
     /// Force a specific color for the signature (blue, black, or red)
     public let signatureColor: SignRequestCreateRequestSignatureColorField?
 
+    public let parentFolder: FolderMini?
+
     /// Initializer for a SignRequestCreateRequest.
     ///
     /// - Parameters:
-    ///   - parentFolder: 
     ///   - signers: Array of signers for the sign request. 35 is the max number of signers permitted.
     ///   - isDocumentPreparationNeeded: Indicates if the sender should receive a `prepare_url` in the response to complete document preparation via UI.
     ///   - redirectUrl: When specified, signature request will be redirected to this url when a document is signed.
@@ -37,12 +39,14 @@ public class SignRequestCreateRequest: SignRequestBase {
     ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
     ///   - sourceFiles: List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
     ///   - signatureColor: Force a specific color for the signature (blue, black, or red)
-    public init(parentFolder: FolderMini, signers: [SignRequestCreateSigner], isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil, sourceFiles: [FileBase]? = nil, signatureColor: SignRequestCreateRequestSignatureColorField? = nil) {
+    ///   - parentFolder: 
+    public init(signers: [SignRequestCreateSigner], isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil, sourceFiles: [FileBase]? = nil, signatureColor: SignRequestCreateRequestSignatureColorField? = nil, parentFolder: FolderMini? = nil) {
         self.signers = signers
         self.sourceFiles = sourceFiles
         self.signatureColor = signatureColor
+        self.parentFolder = parentFolder
 
-        super.init(parentFolder: parentFolder, isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, isPhoneVerificationRequiredToView: isPhoneVerificationRequiredToView, templateId: templateId)
+        super.init(isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, isPhoneVerificationRequiredToView: isPhoneVerificationRequiredToView, templateId: templateId)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -50,6 +54,7 @@ public class SignRequestCreateRequest: SignRequestBase {
         signers = try container.decode([SignRequestCreateSigner].self, forKey: .signers)
         sourceFiles = try container.decodeIfPresent([FileBase].self, forKey: .sourceFiles)
         signatureColor = try container.decodeIfPresent(SignRequestCreateRequestSignatureColorField.self, forKey: .signatureColor)
+        parentFolder = try container.decodeIfPresent(FolderMini.self, forKey: .parentFolder)
 
         try super.init(from: decoder)
     }
@@ -59,6 +64,7 @@ public class SignRequestCreateRequest: SignRequestBase {
         try container.encode(signers, forKey: .signers)
         try container.encodeIfPresent(sourceFiles, forKey: .sourceFiles)
         try container.encodeIfPresent(signatureColor, forKey: .signatureColor)
+        try container.encodeIfPresent(parentFolder, forKey: .parentFolder)
         try super.encode(to: encoder)
     }
 

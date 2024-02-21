@@ -17,7 +17,10 @@ This operation is performed by calling function `getWorkflows`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-workflows/).
 
-*Currently we don't have an example for calling `getWorkflows` in integration tests*
+<!-- sample get_workflows -->
+```
+try await adminClient.workflows.getWorkflows(queryParams: GetWorkflowsQueryParams(folderId: workflowFolderId))
+```
 
 ### Arguments
 
@@ -46,7 +49,10 @@ This operation is performed by calling function `startWorkflow`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/post-workflows-id-start/).
 
-*Currently we don't have an example for calling `startWorkflow` in integration tests*
+<!-- sample post_workflows_id_start -->
+```
+try await adminClient.workflows.startWorkflow(workflowId: workflowToRun.id!, requestBody: StartWorkflowRequestBody(type: StartWorkflowRequestBodyTypeField.workflowParameters, flow: StartWorkflowRequestBodyFlowField(type: "flow", id: workflowToRun.flows![0].id!), files: [StartWorkflowRequestBodyFilesField(type: StartWorkflowRequestBodyFilesTypeField.file, id: workflowFileId)], folder: StartWorkflowRequestBodyFolderField(type: StartWorkflowRequestBodyFolderTypeField.folder, id: workflowFolderId)))
+```
 
 ### Arguments
 

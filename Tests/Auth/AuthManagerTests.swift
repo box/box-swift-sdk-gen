@@ -7,7 +7,7 @@ class AuthManagerTests: XCTestCase {
     public func testOauthAuthAuthorizeUrl() async throws {
         let config: OAuthConfig = OAuthConfig(clientId: "OAUTH_CLIENT_ID", clientSecret: "OAUTH_CLIENT_SECRET")
         let auth: BoxOAuth = BoxOAuth(config: config)
-        let authUrl: String = auth.getAuthorizeUrl()
+        let authUrl: String = try auth.getAuthorizeUrl()
         XCTAssertTrue(authUrl == "https://account.box.com/api/oauth2/authorize?client_id=OAUTH_CLIENT_ID&response_type=code" || authUrl == "https://account.box.com/api/oauth2/authorize?response_type=code&client_id=OAUTH_CLIENT_ID")
     }
 

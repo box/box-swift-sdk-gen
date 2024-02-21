@@ -61,9 +61,13 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     via two factor authentication before they are able to sign the document.
     ///   - password: If set, the signer is required to enter the password before they are able
     ///     to sign a document. This field is write only.
-    ///   - signerGroupId: If set, signers who have the same group ID will be assigned to the same input.
-    ///     A signer group is expected to have more than one signer. When a group contains fewer than two signers, 
-    ///     it will be converted to a single signer and the group will be removed. 
+    ///   - signerGroupId: If set, signers who have the same value will be assigned to the same input and to the same signer group.
+    ///     A signer group is not a Box Group. It is an entity that belongs to a Sign Request and can only be
+    ///     used/accessed within this Sign Request. A signer group is expected to have more than one signer.
+    ///     If the provided value is only used for one signer, this value will be ignored and request will be handled
+    ///     as it was intended for an individual signer. The value provided can be any string and only used to
+    ///     determine which signers belongs to same group. A successful response will provide a generated UUID value
+    ///     instead for signers in the same signer group.
     ///   - hasViewedDocument: Set to `true` if the signer views the document
     ///   - signerDecision: Final decision made by the signer
     ///   - inputs: 

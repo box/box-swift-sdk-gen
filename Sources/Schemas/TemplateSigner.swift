@@ -31,9 +31,9 @@ public class TemplateSigner: Codable {
     /// Order of the signer
     public let order: Int64?
 
-    /// If set, signers who have the same group ID will be assigned to the same input.
-    /// A signer group is expected to have more than one signer. When a group contains fewer than two signers, 
-    /// it will be converted to a single signer and the group will be removed. 
+    /// If provided, this value points signers that are assigned the same inputs and belongs to same signer group.
+    /// A signer group is not a Box Group. It is an entity that belongs to the template itself and can only be used
+    /// within Sign Requests created from it.
     public let signerGroupId: String?
 
     /// Initializer for a TemplateSigner.
@@ -50,9 +50,9 @@ public class TemplateSigner: Codable {
     ///     After the sender signs, they will be
     ///     redirected to the next `in_person` signer.
     ///   - order: Order of the signer
-    ///   - signerGroupId: If set, signers who have the same group ID will be assigned to the same input.
-    ///     A signer group is expected to have more than one signer. When a group contains fewer than two signers, 
-    ///     it will be converted to a single signer and the group will be removed. 
+    ///   - signerGroupId: If provided, this value points signers that are assigned the same inputs and belongs to same signer group.
+    ///     A signer group is not a Box Group. It is an entity that belongs to the template itself and can only be used
+    ///     within Sign Requests created from it.
     public init(inputs: [TemplateSignerInput]? = nil, email: String? = nil, role: TemplateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, signerGroupId: String? = nil) {
         self.inputs = inputs
         self.email = email
