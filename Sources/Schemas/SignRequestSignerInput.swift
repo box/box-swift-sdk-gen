@@ -6,6 +6,7 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
         case pageIndex = "page_index"
         case type
         case contentType = "content_type"
+        case readOnly = "read_only"
     }
 
     /// Index of page that the input is on
@@ -17,6 +18,9 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
     /// Content type of input
     public let contentType: SignRequestSignerInputContentTypeField?
 
+    /// Whether this input was defined as read-only(immutable by signers) or not
+    public let readOnly: Bool?
+
     /// Initializer for a SignRequestSignerInput.
     ///
     /// - Parameters:
@@ -27,10 +31,12 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
     ///   - dateValue: Date prefill value
     ///   - type: Type of input
     ///   - contentType: Content type of input
-    public init(pageIndex: Int64, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: String? = nil, type: SignRequestSignerInputTypeField? = nil, contentType: SignRequestSignerInputContentTypeField? = nil) {
+    ///   - readOnly: Whether this input was defined as read-only(immutable by signers) or not
+    public init(pageIndex: Int64, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: String? = nil, type: SignRequestSignerInputTypeField? = nil, contentType: SignRequestSignerInputContentTypeField? = nil, readOnly: Bool? = nil) {
         self.pageIndex = pageIndex
         self.type = type
         self.contentType = contentType
+        self.readOnly = readOnly
 
         super.init(documentTagId: documentTagId, textValue: textValue, checkboxValue: checkboxValue, dateValue: dateValue)
     }
@@ -40,6 +46,7 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
         pageIndex = try container.decode(Int64.self, forKey: .pageIndex)
         type = try container.decodeIfPresent(SignRequestSignerInputTypeField.self, forKey: .type)
         contentType = try container.decodeIfPresent(SignRequestSignerInputContentTypeField.self, forKey: .contentType)
+        readOnly = try container.decodeIfPresent(Bool.self, forKey: .readOnly)
 
         try super.init(from: decoder)
     }
@@ -49,6 +56,7 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
         try container.encode(pageIndex, forKey: .pageIndex)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(contentType, forKey: .contentType)
+        try container.encodeIfPresent(readOnly, forKey: .readOnly)
         try super.encode(to: encoder)
     }
 

@@ -13,6 +13,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
         case coordinates
         case dimensions
         case label
+        case readOnly = "read_only"
     }
 
     /// Index of page that the input is on.
@@ -45,6 +46,9 @@ public class TemplateSignerInput: SignRequestPrefillTag {
     /// The label field is used especially for text, attachment, radio, and checkbox type inputs.
     public let label: String?
 
+    /// Whether this input was defined as read-only(immutable by signers) or not
+    public let readOnly: Bool?
+
     /// Initializer for a TemplateSignerInput.
     ///
     /// - Parameters:
@@ -62,7 +66,8 @@ public class TemplateSignerInput: SignRequestPrefillTag {
     ///   - coordinates: Where the input is located on a page.
     ///   - dimensions: The size of the input.
     ///   - label: The label field is used especially for text, attachment, radio, and checkbox type inputs.
-    public init(pageIndex: Int64, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: String? = nil, type: TemplateSignerInputTypeField? = nil, contentType: TemplateSignerInputContentTypeField? = nil, isRequired: Bool? = nil, documentId: String? = nil, dropdownChoices: [String]? = nil, groupId: String? = nil, coordinates: TemplateSignerInputCoordinatesField? = nil, dimensions: TemplateSignerInputDimensionsField? = nil, label: String? = nil) {
+    ///   - readOnly: Whether this input was defined as read-only(immutable by signers) or not
+    public init(pageIndex: Int64, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: String? = nil, type: TemplateSignerInputTypeField? = nil, contentType: TemplateSignerInputContentTypeField? = nil, isRequired: Bool? = nil, documentId: String? = nil, dropdownChoices: [String]? = nil, groupId: String? = nil, coordinates: TemplateSignerInputCoordinatesField? = nil, dimensions: TemplateSignerInputDimensionsField? = nil, label: String? = nil, readOnly: Bool? = nil) {
         self.pageIndex = pageIndex
         self.type = type
         self.contentType = contentType
@@ -73,6 +78,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
         self.coordinates = coordinates
         self.dimensions = dimensions
         self.label = label
+        self.readOnly = readOnly
 
         super.init(documentTagId: documentTagId, textValue: textValue, checkboxValue: checkboxValue, dateValue: dateValue)
     }
@@ -89,6 +95,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
         coordinates = try container.decodeIfPresent(TemplateSignerInputCoordinatesField.self, forKey: .coordinates)
         dimensions = try container.decodeIfPresent(TemplateSignerInputDimensionsField.self, forKey: .dimensions)
         label = try container.decodeIfPresent(String.self, forKey: .label)
+        readOnly = try container.decodeIfPresent(Bool.self, forKey: .readOnly)
 
         try super.init(from: decoder)
     }
@@ -105,6 +112,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
         try container.encodeIfPresent(coordinates, forKey: .coordinates)
         try container.encodeIfPresent(dimensions, forKey: .dimensions)
         try container.encodeIfPresent(label, forKey: .label)
+        try container.encodeIfPresent(readOnly, forKey: .readOnly)
         try super.encode(to: encoder)
     }
 
