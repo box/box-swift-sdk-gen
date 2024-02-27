@@ -1,10 +1,11 @@
 import Foundation
 
-public enum EventSourceOrFileOrFolderOrUser: Codable {
+public enum EventSourceOrFileOrFolderOrGenericSourceOrUser: Codable {
     case eventSource(EventSource)
     case file(File)
     case folder(Folder)
     case user(User)
+    case genericSource(GenericSource)
 
     private enum DiscriminatorCodingKey: String, CodingKey {
         case itemType = "item_type"
@@ -28,7 +29,7 @@ public enum EventSourceOrFileOrFolderOrUser: Codable {
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(EventSourceOrFileOrFolderOrUser.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key itemType"))
+                    throw DecodingError.typeMismatch(EventSourceOrFileOrFolderOrGenericSourceOrUser.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key itemType"))
 
                 }
             }
@@ -54,14 +55,19 @@ public enum EventSourceOrFileOrFolderOrUser: Codable {
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(EventSourceOrFileOrFolderOrUser.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key type"))
+                    throw DecodingError.typeMismatch(EventSourceOrFileOrFolderOrGenericSourceOrUser.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key type"))
 
                 }
             }
 
         }
 
-        throw DecodingError.typeMismatch(EventSourceOrFileOrFolderOrUser.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The type of the decoded object cannot be determined."))
+        if let content = try? GenericSource(from: decoder) {
+            self = .genericSource(content)
+            return
+        }
+
+        throw DecodingError.typeMismatch(EventSourceOrFileOrFolderOrGenericSourceOrUser.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The type of the decoded object cannot be determined."))
 
     }
 
@@ -75,6 +81,8 @@ public enum EventSourceOrFileOrFolderOrUser: Codable {
             try folder.encode(to: encoder)
         case .user(let user):
             try user.encode(to: encoder)
+        case .genericSource(let genericSource):
+            try genericSource.encode(to: encoder)
         }
     }
 

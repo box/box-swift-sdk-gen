@@ -34,7 +34,7 @@ public class Event: Codable {
     /// populate this attribute.
     public let sessionId: String?
 
-    public let source: EventSourceOrFileOrFolderOrUser?
+    public let source: EventSourceOrFileOrFolderOrGenericSourceOrUser?
 
     /// This object provides additional information about the event if available.
     /// 
@@ -62,7 +62,7 @@ public class Event: Codable {
     ///     information to correlate an event to external KeySafe logs. Not all events
     ///     have an `additional_details` object.  This object is only available in the
     ///     Enterprise Events.
-    public init(type: String? = nil, createdAt: String? = nil, recordedAt: String? = nil, eventId: String? = nil, createdBy: UserMini? = nil, eventType: EventEventTypeField? = nil, sessionId: String? = nil, source: EventSourceOrFileOrFolderOrUser? = nil, additionalDetails: EventAdditionalDetailsField? = nil) {
+    public init(type: String? = nil, createdAt: String? = nil, recordedAt: String? = nil, eventId: String? = nil, createdBy: UserMini? = nil, eventType: EventEventTypeField? = nil, sessionId: String? = nil, source: EventSourceOrFileOrFolderOrGenericSourceOrUser? = nil, additionalDetails: EventAdditionalDetailsField? = nil) {
         self.type = type
         self.createdAt = createdAt
         self.recordedAt = recordedAt
@@ -83,7 +83,7 @@ public class Event: Codable {
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
         eventType = try container.decodeIfPresent(EventEventTypeField.self, forKey: .eventType)
         sessionId = try container.decodeIfPresent(String.self, forKey: .sessionId)
-        source = try container.decodeIfPresent(EventSourceOrFileOrFolderOrUser.self, forKey: .source)
+        source = try container.decodeIfPresent(EventSourceOrFileOrFolderOrGenericSourceOrUser.self, forKey: .source)
         additionalDetails = try container.decodeIfPresent(EventAdditionalDetailsField.self, forKey: .additionalDetails)
     }
 
