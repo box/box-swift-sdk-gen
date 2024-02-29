@@ -74,13 +74,12 @@ class AuthManagerTests: XCTestCase {
     public func testOauthAuthRevoke() async throws {
         let config: OAuthConfig = OAuthConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"))
         let auth: BoxOAuth = BoxOAuth(config: config)
+        let client: BoxClient = BoxClient(auth: auth)
         let token: AccessToken = try await getAccessToken()
         try await auth.tokenStorage.store(token: token)
-        let tokenBeforeRevoke: AccessToken? = try await auth.tokenStorage.get()
+        try await client.users.getUserMe()
         try await auth.revokeToken()
-        let tokenAfterRevoke: AccessToken? = try await auth.tokenStorage.get()
-        XCTAssertTrue(tokenBeforeRevoke != nil)
-        XCTAssertTrue(tokenAfterRevoke == nil)
+        await XCTAssertThrowsErrorAsync(try await client.users.getUserMe())
     }
 
     public func testOauthAuthDownscope() async throws {
