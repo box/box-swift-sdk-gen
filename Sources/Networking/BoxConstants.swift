@@ -11,13 +11,11 @@ import AppKit
 public enum BoxConstants {
     /// The name of the SDK
     public static let sdkName = "box-swift-generated-sdk"
-    /// The current SDK version
-    public static let version = "0.1.0"
     /// Analytics headers using by the SDK
     public static var analyticsHeaders: [String: String] {
         [
-            "User-Agent": "\(sdkName)/\(version) \(OSInformation.shared.name)/\(ProcessInfo.processInfo.operatingSystemVersionString)",
-            "X-Box-UA": "agent=\(sdkName)/\(version); env=\(OSInformation.shared.name)/\(OSInformation.shared.version)"
+            "User-Agent": "\(sdkName)/\(Version.sdkVersion) \(OSInformation.shared.name)/\(ProcessInfo.processInfo.operatingSystemVersionString)",
+            "X-Box-UA": "agent=\(sdkName)/\(Version.sdkVersion); env=\(OSInformation.shared.name)/\(OSInformation.shared.version)"
         ]
     }
 }
