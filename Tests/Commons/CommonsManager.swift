@@ -59,6 +59,28 @@ public class CommonsManager {
         return try await client.termsOfServices.createTermsOfService(requestBody: CreateTermsOfServiceRequestBody(status: CreateTermsOfServiceRequestBodyStatusField.disabled, text: "Test TOS", tosType: CreateTermsOfServiceRequestBodyTosTypeField.managed))
     }
 
+    public func getOrCreateClassification(classificationTemplate: ClassificationTemplate) async throws -> ClassificationTemplateFieldsOptionsField {
+        let client: BoxClient = CommonsManager().getDefaultClient()
+        let classifications: [ClassificationTemplateFieldsOptionsField] = classificationTemplate.fields[0].options
+        let currentNumberOfClassifications: Int = classifications.count
+        if currentNumberOfClassifications == 0 {
+            let classificationTemplateWithNewClassification: ClassificationTemplate = try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(op: AddClassificationRequestBodyOpField.addEnumOption, fieldKey: AddClassificationRequestBodyFieldKeyField.boxSecurityClassificationKey, data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(classificationDefinition: "Some description", colorId: 3))))])
+            return classificationTemplateWithNewClassification.fields[0].options[0]
+        }
+
+        return classifications[0]
+    }
+
+    public func getOrCreateClassificationTemplate() async throws -> ClassificationTemplate {
+        let client: BoxClient = CommonsManager().getDefaultClient()
+        do {
+            return try await client.classifications.getClassificationTemplate()
+        } catch {
+            return try await client.classifications.createClassificationTemplate(requestBody: CreateClassificationTemplateRequestBody(scope: CreateClassificationTemplateRequestBodyScopeField.enterprise, templateKey: CreateClassificationTemplateRequestBodyTemplateKeyField.securityClassification6VmVochwUWo, displayName: CreateClassificationTemplateRequestBodyDisplayNameField.classification, fields: [CreateClassificationTemplateRequestBodyFieldsField(type: CreateClassificationTemplateRequestBodyFieldsTypeField.enum_, key: CreateClassificationTemplateRequestBodyFieldsKeyField.boxSecurityClassificationKey, displayName: CreateClassificationTemplateRequestBodyFieldsDisplayNameField.classification, options: [])]))
+        }
+
+    }
+
     public func getOrCreateShieldInformationBarrier(client: BoxClient, enterpriseId: String) async throws -> ShieldInformationBarrier {
         let barriers: ShieldInformationBarriers = try await client.shieldInformationBarriers.getShieldInformationBarriers()
         let numberOfBarriers: Int = barriers.entries!.count

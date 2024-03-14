@@ -20,7 +20,10 @@ This operation is performed by calling function `getClassificationOnFile`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-files-id-metadata-enterprise-security-classification-6-vm-vochw-u-wo/).
 
-*Currently we don't have an example for calling `getClassificationOnFile` in integration tests*
+<!-- sample get_files_id_metadata_enterprise_securityClassification-6VMVochwUWo -->
+```
+try await client.fileClassifications.getClassificationOnFile(fileId: file.id)
+```
 
 ### Arguments
 
@@ -54,7 +57,10 @@ This operation is performed by calling function `addClassificationToFile`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/post-files-id-metadata-enterprise-security-classification-6-vm-vochw-u-wo/).
 
-*Currently we don't have an example for calling `addClassificationToFile` in integration tests*
+<!-- sample post_files_id_metadata_enterprise_securityClassification-6VMVochwUWo -->
+```
+try await client.fileClassifications.addClassificationToFile(fileId: file.id, requestBody: AddClassificationToFileRequestBody(boxSecurityClassificationKey: classification.key))
+```
 
 ### Arguments
 
@@ -87,7 +93,10 @@ This operation is performed by calling function `updateClassificationOnFile`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/put-files-id-metadata-enterprise-security-classification-6-vm-vochw-u-wo/).
 
-*Currently we don't have an example for calling `updateClassificationOnFile` in integration tests*
+<!-- sample put_files_id_metadata_enterprise_securityClassification-6VMVochwUWo -->
+```
+try await client.fileClassifications.updateClassificationOnFile(fileId: file.id, requestBody: [UpdateClassificationOnFileRequestBody(op: UpdateClassificationOnFileRequestBodyOpField.replace, path: UpdateClassificationOnFileRequestBodyPathField.boxSecurityClassificationKey, value: secondClassification.key)])
+```
 
 ### Arguments
 
@@ -119,7 +128,10 @@ This operation is performed by calling function `deleteClassificationFromFile`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/delete-files-id-metadata-enterprise-security-classification-6-vm-vochw-u-wo/).
 
-*Currently we don't have an example for calling `deleteClassificationFromFile` in integration tests*
+<!-- sample delete_files_id_metadata_enterprise_securityClassification-6VMVochwUWo -->
+```
+try await client.fileClassifications.deleteClassificationFromFile(fileId: file.id)
+```
 
 ### Arguments
 

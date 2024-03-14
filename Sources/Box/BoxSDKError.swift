@@ -1,6 +1,6 @@
 import Foundation
 
-public class BoxSDKError {
+public class BoxSDKError: Error {
     public let message: String
 
     public let timestamp: String?
