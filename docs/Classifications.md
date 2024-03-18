@@ -20,7 +20,10 @@ This operation is performed by calling function `getClassificationTemplate`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-metadata-templates-enterprise-security-classification-6-vm-vochw-u-wo-schema/).
 
-*Currently we don't have an example for calling `getClassificationTemplate` in integration tests*
+<!-- sample get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema -->
+```
+try await client.classifications.getClassificationTemplate()
+```
 
 ### Arguments
 
@@ -51,7 +54,10 @@ This operation is performed by calling function `addClassification`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/put-metadata-templates-enterprise-security-classification-6-vm-vochw-u-wo-schema-add/).
 
-*Currently we don't have an example for calling `addClassification` in integration tests*
+<!-- sample put_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema#add -->
+```
+try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(op: AddClassificationRequestBodyOpField.addEnumOption, fieldKey: AddClassificationRequestBodyFieldKeyField.boxSecurityClassificationKey, data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(colorId: 4, classificationDefinition: "Other description"))))])
+```
 
 ### Arguments
 
@@ -84,7 +90,10 @@ This operation is performed by calling function `updateClassification`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/put-metadata-templates-enterprise-security-classification-6-vm-vochw-u-wo-schema-update/).
 
-*Currently we don't have an example for calling `updateClassification` in integration tests*
+<!-- sample put_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema#update -->
+```
+try await client.classifications.updateClassification(requestBody: [UpdateClassificationRequestBody(op: UpdateClassificationRequestBodyOpField.editEnumOption, fieldKey: UpdateClassificationRequestBodyFieldKeyField.boxSecurityClassificationKey, enumOptionKey: classification.key, data: UpdateClassificationRequestBodyDataField(key: updatedClassificationName, staticConfig: UpdateClassificationRequestBodyDataStaticConfigField(classification: UpdateClassificationRequestBodyDataStaticConfigClassificationField(colorId: 2, classificationDefinition: updatedClassificationDescription))))])
+```
 
 ### Arguments
 
