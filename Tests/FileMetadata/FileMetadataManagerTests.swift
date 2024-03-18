@@ -9,7 +9,7 @@ class FileMetadataManagerTests: XCTestCase {
         client = CommonsManager().getDefaultClient()
     }
 
-    public func testFileMetadata() async throws {
+    public func testGlobalFileMetadata() async throws {
         let file: FileFull = try await CommonsManager().uploadNewFile()
         let fileMetadata: Metadatas = try await client.fileMetadata.getFileMetadata(fileId: file.id)
         XCTAssertTrue(fileMetadata.entries!.count == 0)

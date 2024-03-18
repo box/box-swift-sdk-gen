@@ -9,7 +9,7 @@ class FolderMetadataManagerTests: XCTestCase {
         client = CommonsManager().getDefaultClient()
     }
 
-    public func testFolderMetadata() async throws {
+    public func testGlobalFolderMetadata() async throws {
         let folder: FolderFull = try await CommonsManager().createNewFolder()
         let folderMetadata: Metadatas = try await client.folderMetadata.getFolderMetadata(folderId: folder.id)
         XCTAssertTrue(folderMetadata.entries!.count == 0)
