@@ -22,8 +22,8 @@ public class StartWorkflowRequestBody: Codable {
     /// The type of the parameters object
     public let type: StartWorkflowRequestBodyTypeField?
 
-    /// A list of outcomes required to be configured at start time.
-    public let outcomes: [StartWorkflowRequestBodyOutcomesField]?
+    /// A configurable outcome the workflow should complete.
+    public let outcomes: [Outcome]?
 
     /// Initializer for a StartWorkflowRequestBody.
     ///
@@ -33,8 +33,8 @@ public class StartWorkflowRequestBody: Codable {
     ///     must be in the workflow's configured folder.
     ///   - folder: The folder object for which the workflow is configured.
     ///   - type: The type of the parameters object
-    ///   - outcomes: A list of outcomes required to be configured at start time.
-    public init(flow: StartWorkflowRequestBodyFlowField, files: [StartWorkflowRequestBodyFilesField], folder: StartWorkflowRequestBodyFolderField, type: StartWorkflowRequestBodyTypeField? = nil, outcomes: [StartWorkflowRequestBodyOutcomesField]? = nil) {
+    ///   - outcomes: A configurable outcome the workflow should complete.
+    public init(flow: StartWorkflowRequestBodyFlowField, files: [StartWorkflowRequestBodyFilesField], folder: StartWorkflowRequestBodyFolderField, type: StartWorkflowRequestBodyTypeField? = nil, outcomes: [Outcome]? = nil) {
         self.flow = flow
         self.files = files
         self.folder = folder
@@ -48,7 +48,7 @@ public class StartWorkflowRequestBody: Codable {
         files = try container.decode([StartWorkflowRequestBodyFilesField].self, forKey: .files)
         folder = try container.decode(StartWorkflowRequestBodyFolderField.self, forKey: .folder)
         type = try container.decodeIfPresent(StartWorkflowRequestBodyTypeField.self, forKey: .type)
-        outcomes = try container.decodeIfPresent([StartWorkflowRequestBodyOutcomesField].self, forKey: .outcomes)
+        outcomes = try container.decodeIfPresent([Outcome].self, forKey: .outcomes)
     }
 
     public func encode(to encoder: Encoder) throws {
