@@ -30,4 +30,10 @@ class ClientManagerTests: XCTestCase {
         XCTAssertTrue(Utils.Strings.toString(value: appUser.name) == userName)
         try await client.users.deleteUserById(userId: createdUser.id)
     }
+
+    public func testWithCustomBaseUrls() async throws {
+        let newBaseUrls: BaseUrls = BaseUrls(baseUrl: "https://box.com/", uploadUrl: "https://box.com/", oauth2Url: "https://box.com/")
+        let customBaseClient: BoxClient = client.withCustomBaseUrls(baseUrls: newBaseUrls)
+        await XCTAssertThrowsErrorAsync(try await customBaseClient.users.getUserMe())
+    }
 }
