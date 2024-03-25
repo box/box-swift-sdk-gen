@@ -33,6 +33,7 @@ class MetadataCascadePoliciesManagerTests: XCTestCase {
         try await client.metadataCascadePolicies.applyMetadataCascadePolicy(metadataCascadePolicyId: cascadePolicyId, requestBody: ApplyMetadataCascadePolicyRequestBody(conflictResolution: ApplyMetadataCascadePolicyRequestBodyConflictResolutionField.overwrite))
         try await client.metadataCascadePolicies.deleteMetadataCascadePolicyById(metadataCascadePolicyId: cascadePolicyId)
         await XCTAssertThrowsErrorAsync(try await client.metadataCascadePolicies.getMetadataCascadePolicyById(metadataCascadePolicyId: cascadePolicyId))
+        try await client.metadataTemplates.deleteMetadataTemplate(scope: DeleteMetadataTemplateScope.enterprise, templateKey: templateKey)
         try await client.folders.deleteFolderById(folderId: folder.id)
     }
 }
