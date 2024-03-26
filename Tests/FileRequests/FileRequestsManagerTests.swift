@@ -7,7 +7,7 @@ class FileRequestsManagerTests: XCTestCase {
     public func testGetCopyUpdateDeleteFileRequest() async throws {
         let fileRequestId: String = Utils.getEnvironmentVariable(name: "BOX_FILE_REQUEST_ID")
         let userId: String = Utils.getEnvironmentVariable(name: "USER_ID")
-        let client: BoxClient = try await CommonsManager().getDefaultClientAsUser(userId: userId)
+        let client: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: userId)
         let fileRequest: FileRequest = try await client.fileRequests.getFileRequestById(fileRequestId: fileRequestId)
         XCTAssertTrue(fileRequest.id == fileRequestId)
         XCTAssertTrue(Utils.Strings.toString(value: fileRequest.type) == "file_request")

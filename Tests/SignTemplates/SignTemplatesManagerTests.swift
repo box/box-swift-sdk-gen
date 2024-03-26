@@ -5,13 +5,13 @@ import XCTest
 class SignTemplatesManagerTests: XCTestCase {
 
     public func testGetSignTemplates() async throws {
-        let client: BoxClient = try await CommonsManager().getDefaultClientAsUser(userId: Utils.getEnvironmentVariable(name: "USER_ID"))
+        let client: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: Utils.getEnvironmentVariable(name: "USER_ID"))
         let signTemplates: SignTemplates = try await client.signTemplates.getSignTemplates(queryParams: GetSignTemplatesQueryParams(limit: 2))
         XCTAssertTrue(signTemplates.entries!.count >= 0)
     }
 
     public func testGetSignTemplate() async throws {
-        let client: BoxClient = try await CommonsManager().getDefaultClientAsUser(userId: Utils.getEnvironmentVariable(name: "USER_ID"))
+        let client: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: Utils.getEnvironmentVariable(name: "USER_ID"))
         let signTemplates: SignTemplates = try await client.signTemplates.getSignTemplates(queryParams: GetSignTemplatesQueryParams(limit: 2))
         XCTAssertTrue(signTemplates.entries!.count >= 0)
         if signTemplates.entries!.count > 0 {

@@ -10,7 +10,7 @@ class StoragePoliciesManagerTests: XCTestCase {
     }
 
     public func testGetStoragePolicies() async throws {
-        let client: BoxClient = try await CommonsManager().getDefaultClientAsUser(userId: userId)
+        let client: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: userId)
         let storagePolicies: StoragePolicies = try await client.storagePolicies.getStoragePolicies()
         let storagePolicy: StoragePolicy = storagePolicies.entries![0]
         XCTAssertTrue(Utils.Strings.toString(value: storagePolicy.type) == "storage_policy")

@@ -10,7 +10,7 @@ class SessionTerminationManagerTests: XCTestCase {
     }
 
     public func testSessionTerminationUser() async throws {
-        let adminClient: BoxClient = try await CommonsManager().getDefaultClientAsUser(userId: Utils.getEnvironmentVariable(name: "USER_ID"))
+        let adminClient: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: Utils.getEnvironmentVariable(name: "USER_ID"))
         let user: UserFull = try await adminClient.users.getUserMe()
         let result: SessionTerminationMessage = try await client.sessionTermination.terminateUsersSessions(requestBody: TerminateUsersSessionsRequestBody(userIds: [Utils.getEnvironmentVariable(name: "USER_ID")], userLogins: [user.login!]))
         XCTAssertTrue(result.message == "Request is successful, please check the admin events for the status of the job")

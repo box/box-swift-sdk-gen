@@ -6,7 +6,7 @@ class InvitesManagerTests: XCTestCase {
 
     public func testInvites() async throws {
         let userId: String = Utils.getEnvironmentVariable(name: "USER_ID")
-        let client: BoxClient = try await CommonsManager().getDefaultClientAsUser(userId: userId)
+        let client: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: userId)
         let currentUser: UserFull = try await client.users.getUserMe(queryParams: GetUserMeQueryParams(fields: ["enterprise"]))
         let email: String = Utils.getEnvironmentVariable(name: "BOX_EXTERNAL_USER_EMAIL")
         let invitation: Invite = try await client.invites.createInvite(requestBody: CreateInviteRequestBody(enterprise: CreateInviteRequestBodyEnterpriseField(id: currentUser.enterprise!.id!), actionableBy: CreateInviteRequestBodyActionableByField(login: email)))
