@@ -5,7 +5,7 @@ import XCTest
 class ShieldInformationBarrierSegmentRestrictionsManagerTests: XCTestCase {
 
     public func testShieldInformationBarrierSegmentRestrictions() async throws {
-        let client: BoxClient = try await CommonsManager().getDefaultClientAsUser(userId: Utils.getEnvironmentVariable(name: "USER_ID"))
+        let client: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: Utils.getEnvironmentVariable(name: "USER_ID"))
         let enterpriseId: String = Utils.getEnvironmentVariable(name: "ENTERPRISE_ID")
         let barrier: ShieldInformationBarrier = try await CommonsManager().getOrCreateShieldInformationBarrier(client: client, enterpriseId: enterpriseId)
         let barrierId: String = barrier.id!

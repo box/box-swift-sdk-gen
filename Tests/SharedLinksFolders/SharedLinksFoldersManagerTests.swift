@@ -15,7 +15,7 @@ class SharedLinksFoldersManagerTests: XCTestCase {
         let folderFromApi: FolderFull = try await client.sharedLinksFolders.getSharedLinkForFolder(folderId: folder.id, queryParams: GetSharedLinkForFolderQueryParams(fields: "shared_link"))
         XCTAssertTrue(Utils.Strings.toString(value: folderFromApi.sharedLink!.access) == "open")
         let userId: String = Utils.getEnvironmentVariable(name: "USER_ID")
-        let userClient: BoxClient = try await CommonsManager().getDefaultClientAsUser(userId: userId)
+        let userClient: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: userId)
         let folderFromSharedLinkPassword: FolderFull = try await userClient.sharedLinksFolders.findFolderForSharedLink(queryParams: FindFolderForSharedLinkQueryParams(), headers: FindFolderForSharedLinkHeaders(boxapi: "\("shared_link=")\(folderFromApi.sharedLink!.url)\("&shared_link_password=Secret123@")"))
         XCTAssertTrue(folder.id == folderFromSharedLinkPassword.id)
         await XCTAssertThrowsErrorAsync(try await userClient.sharedLinksFolders.findFolderForSharedLink(queryParams: FindFolderForSharedLinkQueryParams(), headers: FindFolderForSharedLinkHeaders(boxapi: "\("shared_link=")\(folderFromApi.sharedLink!.url)\("&shared_link_password=incorrectPassword")")))

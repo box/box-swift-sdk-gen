@@ -17,7 +17,7 @@ class SharedLinksWebLinksManagerTests: XCTestCase {
         let webLinkFromApi: WebLink = try await client.sharedLinksWebLinks.getSharedLinkForWebLink(webLinkId: webLinkId, queryParams: GetSharedLinkForWebLinkQueryParams(fields: "shared_link"))
         XCTAssertTrue(Utils.Strings.toString(value: webLinkFromApi.sharedLink!.access) == "open")
         let userId: String = Utils.getEnvironmentVariable(name: "USER_ID")
-        let userClient: BoxClient = try await CommonsManager().getDefaultClientAsUser(userId: userId)
+        let userClient: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: userId)
         let webLinkFromSharedLinkPassword: WebLink = try await userClient.sharedLinksWebLinks.findWebLinkForSharedLink(queryParams: FindWebLinkForSharedLinkQueryParams(), headers: FindWebLinkForSharedLinkHeaders(boxapi: "\("shared_link=")\(webLinkFromApi.sharedLink!.url)\("&shared_link_password=Secret123@")"))
         XCTAssertTrue(webLinkId == webLinkFromSharedLinkPassword.id)
         await XCTAssertThrowsErrorAsync(try await userClient.sharedLinksWebLinks.findWebLinkForSharedLink(queryParams: FindWebLinkForSharedLinkQueryParams(), headers: FindWebLinkForSharedLinkHeaders(boxapi: "\("shared_link=")\(webLinkFromApi.sharedLink!.url)\("&shared_link_password=incorrectPassword")")))

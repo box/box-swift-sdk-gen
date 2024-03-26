@@ -58,8 +58,7 @@ class AuthManagerTests: XCTestCase {
         let ccgConfig: CCGConfig = CCGConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"), enterpriseId: enterpriseId, userId: userId)
         let auth: BoxCCGAuth = BoxCCGAuth(config: ccgConfig)
         try await auth.asUser(userId: userId)
-        let token: AccessToken = try await auth.retrieveToken()
-        return token
+        return try await auth.retrieveToken()
     }
 
     public func testDeveloperTokenAuth() async throws {
