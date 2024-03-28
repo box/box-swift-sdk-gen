@@ -14,7 +14,7 @@ public class GetFolderByIdQueryParams {
     /// Additionally this field can be used to query any metadata
     /// applied to the file by specifying the `metadata` field as well
     /// as the scope and key of the template to retrieve, for example
-    /// `?field=metadata.enterprise_12345.contractTemplate`.
+    /// `?fields=metadata.enterprise_12345.contractTemplate`.
     public let fields: [String]?
 
     /// Defines the **second** attribute by which items
@@ -77,7 +77,7 @@ public class GetFolderByIdQueryParams {
     ///     Additionally this field can be used to query any metadata
     ///     applied to the file by specifying the `metadata` field as well
     ///     as the scope and key of the template to retrieve, for example
-    ///     `?field=metadata.enterprise_12345.contractTemplate`.
+    ///     `?fields=metadata.enterprise_12345.contractTemplate`.
     ///   - sort: Defines the **second** attribute by which items
     ///     are sorted.
     ///     
