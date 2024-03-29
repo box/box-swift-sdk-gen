@@ -19,7 +19,7 @@ public class UserBase: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this user
     ///   - type: `user`
-    public init(id: String, type: UserBaseTypeField) {
+    public init(id: String, type: UserBaseTypeField = UserBaseTypeField.user) {
         self.id = id
         self.type = type
     }

@@ -95,7 +95,7 @@ See the endpoint docs at
 
 <!-- sample put_files_id_metadata_enterprise_securityClassification-6VMVochwUWo -->
 ```
-try await client.fileClassifications.updateClassificationOnFile(fileId: file.id, requestBody: [UpdateClassificationOnFileRequestBody(op: UpdateClassificationOnFileRequestBodyOpField.replace, path: UpdateClassificationOnFileRequestBodyPathField.boxSecurityClassificationKey, value: secondClassification.key)])
+try await client.fileClassifications.updateClassificationOnFile(fileId: file.id, requestBody: [UpdateClassificationOnFileRequestBody(value: secondClassification.key)])
 ```
 
 ### Arguments

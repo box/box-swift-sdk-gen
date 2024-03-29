@@ -21,7 +21,7 @@ public class UserIntegrationMappings: UserBase {
     ///   - type: `user`
     ///   - name: The display name of this user
     ///   - login: The primary email address of this user
-    public init(id: String, type: UserBaseTypeField, name: String? = nil, login: String? = nil) {
+    public init(id: String, type: UserBaseTypeField = UserBaseTypeField.user, name: String? = nil, login: String? = nil) {
         self.name = name
         self.login = login
 

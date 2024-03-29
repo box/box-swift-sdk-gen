@@ -13,7 +13,7 @@ class FileClassificationsManagerTests: XCTestCase {
         let classifications: [ClassificationTemplateFieldsOptionsField] = classificationTemplate.fields[0].options
         let currentNumberOfClassifications: Int = classifications.count
         if currentNumberOfClassifications == 1 {
-            let classificationTemplateWithNewClassification: ClassificationTemplate = try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(op: AddClassificationRequestBodyOpField.addEnumOption, fieldKey: AddClassificationRequestBodyFieldKeyField.boxSecurityClassificationKey, data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(classificationDefinition: "Other description", colorId: 4))))])
+            let classificationTemplateWithNewClassification: ClassificationTemplate = try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(classificationDefinition: "Other description", colorId: 4))))])
             return classificationTemplateWithNewClassification.fields[0].options[1]
         }
 
@@ -30,7 +30,7 @@ class FileClassificationsManagerTests: XCTestCase {
         let fileClassification: Classification = try await client.fileClassifications.getClassificationOnFile(fileId: file.id)
         XCTAssertTrue(fileClassification.boxSecurityClassificationKey == classification.key)
         let secondClassification: ClassificationTemplateFieldsOptionsField = try await getOrCreateSecondClassification(classificationTemplate: classificationTemplate)
-        let updatedFileClassification: Classification = try await client.fileClassifications.updateClassificationOnFile(fileId: file.id, requestBody: [UpdateClassificationOnFileRequestBody(op: UpdateClassificationOnFileRequestBodyOpField.replace, path: UpdateClassificationOnFileRequestBodyPathField.boxSecurityClassificationKey, value: secondClassification.key)])
+        let updatedFileClassification: Classification = try await client.fileClassifications.updateClassificationOnFile(fileId: file.id, requestBody: [UpdateClassificationOnFileRequestBody(value: secondClassification.key)])
         XCTAssertTrue(updatedFileClassification.boxSecurityClassificationKey == secondClassification.key)
         try await client.fileClassifications.deleteClassificationFromFile(fileId: file.id)
         await XCTAssertThrowsErrorAsync(try await client.fileClassifications.getClassificationOnFile(fileId: file.id))

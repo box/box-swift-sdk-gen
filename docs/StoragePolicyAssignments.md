@@ -48,7 +48,7 @@ See the endpoint docs at
 
 <!-- sample post_storage_policy_assignments -->
 ```
-try await client.storagePolicyAssignments.createStoragePolicyAssignment(requestBody: CreateStoragePolicyAssignmentRequestBody(storagePolicy: CreateStoragePolicyAssignmentRequestBodyStoragePolicyField(id: policyId, type: CreateStoragePolicyAssignmentRequestBodyStoragePolicyTypeField.storagePolicy), assignedTo: CreateStoragePolicyAssignmentRequestBodyAssignedToField(id: userId, type: CreateStoragePolicyAssignmentRequestBodyAssignedToTypeField.user)))
+try await client.storagePolicyAssignments.createStoragePolicyAssignment(requestBody: CreateStoragePolicyAssignmentRequestBody(storagePolicy: CreateStoragePolicyAssignmentRequestBodyStoragePolicyField(id: policyId), assignedTo: CreateStoragePolicyAssignmentRequestBodyAssignedToField(id: userId, type: CreateStoragePolicyAssignmentRequestBodyAssignedToTypeField.user)))
 ```
 
 ### Arguments
@@ -106,7 +106,7 @@ See the endpoint docs at
 
 <!-- sample put_storage_policy_assignments_id -->
 ```
-try await client.storagePolicyAssignments.updateStoragePolicyAssignmentById(storagePolicyAssignmentId: storagePolicyAssignment.id, requestBody: UpdateStoragePolicyAssignmentByIdRequestBody(storagePolicy: UpdateStoragePolicyAssignmentByIdRequestBodyStoragePolicyField(id: storagePolicy2.id, type: UpdateStoragePolicyAssignmentByIdRequestBodyStoragePolicyTypeField.storagePolicy)))
+try await client.storagePolicyAssignments.updateStoragePolicyAssignmentById(storagePolicyAssignmentId: storagePolicyAssignment.id, requestBody: UpdateStoragePolicyAssignmentByIdRequestBody(storagePolicy: UpdateStoragePolicyAssignmentByIdRequestBodyStoragePolicyField(id: storagePolicy2.id)))
 ```
 
 ### Arguments

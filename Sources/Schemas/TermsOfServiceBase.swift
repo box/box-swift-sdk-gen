@@ -19,7 +19,7 @@ public class TermsOfServiceBase: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this terms of service.
     ///   - type: `terms_of_service`
-    public init(id: String, type: TermsOfServiceBaseTypeField) {
+    public init(id: String, type: TermsOfServiceBaseTypeField = TermsOfServiceBaseTypeField.termsOfService) {
         self.id = id
         self.type = type
     }

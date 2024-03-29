@@ -53,7 +53,7 @@ See the endpoint docs at
 
 <!-- sample post_integration_mappings_slack -->
 ```
-try await userClient.integrationMappings.createSlackIntegrationMapping(requestBody: IntegrationMappingSlackCreateRequest(partnerItem: IntegrationMappingPartnerItemSlack(type: IntegrationMappingPartnerItemSlackTypeField.channel, id: partnerItemId, slackOrgId: slackOrgId), boxItem: IntegrationMappingBoxItemSlack(id: folder.id, type: IntegrationMappingBoxItemSlackTypeField.folder)))
+try await userClient.integrationMappings.createSlackIntegrationMapping(requestBody: IntegrationMappingSlackCreateRequest(partnerItem: IntegrationMappingPartnerItemSlack(id: partnerItemId, slackOrgId: slackOrgId), boxItem: IntegrationMappingBoxItemSlack(id: folder.id)))
 ```
 
 ### Arguments

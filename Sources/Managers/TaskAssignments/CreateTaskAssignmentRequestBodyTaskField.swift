@@ -17,7 +17,7 @@ public class CreateTaskAssignmentRequestBodyTaskField: Codable {
     /// - Parameters:
     ///   - id: The ID of the task
     ///   - type: The type of the item to assign.
-    public init(id: String, type: CreateTaskAssignmentRequestBodyTaskTypeField) {
+    public init(id: String, type: CreateTaskAssignmentRequestBodyTaskTypeField = CreateTaskAssignmentRequestBodyTaskTypeField.task) {
         self.id = id
         self.type = type
     }

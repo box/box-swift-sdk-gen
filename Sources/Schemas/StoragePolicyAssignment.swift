@@ -26,7 +26,7 @@ public class StoragePolicyAssignment: Codable {
     ///   - type: `storage_policy_assignment`
     ///   - storagePolicy: 
     ///   - assignedTo: 
-    public init(id: String, type: StoragePolicyAssignmentTypeField, storagePolicy: StoragePolicyMini? = nil, assignedTo: StoragePolicyAssignmentAssignedToField? = nil) {
+    public init(id: String, type: StoragePolicyAssignmentTypeField = StoragePolicyAssignmentTypeField.storagePolicyAssignment, storagePolicy: StoragePolicyMini? = nil, assignedTo: StoragePolicyAssignmentAssignedToField? = nil) {
         self.id = id
         self.type = type
         self.storagePolicy = storagePolicy

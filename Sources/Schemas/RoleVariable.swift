@@ -6,10 +6,12 @@ import Foundation
 /// collaborator role.
 public class RoleVariable: Codable {
     private enum CodingKeys: String, CodingKey {
+        case variableValue = "variable_value"
         case type
         case variableType = "variable_type"
-        case variableValue = "variable_value"
     }
+
+    public let variableValue: RoleVariableVariableValueField
 
     /// Role object type.
     /// 
@@ -20,35 +22,33 @@ public class RoleVariable: Codable {
     /// 
     public let variableType: RoleVariableVariableTypeField
 
-    public let variableValue: RoleVariableVariableValueField
-
     /// Initializer for a RoleVariable.
     ///
     /// - Parameters:
+    ///   - variableValue: 
     ///   - type: Role object type.
     ///     
     ///   - variableType: The variable type used
     ///     by the object.
     ///     
-    ///   - variableValue: 
-    public init(type: RoleVariableTypeField, variableType: RoleVariableVariableTypeField, variableValue: RoleVariableVariableValueField) {
+    public init(variableValue: RoleVariableVariableValueField, type: RoleVariableTypeField = RoleVariableTypeField.variable, variableType: RoleVariableVariableTypeField = RoleVariableVariableTypeField.collaboratorRole) {
+        self.variableValue = variableValue
         self.type = type
         self.variableType = variableType
-        self.variableValue = variableValue
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        variableValue = try container.decode(RoleVariableVariableValueField.self, forKey: .variableValue)
         type = try container.decode(RoleVariableTypeField.self, forKey: .type)
         variableType = try container.decode(RoleVariableVariableTypeField.self, forKey: .variableType)
-        variableValue = try container.decode(RoleVariableVariableValueField.self, forKey: .variableValue)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(variableValue, forKey: .variableValue)
         try container.encode(type, forKey: .type)
         try container.encode(variableType, forKey: .variableType)
-        try container.encode(variableValue, forKey: .variableValue)
     }
 
 }

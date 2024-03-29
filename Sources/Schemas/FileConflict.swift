@@ -12,17 +12,17 @@ public class FileConflict: FileMini {
     ///     and copying the ID from the URL. For example,
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
-    ///   - type: `file`
     ///   - etag: The HTTP `etag` of this file. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the file if (no) changes have happened.
+    ///   - type: `file`
     ///   - sequenceId: 
     ///   - name: The name of the file
     ///   - sha1: The SHA1 hash of the file. This can be used to compare the contents
     ///     of a file on Box with a local file.
     ///   - fileVersion: 
-    public override init(id: String, type: FileBaseTypeField, etag: String? = nil, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil) {
-        super.init(id: id, type: type, etag: etag, sequenceId: sequenceId, name: name, sha1: sha1, fileVersion: fileVersion)
+    public override init(id: String, etag: String? = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil) {
+        super.init(id: id, etag: etag, type: type, sequenceId: sequenceId, name: name, sha1: sha1, fileVersion: fileVersion)
     }
 
     required public init(from decoder: Decoder) throws {

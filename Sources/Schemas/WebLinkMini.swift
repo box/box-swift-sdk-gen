@@ -30,7 +30,7 @@ public class WebLinkMini: WebLinkBase {
     ///   - url: The URL this web link points to
     ///   - sequenceId: 
     ///   - name: The name of the web link
-    public init(id: String, type: WebLinkBaseTypeField, etag: String? = nil, url: String? = nil, sequenceId: String? = nil, name: String? = nil) {
+    public init(id: String, type: WebLinkBaseTypeField = WebLinkBaseTypeField.webLink, etag: String? = nil, url: String? = nil, sequenceId: String? = nil, name: String? = nil) {
         self.url = url
         self.sequenceId = sequenceId
         self.name = name

@@ -21,7 +21,7 @@ public class GroupMini: GroupBase {
     ///   - type: `group`
     ///   - name: The name of the group
     ///   - groupType: The type of the group.
-    public init(id: String, type: GroupBaseTypeField, name: String? = nil, groupType: GroupMiniGroupTypeField? = nil) {
+    public init(id: String, type: GroupBaseTypeField = GroupBaseTypeField.group, name: String? = nil, groupType: GroupMiniGroupTypeField? = nil) {
         self.name = name
         self.groupType = groupType
 

@@ -28,7 +28,7 @@ public class FileVersionFull: FileVersion {
     ///   - purgedAt: When the file version object will be permanently deleted.
     ///   - uploaderDisplayName: 
     ///   - versionNumber: The version number of this file version
-    public init(id: String, type: FileVersionBaseTypeField, sha1: String? = nil, name: String? = nil, size: Int64? = nil, createdAt: String? = nil, modifiedAt: String? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, trashedBy: UserMini? = nil, restoredAt: String? = nil, restoredBy: UserMini? = nil, purgedAt: String? = nil, uploaderDisplayName: String? = nil, versionNumber: String? = nil) {
+    public init(id: String, type: FileVersionBaseTypeField = FileVersionBaseTypeField.fileVersion, sha1: String? = nil, name: String? = nil, size: Int64? = nil, createdAt: String? = nil, modifiedAt: String? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, trashedBy: UserMini? = nil, restoredAt: String? = nil, restoredBy: UserMini? = nil, purgedAt: String? = nil, uploaderDisplayName: String? = nil, versionNumber: String? = nil) {
         self.versionNumber = versionNumber
 
         super.init(id: id, type: type, sha1: sha1, name: name, size: size, createdAt: createdAt, modifiedAt: modifiedAt, modifiedBy: modifiedBy, trashedAt: trashedAt, trashedBy: trashedBy, restoredAt: restoredAt, restoredBy: restoredBy, purgedAt: purgedAt, uploaderDisplayName: uploaderDisplayName)

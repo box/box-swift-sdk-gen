@@ -18,7 +18,7 @@ public class RetentionPolicyAssignmentBase: Codable {
     /// - Parameters:
     ///   - id: The unique identifier that represents a file version.
     ///   - type: `retention_policy_assignment`
-    public init(id: String, type: RetentionPolicyAssignmentBaseTypeField) {
+    public init(id: String, type: RetentionPolicyAssignmentBaseTypeField = RetentionPolicyAssignmentBaseTypeField.retentionPolicyAssignment) {
         self.id = id
         self.type = type
     }

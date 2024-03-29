@@ -134,7 +134,7 @@ See the endpoint docs at
 
 <!-- sample post_sign_requests -->
 ```
-try await client.signRequests.createSignRequest(requestBody: SignRequestCreateRequest(signers: [SignRequestCreateSigner(email: signer1Email, signerGroupId: "user"), SignRequestCreateSigner(email: signer2Email, signerGroupId: "user")], parentFolder: FolderMini(id: destinationFolder.id, type: FolderBaseTypeField.folder), sourceFiles: [FileBase(id: fileToSign.id, type: FileBaseTypeField.file)]))
+try await client.signRequests.createSignRequest(requestBody: SignRequestCreateRequest(signers: [SignRequestCreateSigner(email: signer1Email, signerGroupId: "user"), SignRequestCreateSigner(email: signer2Email, signerGroupId: "user")], parentFolder: FolderMini(id: destinationFolder.id), sourceFiles: [FileBase(id: fileToSign.id)]))
 ```
 
 ### Arguments

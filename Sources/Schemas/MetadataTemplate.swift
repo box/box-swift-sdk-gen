@@ -68,7 +68,7 @@ public class MetadataTemplate: Codable {
     ///     field can be a regular text field, date field, number field, as well as a
     ///     single or multi-select list.
     ///   - copyInstanceOnItemCopy: Whether or not to include the metadata when a file or folder is copied.
-    public init(id: String, type: MetadataTemplateTypeField, scope: String? = nil, templateKey: String? = nil, displayName: String? = nil, hidden: Bool? = nil, fields: [MetadataTemplateFieldsField]? = nil, copyInstanceOnItemCopy: Bool? = nil) {
+    public init(id: String, type: MetadataTemplateTypeField = MetadataTemplateTypeField.metadataTemplate, scope: String? = nil, templateKey: String? = nil, displayName: String? = nil, hidden: Bool? = nil, fields: [MetadataTemplateFieldsField]? = nil, copyInstanceOnItemCopy: Bool? = nil) {
         self.id = id
         self.type = type
         self.scope = scope

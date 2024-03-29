@@ -18,7 +18,7 @@ public class StoragePolicyMini: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this storage policy
     ///   - type: `storage_policy`
-    public init(id: String, type: StoragePolicyMiniTypeField) {
+    public init(id: String, type: StoragePolicyMiniTypeField = StoragePolicyMiniTypeField.storagePolicy) {
         self.id = id
         self.type = type
     }

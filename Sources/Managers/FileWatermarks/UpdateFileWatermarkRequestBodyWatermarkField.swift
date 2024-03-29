@@ -16,7 +16,7 @@ public class UpdateFileWatermarkRequestBodyWatermarkField: Codable {
     ///   - imprint: The type of watermark to apply.
     ///     
     ///     Currently only supports one option.
-    public init(imprint: UpdateFileWatermarkRequestBodyWatermarkImprintField) {
+    public init(imprint: UpdateFileWatermarkRequestBodyWatermarkImprintField = UpdateFileWatermarkRequestBodyWatermarkImprintField.default_) {
         self.imprint = imprint
     }
 

@@ -75,7 +75,7 @@ public class MetadataCascadePolicy: Codable {
     ///     [list]: e://get-metadata-templates-enterprise
     ///     [file]: e://get-files-id-metadata
     ///     [folder]: e://get-folders-id-metadata
-    public init(id: String, type: MetadataCascadePolicyTypeField, ownerEnterprise: MetadataCascadePolicyOwnerEnterpriseField? = nil, parent: MetadataCascadePolicyParentField? = nil, scope: String? = nil, templateKey: String? = nil) {
+    public init(id: String, type: MetadataCascadePolicyTypeField = MetadataCascadePolicyTypeField.metadataCascadePolicy, ownerEnterprise: MetadataCascadePolicyOwnerEnterpriseField? = nil, parent: MetadataCascadePolicyParentField? = nil, scope: String? = nil, templateKey: String? = nil) {
         self.id = id
         self.type = type
         self.ownerEnterprise = ownerEnterprise

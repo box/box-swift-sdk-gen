@@ -4,7 +4,6 @@ import Foundation
 public class TrashFileRestored: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
-        case type
         case sequenceId = "sequence_id"
         case sha1
         case description
@@ -16,6 +15,7 @@ public class TrashFileRestored: Codable {
         case ownedBy = "owned_by"
         case itemStatus = "item_status"
         case etag
+        case type
         case name
         case fileVersion = "file_version"
         case trashedAt = "trashed_at"
@@ -35,9 +35,6 @@ public class TrashFileRestored: Codable {
     /// for the URL `https://*.app.box.com/files/123`
     /// the `file_id` is `123`.
     public let id: String
-
-    /// `file`
-    public let type: TrashFileRestoredTypeField
 
     public let sequenceId: String
 
@@ -75,6 +72,9 @@ public class TrashFileRestored: Codable {
     /// endpoints in the `If-Match` and `If-None-Match` headers to only
     /// perform changes on the file if (no) changes have happened.
     public let etag: String?
+
+    /// `file`
+    public let type: TrashFileRestoredTypeField
 
     /// The name of the file
     public let name: String?
@@ -116,7 +116,6 @@ public class TrashFileRestored: Codable {
     ///     and copying the ID from the URL. For example,
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
-    ///   - type: `file`
     ///   - sequenceId: 
     ///   - sha1: The SHA1 hash of the file. This can be used to compare the contents
     ///     of a file on Box with a local file.
@@ -136,6 +135,7 @@ public class TrashFileRestored: Codable {
     ///   - etag: The HTTP `etag` of this file. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the file if (no) changes have happened.
+    ///   - type: `file`
     ///   - name: The name of the file
     ///   - fileVersion: 
     ///   - trashedAt: The time at which this file was put in the
@@ -151,9 +151,8 @@ public class TrashFileRestored: Codable {
     ///     be `null` if a file had been trashed, even though the original shared
     ///     link does become active again.
     ///   - parent: 
-    public init(id: String, type: TrashFileRestoredTypeField, sequenceId: String, sha1: String, description: String, size: Int64, pathCollection: TrashFileRestoredPathCollectionField, createdAt: String, modifiedAt: String, modifiedBy: UserMini, ownedBy: UserMini, itemStatus: TrashFileRestoredItemStatusField, etag: String? = nil, name: String? = nil, fileVersion: FileVersionMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, createdBy: UserMini? = nil, sharedLink: String? = nil, parent: FolderMini? = nil) {
+    public init(id: String, sequenceId: String, sha1: String, description: String, size: Int64, pathCollection: TrashFileRestoredPathCollectionField, createdAt: String, modifiedAt: String, modifiedBy: UserMini, ownedBy: UserMini, itemStatus: TrashFileRestoredItemStatusField, etag: String? = nil, type: TrashFileRestoredTypeField = TrashFileRestoredTypeField.file, name: String? = nil, fileVersion: FileVersionMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, createdBy: UserMini? = nil, sharedLink: String? = nil, parent: FolderMini? = nil) {
         self.id = id
-        self.type = type
         self.sequenceId = sequenceId
         self.sha1 = sha1
         self.description = description
@@ -165,6 +164,7 @@ public class TrashFileRestored: Codable {
         self.ownedBy = ownedBy
         self.itemStatus = itemStatus
         self.etag = etag
+        self.type = type
         self.name = name
         self.fileVersion = fileVersion
         self.trashedAt = trashedAt
@@ -179,7 +179,6 @@ public class TrashFileRestored: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
-        type = try container.decode(TrashFileRestoredTypeField.self, forKey: .type)
         sequenceId = try container.decode(String.self, forKey: .sequenceId)
         sha1 = try container.decode(String.self, forKey: .sha1)
         description = try container.decode(String.self, forKey: .description)
@@ -191,6 +190,7 @@ public class TrashFileRestored: Codable {
         ownedBy = try container.decode(UserMini.self, forKey: .ownedBy)
         itemStatus = try container.decode(TrashFileRestoredItemStatusField.self, forKey: .itemStatus)
         etag = try container.decodeIfPresent(String.self, forKey: .etag)
+        type = try container.decode(TrashFileRestoredTypeField.self, forKey: .type)
         name = try container.decodeIfPresent(String.self, forKey: .name)
         fileVersion = try container.decodeIfPresent(FileVersionMini.self, forKey: .fileVersion)
         trashedAt = try container.decodeIfPresent(String.self, forKey: .trashedAt)
@@ -205,7 +205,6 @@ public class TrashFileRestored: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
-        try container.encode(type, forKey: .type)
         try container.encode(sequenceId, forKey: .sequenceId)
         try container.encode(sha1, forKey: .sha1)
         try container.encode(description, forKey: .description)
@@ -217,6 +216,7 @@ public class TrashFileRestored: Codable {
         try container.encode(ownedBy, forKey: .ownedBy)
         try container.encode(itemStatus, forKey: .itemStatus)
         try container.encodeIfPresent(etag, forKey: .etag)
+        try container.encode(type, forKey: .type)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
         try container.encodeIfPresent(trashedAt, forKey: .trashedAt)
