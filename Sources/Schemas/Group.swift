@@ -23,7 +23,7 @@ public class Group: GroupMini {
     ///   - groupType: The type of the group.
     ///   - createdAt: When the group object was created
     ///   - modifiedAt: When the group object was last modified
-    public init(id: String, type: GroupBaseTypeField, name: String? = nil, groupType: GroupMiniGroupTypeField? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
+    public init(id: String, type: GroupBaseTypeField = GroupBaseTypeField.group, name: String? = nil, groupType: GroupMiniGroupTypeField? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
 

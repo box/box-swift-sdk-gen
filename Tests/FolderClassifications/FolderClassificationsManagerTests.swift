@@ -13,7 +13,7 @@ class FolderClassificationsManagerTests: XCTestCase {
         let classifications: [ClassificationTemplateFieldsOptionsField] = classificationTemplate.fields[0].options
         let currentNumberOfClassifications: Int = classifications.count
         if currentNumberOfClassifications == 1 {
-            let classificationTemplateWithNewClassification: ClassificationTemplate = try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(op: AddClassificationRequestBodyOpField.addEnumOption, fieldKey: AddClassificationRequestBodyFieldKeyField.boxSecurityClassificationKey, data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(classificationDefinition: "Other description", colorId: 4))))])
+            let classificationTemplateWithNewClassification: ClassificationTemplate = try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(classificationDefinition: "Other description", colorId: 4))))])
             return classificationTemplateWithNewClassification.fields[0].options[1]
         }
 
@@ -30,7 +30,7 @@ class FolderClassificationsManagerTests: XCTestCase {
         let folderClassification: Classification = try await client.folderClassifications.getClassificationOnFolder(folderId: folder.id)
         XCTAssertTrue(folderClassification.boxSecurityClassificationKey == classification.key)
         let secondClassification: ClassificationTemplateFieldsOptionsField = try await getOrCreateSecondClassification(classificationTemplate: classificationTemplate)
-        let updatedFolderClassification: Classification = try await client.folderClassifications.updateClassificationOnFolder(folderId: folder.id, requestBody: [UpdateClassificationOnFolderRequestBody(op: UpdateClassificationOnFolderRequestBodyOpField.replace, path: UpdateClassificationOnFolderRequestBodyPathField.boxSecurityClassificationKey, value: secondClassification.key)])
+        let updatedFolderClassification: Classification = try await client.folderClassifications.updateClassificationOnFolder(folderId: folder.id, requestBody: [UpdateClassificationOnFolderRequestBody(value: secondClassification.key)])
         XCTAssertTrue(updatedFolderClassification.boxSecurityClassificationKey == secondClassification.key)
         try await client.folderClassifications.deleteClassificationFromFolder(folderId: folder.id)
         await XCTAssertThrowsErrorAsync(try await client.folderClassifications.getClassificationOnFolder(folderId: folder.id))

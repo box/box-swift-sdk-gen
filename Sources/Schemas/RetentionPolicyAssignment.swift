@@ -61,7 +61,7 @@ public class RetentionPolicyAssignment: Codable {
     ///   - startDateField: The date the retention policy assignment begins.
     ///     If the `assigned_to` type is `metadata_template`,
     ///     this field can be a date field's metadata attribute key id.
-    public init(id: String, type: RetentionPolicyAssignmentTypeField, retentionPolicy: RetentionPolicyMini? = nil, assignedTo: RetentionPolicyAssignmentAssignedToField? = nil, filterFields: [RetentionPolicyAssignmentFilterFieldsField]? = nil, assignedBy: UserMini? = nil, assignedAt: String? = nil, startDateField: String? = nil) {
+    public init(id: String, type: RetentionPolicyAssignmentTypeField = RetentionPolicyAssignmentTypeField.retentionPolicyAssignment, retentionPolicy: RetentionPolicyMini? = nil, assignedTo: RetentionPolicyAssignmentAssignedToField? = nil, filterFields: [RetentionPolicyAssignmentFilterFieldsField]? = nil, assignedBy: UserMini? = nil, assignedAt: String? = nil, startDateField: String? = nil) {
         self.id = id
         self.type = type
         self.retentionPolicy = retentionPolicy

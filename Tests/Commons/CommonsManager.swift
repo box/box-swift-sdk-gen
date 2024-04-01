@@ -64,7 +64,7 @@ public class CommonsManager {
         let classifications: [ClassificationTemplateFieldsOptionsField] = classificationTemplate.fields[0].options
         let currentNumberOfClassifications: Int = classifications.count
         if currentNumberOfClassifications == 0 {
-            let classificationTemplateWithNewClassification: ClassificationTemplate = try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(op: AddClassificationRequestBodyOpField.addEnumOption, fieldKey: AddClassificationRequestBodyFieldKeyField.boxSecurityClassificationKey, data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(classificationDefinition: "Some description", colorId: 3))))])
+            let classificationTemplateWithNewClassification: ClassificationTemplate = try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(classificationDefinition: "Some description", colorId: 3))))])
             return classificationTemplateWithNewClassification.fields[0].options[0]
         }
 
@@ -76,7 +76,7 @@ public class CommonsManager {
         do {
             return try await client.classifications.getClassificationTemplate()
         } catch {
-            return try await client.classifications.createClassificationTemplate(requestBody: CreateClassificationTemplateRequestBody(scope: CreateClassificationTemplateRequestBodyScopeField.enterprise, templateKey: CreateClassificationTemplateRequestBodyTemplateKeyField.securityClassification6VmVochwUWo, displayName: CreateClassificationTemplateRequestBodyDisplayNameField.classification, fields: [CreateClassificationTemplateRequestBodyFieldsField(type: CreateClassificationTemplateRequestBodyFieldsTypeField.enum_, key: CreateClassificationTemplateRequestBodyFieldsKeyField.boxSecurityClassificationKey, displayName: CreateClassificationTemplateRequestBodyFieldsDisplayNameField.classification, options: [])]))
+            return try await client.classifications.createClassificationTemplate(requestBody: CreateClassificationTemplateRequestBody(fields: [CreateClassificationTemplateRequestBodyFieldsField(options: [])]))
         }
 
     }
@@ -85,7 +85,7 @@ public class CommonsManager {
         let barriers: ShieldInformationBarriers = try await client.shieldInformationBarriers.getShieldInformationBarriers()
         let numberOfBarriers: Int = barriers.entries!.count
         if numberOfBarriers == 0 {
-            return try await client.shieldInformationBarriers.createShieldInformationBarrier(requestBody: CreateShieldInformationBarrierRequestBody(enterprise: EnterpriseBase(id: enterpriseId, type: EnterpriseBaseTypeField.enterprise)))
+            return try await client.shieldInformationBarriers.createShieldInformationBarrier(requestBody: CreateShieldInformationBarrierRequestBody(enterprise: EnterpriseBase(id: enterpriseId)))
         }
 
         return barriers.entries![numberOfBarriers - 1]

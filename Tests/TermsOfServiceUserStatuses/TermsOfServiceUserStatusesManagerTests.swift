@@ -9,7 +9,7 @@ class TermsOfServiceUserStatusesManagerTests: XCTestCase {
         let client: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: adminUserId)
         let tos: TermsOfService = try await CommonsManager().getOrCreateTermsOfServices()
         let user: UserFull = try await client.users.createUser(requestBody: CreateUserRequestBody(name: Utils.getUUID(), login: "\(Utils.getUUID())\("@boxdemo.com")", isPlatformAccessOnly: true))
-        let createdTosUserStatus: TermsOfServiceUserStatus = try await client.termsOfServiceUserStatuses.createTermsOfServiceStatusForUser(requestBody: CreateTermsOfServiceStatusForUserRequestBody(tos: CreateTermsOfServiceStatusForUserRequestBodyTosField(type: CreateTermsOfServiceStatusForUserRequestBodyTosTypeField.termsOfService, id: tos.id), user: CreateTermsOfServiceStatusForUserRequestBodyUserField(type: CreateTermsOfServiceStatusForUserRequestBodyUserTypeField.user, id: user.id), isAccepted: false))
+        let createdTosUserStatus: TermsOfServiceUserStatus = try await client.termsOfServiceUserStatuses.createTermsOfServiceStatusForUser(requestBody: CreateTermsOfServiceStatusForUserRequestBody(tos: CreateTermsOfServiceStatusForUserRequestBodyTosField(id: tos.id), user: CreateTermsOfServiceStatusForUserRequestBodyUserField(id: user.id), isAccepted: false))
         XCTAssertTrue(createdTosUserStatus.isAccepted == false)
         XCTAssertTrue(Utils.Strings.toString(value: createdTosUserStatus.type) == "terms_of_service_user_status")
         XCTAssertTrue(Utils.Strings.toString(value: createdTosUserStatus.tos!.type) == "terms_of_service")

@@ -135,7 +135,7 @@ public class RetentionPolicy: RetentionPolicyMini {
     ///     the retention duration is about to end.
     ///   - customNotificationRecipients: A list of users notified when the retention policy duration is about to end.
     ///   - assignmentCounts: Counts the retention policy assignments for each item type.
-    public init(id: String, type: RetentionPolicyBaseTypeField, policyName: String? = nil, retentionLength: String? = nil, dispositionAction: RetentionPolicyMiniDispositionActionField? = nil, description: String? = nil, policyType: RetentionPolicyPolicyTypeField? = nil, retentionType: RetentionPolicyRetentionTypeField? = nil, status: RetentionPolicyStatusField? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, modifiedAt: String? = nil, canOwnerExtendRetention: Bool? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserMini]? = nil, assignmentCounts: RetentionPolicyAssignmentCountsField? = nil) {
+    public init(id: String, type: RetentionPolicyBaseTypeField = RetentionPolicyBaseTypeField.retentionPolicy, policyName: String? = nil, retentionLength: String? = nil, dispositionAction: RetentionPolicyMiniDispositionActionField? = nil, description: String? = nil, policyType: RetentionPolicyPolicyTypeField? = nil, retentionType: RetentionPolicyRetentionTypeField? = nil, status: RetentionPolicyStatusField? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, modifiedAt: String? = nil, canOwnerExtendRetention: Bool? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserMini]? = nil, assignmentCounts: RetentionPolicyAssignmentCountsField? = nil) {
         self.description = description
         self.policyType = policyType
         self.retentionType = retentionType

@@ -95,7 +95,7 @@ See the endpoint docs at
 
 <!-- sample put_folders_id_metadata_enterprise_securityClassification-6VMVochwUWo -->
 ```
-try await client.folderClassifications.updateClassificationOnFolder(folderId: folder.id, requestBody: [UpdateClassificationOnFolderRequestBody(op: UpdateClassificationOnFolderRequestBodyOpField.replace, path: UpdateClassificationOnFolderRequestBodyPathField.boxSecurityClassificationKey, value: secondClassification.key)])
+try await client.folderClassifications.updateClassificationOnFolder(folderId: folder.id, requestBody: [UpdateClassificationOnFolderRequestBody(value: secondClassification.key)])
 ```
 
 ### Arguments

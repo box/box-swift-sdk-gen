@@ -18,7 +18,7 @@ public class RetentionPolicyBase: Codable {
     /// - Parameters:
     ///   - id: The unique identifier that represents a retention policy.
     ///   - type: `retention_policy`
-    public init(id: String, type: RetentionPolicyBaseTypeField) {
+    public init(id: String, type: RetentionPolicyBaseTypeField = RetentionPolicyBaseTypeField.retentionPolicy) {
         self.id = id
         self.type = type
     }

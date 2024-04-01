@@ -86,7 +86,7 @@ public class User: UserMini {
     ///     notifications are sent. When it's confirmed, this will be
     ///     the email address to which notifications are sent instead of
     ///     to the primary email address.
-    public init(id: String, type: UserBaseTypeField, name: String? = nil, login: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, language: String? = nil, timezone: String? = nil, spaceAmount: Int64? = nil, spaceUsed: Int64? = nil, maxUploadSize: Int64? = nil, status: UserStatusField? = nil, jobTitle: String? = nil, phone: String? = nil, address: String? = nil, avatarUrl: String? = nil, notificationEmail: UserNotificationEmailField? = nil) {
+    public init(id: String, type: UserBaseTypeField = UserBaseTypeField.user, name: String? = nil, login: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, language: String? = nil, timezone: String? = nil, spaceAmount: Int64? = nil, spaceUsed: Int64? = nil, maxUploadSize: Int64? = nil, status: UserStatusField? = nil, jobTitle: String? = nil, phone: String? = nil, address: String? = nil, avatarUrl: String? = nil, notificationEmail: UserNotificationEmailField? = nil) {
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
         self.language = language

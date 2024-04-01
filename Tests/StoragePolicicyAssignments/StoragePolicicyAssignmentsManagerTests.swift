@@ -18,7 +18,7 @@ class StoragePolicicyAssignmentsManagerTests: XCTestCase {
 
         }
 
-        let storagePolicyAssignment: StoragePolicyAssignment = try await client.storagePolicyAssignments.createStoragePolicyAssignment(requestBody: CreateStoragePolicyAssignmentRequestBody(storagePolicy: CreateStoragePolicyAssignmentRequestBodyStoragePolicyField(type: CreateStoragePolicyAssignmentRequestBodyStoragePolicyTypeField.storagePolicy, id: policyId), assignedTo: CreateStoragePolicyAssignmentRequestBodyAssignedToField(type: CreateStoragePolicyAssignmentRequestBodyAssignedToTypeField.user, id: userId)))
+        let storagePolicyAssignment: StoragePolicyAssignment = try await client.storagePolicyAssignments.createStoragePolicyAssignment(requestBody: CreateStoragePolicyAssignmentRequestBody(storagePolicy: CreateStoragePolicyAssignmentRequestBodyStoragePolicyField(id: policyId), assignedTo: CreateStoragePolicyAssignmentRequestBodyAssignedToField(type: CreateStoragePolicyAssignmentRequestBodyAssignedToTypeField.user, id: userId)))
         return storagePolicyAssignment
     }
 
@@ -35,7 +35,7 @@ class StoragePolicicyAssignmentsManagerTests: XCTestCase {
         XCTAssertTrue(storagePolicyAssignment.assignedTo!.id == newUser.id)
         let getStoragePolicyAssignment: StoragePolicyAssignment = try await client.storagePolicyAssignments.getStoragePolicyAssignmentById(storagePolicyAssignmentId: storagePolicyAssignment.id)
         XCTAssertTrue(getStoragePolicyAssignment.id == storagePolicyAssignment.id)
-        let updatedStoragePolicyAssignment: StoragePolicyAssignment = try await client.storagePolicyAssignments.updateStoragePolicyAssignmentById(storagePolicyAssignmentId: storagePolicyAssignment.id, requestBody: UpdateStoragePolicyAssignmentByIdRequestBody(storagePolicy: UpdateStoragePolicyAssignmentByIdRequestBodyStoragePolicyField(type: UpdateStoragePolicyAssignmentByIdRequestBodyStoragePolicyTypeField.storagePolicy, id: storagePolicy2.id)))
+        let updatedStoragePolicyAssignment: StoragePolicyAssignment = try await client.storagePolicyAssignments.updateStoragePolicyAssignmentById(storagePolicyAssignmentId: storagePolicyAssignment.id, requestBody: UpdateStoragePolicyAssignmentByIdRequestBody(storagePolicy: UpdateStoragePolicyAssignmentByIdRequestBodyStoragePolicyField(id: storagePolicy2.id)))
         XCTAssertTrue(updatedStoragePolicyAssignment.storagePolicy!.id == storagePolicy2.id)
         try await client.storagePolicyAssignments.deleteStoragePolicyAssignmentById(storagePolicyAssignmentId: storagePolicyAssignment.id)
         try await client.users.deleteUserById(userId: newUser.id)

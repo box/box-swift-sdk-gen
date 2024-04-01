@@ -93,7 +93,7 @@ public class Collaboration: Codable {
     ///   - createdAt: When the collaboration object was created.
     ///   - modifiedAt: When the collaboration object was last modified.
     ///   - acceptanceRequirementsStatus: 
-    public init(id: String, type: CollaborationTypeField, item: FileOrFolderOrWebLink? = nil, accessibleBy: GroupMiniOrUserCollaborations? = nil, inviteEmail: String? = nil, role: CollaborationRoleField? = nil, expiresAt: String? = nil, isAccessOnly: Bool? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: String? = nil, createdBy: UserCollaborations? = nil, createdAt: String? = nil, modifiedAt: String? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
+    public init(id: String, type: CollaborationTypeField = CollaborationTypeField.collaboration, item: FileOrFolderOrWebLink? = nil, accessibleBy: GroupMiniOrUserCollaborations? = nil, inviteEmail: String? = nil, role: CollaborationRoleField? = nil, expiresAt: String? = nil, isAccessOnly: Bool? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: String? = nil, createdBy: UserCollaborations? = nil, createdAt: String? = nil, modifiedAt: String? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
         self.id = id
         self.type = type
         self.item = item

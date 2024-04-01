@@ -81,7 +81,7 @@ public class WebLink: WebLinkMini {
     ///   - itemStatus: Whether this item is deleted or not. Values include `active`,
     ///     `trashed` if the file has been moved to the trash, and `deleted` if
     ///     the file has been permanently deleted
-    public init(id: String, type: WebLinkBaseTypeField, etag: String? = nil, url: String? = nil, sequenceId: String? = nil, name: String? = nil, parent: FolderMini? = nil, description: String? = nil, pathCollection: WebLinkPathCollectionField? = nil, createdAt: String? = nil, modifiedAt: String? = nil, trashedAt: String? = nil, purgedAt: String? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: WebLinkSharedLinkField? = nil, itemStatus: WebLinkItemStatusField? = nil) {
+    public init(id: String, type: WebLinkBaseTypeField = WebLinkBaseTypeField.webLink, etag: String? = nil, url: String? = nil, sequenceId: String? = nil, name: String? = nil, parent: FolderMini? = nil, description: String? = nil, pathCollection: WebLinkPathCollectionField? = nil, createdAt: String? = nil, modifiedAt: String? = nil, trashedAt: String? = nil, purgedAt: String? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: WebLinkSharedLinkField? = nil, itemStatus: WebLinkItemStatusField? = nil) {
         self.parent = parent
         self.description = description
         self.pathCollection = pathCollection

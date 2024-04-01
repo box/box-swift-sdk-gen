@@ -2,36 +2,36 @@ import Foundation
 
 public class CreateTermsOfServiceStatusForUserRequestBodyUserField: Codable {
     private enum CodingKeys: String, CodingKey {
-        case type
         case id
+        case type
     }
-
-    /// The type of object.
-    public let type: CreateTermsOfServiceStatusForUserRequestBodyUserTypeField
 
     /// The ID of user
     public let id: String
 
+    /// The type of object.
+    public let type: CreateTermsOfServiceStatusForUserRequestBodyUserTypeField
+
     /// Initializer for a CreateTermsOfServiceStatusForUserRequestBodyUserField.
     ///
     /// - Parameters:
-    ///   - type: The type of object.
     ///   - id: The ID of user
-    public init(type: CreateTermsOfServiceStatusForUserRequestBodyUserTypeField, id: String) {
-        self.type = type
+    ///   - type: The type of object.
+    public init(id: String, type: CreateTermsOfServiceStatusForUserRequestBodyUserTypeField = CreateTermsOfServiceStatusForUserRequestBodyUserTypeField.user) {
         self.id = id
+        self.type = type
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decode(CreateTermsOfServiceStatusForUserRequestBodyUserTypeField.self, forKey: .type)
         id = try container.decode(String.self, forKey: .id)
+        type = try container.decode(CreateTermsOfServiceStatusForUserRequestBodyUserTypeField.self, forKey: .type)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
+        try container.encode(type, forKey: .type)
     }
 
 }

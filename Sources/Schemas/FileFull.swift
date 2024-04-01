@@ -94,10 +94,10 @@ public class FileFull: File {
     ///     and copying the ID from the URL. For example,
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
-    ///   - type: `file`
     ///   - etag: The HTTP `etag` of this file. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the file if (no) changes have happened.
+    ///   - type: `file`
     ///   - sequenceId: 
     ///   - name: The name of the file
     ///   - sha1: The SHA1 hash of the file. This can be used to compare the contents
@@ -153,7 +153,7 @@ public class FileFull: File {
     ///   - dispositionAt: The retention expiration timestamp for the given file
     ///   - sharedLinkPermissionOptions: A list of the types of roles that user can be invited at
     ///     when sharing this file.
-    public init(id: String, type: FileBaseTypeField, etag: String? = nil, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: String? = nil, modifiedAt: String? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: FolderMini? = nil, itemStatus: FileItemStatusField? = nil, versionNumber: String? = nil, commentCount: Int64? = nil, permissions: FileFullPermissionsField? = nil, tags: [String]? = nil, lock: FileFullLockField? = nil, extension_: String? = nil, isPackage: Bool? = nil, expiringEmbedLink: FileFullExpiringEmbedLinkField? = nil, watermarkInfo: FileFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, allowedInviteeRoles: [FileFullAllowedInviteeRolesField]? = nil, isExternallyOwned: Bool? = nil, hasCollaborations: Bool? = nil, metadata: FileFullMetadataField? = nil, expiresAt: String? = nil, representations: FileFullRepresentationsField? = nil, classification: FileFullClassificationField? = nil, uploaderDisplayName: String? = nil, dispositionAt: String? = nil, sharedLinkPermissionOptions: [FileFullSharedLinkPermissionOptionsField]? = nil) {
+    public init(id: String, etag: String? = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: String? = nil, modifiedAt: String? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: FolderMini? = nil, itemStatus: FileItemStatusField? = nil, versionNumber: String? = nil, commentCount: Int64? = nil, permissions: FileFullPermissionsField? = nil, tags: [String]? = nil, lock: FileFullLockField? = nil, extension_: String? = nil, isPackage: Bool? = nil, expiringEmbedLink: FileFullExpiringEmbedLinkField? = nil, watermarkInfo: FileFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, allowedInviteeRoles: [FileFullAllowedInviteeRolesField]? = nil, isExternallyOwned: Bool? = nil, hasCollaborations: Bool? = nil, metadata: FileFullMetadataField? = nil, expiresAt: String? = nil, representations: FileFullRepresentationsField? = nil, classification: FileFullClassificationField? = nil, uploaderDisplayName: String? = nil, dispositionAt: String? = nil, sharedLinkPermissionOptions: [FileFullSharedLinkPermissionOptionsField]? = nil) {
         self.versionNumber = versionNumber
         self.commentCount = commentCount
         self.permissions = permissions
@@ -175,7 +175,7 @@ public class FileFull: File {
         self.dispositionAt = dispositionAt
         self.sharedLinkPermissionOptions = sharedLinkPermissionOptions
 
-        super.init(id: id, type: type, etag: etag, sequenceId: sequenceId, name: name, sha1: sha1, fileVersion: fileVersion, description: description, size: size, pathCollection: pathCollection, createdAt: createdAt, modifiedAt: modifiedAt, trashedAt: trashedAt, purgedAt: purgedAt, contentCreatedAt: contentCreatedAt, contentModifiedAt: contentModifiedAt, createdBy: createdBy, modifiedBy: modifiedBy, ownedBy: ownedBy, sharedLink: sharedLink, parent: parent, itemStatus: itemStatus)
+        super.init(id: id, etag: etag, type: type, sequenceId: sequenceId, name: name, sha1: sha1, fileVersion: fileVersion, description: description, size: size, pathCollection: pathCollection, createdAt: createdAt, modifiedAt: modifiedAt, trashedAt: trashedAt, purgedAt: purgedAt, contentCreatedAt: contentCreatedAt, contentModifiedAt: contentModifiedAt, createdBy: createdBy, modifiedBy: modifiedBy, ownedBy: ownedBy, sharedLink: sharedLink, parent: parent, itemStatus: itemStatus)
     }
 
     required public init(from decoder: Decoder) throws {

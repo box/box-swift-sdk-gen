@@ -77,10 +77,10 @@ public class FolderFull: Folder {
     ///     and copying the ID from the URL. For example,
     ///     for the URL `https://*.app.box.com/folders/123`
     ///     the `folder_id` is `123`.
-    ///   - type: `folder`
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
+    ///   - type: `folder`
     ///   - sequenceId: 
     ///   - name: The name of the folder.
     ///   - createdAt: The date and time when the folder was created. This value may
@@ -140,7 +140,7 @@ public class FolderFull: Folder {
     ///     It also restricts non-owners from inviting new
     ///     collaborators.
     ///   - classification: 
-    public init(id: String, type: FolderBaseTypeField, etag: String? = nil, sequenceId: String? = nil, name: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FolderPathCollectionField? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, ownedBy: UserMini? = nil, sharedLink: FolderSharedLinkField? = nil, folderUploadEmail: FolderFolderUploadEmailField? = nil, parent: FolderMini? = nil, itemStatus: FolderItemStatusField? = nil, itemCollection: Items? = nil, syncState: FolderFullSyncStateField? = nil, hasCollaborations: Bool? = nil, permissions: FolderFullPermissionsField? = nil, tags: [String]? = nil, canNonOwnersInvite: Bool? = nil, isExternallyOwned: Bool? = nil, metadata: FolderFullMetadataField? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, allowedSharedLinkAccessLevels: [FolderFullAllowedSharedLinkAccessLevelsField]? = nil, allowedInviteeRoles: [FolderFullAllowedInviteeRolesField]? = nil, watermarkInfo: FolderFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, canNonOwnersViewCollaborators: Bool? = nil, classification: FolderFullClassificationField? = nil) {
+    public init(id: String, etag: String? = nil, type: FolderBaseTypeField = FolderBaseTypeField.folder, sequenceId: String? = nil, name: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FolderPathCollectionField? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, ownedBy: UserMini? = nil, sharedLink: FolderSharedLinkField? = nil, folderUploadEmail: FolderFolderUploadEmailField? = nil, parent: FolderMini? = nil, itemStatus: FolderItemStatusField? = nil, itemCollection: Items? = nil, syncState: FolderFullSyncStateField? = nil, hasCollaborations: Bool? = nil, permissions: FolderFullPermissionsField? = nil, tags: [String]? = nil, canNonOwnersInvite: Bool? = nil, isExternallyOwned: Bool? = nil, metadata: FolderFullMetadataField? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, allowedSharedLinkAccessLevels: [FolderFullAllowedSharedLinkAccessLevelsField]? = nil, allowedInviteeRoles: [FolderFullAllowedInviteeRolesField]? = nil, watermarkInfo: FolderFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, canNonOwnersViewCollaborators: Bool? = nil, classification: FolderFullClassificationField? = nil) {
         self.syncState = syncState
         self.hasCollaborations = hasCollaborations
         self.permissions = permissions
@@ -156,7 +156,7 @@ public class FolderFull: Folder {
         self.canNonOwnersViewCollaborators = canNonOwnersViewCollaborators
         self.classification = classification
 
-        super.init(id: id, type: type, etag: etag, sequenceId: sequenceId, name: name, createdAt: createdAt, modifiedAt: modifiedAt, description: description, size: size, pathCollection: pathCollection, createdBy: createdBy, modifiedBy: modifiedBy, trashedAt: trashedAt, purgedAt: purgedAt, contentCreatedAt: contentCreatedAt, contentModifiedAt: contentModifiedAt, ownedBy: ownedBy, sharedLink: sharedLink, folderUploadEmail: folderUploadEmail, parent: parent, itemStatus: itemStatus, itemCollection: itemCollection)
+        super.init(id: id, etag: etag, type: type, sequenceId: sequenceId, name: name, createdAt: createdAt, modifiedAt: modifiedAt, description: description, size: size, pathCollection: pathCollection, createdBy: createdBy, modifiedBy: modifiedBy, trashedAt: trashedAt, purgedAt: purgedAt, contentCreatedAt: contentCreatedAt, contentModifiedAt: contentModifiedAt, ownedBy: ownedBy, sharedLink: sharedLink, folderUploadEmail: folderUploadEmail, parent: parent, itemStatus: itemStatus, itemCollection: itemCollection)
     }
 
     required public init(from decoder: Decoder) throws {

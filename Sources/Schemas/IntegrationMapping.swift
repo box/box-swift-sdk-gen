@@ -4,9 +4,9 @@ import Foundation
 /// mapping object.
 public class IntegrationMapping: IntegrationMappingBase {
     private enum CodingKeys: String, CodingKey {
-        case type
         case partnerItem = "partner_item"
         case boxItem = "box_item"
+        case type
         case isManuallyCreated = "is_manually_created"
         case options
         case createdBy = "created_by"
@@ -15,15 +15,15 @@ public class IntegrationMapping: IntegrationMappingBase {
         case modifiedAt = "modified_at"
     }
 
-    /// Mapping type
-    public let type: IntegrationMappingTypeField
-
     /// Mapped item object for Slack
     public let partnerItem: IntegrationMappingPartnerItemSlack
 
     /// The Box folder, to which the object from the
     /// partner app domain (referenced in `partner_item_id`) is mapped
     public let boxItem: FolderMini
+
+    /// Mapping type
+    public let type: IntegrationMappingTypeField
 
     /// Identifies whether the mapping has
     /// been manually set
@@ -50,7 +50,6 @@ public class IntegrationMapping: IntegrationMappingBase {
     /// Initializer for a IntegrationMapping.
     ///
     /// - Parameters:
-    ///   - type: Mapping type
     ///   - partnerItem: Mapped item object for Slack
     ///   - boxItem: The Box folder, to which the object from the
     ///     partner app domain (referenced in `partner_item_id`) is mapped
@@ -61,6 +60,7 @@ public class IntegrationMapping: IntegrationMappingBase {
     ///     with which the mapping is associated.
     ///     Currently only supports Slack.
     ///     (part of the composite key together with `id`)
+    ///   - type: Mapping type
     ///   - isManuallyCreated: Identifies whether the mapping has
     ///     been manually set
     ///     (as opposed to being automatically created)
@@ -71,10 +71,10 @@ public class IntegrationMapping: IntegrationMappingBase {
     ///     last modified the integration mapping
     ///   - createdAt: When the integration mapping object was created
     ///   - modifiedAt: When the integration mapping object was last modified
-    public init(type: IntegrationMappingTypeField, partnerItem: IntegrationMappingPartnerItemSlack, boxItem: FolderMini, id: String? = nil, integrationType: IntegrationMappingBaseIntegrationTypeField? = nil, isManuallyCreated: Bool? = nil, options: IntegrationMappingSlackOptions? = nil, createdBy: UserIntegrationMappings? = nil, modifiedBy: UserIntegrationMappings? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
-        self.type = type
+    public init(partnerItem: IntegrationMappingPartnerItemSlack, boxItem: FolderMini, id: String? = nil, integrationType: IntegrationMappingBaseIntegrationTypeField? = nil, type: IntegrationMappingTypeField = IntegrationMappingTypeField.integrationMapping, isManuallyCreated: Bool? = nil, options: IntegrationMappingSlackOptions? = nil, createdBy: UserIntegrationMappings? = nil, modifiedBy: UserIntegrationMappings? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
         self.partnerItem = partnerItem
         self.boxItem = boxItem
+        self.type = type
         self.isManuallyCreated = isManuallyCreated
         self.options = options
         self.createdBy = createdBy
@@ -87,9 +87,9 @@ public class IntegrationMapping: IntegrationMappingBase {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decode(IntegrationMappingTypeField.self, forKey: .type)
         partnerItem = try container.decode(IntegrationMappingPartnerItemSlack.self, forKey: .partnerItem)
         boxItem = try container.decode(FolderMini.self, forKey: .boxItem)
+        type = try container.decode(IntegrationMappingTypeField.self, forKey: .type)
         isManuallyCreated = try container.decodeIfPresent(Bool.self, forKey: .isManuallyCreated)
         options = try container.decodeIfPresent(IntegrationMappingSlackOptions.self, forKey: .options)
         createdBy = try container.decodeIfPresent(UserIntegrationMappings.self, forKey: .createdBy)
@@ -102,9 +102,9 @@ public class IntegrationMapping: IntegrationMappingBase {
 
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(type, forKey: .type)
         try container.encode(partnerItem, forKey: .partnerItem)
         try container.encode(boxItem, forKey: .boxItem)
+        try container.encode(type, forKey: .type)
         try container.encodeIfPresent(isManuallyCreated, forKey: .isManuallyCreated)
         try container.encodeIfPresent(options, forKey: .options)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)

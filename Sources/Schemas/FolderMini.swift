@@ -23,17 +23,17 @@ public class FolderMini: FolderBase {
     ///     and copying the ID from the URL. For example,
     ///     for the URL `https://*.app.box.com/folders/123`
     ///     the `folder_id` is `123`.
-    ///   - type: `folder`
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
+    ///   - type: `folder`
     ///   - sequenceId: 
     ///   - name: The name of the folder.
-    public init(id: String, type: FolderBaseTypeField, etag: String? = nil, sequenceId: String? = nil, name: String? = nil) {
+    public init(id: String, etag: String? = nil, type: FolderBaseTypeField = FolderBaseTypeField.folder, sequenceId: String? = nil, name: String? = nil) {
         self.sequenceId = sequenceId
         self.name = name
 
-        super.init(id: id, type: type, etag: etag)
+        super.init(id: id, etag: etag, type: type)
     }
 
     required public init(from decoder: Decoder) throws {

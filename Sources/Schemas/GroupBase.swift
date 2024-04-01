@@ -18,7 +18,7 @@ public class GroupBase: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this object
     ///   - type: `group`
-    public init(id: String, type: GroupBaseTypeField) {
+    public init(id: String, type: GroupBaseTypeField = GroupBaseTypeField.group) {
         self.id = id
         self.type = type
     }

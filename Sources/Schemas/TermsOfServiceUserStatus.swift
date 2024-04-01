@@ -41,7 +41,7 @@ public class TermsOfServiceUserStatus: Codable {
     ///   - isAccepted: If the user has accepted the terms of services
     ///   - createdAt: When the legal item was created
     ///   - modifiedAt: When the legal item was modified.
-    public init(id: String, type: TermsOfServiceUserStatusTypeField, tos: TermsOfServiceBase? = nil, user: UserMini? = nil, isAccepted: Bool? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
+    public init(id: String, type: TermsOfServiceUserStatusTypeField = TermsOfServiceUserStatusTypeField.termsOfServiceUserStatus, tos: TermsOfServiceBase? = nil, user: UserMini? = nil, isAccepted: Bool? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
         self.id = id
         self.type = type
         self.tos = tos

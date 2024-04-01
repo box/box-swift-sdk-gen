@@ -4,7 +4,6 @@ import Foundation
 public class TrashFolder: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
-        case type
         case name
         case description
         case size
@@ -14,6 +13,7 @@ public class TrashFolder: Codable {
         case ownedBy = "owned_by"
         case itemStatus = "item_status"
         case etag
+        case type
         case sequenceId = "sequence_id"
         case createdAt = "created_at"
         case modifiedAt = "modified_at"
@@ -34,9 +34,6 @@ public class TrashFolder: Codable {
     /// for the URL `https://*.app.box.com/folders/123`
     /// the `folder_id` is `123`.
     public let id: String
-
-    /// `folder`
-    public let type: TrashFolderTypeField
 
     /// The name of the folder.
     public let name: String
@@ -68,6 +65,9 @@ public class TrashFolder: Codable {
     /// endpoints in the `If-Match` and `If-None-Match` headers to only
     /// perform changes on the folder if (no) changes have happened.
     public let etag: String?
+
+    /// `folder`
+    public let type: TrashFolderTypeField
 
     public let sequenceId: String?
 
@@ -117,7 +117,6 @@ public class TrashFolder: Codable {
     ///     and copying the ID from the URL. For example,
     ///     for the URL `https://*.app.box.com/folders/123`
     ///     the `folder_id` is `123`.
-    ///   - type: `folder`
     ///   - name: The name of the folder.
     ///   - description: 
     ///   - size: The folder size in bytes.
@@ -136,6 +135,7 @@ public class TrashFolder: Codable {
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
+    ///   - type: `folder`
     ///   - sequenceId: 
     ///   - createdAt: The date and time when the folder was created. This value may
     ///     be `null` for some folders such as the root folder or the trash
@@ -156,9 +156,8 @@ public class TrashFolder: Codable {
     ///     be `null` if a folder has been trashed, since the upload will no longer
     ///     work.
     ///   - parent: 
-    public init(id: String, type: TrashFolderTypeField, name: String, description: String, size: Int64, pathCollection: TrashFolderPathCollectionField, createdBy: UserMini, modifiedBy: UserMini, ownedBy: UserMini, itemStatus: TrashFolderItemStatusField, etag: String? = nil, sequenceId: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, sharedLink: String? = nil, folderUploadEmail: String? = nil, parent: FolderMini? = nil) {
+    public init(id: String, name: String, description: String, size: Int64, pathCollection: TrashFolderPathCollectionField, createdBy: UserMini, modifiedBy: UserMini, ownedBy: UserMini, itemStatus: TrashFolderItemStatusField, etag: String? = nil, type: TrashFolderTypeField = TrashFolderTypeField.folder, sequenceId: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, sharedLink: String? = nil, folderUploadEmail: String? = nil, parent: FolderMini? = nil) {
         self.id = id
-        self.type = type
         self.name = name
         self.description = description
         self.size = size
@@ -168,6 +167,7 @@ public class TrashFolder: Codable {
         self.ownedBy = ownedBy
         self.itemStatus = itemStatus
         self.etag = etag
+        self.type = type
         self.sequenceId = sequenceId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
@@ -183,7 +183,6 @@ public class TrashFolder: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
-        type = try container.decode(TrashFolderTypeField.self, forKey: .type)
         name = try container.decode(String.self, forKey: .name)
         description = try container.decode(String.self, forKey: .description)
         size = try container.decode(Int64.self, forKey: .size)
@@ -193,6 +192,7 @@ public class TrashFolder: Codable {
         ownedBy = try container.decode(UserMini.self, forKey: .ownedBy)
         itemStatus = try container.decode(TrashFolderItemStatusField.self, forKey: .itemStatus)
         etag = try container.decodeIfPresent(String.self, forKey: .etag)
+        type = try container.decode(TrashFolderTypeField.self, forKey: .type)
         sequenceId = try container.decodeIfPresent(String.self, forKey: .sequenceId)
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
         modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
@@ -208,7 +208,6 @@ public class TrashFolder: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
-        try container.encode(type, forKey: .type)
         try container.encode(name, forKey: .name)
         try container.encode(description, forKey: .description)
         try container.encode(size, forKey: .size)
@@ -218,6 +217,7 @@ public class TrashFolder: Codable {
         try container.encode(ownedBy, forKey: .ownedBy)
         try container.encode(itemStatus, forKey: .itemStatus)
         try container.encodeIfPresent(etag, forKey: .etag)
+        try container.encode(type, forKey: .type)
         try container.encodeIfPresent(sequenceId, forKey: .sequenceId)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)

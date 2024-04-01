@@ -46,7 +46,7 @@ public class Invite: Codable {
     ///   - status: The status of the invite
     ///   - createdAt: When the invite was created
     ///   - modifiedAt: When the invite was modified.
-    public init(id: String, type: InviteTypeField, invitedTo: InviteInvitedToField? = nil, actionableBy: UserMini? = nil, invitedBy: UserMini? = nil, status: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
+    public init(id: String, type: InviteTypeField = InviteTypeField.invite, invitedTo: InviteInvitedToField? = nil, actionableBy: UserMini? = nil, invitedBy: UserMini? = nil, status: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
         self.id = id
         self.type = type
         self.invitedTo = invitedTo

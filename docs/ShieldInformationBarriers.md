@@ -109,7 +109,7 @@ See the endpoint docs at
 
 <!-- sample post_shield_information_barriers -->
 ```
-try await client.shieldInformationBarriers.createShieldInformationBarrier(requestBody: CreateShieldInformationBarrierRequestBody(enterprise: EnterpriseBase(id: enterpriseId, type: EnterpriseBaseTypeField.enterprise)))
+try await client.shieldInformationBarriers.createShieldInformationBarrier(requestBody: CreateShieldInformationBarrierRequestBody(enterprise: EnterpriseBase(id: enterpriseId)))
 ```
 
 ### Arguments

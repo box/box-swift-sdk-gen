@@ -62,7 +62,7 @@ public class FileVersion: FileVersionMini {
     ///   - restoredBy: 
     ///   - purgedAt: When the file version object will be permanently deleted.
     ///   - uploaderDisplayName: 
-    public init(id: String, type: FileVersionBaseTypeField, sha1: String? = nil, name: String? = nil, size: Int64? = nil, createdAt: String? = nil, modifiedAt: String? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, trashedBy: UserMini? = nil, restoredAt: String? = nil, restoredBy: UserMini? = nil, purgedAt: String? = nil, uploaderDisplayName: String? = nil) {
+    public init(id: String, type: FileVersionBaseTypeField = FileVersionBaseTypeField.fileVersion, sha1: String? = nil, name: String? = nil, size: Int64? = nil, createdAt: String? = nil, modifiedAt: String? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, trashedBy: UserMini? = nil, restoredAt: String? = nil, restoredBy: UserMini? = nil, purgedAt: String? = nil, uploaderDisplayName: String? = nil) {
         self.name = name
         self.size = size
         self.createdAt = createdAt

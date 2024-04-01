@@ -47,7 +47,7 @@ See the endpoint docs at
 
 <!-- sample post_terms_of_service_user_statuses -->
 ```
-try await client.termsOfServiceUserStatuses.createTermsOfServiceStatusForUser(requestBody: CreateTermsOfServiceStatusForUserRequestBody(tos: CreateTermsOfServiceStatusForUserRequestBodyTosField(type: CreateTermsOfServiceStatusForUserRequestBodyTosTypeField.termsOfService, id: tos.id), user: CreateTermsOfServiceStatusForUserRequestBodyUserField(type: CreateTermsOfServiceStatusForUserRequestBodyUserTypeField.user, id: user.id), isAccepted: false))
+try await client.termsOfServiceUserStatuses.createTermsOfServiceStatusForUser(requestBody: CreateTermsOfServiceStatusForUserRequestBody(tos: CreateTermsOfServiceStatusForUserRequestBodyTosField(id: tos.id), user: CreateTermsOfServiceStatusForUserRequestBodyUserField(id: user.id), isAccepted: false))
 ```
 
 ### Arguments

@@ -20,7 +20,7 @@ public class FileVersionBase: Codable {
     /// - Parameters:
     ///   - id: The unique identifier that represent a file version.
     ///   - type: `file_version`
-    public init(id: String, type: FileVersionBaseTypeField) {
+    public init(id: String, type: FileVersionBaseTypeField = FileVersionBaseTypeField.fileVersion) {
         self.id = id
         self.type = type
     }

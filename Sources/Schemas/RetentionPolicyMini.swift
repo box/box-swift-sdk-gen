@@ -48,7 +48,7 @@ public class RetentionPolicyMini: RetentionPolicyBase {
     ///     which will lift the retention policy from the content,
     ///     allowing it to be deleted by users,
     ///     once the retention policy has expired.
-    public init(id: String, type: RetentionPolicyBaseTypeField, policyName: String? = nil, retentionLength: String? = nil, dispositionAction: RetentionPolicyMiniDispositionActionField? = nil) {
+    public init(id: String, type: RetentionPolicyBaseTypeField = RetentionPolicyBaseTypeField.retentionPolicy, policyName: String? = nil, retentionLength: String? = nil, dispositionAction: RetentionPolicyMiniDispositionActionField? = nil) {
         self.policyName = policyName
         self.retentionLength = retentionLength
         self.dispositionAction = dispositionAction

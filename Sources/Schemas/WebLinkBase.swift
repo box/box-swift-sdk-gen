@@ -29,7 +29,7 @@ public class WebLinkBase: Codable {
     ///   - type: `web_link`
     ///   - etag: The entity tag of this web link. Used with `If-Match`
     ///     headers.
-    public init(id: String, type: WebLinkBaseTypeField, etag: String? = nil) {
+    public init(id: String, type: WebLinkBaseTypeField = WebLinkBaseTypeField.webLink, etag: String? = nil) {
         self.id = id
         self.type = type
         self.etag = etag

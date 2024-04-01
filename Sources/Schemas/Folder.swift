@@ -88,10 +88,10 @@ public class Folder: FolderMini {
     ///     and copying the ID from the URL. For example,
     ///     for the URL `https://*.app.box.com/folders/123`
     ///     the `folder_id` is `123`.
-    ///   - type: `folder`
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
+    ///   - type: `folder`
     ///   - sequenceId: 
     ///   - name: The name of the folder.
     ///   - createdAt: The date and time when the folder was created. This value may
@@ -124,7 +124,7 @@ public class Folder: FolderMini {
     ///     * `trashed` when the item has been moved to the trash but not deleted
     ///     * `deleted` when the item has been permanently deleted.
     ///   - itemCollection: 
-    public init(id: String, type: FolderBaseTypeField, etag: String? = nil, sequenceId: String? = nil, name: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FolderPathCollectionField? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, ownedBy: UserMini? = nil, sharedLink: FolderSharedLinkField? = nil, folderUploadEmail: FolderFolderUploadEmailField? = nil, parent: FolderMini? = nil, itemStatus: FolderItemStatusField? = nil, itemCollection: Items? = nil) {
+    public init(id: String, etag: String? = nil, type: FolderBaseTypeField = FolderBaseTypeField.folder, sequenceId: String? = nil, name: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FolderPathCollectionField? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, ownedBy: UserMini? = nil, sharedLink: FolderSharedLinkField? = nil, folderUploadEmail: FolderFolderUploadEmailField? = nil, parent: FolderMini? = nil, itemStatus: FolderItemStatusField? = nil, itemCollection: Items? = nil) {
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
         self.description = description
@@ -143,7 +143,7 @@ public class Folder: FolderMini {
         self.itemStatus = itemStatus
         self.itemCollection = itemCollection
 
-        super.init(id: id, type: type, etag: etag, sequenceId: sequenceId, name: name)
+        super.init(id: id, etag: etag, type: type, sequenceId: sequenceId, name: name)
     }
 
     required public init(from decoder: Decoder) throws {

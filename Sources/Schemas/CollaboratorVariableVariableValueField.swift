@@ -2,36 +2,36 @@ import Foundation
 
 public class CollaboratorVariableVariableValueField: Codable {
     private enum CodingKeys: String, CodingKey {
-        case type
         case id
+        case type
     }
-
-    /// The object type.
-    public let type: CollaboratorVariableVariableValueTypeField
 
     /// User's ID.
     public let id: String
 
+    /// The object type.
+    public let type: CollaboratorVariableVariableValueTypeField
+
     /// Initializer for a CollaboratorVariableVariableValueField.
     ///
     /// - Parameters:
-    ///   - type: The object type.
     ///   - id: User's ID.
-    public init(type: CollaboratorVariableVariableValueTypeField, id: String) {
-        self.type = type
+    ///   - type: The object type.
+    public init(id: String, type: CollaboratorVariableVariableValueTypeField = CollaboratorVariableVariableValueTypeField.user) {
         self.id = id
+        self.type = type
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decode(CollaboratorVariableVariableValueTypeField.self, forKey: .type)
         id = try container.decode(String.self, forKey: .id)
+        type = try container.decode(CollaboratorVariableVariableValueTypeField.self, forKey: .type)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(type, forKey: .type)
         try container.encode(id, forKey: .id)
+        try container.encode(type, forKey: .type)
     }
 
 }

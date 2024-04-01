@@ -18,7 +18,7 @@ public class LegalHoldPolicyMini: Codable {
     /// - Parameters:
     ///   - id: The unique identifier for this legal hold policy
     ///   - type: `legal_hold_policy`
-    public init(id: String, type: LegalHoldPolicyMiniTypeField) {
+    public init(id: String, type: LegalHoldPolicyMiniTypeField = LegalHoldPolicyMiniTypeField.legalHoldPolicy) {
         self.id = id
         self.type = type
     }
