@@ -120,13 +120,15 @@ let client = BoxClient(auth: auth)
 In order to switch between being authenticated as Service Account and a User you can call:
 
 ```swift
-auth.asEnterprise(enterpriseId: "YOUR_ENTERPRISE_ID")
+let enterpriseAuth = auth.withEnterpriseSubject(enterpriseId: "YOUR_ENTERPRISE_ID")
+let enterpriseClient = BoxClient(auth: enterpriseAuth)
 ```
 
 to authenticate as enterprise or
 
 ```swift
-auth.asUser(userId: "YOUR_USER_ID")
+let userAuth = auth.withUserSubject(userId: "YOUR_USER_ID")
+let userClient = BoxClient(auth: userAuth)
 ```
 
 to authenticate as User with provided ID. The new token will be automatically fetched with a next API call.
@@ -306,6 +308,7 @@ For example to exchange the token for a new token with only `item_preview` scope
 
 ```swift
 let resource = "https://api.box.com/2.0/files/123456789"
-let accessToken: AccessToken = try await auth.downscopeToken(scopes: ["item_preview"], resource: resource)
-// accessToken contains the new downscoped access token
+let downscopedToken: AccessToken = try await auth.downscopeToken(scopes: ["item_preview"], resource: resource)
+let downscopedAuth = BoxDeveloperTokenAuth(token: downscopedToken.accessToken!)
+let downscopedClient = BoxClient(auth: downscopedAuth)
 ```

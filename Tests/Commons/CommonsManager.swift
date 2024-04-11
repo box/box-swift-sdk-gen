@@ -11,10 +11,10 @@ public class CommonsManager {
         return auth
     }
 
-    public func getDefaultClientWithUserSubject(userId: String) async throws -> BoxClient {
+    public func getDefaultClientWithUserSubject(userId: String) -> BoxClient {
         let auth: BoxCCGAuth = getCcgAuth()
-        try await auth.asUser(userId: userId)
-        return BoxClient(auth: auth)
+        let authUser: BoxCCGAuth = auth.withUserSubject(userId: userId)
+        return BoxClient(auth: authUser)
     }
 
     public func getDefaultClient() -> BoxClient {

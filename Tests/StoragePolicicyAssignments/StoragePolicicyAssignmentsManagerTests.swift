@@ -23,7 +23,7 @@ class StoragePolicicyAssignmentsManagerTests: XCTestCase {
     }
 
     public func testGetStoragePolicyAssignments() async throws {
-        let client: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: adminUserId)
+        let client: BoxClient = CommonsManager().getDefaultClientWithUserSubject(userId: adminUserId)
         let userName: String = Utils.getUUID()
         let newUser: UserFull = try await client.users.createUser(requestBody: CreateUserRequestBody(name: userName, isPlatformAccessOnly: true))
         let storagePolicies: StoragePolicies = try await client.storagePolicies.getStoragePolicies()

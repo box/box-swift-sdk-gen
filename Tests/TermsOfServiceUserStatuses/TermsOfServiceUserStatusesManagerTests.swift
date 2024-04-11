@@ -6,7 +6,7 @@ class TermsOfServiceUserStatusesManagerTests: XCTestCase {
 
     public func testGetTermsOfServiceUserStatuses() async throws {
         let adminUserId: String = Utils.getEnvironmentVariable(name: "USER_ID")
-        let client: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: adminUserId)
+        let client: BoxClient = CommonsManager().getDefaultClientWithUserSubject(userId: adminUserId)
         let tos: TermsOfService = try await CommonsManager().getOrCreateTermsOfServices()
         let user: UserFull = try await client.users.createUser(requestBody: CreateUserRequestBody(name: Utils.getUUID(), login: "\(Utils.getUUID())\("@boxdemo.com")", isPlatformAccessOnly: true))
         let createdTosUserStatus: TermsOfServiceUserStatus = try await client.termsOfServiceUserStatuses.createTermsOfServiceStatusForUser(requestBody: CreateTermsOfServiceStatusForUserRequestBody(tos: CreateTermsOfServiceStatusForUserRequestBodyTosField(id: tos.id), user: CreateTermsOfServiceStatusForUserRequestBodyUserField(id: user.id), isAccepted: false))
