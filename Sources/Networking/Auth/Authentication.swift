@@ -7,4 +7,8 @@ public protocol Authentication {
 
     func retrieveAuthorizationHeader(networkSession: NetworkSession?) async throws -> String
 
+    func revokeToken(networkSession: NetworkSession?) async throws
+
+    func downscopeToken(scopes: [String], resource: String?, sharedLink: String?, networkSession: NetworkSession?) async throws -> AccessToken
+
 }
