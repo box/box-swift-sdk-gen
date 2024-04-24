@@ -10,7 +10,7 @@ class WorkflowsManagerTests: XCTestCase {
     }
 
     public func testWorkflows() async throws {
-        let adminClient: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: Utils.getEnvironmentVariable(name: "USER_ID"))
+        let adminClient: BoxClient = CommonsManager().getDefaultClientWithUserSubject(userId: Utils.getEnvironmentVariable(name: "USER_ID"))
         let workflowFolderId: String = Utils.getEnvironmentVariable(name: "WORKFLOW_FOLDER_ID")
         let uploadedFiles: Files = try await adminClient.uploads.uploadFile(requestBody: UploadFileRequestBody(attributes: UploadFileRequestBodyAttributesField(name: Utils.getUUID(), parent: UploadFileRequestBodyAttributesParentField(id: workflowFolderId)), file: Utils.generateByteStream(size: 1024 * 1024)))
         let file: FileFull = uploadedFiles.entries![0]

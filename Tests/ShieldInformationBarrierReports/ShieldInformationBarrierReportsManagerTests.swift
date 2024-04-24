@@ -5,7 +5,7 @@ import XCTest
 class ShieldInformationBarrierReportsManagerTests: XCTestCase {
 
     public func testShieldInformationBarrierReports() async throws {
-        let client: BoxClient = try await CommonsManager().getDefaultClientWithUserSubject(userId: Utils.getEnvironmentVariable(name: "USER_ID"))
+        let client: BoxClient = CommonsManager().getDefaultClientWithUserSubject(userId: Utils.getEnvironmentVariable(name: "USER_ID"))
         let enterpriseId: String = Utils.getEnvironmentVariable(name: "ENTERPRISE_ID")
         let barrier: ShieldInformationBarrier = try await CommonsManager().getOrCreateShieldInformationBarrier(client: client, enterpriseId: enterpriseId)
         XCTAssertTrue(Utils.Strings.toString(value: barrier.status!) == "draft")

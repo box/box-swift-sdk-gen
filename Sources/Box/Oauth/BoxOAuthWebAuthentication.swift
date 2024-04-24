@@ -30,7 +30,7 @@ class BoxOAuthWebAuthentication {
     ///   - context: Context to target where in an application's UI the authorization view should be shown.
     ///   - completion: The completion handler which is called when the session is completed successfully or canceled by user.
     func obtainAuthorizationCode(
-        options: AuthorizeUrlParams,
+        options: GetAuthorizeUrlOptions,
         context: ASWebAuthenticationPresentationContextProviding,
         completion: @escaping (Result<String, Error>) -> Void) {
             let authorizeURL = URL.init(string:authorizeUrl)!
@@ -73,7 +73,7 @@ class BoxOAuthWebAuthentication {
     /// - Returns: The authorization code.
     /// - Throws: An error if for any reason the authorization code cannot be fetched.
     func obtainAuthorizationCode(
-        options: AuthorizeUrlParams,
+        options: GetAuthorizeUrlOptions,
         context: ASWebAuthenticationPresentationContextProviding
     ) async throws ->String {
         return try await withCheckedThrowingContinuation {continuation in
