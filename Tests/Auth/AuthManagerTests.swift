@@ -62,6 +62,33 @@ class AuthManagerTests: XCTestCase {
         return try await authUser.retrieveToken()
     }
 
+    public func testDeveloperTokenAuthRevoke() async throws {
+        let developerTokenConfig: DeveloperTokenConfig = DeveloperTokenConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"))
+        let token: AccessToken = try await getAccessToken()
+        let auth: BoxDeveloperTokenAuth = BoxDeveloperTokenAuth(token: token.accessToken!, config: developerTokenConfig)
+        try await auth.retrieveToken()
+        let tokenFromStorageBeforeRevoke: AccessToken? = try await auth.tokenStorage.get()
+        try await auth.revokeToken()
+        let tokenFromStorageAfterRevoke: AccessToken? = try await auth.tokenStorage.get()
+        XCTAssertTrue(tokenFromStorageBeforeRevoke != nil)
+        XCTAssertTrue(tokenFromStorageAfterRevoke == nil)
+    }
+
+    public func testDeveloperTokenAuthDownscope() async throws {
+        let developerTokenConfig: DeveloperTokenConfig = DeveloperTokenConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"))
+        let token: AccessToken = try await getAccessToken()
+        let auth: BoxDeveloperTokenAuth = BoxDeveloperTokenAuth(token: token.accessToken!, config: developerTokenConfig)
+        let parentClient: BoxClient = BoxClient(auth: auth)
+        let folder: FolderFull = try await parentClient.folders.createFolder(requestBody: CreateFolderRequestBody(name: Utils.getUUID(), parent: CreateFolderRequestBodyParentField(id: "0")))
+        let resourcePath: String = "\("https://api.box.com/2.0/folders/")\(folder.id)"
+        let downscopedToken: AccessToken = try await auth.downscopeToken(scopes: ["item_rename", "item_preview"], resource: resourcePath)
+        XCTAssertTrue(downscopedToken.accessToken != nil)
+        let downscopedClient: BoxClient = BoxClient(auth: BoxDeveloperTokenAuth(token: downscopedToken.accessToken!))
+        try await downscopedClient.folders.updateFolderById(folderId: folder.id, requestBody: UpdateFolderByIdRequestBody(name: Utils.getUUID()))
+        await XCTAssertThrowsErrorAsync(try await downscopedClient.folders.deleteFolderById(folderId: folder.id))
+        try await parentClient.folders.deleteFolderById(folderId: folder.id)
+    }
+
     public func testDeveloperTokenAuth() async throws {
         let userId: String = Utils.getEnvironmentVariable(name: "USER_ID")
         let token: AccessToken = try await getAccessToken()

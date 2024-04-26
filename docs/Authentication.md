@@ -12,12 +12,12 @@
   - [OAuth 2.0 Auth](#oauth-20-auth)
     - [Login flow (recommended)](#login-flow-recommended)
     - [Manual flow](#manual-flow)
+- [Revoke token](#revoke-token)
+- [Downscope token](#downscope-token)
 - [Token storage](#token-storage)
   - [In-memory token storage](#in-memory-token-storage)
   - [Keychain token storage](#keychain-token-storage)
   - [Custom storage](#custom-storage)
-- [Revoking tokens](#revoking-tokens)
-- [Downscoping tokens](#downscoping-tokens)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -222,6 +222,48 @@ auth.getTokensAuthorizationCodeGrant(authorizationCode: "<<YOUR_AUTHORIZATION_CO
 let client = BoxClient(auth: oauth)
 ```
 
+# Revoke token
+
+Access tokens for a client can be revoked when needed. This call invalidates old token.
+For BoxCCGAuth you can still reuse the `auth` object to retrieve a new token.
+If you make any new call after revoking the token, a new token will be automatically retrieved.
+For BoxOAuth it would be necessary to manually go through the authentication process again.
+For BoxDeveloperTokenAuth, it is necessary to provide a DeveloperTokenConfig during initialization,
+containing the client ID and client secret.
+
+To revoke current client's tokens in the storage use the following code:
+
+<!-- sample post_oauth2_revoke -->
+
+```swift
+try await auth.revokeToken()
+```
+
+# Downscope token
+
+You can exchange an access token for one with a lower scope, in order
+to restrict the permissions for a child client or to pass to a less secure
+location (e.g. a browser-based app).
+
+A downscoped token does not include a refresh token.
+In that case, to get a new downscoped token, refresh the original refresh token and use that new token to get a downscoped token.
+
+More information about downscoping tokens can be found [here](https://developer.box.com/guides/authentication/tokens/downscope/).
+If you want to learn more about available scopes please go [here](https://developer.box.com/guides/api-calls/permissions-and-errors/scopes/#scopes-for-downscoping).
+
+For example to get a new token with only `item_preview` scope, restricted to a single file, suitable for the
+[Content Preview UI Element](https://developer.box.com/en/guides/embed/ui-elements/preview/) you can the following code:
+You can also initialize `BoxDeveloperTokenAuth` with the retrieved access token and use it to create a new Client.
+
+<!-- sample post_oauth2_token downscope_token -->
+
+```swift
+let resource = "https://api.box.com/2.0/files/123456789"
+let downscopedToken: AccessToken = try await auth.downscopeToken(scopes: ["item_preview"], resource: resource)
+let downscopedAuth = BoxDeveloperTokenAuth(token: downscopedToken.accessToken!)
+let downscopedClient = BoxClient(auth: downscopedAuth)
+```
+
 # Token storage
 
 ## In-memory token storage
@@ -271,44 +313,4 @@ let auth = BoxOAuth(config:
           tokenStorage: MyCustomTokenStorage()
           )
 )
-```
-
-# Revoking tokens
-
-Both `BoxCCGAuth` and `BoxOAuth` support token revocation.
-
-Access tokens can be revoked when needed.
-This method revokes the token on the server side and removes it from the token storage.
-
-To revoke current token in the storage use the following code:
-
-<!-- sample post_oauth2_revoke -->
-
-```swift
-try await auth.revokeToken()
-```
-
-# Downscoping tokens
-
-Both `BoxCCGAuth` and `BoxOAuth` support token downscoping.
-
-You can exchange an access token for one with a lower scope, in order
-to restrict the permissions for a child client or to pass to a less secure
-location (e.g. a browser-based app).
-
-A downscoped token does not include a refresh token.
-In that case, to get a new downscoped token, refresh the original refresh token and use that new token to get a downscoped token.
-
-More information about downscoping tokens can be found [here](https://developer.box.com/guides/authentication/tokens/downscope/).
-If you want to learn more about available scopes please go [here](https://developer.box.com/guides/api-calls/permissions-and-errors/scopes/#scopes-for-downscoping).
-
-For example to exchange the token for a new token with only `item_preview` scope, restricted to a single file, suitable for the [Content Preview UI Element](https://developer.box.com/en/guides/embed/ui-elements/preview/) you can the following code:
-
-<!-- sample post_oauth2_token downscope_token -->
-
-```swift
-let resource = "https://api.box.com/2.0/files/123456789"
-let downscopedToken: AccessToken = try await auth.downscopeToken(scopes: ["item_preview"], resource: resource)
-let downscopedAuth = BoxDeveloperTokenAuth(token: downscopedToken.accessToken!)
-let downscopedClient = BoxClient(auth: downscopedAuth)
 ```

@@ -6,8 +6,8 @@ public class InMemoryTokenStorage: TokenStorage {
     /// Access token
     private var token: AccessToken?
 
-    public init() {
-        self.token = nil
+    public init(token: AccessToken? = nil) {
+        self.token = token
     }
 
     /// Store access token in memory
