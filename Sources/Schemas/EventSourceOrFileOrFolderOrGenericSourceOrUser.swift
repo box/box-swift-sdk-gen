@@ -1,6 +1,6 @@
 import Foundation
 
-public enum UserOrEventSourceOrFileOrFolderOrGenericSource: Codable {
+public enum EventSourceOrFileOrFolderOrGenericSourceOrUser: Codable {
     case eventSource(EventSource)
     case file(File)
     case folder(Folder)
@@ -29,7 +29,7 @@ public enum UserOrEventSourceOrFileOrFolderOrGenericSource: Codable {
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(UserOrEventSourceOrFileOrFolderOrGenericSource.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key itemType"))
+                    throw DecodingError.typeMismatch(EventSourceOrFileOrFolderOrGenericSourceOrUser.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key itemType"))
 
                 }
             }
@@ -55,7 +55,7 @@ public enum UserOrEventSourceOrFileOrFolderOrGenericSource: Codable {
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(UserOrEventSourceOrFileOrFolderOrGenericSource.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key type"))
+                    throw DecodingError.typeMismatch(EventSourceOrFileOrFolderOrGenericSourceOrUser.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key type"))
 
                 }
             }
@@ -67,7 +67,7 @@ public enum UserOrEventSourceOrFileOrFolderOrGenericSource: Codable {
             return
         }
 
-        throw DecodingError.typeMismatch(UserOrEventSourceOrFileOrFolderOrGenericSource.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The type of the decoded object cannot be determined."))
+        throw DecodingError.typeMismatch(EventSourceOrFileOrFolderOrGenericSourceOrUser.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The type of the decoded object cannot be determined."))
 
     }
 

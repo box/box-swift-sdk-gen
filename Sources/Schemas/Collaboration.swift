@@ -30,7 +30,7 @@ public class Collaboration: Codable {
 
     public let item: FileOrFolderOrWebLink?
 
-    public let accessibleBy: UserCollaborationsOrGroupMini?
+    public let accessibleBy: GroupMiniOrUserCollaborations?
 
     /// The email address used to invite an unregistered collaborator, if
     /// they are not a registered user.
@@ -93,7 +93,7 @@ public class Collaboration: Codable {
     ///   - createdAt: When the collaboration object was created.
     ///   - modifiedAt: When the collaboration object was last modified.
     ///   - acceptanceRequirementsStatus: 
-    public init(id: String, type: CollaborationTypeField = CollaborationTypeField.collaboration, item: FileOrFolderOrWebLink? = nil, accessibleBy: UserCollaborationsOrGroupMini? = nil, inviteEmail: String? = nil, role: CollaborationRoleField? = nil, expiresAt: String? = nil, isAccessOnly: Bool? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: String? = nil, createdBy: UserCollaborations? = nil, createdAt: String? = nil, modifiedAt: String? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
+    public init(id: String, type: CollaborationTypeField = CollaborationTypeField.collaboration, item: FileOrFolderOrWebLink? = nil, accessibleBy: GroupMiniOrUserCollaborations? = nil, inviteEmail: String? = nil, role: CollaborationRoleField? = nil, expiresAt: String? = nil, isAccessOnly: Bool? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: String? = nil, createdBy: UserCollaborations? = nil, createdAt: String? = nil, modifiedAt: String? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
         self.id = id
         self.type = type
         self.item = item
@@ -115,7 +115,7 @@ public class Collaboration: Codable {
         id = try container.decode(String.self, forKey: .id)
         type = try container.decode(CollaborationTypeField.self, forKey: .type)
         item = try container.decodeIfPresent(FileOrFolderOrWebLink.self, forKey: .item)
-        accessibleBy = try container.decodeIfPresent(UserCollaborationsOrGroupMini.self, forKey: .accessibleBy)
+        accessibleBy = try container.decodeIfPresent(GroupMiniOrUserCollaborations.self, forKey: .accessibleBy)
         inviteEmail = try container.decodeIfPresent(String.self, forKey: .inviteEmail)
         role = try container.decodeIfPresent(CollaborationRoleField.self, forKey: .role)
         expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt)

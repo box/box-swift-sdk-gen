@@ -1,6 +1,6 @@
 import Foundation
 
-public enum UserCollaborationsOrGroupMini: Codable {
+public enum GroupMiniOrUserCollaborations: Codable {
     case groupMini(GroupMini)
     case userCollaborations(UserCollaborations)
 
@@ -25,14 +25,14 @@ public enum UserCollaborationsOrGroupMini: Codable {
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(UserCollaborationsOrGroupMini.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key type"))
+                    throw DecodingError.typeMismatch(GroupMiniOrUserCollaborations.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key type"))
 
                 }
             }
 
         }
 
-        throw DecodingError.typeMismatch(UserCollaborationsOrGroupMini.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The type of the decoded object cannot be determined."))
+        throw DecodingError.typeMismatch(GroupMiniOrUserCollaborations.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The type of the decoded object cannot be determined."))
 
     }
 
