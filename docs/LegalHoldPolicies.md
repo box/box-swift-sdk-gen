@@ -140,7 +140,7 @@ See the endpoint docs at
 
 <!-- sample delete_legal_hold_policies_id -->
 ```
-try await client.legalHoldPolicies.deleteLegalHoldPolicyById(legalHoldPolicyId: legalHoldPolicy.id)
+try await client.legalHoldPolicies.deleteLegalHoldPolicyById(legalHoldPolicyId: legalHoldPolicyId)
 ```
 
 ### Arguments

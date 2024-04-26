@@ -26,5 +26,11 @@ class LegalHoldPolicyAssignmentsManagerTests: XCTestCase {
         try await client.legalHoldPolicyAssignments.deleteLegalHoldPolicyAssignmentById(legalHoldPolicyAssignmentId: legalHoldPolicyAssignmentId)
         await XCTAssertThrowsErrorAsync(try await client.legalHoldPolicyAssignments.deleteLegalHoldPolicyAssignmentById(legalHoldPolicyAssignmentId: legalHoldPolicyAssignmentId))
         try await client.files.deleteFileById(fileId: fileId)
+        do {
+            try await client.legalHoldPolicies.deleteLegalHoldPolicyById(legalHoldPolicyId: legalHoldPolicyId)
+        } catch {
+            print("\("Could not delete Legal Policy with id: ")\(legalHoldPolicyId)")
+        }
+
     }
 }
