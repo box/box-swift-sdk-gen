@@ -29,11 +29,13 @@ class LegalHoldPoliciesManagerTests: XCTestCase {
     public func testCreateNotOngoingLegalHoldPolicy() async throws {
         let legalHoldPolicyName: String = Utils.getUUID()
         let legalHoldDescription: String = "test description"
-        let legalHoldPolicy: LegalHoldPolicy = try await client.legalHoldPolicies.createLegalHoldPolicy(requestBody: CreateLegalHoldPolicyRequestBody(policyName: legalHoldPolicyName, description: legalHoldDescription, filterStartedAt: "2021-01-01T00:00:00-08:00", filterEndedAt: "2022-01-01T00:00:00-08:00", isOngoing: false))
+        let filterStartedAt: String = "2021-01-01T00:00:00-08:00"
+        let filterEndedAt: String = "2022-01-01T00:00:00-08:00"
+        let legalHoldPolicy: LegalHoldPolicy = try await client.legalHoldPolicies.createLegalHoldPolicy(requestBody: CreateLegalHoldPolicyRequestBody(policyName: legalHoldPolicyName, description: legalHoldDescription, filterStartedAt: filterStartedAt, filterEndedAt: filterEndedAt, isOngoing: false))
         XCTAssertTrue(legalHoldPolicy.policyName == legalHoldPolicyName)
         XCTAssertTrue(legalHoldPolicy.description == legalHoldDescription)
-        XCTAssertTrue(legalHoldPolicy.filterStartedAt! == "2021-01-01T00:00:00-08:00")
-        legalHoldPolicy.filterEndedAt! == "2022-01-01T00:00:00-08:00"
+        XCTAssertTrue(legalHoldPolicy.filterStartedAt! == filterStartedAt)
+        legalHoldPolicy.filterEndedAt! == filterEndedAt
         try await client.legalHoldPolicies.deleteLegalHoldPolicyById(legalHoldPolicyId: legalHoldPolicy.id)
     }
 }
