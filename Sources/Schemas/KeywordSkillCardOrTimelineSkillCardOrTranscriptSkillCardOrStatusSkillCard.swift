@@ -1,6 +1,6 @@
 import Foundation
 
-public enum KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard: Codable {
+public enum KeywordSkillCardOrTimelineSkillCardOrTranscriptSkillCardOrStatusSkillCard: Codable {
     case keywordSkillCard(KeywordSkillCard)
     case statusSkillCard(StatusSkillCard)
     case timelineSkillCard(TimelineSkillCard)
@@ -39,14 +39,14 @@ public enum KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkil
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key skillCardType"))
+                    throw DecodingError.typeMismatch(KeywordSkillCardOrTimelineSkillCardOrTranscriptSkillCardOrStatusSkillCard.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key skillCardType"))
 
                 }
             }
 
         }
 
-        throw DecodingError.typeMismatch(KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The type of the decoded object cannot be determined."))
+        throw DecodingError.typeMismatch(KeywordSkillCardOrTimelineSkillCardOrTranscriptSkillCardOrStatusSkillCard.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The type of the decoded object cannot be determined."))
 
     }
 
