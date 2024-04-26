@@ -1,6 +1,6 @@
 import Foundation
 
-public enum FileMiniOrFolderMini: Codable {
+public enum FolderMiniOrFileMini: Codable {
     case fileMini(FileMini)
     case folderMini(FolderMini)
 
@@ -25,14 +25,14 @@ public enum FileMiniOrFolderMini: Codable {
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(FileMiniOrFolderMini.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key type"))
+                    throw DecodingError.typeMismatch(FolderMiniOrFileMini.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key type"))
 
                 }
             }
 
         }
 
-        throw DecodingError.typeMismatch(FileMiniOrFolderMini.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The type of the decoded object cannot be determined."))
+        throw DecodingError.typeMismatch(FolderMiniOrFileMini.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The type of the decoded object cannot be determined."))
 
     }
 
