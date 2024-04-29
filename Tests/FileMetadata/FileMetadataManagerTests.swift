@@ -20,7 +20,7 @@ class FileMetadataManagerTests: XCTestCase {
         let receivedMetadata: MetadataFull = try await client.fileMetadata.getFileMetadataById(fileId: file.id, scope: GetFileMetadataByIdScope.global, templateKey: "properties")
         XCTAssertTrue(receivedMetadata.extraData!["abc"] == "xyz")
         let newValue: String = "bar"
-        let updatedMetadata: MetadataFull = try await client.fileMetadata.updateFileMetadataById(fileId: file.id, scope: UpdateFileMetadataByIdScope.global, templateKey: "properties", requestBody: [UpdateFileMetadataByIdRequestBody(op: UpdateFileMetadataByIdRequestBodyOpField.replace, path: "/abc", value: newValue)])
+        try await client.fileMetadata.updateFileMetadataById(fileId: file.id, scope: UpdateFileMetadataByIdScope.global, templateKey: "properties", requestBody: [UpdateFileMetadataByIdRequestBody(op: UpdateFileMetadataByIdRequestBodyOpField.replace, path: "/abc", value: newValue)])
         let receivedUpdatedMetadata: MetadataFull = try await client.fileMetadata.getFileMetadataById(fileId: file.id, scope: GetFileMetadataByIdScope.global, templateKey: "properties")
         XCTAssertTrue(receivedUpdatedMetadata.extraData!["abc"] == newValue)
         try await client.fileMetadata.deleteFileMetadataById(fileId: file.id, scope: DeleteFileMetadataByIdScope.global, templateKey: "properties")

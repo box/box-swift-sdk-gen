@@ -73,7 +73,10 @@ This operation is performed by calling function `updateWebLinkById`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/put-web-links-id/).
 
-*Currently we don't have an example for calling `updateWebLinkById` in integration tests*
+<!-- sample put_web_links_id -->
+```
+try await client.webLinks.updateWebLinkById(webLinkId: weblink.id, requestBody: UpdateWebLinkByIdRequestBody(name: updatedName, sharedLink: UpdateWebLinkByIdRequestBodySharedLinkField(access: UpdateWebLinkByIdRequestBodySharedLinkAccessField.open, password: password)))
+```
 
 ### Arguments
 

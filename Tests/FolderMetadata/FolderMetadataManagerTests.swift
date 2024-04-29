@@ -20,7 +20,7 @@ class FolderMetadataManagerTests: XCTestCase {
         let receivedMetadata: MetadataFull = try await client.folderMetadata.getFolderMetadataById(folderId: folder.id, scope: GetFolderMetadataByIdScope.global, templateKey: "properties")
         XCTAssertTrue(receivedMetadata.extraData!["abc"] == "xyz")
         let newValue: String = "bar"
-        let updatedMetadata: MetadataFull = try await client.folderMetadata.updateFolderMetadataById(folderId: folder.id, scope: UpdateFolderMetadataByIdScope.global, templateKey: "properties", requestBody: [UpdateFolderMetadataByIdRequestBody(op: UpdateFolderMetadataByIdRequestBodyOpField.replace, path: "/abc", value: newValue)])
+        try await client.folderMetadata.updateFolderMetadataById(folderId: folder.id, scope: UpdateFolderMetadataByIdScope.global, templateKey: "properties", requestBody: [UpdateFolderMetadataByIdRequestBody(op: UpdateFolderMetadataByIdRequestBodyOpField.replace, path: "/abc", value: newValue)])
         let receivedUpdatedMetadata: MetadataFull = try await client.folderMetadata.getFolderMetadataById(folderId: folder.id, scope: GetFolderMetadataByIdScope.global, templateKey: "properties")
         XCTAssertTrue(receivedUpdatedMetadata.extraData!["abc"] == newValue)
         try await client.folderMetadata.deleteFolderMetadataById(folderId: folder.id, scope: DeleteFolderMetadataByIdScope.global, templateKey: "properties")
