@@ -141,6 +141,8 @@ public class BoxClient {
 
     public let integrationMappings: IntegrationMappingsManager
 
+    public let ai: AiManager
+
     public init(auth: Authentication, networkSession: NetworkSession = NetworkSession(baseUrls: BaseUrls())) {
         self.auth = auth
         self.networkSession = networkSession
@@ -212,6 +214,7 @@ public class BoxClient {
         self.workflows = WorkflowsManager(auth: self.auth, networkSession: self.networkSession)
         self.signTemplates = SignTemplatesManager(auth: self.auth, networkSession: self.networkSession)
         self.integrationMappings = IntegrationMappingsManager(auth: self.auth, networkSession: self.networkSession)
+        self.ai = AiManager(auth: self.auth, networkSession: self.networkSession)
     }
 
     /// Create a new client to impersonate user with the provided ID. All calls made with the new client will be made in context of the impersonated user, leaving the original client unmodified.
