@@ -65,6 +65,13 @@ public class Folder: FolderMini {
 
     public let sharedLink: FolderSharedLinkField?
 
+    /// The `folder_upload_email` parameter is not `null` if one of the following options is **true**:
+    /// 
+    ///   * The **Allow uploads to this folder via email** and the **Only allow email uploads from collaborators in this folder** are [enabled for a folder in the Admin Console](https://support.box.com/hc/en-us/articles/360043697534-Upload-to-Box-Through-Email), and the user has at least **Upload** permissions granted.
+    /// 
+    ///   * The **Allow uploads to this folder via email** setting is enabled for a folder in the Admin Console, and the **Only allow email uploads from collaborators in this folder** setting is deactivated (unchecked).
+    /// 
+    /// If the conditions are not met, the parameter will have the following value: `folder_upload_email: null`
     public let folderUploadEmail: FolderFolderUploadEmailField?
 
     public let parent: FolderMini?
@@ -116,7 +123,13 @@ public class Folder: FolderMini {
     ///   - contentModifiedAt: The date and time at which this folder was last updated.
     ///   - ownedBy: 
     ///   - sharedLink: 
-    ///   - folderUploadEmail: 
+    ///   - folderUploadEmail: The `folder_upload_email` parameter is not `null` if one of the following options is **true**:
+    ///     
+    ///       * The **Allow uploads to this folder via email** and the **Only allow email uploads from collaborators in this folder** are [enabled for a folder in the Admin Console](https://support.box.com/hc/en-us/articles/360043697534-Upload-to-Box-Through-Email), and the user has at least **Upload** permissions granted.
+    ///     
+    ///       * The **Allow uploads to this folder via email** setting is enabled for a folder in the Admin Console, and the **Only allow email uploads from collaborators in this folder** setting is deactivated (unchecked).
+    ///     
+    ///     If the conditions are not met, the parameter will have the following value: `folder_upload_email: null`
     ///   - parent: 
     ///   - itemStatus: Defines if this item has been deleted or not.
     ///     
