@@ -97,35 +97,4 @@ public class LegalHoldPolicyAssignmentsManager {
         return try FileVersionLegalHolds.deserialize(from: response.data)
     }
 
-    /// Get a list of previous file versions for a legal hold
-    /// assignment.
-    /// 
-    /// In some cases you may only need the latest file versions instead. In these
-    /// cases, use the `GET  /legal_hold_policy_assignments/:id/files_on_hold` API
-    /// instead to return any current (latest) versions of a file for this legal hold
-    /// policy assignment.
-    /// 
-    /// Due to ongoing re-architecture efforts this API might not return all files
-    /// held for this policy ID. Instead, this API will only return past file versions
-    /// held in the newly developed architecture. The `GET /file_version_legal_holds`
-    /// API can be used to fetch current and past versions of files held within the
-    /// legacy architecture.
-    /// 
-    /// The `GET /legal_hold_policy_assignments?policy_id={id}` API can be used to
-    /// find a list of policy assignments for a given policy ID.
-    ///
-    /// - Parameters:
-    ///   - legalHoldPolicyAssignmentId: The ID of the legal hold policy assignment
-    ///     Example: "753465"
-    ///   - queryParams: Query parameters of getLegalHoldPolicyAssignmentFileVersionOnHold method
-    ///   - headers: Headers of getLegalHoldPolicyAssignmentFileVersionOnHold method
-    /// - Returns: The `FileVersionLegalHolds`.
-    /// - Throws: The `GeneralError`.
-    public func getLegalHoldPolicyAssignmentFileVersionOnHold(legalHoldPolicyAssignmentId: String, queryParams: GetLegalHoldPolicyAssignmentFileVersionOnHoldQueryParams = GetLegalHoldPolicyAssignmentFileVersionOnHoldQueryParams(), headers: GetLegalHoldPolicyAssignmentFileVersionOnHoldHeaders = GetLegalHoldPolicyAssignmentFileVersionOnHoldHeaders()) async throws -> FileVersionLegalHolds {
-        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit), "fields": Utils.Strings.toString(value: queryParams.fields)])
-        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/legal_hold_policy_assignments/")\(legalHoldPolicyAssignmentId)\("/file_versions_on_hold")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileVersionLegalHolds.deserialize(from: response.data)
-    }
-
 }
