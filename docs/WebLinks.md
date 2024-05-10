@@ -17,7 +17,7 @@ See the endpoint docs at
 
 <!-- sample post_web_links -->
 ```
-try await client.webLinks.createWebLink(requestBody: CreateWebLinkRequestBody(url: url, parent: CreateWebLinkRequestBodyParentField(id: parent.id), name: name, description: description))
+try await client.webLinks.createWebLink(requestBody: CreateWebLinkRequestBody(url: "https://www.box.com", parent: CreateWebLinkRequestBodyParentField(id: parent.id), name: Utils.getUUID(), description: "Weblink description"))
 ```
 
 ### Arguments
@@ -106,7 +106,7 @@ See the endpoint docs at
 
 <!-- sample delete_web_links_id -->
 ```
-try await client.webLinks.deleteWebLinkById(webLinkId: weblink.id)
+try await client.webLinks.deleteWebLinkById(webLinkId: webLinkId)
 ```
 
 ### Arguments
