@@ -3,7 +3,7 @@ import Foundation
 public enum MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString: Codable {
     case metadataFieldFilterDateRange(MetadataFieldFilterDateRange)
     case metadataFieldFilterFloatRange(MetadataFieldFilterFloatRange)
-    case stringArray([String])
+    case string([String])
     case double(Double)
     case string(String)
 
@@ -19,7 +19,7 @@ public enum MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOf
         }
 
         if let content = try? [String](from: decoder) {
-            self = .stringArray(content)
+            self = .string(content)
             return
         }
 
@@ -43,8 +43,8 @@ public enum MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOf
             try metadataFieldFilterDateRange.encode(to: encoder)
         case .metadataFieldFilterFloatRange(let metadataFieldFilterFloatRange):
             try metadataFieldFilterFloatRange.encode(to: encoder)
-        case .stringArray(let stringArray):
-            try stringArray.encode(to: encoder)
+        case .string(let string):
+            try string.encode(to: encoder)
         case .double(let double):
             try double.encode(to: encoder)
         case .string(let string):
