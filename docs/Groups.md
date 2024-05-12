@@ -50,7 +50,7 @@ See the endpoint docs at
 
 <!-- sample post_groups -->
 ```
-try await client.groups.createGroup(requestBody: CreateGroupRequestBody(name: groupName))
+try await client.groups.createGroup(requestBody: CreateGroupRequestBody(name: groupName, description: groupDescription))
 ```
 
 ### Arguments

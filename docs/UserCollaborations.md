@@ -83,7 +83,7 @@ See the endpoint docs at
 
 <!-- sample delete_collaborations_id -->
 ```
-try await client.userCollaborations.deleteCollaborationById(collaborationId: collaborationId)
+try await client.userCollaborations.deleteCollaborationById(collaborationId: groupCollaboration.id)
 ```
 
 ### Arguments
@@ -126,7 +126,7 @@ See the endpoint docs at
 
 <!-- sample post_collaborations -->
 ```
-try await client.userCollaborations.createCollaboration(requestBody: CreateCollaborationRequestBody(item: CreateCollaborationRequestBodyItemField(type: CreateCollaborationRequestBodyItemTypeField.folder, id: folder.id), accessibleBy: CreateCollaborationRequestBodyAccessibleByField(type: CreateCollaborationRequestBodyAccessibleByTypeField.user, login: userLogin), role: CreateCollaborationRequestBodyRoleField.editor))
+try await client.userCollaborations.createCollaboration(requestBody: CreateCollaborationRequestBody(item: CreateCollaborationRequestBodyItemField(type: CreateCollaborationRequestBodyItemTypeField.file, id: file.id), accessibleBy: CreateCollaborationRequestBodyAccessibleByField(type: CreateCollaborationRequestBodyAccessibleByTypeField.user, id: Utils.getEnvironmentVariable(name: "USER_ID")), role: CreateCollaborationRequestBodyRoleField.editor))
 ```
 
 ### Arguments

@@ -52,7 +52,7 @@ See the endpoint docs at
 
 <!-- sample post_tasks -->
 ```
-try await client.tasks.createTask(requestBody: CreateTaskRequestBody(item: CreateTaskRequestBodyItemField(type: CreateTaskRequestBodyItemTypeField.file, id: file.id), message: "test message", dueAt: dateTime, action: CreateTaskRequestBodyActionField.review, completionRule: CreateTaskRequestBodyCompletionRuleField.allAssignees))
+try await client.tasks.createTask(requestBody: CreateTaskRequestBody(item: CreateTaskRequestBodyItemField(type: CreateTaskRequestBodyItemTypeField.file, id: file.id), message: "test message", dueAt: date, action: CreateTaskRequestBodyActionField.review, completionRule: CreateTaskRequestBodyCompletionRuleField.allAssignees))
 ```
 
 ### Arguments
