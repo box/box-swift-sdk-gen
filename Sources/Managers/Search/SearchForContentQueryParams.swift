@@ -170,14 +170,9 @@ public class SearchForContentQueryParams {
     /// * `all_items` - Searches for both trashed and non-trashed items.
     public let trashContent: SearchForContentQueryParamsTrashContentField?
 
-    /// Limits the search results to any items for which the metadata matches
-    /// the provided filter.
-    /// 
-    /// This parameter contains a list of 1 metadata template to filter
-    /// the search results by. This list can currently only
-    /// contain one entry, though this might be expanded in the future.
-    /// 
-    /// This parameter is required unless the `query` parameter is provided.
+    /// Limits the search results to any items for which the metadata matches the provided filter.
+    /// This parameter is a list that specifies exactly **one** metadata template used to filter the search results. 
+    /// It is required unless the `query` parameter is provided.
     public let mdfilters: [MetadataFilter]?
 
     /// Defines the order in which search results are returned. This API
@@ -413,14 +408,9 @@ public class SearchForContentQueryParams {
     ///     * `non_trashed_only` - Only searches for items currently not in
     ///       the trash
     ///     * `all_items` - Searches for both trashed and non-trashed items.
-    ///   - mdfilters: Limits the search results to any items for which the metadata matches
-    ///     the provided filter.
-    ///     
-    ///     This parameter contains a list of 1 metadata template to filter
-    ///     the search results by. This list can currently only
-    ///     contain one entry, though this might be expanded in the future.
-    ///     
-    ///     This parameter is required unless the `query` parameter is provided.
+    ///   - mdfilters: Limits the search results to any items for which the metadata matches the provided filter.
+    ///     This parameter is a list that specifies exactly **one** metadata template used to filter the search results. 
+    ///     It is required unless the `query` parameter is provided.
     ///   - sort: Defines the order in which search results are returned. This API
     ///     defaults to returning items by relevance unless this parameter is
     ///     explicitly specified.

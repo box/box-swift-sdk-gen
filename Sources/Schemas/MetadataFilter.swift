@@ -1,6 +1,6 @@
 import Foundation
 
-/// A metadata template to filter the search results by.
+/// A metadata template used to filter the search results.
 public class MetadataFilter: Codable {
     private enum CodingKeys: String, CodingKey {
         case scope
@@ -15,7 +15,7 @@ public class MetadataFilter: Codable {
     /// that are available to all enterprises using Box.
     public let scope: MetadataFilterScopeField?
 
-    /// The key of the template to filter search results by.
+    /// The key of the template used to filter search results.
     /// 
     /// In many cases the template key is automatically derived
     /// of its display name, for example `Contract Template` would
@@ -31,7 +31,11 @@ public class MetadataFilter: Codable {
     /// [folder]: e://get-folders-id-metadata
     public let templateKey: String?
 
-    public let filters: MetadataFilterFiltersField?
+    /// Specifies which fields on the template to filter the search
+    /// results by. When more than one field is specified, the query
+    /// performs a logical `AND` to ensure that the instance of the
+    /// template matches each of the fields specified.
+    public let filters: [String: MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString]?
 
     /// Initializer for a MetadataFilter.
     ///
@@ -41,7 +45,7 @@ public class MetadataFilter: Codable {
     ///     This will be `enterprise_{enterprise_id}` for templates defined
     ///     for use in this enterprise, and `global` for general templates
     ///     that are available to all enterprises using Box.
-    ///   - templateKey: The key of the template to filter search results by.
+    ///   - templateKey: The key of the template used to filter search results.
     ///     
     ///     In many cases the template key is automatically derived
     ///     of its display name, for example `Contract Template` would
@@ -55,8 +59,11 @@ public class MetadataFilter: Codable {
     ///     [list]: e://get-metadata-templates-enterprise
     ///     [file]: e://get-files-id-metadata
     ///     [folder]: e://get-folders-id-metadata
-    ///   - filters: 
-    public init(scope: MetadataFilterScopeField? = nil, templateKey: String? = nil, filters: MetadataFilterFiltersField? = nil) {
+    ///   - filters: Specifies which fields on the template to filter the search
+    ///     results by. When more than one field is specified, the query
+    ///     performs a logical `AND` to ensure that the instance of the
+    ///     template matches each of the fields specified.
+    public init(scope: MetadataFilterScopeField? = nil, templateKey: String? = nil, filters: [String: MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString]? = nil) {
         self.scope = scope
         self.templateKey = templateKey
         self.filters = filters
@@ -66,7 +73,7 @@ public class MetadataFilter: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         scope = try container.decodeIfPresent(MetadataFilterScopeField.self, forKey: .scope)
         templateKey = try container.decodeIfPresent(String.self, forKey: .templateKey)
-        filters = try container.decodeIfPresent(MetadataFilterFiltersField.self, forKey: .filters)
+        filters = try container.decodeIfPresent([String: MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString].self, forKey: .filters)
     }
 
     public func encode(to encoder: Encoder) throws {
