@@ -19,7 +19,7 @@ public class UploadSession: Codable {
     public let type: UploadSessionTypeField?
 
     /// The date and time when this session expires.
-    public let sessionExpiresAt: String?
+    public let sessionExpiresAt: Date?
 
     /// The  size in bytes that must be used for all parts of of the
     /// upload.
@@ -58,7 +58,7 @@ public class UploadSession: Codable {
     ///     When committing a file files, inspecting this property can
     ///     provide insight if all parts have been uploaded correctly.
     ///   - sessionEndpoints: 
-    public init(id: String? = nil, type: UploadSessionTypeField? = nil, sessionExpiresAt: String? = nil, partSize: Int64? = nil, totalParts: Int? = nil, numPartsProcessed: Int? = nil, sessionEndpoints: UploadSessionSessionEndpointsField? = nil) {
+    public init(id: String? = nil, type: UploadSessionTypeField? = nil, sessionExpiresAt: Date? = nil, partSize: Int64? = nil, totalParts: Int? = nil, numPartsProcessed: Int? = nil, sessionEndpoints: UploadSessionSessionEndpointsField? = nil) {
         self.id = id
         self.type = type
         self.sessionExpiresAt = sessionExpiresAt
@@ -72,7 +72,12 @@ public class UploadSession: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
         type = try container.decodeIfPresent(UploadSessionTypeField.self, forKey: .type)
-        sessionExpiresAt = try container.decodeIfPresent(String.self, forKey: .sessionExpiresAt)
+        if let _sessionExpiresAt = try container.decodeIfPresent(String.self, forKey: .sessionExpiresAt) {
+            sessionExpiresAt = try Utils.Dates.dateTimeFromString(dateTime: _sessionExpiresAt)
+        } else {
+            sessionExpiresAt = nil
+        }
+
         partSize = try container.decodeIfPresent(Int64.self, forKey: .partSize)
         totalParts = try container.decodeIfPresent(Int.self, forKey: .totalParts)
         numPartsProcessed = try container.decodeIfPresent(Int.self, forKey: .numPartsProcessed)
@@ -83,7 +88,10 @@ public class UploadSession: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
-        try container.encodeIfPresent(sessionExpiresAt, forKey: .sessionExpiresAt)
+        if let sessionExpiresAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: sessionExpiresAt), forKey: .sessionExpiresAt)
+        }
+
         try container.encodeIfPresent(partSize, forKey: .partSize)
         try container.encodeIfPresent(totalParts, forKey: .totalParts)
         try container.encodeIfPresent(numPartsProcessed, forKey: .numPartsProcessed)

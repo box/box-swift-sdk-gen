@@ -29,7 +29,7 @@ public class UpdateCollaborationByIdRequestBody: Codable {
     /// Additionally, a collaboration can only be given an
     /// expiration if it was created after the **Automatically remove
     /// invited collaborator** setting was enabled.
-    public let expiresAt: String?
+    public let expiresAt: Date?
 
     /// Determines if the invited users can see the entire parent path to
     /// the associated folder. The user will not gain privileges in any
@@ -79,7 +79,7 @@ public class UpdateCollaborationByIdRequestBody: Codable {
     ///     `true`.
     ///     
     ///     `can_view_path` can only be used for folder collaborations.
-    public init(role: UpdateCollaborationByIdRequestBodyRoleField, status: UpdateCollaborationByIdRequestBodyStatusField? = nil, expiresAt: String? = nil, canViewPath: Bool? = nil) {
+    public init(role: UpdateCollaborationByIdRequestBodyRoleField, status: UpdateCollaborationByIdRequestBodyStatusField? = nil, expiresAt: Date? = nil, canViewPath: Bool? = nil) {
         self.role = role
         self.status = status
         self.expiresAt = expiresAt
@@ -90,7 +90,12 @@ public class UpdateCollaborationByIdRequestBody: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         role = try container.decode(UpdateCollaborationByIdRequestBodyRoleField.self, forKey: .role)
         status = try container.decodeIfPresent(UpdateCollaborationByIdRequestBodyStatusField.self, forKey: .status)
-        expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt)
+        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
+            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
+        } else {
+            expiresAt = nil
+        }
+
         canViewPath = try container.decodeIfPresent(Bool.self, forKey: .canViewPath)
     }
 
@@ -98,7 +103,10 @@ public class UpdateCollaborationByIdRequestBody: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(role, forKey: .role)
         try container.encodeIfPresent(status, forKey: .status)
-        try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
+        if let expiresAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
+        }
+
         try container.encodeIfPresent(canViewPath, forKey: .canViewPath)
     }
 

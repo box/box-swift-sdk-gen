@@ -31,7 +31,7 @@ public class SkillInvocation: Codable {
     public let status: SkillInvocationStatusField?
 
     /// The time this invocation was created.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// Action that triggered the invocation
     public let trigger: String?
@@ -55,7 +55,7 @@ public class SkillInvocation: Codable {
     ///   - enterprise: 
     ///   - source: 
     ///   - event: 
-    public init(type: SkillInvocationTypeField? = nil, id: String? = nil, skill: SkillInvocationSkillField? = nil, token: SkillInvocationTokenField? = nil, status: SkillInvocationStatusField? = nil, createdAt: String? = nil, trigger: String? = nil, enterprise: SkillInvocationEnterpriseField? = nil, source: FileOrFolder? = nil, event: Event? = nil) {
+    public init(type: SkillInvocationTypeField? = nil, id: String? = nil, skill: SkillInvocationSkillField? = nil, token: SkillInvocationTokenField? = nil, status: SkillInvocationStatusField? = nil, createdAt: Date? = nil, trigger: String? = nil, enterprise: SkillInvocationEnterpriseField? = nil, source: FileOrFolder? = nil, event: Event? = nil) {
         self.type = type
         self.id = id
         self.skill = skill
@@ -75,7 +75,12 @@ public class SkillInvocation: Codable {
         skill = try container.decodeIfPresent(SkillInvocationSkillField.self, forKey: .skill)
         token = try container.decodeIfPresent(SkillInvocationTokenField.self, forKey: .token)
         status = try container.decodeIfPresent(SkillInvocationStatusField.self, forKey: .status)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
         trigger = try container.decodeIfPresent(String.self, forKey: .trigger)
         enterprise = try container.decodeIfPresent(SkillInvocationEnterpriseField.self, forKey: .enterprise)
         source = try container.decodeIfPresent(FileOrFolder.self, forKey: .source)
@@ -89,7 +94,10 @@ public class SkillInvocation: Codable {
         try container.encodeIfPresent(skill, forKey: .skill)
         try container.encodeIfPresent(token, forKey: .token)
         try container.encodeIfPresent(status, forKey: .status)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
         try container.encodeIfPresent(trigger, forKey: .trigger)
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
         try container.encodeIfPresent(source, forKey: .source)

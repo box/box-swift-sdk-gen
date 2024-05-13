@@ -14,7 +14,7 @@ public class AiTextGenDialogueHistoryField: Codable {
     public let answer: String?
 
     /// The ISO date formatted timestamp of when the previous answer to the prompt was created.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// Initializer for a AiTextGenDialogueHistoryField.
     ///
@@ -22,7 +22,7 @@ public class AiTextGenDialogueHistoryField: Codable {
     ///   - prompt: The prompt previously provided by the client and answered by the LLM.
     ///   - answer: The answer previously provided by the LLM.
     ///   - createdAt: The ISO date formatted timestamp of when the previous answer to the prompt was created.
-    public init(prompt: String? = nil, answer: String? = nil, createdAt: String? = nil) {
+    public init(prompt: String? = nil, answer: String? = nil, createdAt: Date? = nil) {
         self.prompt = prompt
         self.answer = answer
         self.createdAt = createdAt
@@ -32,14 +32,22 @@ public class AiTextGenDialogueHistoryField: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         prompt = try container.decodeIfPresent(String.self, forKey: .prompt)
         answer = try container.decodeIfPresent(String.self, forKey: .answer)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(prompt, forKey: .prompt)
         try container.encodeIfPresent(answer, forKey: .answer)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
     }
 
 }

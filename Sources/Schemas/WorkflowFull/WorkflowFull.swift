@@ -13,10 +13,10 @@ public class WorkflowFull: Workflow {
     }
 
     /// The date and time when the workflow was created on Box
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// The date and time when the workflow was last updated on Box
-    public let modifiedAt: String?
+    public let modifiedAt: Date?
 
     public let createdBy: UserBase?
 
@@ -35,7 +35,7 @@ public class WorkflowFull: Workflow {
     ///   - modifiedAt: The date and time when the workflow was last updated on Box
     ///   - createdBy: 
     ///   - modifiedBy: 
-    public init(id: String? = nil, type: WorkflowMiniTypeField? = nil, name: String? = nil, description: String? = nil, isEnabled: Bool? = nil, flows: [WorkflowFlowsField]? = nil, createdAt: String? = nil, modifiedAt: String? = nil, createdBy: UserBase? = nil, modifiedBy: UserBase? = nil) {
+    public init(id: String? = nil, type: WorkflowMiniTypeField? = nil, name: String? = nil, description: String? = nil, isEnabled: Bool? = nil, flows: [WorkflowFlowsField]? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, createdBy: UserBase? = nil, modifiedBy: UserBase? = nil) {
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
         self.createdBy = createdBy
@@ -46,8 +46,18 @@ public class WorkflowFull: Workflow {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
+            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
+        } else {
+            modifiedAt = nil
+        }
+
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
         modifiedBy = try container.decodeIfPresent(UserBase.self, forKey: .modifiedBy)
 
@@ -56,8 +66,14 @@ public class WorkflowFull: Workflow {
 
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let modifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
+        }
+
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(modifiedBy, forKey: .modifiedBy)
         try super.encode(to: encoder)

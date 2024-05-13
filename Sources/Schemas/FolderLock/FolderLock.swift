@@ -24,7 +24,7 @@ public class FolderLock: Codable {
     public let createdBy: UserBase?
 
     /// When the folder lock object was created.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// The operations that have been locked. Currently the `move`
     /// and `delete` operations cannot be locked separately, and both need to be
@@ -48,7 +48,7 @@ public class FolderLock: Codable {
     ///     set to `true`.
     ///     
     ///   - lockType: The lock type, always `freeze`.
-    public init(folder: FolderMini? = nil, id: String? = nil, type: String? = nil, createdBy: UserBase? = nil, createdAt: String? = nil, lockedOperations: FolderLockLockedOperationsField? = nil, lockType: String? = nil) {
+    public init(folder: FolderMini? = nil, id: String? = nil, type: String? = nil, createdBy: UserBase? = nil, createdAt: Date? = nil, lockedOperations: FolderLockLockedOperationsField? = nil, lockType: String? = nil) {
         self.folder = folder
         self.id = id
         self.type = type
@@ -64,7 +64,12 @@ public class FolderLock: Codable {
         id = try container.decodeIfPresent(String.self, forKey: .id)
         type = try container.decodeIfPresent(String.self, forKey: .type)
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
         lockedOperations = try container.decodeIfPresent(FolderLockLockedOperationsField.self, forKey: .lockedOperations)
         lockType = try container.decodeIfPresent(String.self, forKey: .lockType)
     }
@@ -75,7 +80,10 @@ public class FolderLock: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
         try container.encodeIfPresent(lockedOperations, forKey: .lockedOperations)
         try container.encodeIfPresent(lockType, forKey: .lockType)
     }

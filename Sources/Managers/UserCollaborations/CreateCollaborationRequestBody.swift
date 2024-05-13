@@ -50,7 +50,7 @@ public class CreateCollaborationRequestBody: Codable {
     /// of the **Admin Console**. When the setting is not enabled,
     /// collaborations can not have an expiry date and a value for this
     /// field will be result in an error.
-    public let expiresAt: String?
+    public let expiresAt: Date?
 
     /// Initializer for a CreateCollaborationRequestBody.
     ///
@@ -85,7 +85,7 @@ public class CreateCollaborationRequestBody: Codable {
     ///     of the **Admin Console**. When the setting is not enabled,
     ///     collaborations can not have an expiry date and a value for this
     ///     field will be result in an error.
-    public init(item: CreateCollaborationRequestBodyItemField, accessibleBy: CreateCollaborationRequestBodyAccessibleByField, role: CreateCollaborationRequestBodyRoleField, isAccessOnly: Bool? = nil, canViewPath: Bool? = nil, expiresAt: String? = nil) {
+    public init(item: CreateCollaborationRequestBodyItemField, accessibleBy: CreateCollaborationRequestBodyAccessibleByField, role: CreateCollaborationRequestBodyRoleField, isAccessOnly: Bool? = nil, canViewPath: Bool? = nil, expiresAt: Date? = nil) {
         self.item = item
         self.accessibleBy = accessibleBy
         self.role = role
@@ -101,7 +101,12 @@ public class CreateCollaborationRequestBody: Codable {
         role = try container.decode(CreateCollaborationRequestBodyRoleField.self, forKey: .role)
         isAccessOnly = try container.decodeIfPresent(Bool.self, forKey: .isAccessOnly)
         canViewPath = try container.decodeIfPresent(Bool.self, forKey: .canViewPath)
-        expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt)
+        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
+            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
+        } else {
+            expiresAt = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -111,7 +116,10 @@ public class CreateCollaborationRequestBody: Codable {
         try container.encode(role, forKey: .role)
         try container.encodeIfPresent(isAccessOnly, forKey: .isAccessOnly)
         try container.encodeIfPresent(canViewPath, forKey: .canViewPath)
-        try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
+        if let expiresAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
+        }
+
     }
 
 }

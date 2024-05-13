@@ -41,7 +41,7 @@ public class UpdateFileByIdRequestBodySharedLinkField: Codable {
     /// The timestamp at which this shared link will
     /// expire. This field can only be set by
     /// users with paid accounts.
-    public let unsharedAt: String?
+    public let unsharedAt: Date?
 
     public let permissions: UpdateFileByIdRequestBodySharedLinkPermissionsField?
 
@@ -75,7 +75,7 @@ public class UpdateFileByIdRequestBodySharedLinkField: Codable {
     ///     expire. This field can only be set by
     ///     users with paid accounts.
     ///   - permissions: 
-    public init(access: UpdateFileByIdRequestBodySharedLinkAccessField? = nil, password: String? = nil, vanityName: String? = nil, unsharedAt: String? = nil, permissions: UpdateFileByIdRequestBodySharedLinkPermissionsField? = nil) {
+    public init(access: UpdateFileByIdRequestBodySharedLinkAccessField? = nil, password: String? = nil, vanityName: String? = nil, unsharedAt: Date? = nil, permissions: UpdateFileByIdRequestBodySharedLinkPermissionsField? = nil) {
         self.access = access
         self.password = password
         self.vanityName = vanityName
@@ -88,7 +88,12 @@ public class UpdateFileByIdRequestBodySharedLinkField: Codable {
         access = try container.decodeIfPresent(UpdateFileByIdRequestBodySharedLinkAccessField.self, forKey: .access)
         password = try container.decodeIfPresent(String.self, forKey: .password)
         vanityName = try container.decodeIfPresent(String.self, forKey: .vanityName)
-        unsharedAt = try container.decodeIfPresent(String.self, forKey: .unsharedAt)
+        if let _unsharedAt = try container.decodeIfPresent(String.self, forKey: .unsharedAt) {
+            unsharedAt = try Utils.Dates.dateTimeFromString(dateTime: _unsharedAt)
+        } else {
+            unsharedAt = nil
+        }
+
         permissions = try container.decodeIfPresent(UpdateFileByIdRequestBodySharedLinkPermissionsField.self, forKey: .permissions)
     }
 
@@ -97,7 +102,10 @@ public class UpdateFileByIdRequestBodySharedLinkField: Codable {
         try container.encodeIfPresent(access, forKey: .access)
         try container.encodeIfPresent(password, forKey: .password)
         try container.encodeIfPresent(vanityName, forKey: .vanityName)
-        try container.encodeIfPresent(unsharedAt, forKey: .unsharedAt)
+        if let unsharedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: unsharedAt), forKey: .unsharedAt)
+        }
+
         try container.encodeIfPresent(permissions, forKey: .permissions)
     }
 

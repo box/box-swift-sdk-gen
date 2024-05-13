@@ -30,11 +30,11 @@ public class FileVersionRetention: Codable {
 
     /// When this file version retention object was
     /// created
-    public let appliedAt: String?
+    public let appliedAt: Date?
 
     /// When the retention expires on this file
     /// version retention
-    public let dispositionAt: String?
+    public let dispositionAt: Date?
 
     public let winningRetentionPolicy: RetentionPolicyMini?
 
@@ -50,7 +50,7 @@ public class FileVersionRetention: Codable {
     ///   - dispositionAt: When the retention expires on this file
     ///     version retention
     ///   - winningRetentionPolicy: 
-    public init(id: String? = nil, type: FileVersionRetentionTypeField? = nil, fileVersion: FileVersionMini? = nil, file: FileMini? = nil, appliedAt: String? = nil, dispositionAt: String? = nil, winningRetentionPolicy: RetentionPolicyMini? = nil) {
+    public init(id: String? = nil, type: FileVersionRetentionTypeField? = nil, fileVersion: FileVersionMini? = nil, file: FileMini? = nil, appliedAt: Date? = nil, dispositionAt: Date? = nil, winningRetentionPolicy: RetentionPolicyMini? = nil) {
         self.id = id
         self.type = type
         self.fileVersion = fileVersion
@@ -66,8 +66,18 @@ public class FileVersionRetention: Codable {
         type = try container.decodeIfPresent(FileVersionRetentionTypeField.self, forKey: .type)
         fileVersion = try container.decodeIfPresent(FileVersionMini.self, forKey: .fileVersion)
         file = try container.decodeIfPresent(FileMini.self, forKey: .file)
-        appliedAt = try container.decodeIfPresent(String.self, forKey: .appliedAt)
-        dispositionAt = try container.decodeIfPresent(String.self, forKey: .dispositionAt)
+        if let _appliedAt = try container.decodeIfPresent(String.self, forKey: .appliedAt) {
+            appliedAt = try Utils.Dates.dateTimeFromString(dateTime: _appliedAt)
+        } else {
+            appliedAt = nil
+        }
+
+        if let _dispositionAt = try container.decodeIfPresent(String.self, forKey: .dispositionAt) {
+            dispositionAt = try Utils.Dates.dateTimeFromString(dateTime: _dispositionAt)
+        } else {
+            dispositionAt = nil
+        }
+
         winningRetentionPolicy = try container.decodeIfPresent(RetentionPolicyMini.self, forKey: .winningRetentionPolicy)
     }
 
@@ -77,8 +87,14 @@ public class FileVersionRetention: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
         try container.encodeIfPresent(file, forKey: .file)
-        try container.encodeIfPresent(appliedAt, forKey: .appliedAt)
-        try container.encodeIfPresent(dispositionAt, forKey: .dispositionAt)
+        if let appliedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: appliedAt), forKey: .appliedAt)
+        }
+
+        if let dispositionAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: dispositionAt), forKey: .dispositionAt)
+        }
+
         try container.encodeIfPresent(winningRetentionPolicy, forKey: .winningRetentionPolicy)
     }
 

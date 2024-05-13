@@ -25,10 +25,10 @@ public class TermsOfService: TermsOfServiceBase {
     public let text: String?
 
     /// When the legal item was created
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// When the legal item was modified.
-    public let modifiedAt: String?
+    public let modifiedAt: Date?
 
     /// Initializer for a TermsOfService.
     ///
@@ -42,7 +42,7 @@ public class TermsOfService: TermsOfServiceBase {
     ///     empty if the `status` is set to `disabled`.
     ///   - createdAt: When the legal item was created
     ///   - modifiedAt: When the legal item was modified.
-    public init(id: String, type: TermsOfServiceBaseTypeField = TermsOfServiceBaseTypeField.termsOfService, status: TermsOfServiceStatusField? = nil, enterprise: TermsOfServiceEnterpriseField? = nil, tosType: TermsOfServiceTosTypeField? = nil, text: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
+    public init(id: String, type: TermsOfServiceBaseTypeField = TermsOfServiceBaseTypeField.termsOfService, status: TermsOfServiceStatusField? = nil, enterprise: TermsOfServiceEnterpriseField? = nil, tosType: TermsOfServiceTosTypeField? = nil, text: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.status = status
         self.enterprise = enterprise
         self.tosType = tosType
@@ -59,8 +59,18 @@ public class TermsOfService: TermsOfServiceBase {
         enterprise = try container.decodeIfPresent(TermsOfServiceEnterpriseField.self, forKey: .enterprise)
         tosType = try container.decodeIfPresent(TermsOfServiceTosTypeField.self, forKey: .tosType)
         text = try container.decodeIfPresent(String.self, forKey: .text)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
+            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
+        } else {
+            modifiedAt = nil
+        }
+
 
         try super.init(from: decoder)
     }
@@ -71,8 +81,14 @@ public class TermsOfService: TermsOfServiceBase {
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
         try container.encodeIfPresent(tosType, forKey: .tosType)
         try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let modifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
+        }
+
         try super.encode(to: encoder)
     }
 

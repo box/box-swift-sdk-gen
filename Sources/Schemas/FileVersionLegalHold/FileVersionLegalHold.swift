@@ -27,7 +27,7 @@ public class FileVersionLegalHold: Codable {
 
     /// Time that this File-Version-Legal-Hold was
     /// deleted.
-    public let deletedAt: String?
+    public let deletedAt: Date?
 
     /// Initializer for a FileVersionLegalHold.
     ///
@@ -39,7 +39,7 @@ public class FileVersionLegalHold: Codable {
     ///   - legalHoldPolicyAssignments: List of assignments contributing to this Hold.
     ///   - deletedAt: Time that this File-Version-Legal-Hold was
     ///     deleted.
-    public init(id: String? = nil, type: FileVersionLegalHoldTypeField? = nil, fileVersion: FileVersionMini? = nil, file: FileMini? = nil, legalHoldPolicyAssignments: [LegalHoldPolicyAssignment]? = nil, deletedAt: String? = nil) {
+    public init(id: String? = nil, type: FileVersionLegalHoldTypeField? = nil, fileVersion: FileVersionMini? = nil, file: FileMini? = nil, legalHoldPolicyAssignments: [LegalHoldPolicyAssignment]? = nil, deletedAt: Date? = nil) {
         self.id = id
         self.type = type
         self.fileVersion = fileVersion
@@ -55,7 +55,12 @@ public class FileVersionLegalHold: Codable {
         fileVersion = try container.decodeIfPresent(FileVersionMini.self, forKey: .fileVersion)
         file = try container.decodeIfPresent(FileMini.self, forKey: .file)
         legalHoldPolicyAssignments = try container.decodeIfPresent([LegalHoldPolicyAssignment].self, forKey: .legalHoldPolicyAssignments)
-        deletedAt = try container.decodeIfPresent(String.self, forKey: .deletedAt)
+        if let _deletedAt = try container.decodeIfPresent(String.self, forKey: .deletedAt) {
+            deletedAt = try Utils.Dates.dateTimeFromString(dateTime: _deletedAt)
+        } else {
+            deletedAt = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -65,7 +70,10 @@ public class FileVersionLegalHold: Codable {
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
         try container.encodeIfPresent(file, forKey: .file)
         try container.encodeIfPresent(legalHoldPolicyAssignments, forKey: .legalHoldPolicyAssignments)
-        try container.encodeIfPresent(deletedAt, forKey: .deletedAt)
+        if let deletedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: deletedAt), forKey: .deletedAt)
+        }
+
     }
 
 }

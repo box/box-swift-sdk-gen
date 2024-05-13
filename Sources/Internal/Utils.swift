@@ -78,6 +78,7 @@ public enum Utils {
             return map.compactMapValues { $0 }
         }
     }
+
     /// Helper methods for String
     public enum Strings {
         /// Returns String representation of a given `value` parameter.
@@ -105,6 +106,57 @@ public enum Utils {
         }
     }
 
+    /// Helper methods for Date
+    public enum Dates {
+        static let dateFormatter = DateFormatter(dateFormat: "yyyy-MM-dd")
+        static let dateFormatterWithSeconds = DateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ssxxx")
+        static let dateFormatterWithMilliseconds = DateFormatter(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSxxx")
+
+        /// Converts string in ISO 8601 format to Date
+        /// - Parameters:
+        ///   - dateTime: String which represents date in ISO 8601 format `yyyy-MM-dd'T'HH:mm:ssxxx`
+        /// - Returns: Date
+        /// - Throws: GeneralError
+        public static func dateTimeFromString(dateTime: String) throws -> Date {
+            let result = dateFormatterWithSeconds.date(from: dateTime) ??
+            dateFormatterWithMilliseconds.date(from: dateTime)
+
+            guard let result else {
+                throw GeneralError(message: .customValue("Could not create Date from provided string \(dateTime)"))
+            }
+
+            return result
+        }
+
+        /// Converts Date to string in ISO 8601 format
+        /// - Parameters:
+        ///   - dateTime: Date
+        /// - Returns: String
+        public static func  dateTimeToString(dateTime: Date) -> String {
+            return dateFormatterWithSeconds.string(from: dateTime)
+        }
+
+        /// Converts string in ISO 8601 format `yyyy-MM-dd` to Date
+        /// - Parameters:
+        ///   - date: String which represents date in ISO 8601 format `yyyy-MM-dd`
+        /// - Returns: Date
+        /// - Throws: GeneralError
+        public static func  dateFromString(date: String) throws -> Date {
+            guard let date = dateFormatter.date(from: date) else {
+                throw GeneralError(message: .customValue("Could not create Date from provided string \(date)"))
+            }
+
+            return date
+        }
+
+        /// Converts Date to string in ISO 8601 format `yyyy-MM-dd`
+        /// - Parameters:
+        ///   - date: Date
+        /// - Returns: String
+        public static func  dateToString(date: Date) -> String {
+            dateFormatter.string(from: date)
+        }
+    }
 
     /// Creates and returns a string created from the UUID
     ///

@@ -58,10 +58,10 @@ public class RetentionPolicy: RetentionPolicyMini {
     public let createdBy: UserMini?
 
     /// When the retention policy object was created.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// When the retention policy object was last modified.
-    public let modifiedAt: String?
+    public let modifiedAt: Date?
 
     /// Determines if the owner of items under the policy
     /// can extend the retention when the original
@@ -135,7 +135,7 @@ public class RetentionPolicy: RetentionPolicyMini {
     ///     the retention duration is about to end.
     ///   - customNotificationRecipients: A list of users notified when the retention policy duration is about to end.
     ///   - assignmentCounts: Counts the retention policy assignments for each item type.
-    public init(id: String, type: RetentionPolicyBaseTypeField = RetentionPolicyBaseTypeField.retentionPolicy, policyName: String? = nil, retentionLength: String? = nil, dispositionAction: RetentionPolicyMiniDispositionActionField? = nil, description: String? = nil, policyType: RetentionPolicyPolicyTypeField? = nil, retentionType: RetentionPolicyRetentionTypeField? = nil, status: RetentionPolicyStatusField? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, modifiedAt: String? = nil, canOwnerExtendRetention: Bool? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserMini]? = nil, assignmentCounts: RetentionPolicyAssignmentCountsField? = nil) {
+    public init(id: String, type: RetentionPolicyBaseTypeField = RetentionPolicyBaseTypeField.retentionPolicy, policyName: String? = nil, retentionLength: String? = nil, dispositionAction: RetentionPolicyMiniDispositionActionField? = nil, description: String? = nil, policyType: RetentionPolicyPolicyTypeField? = nil, retentionType: RetentionPolicyRetentionTypeField? = nil, status: RetentionPolicyStatusField? = nil, createdBy: UserMini? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, canOwnerExtendRetention: Bool? = nil, areOwnersNotified: Bool? = nil, customNotificationRecipients: [UserMini]? = nil, assignmentCounts: RetentionPolicyAssignmentCountsField? = nil) {
         self.description = description
         self.policyType = policyType
         self.retentionType = retentionType
@@ -158,8 +158,18 @@ public class RetentionPolicy: RetentionPolicyMini {
         retentionType = try container.decodeIfPresent(RetentionPolicyRetentionTypeField.self, forKey: .retentionType)
         status = try container.decodeIfPresent(RetentionPolicyStatusField.self, forKey: .status)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
+            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
+        } else {
+            modifiedAt = nil
+        }
+
         canOwnerExtendRetention = try container.decodeIfPresent(Bool.self, forKey: .canOwnerExtendRetention)
         areOwnersNotified = try container.decodeIfPresent(Bool.self, forKey: .areOwnersNotified)
         customNotificationRecipients = try container.decodeIfPresent([UserMini].self, forKey: .customNotificationRecipients)
@@ -175,8 +185,14 @@ public class RetentionPolicy: RetentionPolicyMini {
         try container.encodeIfPresent(retentionType, forKey: .retentionType)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let modifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
+        }
+
         try container.encodeIfPresent(canOwnerExtendRetention, forKey: .canOwnerExtendRetention)
         try container.encodeIfPresent(areOwnersNotified, forKey: .areOwnersNotified)
         try container.encodeIfPresent(customNotificationRecipients, forKey: .customNotificationRecipients)

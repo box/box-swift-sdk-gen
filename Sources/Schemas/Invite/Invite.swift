@@ -30,10 +30,10 @@ public class Invite: Codable {
     public let status: String?
 
     /// When the invite was created
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// When the invite was modified.
-    public let modifiedAt: String?
+    public let modifiedAt: Date?
 
     /// Initializer for a Invite.
     ///
@@ -46,7 +46,7 @@ public class Invite: Codable {
     ///   - status: The status of the invite
     ///   - createdAt: When the invite was created
     ///   - modifiedAt: When the invite was modified.
-    public init(id: String, type: InviteTypeField = InviteTypeField.invite, invitedTo: InviteInvitedToField? = nil, actionableBy: UserMini? = nil, invitedBy: UserMini? = nil, status: String? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
+    public init(id: String, type: InviteTypeField = InviteTypeField.invite, invitedTo: InviteInvitedToField? = nil, actionableBy: UserMini? = nil, invitedBy: UserMini? = nil, status: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.id = id
         self.type = type
         self.invitedTo = invitedTo
@@ -65,8 +65,18 @@ public class Invite: Codable {
         actionableBy = try container.decodeIfPresent(UserMini.self, forKey: .actionableBy)
         invitedBy = try container.decodeIfPresent(UserMini.self, forKey: .invitedBy)
         status = try container.decodeIfPresent(String.self, forKey: .status)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
+            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
+        } else {
+            modifiedAt = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -77,8 +87,14 @@ public class Invite: Codable {
         try container.encodeIfPresent(actionableBy, forKey: .actionableBy)
         try container.encodeIfPresent(invitedBy, forKey: .invitedBy)
         try container.encodeIfPresent(status, forKey: .status)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let modifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
+        }
+
     }
 
 }

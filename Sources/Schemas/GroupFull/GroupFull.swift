@@ -100,7 +100,7 @@ public class GroupFull: Group {
     ///     * `all_managed_users` - all managed users in the
     ///       enterprise
     ///   - permissions: 
-    public init(id: String, type: GroupBaseTypeField = GroupBaseTypeField.group, name: String? = nil, groupType: GroupMiniGroupTypeField? = nil, createdAt: String? = nil, modifiedAt: String? = nil, provenance: String? = nil, externalSyncIdentifier: String? = nil, description: String? = nil, invitabilityLevel: GroupFullInvitabilityLevelField? = nil, memberViewabilityLevel: GroupFullMemberViewabilityLevelField? = nil, permissions: GroupFullPermissionsField? = nil) {
+    public init(id: String, type: GroupBaseTypeField = GroupBaseTypeField.group, name: String? = nil, groupType: GroupMiniGroupTypeField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, provenance: String? = nil, externalSyncIdentifier: String? = nil, description: String? = nil, invitabilityLevel: GroupFullInvitabilityLevelField? = nil, memberViewabilityLevel: GroupFullMemberViewabilityLevelField? = nil, permissions: GroupFullPermissionsField? = nil) {
         self.provenance = provenance
         self.externalSyncIdentifier = externalSyncIdentifier
         self.description = description

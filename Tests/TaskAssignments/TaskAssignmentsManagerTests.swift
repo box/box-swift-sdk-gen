@@ -11,7 +11,7 @@ class TaskAssignmentsManagerTests: XCTestCase {
 
     public func testCreateUpdateGetDeleteTaskAssignment() async throws {
         let file: FileFull = try await CommonsManager().uploadNewFile()
-        let date: String = "2035-01-01T00:00:00Z"
+        let date: Date = try Utils.Dates.dateTimeFromString(dateTime: "2035-01-01T00:00:00Z")
         let task: Task = try await client.tasks.createTask(requestBody: CreateTaskRequestBody(item: CreateTaskRequestBodyItemField(id: file.id, type: CreateTaskRequestBodyItemTypeField.file), action: CreateTaskRequestBodyActionField.review, message: "test message", dueAt: date, completionRule: CreateTaskRequestBodyCompletionRuleField.allAssignees))
         XCTAssertTrue(task.message == "test message")
         XCTAssertTrue(task.item!.id == file.id)

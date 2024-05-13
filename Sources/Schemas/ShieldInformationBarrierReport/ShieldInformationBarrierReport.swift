@@ -21,13 +21,13 @@ public class ShieldInformationBarrierReport: ShieldInformationBarrierReportBase 
 
     /// ISO date time string when this
     /// shield information barrier report object was created.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     public let createdBy: UserBase?
 
     /// ISO date time string when this
     /// shield information barrier report was updated.
-    public let updatedAt: String?
+    public let updatedAt: Date?
 
     /// Initializer for a ShieldInformationBarrierReport.
     ///
@@ -42,7 +42,7 @@ public class ShieldInformationBarrierReport: ShieldInformationBarrierReportBase 
     ///   - createdBy: 
     ///   - updatedAt: ISO date time string when this
     ///     shield information barrier report was updated.
-    public init(id: String? = nil, type: ShieldInformationBarrierReportBaseTypeField? = nil, shieldInformationBarrier: ShieldInformationBarrierReference? = nil, status: ShieldInformationBarrierReportStatusField? = nil, details: ShieldInformationBarrierReportDetails? = nil, createdAt: String? = nil, createdBy: UserBase? = nil, updatedAt: String? = nil) {
+    public init(id: String? = nil, type: ShieldInformationBarrierReportBaseTypeField? = nil, shieldInformationBarrier: ShieldInformationBarrierReference? = nil, status: ShieldInformationBarrierReportStatusField? = nil, details: ShieldInformationBarrierReportDetails? = nil, createdAt: Date? = nil, createdBy: UserBase? = nil, updatedAt: Date? = nil) {
         self.shieldInformationBarrier = shieldInformationBarrier
         self.status = status
         self.details = details
@@ -58,9 +58,19 @@ public class ShieldInformationBarrierReport: ShieldInformationBarrierReportBase 
         shieldInformationBarrier = try container.decodeIfPresent(ShieldInformationBarrierReference.self, forKey: .shieldInformationBarrier)
         status = try container.decodeIfPresent(ShieldInformationBarrierReportStatusField.self, forKey: .status)
         details = try container.decodeIfPresent(ShieldInformationBarrierReportDetails.self, forKey: .details)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
-        updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt)
+        if let _updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) {
+            updatedAt = try Utils.Dates.dateTimeFromString(dateTime: _updatedAt)
+        } else {
+            updatedAt = nil
+        }
+
 
         try super.init(from: decoder)
     }
@@ -70,9 +80,15 @@ public class ShieldInformationBarrierReport: ShieldInformationBarrierReportBase 
         try container.encodeIfPresent(shieldInformationBarrier, forKey: .shieldInformationBarrier)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(details, forKey: .details)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
+        if let updatedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: updatedAt), forKey: .updatedAt)
+        }
+
         try super.encode(to: encoder)
     }
 

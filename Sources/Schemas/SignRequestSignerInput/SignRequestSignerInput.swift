@@ -32,7 +32,7 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
     ///   - type: Type of input
     ///   - contentType: Content type of input
     ///   - readOnly: Whether this input was defined as read-only(immutable by signers) or not
-    public init(pageIndex: Int64, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: String? = nil, type: SignRequestSignerInputTypeField? = nil, contentType: SignRequestSignerInputContentTypeField? = nil, readOnly: Bool? = nil) {
+    public init(pageIndex: Int64, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: Date? = nil, type: SignRequestSignerInputTypeField? = nil, contentType: SignRequestSignerInputContentTypeField? = nil, readOnly: Bool? = nil) {
         self.pageIndex = pageIndex
         self.type = type
         self.contentType = contentType

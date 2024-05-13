@@ -19,7 +19,7 @@ public class UpdateTaskByIdRequestBody: Codable {
     public let message: String?
 
     /// When the task is due at.
-    public let dueAt: String?
+    public let dueAt: Date?
 
     /// Defines which assignees need to complete this task before the task
     /// is considered completed.
@@ -47,7 +47,7 @@ public class UpdateTaskByIdRequestBody: Codable {
     ///     approve the the task in order for it to be considered completed.
     ///     * `any_assignee` accepts any one assignee to review or
     ///     approve the the task in order for it to be considered completed.
-    public init(action: UpdateTaskByIdRequestBodyActionField? = nil, message: String? = nil, dueAt: String? = nil, completionRule: UpdateTaskByIdRequestBodyCompletionRuleField? = nil) {
+    public init(action: UpdateTaskByIdRequestBodyActionField? = nil, message: String? = nil, dueAt: Date? = nil, completionRule: UpdateTaskByIdRequestBodyCompletionRuleField? = nil) {
         self.action = action
         self.message = message
         self.dueAt = dueAt
@@ -58,7 +58,12 @@ public class UpdateTaskByIdRequestBody: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         action = try container.decodeIfPresent(UpdateTaskByIdRequestBodyActionField.self, forKey: .action)
         message = try container.decodeIfPresent(String.self, forKey: .message)
-        dueAt = try container.decodeIfPresent(String.self, forKey: .dueAt)
+        if let _dueAt = try container.decodeIfPresent(String.self, forKey: .dueAt) {
+            dueAt = try Utils.Dates.dateTimeFromString(dateTime: _dueAt)
+        } else {
+            dueAt = nil
+        }
+
         completionRule = try container.decodeIfPresent(UpdateTaskByIdRequestBodyCompletionRuleField.self, forKey: .completionRule)
     }
 
@@ -66,7 +71,10 @@ public class UpdateTaskByIdRequestBody: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(action, forKey: .action)
         try container.encodeIfPresent(message, forKey: .message)
-        try container.encodeIfPresent(dueAt, forKey: .dueAt)
+        if let dueAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: dueAt), forKey: .dueAt)
+        }
+
         try container.encodeIfPresent(completionRule, forKey: .completionRule)
     }
 

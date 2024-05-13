@@ -12,7 +12,7 @@ public class AiResponse: Codable {
     public let answer: String
 
     /// The ISO date formatted timestamp of when the answer to the prompt was created.
-    public let createdAt: String
+    public let createdAt: Date
 
     /// The reason the response finishes.
     public let completionReason: String?
@@ -23,7 +23,7 @@ public class AiResponse: Codable {
     ///   - answer: The answer provided by the LLM.
     ///   - createdAt: The ISO date formatted timestamp of when the answer to the prompt was created.
     ///   - completionReason: The reason the response finishes.
-    public init(answer: String, createdAt: String, completionReason: String? = nil) {
+    public init(answer: String, createdAt: Date, completionReason: String? = nil) {
         self.answer = answer
         self.createdAt = createdAt
         self.completionReason = completionReason
@@ -32,14 +32,14 @@ public class AiResponse: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         answer = try container.decode(String.self, forKey: .answer)
-        createdAt = try container.decode(String.self, forKey: .createdAt)
+        createdAt = try Utils.Dates.dateTimeFromString(dateTime: try container.decode(String.self, forKey: .createdAt))
         completionReason = try container.decodeIfPresent(String.self, forKey: .completionReason)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(answer, forKey: .answer)
-        try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         try container.encodeIfPresent(completionReason, forKey: .completionReason)
     }
 

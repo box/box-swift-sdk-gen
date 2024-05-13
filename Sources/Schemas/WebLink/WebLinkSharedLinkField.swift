@@ -73,7 +73,7 @@ public class WebLinkSharedLinkField: Codable {
 
     /// The date and time when this link will be unshared. This field can only be
     /// set by users with paid accounts.
-    public let unsharedAt: String?
+    public let unsharedAt: Date?
 
     /// Defines if this link allows a user to preview, edit, and download an item.
     /// These permissions refer to the shared link only and
@@ -123,7 +123,7 @@ public class WebLinkSharedLinkField: Codable {
     ///   - permissions: Defines if this link allows a user to preview, edit, and download an item.
     ///     These permissions refer to the shared link only and
     ///     do not supersede permissions applied to the item itself.
-    public init(url: String, effectiveAccess: WebLinkSharedLinkEffectiveAccessField, effectivePermission: WebLinkSharedLinkEffectivePermissionField, isPasswordEnabled: Bool, downloadCount: Int64, previewCount: Int64, downloadUrl: String? = nil, vanityUrl: String? = nil, vanityName: String? = nil, access: WebLinkSharedLinkAccessField? = nil, unsharedAt: String? = nil, permissions: WebLinkSharedLinkPermissionsField? = nil) {
+    public init(url: String, effectiveAccess: WebLinkSharedLinkEffectiveAccessField, effectivePermission: WebLinkSharedLinkEffectivePermissionField, isPasswordEnabled: Bool, downloadCount: Int64, previewCount: Int64, downloadUrl: String? = nil, vanityUrl: String? = nil, vanityName: String? = nil, access: WebLinkSharedLinkAccessField? = nil, unsharedAt: Date? = nil, permissions: WebLinkSharedLinkPermissionsField? = nil) {
         self.url = url
         self.effectiveAccess = effectiveAccess
         self.effectivePermission = effectivePermission
@@ -150,7 +150,12 @@ public class WebLinkSharedLinkField: Codable {
         vanityUrl = try container.decodeIfPresent(String.self, forKey: .vanityUrl)
         vanityName = try container.decodeIfPresent(String.self, forKey: .vanityName)
         access = try container.decodeIfPresent(WebLinkSharedLinkAccessField.self, forKey: .access)
-        unsharedAt = try container.decodeIfPresent(String.self, forKey: .unsharedAt)
+        if let _unsharedAt = try container.decodeIfPresent(String.self, forKey: .unsharedAt) {
+            unsharedAt = try Utils.Dates.dateTimeFromString(dateTime: _unsharedAt)
+        } else {
+            unsharedAt = nil
+        }
+
         permissions = try container.decodeIfPresent(WebLinkSharedLinkPermissionsField.self, forKey: .permissions)
     }
 
@@ -166,7 +171,10 @@ public class WebLinkSharedLinkField: Codable {
         try container.encodeIfPresent(vanityUrl, forKey: .vanityUrl)
         try container.encodeIfPresent(vanityName, forKey: .vanityName)
         try container.encodeIfPresent(access, forKey: .access)
-        try container.encodeIfPresent(unsharedAt, forKey: .unsharedAt)
+        if let unsharedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: unsharedAt), forKey: .unsharedAt)
+        }
+
         try container.encodeIfPresent(permissions, forKey: .permissions)
     }
 

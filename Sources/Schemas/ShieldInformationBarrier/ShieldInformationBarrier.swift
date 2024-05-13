@@ -30,19 +30,19 @@ public class ShieldInformationBarrier: Codable {
 
     /// ISO date time string when this
     /// shield information barrier object was created.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// The user who created this shield information barrier.
     public let createdBy: UserBase?
 
     /// ISO date time string when this shield information barrier was updated.
-    public let updatedAt: String?
+    public let updatedAt: Date?
 
     /// The user that updated this shield information barrier.
     public let updatedBy: UserBase?
 
     /// ISO date time string when this shield information barrier was enabled.
-    public let enabledAt: String?
+    public let enabledAt: Date?
 
     public let enabledBy: UserBase?
 
@@ -60,7 +60,7 @@ public class ShieldInformationBarrier: Codable {
     ///   - updatedBy: The user that updated this shield information barrier.
     ///   - enabledAt: ISO date time string when this shield information barrier was enabled.
     ///   - enabledBy: 
-    public init(id: String? = nil, type: ShieldInformationBarrierTypeField? = nil, enterprise: EnterpriseBase? = nil, status: ShieldInformationBarrierStatusField? = nil, createdAt: String? = nil, createdBy: UserBase? = nil, updatedAt: String? = nil, updatedBy: UserBase? = nil, enabledAt: String? = nil, enabledBy: UserBase? = nil) {
+    public init(id: String? = nil, type: ShieldInformationBarrierTypeField? = nil, enterprise: EnterpriseBase? = nil, status: ShieldInformationBarrierStatusField? = nil, createdAt: Date? = nil, createdBy: UserBase? = nil, updatedAt: Date? = nil, updatedBy: UserBase? = nil, enabledAt: Date? = nil, enabledBy: UserBase? = nil) {
         self.id = id
         self.type = type
         self.enterprise = enterprise
@@ -79,11 +79,26 @@ public class ShieldInformationBarrier: Codable {
         type = try container.decodeIfPresent(ShieldInformationBarrierTypeField.self, forKey: .type)
         enterprise = try container.decodeIfPresent(EnterpriseBase.self, forKey: .enterprise)
         status = try container.decodeIfPresent(ShieldInformationBarrierStatusField.self, forKey: .status)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
-        updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt)
+        if let _updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) {
+            updatedAt = try Utils.Dates.dateTimeFromString(dateTime: _updatedAt)
+        } else {
+            updatedAt = nil
+        }
+
         updatedBy = try container.decodeIfPresent(UserBase.self, forKey: .updatedBy)
-        enabledAt = try container.decodeIfPresent(String.self, forKey: .enabledAt)
+        if let _enabledAt = try container.decodeIfPresent(String.self, forKey: .enabledAt) {
+            enabledAt = try Utils.Dates.dateTimeFromString(dateTime: _enabledAt)
+        } else {
+            enabledAt = nil
+        }
+
         enabledBy = try container.decodeIfPresent(UserBase.self, forKey: .enabledBy)
     }
 
@@ -93,11 +108,20 @@ public class ShieldInformationBarrier: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
         try container.encodeIfPresent(status, forKey: .status)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
+        if let updatedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: updatedAt), forKey: .updatedAt)
+        }
+
         try container.encodeIfPresent(updatedBy, forKey: .updatedBy)
-        try container.encodeIfPresent(enabledAt, forKey: .enabledAt)
+        if let enabledAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: enabledAt), forKey: .enabledAt)
+        }
+
         try container.encodeIfPresent(enabledBy, forKey: .enabledBy)
     }
 

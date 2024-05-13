@@ -67,7 +67,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
     ///   - dimensions: The size of the input.
     ///   - label: The label field is used especially for text, attachment, radio, and checkbox type inputs.
     ///   - readOnly: Whether this input was defined as read-only(immutable by signers) or not
-    public init(pageIndex: Int64, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: String? = nil, type: TemplateSignerInputTypeField? = nil, contentType: TemplateSignerInputContentTypeField? = nil, isRequired: Bool? = nil, documentId: String? = nil, dropdownChoices: [String]? = nil, groupId: String? = nil, coordinates: TemplateSignerInputCoordinatesField? = nil, dimensions: TemplateSignerInputDimensionsField? = nil, label: String? = nil, readOnly: Bool? = nil) {
+    public init(pageIndex: Int64, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: Date? = nil, type: TemplateSignerInputTypeField? = nil, contentType: TemplateSignerInputContentTypeField? = nil, isRequired: Bool? = nil, documentId: String? = nil, dropdownChoices: [String]? = nil, groupId: String? = nil, coordinates: TemplateSignerInputCoordinatesField? = nil, dimensions: TemplateSignerInputDimensionsField? = nil, label: String? = nil, readOnly: Bool? = nil) {
         self.pageIndex = pageIndex
         self.type = type
         self.contentType = contentType

@@ -18,10 +18,10 @@ public class Event: Codable {
     public let type: String?
 
     /// When the event object was created
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// When the event object was recorded in database
-    public let recordedAt: String?
+    public let recordedAt: Date?
 
     /// The ID of the event object. You can use this to detect duplicate events
     public let eventId: String?
@@ -62,7 +62,7 @@ public class Event: Codable {
     ///     information to correlate an event to external KeySafe logs. Not all events
     ///     have an `additional_details` object.  This object is only available in the
     ///     Enterprise Events.
-    public init(type: String? = nil, createdAt: String? = nil, recordedAt: String? = nil, eventId: String? = nil, createdBy: UserMini? = nil, eventType: EventEventTypeField? = nil, sessionId: String? = nil, source: EventSourceOrFileOrFolderOrGenericSourceOrUser? = nil, additionalDetails: EventAdditionalDetailsField? = nil) {
+    public init(type: String? = nil, createdAt: Date? = nil, recordedAt: Date? = nil, eventId: String? = nil, createdBy: UserMini? = nil, eventType: EventEventTypeField? = nil, sessionId: String? = nil, source: EventSourceOrFileOrFolderOrGenericSourceOrUser? = nil, additionalDetails: EventAdditionalDetailsField? = nil) {
         self.type = type
         self.createdAt = createdAt
         self.recordedAt = recordedAt
@@ -77,8 +77,18 @@ public class Event: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         type = try container.decodeIfPresent(String.self, forKey: .type)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        recordedAt = try container.decodeIfPresent(String.self, forKey: .recordedAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _recordedAt = try container.decodeIfPresent(String.self, forKey: .recordedAt) {
+            recordedAt = try Utils.Dates.dateTimeFromString(dateTime: _recordedAt)
+        } else {
+            recordedAt = nil
+        }
+
         eventId = try container.decodeIfPresent(String.self, forKey: .eventId)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
         eventType = try container.decodeIfPresent(EventEventTypeField.self, forKey: .eventType)
@@ -90,8 +100,14 @@ public class Event: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(type, forKey: .type)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(recordedAt, forKey: .recordedAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let recordedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: recordedAt), forKey: .recordedAt)
+        }
+
         try container.encodeIfPresent(eventId, forKey: .eventId)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(eventType, forKey: .eventType)

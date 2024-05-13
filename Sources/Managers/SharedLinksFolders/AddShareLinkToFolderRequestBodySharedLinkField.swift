@@ -43,7 +43,7 @@ public class AddShareLinkToFolderRequestBodySharedLinkField: Codable {
     /// expire. This field can only be set by
     /// users with paid accounts. The value must be greater than the
     /// current date and time.
-    public let unsharedAt: String?
+    public let unsharedAt: Date?
 
     public let permissions: AddShareLinkToFolderRequestBodySharedLinkPermissionsField?
 
@@ -79,7 +79,7 @@ public class AddShareLinkToFolderRequestBodySharedLinkField: Codable {
     ///     users with paid accounts. The value must be greater than the
     ///     current date and time.
     ///   - permissions: 
-    public init(access: AddShareLinkToFolderRequestBodySharedLinkAccessField? = nil, password: String? = nil, vanityName: String? = nil, unsharedAt: String? = nil, permissions: AddShareLinkToFolderRequestBodySharedLinkPermissionsField? = nil) {
+    public init(access: AddShareLinkToFolderRequestBodySharedLinkAccessField? = nil, password: String? = nil, vanityName: String? = nil, unsharedAt: Date? = nil, permissions: AddShareLinkToFolderRequestBodySharedLinkPermissionsField? = nil) {
         self.access = access
         self.password = password
         self.vanityName = vanityName
@@ -92,7 +92,12 @@ public class AddShareLinkToFolderRequestBodySharedLinkField: Codable {
         access = try container.decodeIfPresent(AddShareLinkToFolderRequestBodySharedLinkAccessField.self, forKey: .access)
         password = try container.decodeIfPresent(String.self, forKey: .password)
         vanityName = try container.decodeIfPresent(String.self, forKey: .vanityName)
-        unsharedAt = try container.decodeIfPresent(String.self, forKey: .unsharedAt)
+        if let _unsharedAt = try container.decodeIfPresent(String.self, forKey: .unsharedAt) {
+            unsharedAt = try Utils.Dates.dateTimeFromString(dateTime: _unsharedAt)
+        } else {
+            unsharedAt = nil
+        }
+
         permissions = try container.decodeIfPresent(AddShareLinkToFolderRequestBodySharedLinkPermissionsField.self, forKey: .permissions)
     }
 
@@ -101,7 +106,10 @@ public class AddShareLinkToFolderRequestBodySharedLinkField: Codable {
         try container.encodeIfPresent(access, forKey: .access)
         try container.encodeIfPresent(password, forKey: .password)
         try container.encodeIfPresent(vanityName, forKey: .vanityName)
-        try container.encodeIfPresent(unsharedAt, forKey: .unsharedAt)
+        if let unsharedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: unsharedAt), forKey: .unsharedAt)
+        }
+
         try container.encodeIfPresent(permissions, forKey: .permissions)
     }
 

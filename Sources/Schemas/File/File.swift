@@ -31,25 +31,25 @@ public class File: FileMini {
     public let pathCollection: FilePathCollectionField?
 
     /// The date and time when the file was created on Box.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// The date and time when the file was last updated on Box.
-    public let modifiedAt: String?
+    public let modifiedAt: Date?
 
     /// The time at which this file was put in the trash.
-    public let trashedAt: String?
+    public let trashedAt: Date?
 
     /// The time at which this file is expected to be purged
     /// from the trash.
-    public let purgedAt: String?
+    public let purgedAt: Date?
 
     /// The date and time at which this file was originally
     /// created, which might be before it was uploaded to Box.
-    public let contentCreatedAt: String?
+    public let contentCreatedAt: Date?
 
     /// The date and time at which this file was last updated,
     /// which might be before it was uploaded to Box.
-    public let contentModifiedAt: String?
+    public let contentModifiedAt: Date?
 
     public let createdBy: UserMini?
 
@@ -110,7 +110,7 @@ public class File: FileMini {
     ///     * `active` when the item has is not in the trash
     ///     * `trashed` when the item has been moved to the trash but not deleted
     ///     * `deleted` when the item has been permanently deleted.
-    public init(id: String, etag: String? = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: String? = nil, modifiedAt: String? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: FolderMini? = nil, itemStatus: FileItemStatusField? = nil) {
+    public init(id: String, etag: String? = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: Date? = nil, purgedAt: Date? = nil, contentCreatedAt: Date? = nil, contentModifiedAt: Date? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: FolderMini? = nil, itemStatus: FileItemStatusField? = nil) {
         self.description = description
         self.size = size
         self.pathCollection = pathCollection
@@ -135,12 +135,42 @@ public class File: FileMini {
         description = try container.decodeIfPresent(String.self, forKey: .description)
         size = try container.decodeIfPresent(Int64.self, forKey: .size)
         pathCollection = try container.decodeIfPresent(FilePathCollectionField.self, forKey: .pathCollection)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
-        trashedAt = try container.decodeIfPresent(String.self, forKey: .trashedAt)
-        purgedAt = try container.decodeIfPresent(String.self, forKey: .purgedAt)
-        contentCreatedAt = try container.decodeIfPresent(String.self, forKey: .contentCreatedAt)
-        contentModifiedAt = try container.decodeIfPresent(String.self, forKey: .contentModifiedAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
+            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
+        } else {
+            modifiedAt = nil
+        }
+
+        if let _trashedAt = try container.decodeIfPresent(String.self, forKey: .trashedAt) {
+            trashedAt = try Utils.Dates.dateTimeFromString(dateTime: _trashedAt)
+        } else {
+            trashedAt = nil
+        }
+
+        if let _purgedAt = try container.decodeIfPresent(String.self, forKey: .purgedAt) {
+            purgedAt = try Utils.Dates.dateTimeFromString(dateTime: _purgedAt)
+        } else {
+            purgedAt = nil
+        }
+
+        if let _contentCreatedAt = try container.decodeIfPresent(String.self, forKey: .contentCreatedAt) {
+            contentCreatedAt = try Utils.Dates.dateTimeFromString(dateTime: _contentCreatedAt)
+        } else {
+            contentCreatedAt = nil
+        }
+
+        if let _contentModifiedAt = try container.decodeIfPresent(String.self, forKey: .contentModifiedAt) {
+            contentModifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _contentModifiedAt)
+        } else {
+            contentModifiedAt = nil
+        }
+
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
         modifiedBy = try container.decodeIfPresent(UserMini.self, forKey: .modifiedBy)
         ownedBy = try container.decodeIfPresent(UserMini.self, forKey: .ownedBy)
@@ -156,12 +186,30 @@ public class File: FileMini {
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(size, forKey: .size)
         try container.encodeIfPresent(pathCollection, forKey: .pathCollection)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
-        try container.encodeIfPresent(trashedAt, forKey: .trashedAt)
-        try container.encodeIfPresent(purgedAt, forKey: .purgedAt)
-        try container.encodeIfPresent(contentCreatedAt, forKey: .contentCreatedAt)
-        try container.encodeIfPresent(contentModifiedAt, forKey: .contentModifiedAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let modifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
+        }
+
+        if let trashedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: trashedAt), forKey: .trashedAt)
+        }
+
+        if let purgedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: purgedAt), forKey: .purgedAt)
+        }
+
+        if let contentCreatedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: contentCreatedAt), forKey: .contentCreatedAt)
+        }
+
+        if let contentModifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: contentModifiedAt), forKey: .contentModifiedAt)
+        }
+
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(modifiedBy, forKey: .modifiedBy)
         try container.encodeIfPresent(ownedBy, forKey: .ownedBy)

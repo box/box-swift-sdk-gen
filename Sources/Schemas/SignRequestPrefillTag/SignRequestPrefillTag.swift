@@ -20,7 +20,7 @@ public class SignRequestPrefillTag: Codable {
     public let checkboxValue: Bool?
 
     /// Date prefill value
-    public let dateValue: String?
+    public let dateValue: Date?
 
     /// Initializer for a SignRequestPrefillTag.
     ///
@@ -29,7 +29,7 @@ public class SignRequestPrefillTag: Codable {
     ///   - textValue: Text prefill value
     ///   - checkboxValue: Checkbox prefill value
     ///   - dateValue: Date prefill value
-    public init(documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: String? = nil) {
+    public init(documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: Date? = nil) {
         self.documentTagId = documentTagId
         self.textValue = textValue
         self.checkboxValue = checkboxValue
@@ -41,7 +41,12 @@ public class SignRequestPrefillTag: Codable {
         documentTagId = try container.decodeIfPresent(String.self, forKey: .documentTagId)
         textValue = try container.decodeIfPresent(String.self, forKey: .textValue)
         checkboxValue = try container.decodeIfPresent(Bool.self, forKey: .checkboxValue)
-        dateValue = try container.decodeIfPresent(String.self, forKey: .dateValue)
+        if let _dateValue = try container.decodeIfPresent(String.self, forKey: .dateValue) {
+            dateValue = try Utils.Dates.dateFromString(date: _dateValue)
+        } else {
+            dateValue = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -49,7 +54,10 @@ public class SignRequestPrefillTag: Codable {
         try container.encodeIfPresent(documentTagId, forKey: .documentTagId)
         try container.encodeIfPresent(textValue, forKey: .textValue)
         try container.encodeIfPresent(checkboxValue, forKey: .checkboxValue)
-        try container.encodeIfPresent(dateValue, forKey: .dateValue)
+        if let dateValue {
+            try container.encode(Utils.Dates.dateToString(date: dateValue), forKey: .dateValue)
+        }
+
     }
 
 }

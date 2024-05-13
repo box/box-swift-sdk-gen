@@ -23,10 +23,10 @@ public class CollaborationAllowlistExemptTarget: Codable {
     public let user: UserMini?
 
     /// The time the entry was created
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// The time the entry was modified
-    public let modifiedAt: String?
+    public let modifiedAt: Date?
 
     /// Initializer for a CollaborationAllowlistExemptTarget.
     ///
@@ -37,7 +37,7 @@ public class CollaborationAllowlistExemptTarget: Codable {
     ///   - user: 
     ///   - createdAt: The time the entry was created
     ///   - modifiedAt: The time the entry was modified
-    public init(id: String? = nil, type: CollaborationAllowlistExemptTargetTypeField? = nil, enterprise: CollaborationAllowlistExemptTargetEnterpriseField? = nil, user: UserMini? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
+    public init(id: String? = nil, type: CollaborationAllowlistExemptTargetTypeField? = nil, enterprise: CollaborationAllowlistExemptTargetEnterpriseField? = nil, user: UserMini? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.id = id
         self.type = type
         self.enterprise = enterprise
@@ -52,8 +52,18 @@ public class CollaborationAllowlistExemptTarget: Codable {
         type = try container.decodeIfPresent(CollaborationAllowlistExemptTargetTypeField.self, forKey: .type)
         enterprise = try container.decodeIfPresent(CollaborationAllowlistExemptTargetEnterpriseField.self, forKey: .enterprise)
         user = try container.decodeIfPresent(UserMini.self, forKey: .user)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
+            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
+        } else {
+            modifiedAt = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -62,8 +72,14 @@ public class CollaborationAllowlistExemptTarget: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
         try container.encodeIfPresent(user, forKey: .user)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let modifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
+        }
+
     }
 
 }

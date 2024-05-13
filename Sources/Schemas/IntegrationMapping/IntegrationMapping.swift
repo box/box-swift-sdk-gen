@@ -42,10 +42,10 @@ public class IntegrationMapping: IntegrationMappingBase {
     public let modifiedBy: UserIntegrationMappings?
 
     /// When the integration mapping object was created
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// When the integration mapping object was last modified
-    public let modifiedAt: String?
+    public let modifiedAt: Date?
 
     /// Initializer for a IntegrationMapping.
     ///
@@ -71,7 +71,7 @@ public class IntegrationMapping: IntegrationMappingBase {
     ///     last modified the integration mapping
     ///   - createdAt: When the integration mapping object was created
     ///   - modifiedAt: When the integration mapping object was last modified
-    public init(partnerItem: IntegrationMappingPartnerItemSlack, boxItem: FolderMini, id: String? = nil, integrationType: IntegrationMappingBaseIntegrationTypeField? = nil, type: IntegrationMappingTypeField = IntegrationMappingTypeField.integrationMapping, isManuallyCreated: Bool? = nil, options: IntegrationMappingSlackOptions? = nil, createdBy: UserIntegrationMappings? = nil, modifiedBy: UserIntegrationMappings? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
+    public init(partnerItem: IntegrationMappingPartnerItemSlack, boxItem: FolderMini, id: String? = nil, integrationType: IntegrationMappingBaseIntegrationTypeField? = nil, type: IntegrationMappingTypeField = IntegrationMappingTypeField.integrationMapping, isManuallyCreated: Bool? = nil, options: IntegrationMappingSlackOptions? = nil, createdBy: UserIntegrationMappings? = nil, modifiedBy: UserIntegrationMappings? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.partnerItem = partnerItem
         self.boxItem = boxItem
         self.type = type
@@ -94,8 +94,18 @@ public class IntegrationMapping: IntegrationMappingBase {
         options = try container.decodeIfPresent(IntegrationMappingSlackOptions.self, forKey: .options)
         createdBy = try container.decodeIfPresent(UserIntegrationMappings.self, forKey: .createdBy)
         modifiedBy = try container.decodeIfPresent(UserIntegrationMappings.self, forKey: .modifiedBy)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
+            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
+        } else {
+            modifiedAt = nil
+        }
+
 
         try super.init(from: decoder)
     }
@@ -109,8 +119,14 @@ public class IntegrationMapping: IntegrationMappingBase {
         try container.encodeIfPresent(options, forKey: .options)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(modifiedBy, forKey: .modifiedBy)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let modifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
+        }
+
         try super.encode(to: encoder)
     }
 

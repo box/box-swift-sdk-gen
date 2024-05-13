@@ -20,10 +20,10 @@ public class FileFullLockField: Codable {
     public let createdBy: UserMini?
 
     /// The time this lock was created at.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// The time this lock is to expire at, which might be in the past.
-    public let expiredAt: String?
+    public let expiredAt: Date?
 
     /// Whether or not the file can be downloaded while locked.
     public let isDownloadPrevented: Bool?
@@ -47,7 +47,7 @@ public class FileFullLockField: Codable {
     ///     field identifies the type of the application that holds the lock.
     ///     This is an open enum and may be extended with additional values in
     ///     the future.
-    public init(id: String? = nil, type: FileFullLockTypeField? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, expiredAt: String? = nil, isDownloadPrevented: Bool? = nil, appType: FileFullLockAppTypeField? = nil) {
+    public init(id: String? = nil, type: FileFullLockTypeField? = nil, createdBy: UserMini? = nil, createdAt: Date? = nil, expiredAt: Date? = nil, isDownloadPrevented: Bool? = nil, appType: FileFullLockAppTypeField? = nil) {
         self.id = id
         self.type = type
         self.createdBy = createdBy
@@ -62,8 +62,18 @@ public class FileFullLockField: Codable {
         id = try container.decodeIfPresent(String.self, forKey: .id)
         type = try container.decodeIfPresent(FileFullLockTypeField.self, forKey: .type)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        expiredAt = try container.decodeIfPresent(String.self, forKey: .expiredAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _expiredAt = try container.decodeIfPresent(String.self, forKey: .expiredAt) {
+            expiredAt = try Utils.Dates.dateTimeFromString(dateTime: _expiredAt)
+        } else {
+            expiredAt = nil
+        }
+
         isDownloadPrevented = try container.decodeIfPresent(Bool.self, forKey: .isDownloadPrevented)
         appType = try container.decodeIfPresent(FileFullLockAppTypeField.self, forKey: .appType)
     }
@@ -73,8 +83,14 @@ public class FileFullLockField: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(expiredAt, forKey: .expiredAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let expiredAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiredAt), forKey: .expiredAt)
+        }
+
         try container.encodeIfPresent(isDownloadPrevented, forKey: .isDownloadPrevented)
         try container.encodeIfPresent(appType, forKey: .appType)
     }

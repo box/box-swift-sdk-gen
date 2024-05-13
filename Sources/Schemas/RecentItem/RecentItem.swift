@@ -20,7 +20,7 @@ public class RecentItem: Codable {
     public let interactionType: RecentItemInteractionTypeField?
 
     /// The time of the most recent interaction.
-    public let interactedAt: String?
+    public let interactedAt: Date?
 
     /// If the item was accessed through a shared link it will appear here,
     /// otherwise this will be null.
@@ -36,7 +36,7 @@ public class RecentItem: Codable {
     ///   - interactedAt: The time of the most recent interaction.
     ///   - interactionSharedLink: If the item was accessed through a shared link it will appear here,
     ///     otherwise this will be null.
-    public init(type: String? = nil, item: FileFullOrFolderFullOrWebLink? = nil, interactionType: RecentItemInteractionTypeField? = nil, interactedAt: String? = nil, interactionSharedLink: String? = nil) {
+    public init(type: String? = nil, item: FileFullOrFolderFullOrWebLink? = nil, interactionType: RecentItemInteractionTypeField? = nil, interactedAt: Date? = nil, interactionSharedLink: String? = nil) {
         self.type = type
         self.item = item
         self.interactionType = interactionType
@@ -49,7 +49,12 @@ public class RecentItem: Codable {
         type = try container.decodeIfPresent(String.self, forKey: .type)
         item = try container.decodeIfPresent(FileFullOrFolderFullOrWebLink.self, forKey: .item)
         interactionType = try container.decodeIfPresent(RecentItemInteractionTypeField.self, forKey: .interactionType)
-        interactedAt = try container.decodeIfPresent(String.self, forKey: .interactedAt)
+        if let _interactedAt = try container.decodeIfPresent(String.self, forKey: .interactedAt) {
+            interactedAt = try Utils.Dates.dateTimeFromString(dateTime: _interactedAt)
+        } else {
+            interactedAt = nil
+        }
+
         interactionSharedLink = try container.decodeIfPresent(String.self, forKey: .interactionSharedLink)
     }
 
@@ -58,7 +63,10 @@ public class RecentItem: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(item, forKey: .item)
         try container.encodeIfPresent(interactionType, forKey: .interactionType)
-        try container.encodeIfPresent(interactedAt, forKey: .interactedAt)
+        if let interactedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: interactedAt), forKey: .interactedAt)
+        }
+
         try container.encodeIfPresent(interactionSharedLink, forKey: .interactionSharedLink)
     }
 

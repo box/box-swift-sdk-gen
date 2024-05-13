@@ -27,10 +27,10 @@ public class FileRequest: Codable {
     public let folder: FolderMini
 
     /// The date and time when the file request was created.
-    public let createdAt: String
+    public let createdAt: Date
 
     /// The date and time when the file request was last updated.
-    public let updatedAt: String
+    public let updatedAt: Date
 
     /// `file_request`
     public let type: FileRequestTypeField
@@ -86,7 +86,7 @@ public class FileRequest: Codable {
     /// 
     /// After this date, the `status` will automatically be set to
     /// `inactive`.
-    public let expiresAt: String?
+    public let expiresAt: Date?
 
     /// The generated URL for this file request. This URL can be shared
     /// with users to let them upload files to the associated folder.
@@ -161,7 +161,7 @@ public class FileRequest: Codable {
     ///     header.
     ///   - createdBy: 
     ///   - updatedBy: 
-    public init(id: String, folder: FolderMini, createdAt: String, updatedAt: String, type: FileRequestTypeField = FileRequestTypeField.fileRequest, title: String? = nil, description: String? = nil, status: FileRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: String? = nil, url: String? = nil, etag: String? = nil, createdBy: UserMini? = nil, updatedBy: UserMini? = nil) {
+    public init(id: String, folder: FolderMini, createdAt: Date, updatedAt: Date, type: FileRequestTypeField = FileRequestTypeField.fileRequest, title: String? = nil, description: String? = nil, status: FileRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: Date? = nil, url: String? = nil, etag: String? = nil, createdBy: UserMini? = nil, updatedBy: UserMini? = nil) {
         self.id = id
         self.folder = folder
         self.createdAt = createdAt
@@ -183,15 +183,20 @@ public class FileRequest: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         folder = try container.decode(FolderMini.self, forKey: .folder)
-        createdAt = try container.decode(String.self, forKey: .createdAt)
-        updatedAt = try container.decode(String.self, forKey: .updatedAt)
+        createdAt = try Utils.Dates.dateTimeFromString(dateTime: try container.decode(String.self, forKey: .createdAt))
+        updatedAt = try Utils.Dates.dateTimeFromString(dateTime: try container.decode(String.self, forKey: .updatedAt))
         type = try container.decode(FileRequestTypeField.self, forKey: .type)
         title = try container.decodeIfPresent(String.self, forKey: .title)
         description = try container.decodeIfPresent(String.self, forKey: .description)
         status = try container.decodeIfPresent(FileRequestStatusField.self, forKey: .status)
         isEmailRequired = try container.decodeIfPresent(Bool.self, forKey: .isEmailRequired)
         isDescriptionRequired = try container.decodeIfPresent(Bool.self, forKey: .isDescriptionRequired)
-        expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt)
+        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
+            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
+        } else {
+            expiresAt = nil
+        }
+
         url = try container.decodeIfPresent(String.self, forKey: .url)
         etag = try container.decodeIfPresent(String.self, forKey: .etag)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
@@ -202,15 +207,18 @@ public class FileRequest: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(folder, forKey: .folder)
-        try container.encode(createdAt, forKey: .createdAt)
-        try container.encode(updatedAt, forKey: .updatedAt)
+        try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        try container.encode(Utils.Dates.dateTimeToString(dateTime: updatedAt), forKey: .updatedAt)
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(isEmailRequired, forKey: .isEmailRequired)
         try container.encodeIfPresent(isDescriptionRequired, forKey: .isDescriptionRequired)
-        try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
+        if let expiresAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
+        }
+
         try container.encodeIfPresent(url, forKey: .url)
         try container.encodeIfPresent(etag, forKey: .etag)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
