@@ -1,7 +1,7 @@
 import Foundation
 
-/// A list of file versions with legal holds.
-public class FileVersionLegalHolds: Codable {
+/// A list of files on hold for legal policy assignment
+public class FilesOnHold: Codable {
     private enum CodingKeys: String, CodingKey {
         case limit
         case nextMarker = "next_marker"
@@ -20,10 +20,10 @@ public class FileVersionLegalHolds: Codable {
     /// The marker for the start of the previous page of results.
     public let prevMarker: String?
 
-    /// A list of file version legal holds
-    public let entries: [FileVersionLegalHold]?
+    /// A list of files
+    public let entries: [FileMini]?
 
-    /// Initializer for a FileVersionLegalHolds.
+    /// Initializer for a FilesOnHold.
     ///
     /// - Parameters:
     ///   - limit: The limit that was used for these entries. This will be the same as the
@@ -31,8 +31,8 @@ public class FileVersionLegalHolds: Codable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
-    ///   - entries: A list of file version legal holds
-    public init(limit: Int64? = nil, nextMarker: String? = nil, prevMarker: String? = nil, entries: [FileVersionLegalHold]? = nil) {
+    ///   - entries: A list of files
+    public init(limit: Int64? = nil, nextMarker: String? = nil, prevMarker: String? = nil, entries: [FileMini]? = nil) {
         self.limit = limit
         self.nextMarker = nextMarker
         self.prevMarker = prevMarker
@@ -44,7 +44,7 @@ public class FileVersionLegalHolds: Codable {
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         nextMarker = try container.decodeIfPresent(String.self, forKey: .nextMarker)
         prevMarker = try container.decodeIfPresent(String.self, forKey: .prevMarker)
-        entries = try container.decodeIfPresent([FileVersionLegalHold].self, forKey: .entries)
+        entries = try container.decodeIfPresent([FileMini].self, forKey: .entries)
     }
 
     public func encode(to encoder: Encoder) throws {

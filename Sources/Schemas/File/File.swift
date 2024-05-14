@@ -21,7 +21,9 @@ public class File: FileMini {
         case itemStatus = "item_status"
     }
 
-    /// The optional description of this file
+    /// The optional description of this file.
+    /// If the description exceeds 255 characters, the first 255 characters
+    /// are set as a file description and the rest of it is ignored.
     public let description: String?
 
     /// The file size in bytes. Be careful parsing this integer as it can
@@ -87,7 +89,9 @@ public class File: FileMini {
     ///   - sha1: The SHA1 hash of the file. This can be used to compare the contents
     ///     of a file on Box with a local file.
     ///   - fileVersion: 
-    ///   - description: The optional description of this file
+    ///   - description: The optional description of this file.
+    ///     If the description exceeds 255 characters, the first 255 characters
+    ///     are set as a file description and the rest of it is ignored.
     ///   - size: The file size in bytes. Be careful parsing this integer as it can
     ///     get very large and cause an integer overflow.
     ///   - pathCollection: 

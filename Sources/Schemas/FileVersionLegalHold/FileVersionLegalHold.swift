@@ -1,6 +1,6 @@
 import Foundation
 
-/// File-Version-Legal-Hold is an entity representing all
+/// File version legal hold is an entity representing all
 /// holds on a File Version.
 public class FileVersionLegalHold: Codable {
     private enum CodingKeys: String, CodingKey {
