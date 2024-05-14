@@ -38,7 +38,7 @@ public class ZipDownload: Codable {
     /// is started after which the `download_url` is valid for the duration of the
     /// download, and the `status_url` is valid for 12 hours from the start of the
     /// download.
-    public let expiresAt: String?
+    public let expiresAt: Date?
 
     /// A list of conflicts that occurred when trying to create the archive. This
     /// would occur when multiple items have been requested with the
@@ -89,7 +89,7 @@ public class ZipDownload: Codable {
     ///     
     ///     For every conflict, both files will be renamed and therefore this list
     ///     will always be a multiple of 2.
-    public init(downloadUrl: String? = nil, statusUrl: String? = nil, expiresAt: String? = nil, nameConflicts: [[ZipDownloadNameConflictsField]]? = nil) {
+    public init(downloadUrl: String? = nil, statusUrl: String? = nil, expiresAt: Date? = nil, nameConflicts: [[ZipDownloadNameConflictsField]]? = nil) {
         self.downloadUrl = downloadUrl
         self.statusUrl = statusUrl
         self.expiresAt = expiresAt
@@ -100,7 +100,12 @@ public class ZipDownload: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         downloadUrl = try container.decodeIfPresent(String.self, forKey: .downloadUrl)
         statusUrl = try container.decodeIfPresent(String.self, forKey: .statusUrl)
-        expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt)
+        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
+            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
+        } else {
+            expiresAt = nil
+        }
+
         nameConflicts = try container.decodeIfPresent([[ZipDownloadNameConflictsField]].self, forKey: .nameConflicts)
     }
 
@@ -108,7 +113,10 @@ public class ZipDownload: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(downloadUrl, forKey: .downloadUrl)
         try container.encodeIfPresent(statusUrl, forKey: .statusUrl)
-        try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
+        if let expiresAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
+        }
+
         try container.encodeIfPresent(nameConflicts, forKey: .nameConflicts)
     }
 

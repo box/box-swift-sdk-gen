@@ -29,7 +29,7 @@ class AiManagerTests: XCTestCase {
 
     public func testAiTextGenWithDialogueHistory() async throws {
         let fileToAsk: FileFull = try await CommonsManager().uploadNewFile()
-        let response: AiResponse = try await client.ai.createAiTextGen(requestBody: AiTextGen(prompt: "Parapharse the document.s", items: [AiTextGenItemsField(id: fileToAsk.id, type: AiTextGenItemsTypeField.file, content: "The Earth goes around the sun. Sun rises in the East in the morning.")], dialogueHistory: [AiTextGenDialogueHistoryField(prompt: "What does the earth go around?", answer: "The sun", createdAt: "2021-01-01T00:00:00Z"), AiTextGenDialogueHistoryField(prompt: "On Earth, where does the sun rise?", answer: "East", createdAt: "2021-01-01T00:00:00Z")]))
+        let response: AiResponse = try await client.ai.createAiTextGen(requestBody: AiTextGen(prompt: "Parapharse the document.s", items: [AiTextGenItemsField(id: fileToAsk.id, type: AiTextGenItemsTypeField.file, content: "The Earth goes around the sun. Sun rises in the East in the morning.")], dialogueHistory: [AiTextGenDialogueHistoryField(prompt: "What does the earth go around?", answer: "The sun", createdAt: try Utils.Dates.dateTimeFromString(dateTime: "2021-01-01T00:00:00Z")), AiTextGenDialogueHistoryField(prompt: "On Earth, where does the sun rise?", answer: "East", createdAt: try Utils.Dates.dateTimeFromString(dateTime: "2021-01-01T00:00:00Z"))]))
         XCTAssertTrue(response.answer.contains("sun"))
         XCTAssertTrue(response.completionReason == "done")
         try await client.files.deleteFileById(fileId: fileToAsk.id)

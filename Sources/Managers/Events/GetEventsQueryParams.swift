@@ -47,12 +47,12 @@ public class GetEventsQueryParams {
     /// The lower bound date and time to return events for. This can only be used
     /// when requesting the events with a `stream_type` of `admin_logs`. For any
     /// other `stream_type` this value will be ignored.
-    public let createdAfter: String?
+    public let createdAfter: Date?
 
     /// The upper bound date and time to return events for. This can only be used
     /// when requesting the events with a `stream_type` of `admin_logs`. For any
     /// other `stream_type` this value will be ignored.
-    public let createdBefore: String?
+    public let createdBefore: Date?
 
     /// Initializer for a GetEventsQueryParams.
     ///
@@ -98,7 +98,7 @@ public class GetEventsQueryParams {
     ///   - createdBefore: The upper bound date and time to return events for. This can only be used
     ///     when requesting the events with a `stream_type` of `admin_logs`. For any
     ///     other `stream_type` this value will be ignored.
-    public init(streamType: GetEventsQueryParamsStreamTypeField? = nil, streamPosition: String? = nil, limit: Int64? = nil, eventType: [GetEventsQueryParamsEventTypeField]? = nil, createdAfter: String? = nil, createdBefore: String? = nil) {
+    public init(streamType: GetEventsQueryParamsStreamTypeField? = nil, streamPosition: String? = nil, limit: Int64? = nil, eventType: [GetEventsQueryParamsEventTypeField]? = nil, createdAfter: Date? = nil, createdBefore: Date? = nil) {
         self.streamType = streamType
         self.streamPosition = streamPosition
         self.limit = limit

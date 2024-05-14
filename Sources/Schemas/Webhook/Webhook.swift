@@ -13,7 +13,7 @@ public class Webhook: WebhookMini {
 
     /// A timestamp identifying the time that
     /// the webhook was created.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// The URL that is notified by this webhook
     public let address: String?
@@ -34,7 +34,7 @@ public class Webhook: WebhookMini {
     ///   - address: The URL that is notified by this webhook
     ///   - triggers: An array of event names that this webhook is
     ///     to be triggered for
-    public init(id: String? = nil, type: WebhookMiniTypeField? = nil, target: WebhookMiniTargetField? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, address: String? = nil, triggers: [WebhookTriggersField]? = nil) {
+    public init(id: String? = nil, type: WebhookMiniTypeField? = nil, target: WebhookMiniTargetField? = nil, createdBy: UserMini? = nil, createdAt: Date? = nil, address: String? = nil, triggers: [WebhookTriggersField]? = nil) {
         self.createdBy = createdBy
         self.createdAt = createdAt
         self.address = address
@@ -46,7 +46,12 @@ public class Webhook: WebhookMini {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
         address = try container.decodeIfPresent(String.self, forKey: .address)
         triggers = try container.decodeIfPresent([WebhookTriggersField].self, forKey: .triggers)
 
@@ -56,7 +61,10 @@ public class Webhook: WebhookMini {
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
         try container.encodeIfPresent(address, forKey: .address)
         try container.encodeIfPresent(triggers, forKey: .triggers)
         try super.encode(to: encoder)

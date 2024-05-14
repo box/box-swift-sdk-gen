@@ -11,7 +11,7 @@ public class UpdateFileByIdRequestBodyLockField: Codable {
     public let access: UpdateFileByIdRequestBodyLockAccessField?
 
     /// Defines the time at which the lock expires.
-    public let expiresAt: String?
+    public let expiresAt: Date?
 
     /// Defines if the file can be downloaded while it is locked.
     public let isDownloadPrevented: Bool?
@@ -22,7 +22,7 @@ public class UpdateFileByIdRequestBodyLockField: Codable {
     ///   - access: The type of this object.
     ///   - expiresAt: Defines the time at which the lock expires.
     ///   - isDownloadPrevented: Defines if the file can be downloaded while it is locked.
-    public init(access: UpdateFileByIdRequestBodyLockAccessField? = nil, expiresAt: String? = nil, isDownloadPrevented: Bool? = nil) {
+    public init(access: UpdateFileByIdRequestBodyLockAccessField? = nil, expiresAt: Date? = nil, isDownloadPrevented: Bool? = nil) {
         self.access = access
         self.expiresAt = expiresAt
         self.isDownloadPrevented = isDownloadPrevented
@@ -31,14 +31,22 @@ public class UpdateFileByIdRequestBodyLockField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         access = try container.decodeIfPresent(UpdateFileByIdRequestBodyLockAccessField.self, forKey: .access)
-        expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt)
+        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
+            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
+        } else {
+            expiresAt = nil
+        }
+
         isDownloadPrevented = try container.decodeIfPresent(Bool.self, forKey: .isDownloadPrevented)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(access, forKey: .access)
-        try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
+        if let expiresAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
+        }
+
         try container.encodeIfPresent(isDownloadPrevented, forKey: .isDownloadPrevented)
     }
 

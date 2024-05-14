@@ -42,7 +42,7 @@ public class UpdateWebLinkByIdRequestBodySharedLinkField: Codable {
     /// expire. This field can only be set by
     /// users with paid accounts. The value must be greater than the
     /// current date and time.
-    public let unsharedAt: String?
+    public let unsharedAt: Date?
 
     /// Initializer for a UpdateWebLinkByIdRequestBodySharedLinkField.
     ///
@@ -75,7 +75,7 @@ public class UpdateWebLinkByIdRequestBodySharedLinkField: Codable {
     ///     expire. This field can only be set by
     ///     users with paid accounts. The value must be greater than the
     ///     current date and time.
-    public init(access: UpdateWebLinkByIdRequestBodySharedLinkAccessField? = nil, password: String? = nil, vanityName: String? = nil, unsharedAt: String? = nil) {
+    public init(access: UpdateWebLinkByIdRequestBodySharedLinkAccessField? = nil, password: String? = nil, vanityName: String? = nil, unsharedAt: Date? = nil) {
         self.access = access
         self.password = password
         self.vanityName = vanityName
@@ -87,7 +87,12 @@ public class UpdateWebLinkByIdRequestBodySharedLinkField: Codable {
         access = try container.decodeIfPresent(UpdateWebLinkByIdRequestBodySharedLinkAccessField.self, forKey: .access)
         password = try container.decodeIfPresent(String.self, forKey: .password)
         vanityName = try container.decodeIfPresent(String.self, forKey: .vanityName)
-        unsharedAt = try container.decodeIfPresent(String.self, forKey: .unsharedAt)
+        if let _unsharedAt = try container.decodeIfPresent(String.self, forKey: .unsharedAt) {
+            unsharedAt = try Utils.Dates.dateTimeFromString(dateTime: _unsharedAt)
+        } else {
+            unsharedAt = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -95,7 +100,10 @@ public class UpdateWebLinkByIdRequestBodySharedLinkField: Codable {
         try container.encodeIfPresent(access, forKey: .access)
         try container.encodeIfPresent(password, forKey: .password)
         try container.encodeIfPresent(vanityName, forKey: .vanityName)
-        try container.encodeIfPresent(unsharedAt, forKey: .unsharedAt)
+        if let unsharedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: unsharedAt), forKey: .unsharedAt)
+        }
+
     }
 
 }

@@ -32,14 +32,14 @@ public class TaskAssignment: Codable {
 
     /// The date at which this task assignment was
     /// completed. This will be `null` if the task is not completed yet.
-    public let completedAt: String?
+    public let completedAt: Date?
 
     /// The date at which this task was assigned to the user.
-    public let assignedAt: String?
+    public let assignedAt: Date?
 
     /// The date at which the assigned user was reminded of this task
     /// assignment.
-    public let remindedAt: String?
+    public let remindedAt: Date?
 
     /// The current state of the assignment. The available states depend on
     /// the `action` value of the task object.
@@ -65,7 +65,7 @@ public class TaskAssignment: Codable {
     ///   - resolutionState: The current state of the assignment. The available states depend on
     ///     the `action` value of the task object.
     ///   - assignedBy: 
-    public init(id: String? = nil, type: TaskAssignmentTypeField? = nil, item: FileMini? = nil, assignedTo: UserMini? = nil, message: String? = nil, completedAt: String? = nil, assignedAt: String? = nil, remindedAt: String? = nil, resolutionState: TaskAssignmentResolutionStateField? = nil, assignedBy: UserMini? = nil) {
+    public init(id: String? = nil, type: TaskAssignmentTypeField? = nil, item: FileMini? = nil, assignedTo: UserMini? = nil, message: String? = nil, completedAt: Date? = nil, assignedAt: Date? = nil, remindedAt: Date? = nil, resolutionState: TaskAssignmentResolutionStateField? = nil, assignedBy: UserMini? = nil) {
         self.id = id
         self.type = type
         self.item = item
@@ -85,9 +85,24 @@ public class TaskAssignment: Codable {
         item = try container.decodeIfPresent(FileMini.self, forKey: .item)
         assignedTo = try container.decodeIfPresent(UserMini.self, forKey: .assignedTo)
         message = try container.decodeIfPresent(String.self, forKey: .message)
-        completedAt = try container.decodeIfPresent(String.self, forKey: .completedAt)
-        assignedAt = try container.decodeIfPresent(String.self, forKey: .assignedAt)
-        remindedAt = try container.decodeIfPresent(String.self, forKey: .remindedAt)
+        if let _completedAt = try container.decodeIfPresent(String.self, forKey: .completedAt) {
+            completedAt = try Utils.Dates.dateTimeFromString(dateTime: _completedAt)
+        } else {
+            completedAt = nil
+        }
+
+        if let _assignedAt = try container.decodeIfPresent(String.self, forKey: .assignedAt) {
+            assignedAt = try Utils.Dates.dateTimeFromString(dateTime: _assignedAt)
+        } else {
+            assignedAt = nil
+        }
+
+        if let _remindedAt = try container.decodeIfPresent(String.self, forKey: .remindedAt) {
+            remindedAt = try Utils.Dates.dateTimeFromString(dateTime: _remindedAt)
+        } else {
+            remindedAt = nil
+        }
+
         resolutionState = try container.decodeIfPresent(TaskAssignmentResolutionStateField.self, forKey: .resolutionState)
         assignedBy = try container.decodeIfPresent(UserMini.self, forKey: .assignedBy)
     }
@@ -99,9 +114,18 @@ public class TaskAssignment: Codable {
         try container.encodeIfPresent(item, forKey: .item)
         try container.encodeIfPresent(assignedTo, forKey: .assignedTo)
         try container.encodeIfPresent(message, forKey: .message)
-        try container.encodeIfPresent(completedAt, forKey: .completedAt)
-        try container.encodeIfPresent(assignedAt, forKey: .assignedAt)
-        try container.encodeIfPresent(remindedAt, forKey: .remindedAt)
+        if let completedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: completedAt), forKey: .completedAt)
+        }
+
+        if let assignedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: assignedAt), forKey: .assignedAt)
+        }
+
+        if let remindedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: remindedAt), forKey: .remindedAt)
+        }
+
         try container.encodeIfPresent(resolutionState, forKey: .resolutionState)
         try container.encodeIfPresent(assignedBy, forKey: .assignedBy)
     }

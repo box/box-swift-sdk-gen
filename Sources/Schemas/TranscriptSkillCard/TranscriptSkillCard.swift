@@ -25,7 +25,7 @@ public class TranscriptSkillCard: Codable {
     public let entries: [TranscriptSkillCardEntriesField]
 
     /// The optional date and time this card was created at.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// `skill_card`
     public let type: TranscriptSkillCardTypeField
@@ -58,7 +58,7 @@ public class TranscriptSkillCard: Codable {
     ///     
     ///     Used with a `skill_card_type` of `transcript` or
     ///     `timeline`.
-    public init(skill: TranscriptSkillCardSkillField, invocation: TranscriptSkillCardInvocationField, entries: [TranscriptSkillCardEntriesField], createdAt: String? = nil, type: TranscriptSkillCardTypeField = TranscriptSkillCardTypeField.skillCard, skillCardType: TranscriptSkillCardSkillCardTypeField = TranscriptSkillCardSkillCardTypeField.transcript, skillCardTitle: TranscriptSkillCardSkillCardTitleField? = nil, duration: Int64? = nil) {
+    public init(skill: TranscriptSkillCardSkillField, invocation: TranscriptSkillCardInvocationField, entries: [TranscriptSkillCardEntriesField], createdAt: Date? = nil, type: TranscriptSkillCardTypeField = TranscriptSkillCardTypeField.skillCard, skillCardType: TranscriptSkillCardSkillCardTypeField = TranscriptSkillCardSkillCardTypeField.transcript, skillCardTitle: TranscriptSkillCardSkillCardTitleField? = nil, duration: Int64? = nil) {
         self.skill = skill
         self.invocation = invocation
         self.entries = entries
@@ -74,7 +74,12 @@ public class TranscriptSkillCard: Codable {
         skill = try container.decode(TranscriptSkillCardSkillField.self, forKey: .skill)
         invocation = try container.decode(TranscriptSkillCardInvocationField.self, forKey: .invocation)
         entries = try container.decode([TranscriptSkillCardEntriesField].self, forKey: .entries)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
         type = try container.decode(TranscriptSkillCardTypeField.self, forKey: .type)
         skillCardType = try container.decode(TranscriptSkillCardSkillCardTypeField.self, forKey: .skillCardType)
         skillCardTitle = try container.decodeIfPresent(TranscriptSkillCardSkillCardTitleField.self, forKey: .skillCardTitle)
@@ -86,7 +91,10 @@ public class TranscriptSkillCard: Codable {
         try container.encode(skill, forKey: .skill)
         try container.encode(invocation, forKey: .invocation)
         try container.encode(entries, forKey: .entries)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
         try container.encode(type, forKey: .type)
         try container.encode(skillCardType, forKey: .skillCardType)
         try container.encodeIfPresent(skillCardTitle, forKey: .skillCardTitle)

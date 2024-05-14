@@ -12,13 +12,13 @@ public class MetadataFieldFilterDateRange: Codable {
     /// value. The value of a field must be lower than (`lt`) or
     /// equal to this value for the search query to match this
     /// template.
-    public let lt: String?
+    public let lt: Date?
 
     /// Specifies the (inclusive) lower bound for the metadata field
     /// value. The value of a field must be greater than (`gt`) or
     /// equal to this value for the search query to match this
     /// template.
-    public let gt: String?
+    public let gt: Date?
 
     /// Initializer for a MetadataFieldFilterDateRange.
     ///
@@ -31,21 +31,37 @@ public class MetadataFieldFilterDateRange: Codable {
     ///     value. The value of a field must be greater than (`gt`) or
     ///     equal to this value for the search query to match this
     ///     template.
-    public init(lt: String? = nil, gt: String? = nil) {
+    public init(lt: Date? = nil, gt: Date? = nil) {
         self.lt = lt
         self.gt = gt
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        lt = try container.decodeIfPresent(String.self, forKey: .lt)
-        gt = try container.decodeIfPresent(String.self, forKey: .gt)
+        if let _lt = try container.decodeIfPresent(String.self, forKey: .lt) {
+            lt = try Utils.Dates.dateTimeFromString(dateTime: _lt)
+        } else {
+            lt = nil
+        }
+
+        if let _gt = try container.decodeIfPresent(String.self, forKey: .gt) {
+            gt = try Utils.Dates.dateTimeFromString(dateTime: _gt)
+        } else {
+            gt = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(lt, forKey: .lt)
-        try container.encodeIfPresent(gt, forKey: .gt)
+        if let lt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: lt), forKey: .lt)
+        }
+
+        if let gt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: gt), forKey: .gt)
+        }
+
     }
 
 }

@@ -50,7 +50,7 @@ public class FileRequestCopyRequest: FileRequestUpdateRequest {
     ///     `inactive`.
     ///     
     ///     This will default to the value on the existing file request.
-    public init(folder: FileRequestCopyRequestFolderField, title: String? = nil, description: String? = nil, status: FileRequestUpdateRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: String? = nil) {
+    public init(folder: FileRequestCopyRequestFolderField, title: String? = nil, description: String? = nil, status: FileRequestUpdateRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: Date? = nil) {
         self.folder = folder
 
         super.init(title: title, description: description, status: status, isEmailRequired: isEmailRequired, isDescriptionRequired: isDescriptionRequired, expiresAt: expiresAt)

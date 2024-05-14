@@ -30,17 +30,17 @@ public class WebLink: WebLinkMini {
     public let pathCollection: WebLinkPathCollectionField?
 
     /// When this file was created on Box’s servers.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// When this file was last updated on the Box
     /// servers.
-    public let modifiedAt: String?
+    public let modifiedAt: Date?
 
     /// When this file was moved to the trash.
-    public let trashedAt: String?
+    public let trashedAt: Date?
 
     /// When this file will be permanently deleted.
-    public let purgedAt: String?
+    public let purgedAt: Date?
 
     public let createdBy: UserMini?
 
@@ -81,7 +81,7 @@ public class WebLink: WebLinkMini {
     ///   - itemStatus: Whether this item is deleted or not. Values include `active`,
     ///     `trashed` if the file has been moved to the trash, and `deleted` if
     ///     the file has been permanently deleted
-    public init(id: String, type: WebLinkBaseTypeField = WebLinkBaseTypeField.webLink, etag: String? = nil, url: String? = nil, sequenceId: String? = nil, name: String? = nil, parent: FolderMini? = nil, description: String? = nil, pathCollection: WebLinkPathCollectionField? = nil, createdAt: String? = nil, modifiedAt: String? = nil, trashedAt: String? = nil, purgedAt: String? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: WebLinkSharedLinkField? = nil, itemStatus: WebLinkItemStatusField? = nil) {
+    public init(id: String, type: WebLinkBaseTypeField = WebLinkBaseTypeField.webLink, etag: String? = nil, url: String? = nil, sequenceId: String? = nil, name: String? = nil, parent: FolderMini? = nil, description: String? = nil, pathCollection: WebLinkPathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: Date? = nil, purgedAt: Date? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: WebLinkSharedLinkField? = nil, itemStatus: WebLinkItemStatusField? = nil) {
         self.parent = parent
         self.description = description
         self.pathCollection = pathCollection
@@ -103,10 +103,30 @@ public class WebLink: WebLinkMini {
         parent = try container.decodeIfPresent(FolderMini.self, forKey: .parent)
         description = try container.decodeIfPresent(String.self, forKey: .description)
         pathCollection = try container.decodeIfPresent(WebLinkPathCollectionField.self, forKey: .pathCollection)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
-        trashedAt = try container.decodeIfPresent(String.self, forKey: .trashedAt)
-        purgedAt = try container.decodeIfPresent(String.self, forKey: .purgedAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
+            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
+        } else {
+            modifiedAt = nil
+        }
+
+        if let _trashedAt = try container.decodeIfPresent(String.self, forKey: .trashedAt) {
+            trashedAt = try Utils.Dates.dateTimeFromString(dateTime: _trashedAt)
+        } else {
+            trashedAt = nil
+        }
+
+        if let _purgedAt = try container.decodeIfPresent(String.self, forKey: .purgedAt) {
+            purgedAt = try Utils.Dates.dateTimeFromString(dateTime: _purgedAt)
+        } else {
+            purgedAt = nil
+        }
+
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
         modifiedBy = try container.decodeIfPresent(UserMini.self, forKey: .modifiedBy)
         ownedBy = try container.decodeIfPresent(UserMini.self, forKey: .ownedBy)
@@ -121,10 +141,22 @@ public class WebLink: WebLinkMini {
         try container.encodeIfPresent(parent, forKey: .parent)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(pathCollection, forKey: .pathCollection)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
-        try container.encodeIfPresent(trashedAt, forKey: .trashedAt)
-        try container.encodeIfPresent(purgedAt, forKey: .purgedAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let modifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
+        }
+
+        if let trashedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: trashedAt), forKey: .trashedAt)
+        }
+
+        if let purgedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: purgedAt), forKey: .purgedAt)
+        }
+
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(modifiedBy, forKey: .modifiedBy)
         try container.encodeIfPresent(ownedBy, forKey: .ownedBy)

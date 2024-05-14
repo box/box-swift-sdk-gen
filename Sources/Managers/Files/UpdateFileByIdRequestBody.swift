@@ -36,7 +36,7 @@ public class UpdateFileByIdRequestBody: Codable {
 
     /// The retention expiration timestamp for the given file. This
     /// date cannot be shortened once set on a file.
-    public let dispositionAt: String?
+    public let dispositionAt: Date?
 
     /// Defines who can download a file.
     public let permissions: UpdateFileByIdRequestBodyPermissionsField?
@@ -102,7 +102,7 @@ public class UpdateFileByIdRequestBody: Codable {
     ///     
     ///     There is a limit of 100 tags per item, and 10,000
     ///     unique tags per enterprise.
-    public init(name: String? = nil, description: String? = nil, parent: UpdateFileByIdRequestBodyParentField? = nil, sharedLink: UpdateFileByIdRequestBodySharedLinkField? = nil, lock: UpdateFileByIdRequestBodyLockField? = nil, dispositionAt: String? = nil, permissions: UpdateFileByIdRequestBodyPermissionsField? = nil, collections: [UpdateFileByIdRequestBodyCollectionsField]? = nil, tags: [String]? = nil) {
+    public init(name: String? = nil, description: String? = nil, parent: UpdateFileByIdRequestBodyParentField? = nil, sharedLink: UpdateFileByIdRequestBodySharedLinkField? = nil, lock: UpdateFileByIdRequestBodyLockField? = nil, dispositionAt: Date? = nil, permissions: UpdateFileByIdRequestBodyPermissionsField? = nil, collections: [UpdateFileByIdRequestBodyCollectionsField]? = nil, tags: [String]? = nil) {
         self.name = name
         self.description = description
         self.parent = parent
@@ -121,7 +121,12 @@ public class UpdateFileByIdRequestBody: Codable {
         parent = try container.decodeIfPresent(UpdateFileByIdRequestBodyParentField.self, forKey: .parent)
         sharedLink = try container.decodeIfPresent(UpdateFileByIdRequestBodySharedLinkField.self, forKey: .sharedLink)
         lock = try container.decodeIfPresent(UpdateFileByIdRequestBodyLockField.self, forKey: .lock)
-        dispositionAt = try container.decodeIfPresent(String.self, forKey: .dispositionAt)
+        if let _dispositionAt = try container.decodeIfPresent(String.self, forKey: .dispositionAt) {
+            dispositionAt = try Utils.Dates.dateTimeFromString(dateTime: _dispositionAt)
+        } else {
+            dispositionAt = nil
+        }
+
         permissions = try container.decodeIfPresent(UpdateFileByIdRequestBodyPermissionsField.self, forKey: .permissions)
         collections = try container.decodeIfPresent([UpdateFileByIdRequestBodyCollectionsField].self, forKey: .collections)
         tags = try container.decodeIfPresent([String].self, forKey: .tags)
@@ -134,7 +139,10 @@ public class UpdateFileByIdRequestBody: Codable {
         try container.encodeIfPresent(parent, forKey: .parent)
         try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
         try container.encodeIfPresent(lock, forKey: .lock)
-        try container.encodeIfPresent(dispositionAt, forKey: .dispositionAt)
+        if let dispositionAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: dispositionAt), forKey: .dispositionAt)
+        }
+
         try container.encodeIfPresent(permissions, forKey: .permissions)
         try container.encodeIfPresent(collections, forKey: .collections)
         try container.encodeIfPresent(tags, forKey: .tags)

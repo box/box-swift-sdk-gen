@@ -30,7 +30,7 @@ public class CommentFull: Comment {
     ///     @mentions included. @mention format is @[id:username]
     ///     where `id` is user's Box ID and `username` is
     ///     their display name.
-    public init(id: String? = nil, type: CommentBaseTypeField? = nil, isReplyComment: Bool? = nil, message: String? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, modifiedAt: String? = nil, item: CommentItemField? = nil, taggedMessage: String? = nil) {
+    public init(id: String? = nil, type: CommentBaseTypeField? = nil, isReplyComment: Bool? = nil, message: String? = nil, createdBy: UserMini? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, item: CommentItemField? = nil, taggedMessage: String? = nil) {
         self.taggedMessage = taggedMessage
 
         super.init(id: id, type: type, isReplyComment: isReplyComment, message: message, createdBy: createdBy, createdAt: createdAt, modifiedAt: modifiedAt, item: item)

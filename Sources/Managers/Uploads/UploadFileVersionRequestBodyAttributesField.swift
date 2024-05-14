@@ -13,7 +13,7 @@ public class UploadFileVersionRequestBodyAttributesField: Codable {
     /// Defines the time the file was last modified at.
     /// 
     /// If not set, the upload time will be used.
-    public let contentModifiedAt: String?
+    public let contentModifiedAt: Date?
 
     /// Initializer for a UploadFileVersionRequestBodyAttributesField.
     ///
@@ -23,7 +23,7 @@ public class UploadFileVersionRequestBodyAttributesField: Codable {
     ///   - contentModifiedAt: Defines the time the file was last modified at.
     ///     
     ///     If not set, the upload time will be used.
-    public init(name: String, contentModifiedAt: String? = nil) {
+    public init(name: String, contentModifiedAt: Date? = nil) {
         self.name = name
         self.contentModifiedAt = contentModifiedAt
     }
@@ -31,13 +31,21 @@ public class UploadFileVersionRequestBodyAttributesField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
-        contentModifiedAt = try container.decodeIfPresent(String.self, forKey: .contentModifiedAt)
+        if let _contentModifiedAt = try container.decodeIfPresent(String.self, forKey: .contentModifiedAt) {
+            contentModifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _contentModifiedAt)
+        } else {
+            contentModifiedAt = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
-        try container.encodeIfPresent(contentModifiedAt, forKey: .contentModifiedAt)
+        if let contentModifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: contentModifiedAt), forKey: .contentModifiedAt)
+        }
+
     }
 
 }

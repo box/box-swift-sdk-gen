@@ -69,7 +69,7 @@ public class FileFull: File {
     public let metadata: FileFullMetadataField?
 
     /// When the file will automatically be deleted
-    public let expiresAt: String?
+    public let expiresAt: Date?
 
     public let representations: FileFullRepresentationsField?
 
@@ -78,7 +78,7 @@ public class FileFull: File {
     public let uploaderDisplayName: String?
 
     /// The retention expiration timestamp for the given file
-    public let dispositionAt: String?
+    public let dispositionAt: Date?
 
     /// A list of the types of roles that user can be invited at
     /// when sharing this file.
@@ -153,7 +153,7 @@ public class FileFull: File {
     ///   - dispositionAt: The retention expiration timestamp for the given file
     ///   - sharedLinkPermissionOptions: A list of the types of roles that user can be invited at
     ///     when sharing this file.
-    public init(id: String, etag: String? = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: String? = nil, modifiedAt: String? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: FolderMini? = nil, itemStatus: FileItemStatusField? = nil, versionNumber: String? = nil, commentCount: Int64? = nil, permissions: FileFullPermissionsField? = nil, tags: [String]? = nil, lock: FileFullLockField? = nil, extension_: String? = nil, isPackage: Bool? = nil, expiringEmbedLink: FileFullExpiringEmbedLinkField? = nil, watermarkInfo: FileFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, allowedInviteeRoles: [FileFullAllowedInviteeRolesField]? = nil, isExternallyOwned: Bool? = nil, hasCollaborations: Bool? = nil, metadata: FileFullMetadataField? = nil, expiresAt: String? = nil, representations: FileFullRepresentationsField? = nil, classification: FileFullClassificationField? = nil, uploaderDisplayName: String? = nil, dispositionAt: String? = nil, sharedLinkPermissionOptions: [FileFullSharedLinkPermissionOptionsField]? = nil) {
+    public init(id: String, etag: String? = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: Date? = nil, purgedAt: Date? = nil, contentCreatedAt: Date? = nil, contentModifiedAt: Date? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: FolderMini? = nil, itemStatus: FileItemStatusField? = nil, versionNumber: String? = nil, commentCount: Int64? = nil, permissions: FileFullPermissionsField? = nil, tags: [String]? = nil, lock: FileFullLockField? = nil, extension_: String? = nil, isPackage: Bool? = nil, expiringEmbedLink: FileFullExpiringEmbedLinkField? = nil, watermarkInfo: FileFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, allowedInviteeRoles: [FileFullAllowedInviteeRolesField]? = nil, isExternallyOwned: Bool? = nil, hasCollaborations: Bool? = nil, metadata: FileFullMetadataField? = nil, expiresAt: Date? = nil, representations: FileFullRepresentationsField? = nil, classification: FileFullClassificationField? = nil, uploaderDisplayName: String? = nil, dispositionAt: Date? = nil, sharedLinkPermissionOptions: [FileFullSharedLinkPermissionOptionsField]? = nil) {
         self.versionNumber = versionNumber
         self.commentCount = commentCount
         self.permissions = permissions
@@ -194,11 +194,21 @@ public class FileFull: File {
         isExternallyOwned = try container.decodeIfPresent(Bool.self, forKey: .isExternallyOwned)
         hasCollaborations = try container.decodeIfPresent(Bool.self, forKey: .hasCollaborations)
         metadata = try container.decodeIfPresent(FileFullMetadataField.self, forKey: .metadata)
-        expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt)
+        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
+            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
+        } else {
+            expiresAt = nil
+        }
+
         representations = try container.decodeIfPresent(FileFullRepresentationsField.self, forKey: .representations)
         classification = try container.decodeIfPresent(FileFullClassificationField.self, forKey: .classification)
         uploaderDisplayName = try container.decodeIfPresent(String.self, forKey: .uploaderDisplayName)
-        dispositionAt = try container.decodeIfPresent(String.self, forKey: .dispositionAt)
+        if let _dispositionAt = try container.decodeIfPresent(String.self, forKey: .dispositionAt) {
+            dispositionAt = try Utils.Dates.dateTimeFromString(dateTime: _dispositionAt)
+        } else {
+            dispositionAt = nil
+        }
+
         sharedLinkPermissionOptions = try container.decodeIfPresent([FileFullSharedLinkPermissionOptionsField].self, forKey: .sharedLinkPermissionOptions)
 
         try super.init(from: decoder)
@@ -220,11 +230,17 @@ public class FileFull: File {
         try container.encodeIfPresent(isExternallyOwned, forKey: .isExternallyOwned)
         try container.encodeIfPresent(hasCollaborations, forKey: .hasCollaborations)
         try container.encodeIfPresent(metadata, forKey: .metadata)
-        try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
+        if let expiresAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
+        }
+
         try container.encodeIfPresent(representations, forKey: .representations)
         try container.encodeIfPresent(classification, forKey: .classification)
         try container.encodeIfPresent(uploaderDisplayName, forKey: .uploaderDisplayName)
-        try container.encodeIfPresent(dispositionAt, forKey: .dispositionAt)
+        if let dispositionAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: dispositionAt), forKey: .dispositionAt)
+        }
+
         try container.encodeIfPresent(sharedLinkPermissionOptions, forKey: .sharedLinkPermissionOptions)
         try super.encode(to: encoder)
     }

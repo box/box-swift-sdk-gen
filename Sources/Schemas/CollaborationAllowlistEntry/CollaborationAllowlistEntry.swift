@@ -27,7 +27,7 @@ public class CollaborationAllowlistEntry: Codable {
     public let enterprise: CollaborationAllowlistEntryEnterpriseField?
 
     /// The time the entry was created at
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// Initializer for a CollaborationAllowlistEntry.
     ///
@@ -38,7 +38,7 @@ public class CollaborationAllowlistEntry: Codable {
     ///   - direction: The direction of the collaborations to allow.
     ///   - enterprise: 
     ///   - createdAt: The time the entry was created at
-    public init(id: String? = nil, type: CollaborationAllowlistEntryTypeField? = nil, domain: String? = nil, direction: CollaborationAllowlistEntryDirectionField? = nil, enterprise: CollaborationAllowlistEntryEnterpriseField? = nil, createdAt: String? = nil) {
+    public init(id: String? = nil, type: CollaborationAllowlistEntryTypeField? = nil, domain: String? = nil, direction: CollaborationAllowlistEntryDirectionField? = nil, enterprise: CollaborationAllowlistEntryEnterpriseField? = nil, createdAt: Date? = nil) {
         self.id = id
         self.type = type
         self.domain = domain
@@ -54,7 +54,12 @@ public class CollaborationAllowlistEntry: Codable {
         domain = try container.decodeIfPresent(String.self, forKey: .domain)
         direction = try container.decodeIfPresent(CollaborationAllowlistEntryDirectionField.self, forKey: .direction)
         enterprise = try container.decodeIfPresent(CollaborationAllowlistEntryEnterpriseField.self, forKey: .enterprise)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -64,7 +69,10 @@ public class CollaborationAllowlistEntry: Codable {
         try container.encodeIfPresent(domain, forKey: .domain)
         try container.encodeIfPresent(direction, forKey: .direction)
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
     }
 
 }

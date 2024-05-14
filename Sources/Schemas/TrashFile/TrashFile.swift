@@ -52,10 +52,10 @@ public class TrashFile: Codable {
     public let pathCollection: TrashFilePathCollectionField
 
     /// The date and time when the file was created on Box.
-    public let createdAt: String
+    public let createdAt: Date
 
     /// The date and time when the file was last updated on Box.
-    public let modifiedAt: String
+    public let modifiedAt: Date
 
     public let modifiedBy: UserMini
 
@@ -82,19 +82,19 @@ public class TrashFile: Codable {
     public let fileVersion: FileVersionMini?
 
     /// The time at which this file was put in the trash.
-    public let trashedAt: String?
+    public let trashedAt: Date?
 
     /// The time at which this file is expected to be purged
     /// from the trash.
-    public let purgedAt: String?
+    public let purgedAt: Date?
 
     /// The date and time at which this file was originally
     /// created, which might be before it was uploaded to Box.
-    public let contentCreatedAt: String?
+    public let contentCreatedAt: Date?
 
     /// The date and time at which this file was last updated,
     /// which might be before it was uploaded to Box.
-    public let contentModifiedAt: String?
+    public let contentModifiedAt: Date?
 
     public let createdBy: UserMini?
 
@@ -149,7 +149,7 @@ public class TrashFile: Codable {
     ///     be `null` if a file has been trashed, since the link will no longer
     ///     be active.
     ///   - parent: 
-    public init(id: String, sequenceId: String, sha1: String, description: String, size: Int64, pathCollection: TrashFilePathCollectionField, createdAt: String, modifiedAt: String, modifiedBy: UserMini, ownedBy: UserMini, itemStatus: TrashFileItemStatusField, etag: String? = nil, type: TrashFileTypeField = TrashFileTypeField.file, name: String? = nil, fileVersion: FileVersionMini? = nil, trashedAt: String? = nil, purgedAt: String? = nil, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil, createdBy: UserMini? = nil, sharedLink: String? = nil, parent: FolderMini? = nil) {
+    public init(id: String, sequenceId: String, sha1: String, description: String, size: Int64, pathCollection: TrashFilePathCollectionField, createdAt: Date, modifiedAt: Date, modifiedBy: UserMini, ownedBy: UserMini, itemStatus: TrashFileItemStatusField, etag: String? = nil, type: TrashFileTypeField = TrashFileTypeField.file, name: String? = nil, fileVersion: FileVersionMini? = nil, trashedAt: Date? = nil, purgedAt: Date? = nil, contentCreatedAt: Date? = nil, contentModifiedAt: Date? = nil, createdBy: UserMini? = nil, sharedLink: String? = nil, parent: FolderMini? = nil) {
         self.id = id
         self.sequenceId = sequenceId
         self.sha1 = sha1
@@ -182,8 +182,8 @@ public class TrashFile: Codable {
         description = try container.decode(String.self, forKey: .description)
         size = try container.decode(Int64.self, forKey: .size)
         pathCollection = try container.decode(TrashFilePathCollectionField.self, forKey: .pathCollection)
-        createdAt = try container.decode(String.self, forKey: .createdAt)
-        modifiedAt = try container.decode(String.self, forKey: .modifiedAt)
+        createdAt = try Utils.Dates.dateTimeFromString(dateTime: try container.decode(String.self, forKey: .createdAt))
+        modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: try container.decode(String.self, forKey: .modifiedAt))
         modifiedBy = try container.decode(UserMini.self, forKey: .modifiedBy)
         ownedBy = try container.decode(UserMini.self, forKey: .ownedBy)
         itemStatus = try container.decode(TrashFileItemStatusField.self, forKey: .itemStatus)
@@ -191,10 +191,30 @@ public class TrashFile: Codable {
         type = try container.decode(TrashFileTypeField.self, forKey: .type)
         name = try container.decodeIfPresent(String.self, forKey: .name)
         fileVersion = try container.decodeIfPresent(FileVersionMini.self, forKey: .fileVersion)
-        trashedAt = try container.decodeIfPresent(String.self, forKey: .trashedAt)
-        purgedAt = try container.decodeIfPresent(String.self, forKey: .purgedAt)
-        contentCreatedAt = try container.decodeIfPresent(String.self, forKey: .contentCreatedAt)
-        contentModifiedAt = try container.decodeIfPresent(String.self, forKey: .contentModifiedAt)
+        if let _trashedAt = try container.decodeIfPresent(String.self, forKey: .trashedAt) {
+            trashedAt = try Utils.Dates.dateTimeFromString(dateTime: _trashedAt)
+        } else {
+            trashedAt = nil
+        }
+
+        if let _purgedAt = try container.decodeIfPresent(String.self, forKey: .purgedAt) {
+            purgedAt = try Utils.Dates.dateTimeFromString(dateTime: _purgedAt)
+        } else {
+            purgedAt = nil
+        }
+
+        if let _contentCreatedAt = try container.decodeIfPresent(String.self, forKey: .contentCreatedAt) {
+            contentCreatedAt = try Utils.Dates.dateTimeFromString(dateTime: _contentCreatedAt)
+        } else {
+            contentCreatedAt = nil
+        }
+
+        if let _contentModifiedAt = try container.decodeIfPresent(String.self, forKey: .contentModifiedAt) {
+            contentModifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _contentModifiedAt)
+        } else {
+            contentModifiedAt = nil
+        }
+
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
         sharedLink = try container.decodeIfPresent(String.self, forKey: .sharedLink)
         parent = try container.decodeIfPresent(FolderMini.self, forKey: .parent)
@@ -208,8 +228,8 @@ public class TrashFile: Codable {
         try container.encode(description, forKey: .description)
         try container.encode(size, forKey: .size)
         try container.encode(pathCollection, forKey: .pathCollection)
-        try container.encode(createdAt, forKey: .createdAt)
-        try container.encode(modifiedAt, forKey: .modifiedAt)
+        try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
         try container.encode(modifiedBy, forKey: .modifiedBy)
         try container.encode(ownedBy, forKey: .ownedBy)
         try container.encode(itemStatus, forKey: .itemStatus)
@@ -217,10 +237,22 @@ public class TrashFile: Codable {
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
-        try container.encodeIfPresent(trashedAt, forKey: .trashedAt)
-        try container.encodeIfPresent(purgedAt, forKey: .purgedAt)
-        try container.encodeIfPresent(contentCreatedAt, forKey: .contentCreatedAt)
-        try container.encodeIfPresent(contentModifiedAt, forKey: .contentModifiedAt)
+        if let trashedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: trashedAt), forKey: .trashedAt)
+        }
+
+        if let purgedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: purgedAt), forKey: .purgedAt)
+        }
+
+        if let contentCreatedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: contentCreatedAt), forKey: .contentCreatedAt)
+        }
+
+        if let contentModifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: contentModifiedAt), forKey: .contentModifiedAt)
+        }
+
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
         try container.encodeIfPresent(parent, forKey: .parent)

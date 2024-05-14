@@ -27,10 +27,10 @@ public class GroupMembership: Codable {
     public let role: GroupMembershipRoleField?
 
     /// The time this membership was created.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// The time this membership was last modified.
-    public let modifiedAt: String?
+    public let modifiedAt: Date?
 
     /// Initializer for a GroupMembership.
     ///
@@ -42,7 +42,7 @@ public class GroupMembership: Codable {
     ///   - role: The role of the user in the group.
     ///   - createdAt: The time this membership was created.
     ///   - modifiedAt: The time this membership was last modified.
-    public init(id: String? = nil, type: GroupMembershipTypeField? = nil, user: UserMini? = nil, group: GroupMini? = nil, role: GroupMembershipRoleField? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
+    public init(id: String? = nil, type: GroupMembershipTypeField? = nil, user: UserMini? = nil, group: GroupMini? = nil, role: GroupMembershipRoleField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.id = id
         self.type = type
         self.user = user
@@ -59,8 +59,18 @@ public class GroupMembership: Codable {
         user = try container.decodeIfPresent(UserMini.self, forKey: .user)
         group = try container.decodeIfPresent(GroupMini.self, forKey: .group)
         role = try container.decodeIfPresent(GroupMembershipRoleField.self, forKey: .role)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
+            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
+        } else {
+            modifiedAt = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -70,8 +80,14 @@ public class GroupMembership: Codable {
         try container.encodeIfPresent(user, forKey: .user)
         try container.encodeIfPresent(group, forKey: .group)
         try container.encodeIfPresent(role, forKey: .role)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let modifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
+        }
+
     }
 
 }

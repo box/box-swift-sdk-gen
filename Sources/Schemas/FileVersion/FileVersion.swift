@@ -23,25 +23,25 @@ public class FileVersion: FileVersionMini {
     public let size: Int64?
 
     /// When the file version object was created
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// When the file version object was last updated
-    public let modifiedAt: String?
+    public let modifiedAt: Date?
 
     public let modifiedBy: UserMini?
 
     /// When the file version object was trashed.
-    public let trashedAt: String?
+    public let trashedAt: Date?
 
     public let trashedBy: UserMini?
 
     /// When the file version was restored from the trash.
-    public let restoredAt: String?
+    public let restoredAt: Date?
 
     public let restoredBy: UserMini?
 
     /// When the file version object will be permanently deleted.
-    public let purgedAt: String?
+    public let purgedAt: Date?
 
     public let uploaderDisplayName: String?
 
@@ -62,7 +62,7 @@ public class FileVersion: FileVersionMini {
     ///   - restoredBy: 
     ///   - purgedAt: When the file version object will be permanently deleted.
     ///   - uploaderDisplayName: 
-    public init(id: String, type: FileVersionBaseTypeField = FileVersionBaseTypeField.fileVersion, sha1: String? = nil, name: String? = nil, size: Int64? = nil, createdAt: String? = nil, modifiedAt: String? = nil, modifiedBy: UserMini? = nil, trashedAt: String? = nil, trashedBy: UserMini? = nil, restoredAt: String? = nil, restoredBy: UserMini? = nil, purgedAt: String? = nil, uploaderDisplayName: String? = nil) {
+    public init(id: String, type: FileVersionBaseTypeField = FileVersionBaseTypeField.fileVersion, sha1: String? = nil, name: String? = nil, size: Int64? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, modifiedBy: UserMini? = nil, trashedAt: Date? = nil, trashedBy: UserMini? = nil, restoredAt: Date? = nil, restoredBy: UserMini? = nil, purgedAt: Date? = nil, uploaderDisplayName: String? = nil) {
         self.name = name
         self.size = size
         self.createdAt = createdAt
@@ -82,14 +82,39 @@ public class FileVersion: FileVersionMini {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decodeIfPresent(String.self, forKey: .name)
         size = try container.decodeIfPresent(Int64.self, forKey: .size)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
+            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
+        } else {
+            modifiedAt = nil
+        }
+
         modifiedBy = try container.decodeIfPresent(UserMini.self, forKey: .modifiedBy)
-        trashedAt = try container.decodeIfPresent(String.self, forKey: .trashedAt)
+        if let _trashedAt = try container.decodeIfPresent(String.self, forKey: .trashedAt) {
+            trashedAt = try Utils.Dates.dateTimeFromString(dateTime: _trashedAt)
+        } else {
+            trashedAt = nil
+        }
+
         trashedBy = try container.decodeIfPresent(UserMini.self, forKey: .trashedBy)
-        restoredAt = try container.decodeIfPresent(String.self, forKey: .restoredAt)
+        if let _restoredAt = try container.decodeIfPresent(String.self, forKey: .restoredAt) {
+            restoredAt = try Utils.Dates.dateTimeFromString(dateTime: _restoredAt)
+        } else {
+            restoredAt = nil
+        }
+
         restoredBy = try container.decodeIfPresent(UserMini.self, forKey: .restoredBy)
-        purgedAt = try container.decodeIfPresent(String.self, forKey: .purgedAt)
+        if let _purgedAt = try container.decodeIfPresent(String.self, forKey: .purgedAt) {
+            purgedAt = try Utils.Dates.dateTimeFromString(dateTime: _purgedAt)
+        } else {
+            purgedAt = nil
+        }
+
         uploaderDisplayName = try container.decodeIfPresent(String.self, forKey: .uploaderDisplayName)
 
         try super.init(from: decoder)
@@ -99,14 +124,29 @@ public class FileVersion: FileVersionMini {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(size, forKey: .size)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let modifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
+        }
+
         try container.encodeIfPresent(modifiedBy, forKey: .modifiedBy)
-        try container.encodeIfPresent(trashedAt, forKey: .trashedAt)
+        if let trashedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: trashedAt), forKey: .trashedAt)
+        }
+
         try container.encodeIfPresent(trashedBy, forKey: .trashedBy)
-        try container.encodeIfPresent(restoredAt, forKey: .restoredAt)
+        if let restoredAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: restoredAt), forKey: .restoredAt)
+        }
+
         try container.encodeIfPresent(restoredBy, forKey: .restoredBy)
-        try container.encodeIfPresent(purgedAt, forKey: .purgedAt)
+        if let purgedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: purgedAt), forKey: .purgedAt)
+        }
+
         try container.encodeIfPresent(uploaderDisplayName, forKey: .uploaderDisplayName)
         try super.encode(to: encoder)
     }

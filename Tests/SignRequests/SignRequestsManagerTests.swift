@@ -13,10 +13,11 @@ class SignRequestsManagerTests: XCTestCase {
         let signerEmail: String = "\(Utils.getUUID())\("@box.com")"
         let fileToSign: FileFull = try await CommonsManager().uploadNewFile()
         let destinationFolder: FolderFull = try await CommonsManager().createNewFolder()
-        let createdSignRequest: SignRequest = try await client.signRequests.createSignRequest(requestBody: SignRequestCreateRequest(signers: [SignRequestCreateSigner(email: signerEmail)], sourceFiles: [FileBase(id: fileToSign.id)], parentFolder: FolderMini(id: destinationFolder.id)))
+        let createdSignRequest: SignRequest = try await client.signRequests.createSignRequest(requestBody: SignRequestCreateRequest(signers: [SignRequestCreateSigner(email: signerEmail)], prefillTags: [SignRequestPrefillTag(documentTagId: "0", dateValue: try Utils.Dates.dateFromString(date: "2035-01-01"))], sourceFiles: [FileBase(id: fileToSign.id)], parentFolder: FolderMini(id: destinationFolder.id)))
         XCTAssertTrue(createdSignRequest.signFiles!.files![0].name == fileToSign.name)
         XCTAssertTrue(createdSignRequest.signers![1].email == signerEmail)
         XCTAssertTrue(createdSignRequest.parentFolder!.id == destinationFolder.id)
+        XCTAssertTrue(Utils.Dates.dateToString(date: createdSignRequest.prefillTags![0].dateValue!) == "2035-01-01")
         let newSignRequest: SignRequest = try await client.signRequests.getSignRequestById(signRequestId: createdSignRequest.id!)
         XCTAssertTrue(newSignRequest.signFiles!.files![0].name == fileToSign.name)
         XCTAssertTrue(newSignRequest.signers![1].email == signerEmail)

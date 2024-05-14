@@ -26,10 +26,10 @@ public class TermsOfServiceUserStatus: Codable {
     public let isAccepted: Bool?
 
     /// When the legal item was created
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// When the legal item was modified.
-    public let modifiedAt: String?
+    public let modifiedAt: Date?
 
     /// Initializer for a TermsOfServiceUserStatus.
     ///
@@ -41,7 +41,7 @@ public class TermsOfServiceUserStatus: Codable {
     ///   - isAccepted: If the user has accepted the terms of services
     ///   - createdAt: When the legal item was created
     ///   - modifiedAt: When the legal item was modified.
-    public init(id: String, type: TermsOfServiceUserStatusTypeField = TermsOfServiceUserStatusTypeField.termsOfServiceUserStatus, tos: TermsOfServiceBase? = nil, user: UserMini? = nil, isAccepted: Bool? = nil, createdAt: String? = nil, modifiedAt: String? = nil) {
+    public init(id: String, type: TermsOfServiceUserStatusTypeField = TermsOfServiceUserStatusTypeField.termsOfServiceUserStatus, tos: TermsOfServiceBase? = nil, user: UserMini? = nil, isAccepted: Bool? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.id = id
         self.type = type
         self.tos = tos
@@ -58,8 +58,18 @@ public class TermsOfServiceUserStatus: Codable {
         tos = try container.decodeIfPresent(TermsOfServiceBase.self, forKey: .tos)
         user = try container.decodeIfPresent(UserMini.self, forKey: .user)
         isAccepted = try container.decodeIfPresent(Bool.self, forKey: .isAccepted)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
+            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
+        } else {
+            modifiedAt = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -69,8 +79,14 @@ public class TermsOfServiceUserStatus: Codable {
         try container.encodeIfPresent(tos, forKey: .tos)
         try container.encodeIfPresent(user, forKey: .user)
         try container.encodeIfPresent(isAccepted, forKey: .isAccepted)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let modifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
+        }
+
     }
 
 }

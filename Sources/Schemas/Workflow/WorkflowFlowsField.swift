@@ -21,7 +21,7 @@ public class WorkflowFlowsField: Codable {
     public let outcomes: [WorkflowFlowsOutcomesField]?
 
     /// When this flow was created
-    public let createdAt: String?
+    public let createdAt: Date?
 
     public let createdBy: UserBase?
 
@@ -34,7 +34,7 @@ public class WorkflowFlowsField: Codable {
     ///   - outcomes: 
     ///   - createdAt: When this flow was created
     ///   - createdBy: 
-    public init(id: String? = nil, type: WorkflowFlowsTypeField? = nil, trigger: WorkflowFlowsTriggerField? = nil, outcomes: [WorkflowFlowsOutcomesField]? = nil, createdAt: String? = nil, createdBy: UserBase? = nil) {
+    public init(id: String? = nil, type: WorkflowFlowsTypeField? = nil, trigger: WorkflowFlowsTriggerField? = nil, outcomes: [WorkflowFlowsOutcomesField]? = nil, createdAt: Date? = nil, createdBy: UserBase? = nil) {
         self.id = id
         self.type = type
         self.trigger = trigger
@@ -49,7 +49,12 @@ public class WorkflowFlowsField: Codable {
         type = try container.decodeIfPresent(WorkflowFlowsTypeField.self, forKey: .type)
         trigger = try container.decodeIfPresent(WorkflowFlowsTriggerField.self, forKey: .trigger)
         outcomes = try container.decodeIfPresent([WorkflowFlowsOutcomesField].self, forKey: .outcomes)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
     }
 
@@ -59,7 +64,10 @@ public class WorkflowFlowsField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(trigger, forKey: .trigger)
         try container.encodeIfPresent(outcomes, forKey: .outcomes)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
     }
 

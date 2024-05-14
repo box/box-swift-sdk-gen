@@ -17,12 +17,12 @@ public class UploadFileRequestBodyAttributesField: Codable {
     /// Defines the time the file was originally created at.
     /// 
     /// If not set, the upload time will be used.
-    public let contentCreatedAt: String?
+    public let contentCreatedAt: Date?
 
     /// Defines the time the file was last modified at.
     /// 
     /// If not set, the upload time will be used.
-    public let contentModifiedAt: String?
+    public let contentModifiedAt: Date?
 
     /// Initializer for a UploadFileRequestBodyAttributesField.
     ///
@@ -35,7 +35,7 @@ public class UploadFileRequestBodyAttributesField: Codable {
     ///   - contentModifiedAt: Defines the time the file was last modified at.
     ///     
     ///     If not set, the upload time will be used.
-    public init(name: String, parent: UploadFileRequestBodyAttributesParentField, contentCreatedAt: String? = nil, contentModifiedAt: String? = nil) {
+    public init(name: String, parent: UploadFileRequestBodyAttributesParentField, contentCreatedAt: Date? = nil, contentModifiedAt: Date? = nil) {
         self.name = name
         self.parent = parent
         self.contentCreatedAt = contentCreatedAt
@@ -46,16 +46,32 @@ public class UploadFileRequestBodyAttributesField: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
         parent = try container.decode(UploadFileRequestBodyAttributesParentField.self, forKey: .parent)
-        contentCreatedAt = try container.decodeIfPresent(String.self, forKey: .contentCreatedAt)
-        contentModifiedAt = try container.decodeIfPresent(String.self, forKey: .contentModifiedAt)
+        if let _contentCreatedAt = try container.decodeIfPresent(String.self, forKey: .contentCreatedAt) {
+            contentCreatedAt = try Utils.Dates.dateTimeFromString(dateTime: _contentCreatedAt)
+        } else {
+            contentCreatedAt = nil
+        }
+
+        if let _contentModifiedAt = try container.decodeIfPresent(String.self, forKey: .contentModifiedAt) {
+            contentModifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _contentModifiedAt)
+        } else {
+            contentModifiedAt = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(parent, forKey: .parent)
-        try container.encodeIfPresent(contentCreatedAt, forKey: .contentCreatedAt)
-        try container.encodeIfPresent(contentModifiedAt, forKey: .contentModifiedAt)
+        if let contentCreatedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: contentCreatedAt), forKey: .contentCreatedAt)
+        }
+
+        if let contentModifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: contentModifiedAt), forKey: .contentModifiedAt)
+        }
+
     }
 
 }

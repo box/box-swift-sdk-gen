@@ -27,7 +27,7 @@ public class Task: Codable {
     public let item: FileMini?
 
     /// When the task is due
-    public let dueAt: String?
+    public let dueAt: Date?
 
     /// The type of task the task assignee will be prompted to
     /// perform.
@@ -44,7 +44,7 @@ public class Task: Codable {
     public let createdBy: UserMini?
 
     /// When the task object was created
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// Defines which assignees need to complete this task before the task
     /// is considered completed.
@@ -76,7 +76,7 @@ public class Task: Codable {
     ///     approve the the task in order for it to be considered completed.
     ///     * `any_assignee` accepts any one assignee to review or
     ///     approve the the task in order for it to be considered completed.
-    public init(id: String? = nil, type: TaskTypeField? = nil, item: FileMini? = nil, dueAt: String? = nil, action: TaskActionField? = nil, message: String? = nil, taskAssignmentCollection: TaskAssignments? = nil, isCompleted: Bool? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, completionRule: TaskCompletionRuleField? = nil) {
+    public init(id: String? = nil, type: TaskTypeField? = nil, item: FileMini? = nil, dueAt: Date? = nil, action: TaskActionField? = nil, message: String? = nil, taskAssignmentCollection: TaskAssignments? = nil, isCompleted: Bool? = nil, createdBy: UserMini? = nil, createdAt: Date? = nil, completionRule: TaskCompletionRuleField? = nil) {
         self.id = id
         self.type = type
         self.item = item
@@ -95,13 +95,23 @@ public class Task: Codable {
         id = try container.decodeIfPresent(String.self, forKey: .id)
         type = try container.decodeIfPresent(TaskTypeField.self, forKey: .type)
         item = try container.decodeIfPresent(FileMini.self, forKey: .item)
-        dueAt = try container.decodeIfPresent(String.self, forKey: .dueAt)
+        if let _dueAt = try container.decodeIfPresent(String.self, forKey: .dueAt) {
+            dueAt = try Utils.Dates.dateTimeFromString(dateTime: _dueAt)
+        } else {
+            dueAt = nil
+        }
+
         action = try container.decodeIfPresent(TaskActionField.self, forKey: .action)
         message = try container.decodeIfPresent(String.self, forKey: .message)
         taskAssignmentCollection = try container.decodeIfPresent(TaskAssignments.self, forKey: .taskAssignmentCollection)
         isCompleted = try container.decodeIfPresent(Bool.self, forKey: .isCompleted)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
         completionRule = try container.decodeIfPresent(TaskCompletionRuleField.self, forKey: .completionRule)
     }
 
@@ -110,13 +120,19 @@ public class Task: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(item, forKey: .item)
-        try container.encodeIfPresent(dueAt, forKey: .dueAt)
+        if let dueAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: dueAt), forKey: .dueAt)
+        }
+
         try container.encodeIfPresent(action, forKey: .action)
         try container.encodeIfPresent(message, forKey: .message)
         try container.encodeIfPresent(taskAssignmentCollection, forKey: .taskAssignmentCollection)
         try container.encodeIfPresent(isCompleted, forKey: .isCompleted)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
         try container.encodeIfPresent(completionRule, forKey: .completionRule)
     }
 

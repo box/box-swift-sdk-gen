@@ -24,7 +24,7 @@ public class WebhookInvocation: Codable {
 
     /// A timestamp identifying the time that
     /// the webhook event was triggered.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     public let trigger: WebhookInvocationTriggerField?
 
@@ -41,7 +41,7 @@ public class WebhookInvocation: Codable {
     ///     the webhook event was triggered.
     ///   - trigger: 
     ///   - source: 
-    public init(id: String? = nil, type: WebhookInvocationTypeField? = nil, webhook: Webhook? = nil, createdBy: UserMini? = nil, createdAt: String? = nil, trigger: WebhookInvocationTriggerField? = nil, source: FileOrFolder? = nil) {
+    public init(id: String? = nil, type: WebhookInvocationTypeField? = nil, webhook: Webhook? = nil, createdBy: UserMini? = nil, createdAt: Date? = nil, trigger: WebhookInvocationTriggerField? = nil, source: FileOrFolder? = nil) {
         self.id = id
         self.type = type
         self.webhook = webhook
@@ -57,7 +57,12 @@ public class WebhookInvocation: Codable {
         type = try container.decodeIfPresent(WebhookInvocationTypeField.self, forKey: .type)
         webhook = try container.decodeIfPresent(Webhook.self, forKey: .webhook)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
         trigger = try container.decodeIfPresent(WebhookInvocationTriggerField.self, forKey: .trigger)
         source = try container.decodeIfPresent(FileOrFolder.self, forKey: .source)
     }
@@ -68,7 +73,10 @@ public class WebhookInvocation: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(webhook, forKey: .webhook)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
         try container.encodeIfPresent(trigger, forKey: .trigger)
         try container.encodeIfPresent(source, forKey: .source)
     }

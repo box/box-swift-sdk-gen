@@ -23,14 +23,14 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
 
     /// When the legal hold policy assignment object was
     /// created
-    public let assignedAt: String?
+    public let assignedAt: Date?
 
     /// When the assignment release request was sent.
     /// (Because it can take time for an assignment to fully
     /// delete, this isn't quite the same time that the
     /// assignment is fully deleted). If null, Assignment
     /// was not deleted.
-    public let deletedAt: String?
+    public let deletedAt: Date?
 
     /// Initializer for a LegalHoldPolicyAssignment.
     ///
@@ -47,7 +47,7 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
     ///     delete, this isn't quite the same time that the
     ///     assignment is fully deleted). If null, Assignment
     ///     was not deleted.
-    public init(id: String? = nil, type: LegalHoldPolicyAssignmentBaseTypeField? = nil, legalHoldPolicy: LegalHoldPolicyMini? = nil, assignedTo: FileOrFolderOrWebLink? = nil, assignedBy: UserMini? = nil, assignedAt: String? = nil, deletedAt: String? = nil) {
+    public init(id: String? = nil, type: LegalHoldPolicyAssignmentBaseTypeField? = nil, legalHoldPolicy: LegalHoldPolicyMini? = nil, assignedTo: FileOrFolderOrWebLink? = nil, assignedBy: UserMini? = nil, assignedAt: Date? = nil, deletedAt: Date? = nil) {
         self.legalHoldPolicy = legalHoldPolicy
         self.assignedTo = assignedTo
         self.assignedBy = assignedBy
@@ -62,8 +62,18 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
         legalHoldPolicy = try container.decodeIfPresent(LegalHoldPolicyMini.self, forKey: .legalHoldPolicy)
         assignedTo = try container.decodeIfPresent(FileOrFolderOrWebLink.self, forKey: .assignedTo)
         assignedBy = try container.decodeIfPresent(UserMini.self, forKey: .assignedBy)
-        assignedAt = try container.decodeIfPresent(String.self, forKey: .assignedAt)
-        deletedAt = try container.decodeIfPresent(String.self, forKey: .deletedAt)
+        if let _assignedAt = try container.decodeIfPresent(String.self, forKey: .assignedAt) {
+            assignedAt = try Utils.Dates.dateTimeFromString(dateTime: _assignedAt)
+        } else {
+            assignedAt = nil
+        }
+
+        if let _deletedAt = try container.decodeIfPresent(String.self, forKey: .deletedAt) {
+            deletedAt = try Utils.Dates.dateTimeFromString(dateTime: _deletedAt)
+        } else {
+            deletedAt = nil
+        }
+
 
         try super.init(from: decoder)
     }
@@ -73,8 +83,14 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
         try container.encodeIfPresent(legalHoldPolicy, forKey: .legalHoldPolicy)
         try container.encodeIfPresent(assignedTo, forKey: .assignedTo)
         try container.encodeIfPresent(assignedBy, forKey: .assignedBy)
-        try container.encodeIfPresent(assignedAt, forKey: .assignedAt)
-        try container.encodeIfPresent(deletedAt, forKey: .deletedAt)
+        if let assignedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: assignedAt), forKey: .assignedAt)
+        }
+
+        if let deletedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: deletedAt), forKey: .deletedAt)
+        }
+
         try super.encode(to: encoder)
     }
 

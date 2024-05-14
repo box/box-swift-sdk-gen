@@ -47,7 +47,7 @@ public class SignRequest: SignRequestBase {
     public let signFiles: SignRequestSignFilesField?
 
     /// Uses `days_valid` to calculate the date and time, in GMT, the sign request will expire if unsigned.
-    public let autoExpireAt: String?
+    public let autoExpireAt: Date?
 
     public let parentFolder: FolderMini?
 
@@ -82,7 +82,7 @@ public class SignRequest: SignRequestBase {
     ///     and can be downloaded at any point in the signing process.
     ///   - autoExpireAt: Uses `days_valid` to calculate the date and time, in GMT, the sign request will expire if unsigned.
     ///   - parentFolder: 
-    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: String? = nil, id: String? = nil, prepareUrl: String? = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: String? = nil, parentFolder: FolderMini? = nil) {
+    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: String? = nil, id: String? = nil, prepareUrl: String? = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: Date? = nil, parentFolder: FolderMini? = nil) {
         self.type = type
         self.sourceFiles = sourceFiles
         self.signers = signers
@@ -109,7 +109,12 @@ public class SignRequest: SignRequestBase {
         signingLog = try container.decodeIfPresent(FileMini.self, forKey: .signingLog)
         status = try container.decodeIfPresent(SignRequestStatusField.self, forKey: .status)
         signFiles = try container.decodeIfPresent(SignRequestSignFilesField.self, forKey: .signFiles)
-        autoExpireAt = try container.decodeIfPresent(String.self, forKey: .autoExpireAt)
+        if let _autoExpireAt = try container.decodeIfPresent(String.self, forKey: .autoExpireAt) {
+            autoExpireAt = try Utils.Dates.dateTimeFromString(dateTime: _autoExpireAt)
+        } else {
+            autoExpireAt = nil
+        }
+
         parentFolder = try container.decodeIfPresent(FolderMini.self, forKey: .parentFolder)
 
         try super.init(from: decoder)
@@ -126,7 +131,10 @@ public class SignRequest: SignRequestBase {
         try container.encodeIfPresent(signingLog, forKey: .signingLog)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(signFiles, forKey: .signFiles)
-        try container.encodeIfPresent(autoExpireAt, forKey: .autoExpireAt)
+        if let autoExpireAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: autoExpireAt), forKey: .autoExpireAt)
+        }
+
         try container.encodeIfPresent(parentFolder, forKey: .parentFolder)
         try super.encode(to: encoder)
     }

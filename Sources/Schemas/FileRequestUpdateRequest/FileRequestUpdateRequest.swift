@@ -58,7 +58,7 @@ public class FileRequestUpdateRequest: Codable {
     /// `inactive`.
     /// 
     /// This will default to the value on the existing file request.
-    public let expiresAt: String?
+    public let expiresAt: Date?
 
     /// Initializer for a FileRequestUpdateRequest.
     ///
@@ -100,7 +100,7 @@ public class FileRequestUpdateRequest: Codable {
     ///     `inactive`.
     ///     
     ///     This will default to the value on the existing file request.
-    public init(title: String? = nil, description: String? = nil, status: FileRequestUpdateRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: String? = nil) {
+    public init(title: String? = nil, description: String? = nil, status: FileRequestUpdateRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: Date? = nil) {
         self.title = title
         self.description = description
         self.status = status
@@ -116,7 +116,12 @@ public class FileRequestUpdateRequest: Codable {
         status = try container.decodeIfPresent(FileRequestUpdateRequestStatusField.self, forKey: .status)
         isEmailRequired = try container.decodeIfPresent(Bool.self, forKey: .isEmailRequired)
         isDescriptionRequired = try container.decodeIfPresent(Bool.self, forKey: .isDescriptionRequired)
-        expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt)
+        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
+            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
+        } else {
+            expiresAt = nil
+        }
+
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -126,7 +131,10 @@ public class FileRequestUpdateRequest: Codable {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(isEmailRequired, forKey: .isEmailRequired)
         try container.encodeIfPresent(isDescriptionRequired, forKey: .isDescriptionRequired)
-        try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
+        if let expiresAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
+        }
+
     }
 
 }

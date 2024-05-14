@@ -24,7 +24,7 @@ public class CreateLegalHoldPolicyRequestBody: Codable {
     /// files, will ignore the date filter.
     /// 
     /// Required if `is_ongoing` is set to `false`.
-    public let filterStartedAt: String?
+    public let filterStartedAt: Date?
 
     /// The filter end date.
     /// 
@@ -35,7 +35,7 @@ public class CreateLegalHoldPolicyRequestBody: Codable {
     /// files, will ignore the date filter.
     /// 
     /// Required if `is_ongoing` is set to `false`.
-    public let filterEndedAt: String?
+    public let filterEndedAt: Date?
 
     /// Whether new assignments under this policy should
     /// continue applying to files even after initialization.
@@ -86,7 +86,7 @@ public class CreateLegalHoldPolicyRequestBody: Codable {
     ///     get held. This will continue until the policy is retired.
     ///     
     ///     Required if no filter dates are set.
-    public init(policyName: String, description: String? = nil, filterStartedAt: String? = nil, filterEndedAt: String? = nil, isOngoing: Bool? = nil) {
+    public init(policyName: String, description: String? = nil, filterStartedAt: Date? = nil, filterEndedAt: Date? = nil, isOngoing: Bool? = nil) {
         self.policyName = policyName
         self.description = description
         self.filterStartedAt = filterStartedAt
@@ -98,8 +98,18 @@ public class CreateLegalHoldPolicyRequestBody: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         policyName = try container.decode(String.self, forKey: .policyName)
         description = try container.decodeIfPresent(String.self, forKey: .description)
-        filterStartedAt = try container.decodeIfPresent(String.self, forKey: .filterStartedAt)
-        filterEndedAt = try container.decodeIfPresent(String.self, forKey: .filterEndedAt)
+        if let _filterStartedAt = try container.decodeIfPresent(String.self, forKey: .filterStartedAt) {
+            filterStartedAt = try Utils.Dates.dateTimeFromString(dateTime: _filterStartedAt)
+        } else {
+            filterStartedAt = nil
+        }
+
+        if let _filterEndedAt = try container.decodeIfPresent(String.self, forKey: .filterEndedAt) {
+            filterEndedAt = try Utils.Dates.dateTimeFromString(dateTime: _filterEndedAt)
+        } else {
+            filterEndedAt = nil
+        }
+
         isOngoing = try container.decodeIfPresent(Bool.self, forKey: .isOngoing)
     }
 
@@ -107,8 +117,14 @@ public class CreateLegalHoldPolicyRequestBody: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(policyName, forKey: .policyName)
         try container.encodeIfPresent(description, forKey: .description)
-        try container.encodeIfPresent(filterStartedAt, forKey: .filterStartedAt)
-        try container.encodeIfPresent(filterEndedAt, forKey: .filterEndedAt)
+        if let filterStartedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: filterStartedAt), forKey: .filterStartedAt)
+        }
+
+        if let filterEndedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: filterEndedAt), forKey: .filterEndedAt)
+        }
+
         try container.encodeIfPresent(isOngoing, forKey: .isOngoing)
     }
 

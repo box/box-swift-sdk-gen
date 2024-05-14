@@ -12,10 +12,11 @@ class TasksManagerTests: XCTestCase {
     public func testCreateUpdateGetDeleteTask() async throws {
         let files: Files = try await client.uploads.uploadFile(requestBody: UploadFileRequestBody(attributes: UploadFileRequestBodyAttributesField(name: Utils.getUUID(), parent: UploadFileRequestBodyAttributesParentField(id: "0")), file: Utils.generateByteStream(size: 10)))
         let file: FileFull = files.entries![0]
-        let dateTime: String = "2035-01-01T00:00:00Z"
+        let dateTime: Date = try Utils.Dates.dateTimeFromString(dateTime: "2035-01-01T00:00:00Z")
         let task: Task = try await client.tasks.createTask(requestBody: CreateTaskRequestBody(item: CreateTaskRequestBodyItemField(id: file.id, type: CreateTaskRequestBodyItemTypeField.file), action: CreateTaskRequestBodyActionField.review, message: "test message", dueAt: dateTime, completionRule: CreateTaskRequestBodyCompletionRuleField.allAssignees))
         XCTAssertTrue(task.message == "test message")
         XCTAssertTrue(task.item!.id == file.id)
+        XCTAssertTrue(Utils.Dates.dateTimeToString(dateTime: task.dueAt!) == Utils.Dates.dateTimeToString(dateTime: dateTime))
         let taskById: Task = try await client.tasks.getTaskById(taskId: task.id!)
         XCTAssertTrue(taskById.id == task.id)
         let taskOnFile: Tasks = try await client.tasks.getFileTasks(fileId: file.id)

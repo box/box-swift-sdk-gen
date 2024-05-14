@@ -41,7 +41,7 @@ public class Collaboration: Codable {
 
     /// When the collaboration will expire, or `null` if no expiration
     /// date is set.
-    public let expiresAt: String?
+    public let expiresAt: Date?
 
     /// If set to `true`, collaborators have access to
     /// shared items, but such items won't be visible in the
@@ -56,15 +56,15 @@ public class Collaboration: Codable {
 
     /// When the `status` of the collaboration object changed to
     /// `accepted` or `rejected`.
-    public let acknowledgedAt: String?
+    public let acknowledgedAt: Date?
 
     public let createdBy: UserCollaborations?
 
     /// When the collaboration object was created.
-    public let createdAt: String?
+    public let createdAt: Date?
 
     /// When the collaboration object was last modified.
-    public let modifiedAt: String?
+    public let modifiedAt: Date?
 
     public let acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField?
 
@@ -93,7 +93,7 @@ public class Collaboration: Codable {
     ///   - createdAt: When the collaboration object was created.
     ///   - modifiedAt: When the collaboration object was last modified.
     ///   - acceptanceRequirementsStatus: 
-    public init(id: String, type: CollaborationTypeField = CollaborationTypeField.collaboration, item: FileOrFolderOrWebLink? = nil, accessibleBy: GroupMiniOrUserCollaborations? = nil, inviteEmail: String? = nil, role: CollaborationRoleField? = nil, expiresAt: String? = nil, isAccessOnly: Bool? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: String? = nil, createdBy: UserCollaborations? = nil, createdAt: String? = nil, modifiedAt: String? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
+    public init(id: String, type: CollaborationTypeField = CollaborationTypeField.collaboration, item: FileOrFolderOrWebLink? = nil, accessibleBy: GroupMiniOrUserCollaborations? = nil, inviteEmail: String? = nil, role: CollaborationRoleField? = nil, expiresAt: Date? = nil, isAccessOnly: Bool? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: Date? = nil, createdBy: UserCollaborations? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
         self.id = id
         self.type = type
         self.item = item
@@ -118,13 +118,33 @@ public class Collaboration: Codable {
         accessibleBy = try container.decodeIfPresent(GroupMiniOrUserCollaborations.self, forKey: .accessibleBy)
         inviteEmail = try container.decodeIfPresent(String.self, forKey: .inviteEmail)
         role = try container.decodeIfPresent(CollaborationRoleField.self, forKey: .role)
-        expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt)
+        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
+            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
+        } else {
+            expiresAt = nil
+        }
+
         isAccessOnly = try container.decodeIfPresent(Bool.self, forKey: .isAccessOnly)
         status = try container.decodeIfPresent(CollaborationStatusField.self, forKey: .status)
-        acknowledgedAt = try container.decodeIfPresent(String.self, forKey: .acknowledgedAt)
+        if let _acknowledgedAt = try container.decodeIfPresent(String.self, forKey: .acknowledgedAt) {
+            acknowledgedAt = try Utils.Dates.dateTimeFromString(dateTime: _acknowledgedAt)
+        } else {
+            acknowledgedAt = nil
+        }
+
         createdBy = try container.decodeIfPresent(UserCollaborations.self, forKey: .createdBy)
-        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt)
+        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
+            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
+        } else {
+            createdAt = nil
+        }
+
+        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
+            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
+        } else {
+            modifiedAt = nil
+        }
+
         acceptanceRequirementsStatus = try container.decodeIfPresent(CollaborationAcceptanceRequirementsStatusField.self, forKey: .acceptanceRequirementsStatus)
     }
 
@@ -136,13 +156,25 @@ public class Collaboration: Codable {
         try container.encodeIfPresent(accessibleBy, forKey: .accessibleBy)
         try container.encodeIfPresent(inviteEmail, forKey: .inviteEmail)
         try container.encodeIfPresent(role, forKey: .role)
-        try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
+        if let expiresAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
+        }
+
         try container.encodeIfPresent(isAccessOnly, forKey: .isAccessOnly)
         try container.encodeIfPresent(status, forKey: .status)
-        try container.encodeIfPresent(acknowledgedAt, forKey: .acknowledgedAt)
+        if let acknowledgedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: acknowledgedAt), forKey: .acknowledgedAt)
+        }
+
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
-        try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        if let createdAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        }
+
+        if let modifiedAt {
+            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
+        }
+
         try container.encodeIfPresent(acceptanceRequirementsStatus, forKey: .acceptanceRequirementsStatus)
     }
 
