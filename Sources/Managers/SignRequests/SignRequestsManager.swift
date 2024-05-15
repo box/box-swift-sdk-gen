@@ -13,7 +13,7 @@ public class SignRequestsManager {
     /// Cancels a sign request.
     ///
     /// - Parameters:
-    ///   - signRequestId: The ID of the sign request
+    ///   - signRequestId: The ID of the signature request
     ///     Example: "33243242"
     ///   - headers: Headers of cancelSignRequest method
     /// - Returns: The `SignRequest`.
@@ -24,10 +24,10 @@ public class SignRequestsManager {
         return try SignRequest.deserialize(from: response.data)
     }
 
-    /// Resends a sign request email to all outstanding signers.
+    /// Resends a signature request email to all outstanding signers.
     ///
     /// - Parameters:
-    ///   - signRequestId: The ID of the sign request
+    ///   - signRequestId: The ID of the signature request
     ///     Example: "33243242"
     ///   - headers: Headers of resendSignRequest method
     /// - Throws: The `GeneralError`.
@@ -39,7 +39,7 @@ public class SignRequestsManager {
     /// Gets a sign request by ID.
     ///
     /// - Parameters:
-    ///   - signRequestId: The ID of the sign request
+    ///   - signRequestId: The ID of the signature request
     ///     Example: "33243242"
     ///   - headers: Headers of getSignRequestById method
     /// - Returns: The `SignRequest`.
@@ -50,8 +50,8 @@ public class SignRequestsManager {
         return try SignRequest.deserialize(from: response.data)
     }
 
-    /// Gets sign requests created by a user. If the `sign_files` and/or
-    /// `parent_folder` are deleted, the sign request will not return in the list.
+    /// Gets signature requests created by a user. If the `sign_files` and/or
+    /// `parent_folder` are deleted, the signature request will not return in the list.
     ///
     /// - Parameters:
     ///   - queryParams: Query parameters of getSignRequests method
@@ -65,8 +65,8 @@ public class SignRequestsManager {
         return try SignRequests.deserialize(from: response.data)
     }
 
-    /// Creates a sign request. This involves preparing a document for signing and
-    /// sending the sign request to signers.
+    /// Creates a signature request. This involves preparing a document for signing and
+    /// sending the signature request to signers.
     ///
     /// - Parameters:
     ///   - requestBody: Request body of createSignRequest method
