@@ -1,6 +1,7 @@
 import Foundation
 
-/// The schema for a Signer in a GET Sign Request request body
+/// The schema for a Signer object used
+/// on the body of a Box Sign request object.
 public class SignRequestSigner: SignRequestCreateSigner {
     private enum CodingKeys: String, CodingKey {
         case hasViewedDocument = "has_viewed_document"
@@ -13,7 +14,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
     /// Set to `true` if the signer views the document
     public let hasViewedDocument: Bool?
 
-    /// Final decision made by the signer
+    /// Final decision made by the signer.
     public let signerDecision: SignRequestSignerSignerDecisionField?
 
     public let inputs: [SignRequestSignerInput]?
@@ -26,7 +27,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
     /// It will be returned in the response
     /// only if the `embed_url_external_user_id`
     /// parameter was passed in the
-    /// `create sign request` call.
+    /// `create Box Sign request` call.
     public let iframeableEmbedUrl: String?
 
     /// Initializer for a SignRequestSigner.
@@ -34,7 +35,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
     /// - Parameters:
     ///   - email: Email address of the signer.
     ///     The email address of the signer is required when making signature requests, except when using templates that are configured to include emails.
-    ///   - role: Defines the role of the signer in the sign request. A `signer`
+    ///   - role: Defines the role of the signer in the signature request. A `signer`
     ///     must sign the document and an `approver` must approve the document. A
     ///     `final_copy_reader` only receives the final signed document and signing
     ///     log.
@@ -69,7 +70,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     determine which signers belongs to same group. A successful response will provide a generated UUID value
     ///     instead for signers in the same signer group.
     ///   - hasViewedDocument: Set to `true` if the signer views the document
-    ///   - signerDecision: Final decision made by the signer
+    ///   - signerDecision: Final decision made by the signer.
     ///   - inputs: 
     ///   - embedUrl: URL to direct a signer to for signing
     ///   - iframeableEmbedUrl: This URL is specifically designed for
@@ -77,7 +78,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     It will be returned in the response
     ///     only if the `embed_url_external_user_id`
     ///     parameter was passed in the
-    ///     `create sign request` call.
+    ///     `create Box Sign request` call.
     public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil, signerGroupId: String? = nil, hasViewedDocument: Bool? = nil, signerDecision: SignRequestSignerSignerDecisionField? = nil, inputs: [SignRequestSignerInput]? = nil, embedUrl: String? = nil, iframeableEmbedUrl: String? = nil) {
         self.hasViewedDocument = hasViewedDocument
         self.signerDecision = signerDecision

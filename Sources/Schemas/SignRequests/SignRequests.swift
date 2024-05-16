@@ -1,6 +1,6 @@
 import Foundation
 
-/// A standard representation of a sign request, as returned from any Box Sign
+/// A standard representation of a signature request, as returned from any Box Sign
 /// API endpoints by default.
 public class SignRequests: Codable {
     private enum CodingKeys: String, CodingKey {
@@ -17,7 +17,7 @@ public class SignRequests: Codable {
     /// The marker for the start of the next page of results.
     public let nextMarker: String?
 
-    /// A list of sign requests
+    /// A list of Box Sign requests.
     public let entries: [SignRequest]?
 
     /// Initializer for a SignRequests.
@@ -27,7 +27,7 @@ public class SignRequests: Codable {
     ///     `limit` query parameter unless that value exceeded the maximum value
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
-    ///   - entries: A list of sign requests
+    ///   - entries: A list of Box Sign requests.
     public init(limit: Int64? = nil, nextMarker: String? = nil, entries: [SignRequest]? = nil) {
         self.limit = limit
         self.nextMarker = nextMarker
