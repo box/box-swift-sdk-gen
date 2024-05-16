@@ -13,7 +13,7 @@ public class Events: Codable {
 
     /// The stream position of the start of the next page (chunk)
     /// of events.
-    public let nextStreamPosition: String?
+    public let nextStreamPosition: EventsNextStreamPositionField?
 
     /// A list of events
     public let entries: [Event]?
@@ -25,7 +25,7 @@ public class Events: Codable {
     ///   - nextStreamPosition: The stream position of the start of the next page (chunk)
     ///     of events.
     ///   - entries: A list of events
-    public init(chunkSize: Int64? = nil, nextStreamPosition: String? = nil, entries: [Event]? = nil) {
+    public init(chunkSize: Int64? = nil, nextStreamPosition: EventsNextStreamPositionField? = nil, entries: [Event]? = nil) {
         self.chunkSize = chunkSize
         self.nextStreamPosition = nextStreamPosition
         self.entries = entries
@@ -34,7 +34,7 @@ public class Events: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         chunkSize = try container.decodeIfPresent(Int64.self, forKey: .chunkSize)
-        nextStreamPosition = try container.decodeIfPresent(String.self, forKey: .nextStreamPosition)
+        nextStreamPosition = try container.decodeIfPresent(EventsNextStreamPositionField.self, forKey: .nextStreamPosition)
         entries = try container.decodeIfPresent([Event].self, forKey: .entries)
     }
 
