@@ -1,6 +1,7 @@
 import Foundation
 
-/// The schema for a Signer in a POST Sign Request request body
+/// The schema for a Signer object used in
+/// for creating a Box Sign request object.
 public class SignRequestCreateSigner: Codable {
     private enum CodingKeys: String, CodingKey {
         case email
@@ -20,7 +21,7 @@ public class SignRequestCreateSigner: Codable {
     /// The email address of the signer is required when making signature requests, except when using templates that are configured to include emails.
     public let email: String?
 
-    /// Defines the role of the signer in the sign request. A `signer`
+    /// Defines the role of the signer in the signature request. A `signer`
     /// must sign the document and an `approver` must approve the document. A
     /// `final_copy_reader` only receives the final signed document and signing
     /// log.
@@ -79,7 +80,7 @@ public class SignRequestCreateSigner: Codable {
     /// - Parameters:
     ///   - email: Email address of the signer.
     ///     The email address of the signer is required when making signature requests, except when using templates that are configured to include emails.
-    ///   - role: Defines the role of the signer in the sign request. A `signer`
+    ///   - role: Defines the role of the signer in the signature request. A `signer`
     ///     must sign the document and an `approver` must approve the document. A
     ///     `final_copy_reader` only receives the final signed document and signing
     ///     log.

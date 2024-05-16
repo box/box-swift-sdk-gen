@@ -10,7 +10,7 @@ public class SignRequestPrefillTag: Codable {
         case dateValue = "date_value"
     }
 
-    /// This references the ID of a specific tag contained in a file of the sign request.
+    /// This references the ID of a specific tag contained in a file of the signature request.
     public let documentTagId: String?
 
     /// Text prefill value
@@ -25,7 +25,7 @@ public class SignRequestPrefillTag: Codable {
     /// Initializer for a SignRequestPrefillTag.
     ///
     /// - Parameters:
-    ///   - documentTagId: This references the ID of a specific tag contained in a file of the sign request.
+    ///   - documentTagId: This references the ID of a specific tag contained in a file of the signature request.
     ///   - textValue: Text prefill value
     ///   - checkboxValue: Checkbox prefill value
     ///   - dateValue: Date prefill value

@@ -25,7 +25,7 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
     ///
     /// - Parameters:
     ///   - pageIndex: Index of page that the input is on
-    ///   - documentTagId: This references the ID of a specific tag contained in a file of the sign request.
+    ///   - documentTagId: This references the ID of a specific tag contained in a file of the signature request.
     ///   - textValue: Text prefill value
     ///   - checkboxValue: Checkbox prefill value
     ///   - dateValue: Date prefill value
