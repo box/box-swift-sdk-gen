@@ -15,6 +15,7 @@ public class SignRequestCreateSigner: Codable {
         case verificationPhoneNumber = "verification_phone_number"
         case password
         case signerGroupId = "signer_group_id"
+        case suppressNotifications = "suppress_notifications"
     }
 
     /// Email address of the signer.
@@ -75,6 +76,9 @@ public class SignRequestCreateSigner: Codable {
     /// instead for signers in the same signer group.
     public let signerGroupId: String?
 
+    /// If true, no emails about the sign request will be sent
+    public let suppressNotifications: Bool?
+
     /// Initializer for a SignRequestCreateSigner.
     ///
     /// - Parameters:
@@ -114,7 +118,8 @@ public class SignRequestCreateSigner: Codable {
     ///     as it was intended for an individual signer. The value provided can be any string and only used to
     ///     determine which signers belongs to same group. A successful response will provide a generated UUID value
     ///     instead for signers in the same signer group.
-    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil, signerGroupId: String? = nil) {
+    ///   - suppressNotifications: If true, no emails about the sign request will be sent
+    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil, signerGroupId: String? = nil, suppressNotifications: Bool? = nil) {
         self.email = email
         self.role = role
         self.isInPerson = isInPerson
@@ -126,6 +131,7 @@ public class SignRequestCreateSigner: Codable {
         self.verificationPhoneNumber = verificationPhoneNumber
         self.password = password
         self.signerGroupId = signerGroupId
+        self.suppressNotifications = suppressNotifications
     }
 
     required public init(from decoder: Decoder) throws {
@@ -141,6 +147,7 @@ public class SignRequestCreateSigner: Codable {
         verificationPhoneNumber = try container.decodeIfPresent(String.self, forKey: .verificationPhoneNumber)
         password = try container.decodeIfPresent(String.self, forKey: .password)
         signerGroupId = try container.decodeIfPresent(String.self, forKey: .signerGroupId)
+        suppressNotifications = try container.decodeIfPresent(Bool.self, forKey: .suppressNotifications)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -156,6 +163,7 @@ public class SignRequestCreateSigner: Codable {
         try container.encodeIfPresent(verificationPhoneNumber, forKey: .verificationPhoneNumber)
         try container.encodeIfPresent(password, forKey: .password)
         try container.encodeIfPresent(signerGroupId, forKey: .signerGroupId)
+        try container.encodeIfPresent(suppressNotifications, forKey: .suppressNotifications)
     }
 
 }
