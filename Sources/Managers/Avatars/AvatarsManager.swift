@@ -21,7 +21,7 @@ public class AvatarsManager {
     /// - Throws: The `GeneralError`.
     public func getUserAvatar(userId: String, downloadDestinationURL: URL, headers: GetUserAvatarHeaders = GetUserAvatarHeaders()) async throws -> URL {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)\("/avatar")", options: FetchOptions(method: "GET", headers: headersMap, downloadDestinationURL: downloadDestinationURL, responseFormat: "binary", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(userId)\("/avatar")", options: FetchOptions(method: "GET", headers: headersMap, downloadDestinationURL: downloadDestinationURL, responseFormat: "binary", auth: self.auth, networkSession: self.networkSession))
         return response.downloadDestinationURL!
     }
 
@@ -36,7 +36,7 @@ public class AvatarsManager {
     /// - Throws: The `GeneralError`.
     public func createUserAvatar(userId: String, requestBody: CreateUserAvatarRequestBody, headers: CreateUserAvatarHeaders = CreateUserAvatarHeaders()) async throws -> UserAvatar {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)\("/avatar")", options: FetchOptions(method: "POST", headers: headersMap, multipartData: [MultipartItem(partName: "pic", fileStream: requestBody.pic, fileName: requestBody.picFileName, contentType: requestBody.picContentType)], contentType: "multipart/form-data", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(userId)\("/avatar")", options: FetchOptions(method: "POST", headers: headersMap, multipartData: [MultipartItem(partName: "pic", fileStream: requestBody.pic, fileName: requestBody.picFileName, contentType: requestBody.picContentType)], contentType: "multipart/form-data", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UserAvatar.deserialize(from: response.data)
     }
 
@@ -50,7 +50,7 @@ public class AvatarsManager {
     /// - Throws: The `GeneralError`.
     public func deleteUserAvatar(userId: String, headers: DeleteUserAvatarHeaders = DeleteUserAvatarHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)\("/avatar")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(userId)\("/avatar")", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

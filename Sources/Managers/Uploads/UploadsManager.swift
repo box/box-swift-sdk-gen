@@ -37,7 +37,7 @@ public class UploadsManager {
     public func uploadFileVersion(fileId: String, requestBody: UploadFileVersionRequestBody, queryParams: UploadFileVersionQueryParams = UploadFileVersionQueryParams(), headers: UploadFileVersionHeaders = UploadFileVersionHeaders()) async throws -> Files {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-match": Utils.Strings.toString(value: headers.ifMatch), "content-md5": Utils.Strings.toString(value: headers.contentMd5)], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.uploadUrl)\("/files/")\(fileId)\("/content")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, multipartData: [MultipartItem(partName: "attributes", data: try requestBody.attributes.serialize()), MultipartItem(partName: "file", fileStream: requestBody.file, fileName: requestBody.fileFileName, contentType: requestBody.fileContentType)], contentType: "multipart/form-data", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/")\(fileId)\("/content")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, multipartData: [MultipartItem(partName: "attributes", data: try requestBody.attributes.serialize()), MultipartItem(partName: "file", fileStream: requestBody.file, fileName: requestBody.fileFileName, contentType: requestBody.fileContentType)], contentType: "multipart/form-data", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Files.deserialize(from: response.data)
     }
 
@@ -60,7 +60,7 @@ public class UploadsManager {
     public func uploadFile(requestBody: UploadFileRequestBody, queryParams: UploadFileQueryParams = UploadFileQueryParams(), headers: UploadFileHeaders = UploadFileHeaders()) async throws -> Files {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["content-md5": Utils.Strings.toString(value: headers.contentMd5)], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.uploadUrl)\("/files/content")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, multipartData: [MultipartItem(partName: "attributes", data: try requestBody.attributes.serialize()), MultipartItem(partName: "file", fileStream: requestBody.file, fileName: requestBody.fileFileName, contentType: requestBody.fileContentType)], contentType: "multipart/form-data", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/content")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, multipartData: [MultipartItem(partName: "attributes", data: try requestBody.attributes.serialize()), MultipartItem(partName: "file", fileStream: requestBody.file, fileName: requestBody.fileFileName, contentType: requestBody.fileContentType)], contentType: "multipart/form-data", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Files.deserialize(from: response.data)
     }
 
@@ -74,7 +74,7 @@ public class UploadsManager {
     /// - Throws: The `GeneralError`.
     public func preflightFileUploadCheck(requestBody: PreflightFileUploadCheckRequestBody = PreflightFileUploadCheckRequestBody(), headers: PreflightFileUploadCheckHeaders = PreflightFileUploadCheckHeaders()) async throws -> UploadUrl {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/files/content")", options: FetchOptions(method: "OPTIONS", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/content")", options: FetchOptions(method: "OPTIONS", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UploadUrl.deserialize(from: response.data)
     }
 

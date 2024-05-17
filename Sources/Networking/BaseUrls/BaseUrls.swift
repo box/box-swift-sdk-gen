@@ -13,7 +13,7 @@ public class BaseUrls: Codable {
 
     public let oauth2Url: String
 
-    public init(baseUrl: String = "https://api.box.com/2.0", uploadUrl: String = "https://upload.box.com/api/2.0", oauth2Url: String = "https://account.box.com/api/oauth2") {
+    public init(baseUrl: String = "https://api.box.com", uploadUrl: String = "https://upload.box.com/api", oauth2Url: String = "https://account.box.com/api/oauth2") {
         self.baseUrl = baseUrl
         self.uploadUrl = uploadUrl
         self.oauth2Url = oauth2Url

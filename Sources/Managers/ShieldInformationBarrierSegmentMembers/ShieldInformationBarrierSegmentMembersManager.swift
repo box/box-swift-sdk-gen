@@ -21,7 +21,7 @@ public class ShieldInformationBarrierSegmentMembersManager {
     /// - Throws: The `GeneralError`.
     public func getShieldInformationBarrierSegmentMemberById(shieldInformationBarrierSegmentMemberId: String, headers: GetShieldInformationBarrierSegmentMemberByIdHeaders = GetShieldInformationBarrierSegmentMemberByIdHeaders()) async throws -> ShieldInformationBarrierSegmentMember {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/shield_information_barrier_segment_members/")\(shieldInformationBarrierSegmentMemberId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segment_members/")\(shieldInformationBarrierSegmentMemberId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ShieldInformationBarrierSegmentMember.deserialize(from: response.data)
     }
 
@@ -35,7 +35,7 @@ public class ShieldInformationBarrierSegmentMembersManager {
     /// - Throws: The `GeneralError`.
     public func deleteShieldInformationBarrierSegmentMemberById(shieldInformationBarrierSegmentMemberId: String, headers: DeleteShieldInformationBarrierSegmentMemberByIdHeaders = DeleteShieldInformationBarrierSegmentMemberByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/shield_information_barrier_segment_members/")\(shieldInformationBarrierSegmentMemberId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segment_members/")\(shieldInformationBarrierSegmentMemberId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Lists shield information barrier segment members
@@ -49,7 +49,7 @@ public class ShieldInformationBarrierSegmentMembersManager {
     public func getShieldInformationBarrierSegmentMembers(queryParams: GetShieldInformationBarrierSegmentMembersQueryParams, headers: GetShieldInformationBarrierSegmentMembersHeaders = GetShieldInformationBarrierSegmentMembersHeaders()) async throws -> ShieldInformationBarrierSegmentMembers {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["shield_information_barrier_segment_id": Utils.Strings.toString(value: queryParams.shieldInformationBarrierSegmentId), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/shield_information_barrier_segment_members")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segment_members")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ShieldInformationBarrierSegmentMembers.deserialize(from: response.data)
     }
 
@@ -62,7 +62,7 @@ public class ShieldInformationBarrierSegmentMembersManager {
     /// - Throws: The `GeneralError`.
     public func createShieldInformationBarrierSegmentMember(requestBody: CreateShieldInformationBarrierSegmentMemberRequestBody, headers: CreateShieldInformationBarrierSegmentMemberHeaders = CreateShieldInformationBarrierSegmentMemberHeaders()) async throws -> ShieldInformationBarrierSegmentMember {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/shield_information_barrier_segment_members")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segment_members")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ShieldInformationBarrierSegmentMember.deserialize(from: response.data)
     }
 

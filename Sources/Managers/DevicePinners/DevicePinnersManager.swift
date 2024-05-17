@@ -20,7 +20,7 @@ public class DevicePinnersManager {
     /// - Throws: The `GeneralError`.
     public func getDevicePinnerById(devicePinnerId: String, headers: GetDevicePinnerByIdHeaders = GetDevicePinnerByIdHeaders()) async throws -> DevicePinner {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/device_pinners/")\(devicePinnerId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/device_pinners/")\(devicePinnerId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try DevicePinner.deserialize(from: response.data)
     }
 
@@ -33,7 +33,7 @@ public class DevicePinnersManager {
     /// - Throws: The `GeneralError`.
     public func deleteDevicePinnerById(devicePinnerId: String, headers: DeleteDevicePinnerByIdHeaders = DeleteDevicePinnerByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/device_pinners/")\(devicePinnerId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/device_pinners/")\(devicePinnerId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Retrieves all the device pins within an enterprise.
@@ -51,7 +51,7 @@ public class DevicePinnersManager {
     public func getEnterpriseDevicePinners(enterpriseId: String, queryParams: GetEnterpriseDevicePinnersQueryParams = GetEnterpriseDevicePinnersQueryParams(), headers: GetEnterpriseDevicePinnersHeaders = GetEnterpriseDevicePinnersHeaders()) async throws -> DevicePinners {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit), "direction": Utils.Strings.toString(value: queryParams.direction)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/enterprises/")\(enterpriseId)\("/device_pinners")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/enterprises/")\(enterpriseId)\("/device_pinners")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try DevicePinners.deserialize(from: response.data)
     }
 

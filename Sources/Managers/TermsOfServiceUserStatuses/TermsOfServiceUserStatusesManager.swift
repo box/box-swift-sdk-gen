@@ -22,7 +22,7 @@ public class TermsOfServiceUserStatusesManager {
     public func getTermsOfServiceUserStatuses(queryParams: GetTermsOfServiceUserStatusesQueryParams, headers: GetTermsOfServiceUserStatusesHeaders = GetTermsOfServiceUserStatusesHeaders()) async throws -> TermsOfServiceUserStatuses {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["tos_id": Utils.Strings.toString(value: queryParams.tosId), "user_id": Utils.Strings.toString(value: queryParams.userId)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/terms_of_service_user_statuses")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/terms_of_service_user_statuses")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try TermsOfServiceUserStatuses.deserialize(from: response.data)
     }
 
@@ -35,7 +35,7 @@ public class TermsOfServiceUserStatusesManager {
     /// - Throws: The `GeneralError`.
     public func createTermsOfServiceStatusForUser(requestBody: CreateTermsOfServiceStatusForUserRequestBody, headers: CreateTermsOfServiceStatusForUserHeaders = CreateTermsOfServiceStatusForUserHeaders()) async throws -> TermsOfServiceUserStatus {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/terms_of_service_user_statuses")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/terms_of_service_user_statuses")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try TermsOfServiceUserStatus.deserialize(from: response.data)
     }
 
@@ -50,7 +50,7 @@ public class TermsOfServiceUserStatusesManager {
     /// - Throws: The `GeneralError`.
     public func updateTermsOfServiceStatusForUserById(termsOfServiceUserStatusId: String, requestBody: UpdateTermsOfServiceStatusForUserByIdRequestBody, headers: UpdateTermsOfServiceStatusForUserByIdHeaders = UpdateTermsOfServiceStatusForUserByIdHeaders()) async throws -> TermsOfServiceUserStatus {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/terms_of_service_user_statuses/")\(termsOfServiceUserStatusId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/terms_of_service_user_statuses/")\(termsOfServiceUserStatusId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try TermsOfServiceUserStatus.deserialize(from: response.data)
     }
 
