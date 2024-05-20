@@ -24,7 +24,7 @@ public class MembershipsManager {
     public func getUserMemberships(userId: String, queryParams: GetUserMembershipsQueryParams = GetUserMembershipsQueryParams(), headers: GetUserMembershipsHeaders = GetUserMembershipsHeaders()) async throws -> GroupMemberships {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["limit": Utils.Strings.toString(value: queryParams.limit), "offset": Utils.Strings.toString(value: queryParams.offset)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/users/")\(userId)\("/memberships")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(userId)\("/memberships")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try GroupMemberships.deserialize(from: response.data)
     }
 
@@ -42,7 +42,7 @@ public class MembershipsManager {
     public func getGroupMemberships(groupId: String, queryParams: GetGroupMembershipsQueryParams = GetGroupMembershipsQueryParams(), headers: GetGroupMembershipsHeaders = GetGroupMembershipsHeaders()) async throws -> GroupMemberships {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["limit": Utils.Strings.toString(value: queryParams.limit), "offset": Utils.Strings.toString(value: queryParams.offset)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/groups/")\(groupId)\("/memberships")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/groups/")\(groupId)\("/memberships")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try GroupMemberships.deserialize(from: response.data)
     }
 
@@ -58,7 +58,7 @@ public class MembershipsManager {
     public func createGroupMembership(requestBody: CreateGroupMembershipRequestBody, queryParams: CreateGroupMembershipQueryParams = CreateGroupMembershipQueryParams(), headers: CreateGroupMembershipHeaders = CreateGroupMembershipHeaders()) async throws -> GroupMembership {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/group_memberships")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/group_memberships")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try GroupMembership.deserialize(from: response.data)
     }
 
@@ -76,7 +76,7 @@ public class MembershipsManager {
     public func getGroupMembershipById(groupMembershipId: String, queryParams: GetGroupMembershipByIdQueryParams = GetGroupMembershipByIdQueryParams(), headers: GetGroupMembershipByIdHeaders = GetGroupMembershipByIdHeaders()) async throws -> GroupMembership {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/group_memberships/")\(groupMembershipId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/group_memberships/")\(groupMembershipId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try GroupMembership.deserialize(from: response.data)
     }
 
@@ -95,7 +95,7 @@ public class MembershipsManager {
     public func updateGroupMembershipById(groupMembershipId: String, requestBody: UpdateGroupMembershipByIdRequestBody = UpdateGroupMembershipByIdRequestBody(), queryParams: UpdateGroupMembershipByIdQueryParams = UpdateGroupMembershipByIdQueryParams(), headers: UpdateGroupMembershipByIdHeaders = UpdateGroupMembershipByIdHeaders()) async throws -> GroupMembership {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/group_memberships/")\(groupMembershipId)", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/group_memberships/")\(groupMembershipId)", options: FetchOptions(method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try GroupMembership.deserialize(from: response.data)
     }
 
@@ -110,7 +110,7 @@ public class MembershipsManager {
     /// - Throws: The `GeneralError`.
     public func deleteGroupMembershipById(groupMembershipId: String, headers: DeleteGroupMembershipByIdHeaders = DeleteGroupMembershipByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/group_memberships/")\(groupMembershipId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/group_memberships/")\(groupMembershipId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

@@ -20,7 +20,7 @@ public class RetentionPoliciesManager {
     public func getRetentionPolicies(queryParams: GetRetentionPoliciesQueryParams = GetRetentionPoliciesQueryParams(), headers: GetRetentionPoliciesHeaders = GetRetentionPoliciesHeaders()) async throws -> RetentionPolicies {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["policy_name": Utils.Strings.toString(value: queryParams.policyName), "policy_type": Utils.Strings.toString(value: queryParams.policyType), "created_by_user_id": Utils.Strings.toString(value: queryParams.createdByUserId), "fields": Utils.Strings.toString(value: queryParams.fields), "limit": Utils.Strings.toString(value: queryParams.limit), "marker": Utils.Strings.toString(value: queryParams.marker)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/retention_policies")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policies")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try RetentionPolicies.deserialize(from: response.data)
     }
 
@@ -33,7 +33,7 @@ public class RetentionPoliciesManager {
     /// - Throws: The `GeneralError`.
     public func createRetentionPolicy(requestBody: CreateRetentionPolicyRequestBody, headers: CreateRetentionPolicyHeaders = CreateRetentionPolicyHeaders()) async throws -> RetentionPolicy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/retention_policies")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policies")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try RetentionPolicy.deserialize(from: response.data)
     }
 
@@ -49,7 +49,7 @@ public class RetentionPoliciesManager {
     public func getRetentionPolicyById(retentionPolicyId: String, queryParams: GetRetentionPolicyByIdQueryParams = GetRetentionPolicyByIdQueryParams(), headers: GetRetentionPolicyByIdHeaders = GetRetentionPolicyByIdHeaders()) async throws -> RetentionPolicy {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/retention_policies/")\(retentionPolicyId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policies/")\(retentionPolicyId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try RetentionPolicy.deserialize(from: response.data)
     }
 
@@ -64,7 +64,7 @@ public class RetentionPoliciesManager {
     /// - Throws: The `GeneralError`.
     public func updateRetentionPolicyById(retentionPolicyId: String, requestBody: UpdateRetentionPolicyByIdRequestBody = UpdateRetentionPolicyByIdRequestBody(), headers: UpdateRetentionPolicyByIdHeaders = UpdateRetentionPolicyByIdHeaders()) async throws -> RetentionPolicy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/retention_policies/")\(retentionPolicyId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policies/")\(retentionPolicyId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try RetentionPolicy.deserialize(from: response.data)
     }
 
@@ -77,7 +77,7 @@ public class RetentionPoliciesManager {
     /// - Throws: The `GeneralError`.
     public func deleteRetentionPolicyById(retentionPolicyId: String, headers: DeleteRetentionPolicyByIdHeaders = DeleteRetentionPolicyByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/retention_policies/")\(retentionPolicyId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/retention_policies/")\(retentionPolicyId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }
