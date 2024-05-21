@@ -172,7 +172,7 @@ public class SearchForContentQueryParams {
 
     /// Limits the search results to any items for which the metadata matches the provided filter.
     /// This parameter is a list that specifies exactly **one** metadata template used to filter the search results. 
-    /// It is required unless the `query` parameter is provided.
+    /// The parameter is required unless the `query` parameter is provided.
     public let mdfilters: [MetadataFilter]?
 
     /// Defines the order in which search results are returned. This API
@@ -410,7 +410,7 @@ public class SearchForContentQueryParams {
     ///     * `all_items` - Searches for both trashed and non-trashed items.
     ///   - mdfilters: Limits the search results to any items for which the metadata matches the provided filter.
     ///     This parameter is a list that specifies exactly **one** metadata template used to filter the search results. 
-    ///     It is required unless the `query` parameter is provided.
+    ///     The parameter is required unless the `query` parameter is provided.
     ///   - sort: Defines the order in which search results are returned. This API
     ///     defaults to returning items by relevance unless this parameter is
     ///     explicitly specified.
