@@ -37,7 +37,7 @@ public class SignRequestCreateRequest: SignRequestBase {
     ///   - externalId: This can be used to reference an ID in an external system that the sign request is related to.
     ///   - isPhoneVerificationRequiredToView: Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.
     ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
-    ///   - externalSystemName: Used as an optional system name to appear in the signature log next to the signers who have been assigned an `embed_url_external_id`
+    ///   - externalSystemName: Used as an optional system name to appear in the signature log next to the signers who have been assigned the `embed_url_external_id`.
     ///   - sourceFiles: List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
     ///   - signatureColor: Force a specific color for the signature (blue, black, or red)
     ///   - parentFolder: 

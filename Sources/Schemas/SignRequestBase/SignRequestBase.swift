@@ -58,7 +58,7 @@ public class SignRequestBase: Codable {
     /// When a signature request is created from a template this field will indicate the id of that template.
     public let templateId: String?
 
-    /// Used as an optional system name to appear in the signature log next to the signers who have been assigned an `embed_url_external_id`
+    /// Used as an optional system name to appear in the signature log next to the signers who have been assigned the `embed_url_external_id`.
     public let externalSystemName: String?
 
     /// Initializer for a SignRequestBase.
@@ -77,7 +77,7 @@ public class SignRequestBase: Codable {
     ///   - externalId: This can be used to reference an ID in an external system that the sign request is related to.
     ///   - isPhoneVerificationRequiredToView: Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.
     ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
-    ///   - externalSystemName: Used as an optional system name to appear in the signature log next to the signers who have been assigned an `embed_url_external_id`
+    ///   - externalSystemName: Used as an optional system name to appear in the signature log next to the signers who have been assigned the `embed_url_external_id`.
     public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil, externalSystemName: String? = nil) {
         self.isDocumentPreparationNeeded = isDocumentPreparationNeeded
         self.redirectUrl = redirectUrl

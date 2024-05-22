@@ -45,12 +45,11 @@ class AuthManagerTests: XCTestCase {
     public func testCcgAuthRevoke() async throws {
         let ccgConfig: CCGConfig = CCGConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"), userId: Utils.getEnvironmentVariable(name: "USER_ID"))
         let auth: BoxCCGAuth = BoxCCGAuth(config: ccgConfig)
-        try await auth.retrieveToken()
-        let tokenFromStorageBeforeRevoke: AccessToken? = try await auth.tokenStorage.get()
-        try await auth.revokeToken()
-        let tokenFromStorageAfterRevoke: AccessToken? = try await auth.tokenStorage.get()
+        let tokenFromStorageBeforeRevoke: AccessToken = try await auth.retrieveToken()
         XCTAssertTrue(tokenFromStorageBeforeRevoke != nil)
-        XCTAssertTrue(tokenFromStorageAfterRevoke == nil)
+        try await auth.revokeToken()
+        let tokenFromStorageAfterRevoke: AccessToken = try await auth.retrieveToken()
+        XCTAssertTrue(tokenFromStorageBeforeRevoke.accessToken != tokenFromStorageAfterRevoke.accessToken)
     }
 
     public func getAccessToken() async throws -> AccessToken {
@@ -66,12 +65,10 @@ class AuthManagerTests: XCTestCase {
         let developerTokenConfig: DeveloperTokenConfig = DeveloperTokenConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"))
         let token: AccessToken = try await getAccessToken()
         let auth: BoxDeveloperTokenAuth = BoxDeveloperTokenAuth(token: token.accessToken!, config: developerTokenConfig)
-        try await auth.retrieveToken()
-        let tokenFromStorageBeforeRevoke: AccessToken? = try await auth.tokenStorage.get()
-        try await auth.revokeToken()
-        let tokenFromStorageAfterRevoke: AccessToken? = try await auth.tokenStorage.get()
+        let tokenFromStorageBeforeRevoke: AccessToken = try await auth.retrieveToken()
         XCTAssertTrue(tokenFromStorageBeforeRevoke != nil)
-        XCTAssertTrue(tokenFromStorageAfterRevoke == nil)
+        try await auth.revokeToken()
+        await XCTAssertThrowsErrorAsync(try await auth.retrieveToken())
     }
 
     public func testDeveloperTokenAuthDownscope() async throws {
@@ -99,21 +96,21 @@ class AuthManagerTests: XCTestCase {
     }
 
     public func testOauthAuthRevoke() async throws {
-        let config: OAuthConfig = OAuthConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"))
+        let token: AccessToken = try await getAccessToken()
+        let tokenStorage: InMemoryTokenStorage = InMemoryTokenStorage(token: token)
+        let config: OAuthConfig = OAuthConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"), tokenStorage: tokenStorage)
         let auth: BoxOAuth = BoxOAuth(config: config)
         let client: BoxClient = BoxClient(auth: auth)
-        let token: AccessToken = try await getAccessToken()
-        try await auth.tokenStorage.store(token: token)
         try await client.users.getUserMe()
         try await auth.revokeToken()
         await XCTAssertThrowsErrorAsync(try await client.users.getUserMe())
     }
 
     public func testOauthAuthDownscope() async throws {
-        let config: OAuthConfig = OAuthConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"))
-        let auth: BoxOAuth = BoxOAuth(config: config)
         let token: AccessToken = try await getAccessToken()
-        try await auth.tokenStorage.store(token: token)
+        let tokenStorage: InMemoryTokenStorage = InMemoryTokenStorage(token: token)
+        let config: OAuthConfig = OAuthConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"), tokenStorage: tokenStorage)
+        let auth: BoxOAuth = BoxOAuth(config: config)
         let parentClient: BoxClient = BoxClient(auth: auth)
         let uploadedFiles: Files = try await parentClient.uploads.uploadFile(requestBody: UploadFileRequestBody(attributes: UploadFileRequestBodyAttributesField(name: Utils.getUUID(), parent: UploadFileRequestBodyAttributesParentField(id: "0")), file: Utils.generateByteStream(size: 1024 * 1024)))
         let file: FileFull = uploadedFiles.entries![0]

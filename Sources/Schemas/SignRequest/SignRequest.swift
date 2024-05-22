@@ -32,8 +32,10 @@ public class SignRequest: SignRequestBase {
     public let id: String?
 
     /// This URL is returned if `is_document_preparation_needed` is
-    /// set to `true` for Box Sign request. It is used to prepare a signature request
-    /// using the UI. The signature request is not sent until the preparation
+    /// set to `true` in the request. The parameter is used to prepare
+    /// the signature request
+    /// using the UI. The signature request is not
+    /// sent until the preparation
     /// phase is complete.
     public let prepareUrl: String?
 
@@ -68,15 +70,17 @@ public class SignRequest: SignRequestBase {
     ///   - externalId: This can be used to reference an ID in an external system that the sign request is related to.
     ///   - isPhoneVerificationRequiredToView: Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.
     ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
-    ///   - externalSystemName: Used as an optional system name to appear in the signature log next to the signers who have been assigned an `embed_url_external_id`
+    ///   - externalSystemName: Used as an optional system name to appear in the signature log next to the signers who have been assigned the `embed_url_external_id`.
     ///   - type: object type
     ///   - sourceFiles: List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
     ///   - signers: Array of signers for the signature request.
     ///   - signatureColor: Force a specific color for the signature (blue, black, or red).
     ///   - id: Box Sign request ID.
     ///   - prepareUrl: This URL is returned if `is_document_preparation_needed` is
-    ///     set to `true` for Box Sign request. It is used to prepare a signature request
-    ///     using the UI. The signature request is not sent until the preparation
+    ///     set to `true` in the request. The parameter is used to prepare
+    ///     the signature request
+    ///     using the UI. The signature request is not
+    ///     sent until the preparation
     ///     phase is complete.
     ///   - signingLog: 
     ///   - status: Describes the status of the signature request.
