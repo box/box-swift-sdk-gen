@@ -1,6 +1,11 @@
 import Foundation
 
 /// A list of file version retentions.
+/// 
+/// **Note**:
+/// File retention API is now **deprecated**. 
+/// To get information about files and file versions under retention,
+/// see [files under retention](e://get-retention-policy-assignments-id-files-under-retention) or [file versions under retention](e://get-retention-policy-assignments-id-file-versions-under-retention) endpoints.
 public class FileVersionRetentions: Codable {
     private enum CodingKeys: String, CodingKey {
         case limit
