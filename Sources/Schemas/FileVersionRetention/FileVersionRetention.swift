@@ -5,8 +5,12 @@ import Foundation
 /// specified folders, or an entire enterprise. A file version retention
 /// is a  record for a retained file version. To use this feature,
 /// you must  have the manage retention policies scope enabled for your
-/// API key via  your application management console. For more information
-/// about retention policies, please visit our help documentation
+/// API key in your application management console.
+/// 
+/// **Note**:
+/// File retention API is now **deprecated**. 
+/// To get information about files and file versions under retention,
+/// see [files under retention](e://get-retention-policy-assignments-id-files-under-retention) or [file versions under retention](e://get-retention-policy-assignments-id-file-versions-under-retention) endpoints.
 public class FileVersionRetention: Codable {
     private enum CodingKeys: String, CodingKey {
         case id

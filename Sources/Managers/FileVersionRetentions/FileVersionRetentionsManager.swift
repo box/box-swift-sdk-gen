@@ -11,6 +11,11 @@ public class FileVersionRetentionsManager {
     }
 
     /// Retrieves all file version retentions for the given enterprise.
+    /// 
+    /// **Note**:
+    /// File retention API is now **deprecated**. 
+    /// To get information about files and file versions under retention,
+    /// see [files under retention](e://get-retention-policy-assignments-id-files-under-retention) or [file versions under retention](e://get-retention-policy-assignments-id-file-versions-under-retention) endpoints.
     ///
     /// - Parameters:
     ///   - queryParams: Query parameters of getFileVersionRetentions method
@@ -25,6 +30,11 @@ public class FileVersionRetentionsManager {
     }
 
     /// Returns information about a file version retention.
+    /// 
+    /// **Note**:
+    /// File retention API is now **deprecated**. 
+    /// To get information about files and file versions under retention,
+    /// see [files under retention](e://get-retention-policy-assignments-id-files-under-retention) or [file versions under retention](e://get-retention-policy-assignments-id-file-versions-under-retention) endpoints.
     ///
     /// - Parameters:
     ///   - fileVersionRetentionId: The ID of the file version retention
