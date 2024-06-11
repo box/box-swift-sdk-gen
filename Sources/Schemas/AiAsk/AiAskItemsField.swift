@@ -7,10 +7,10 @@ public class AiAskItemsField: Codable {
         case content
     }
 
-    /// The id of the item
+    /// The id of the item.
     public let id: String
 
-    /// The type of the item
+    /// The type of the item.
     public let type: AiAskItemsTypeField
 
     /// The content of the item, often the text representation.
@@ -19,8 +19,8 @@ public class AiAskItemsField: Codable {
     /// Initializer for a AiAskItemsField.
     ///
     /// - Parameters:
-    ///   - id: The id of the item
-    ///   - type: The type of the item
+    ///   - id: The id of the item.
+    ///   - type: The type of the item.
     ///   - content: The content of the item, often the text representation.
     public init(id: String, type: AiAskItemsTypeField = AiAskItemsTypeField.file, content: String? = nil) {
         self.id = id

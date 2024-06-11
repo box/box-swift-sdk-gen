@@ -8,21 +8,29 @@ public class AiAsk: Codable {
         case items
     }
 
-    /// The mode specifies if this request is for a single or multiple items.
+    /// The mode specifies if this request is for a single or multiple items. If you select `single_item_qa` the `items` array can have one element only. Selecting `multiple_item_qa` allows you to provide up to 25 items.
     public let mode: AiAskModeField
 
-    /// The prompt provided by the client to be answered by the LLM.
+    /// The prompt provided by the client to be answered by the LLM. The prompt's length is limited to 10000 characters.
     public let prompt: String
 
     /// The items to be processed by the LLM, often files.
+    /// 
+    /// **Note**: Box AI handles documents with text representations up to 1MB in size, or a maximum of 25 files, whichever comes first.
+    /// If the file size exceeds 1MB, the first 1MB of text representation will be processed.
+    /// If you set `mode` parameter to `single_item_qa`, the `items` array can have one element only. 
     public let items: [AiAskItemsField]
 
     /// Initializer for a AiAsk.
     ///
     /// - Parameters:
-    ///   - mode: The mode specifies if this request is for a single or multiple items.
-    ///   - prompt: The prompt provided by the client to be answered by the LLM.
+    ///   - mode: The mode specifies if this request is for a single or multiple items. If you select `single_item_qa` the `items` array can have one element only. Selecting `multiple_item_qa` allows you to provide up to 25 items.
+    ///   - prompt: The prompt provided by the client to be answered by the LLM. The prompt's length is limited to 10000 characters.
     ///   - items: The items to be processed by the LLM, often files.
+    ///     
+    ///     **Note**: Box AI handles documents with text representations up to 1MB in size, or a maximum of 25 files, whichever comes first.
+    ///     If the file size exceeds 1MB, the first 1MB of text representation will be processed.
+    ///     If you set `mode` parameter to `single_item_qa`, the `items` array can have one element only. 
     public init(mode: AiAskModeField, prompt: String, items: [AiAskItemsField]) {
         self.mode = mode
         self.prompt = prompt
