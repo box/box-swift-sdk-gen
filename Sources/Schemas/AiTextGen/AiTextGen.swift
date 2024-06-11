@@ -8,10 +8,14 @@ public class AiTextGen: Codable {
         case dialogueHistory = "dialogue_history"
     }
 
-    /// The prompt provided by the client to be answered by the LLM.
+    /// The prompt provided by the client to be answered by the LLM. The prompt's length is limited to 10000 characters.
     public let prompt: String
 
     /// The items to be processed by the LLM, often files.
+    /// The array can include **exactly one** element.
+    /// 
+    /// **Note**: Box AI handles documents with text representations up to 1MB in size.
+    /// If the file size exceeds 1MB, the first 1MB of text representation will be processed.
     public let items: [AiTextGenItemsField]
 
     /// The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
@@ -20,8 +24,12 @@ public class AiTextGen: Codable {
     /// Initializer for a AiTextGen.
     ///
     /// - Parameters:
-    ///   - prompt: The prompt provided by the client to be answered by the LLM.
+    ///   - prompt: The prompt provided by the client to be answered by the LLM. The prompt's length is limited to 10000 characters.
     ///   - items: The items to be processed by the LLM, often files.
+    ///     The array can include **exactly one** element.
+    ///     
+    ///     **Note**: Box AI handles documents with text representations up to 1MB in size.
+    ///     If the file size exceeds 1MB, the first 1MB of text representation will be processed.
     ///   - dialogueHistory: The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
     public init(prompt: String, items: [AiTextGenItemsField], dialogueHistory: [AiTextGenDialogueHistoryField]? = nil) {
         self.prompt = prompt
