@@ -21,7 +21,9 @@ let package = Package(
         .target(
             name: "BoxSdkGen",
             dependencies: [],
-            path: "Sources", exclude: ["Info.plist"]
+            path: "Sources",
+            exclude: ["Info.plist"],
+            resources: [.copy("PrivacyInfo.xcprivacy")]
         ),
         .testTarget(
             name: "BoxSdkGenTests",

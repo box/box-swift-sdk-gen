@@ -30,6 +30,8 @@ fileprivate class OSInformation {
         return WKInterfaceDevice.current().systemName
 #elseif os(OSX)
         return "macOS"
+#elseif os(visionOS)
+        return "visionOS"
 #elseif os(Linux)
         return "Linux"
 #elseif os(Windows)
