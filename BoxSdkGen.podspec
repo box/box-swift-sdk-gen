@@ -9,8 +9,10 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target = '13.0'
   spec.tvos.deployment_target = '13.0'
   spec.watchos.deployment_target = '6.0'
+  spec.visionos.deployment_target = '1.0'
   spec.source       = { :git => 'https://github.com/box/box-swift-sdk-gen.git', :tag => 'v'+spec.version.to_s }
   spec.swift_versions = ['5']
   spec.requires_arc = true
   spec.source_files = 'Sources/**/*.swift'
+  spec.resource_bundle = {"BoxSdkGen" => "Sources/PrivacyInfo.xcprivacy"}
 end
