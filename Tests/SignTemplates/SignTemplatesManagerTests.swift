@@ -16,10 +16,10 @@ class SignTemplatesManagerTests: XCTestCase {
         XCTAssertTrue(signTemplates.entries!.count >= 0)
         if signTemplates.entries!.count > 0 {
             let signTemplate: SignTemplate = try await client.signTemplates.getSignTemplateById(templateId: signTemplates.entries![0].id!)
-            XCTAssertTrue(signTemplate.id == signTemplates.entries![0].id)
-            XCTAssertTrue(signTemplate.sourceFiles!.count > 0)
-            XCTAssertTrue(signTemplate.name != "")
-            XCTAssertTrue(signTemplate.parentFolder!.id != "")
+            assert(signTemplate.id == signTemplates.entries![0].id)
+            assert(signTemplate.sourceFiles!.count > 0)
+            assert(signTemplate.name != "")
+            assert(signTemplate.parentFolder!.id != "")
         }
 
     }

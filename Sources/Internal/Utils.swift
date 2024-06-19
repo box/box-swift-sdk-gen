@@ -104,6 +104,16 @@ public enum Utils {
         public static func from(data: Data) -> String {
             return String(decoding: data, as: UTF8.self)
         }
+
+        /// Converts from hex string to base64 string.
+        ///
+        /// - Parameters:
+        ///   - value: The hex string
+        /// - Returns: The base64 string.
+        public static func hextToBase64(value: String) -> String {
+            let data = Data(fromHexString: value) ?? Data()
+            return data.base64EncodedString()
+        }
     }
 
     /// Helper methods for Date
@@ -262,10 +272,73 @@ public enum Utils {
         return buffer1 == buffer2
     }
 
+    /// Gets length of a buffer
+    ///
+    /// - Parameters:
+    ///   - buffer: The iinstances of Data.
+    /// - Returns: The length of the buffer.
+    public static func bufferLength(buffer: Data) -> Int {
+        return buffer.count
+    }
+
     /// Returns the path of the temporary directory for the current user.
     ///
     /// - Returns: The path path of the temporary directory for the current user.
     public static func temporaryDirectoryPath() -> String {
         FileManager.default.temporaryDirectory.absoluteString
     }
+
+
+    /// Iterates over a stream and yields chunks of it
+    ///
+    /// - Parameters:
+    ///   - stream: InputStream to iterate over
+    ///   - chunkSize: Size of chunk
+    /// - Returns: The asynchronous sequence AsyncStream
+    public static func iterateChunks(stream: InputStream, chunkSize: Int64) -> AsyncStream<InputStream> {
+        return AsyncStream<InputStream> { continuation in
+            _Concurrency.Task {
+                stream.open()
+
+                let bufferSize = Int(chunkSize)
+                var buffer = [UInt8](repeating: 0, count: bufferSize)
+
+                defer {
+                    stream.close()
+                    continuation.finish()
+                }
+
+                while stream.hasBytesAvailable {
+                    let read = stream.read(&buffer, maxLength: buffer.count)
+                    if read < 0, let error = stream.streamError {
+                        throw error
+                    } else if read == 0 {
+                        return
+                    }
+
+                    continuation.yield(InputStream(data:Data(buffer.prefix(read))))
+                }
+            }
+        }
+    }
+
+    /// Asynchronously reduces the elements of an `AsyncStream` using a specified reducer function and initial value.
+    ///
+    /// - Parameters:
+    ///   - iterator: The `AsyncStream` providing elements to be reduced.
+    ///   - reducer: A closure that combines an accumulated value (`U`) with each element of the stream (`T`) asynchronously.
+    ///   - initialValue: The initial value to start the reduction.
+    /// - Returns: The result of combining all elements of the stream using the provided reducer function.
+    /// - Throws: Any error thrown by the `reducer` closure during the reduction process.
+    public static func reduceIterator<T,U>(iterator: AsyncStream<T>, reducer: (U, T) async throws -> U, initialValue: U) async throws -> U
+    {
+        var result = initialValue
+
+        for await item in iterator {
+            result = try await reducer(result, item)
+        }
+
+        return result
+    }
+
 }
