@@ -61,6 +61,12 @@ public class SignTemplate: Codable {
     public let areFilesLocked: Bool?
 
     /// Array of signers for the template.
+    /// 
+    /// **Note**: It may happen that some signers specified in the template belong to conflicting [segments](r://shield-information-barrier-segment-member) (user groups).
+    /// This means that due to the security policies, users are assigned to segments to prevent exchanges or communication that could lead to ethical conflicts.
+    /// In such a case, an attempt to send a sign request based on a template that lists signers in conflicting segments will result in an error.
+    /// 
+    /// Read more about [segments and ethical walls](https://support.box.com/hc/en-us/articles/9920431507603-Understanding-Information-Barriers#h_01GFVJEHQA06N7XEZ4GCZ9GFAQ).
     public let signers: [TemplateSigner]?
 
     /// Additional information on which fields are required and which fields are not editable.
@@ -90,6 +96,12 @@ public class SignTemplate: Codable {
     ///   - areEmailSettingsLocked: Indicates if the template email settings are editable or not.
     ///   - areFilesLocked: Indicates if the template files are editable or not. This includes deleting or renaming template files.
     ///   - signers: Array of signers for the template.
+    ///     
+    ///     **Note**: It may happen that some signers specified in the template belong to conflicting [segments](r://shield-information-barrier-segment-member) (user groups).
+    ///     This means that due to the security policies, users are assigned to segments to prevent exchanges or communication that could lead to ethical conflicts.
+    ///     In such a case, an attempt to send a sign request based on a template that lists signers in conflicting segments will result in an error.
+    ///     
+    ///     Read more about [segments and ethical walls](https://support.box.com/hc/en-us/articles/9920431507603-Understanding-Information-Barriers#h_01GFVJEHQA06N7XEZ4GCZ9GFAQ).
     ///   - additionalInfo: Additional information on which fields are required and which fields are not editable.
     ///   - readySignLink: Box's ready-sign link feature enables you to create a link to a signature request that you've created from a template. Use this link when you want to post a signature request on a public form — such as an email, social media post, or web page — without knowing who the signers will be. Note: The ready-sign link feature is limited to Enterprise Plus customers and not available to Box Verified Enterprises.
     ///   - customBranding: Custom branding applied to notifications
