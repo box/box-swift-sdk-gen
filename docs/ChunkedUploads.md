@@ -9,6 +9,7 @@ This is a manager for chunked uploads (allowed for files at least 20MB).
 - [Remove upload session](#remove-upload-session)
 - [List parts](#list-parts)
 - [Commit upload session](#commit-upload-session)
+- [Upload big file](#upload-big-file)
 
 ## Create upload session
 
@@ -207,5 +208,36 @@ Returns the file object in a list.Returns when all chunks have been uploaded but
 Inspect the upload session to get more information about the
 progress of processing the chunks, then retry committing the file
 when all chunks have processed.
+
+
+## Upload big file
+
+Starts the process of chunk uploading a big file. Should return a File object representing uploaded file.
+
+This operation is performed by calling function `uploadBigFile`.
+
+
+
+```
+try await client.chunkedUploads.uploadBigFile(file: fileByteStream, fileName: fileName, fileSize: Int64(fileSize), parentFolderId: parentFolderId)
+```
+
+### Arguments
+
+- file `InputStream`
+  - The stream of the file to upload.
+- fileName `String`
+  - The name of the file, which will be used for storage in Box.
+- fileSize `Int64`
+  - The total size of the file for the chunked upload in bytes.
+- parentFolderId `String`
+  - The ID of the folder where the file should be uploaded.
+
+
+### Returns
+
+This function returns a value of type `FileFull`.
+
+
 
 

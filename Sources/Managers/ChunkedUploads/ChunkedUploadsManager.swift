@@ -120,4 +120,56 @@ public class ChunkedUploadsManager {
         return try Files.deserialize(from: response.data)
     }
 
+    public func reducer(acc: PartAccumulator, chunk: InputStream) async throws -> PartAccumulator {
+        let lastIndex: Int = acc.lastIndex
+        let parts: [UploadPart] = acc.parts
+        let chunkBuffer: Data = Utils.readByteStream(byteStream: chunk)
+        let hash: Hash = Hash(algorithm: HashName.sha1)
+        hash.updateHash(data: chunkBuffer)
+        let sha1: String = await hash.digestHash(encoding: "base64")
+        let digest: String = "\("sha=")\(sha1)"
+        let chunkSize: Int = Utils.bufferLength(buffer: chunkBuffer)
+        let bytesStart: Int = lastIndex + 1
+        let bytesEnd: Int = lastIndex + chunkSize
+        let contentRange: String = "\("bytes ")\(Utils.Strings.toString(value: bytesStart)!)\("-")\(Utils.Strings.toString(value: bytesEnd)!)\("/")\(Utils.Strings.toString(value: acc.fileSize)!)"
+        let uploadedPart: UploadedPart = try await self.uploadFilePart(uploadSessionId: acc.uploadSessionId, requestBody: Utils.generateByteStreamFromBuffer(buffer: chunkBuffer), headers: UploadFilePartHeaders(digest: digest, contentRange: contentRange))
+        let part: UploadPart = uploadedPart.part!
+        let partSha1: String = Utils.Strings.hextToBase64(value: part.sha1!)
+        assert(partSha1 == sha1)
+        assert(part.size! == chunkSize)
+        assert(part.offset! == bytesStart)
+        acc.fileHash.updateHash(data: chunkBuffer)
+        return PartAccumulator(lastIndex: bytesEnd, parts: parts + [part], fileSize: acc.fileSize, uploadSessionId: acc.uploadSessionId, fileHash: acc.fileHash)
+    }
+
+    /// Starts the process of chunk uploading a big file. Should return a File object representing uploaded file.
+    ///
+    /// - Parameters:
+    ///   - file: The stream of the file to upload.
+    ///   - fileName: The name of the file, which will be used for storage in Box.
+    ///   - fileSize: The total size of the file for the chunked upload in bytes.
+    ///   - parentFolderId: The ID of the folder where the file should be uploaded.
+    /// - Returns: The `FileFull`.
+    /// - Throws: The `GeneralError`.
+    public func uploadBigFile(file: InputStream, fileName: String, fileSize: Int64, parentFolderId: String) async throws -> FileFull {
+        let uploadSession: UploadSession = try await self.createFileUploadSession(requestBody: CreateFileUploadSessionRequestBody(folderId: parentFolderId, fileSize: fileSize, fileName: fileName))
+        let uploadSessionId: String = uploadSession.id!
+        let partSize: Int64 = uploadSession.partSize!
+        let totalParts: Int = uploadSession.totalParts!
+        assert(partSize * Int64(totalParts) >= fileSize)
+        assert(uploadSession.numPartsProcessed == 0)
+        let fileHash: Hash = Hash(algorithm: HashName.sha1)
+        let chunksIterator: AsyncStream<InputStream> = Utils.iterateChunks(stream: file, chunkSize: partSize)
+        let results: PartAccumulator = try await Utils.reduceIterator(iterator: chunksIterator, reducer: self.reducer, initialValue: PartAccumulator(lastIndex: -1, parts: [], fileSize: fileSize, uploadSessionId: uploadSessionId, fileHash: fileHash))
+        let parts: [UploadPart] = results.parts
+        let processedSessionParts: UploadParts = try await self.getFileUploadSessionParts(uploadSessionId: uploadSessionId)
+        assert(processedSessionParts.totalCount! == totalParts)
+        let processedSession: UploadSession = try await self.getFileUploadSessionById(uploadSessionId: uploadSessionId)
+        assert(processedSession.numPartsProcessed == totalParts)
+        let sha1: String = await fileHash.digestHash(encoding: "base64")
+        let digest: String = "\("sha=")\(sha1)"
+        let committedSession: Files = try await self.createFileUploadSessionCommit(uploadSessionId: uploadSessionId, requestBody: CreateFileUploadSessionCommitRequestBody(parts: parts), headers: CreateFileUploadSessionCommitHeaders(digest: digest))
+        return committedSession.entries![0]
+    }
+
 }
