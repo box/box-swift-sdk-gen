@@ -80,13 +80,13 @@ public class NetworkClient {
         return try await withCheckedThrowingContinuation { continuation in
             networkSession.session.dataTask(with: urlRequest) { data, response, error in
                 if let error {
-                    continuation.resume(with: .failure(NetworkError(message: .customValue(error.localizedDescription), error: error)))
+                    continuation.resume(with: .failure(BoxNetworkError(message: error.localizedDescription, error: error)))
                     return
                 }
 
                 guard let response else {
                     continuation.resume(
-                        with: .failure(NetworkError(message: .noResponse(url: urlRequest.url)))
+                        with: .failure(BoxNetworkError(message: "No response \(urlRequest.url?.absoluteString ?? "")."))
                     )
                     return
                 }
@@ -110,20 +110,20 @@ public class NetworkClient {
         return try await withCheckedThrowingContinuation { continuation in
             networkSession.session.downloadTask(with: urlRequest) { location, response, error in
                 if let error {
-                    continuation.resume(with: .failure(NetworkError(message: .customValue(error.localizedDescription), error: error)))
+                    continuation.resume(with: .failure(BoxNetworkError(message: error.localizedDescription, error: error)))
                     return
                 }
 
                 guard let localURL = location else {
                     continuation.resume(
-                        with: .failure(NetworkError(message: .downloadFailed(url: urlRequest.url)))
+                        with: .failure(BoxNetworkError(message: "File was not downloaded \(urlRequest.url?.absoluteString ?? "")"))
                     )
                     return
                 }
 
                 guard let response else {
                     continuation.resume(
-                        with: .failure(NetworkError(message: .noResponse(url: urlRequest.url)))
+                        with: .failure(BoxNetworkError(message: "No response \(urlRequest.url?.absoluteString ?? "")."))
                     )
                     return
                 }
@@ -134,7 +134,7 @@ public class NetworkClient {
                 }
                 catch {
                     continuation.resume(
-                        with: .failure(GeneralError(message: .moveFileFailed(sourceUrl: localURL, destinationUrl: downloadDestinationURL)))
+                        with: .failure(BoxSDKError(message: "Could not move item from temporary download location \(localURL.absoluteString) to download destination \(downloadDestinationURL.absoluteString)."))
                     )
                 }
 
@@ -326,7 +326,7 @@ public class NetworkClient {
 
         // available attempts exceeded
         if attempt >= networkSession.networkSettings.maxRetryAttempts {
-            throw APIError(message: .rateLimitMaxRetries, conversation: conversation)
+            throw BoxAPIError(fromConversation: conversation, message: "Request has hit the maximum number of retries.")
         }
 
         // Unauthorized
@@ -344,7 +344,7 @@ public class NetworkClient {
             return try await fetch(url: conversation.url, options: conversation.options, networkSession: networkSession, attempt: attempt + 1)
         }
 
-        throw APIError(conversation: conversation)
+        throw BoxAPIError(fromConversation: conversation)
     }
 
     /// Suspends the current task for the given duration of seconds.

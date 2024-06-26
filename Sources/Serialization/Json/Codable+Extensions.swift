@@ -24,7 +24,7 @@ extension Decodable {
             return try self.decode(from: data, with: decoder)
         }
 
-        throw GeneralError(message: .deserializationError("Could not in create `Data` from provided string"))
+        throw BoxSDKError(message: "Could not create `Data` from provided string")
     }
 
     public static func deserialize(from serializedData: SerializedData, with decoder: JSONDecoder = JSONDecoder()) throws -> Self {

@@ -61,7 +61,7 @@ struct KeychainService {
     /// - Throws: The `GeneralError` if the operation fails for any reason.
     func set<T: Encodable>(_ value: T, key: String) throws {
         guard let data = try? value.encode() else {
-            throw GeneralError(message: .keychainDataConversionError)
+            throw BoxSDKError(message: "Could not decode or encode data for or from keychain.")
         }
 
         var query = secureStoreQueryable.query
@@ -116,7 +116,7 @@ struct KeychainService {
                 let valueData = queriedItem[String(kSecValueData)] as? Data,
                 let value = try? JSONDecoder().decode(T.self, from: valueData)
             else {
-                throw GeneralError(message: .keychainDataConversionError)
+                throw BoxSDKError(message: "Could not decode or encode data for or from keychain.")
             }
             return value
         case errSecItemNotFound:
@@ -155,9 +155,9 @@ struct KeychainService {
 
     /// Creates an error based on the `OSStatus`
     /// - Returns: The `GeneralError` with the message based on `OSStatus`
-    func error(from status: OSStatus) -> GeneralError {
+    func error(from status: OSStatus) -> BoxSDKError {
         let message = SecCopyErrorMessageString(status, nil) as String? ?? NSLocalizedString("Unhandled Error", comment: "")
-        return GeneralError(message: .keychainUnhandledError(message))
+        return BoxSDKError(message: "Unhandled keychain error: \(message)")
     }
 }
 

@@ -40,15 +40,15 @@ class BoxOAuthWebAuthentication {
                 callbackURLScheme: URL(string: options.redirectUri!)?.scheme,
                 completionHandler: { url, error in
                     if let error = error {
-                        completion(.failure(AuthError(message: .authorizationInitialization("Unexpected error occurred"), error: error)))
+                        completion(.failure(BoxSDKError(message: error.localizedDescription, error: error)))
                     } else if let url = url {
                         guard let authorizationCode =  BoxOAuthWebAuthentication.getURLComponentValueAt(key: "code", from: url) else {
-                            completion(.failure(AuthError(message: .invalidAuthorizationCode)))
+                            completion(.failure(BoxSDKError(message: "Couldn't obtain authorization code from OAuth web session result.")))
                             return
                         }
                         if let sentState = options.state {
                             guard let receivedState =  BoxOAuthWebAuthentication.getURLComponentValueAt(key: "state", from: url), sentState == receivedState else {
-                                completion(.failure(AuthError(message: .invalidOAuthState)))
+                                completion(.failure(BoxSDKError(message: "The sent OAuth state does not match the received one.")))
                                 return
                             }
                         }
@@ -93,7 +93,7 @@ class BoxOAuthWebAuthentication {
     /// - Parameters:
     ///   - key: The key of a query item to search.
     ///   - from: The URL in which the key will be searched.
-    /// - Returns: The value with queryitem if found, otherwise nil.
+    /// - Returns: The value with query item if found, otherwise nil.
     static func getURLComponentValueAt(key: String, from url: URL?) -> String? {
         guard let url = url, let urlComponent = NSURLComponents(string: url.absoluteString)?.queryItems?.first(where: { $0.name == key }),
               let value = urlComponent.value
