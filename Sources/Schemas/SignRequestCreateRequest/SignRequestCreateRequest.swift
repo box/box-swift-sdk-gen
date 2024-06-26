@@ -9,7 +9,14 @@ public class SignRequestCreateRequest: SignRequestBase {
         case parentFolder = "parent_folder"
     }
 
-    /// Array of signers for the signature request. 35 is the max number of signers permitted.
+    /// Array of signers for the signature request. 35 is the
+    /// max number of signers permitted.
+    /// 
+    /// **Note**: It may happen that some signers belong to conflicting [segments](r://shield-information-barrier-segment-member) (user groups).
+    /// This means that due to the security policies, users are assigned to segments to prevent exchanges or communication that could lead to ethical conflicts.
+    /// In such a case, an attempt to send the sign request will result in an error.
+    /// 
+    /// Read more about [segments and ethical walls](https://support.box.com/hc/en-us/articles/9920431507603-Understanding-Information-Barriers#h_01GFVJEHQA06N7XEZ4GCZ9GFAQ).
     public let signers: [SignRequestCreateSigner]
 
     /// List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
@@ -23,7 +30,14 @@ public class SignRequestCreateRequest: SignRequestBase {
     /// Initializer for a SignRequestCreateRequest.
     ///
     /// - Parameters:
-    ///   - signers: Array of signers for the signature request. 35 is the max number of signers permitted.
+    ///   - signers: Array of signers for the signature request. 35 is the
+    ///     max number of signers permitted.
+    ///     
+    ///     **Note**: It may happen that some signers belong to conflicting [segments](r://shield-information-barrier-segment-member) (user groups).
+    ///     This means that due to the security policies, users are assigned to segments to prevent exchanges or communication that could lead to ethical conflicts.
+    ///     In such a case, an attempt to send the sign request will result in an error.
+    ///     
+    ///     Read more about [segments and ethical walls](https://support.box.com/hc/en-us/articles/9920431507603-Understanding-Information-Barriers#h_01GFVJEHQA06N7XEZ4GCZ9GFAQ).
     ///   - isDocumentPreparationNeeded: Indicates if the sender should receive a `prepare_url` in the response to complete document preparation using the UI.
     ///   - redirectUrl: When specified, the signature request will be redirected to this url when a document is signed.
     ///   - declinedRedirectUrl: The uri that a signer will be redirected to after declining to sign a document.
