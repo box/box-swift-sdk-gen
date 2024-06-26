@@ -36,7 +36,7 @@ public enum Utils {
         public static func urlEncodedFrom(data: Data) throws -> String {
             let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
             guard let dictionary else {
-                throw GeneralError(message: .serializationError("Could not create object from JSON data"))
+                throw BoxSDKError(message: "Could not create object from JSON data.")
             }
 
             var items: [URLQueryItem] = []
@@ -51,7 +51,7 @@ public enum Utils {
                 return query
             }
 
-            throw GeneralError(message: .serializationError("Could not create url encoded data."))
+            throw BoxSDKError(message: "Could not create url encoded data.")
         }
     }
 
@@ -132,7 +132,7 @@ public enum Utils {
             dateFormatterWithMilliseconds.date(from: dateTime)
 
             guard let result else {
-                throw GeneralError(message: .customValue("Could not create Date from provided string \(dateTime)"))
+                throw BoxSDKError(message: "Could not create Date from provided string \(dateTime)")
             }
 
             return result
@@ -153,7 +153,7 @@ public enum Utils {
         /// - Throws: GeneralError
         public static func  dateFromString(date: String) throws -> Date {
             guard let date = dateFormatter.date(from: date) else {
-                throw GeneralError(message: .customValue("Could not create Date from provided string \(date)"))
+                throw BoxSDKError(message: "Could not create Date from provided string \(date)")
             }
 
             return date
