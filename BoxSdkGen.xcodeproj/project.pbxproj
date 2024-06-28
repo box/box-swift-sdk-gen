@@ -1902,7 +1902,6 @@
 		46FA74A6BA063BE35CD6E0C0 /* UpdateFolderByIdRequestBodyFolderUploadEmailAccessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880447938F55053DA366BFB8 /* UpdateFolderByIdRequestBodyFolderUploadEmailAccessField.swift */; };
 		47266D42FB53BD8FE8C0B448 /* EventEventTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F2E2F742BDE25BAF4E5B2 /* EventEventTypeField.swift */; };
 		4731614FE70CF1F44C036C0B /* UpdateFileVersionByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B279981C3A0A97BCC3280 /* UpdateFileVersionByIdHeaders.swift */; };
-		473A2732B0FFBAF09DC26AC8 /* AiAskModeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A5AB18298F361ECD98FC8C /* AiAskModeField.swift */; };
 		473CE6C8A5DA268586E31B52 /* AiTextGenDialogueHistoryField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7EBB5A446CFAF6A004F36 /* AiTextGenDialogueHistoryField.swift */; };
 		4740C57C008F2081CC67D92F /* GetInviteByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCEE0511496BACF42E32DB9 /* GetInviteByIdHeaders.swift */; };
 		4745AB26B87270E1C72FB637 /* FolderLockLockedOperationsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2236AFC327111EC33D6BAF1 /* FolderLockLockedOperationsField.swift */; };
@@ -2432,7 +2431,6 @@
 		5B462E46D7D56951382698AC /* CreateInviteHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D695C882AAD55D0432602A /* CreateInviteHeaders.swift */; };
 		5B5D7C4831E544273B7872E6 /* MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2994D4CE3D0E339251F6D24 /* MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString.swift */; };
 		5B61DB33D28D83BE5F641D73 /* AddShareLinkToWebLinkQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45A471B67C0929786619791 /* AddShareLinkToWebLinkQueryParams.swift */; };
-		5B6722BB640BD4780BD2AD1D /* AiAskModeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A5AB18298F361ECD98FC8C /* AiAskModeField.swift */; };
 		5B6CA2AE9E4FE8C867378A79 /* UserStatusField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8BD141BC42613F2F50961B /* UserStatusField.swift */; };
 		5B7419B3707FFEABD3199CE7 /* UpdateShieldInformationBarrierStatusRequestBodyStatusField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312E917489D54FA3A209D88A /* UpdateShieldInformationBarrierStatusRequestBodyStatusField.swift */; };
 		5B75EA3E92786F65BEC189E5 /* DeleteWebhookByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B754F070C1769FA351030C19 /* DeleteWebhookByIdHeaders.swift */; };
@@ -3242,7 +3240,6 @@
 		78AA5F942790215B542504C3 /* CollaborationAllowlistEntryEnterpriseTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F3A2048AB31E9DC198334 /* CollaborationAllowlistEntryEnterpriseTypeField.swift */; };
 		78B7ABD73F441A20D94C64BD /* UpdateAllSkillCardsOnFileHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EDF70ED44E7AAA81C347AD /* UpdateAllSkillCardsOnFileHeaders.swift */; };
 		78B976021658F60025A0CF54 /* UpdateFolderByIdRequestBodySharedLinkPermissionsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86F3D27AB9362110A1F2DDF /* UpdateFolderByIdRequestBodySharedLinkPermissionsField.swift */; };
-		78CA9AF922264442A733EFE3 /* AiAskModeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A5AB18298F361ECD98FC8C /* AiAskModeField.swift */; };
 		78CC95DCCF8991BD0FB558E6 /* IntegrationMappingMiniPartnerItemTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A4C0A6A277430B7756753 /* IntegrationMappingMiniPartnerItemTypeField.swift */; };
 		78D2C5695508BA6E3FD2DD38 /* UpdateFileByIdRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF90851A9FF66316B14496E /* UpdateFileByIdRequestBody.swift */; };
 		78D696F0BABF84A812B4C3A6 /* GetEnterpriseDevicePinnersQueryParamsDirectionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB7B2CA5674DCE7EAEEE3A3 /* GetEnterpriseDevicePinnersQueryParamsDirectionField.swift */; };
@@ -3603,7 +3600,6 @@
 		8615FB4AC10EBB57008222A2 /* SessionTerminationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F847E955249E81820590057D /* SessionTerminationManager.swift */; };
 		86188E699ECF7C30668223C4 /* GetGroupCollaborationsQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8100DBB37C5D9CDDAEE6432 /* GetGroupCollaborationsQueryParams.swift */; };
 		8627DA2118B6C83071793C48 /* SearchForContentQueryParamsDirectionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCE0E80FECD0533913222CA /* SearchForContentQueryParamsDirectionField.swift */; };
-		86393F18ACFF642AC9D396B4 /* AiAskModeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A5AB18298F361ECD98FC8C /* AiAskModeField.swift */; };
 		86433E7EEA86798091F0C10E /* Workflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C4E3512354E0080D9C2F96 /* Workflow.swift */; };
 		8660A6906329EB98D5793D39 /* AddShareLinkToFileHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61945395036D8A2EDDE41C2E /* AddShareLinkToFileHeaders.swift */; };
 		866674EEB32FF3E5E110B17A /* ShieldInformationBarrierSegmentRestrictionBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428D2CA642EF677D68812F3D /* ShieldInformationBarrierSegmentRestrictionBase.swift */; };
@@ -4703,7 +4699,6 @@
 		AFDBE034860C73197EC82DFD /* TaskAssignmentsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40138F627EFD4BB3E9098934 /* TaskAssignmentsManager.swift */; };
 		AFDE86E99A74E5935571A25D /* CopyFolderRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B09C90D664D6D0F5BCD187 /* CopyFolderRequestBody.swift */; };
 		AFE96C72A9385FE07869E599 /* GetFolderLocksHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A121E59728116FBDF4FE8949 /* GetFolderLocksHeaders.swift */; };
-		AFEA7F46FF37AB425EA33BBF /* AiAskModeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A5AB18298F361ECD98FC8C /* AiAskModeField.swift */; };
 		AFEAD2501F8E5D688D9802DD /* StoragePolicyAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BAD08DEB16569C86099829 /* StoragePolicyAssignment.swift */; };
 		AFF344BC3CF2AFD401CFB93F /* UploadParts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E54C2A5AF0D2457970202 /* UploadParts.swift */; };
 		AFFC28275B644ACCAAA20787 /* MetadataQueryIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24B730FFCAD17B862B88034 /* MetadataQueryIndex.swift */; };
@@ -7158,7 +7153,6 @@
 		428D2CA642EF677D68812F3D /* ShieldInformationBarrierSegmentRestrictionBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldInformationBarrierSegmentRestrictionBase.swift; sourceTree = "<group>"; };
 		42924DD3730C79279CA0F855 /* GetTermsOfServiceHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTermsOfServiceHeaders.swift; sourceTree = "<group>"; };
 		429AEDD0C173EC60A78ACD95 /* CollectionNameField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionNameField.swift; sourceTree = "<group>"; };
-		42A5AB18298F361ECD98FC8C /* AiAskModeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiAskModeField.swift; sourceTree = "<group>"; };
 		42EA21BB7312BF3366E3D334 /* UpdateFolderWatermarkHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFolderWatermarkHeaders.swift; sourceTree = "<group>"; };
 		434EE3B454C6B055556B4BF4 /* CreateClassificationTemplateRequestBodyScopeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassificationTemplateRequestBodyScopeField.swift; sourceTree = "<group>"; };
 		4417DF4D789CD0048C9B1ADC /* CreateCollaborationRequestBodyItemField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollaborationRequestBodyItemField.swift; sourceTree = "<group>"; };
@@ -10003,7 +9997,6 @@
 				91739878D87E6331D6AE3323 /* AiAsk.swift */,
 				F89848514B448DBAA2CAE779 /* AiAskItemsField.swift */,
 				FE1008957AF54717325FFA85 /* AiAskItemsTypeField.swift */,
-				42A5AB18298F361ECD98FC8C /* AiAskModeField.swift */,
 			);
 			path = AiAsk;
 			sourceTree = "<group>";
@@ -12140,7 +12133,6 @@
 				66B37D78D1F0B98B8BEA0509 /* AiAsk.swift in Sources */,
 				6C2AACDE6D7D393A9C455915 /* AiAskItemsField.swift in Sources */,
 				FA35E62C57A084A9453B618C /* AiAskItemsTypeField.swift in Sources */,
-				86393F18ACFF642AC9D396B4 /* AiAskModeField.swift in Sources */,
 				63C814E821692D69301C6CEE /* AiManager.swift in Sources */,
 				21209EC506F3DBF4D11E5D2B /* AiResponse.swift in Sources */,
 				CD4BAE01EAFE943C1DB95D9D /* AiTextGen.swift in Sources */,
@@ -13507,7 +13499,6 @@
 				12C145919A401115F75E9DA6 /* AiAsk.swift in Sources */,
 				380C772CC6CF662A1535E469 /* AiAskItemsField.swift in Sources */,
 				7A6ADF1B00A4B51A1DA7AD0C /* AiAskItemsTypeField.swift in Sources */,
-				AFEA7F46FF37AB425EA33BBF /* AiAskModeField.swift in Sources */,
 				2A600E6B4D9E0F82780AD08B /* AiManager.swift in Sources */,
 				0AB7940836654E4549865D66 /* AiResponse.swift in Sources */,
 				3CF8842ED18CB2FB71B67F7E /* AiTextGen.swift in Sources */,
@@ -14874,7 +14865,6 @@
 				3EE0B41C0855A25842A7BDBB /* AiAsk.swift in Sources */,
 				5598E4CCB51FE5B36CE64591 /* AiAskItemsField.swift in Sources */,
 				0446A1263B46FBB378409E4C /* AiAskItemsTypeField.swift in Sources */,
-				473A2732B0FFBAF09DC26AC8 /* AiAskModeField.swift in Sources */,
 				FE78A2DA7B317D4B5753A111 /* AiManager.swift in Sources */,
 				0997054C39DEDEA2A76A3589 /* AiResponse.swift in Sources */,
 				B628267038CFE8297287A0CF /* AiTextGen.swift in Sources */,
@@ -16241,7 +16231,6 @@
 				A1F9F918F85723078C069353 /* AiAsk.swift in Sources */,
 				77D1C07EFCBBB3420946C38A /* AiAskItemsField.swift in Sources */,
 				B008DFB75892AB3D30DF6F16 /* AiAskItemsTypeField.swift in Sources */,
-				5B6722BB640BD4780BD2AD1D /* AiAskModeField.swift in Sources */,
 				295D80BFFBEB6E6DEA8ECEB1 /* AiManager.swift in Sources */,
 				3D5808584035D3FEE664718B /* AiResponse.swift in Sources */,
 				A6DE8FF7BDEB5EAE3DC16890 /* AiTextGen.swift in Sources */,
@@ -17608,7 +17597,6 @@
 				F3AF2E0EB51F1BBEFA752DFB /* AiAsk.swift in Sources */,
 				E71AE43ED1E0E2C21AE1D00C /* AiAskItemsField.swift in Sources */,
 				B6B9BAD35DB8C53B33414602 /* AiAskItemsTypeField.swift in Sources */,
-				78CA9AF922264442A733EFE3 /* AiAskModeField.swift in Sources */,
 				660E64D09D7FE0C10EBDA797 /* AiManager.swift in Sources */,
 				BBC2CDCD96164986DAC23848 /* AiResponse.swift in Sources */,
 				2FC58791D866DECBC93B7F12 /* AiTextGen.swift in Sources */,

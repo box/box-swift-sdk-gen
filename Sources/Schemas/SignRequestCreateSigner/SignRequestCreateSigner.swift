@@ -53,14 +53,16 @@ public class SignRequestCreateSigner: Codable {
     /// declined redirect URL settings for a specific signer.
     public let declinedRedirectUrl: String?
 
-    /// If set to true, signer will need to login to a Box account
+    /// If set to true, the signer will need to log in to a Box account
     /// before signing the request. If the signer does not have
-    /// an existing account, they will have an option to create
-    /// a free Box account.
+    /// an existing account, they will have the option to create
+    /// a free Box account. Cannot be selected in combination with
+    /// `verification_phone_number`.
     public let loginRequired: Bool?
 
-    /// If set, this phone number is be used to verify the signer
-    /// via two factor authentication before they are able to sign the document.
+    /// If set, this phone number will be used to verify the signer
+    /// via two-factor authentication before they are able to sign the document.
+    /// Cannot be selected in combination with `login_required`.
     public let verificationPhoneNumber: String?
 
     /// If set, the signer is required to enter the password before they are able
@@ -103,12 +105,14 @@ public class SignRequestCreateSigner: Codable {
     ///     to after declining to sign a document.
     ///     Defining this URL overrides default or global
     ///     declined redirect URL settings for a specific signer.
-    ///   - loginRequired: If set to true, signer will need to login to a Box account
+    ///   - loginRequired: If set to true, the signer will need to log in to a Box account
     ///     before signing the request. If the signer does not have
-    ///     an existing account, they will have an option to create
-    ///     a free Box account.
-    ///   - verificationPhoneNumber: If set, this phone number is be used to verify the signer
-    ///     via two factor authentication before they are able to sign the document.
+    ///     an existing account, they will have the option to create
+    ///     a free Box account. Cannot be selected in combination with
+    ///     `verification_phone_number`.
+    ///   - verificationPhoneNumber: If set, this phone number will be used to verify the signer
+    ///     via two-factor authentication before they are able to sign the document.
+    ///     Cannot be selected in combination with `login_required`.
     ///   - password: If set, the signer is required to enter the password before they are able
     ///     to sign a document. This field is write only.
     ///   - signerGroupId: If set, signers who have the same value will be assigned to the same input and to the same signer group.
