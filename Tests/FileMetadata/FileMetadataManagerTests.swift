@@ -18,11 +18,11 @@ class FileMetadataManagerTests: XCTestCase {
         XCTAssertTrue(Utils.Strings.toString(value: createdMetadata.scope) == "global")
         XCTAssertTrue(createdMetadata.version == 0)
         let receivedMetadata: MetadataFull = try await client.fileMetadata.getFileMetadataById(fileId: file.id, scope: GetFileMetadataByIdScope.global, templateKey: "properties")
-        XCTAssertTrue(receivedMetadata.extraData!["abc"] == "xyz")
+        XCTAssertTrue(Utils.Strings.toString(value: receivedMetadata.extraData!["abc"]) == "xyz")
         let newValue: String = "bar"
         try await client.fileMetadata.updateFileMetadataById(fileId: file.id, scope: UpdateFileMetadataByIdScope.global, templateKey: "properties", requestBody: [UpdateFileMetadataByIdRequestBody(op: UpdateFileMetadataByIdRequestBodyOpField.replace, path: "/abc", value: newValue)])
         let receivedUpdatedMetadata: MetadataFull = try await client.fileMetadata.getFileMetadataById(fileId: file.id, scope: GetFileMetadataByIdScope.global, templateKey: "properties")
-        XCTAssertTrue(receivedUpdatedMetadata.extraData!["abc"] == newValue)
+        XCTAssertTrue(Utils.Strings.toString(value: receivedUpdatedMetadata.extraData!["abc"]) == newValue)
         try await client.fileMetadata.deleteFileMetadataById(fileId: file.id, scope: DeleteFileMetadataByIdScope.global, templateKey: "properties")
         await XCTAssertThrowsErrorAsync(try await client.fileMetadata.getFileMetadataById(fileId: file.id, scope: GetFileMetadataByIdScope.global, templateKey: "properties"))
         try await client.files.deleteFileById(fileId: file.id)

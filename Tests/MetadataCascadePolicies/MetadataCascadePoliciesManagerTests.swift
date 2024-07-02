@@ -28,8 +28,7 @@ class MetadataCascadePoliciesManagerTests: XCTestCase {
         let policies: MetadataCascadePolicies = try await client.metadataCascadePolicies.getMetadataCascadePolicies(queryParams: GetMetadataCascadePoliciesQueryParams(folderId: folder.id))
         XCTAssertTrue(policies.entries!.count == 1)
         await XCTAssertThrowsErrorAsync(try await client.metadataCascadePolicies.applyMetadataCascadePolicy(metadataCascadePolicyId: cascadePolicyId, requestBody: ApplyMetadataCascadePolicyRequestBody(conflictResolution: ApplyMetadataCascadePolicyRequestBodyConflictResolutionField.overwrite)))
-        let data: [String: String] = ["testName": "xyz"]
-        try await client.folderMetadata.createFolderMetadataById(folderId: folder.id, scope: CreateFolderMetadataByIdScope.enterprise, templateKey: templateKey, requestBody: data)
+        try await client.folderMetadata.createFolderMetadataById(folderId: folder.id, scope: CreateFolderMetadataByIdScope.enterprise, templateKey: templateKey, requestBody: ["testName": "xyz"])
         try await client.metadataCascadePolicies.applyMetadataCascadePolicy(metadataCascadePolicyId: cascadePolicyId, requestBody: ApplyMetadataCascadePolicyRequestBody(conflictResolution: ApplyMetadataCascadePolicyRequestBodyConflictResolutionField.overwrite))
         try await client.metadataCascadePolicies.deleteMetadataCascadePolicyById(metadataCascadePolicyId: cascadePolicyId)
         await XCTAssertThrowsErrorAsync(try await client.metadataCascadePolicies.getMetadataCascadePolicyById(metadataCascadePolicyId: cascadePolicyId))

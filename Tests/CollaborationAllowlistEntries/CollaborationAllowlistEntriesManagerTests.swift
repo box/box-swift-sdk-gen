@@ -12,7 +12,7 @@ class CollaborationAllowlistEntriesManagerTests: XCTestCase {
     public func testCollaborationAllowlistEntries() async throws {
         let allowlist: CollaborationAllowlistEntries = try await client.collaborationAllowlistEntries.getCollaborationWhitelistEntries()
         XCTAssertTrue(allowlist.entries!.count >= 0)
-        let domain: String = "example.com"
+        let domain: String = "\(Utils.getUUID())\("example.com")"
         let newEntry: CollaborationAllowlistEntry = try await client.collaborationAllowlistEntries.createCollaborationWhitelistEntry(requestBody: CreateCollaborationWhitelistEntryRequestBody(domain: domain, direction: CreateCollaborationWhitelistEntryRequestBodyDirectionField.inbound))
         XCTAssertTrue(Utils.Strings.toString(value: newEntry.type) == "collaboration_whitelist_entry")
         XCTAssertTrue(Utils.Strings.toString(value: newEntry.direction) == "inbound")
