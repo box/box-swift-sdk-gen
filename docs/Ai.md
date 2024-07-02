@@ -15,7 +15,7 @@ See the endpoint docs at
 
 <!-- sample post_ai_ask -->
 ```
-try await client.ai.createAiAsk(requestBody: AiAsk(mode: "multiple_item_qa", prompt: "Which direction sun rises?", items: [AiAskItemsField(id: fileToAsk1.id, type: AiAskItemsTypeField.file, content: "Earth goes around the sun"), AiAskItemsField(id: fileToAsk2.id, type: AiAskItemsTypeField.file, content: "Sun rises in the East in the morning")]))
+try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.multipleItemQa, prompt: "Which direction sun rises?", items: [AiAskItemsField(id: fileToAsk1.id, type: AiAskItemsTypeField.file, content: "Earth goes around the sun"), AiAskItemsField(id: fileToAsk2.id, type: AiAskItemsTypeField.file, content: "Sun rises in the East in the morning")]))
 ```
 
 ### Arguments
