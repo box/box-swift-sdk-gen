@@ -159,7 +159,7 @@ public class ChunkedUploadsManager {
         assert(partSize * Int64(totalParts) >= fileSize)
         assert(uploadSession.numPartsProcessed == 0)
         let fileHash: Hash = Hash(algorithm: HashName.sha1)
-        let chunksIterator: AsyncStream<InputStream> = Utils.iterateChunks(stream: file, chunkSize: partSize)
+        let chunksIterator: AsyncStream<InputStream> = Utils.iterateChunks(stream: file, chunkSize: partSize, fileSize: fileSize)
         let results: PartAccumulator = try await Utils.reduceIterator(iterator: chunksIterator, reducer: self.reducer, initialValue: PartAccumulator(lastIndex: -1, parts: [], fileSize: fileSize, uploadSessionId: uploadSessionId, fileHash: fileHash))
         let parts: [UploadPart] = results.parts
         let processedSessionParts: UploadParts = try await self.getFileUploadSessionParts(uploadSessionId: uploadSessionId)
