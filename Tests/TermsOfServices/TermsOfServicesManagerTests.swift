@@ -11,12 +11,12 @@ class TermsOfServicesManagerTests: XCTestCase {
 
     public func testGetTermsOfServices() async throws {
         let tos: TermsOfService = try await CommonsManager().getOrCreateTermsOfServices()
-        let updatedTos1: TermsOfService = try await client.termsOfServices.updateTermsOfServiceById(termsOfServiceId: tos.id, requestBody: UpdateTermsOfServiceByIdRequestBody(status: UpdateTermsOfServiceByIdRequestBodyStatusField.enabled, text: "Enabled TOS"))
-        XCTAssertTrue(Utils.Strings.toString(value: updatedTos1.status) == "enabled")
-        XCTAssertTrue(updatedTos1.text == "Enabled TOS")
-        let updatedTos2: TermsOfService = try await client.termsOfServices.updateTermsOfServiceById(termsOfServiceId: tos.id, requestBody: UpdateTermsOfServiceByIdRequestBody(status: UpdateTermsOfServiceByIdRequestBodyStatusField.disabled, text: "Disabled TOS"))
+        let updatedTos1: TermsOfService = try await client.termsOfServices.updateTermsOfServiceById(termsOfServiceId: tos.id, requestBody: UpdateTermsOfServiceByIdRequestBody(status: UpdateTermsOfServiceByIdRequestBodyStatusField.disabled, text: "TOS"))
+        XCTAssertTrue(Utils.Strings.toString(value: updatedTos1.status) == "disabled")
+        XCTAssertTrue(updatedTos1.text == "TOS")
+        let updatedTos2: TermsOfService = try await client.termsOfServices.updateTermsOfServiceById(termsOfServiceId: tos.id, requestBody: UpdateTermsOfServiceByIdRequestBody(status: UpdateTermsOfServiceByIdRequestBodyStatusField.disabled, text: "Updated TOS"))
         XCTAssertTrue(Utils.Strings.toString(value: updatedTos2.status) == "disabled")
-        XCTAssertTrue(updatedTos2.text == "Disabled TOS")
+        XCTAssertTrue(updatedTos2.text == "Updated TOS")
         let listTos: TermsOfServices = try await client.termsOfServices.getTermsOfService()
         XCTAssertTrue(listTos.totalCount! > 0)
     }
