@@ -425,6 +425,7 @@
 		100BCA7CA94BB5C5CB67AF4E /* LegalHoldPolicyAssignments.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFD0074C1E60EE18BC691BF /* LegalHoldPolicyAssignments.swift */; };
 		100E1B33FCE7FC8E3E676D09 /* SkillInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB564A184DCC23ECFBDB6C05 /* SkillInvocation.swift */; };
 		1012DAD965E24E45A8BBF30A /* ZipDownloadStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D749A8AE7897A94B888BF75 /* ZipDownloadStatus.swift */; };
+		101A6398FC3C72F2E6484850 /* IntegrationMappingPartnerItemSlackUnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DBF85C50B993B1C767E70 /* IntegrationMappingPartnerItemSlackUnion.swift */; };
 		102CCE72C3E4A6D19342413C /* RecentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1044D9D90CE999B627C2B9E /* RecentItem.swift */; };
 		10352969ADB8BC0B6DAA3BEF /* GetFolderMetadataByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD703D719157325B959F96C3 /* GetFolderMetadataByIdHeaders.swift */; };
 		1043B7BE17BB27E0089D0901 /* CreateTermsOfServiceStatusForUserRequestBodyUserField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805F8DA70202832936DCA096 /* CreateTermsOfServiceStatusForUserRequestBodyUserField.swift */; };
@@ -3732,6 +3733,7 @@
 		8B0015337C4F17D9B2B63697 /* SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF23B91BA1AAE0522B86226B /* SHA1.swift */; };
 		8B01DDF88850236382C663DA /* GetZipDownloadStatusHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97124369F1FE7F17CC2F70C /* GetZipDownloadStatusHeaders.swift */; };
 		8B020B5596AA90EACD96B294 /* Tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6884CA716C3684AB0938C56 /* Tasks.swift */; };
+		8B0A0D67760A8113EF4C1801 /* IntegrationMappingPartnerItemSlackUnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DBF85C50B993B1C767E70 /* IntegrationMappingPartnerItemSlackUnion.swift */; };
 		8B173AF4863714F95C0A38A1 /* SkillInvocationEnterpriseField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E8FB4D7BDD14AF85523CD /* SkillInvocationEnterpriseField.swift */; };
 		8B254C1F9830F121BFFD121B /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498AEB6E5308CFA95F227969 /* Metadata.swift */; };
 		8B29F515E9AD996B39529F1B /* UpdateStoragePolicyAssignmentByIdRequestBodyStoragePolicyField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD678BFB6F6B2EFB76E1E677 /* UpdateStoragePolicyAssignmentByIdRequestBodyStoragePolicyField.swift */; };
@@ -3782,6 +3784,7 @@
 		8CD2697CBDF7BA1ED2038A61 /* CreateUserEmailAliasHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8392F0937908D07CB4DADF00 /* CreateUserEmailAliasHeaders.swift */; };
 		8CDA3AB669729DD163129E00 /* GetFilesUnderRetentionPolicyAssignmentHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8547DD4F727C4FB7D76113D /* GetFilesUnderRetentionPolicyAssignmentHeaders.swift */; };
 		8CE728AB94DB19ABE10E5D67 /* CollaborationAllowlistExemptTargetEnterpriseField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D3577C3570863F5F1AC26D /* CollaborationAllowlistExemptTargetEnterpriseField.swift */; };
+		8CF0A9B9B3AA2999C945E6D8 /* IntegrationMappingPartnerItemSlackUnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DBF85C50B993B1C767E70 /* IntegrationMappingPartnerItemSlackUnion.swift */; };
 		8CF263C16641A5E65B6D45B4 /* SkillsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427677C59B000D1420EB23D3 /* SkillsManager.swift */; };
 		8CF61164C6CACD1237F45492 /* ZipDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93522230DDC4E8FF9D2EE0C9 /* ZipDownload.swift */; };
 		8CF9FA813E7233A4AC682392 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872F0DA0B0C11677619DABA9 /* SearchResults.swift */; };
@@ -4044,6 +4047,7 @@
 		9751CB475A6584EA21F21083 /* GetClassificationTemplateHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AA6B6E3EF3094C9737DD74 /* GetClassificationTemplateHeaders.swift */; };
 		976D056152094FAE28002389 /* GetEnterpriseDevicePinnersQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F88C3F057F334D83E9490E /* GetEnterpriseDevicePinnersQueryParams.swift */; };
 		976ED8380D95C830697B946F /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C640552F6640E9BEF3AC7735 /* Codable+Extensions.swift */; };
+		9770BFDE815188227D687486 /* IntegrationMappingPartnerItemSlackUnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DBF85C50B993B1C767E70 /* IntegrationMappingPartnerItemSlackUnion.swift */; };
 		979B2121F97C5B32C496F255 /* CreateFileUploadSessionHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83622A8ED3A3952A61C7305A /* CreateFileUploadSessionHeaders.swift */; };
 		979CFB8461D3582C852EC5D7 /* UpdateGroupMembershipByIdQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C1AA1E321B242F99BB7C6 /* UpdateGroupMembershipByIdQueryParams.swift */; };
 		979F1A9F7B018E44726F47D5 /* GetWebhookByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AEDB1C63265D35369A9EEA /* GetWebhookByIdHeaders.swift */; };
@@ -5412,6 +5416,7 @@
 		CC00D723117344575688A330 /* ShieldInformationBarrierBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D2B032B16E0D9283B29D2B /* ShieldInformationBarrierBase.swift */; };
 		CC013B7B7DF0776FD0CBFCB2 /* SkillInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB564A184DCC23ECFBDB6C05 /* SkillInvocation.swift */; };
 		CC10DFC1A70E1C6608BE411F /* CreateStoragePolicyAssignmentRequestBodyAssignedToTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194E868D524E5C0808C7537C /* CreateStoragePolicyAssignmentRequestBodyAssignedToTypeField.swift */; };
+		CC134321940C72AA5AEE7679 /* IntegrationMappingPartnerItemSlackUnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DBF85C50B993B1C767E70 /* IntegrationMappingPartnerItemSlackUnion.swift */; };
 		CC140708E639EE46A6516896 /* SignTemplateTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0F6B5F39772CD182D6A7A9 /* SignTemplateTypeField.swift */; };
 		CC32EF7A89EDF84210B488CF /* GroupFullInvitabilityLevelField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB5FF8D981B4E24859BB7B /* GroupFullInvitabilityLevelField.swift */; };
 		CC406A45C80EE4CE6F51CFE8 /* CreateRetentionPolicyHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC2293E7820ED440FBA0264 /* CreateRetentionPolicyHeaders.swift */; };
@@ -7112,6 +7117,7 @@
 		39FD17375FDECA898257FB91 /* UploadSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadSession.swift; sourceTree = "<group>"; };
 		3AA47B6212E8C016D8BF9DED /* CreateMetadataTemplateRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMetadataTemplateRequestBody.swift; sourceTree = "<group>"; };
 		3AB91FDD4D6E48DA34516AF2 /* FileFullMetadataField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFullMetadataField.swift; sourceTree = "<group>"; };
+		3B1DBF85C50B993B1C767E70 /* IntegrationMappingPartnerItemSlackUnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationMappingPartnerItemSlackUnion.swift; sourceTree = "<group>"; };
 		3B34493509934066FEA546A5 /* MultipartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartItem.swift; sourceTree = "<group>"; };
 		3B730A923AF5BA072968E61F /* GroupMembershipTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMembershipTypeField.swift; sourceTree = "<group>"; };
 		3B733FE0F4DD7B4B968565B1 /* UpdateClassificationOnFileRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateClassificationOnFileRequestBody.swift; sourceTree = "<group>"; };
@@ -11283,6 +11289,14 @@
 			path = ChunkedUploads;
 			sourceTree = "<group>";
 		};
+		DF943310016B26B0ED3CBC90 /* IntegrationMappingPartnerItemSlackUnion */ = {
+			isa = PBXGroup;
+			children = (
+				3B1DBF85C50B993B1C767E70 /* IntegrationMappingPartnerItemSlackUnion.swift */,
+			);
+			path = IntegrationMappingPartnerItemSlackUnion;
+			sourceTree = "<group>";
+		};
 		E05EB81B61BEBE2EE77E3514 /* IntegrationMappingSlackCreateRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -11783,6 +11797,7 @@
 				50B9B7A273758C0405047EF9 /* IntegrationMappingBoxItemSlack */,
 				8C2DC89D29A8520E86CEB90C /* IntegrationMappingMini */,
 				CE795A7EC6A871623CC92B26 /* IntegrationMappingPartnerItemSlack */,
+				DF943310016B26B0ED3CBC90 /* IntegrationMappingPartnerItemSlackUnion */,
 				ED98EAE8F789A70743851FF1 /* IntegrationMappings */,
 				E05EB81B61BEBE2EE77E3514 /* IntegrationMappingSlackCreateRequest */,
 				1F16931915F05F7A70D5193C /* IntegrationMappingSlackOptions */,
@@ -12833,6 +12848,7 @@
 				E6B0284DF1E9681B9DFF1DB3 /* IntegrationMappingMiniPartnerItemTypeField.swift in Sources */,
 				F27A3BFB9C74B94692D58B2B /* IntegrationMappingPartnerItemSlack.swift in Sources */,
 				898D6506A72720B236DF7A10 /* IntegrationMappingPartnerItemSlackTypeField.swift in Sources */,
+				CC134321940C72AA5AEE7679 /* IntegrationMappingPartnerItemSlackUnion.swift in Sources */,
 				D429DDCC9816EBD9EC83AC08 /* IntegrationMappingSlackCreateRequest.swift in Sources */,
 				AFA01C5124B467CFDAA4051E /* IntegrationMappingSlackOptions.swift in Sources */,
 				24EBADDA63C8E47810F99570 /* IntegrationMappingTypeField.swift in Sources */,
@@ -14200,6 +14216,7 @@
 				8A82CA7F34D78090FC2CDDC0 /* IntegrationMappingMiniPartnerItemTypeField.swift in Sources */,
 				81DA0AF0C2006ADE7F4B6497 /* IntegrationMappingPartnerItemSlack.swift in Sources */,
 				17035FBA11F9E84738CBC6EF /* IntegrationMappingPartnerItemSlackTypeField.swift in Sources */,
+				8CF0A9B9B3AA2999C945E6D8 /* IntegrationMappingPartnerItemSlackUnion.swift in Sources */,
 				699CFF9C953A07A4902588E4 /* IntegrationMappingSlackCreateRequest.swift in Sources */,
 				B563ACDE8968E22C548E102E /* IntegrationMappingSlackOptions.swift in Sources */,
 				CD9DEE3AA1242D0835B88638 /* IntegrationMappingTypeField.swift in Sources */,
@@ -15567,6 +15584,7 @@
 				78CC95DCCF8991BD0FB558E6 /* IntegrationMappingMiniPartnerItemTypeField.swift in Sources */,
 				F0266F383B950E09607B0E84 /* IntegrationMappingPartnerItemSlack.swift in Sources */,
 				C67E5D7D0884E503093BB095 /* IntegrationMappingPartnerItemSlackTypeField.swift in Sources */,
+				8B0A0D67760A8113EF4C1801 /* IntegrationMappingPartnerItemSlackUnion.swift in Sources */,
 				BC4958CB0CCEE769B31EE3D4 /* IntegrationMappingSlackCreateRequest.swift in Sources */,
 				4E4384119D71EE61122EF9E0 /* IntegrationMappingSlackOptions.swift in Sources */,
 				ABB00858139C8864FDE093A0 /* IntegrationMappingTypeField.swift in Sources */,
@@ -16934,6 +16952,7 @@
 				F0762E5052D2E2A817DEC76C /* IntegrationMappingMiniPartnerItemTypeField.swift in Sources */,
 				A13071CCF4140DE6A38419F3 /* IntegrationMappingPartnerItemSlack.swift in Sources */,
 				16E7E2EA445061B77CD62293 /* IntegrationMappingPartnerItemSlackTypeField.swift in Sources */,
+				9770BFDE815188227D687486 /* IntegrationMappingPartnerItemSlackUnion.swift in Sources */,
 				F86E002F847643CD222DE5CB /* IntegrationMappingSlackCreateRequest.swift in Sources */,
 				3907D8C727FD44F380BC347B /* IntegrationMappingSlackOptions.swift in Sources */,
 				01225E91F69022CC0F8D6358 /* IntegrationMappingTypeField.swift in Sources */,
@@ -18301,6 +18320,7 @@
 				05B698EA5BB1A630104681CD /* IntegrationMappingMiniPartnerItemTypeField.swift in Sources */,
 				ED7140C567A647FEC5C1E27F /* IntegrationMappingPartnerItemSlack.swift in Sources */,
 				EB627A68C482DE49CE5EBC63 /* IntegrationMappingPartnerItemSlackTypeField.swift in Sources */,
+				101A6398FC3C72F2E6484850 /* IntegrationMappingPartnerItemSlackUnion.swift in Sources */,
 				0FBCB5037804BAE4C15D92F4 /* IntegrationMappingSlackCreateRequest.swift in Sources */,
 				D0B6CFFAA08809C7AE7DFBD3 /* IntegrationMappingSlackOptions.swift in Sources */,
 				728C2926FE9FDA8E5BAA880B /* IntegrationMappingTypeField.swift in Sources */,
