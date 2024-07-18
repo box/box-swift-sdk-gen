@@ -294,8 +294,9 @@ public enum Utils {
     /// - Parameters:
     ///   - stream: InputStream to iterate over
     ///   - chunkSize: Size of chunk
+    ///   - fileSize: Size of the file
     /// - Returns: The asynchronous sequence AsyncStream
-    public static func iterateChunks(stream: InputStream, chunkSize: Int64) -> AsyncStream<InputStream> {
+    public static func iterateChunks(stream: InputStream, chunkSize: Int64, fileSize: Int64) -> AsyncStream<InputStream> {
         return AsyncStream<InputStream> { continuation in
             _Concurrency.Task {
                 stream.open()
