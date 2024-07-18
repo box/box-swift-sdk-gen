@@ -16,7 +16,7 @@ public class IntegrationMapping: IntegrationMappingBase {
     }
 
     /// Mapped item object for Slack
-    public let partnerItem: IntegrationMappingPartnerItemSlack
+    public let partnerItem: IntegrationMappingPartnerItemSlackUnion
 
     /// The Box folder, to which the object from the
     /// partner app domain (referenced in `partner_item_id`) is mapped
@@ -71,7 +71,7 @@ public class IntegrationMapping: IntegrationMappingBase {
     ///     last modified the integration mapping
     ///   - createdAt: When the integration mapping object was created
     ///   - modifiedAt: When the integration mapping object was last modified
-    public init(partnerItem: IntegrationMappingPartnerItemSlack, boxItem: FolderMini, id: String? = nil, integrationType: IntegrationMappingBaseIntegrationTypeField? = nil, type: IntegrationMappingTypeField = IntegrationMappingTypeField.integrationMapping, isManuallyCreated: Bool? = nil, options: IntegrationMappingSlackOptions? = nil, createdBy: UserIntegrationMappings? = nil, modifiedBy: UserIntegrationMappings? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    public init(partnerItem: IntegrationMappingPartnerItemSlackUnion, boxItem: FolderMini, id: String? = nil, integrationType: IntegrationMappingBaseIntegrationTypeField? = nil, type: IntegrationMappingTypeField = IntegrationMappingTypeField.integrationMapping, isManuallyCreated: Bool? = nil, options: IntegrationMappingSlackOptions? = nil, createdBy: UserIntegrationMappings? = nil, modifiedBy: UserIntegrationMappings? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.partnerItem = partnerItem
         self.boxItem = boxItem
         self.type = type
@@ -87,7 +87,7 @@ public class IntegrationMapping: IntegrationMappingBase {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        partnerItem = try container.decode(IntegrationMappingPartnerItemSlack.self, forKey: .partnerItem)
+        partnerItem = try container.decode(IntegrationMappingPartnerItemSlackUnion.self, forKey: .partnerItem)
         boxItem = try container.decode(FolderMini.self, forKey: .boxItem)
         type = try container.decode(IntegrationMappingTypeField.self, forKey: .type)
         isManuallyCreated = try container.decodeIfPresent(Bool.self, forKey: .isManuallyCreated)
