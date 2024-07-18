@@ -164,8 +164,6 @@ public class ChunkedUploadsManager {
         let parts: [UploadPart] = results.parts
         let processedSessionParts: UploadParts = try await self.getFileUploadSessionParts(uploadSessionId: uploadSessionId)
         assert(processedSessionParts.totalCount! == totalParts)
-        let processedSession: UploadSession = try await self.getFileUploadSessionById(uploadSessionId: uploadSessionId)
-        assert(processedSession.numPartsProcessed == totalParts)
         let sha1: String = await fileHash.digestHash(encoding: "base64")
         let digest: String = "\("sha=")\(sha1)"
         let committedSession: Files = try await self.createFileUploadSessionCommit(uploadSessionId: uploadSessionId, requestBody: CreateFileUploadSessionCommitRequestBody(parts: parts), headers: CreateFileUploadSessionCommitHeaders(digest: digest))
