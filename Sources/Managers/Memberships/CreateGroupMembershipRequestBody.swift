@@ -24,7 +24,7 @@ public class CreateGroupMembershipRequestBody: Codable {
     /// Setting these permissions overwrites the default
     /// access levels of an admin.
     /// 
-    /// Specifying a value of "null" for this object will disable
+    /// Specifying a value of `null` for this object will disable
     /// all configurable permissions. Specifying permissions will set
     /// them accordingly, omitted permissions will be enabled by default.
     public let configurablePermissions: [String: Bool]?
@@ -42,7 +42,7 @@ public class CreateGroupMembershipRequestBody: Codable {
     ///     Setting these permissions overwrites the default
     ///     access levels of an admin.
     ///     
-    ///     Specifying a value of "null" for this object will disable
+    ///     Specifying a value of `null` for this object will disable
     ///     all configurable permissions. Specifying permissions will set
     ///     them accordingly, omitted permissions will be enabled by default.
     public init(user: CreateGroupMembershipRequestBodyUserField, group: CreateGroupMembershipRequestBodyGroupField, role: CreateGroupMembershipRequestBodyRoleField? = nil, configurablePermissions: [String: Bool]? = nil) {
