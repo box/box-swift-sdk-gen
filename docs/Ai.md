@@ -67,19 +67,22 @@ A successful response including the answer from the LLM.
 
 Get the AI agent default config
 
-This operation is performed by calling function `getAiAgentDefault`.
+This operation is performed by calling function `getAiAgentDefaultConfig`.
 
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-ai-agent-default/).
 
-*Currently we don't have an example for calling `getAiAgentDefault` in integration tests*
+<!-- sample get_ai_agent_default -->
+```
+try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.textGen, language: "en-US"))
+```
 
 ### Arguments
 
-- queryParams `GetAiAgentDefaultQueryParams`
-  - Query parameters of getAiAgentDefault method
-- headers `GetAiAgentDefaultHeaders`
-  - Headers of getAiAgentDefault method
+- queryParams `GetAiAgentDefaultConfigQueryParams`
+  - Query parameters of getAiAgentDefaultConfig method
+- headers `GetAiAgentDefaultConfigHeaders`
+  - Headers of getAiAgentDefaultConfig method
 
 
 ### Returns

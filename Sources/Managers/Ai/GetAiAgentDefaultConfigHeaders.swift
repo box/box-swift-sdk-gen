@@ -1,10 +1,10 @@
 import Foundation
 
-public class GetAiAgentDefaultHeaders {
+public class GetAiAgentDefaultConfigHeaders {
     /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
-    /// Initializer for a GetAiAgentDefaultHeaders.
+    /// Initializer for a GetAiAgentDefaultConfigHeaders.
     ///
     /// - Parameters:
     ///   - extraHeaders: Extra headers that will be included in the HTTP request.

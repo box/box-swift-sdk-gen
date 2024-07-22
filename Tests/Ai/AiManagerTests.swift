@@ -34,4 +34,12 @@ class AiManagerTests: XCTestCase {
         XCTAssertTrue(response.completionReason == "done")
         try await client.files.deleteFileById(fileId: fileToAsk.id)
     }
+
+    public func testGettingAiAskAgentConfig() async throws {
+        let aiAskConfig: AiAgentAskOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.ask, language: "ja-JP"))
+    }
+
+    public func testGettingAiTextGenAgentConfig() async throws {
+        let aiTextGenConfig: AiAgentAskOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.textGen, language: "en-US"))
+    }
 }
