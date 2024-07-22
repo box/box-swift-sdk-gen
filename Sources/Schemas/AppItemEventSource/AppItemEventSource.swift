@@ -1,6 +1,6 @@
 import Foundation
 
-/// The `AppItem` that triggered an event in the event stream.
+/// The AppItem that triggered an event in the event stream.
 public class AppItemEventSource: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -16,7 +16,7 @@ public class AppItemEventSource: Codable {
     /// The type of the `AppItem`
     public let appItemType: String
 
-    /// The type of the source that this event represents. Can be only `app_item`.
+    /// The type of the source that this event represents. Can only be `app_item`.
     /// 
     public let type: AppItemEventSourceTypeField
 
@@ -29,7 +29,7 @@ public class AppItemEventSource: Codable {
     /// - Parameters:
     ///   - id: The id of the `AppItem`
     ///   - appItemType: The type of the `AppItem`
-    ///   - type: The type of the source that this event represents. Can be only `app_item`.
+    ///   - type: The type of the source that this event represents. Can only be `app_item`.
     ///     
     ///   - user: 
     ///   - group: 
