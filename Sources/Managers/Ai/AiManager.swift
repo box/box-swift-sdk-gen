@@ -36,4 +36,18 @@ public class AiManager {
         return try AiResponse.deserialize(from: response.data)
     }
 
+    /// Get the AI agent default config
+    ///
+    /// - Parameters:
+    ///   - queryParams: Query parameters of getAiAgentDefaultConfig method
+    ///   - headers: Headers of getAiAgentDefaultConfig method
+    /// - Returns: The `AiAgentAskOrAiAgentTextGen`.
+    /// - Throws: The `GeneralError`.
+    public func getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams, headers: GetAiAgentDefaultConfigHeaders = GetAiAgentDefaultConfigHeaders()) async throws -> AiAgentAskOrAiAgentTextGen {
+        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["mode": Utils.Strings.toString(value: queryParams.mode), "language": Utils.Strings.toString(value: queryParams.language), "model": Utils.Strings.toString(value: queryParams.model)])
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agent_default")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try AiAgentAskOrAiAgentTextGen.deserialize(from: response.data)
+    }
+
 }

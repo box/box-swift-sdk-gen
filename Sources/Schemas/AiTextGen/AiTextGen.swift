@@ -1,11 +1,12 @@
 import Foundation
 
-/// AI Text Gen Request object
+/// AI text gen request object
 public class AiTextGen: Codable {
     private enum CodingKeys: String, CodingKey {
         case prompt
         case items
         case dialogueHistory = "dialogue_history"
+        case aiAgent = "ai_agent"
     }
 
     /// The prompt provided by the client to be answered by the LLM. The prompt's length is limited to 10000 characters.
@@ -21,6 +22,8 @@ public class AiTextGen: Codable {
     /// The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
     public let dialogueHistory: [AiTextGenDialogueHistoryField]?
 
+    public let aiAgent: AiAgentTextGen?
+
     /// Initializer for a AiTextGen.
     ///
     /// - Parameters:
@@ -31,10 +34,12 @@ public class AiTextGen: Codable {
     ///     **Note**: Box AI handles documents with text representations up to 1MB in size.
     ///     If the file size exceeds 1MB, the first 1MB of text representation will be processed.
     ///   - dialogueHistory: The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
-    public init(prompt: String, items: [AiTextGenItemsField], dialogueHistory: [AiTextGenDialogueHistoryField]? = nil) {
+    ///   - aiAgent: 
+    public init(prompt: String, items: [AiTextGenItemsField], dialogueHistory: [AiTextGenDialogueHistoryField]? = nil, aiAgent: AiAgentTextGen? = nil) {
         self.prompt = prompt
         self.items = items
         self.dialogueHistory = dialogueHistory
+        self.aiAgent = aiAgent
     }
 
     required public init(from decoder: Decoder) throws {
@@ -42,6 +47,7 @@ public class AiTextGen: Codable {
         prompt = try container.decode(String.self, forKey: .prompt)
         items = try container.decode([AiTextGenItemsField].self, forKey: .items)
         dialogueHistory = try container.decodeIfPresent([AiTextGenDialogueHistoryField].self, forKey: .dialogueHistory)
+        aiAgent = try container.decodeIfPresent(AiAgentTextGen.self, forKey: .aiAgent)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -49,6 +55,7 @@ public class AiTextGen: Codable {
         try container.encode(prompt, forKey: .prompt)
         try container.encode(items, forKey: .items)
         try container.encodeIfPresent(dialogueHistory, forKey: .dialogueHistory)
+        try container.encodeIfPresent(aiAgent, forKey: .aiAgent)
     }
 
 }

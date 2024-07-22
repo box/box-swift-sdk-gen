@@ -26,7 +26,7 @@ public class UpdateRetentionPolicyByIdRequestBody: Codable {
     /// which will lift the retention policy from the content,
     /// allowing it to be deleted by users,
     /// once the retention policy has expired.
-    /// You can use "null" if you don't want to change `disposition_action`.
+    /// You can use `null` if you don't want to change `disposition_action`.
     public let dispositionAction: String?
 
     /// Specifies the retention type:
@@ -89,7 +89,7 @@ public class UpdateRetentionPolicyByIdRequestBody: Codable {
     ///     which will lift the retention policy from the content,
     ///     allowing it to be deleted by users,
     ///     once the retention policy has expired.
-    ///     You can use "null" if you don't want to change `disposition_action`.
+    ///     You can use `null` if you don't want to change `disposition_action`.
     ///   - retentionType: Specifies the retention type:
     ///     
     ///     * `modifiable`: You can modify the retention policy. For example,
