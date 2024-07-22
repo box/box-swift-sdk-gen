@@ -126,7 +126,7 @@ See the endpoint docs at
 
 <!-- sample delete_files_id_versions_id -->
 ```
-try await client.fileVersions.deleteFileVersionById(fileId: file.id, fileVersionId: fileVersionsRestored.entries![0].id)
+try await client.fileVersions.deleteFileVersionById(fileId: file.id, fileVersionId: fileVersion.id)
 ```
 
 ### Arguments
