@@ -9,7 +9,7 @@ class FileVersionsManagerTests: XCTestCase {
         client = CommonsManager().getDefaultClient()
     }
 
-    public func testCreateListGetRestoreDeleteFileVersion() async throws {
+    public func testCreateListGetPromoteFileVersion() async throws {
         let oldName: String = Utils.getUUID()
         let newName: String = Utils.getUUID()
         let files: Files = try await client.uploads.uploadFile(requestBody: UploadFileRequestBody(attributes: UploadFileRequestBodyAttributesField(name: oldName, parent: UploadFileRequestBodyAttributesParentField(id: "0")), file: Utils.generateByteStream(size: 10)))
@@ -25,12 +25,10 @@ class FileVersionsManagerTests: XCTestCase {
         let fileVersion: FileVersionFull = try await client.fileVersions.getFileVersionById(fileId: file.id, fileVersionId: fileVersions.entries![0].id)
         XCTAssertTrue(fileVersion.id == fileVersions.entries![0].id)
         try await client.fileVersions.promoteFileVersion(fileId: file.id, requestBody: PromoteFileVersionRequestBody(id: fileVersions.entries![0].id, type: PromoteFileVersionRequestBodyTypeField.fileVersion))
-        let fileRestored: FileFull = try await client.files.getFileById(fileId: file.id)
-        XCTAssertTrue(fileRestored.name == oldName)
-        XCTAssertTrue(fileRestored.size == 10)
-        let fileVersionsRestored: FileVersions = try await client.fileVersions.getFileVersions(fileId: file.id)
-        try await client.fileVersions.deleteFileVersionById(fileId: file.id, fileVersionId: fileVersionsRestored.entries![0].id)
-        try await client.fileVersions.getFileVersions(fileId: file.id)
+        let fileWithPromotedVersion: FileFull = try await client.files.getFileById(fileId: file.id)
+        XCTAssertTrue(fileWithPromotedVersion.name == oldName)
+        XCTAssertTrue(fileWithPromotedVersion.size == 10)
+        try await client.fileVersions.deleteFileVersionById(fileId: file.id, fileVersionId: fileVersion.id)
         try await client.files.deleteFileById(fileId: file.id)
     }
 }
