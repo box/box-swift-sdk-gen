@@ -74,7 +74,7 @@ public class NetworkClient {
     /// - Parameters:
     ///   - urlRequest: The request object.
     ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
-    /// - Returns: Tuple of  of (Data, URLReponse)
+    /// - Returns: Tuple of  of (Data, URLResponse)
     /// - Throws: An error if the request fails for any reason.
     private func sendDataRequest(_ urlRequest: URLRequest, networkSession: NetworkSession) async throws -> (Data, URLResponse) {
         return try await withCheckedThrowingContinuation { continuation in
@@ -104,7 +104,7 @@ public class NetworkClient {
     /// - Parameters:
     ///   - urlRequest: The request object.
     ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
-    /// - Returns: Tuple of  of (URL, URLReponse)
+    /// - Returns: Tuple of  of (URL, URLResponse)
     /// - Throws: An error if the request fails for any reason.
     private func sendDownloadRequest(_ urlRequest: URLRequest, downloadDestinationURL: URL, networkSession: NetworkSession) async throws -> (URL, URLResponse) {
         return try await withCheckedThrowingContinuation { continuation in
@@ -318,9 +318,10 @@ public class NetworkClient {
         attempt: Int
     ) async throws -> FetchResponse {
         let statusCode = conversation.urlResponse.statusCode
+        let isStatusCodeAcceptedWithRetryAfterHeader = statusCode == 202 && conversation.urlResponse.value(forHTTPHeaderField: HTTPHeaderKey.retryAfter) != nil
 
         // OK
-        if statusCode >= 200 && statusCode < 400 {
+        if statusCode >= 200 && statusCode < 400 && !isStatusCodeAcceptedWithRetryAfterHeader {
             return conversation.convertToFetchResponse()
         }
 
@@ -336,7 +337,7 @@ public class NetworkClient {
         }
 
         // Retryable
-        if statusCode == 429 || statusCode >= 500 {
+        if statusCode == 429 || statusCode >= 500 || isStatusCodeAcceptedWithRetryAfterHeader {
             let retryTimeout = Double(conversation.urlResponse.value(forHTTPHeaderField: HTTPHeaderKey.retryAfter) ?? "")
             ?? networkSession.networkSettings.retryStrategy.getRetryTimeout(attempt: attempt)
             try await wait(seconds: retryTimeout)
