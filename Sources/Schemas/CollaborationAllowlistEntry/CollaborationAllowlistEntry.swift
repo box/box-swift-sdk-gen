@@ -69,7 +69,7 @@ public class CollaborationAllowlistEntry: Codable {
         try container.encodeIfPresent(domain, forKey: .domain)
         try container.encodeIfPresent(direction, forKey: .direction)
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 

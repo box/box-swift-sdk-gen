@@ -113,7 +113,7 @@ public class ZipDownload: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(downloadUrl, forKey: .downloadUrl)
         try container.encodeIfPresent(statusUrl, forKey: .statusUrl)
-        if let expiresAt {
+        if let expiresAt = expiresAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
         }
 

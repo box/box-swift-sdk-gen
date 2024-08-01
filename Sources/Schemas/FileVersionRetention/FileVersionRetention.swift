@@ -91,11 +91,11 @@ public class FileVersionRetention: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
         try container.encodeIfPresent(file, forKey: .file)
-        if let appliedAt {
+        if let appliedAt = appliedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: appliedAt), forKey: .appliedAt)
         }
 
-        if let dispositionAt {
+        if let dispositionAt = dispositionAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: dispositionAt), forKey: .dispositionAt)
         }
 

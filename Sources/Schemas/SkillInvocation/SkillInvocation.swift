@@ -94,7 +94,7 @@ public class SkillInvocation: Codable {
         try container.encodeIfPresent(skill, forKey: .skill)
         try container.encodeIfPresent(token, forKey: .token)
         try container.encodeIfPresent(status, forKey: .status)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 

@@ -63,7 +63,7 @@ public class RecentItem: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(item, forKey: .item)
         try container.encodeIfPresent(interactionType, forKey: .interactionType)
-        if let interactedAt {
+        if let interactedAt = interactedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: interactedAt), forKey: .interactedAt)
         }
 

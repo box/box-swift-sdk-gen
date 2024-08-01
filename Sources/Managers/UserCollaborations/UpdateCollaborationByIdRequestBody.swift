@@ -103,7 +103,7 @@ public class UpdateCollaborationByIdRequestBody: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(role, forKey: .role)
         try container.encodeIfPresent(status, forKey: .status)
-        if let expiresAt {
+        if let expiresAt = expiresAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
         }
 

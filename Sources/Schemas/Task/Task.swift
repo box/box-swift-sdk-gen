@@ -120,7 +120,7 @@ public class Task: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(item, forKey: .item)
-        if let dueAt {
+        if let dueAt = dueAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: dueAt), forKey: .dueAt)
         }
 
@@ -129,7 +129,7 @@ public class Task: Codable {
         try container.encodeIfPresent(taskAssignmentCollection, forKey: .taskAssignmentCollection)
         try container.encodeIfPresent(isCompleted, forKey: .isCompleted)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 

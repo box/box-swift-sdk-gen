@@ -124,26 +124,26 @@ public class FileVersion: FileVersionMini {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(size, forKey: .size)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
-        if let modifiedAt {
+        if let modifiedAt = modifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
         }
 
         try container.encodeIfPresent(modifiedBy, forKey: .modifiedBy)
-        if let trashedAt {
+        if let trashedAt = trashedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: trashedAt), forKey: .trashedAt)
         }
 
         try container.encodeIfPresent(trashedBy, forKey: .trashedBy)
-        if let restoredAt {
+        if let restoredAt = restoredAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: restoredAt), forKey: .restoredAt)
         }
 
         try container.encodeIfPresent(restoredBy, forKey: .restoredBy)
-        if let purgedAt {
+        if let purgedAt = purgedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: purgedAt), forKey: .purgedAt)
         }
 

@@ -109,7 +109,7 @@ public class MetadataFull: Metadata {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(typeVersion, forKey: .typeVersion)
 
-        if let extraData {
+        if let extraData = extraData {
             for (key,value) in extraData {
                 try container.encodeIfPresent(value, forKey: CodingKeys(stringValue: key))
             }

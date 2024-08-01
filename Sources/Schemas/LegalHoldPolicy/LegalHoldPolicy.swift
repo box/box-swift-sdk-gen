@@ -157,23 +157,23 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(assignmentCounts, forKey: .assignmentCounts)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
-        if let modifiedAt {
+        if let modifiedAt = modifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
         }
 
-        if let deletedAt {
+        if let deletedAt = deletedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: deletedAt), forKey: .deletedAt)
         }
 
-        if let filterStartedAt {
+        if let filterStartedAt = filterStartedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: filterStartedAt), forKey: .filterStartedAt)
         }
 
-        if let filterEndedAt {
+        if let filterEndedAt = filterEndedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: filterEndedAt), forKey: .filterEndedAt)
         }
 

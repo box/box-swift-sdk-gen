@@ -234,11 +234,11 @@ public class TrashFolderRestored: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(sequenceId, forKey: .sequenceId)
         try container.encodeIfPresent(name, forKey: .name)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
-        if let modifiedAt {
+        if let modifiedAt = modifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
         }
 
@@ -249,11 +249,11 @@ public class TrashFolderRestored: Codable {
         try container.encodeIfPresent(modifiedBy, forKey: .modifiedBy)
         try container.encodeIfPresent(trashedAt, forKey: .trashedAt)
         try container.encodeIfPresent(purgedAt, forKey: .purgedAt)
-        if let contentCreatedAt {
+        if let contentCreatedAt = contentCreatedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: contentCreatedAt), forKey: .contentCreatedAt)
         }
 
-        if let contentModifiedAt {
+        if let contentModifiedAt = contentModifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: contentModifiedAt), forKey: .contentModifiedAt)
         }
 

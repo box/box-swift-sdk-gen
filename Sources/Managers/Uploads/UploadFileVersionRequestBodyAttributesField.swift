@@ -42,7 +42,7 @@ public class UploadFileVersionRequestBodyAttributesField: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
-        if let contentModifiedAt {
+        if let contentModifiedAt = contentModifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: contentModifiedAt), forKey: .contentModifiedAt)
         }
 

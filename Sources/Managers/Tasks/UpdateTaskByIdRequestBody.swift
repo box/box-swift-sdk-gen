@@ -71,7 +71,7 @@ public class UpdateTaskByIdRequestBody: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(action, forKey: .action)
         try container.encodeIfPresent(message, forKey: .message)
-        if let dueAt {
+        if let dueAt = dueAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: dueAt), forKey: .dueAt)
         }
 

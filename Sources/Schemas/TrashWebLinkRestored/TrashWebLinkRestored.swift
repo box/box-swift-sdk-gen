@@ -174,11 +174,11 @@ public class TrashWebLinkRestored: Codable {
         try container.encodeIfPresent(url, forKey: .url)
         try container.encodeIfPresent(parent, forKey: .parent)
         try container.encodeIfPresent(description, forKey: .description)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
-        if let modifiedAt {
+        if let modifiedAt = modifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
         }
 

@@ -73,7 +73,7 @@ public class WebhookInvocation: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(webhook, forKey: .webhook)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 

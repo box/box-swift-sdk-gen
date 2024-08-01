@@ -78,11 +78,11 @@ public class Comment: CommentBase {
         try container.encodeIfPresent(isReplyComment, forKey: .isReplyComment)
         try container.encodeIfPresent(message, forKey: .message)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
-        if let modifiedAt {
+        if let modifiedAt = modifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
         }
 

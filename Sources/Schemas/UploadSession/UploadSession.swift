@@ -88,7 +88,7 @@ public class UploadSession: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
-        if let sessionExpiresAt {
+        if let sessionExpiresAt = sessionExpiresAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: sessionExpiresAt), forKey: .sessionExpiresAt)
         }
 

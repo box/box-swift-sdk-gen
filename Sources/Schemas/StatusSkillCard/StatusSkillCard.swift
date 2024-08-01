@@ -76,7 +76,7 @@ public class StatusSkillCard: Codable {
         try container.encode(status, forKey: .status)
         try container.encode(skill, forKey: .skill)
         try container.encode(invocation, forKey: .invocation)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 

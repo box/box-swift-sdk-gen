@@ -97,7 +97,7 @@ public class RetentionPolicyAssignment: Codable {
         try container.encodeIfPresent(assignedTo, forKey: .assignedTo)
         try container.encodeIfPresent(filterFields, forKey: .filterFields)
         try container.encodeIfPresent(assignedBy, forKey: .assignedBy)
-        if let assignedAt {
+        if let assignedAt = assignedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: assignedAt), forKey: .assignedAt)
         }
 

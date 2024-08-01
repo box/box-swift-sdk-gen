@@ -83,12 +83,12 @@ public class ShieldInformationBarrierSegmentMember: ShieldInformationBarrierSegm
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(shieldInformationBarrier, forKey: .shieldInformationBarrier)
         try container.encodeIfPresent(shieldInformationBarrierSegment, forKey: .shieldInformationBarrierSegment)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let updatedAt {
+        if let updatedAt = updatedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: updatedAt), forKey: .updatedAt)
         }
 

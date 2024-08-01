@@ -76,7 +76,7 @@ public class KeywordSkillCard: Codable {
         try container.encode(skill, forKey: .skill)
         try container.encode(invocation, forKey: .invocation)
         try container.encode(entries, forKey: .entries)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 

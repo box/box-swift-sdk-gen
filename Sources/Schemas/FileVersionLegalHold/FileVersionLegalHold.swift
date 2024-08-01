@@ -70,7 +70,7 @@ public class FileVersionLegalHold: Codable {
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
         try container.encodeIfPresent(file, forKey: .file)
         try container.encodeIfPresent(legalHoldPolicyAssignments, forKey: .legalHoldPolicyAssignments)
-        if let deletedAt {
+        if let deletedAt = deletedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: deletedAt), forKey: .deletedAt)
         }
 

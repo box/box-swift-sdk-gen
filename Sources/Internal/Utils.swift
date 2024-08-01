@@ -35,7 +35,7 @@ public enum Utils {
 
         public static func urlEncodedFrom(data: Data) throws -> String {
             let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
-            guard let dictionary else {
+            guard let dictionary = dictionary else {
                 throw BoxSDKError(message: "Could not create object from JSON data.")
             }
 
@@ -131,7 +131,7 @@ public enum Utils {
             let result = dateFormatterWithSeconds.date(from: dateTime) ??
             dateFormatterWithMilliseconds.date(from: dateTime)
 
-            guard let result else {
+            guard let result = result else {
                 throw BoxSDKError(message: "Could not create Date from provided string \(dateTime)")
             }
 

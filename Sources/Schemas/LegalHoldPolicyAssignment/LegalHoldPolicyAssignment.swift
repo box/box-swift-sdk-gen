@@ -83,11 +83,11 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
         try container.encodeIfPresent(legalHoldPolicy, forKey: .legalHoldPolicy)
         try container.encodeIfPresent(assignedTo, forKey: .assignedTo)
         try container.encodeIfPresent(assignedBy, forKey: .assignedBy)
-        if let assignedAt {
+        if let assignedAt = assignedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: assignedAt), forKey: .assignedAt)
         }
 
-        if let deletedAt {
+        if let deletedAt = deletedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: deletedAt), forKey: .deletedAt)
         }
 

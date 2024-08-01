@@ -138,7 +138,7 @@ public class SignRequest: SignRequestBase {
         try container.encodeIfPresent(signingLog, forKey: .signingLog)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(signFiles, forKey: .signFiles)
-        if let autoExpireAt {
+        if let autoExpireAt = autoExpireAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: autoExpireAt), forKey: .autoExpireAt)
         }
 

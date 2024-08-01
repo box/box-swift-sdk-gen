@@ -139,7 +139,7 @@ public class UpdateFileByIdRequestBody: Codable {
         try container.encodeIfPresent(parent, forKey: .parent)
         try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
         try container.encodeIfPresent(lock, forKey: .lock)
-        if let dispositionAt {
+        if let dispositionAt = dispositionAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: dispositionAt), forKey: .dispositionAt)
         }
 
