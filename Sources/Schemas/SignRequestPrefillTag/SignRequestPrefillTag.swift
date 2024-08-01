@@ -54,7 +54,7 @@ public class SignRequestPrefillTag: Codable {
         try container.encodeIfPresent(documentTagId, forKey: .documentTagId)
         try container.encodeIfPresent(textValue, forKey: .textValue)
         try container.encodeIfPresent(checkboxValue, forKey: .checkboxValue)
-        if let dateValue {
+        if let dateValue = dateValue {
             try container.encode(Utils.Dates.dateToString(date: dateValue), forKey: .dateValue)
         }
 

@@ -64,11 +64,11 @@ public class UploadFileRequestBodyAttributesField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(parent, forKey: .parent)
-        if let contentCreatedAt {
+        if let contentCreatedAt = contentCreatedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: contentCreatedAt), forKey: .contentCreatedAt)
         }
 
-        if let contentModifiedAt {
+        if let contentModifiedAt = contentModifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: contentModifiedAt), forKey: .contentModifiedAt)
         }
 

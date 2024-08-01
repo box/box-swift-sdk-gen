@@ -87,11 +87,11 @@ public class Invite: Codable {
         try container.encodeIfPresent(actionableBy, forKey: .actionableBy)
         try container.encodeIfPresent(invitedBy, forKey: .invitedBy)
         try container.encodeIfPresent(status, forKey: .status)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
-        if let modifiedAt {
+        if let modifiedAt = modifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
         }
 

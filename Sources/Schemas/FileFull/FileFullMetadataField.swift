@@ -49,7 +49,7 @@ public class FileFullMetadataField: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
-        if let extraData {
+        if let extraData = extraData {
             for (key,value) in extraData {
                 try container.encodeIfPresent(value, forKey: CodingKeys(stringValue: key))
             }

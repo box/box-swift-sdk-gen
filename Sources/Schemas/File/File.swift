@@ -190,27 +190,27 @@ public class File: FileMini {
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(size, forKey: .size)
         try container.encodeIfPresent(pathCollection, forKey: .pathCollection)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
-        if let modifiedAt {
+        if let modifiedAt = modifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
         }
 
-        if let trashedAt {
+        if let trashedAt = trashedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: trashedAt), forKey: .trashedAt)
         }
 
-        if let purgedAt {
+        if let purgedAt = purgedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: purgedAt), forKey: .purgedAt)
         }
 
-        if let contentCreatedAt {
+        if let contentCreatedAt = contentCreatedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: contentCreatedAt), forKey: .contentCreatedAt)
         }
 
-        if let contentModifiedAt {
+        if let contentModifiedAt = contentModifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: contentModifiedAt), forKey: .contentModifiedAt)
         }
 

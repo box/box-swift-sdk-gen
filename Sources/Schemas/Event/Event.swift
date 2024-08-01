@@ -100,11 +100,11 @@ public class Event: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(type, forKey: .type)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
-        if let recordedAt {
+        if let recordedAt = recordedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: recordedAt), forKey: .recordedAt)
         }
 

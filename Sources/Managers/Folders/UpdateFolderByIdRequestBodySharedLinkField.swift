@@ -102,7 +102,7 @@ public class UpdateFolderByIdRequestBodySharedLinkField: Codable {
         try container.encodeIfPresent(access, forKey: .access)
         try container.encodeIfPresent(password, forKey: .password)
         try container.encodeIfPresent(vanityName, forKey: .vanityName)
-        if let unsharedAt {
+        if let unsharedAt = unsharedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: unsharedAt), forKey: .unsharedAt)
         }
 

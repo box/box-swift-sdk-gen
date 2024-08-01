@@ -215,7 +215,7 @@ public class FileRequest: Codable {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(isEmailRequired, forKey: .isEmailRequired)
         try container.encodeIfPresent(isDescriptionRequired, forKey: .isDescriptionRequired)
-        if let expiresAt {
+        if let expiresAt = expiresAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
         }
 

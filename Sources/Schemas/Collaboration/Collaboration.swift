@@ -156,22 +156,22 @@ public class Collaboration: Codable {
         try container.encodeIfPresent(accessibleBy, forKey: .accessibleBy)
         try container.encodeIfPresent(inviteEmail, forKey: .inviteEmail)
         try container.encodeIfPresent(role, forKey: .role)
-        if let expiresAt {
+        if let expiresAt = expiresAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
         }
 
         try container.encodeIfPresent(isAccessOnly, forKey: .isAccessOnly)
         try container.encodeIfPresent(status, forKey: .status)
-        if let acknowledgedAt {
+        if let acknowledgedAt = acknowledgedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: acknowledgedAt), forKey: .acknowledgedAt)
         }
 
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
-        if let modifiedAt {
+        if let modifiedAt = modifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
         }
 

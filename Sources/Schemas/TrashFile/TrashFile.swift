@@ -237,19 +237,19 @@ public class TrashFile: Codable {
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
-        if let trashedAt {
+        if let trashedAt = trashedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: trashedAt), forKey: .trashedAt)
         }
 
-        if let purgedAt {
+        if let purgedAt = purgedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: purgedAt), forKey: .purgedAt)
         }
 
-        if let contentCreatedAt {
+        if let contentCreatedAt = contentCreatedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: contentCreatedAt), forKey: .contentCreatedAt)
         }
 
-        if let contentModifiedAt {
+        if let contentModifiedAt = contentModifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: contentModifiedAt), forKey: .contentModifiedAt)
         }
 

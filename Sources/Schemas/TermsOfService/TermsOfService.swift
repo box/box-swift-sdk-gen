@@ -81,11 +81,11 @@ public class TermsOfService: TermsOfServiceBase {
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
         try container.encodeIfPresent(tosType, forKey: .tosType)
         try container.encodeIfPresent(text, forKey: .text)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
-        if let modifiedAt {
+        if let modifiedAt = modifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
         }
 

@@ -79,12 +79,12 @@ public class NetworkClient {
     private func sendDataRequest(_ urlRequest: URLRequest, networkSession: NetworkSession) async throws -> (Data, URLResponse) {
         return try await withCheckedThrowingContinuation { continuation in
             networkSession.session.dataTask(with: urlRequest) { data, response, error in
-                if let error {
+                if let error = error {
                     continuation.resume(with: .failure(BoxNetworkError(message: error.localizedDescription, error: error)))
                     return
                 }
 
-                guard let response else {
+                guard let response = response else {
                     continuation.resume(
                         with: .failure(BoxNetworkError(message: "No response \(urlRequest.url?.absoluteString ?? "")."))
                     )
@@ -109,7 +109,7 @@ public class NetworkClient {
     private func sendDownloadRequest(_ urlRequest: URLRequest, downloadDestinationURL: URL, networkSession: NetworkSession) async throws -> (URL, URLResponse) {
         return try await withCheckedThrowingContinuation { continuation in
             networkSession.session.downloadTask(with: urlRequest) { location, response, error in
-                if let error {
+                if let error = error {
                     continuation.resume(with: .failure(BoxNetworkError(message: error.localizedDescription, error: error)))
                     return
                 }
@@ -121,7 +121,7 @@ public class NetworkClient {
                     return
                 }
 
-                guard let response else {
+                guard let response = response else {
                     continuation.resume(
                         with: .failure(BoxNetworkError(message: "No response \(urlRequest.url?.absoluteString ?? "")."))
                     )

@@ -231,11 +231,11 @@ public class TrashFileRestored: Codable {
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
         try container.encodeIfPresent(trashedAt, forKey: .trashedAt)
         try container.encodeIfPresent(purgedAt, forKey: .purgedAt)
-        if let contentCreatedAt {
+        if let contentCreatedAt = contentCreatedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: contentCreatedAt), forKey: .contentCreatedAt)
         }
 
-        if let contentModifiedAt {
+        if let contentModifiedAt = contentModifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: contentModifiedAt), forKey: .contentModifiedAt)
         }
 

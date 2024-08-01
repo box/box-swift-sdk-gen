@@ -54,11 +54,11 @@ public class MetadataFieldFilterDateRange: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        if let lt {
+        if let lt = lt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: lt), forKey: .lt)
         }
 
-        if let gt {
+        if let gt = gt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: gt), forKey: .gt)
         }
 

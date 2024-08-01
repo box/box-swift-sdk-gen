@@ -116,7 +116,7 @@ public class CreateCollaborationRequestBody: Codable {
         try container.encode(role, forKey: .role)
         try container.encodeIfPresent(isAccessOnly, forKey: .isAccessOnly)
         try container.encodeIfPresent(canViewPath, forKey: .canViewPath)
-        if let expiresAt {
+        if let expiresAt = expiresAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
         }
 

@@ -43,7 +43,7 @@ public class SignRequestSignerSignerDecisionField: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(type, forKey: .type)
-        if let finalizedAt {
+        if let finalizedAt = finalizedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: finalizedAt), forKey: .finalizedAt)
         }
 

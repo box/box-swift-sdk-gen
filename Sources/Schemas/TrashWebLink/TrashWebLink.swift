@@ -180,19 +180,19 @@ public class TrashWebLink: Codable {
         try container.encodeIfPresent(parent, forKey: .parent)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(pathCollection, forKey: .pathCollection)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
-        if let modifiedAt {
+        if let modifiedAt = modifiedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
         }
 
-        if let trashedAt {
+        if let trashedAt = trashedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: trashedAt), forKey: .trashedAt)
         }
 
-        if let purgedAt {
+        if let purgedAt = purgedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: purgedAt), forKey: .purgedAt)
         }
 

@@ -117,11 +117,11 @@ public class CreateLegalHoldPolicyRequestBody: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(policyName, forKey: .policyName)
         try container.encodeIfPresent(description, forKey: .description)
-        if let filterStartedAt {
+        if let filterStartedAt = filterStartedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: filterStartedAt), forKey: .filterStartedAt)
         }
 
-        if let filterEndedAt {
+        if let filterEndedAt = filterEndedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: filterEndedAt), forKey: .filterEndedAt)
         }
 

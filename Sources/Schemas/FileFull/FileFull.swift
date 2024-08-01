@@ -232,14 +232,14 @@ public class FileFull: File {
         try container.encodeIfPresent(isExternallyOwned, forKey: .isExternallyOwned)
         try container.encodeIfPresent(hasCollaborations, forKey: .hasCollaborations)
         try container.encodeIfPresent(metadata, forKey: .metadata)
-        if let expiresAt {
+        if let expiresAt = expiresAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
         }
 
         try container.encodeIfPresent(representations, forKey: .representations)
         try container.encodeIfPresent(classification, forKey: .classification)
         try container.encodeIfPresent(uploaderDisplayName, forKey: .uploaderDisplayName)
-        if let dispositionAt {
+        if let dispositionAt = dispositionAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: dispositionAt), forKey: .dispositionAt)
         }
 

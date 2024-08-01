@@ -81,12 +81,12 @@ public class ShieldInformationBarrierSegmentRestriction: ShieldInformationBarrie
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(shieldInformationBarrier, forKey: .shieldInformationBarrier)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let updatedAt {
+        if let updatedAt = updatedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: updatedAt), forKey: .updatedAt)
         }
 

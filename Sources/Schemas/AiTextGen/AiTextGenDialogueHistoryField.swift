@@ -44,7 +44,7 @@ public class AiTextGenDialogueHistoryField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(prompt, forKey: .prompt)
         try container.encodeIfPresent(answer, forKey: .answer)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 

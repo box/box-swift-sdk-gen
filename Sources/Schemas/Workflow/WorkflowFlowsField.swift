@@ -64,7 +64,7 @@ public class WorkflowFlowsField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(trigger, forKey: .trigger)
         try container.encodeIfPresent(outcomes, forKey: .outcomes)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 

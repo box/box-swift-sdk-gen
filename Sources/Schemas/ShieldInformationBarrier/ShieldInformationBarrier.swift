@@ -108,17 +108,17 @@ public class ShieldInformationBarrier: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
         try container.encodeIfPresent(status, forKey: .status)
-        if let createdAt {
+        if let createdAt = createdAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         }
 
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let updatedAt {
+        if let updatedAt = updatedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: updatedAt), forKey: .updatedAt)
         }
 
         try container.encodeIfPresent(updatedBy, forKey: .updatedBy)
-        if let enabledAt {
+        if let enabledAt = enabledAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: enabledAt), forKey: .enabledAt)
         }
 

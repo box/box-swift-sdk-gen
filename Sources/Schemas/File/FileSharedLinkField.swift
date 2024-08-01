@@ -171,7 +171,7 @@ public class FileSharedLinkField: Codable {
         try container.encodeIfPresent(vanityUrl, forKey: .vanityUrl)
         try container.encodeIfPresent(vanityName, forKey: .vanityName)
         try container.encodeIfPresent(access, forKey: .access)
-        if let unsharedAt {
+        if let unsharedAt = unsharedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: unsharedAt), forKey: .unsharedAt)
         }
 

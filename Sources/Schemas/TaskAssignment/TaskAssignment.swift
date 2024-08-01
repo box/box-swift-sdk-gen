@@ -114,15 +114,15 @@ public class TaskAssignment: Codable {
         try container.encodeIfPresent(item, forKey: .item)
         try container.encodeIfPresent(assignedTo, forKey: .assignedTo)
         try container.encodeIfPresent(message, forKey: .message)
-        if let completedAt {
+        if let completedAt = completedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: completedAt), forKey: .completedAt)
         }
 
-        if let assignedAt {
+        if let assignedAt = assignedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: assignedAt), forKey: .assignedAt)
         }
 
-        if let remindedAt {
+        if let remindedAt = remindedAt {
             try container.encode(Utils.Dates.dateTimeToString(dateTime: remindedAt), forKey: .remindedAt)
         }
 
