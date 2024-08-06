@@ -36,7 +36,7 @@ class AiManagerTests: XCTestCase {
     }
 
     public func testGettingAiAskAgentConfig() async throws {
-        let aiAskConfig: AiAgentAskOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.ask, language: "ja-JP"))
+        let aiAskConfig: AiAgentAskOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.ask, language: "en-US"))
     }
 
     public func testGettingAiTextGenAgentConfig() async throws {
