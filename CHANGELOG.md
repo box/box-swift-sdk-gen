@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/box/box-codegen/compare/0.3.0...0.3.1) (2024-08-06)
+
+
+### Bug Fixes
+
+* Extract `IntegrationMappingPartnerItemSlack` to `IntegrationMappingPartnerItemSlackUnion` (box/box-codegen[#530](https://github.com/box/box-codegen/issues/530)) ([#165](https://github.com/box/box-codegen/issues/165)) ([d51df9a](https://github.com/box/box-codegen/commit/d51df9a19d06db886358e94ce70551c283e5cc45))
+* Improve chunked upload reliability (box/box-codegen[#529](https://github.com/box/box-codegen/issues/529)) ([#164](https://github.com/box/box-codegen/issues/164)) ([5d87629](https://github.com/box/box-codegen/commit/5d876299aa88b18accde22379950780bff100da0))
+* Retry requests with 202 status code and `Retry-After` header (box/box-codegen[#538](https://github.com/box/box-codegen/issues/538)) ([#177](https://github.com/box/box-codegen/issues/177)) ([64f27b3](https://github.com/box/box-codegen/commit/64f27b3858725adaa53a10a6e8df8c0bcfe73fea))
+
+
+### New Features and Enhancements
+
+* Add `is_active` parameter to user collaboration (box/box-openapi[#437](https://github.com/box/box-codegen/issues/437)) ([#163](https://github.com/box/box-codegen/issues/163)) ([5f726bb](https://github.com/box/box-codegen/commit/5f726bbffd682934ab5731e1620489b1ee54e5a1))
+* Add support for Swift 5.6 (box/box-codegen[#541](https://github.com/box/box-codegen/issues/541)) ([#180](https://github.com/box/box-codegen/issues/180)) ([04b7020](https://github.com/box/box-codegen/commit/04b7020f1220f73ad4637e6033d5539c56a64fcd))
+* Support AI Agent API (box/box-codegen[#531](https://github.com/box/box-codegen/issues/531)) ([#170](https://github.com/box/box-codegen/issues/170)) ([fc9a00b](https://github.com/box/box-codegen/commit/fc9a00bdcaffeaccfd87caad73fe666fb46c36ab))
+
 ## [0.3.0](https://github.com/box/box-codegen/compare/v0.2.0...v0.3.0) (2024-06-28)
 
 
