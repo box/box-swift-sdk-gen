@@ -6,6 +6,8 @@ public class AiAsk: Codable {
         case mode
         case prompt
         case items
+        case dialogueHistory = "dialogue_history"
+        case includeCitations = "include_citations"
         case aiAgent = "ai_agent"
     }
 
@@ -22,6 +24,12 @@ public class AiAsk: Codable {
     /// If you set `mode` parameter to `single_item_qa`, the `items` array can have one element only. 
     public let items: [AiAskItemsField]
 
+    /// The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
+    public let dialogueHistory: [AiDialogueHistory]?
+
+    /// A flag to indicate whether citations should be returned.
+    public let includeCitations: Bool?
+
     public let aiAgent: AiAgentAsk?
 
     /// Initializer for a AiAsk.
@@ -34,11 +42,15 @@ public class AiAsk: Codable {
     ///     **Note**: Box AI handles documents with text representations up to 1MB in size, or a maximum of 25 files, whichever comes first.
     ///     If the file size exceeds 1MB, the first 1MB of text representation will be processed.
     ///     If you set `mode` parameter to `single_item_qa`, the `items` array can have one element only. 
+    ///   - dialogueHistory: The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
+    ///   - includeCitations: A flag to indicate whether citations should be returned.
     ///   - aiAgent: 
-    public init(mode: AiAskModeField, prompt: String, items: [AiAskItemsField], aiAgent: AiAgentAsk? = nil) {
+    public init(mode: AiAskModeField, prompt: String, items: [AiAskItemsField], dialogueHistory: [AiDialogueHistory]? = nil, includeCitations: Bool? = nil, aiAgent: AiAgentAsk? = nil) {
         self.mode = mode
         self.prompt = prompt
         self.items = items
+        self.dialogueHistory = dialogueHistory
+        self.includeCitations = includeCitations
         self.aiAgent = aiAgent
     }
 
@@ -47,6 +59,8 @@ public class AiAsk: Codable {
         mode = try container.decode(AiAskModeField.self, forKey: .mode)
         prompt = try container.decode(String.self, forKey: .prompt)
         items = try container.decode([AiAskItemsField].self, forKey: .items)
+        dialogueHistory = try container.decodeIfPresent([AiDialogueHistory].self, forKey: .dialogueHistory)
+        includeCitations = try container.decodeIfPresent(Bool.self, forKey: .includeCitations)
         aiAgent = try container.decodeIfPresent(AiAgentAsk.self, forKey: .aiAgent)
     }
 
@@ -55,6 +69,8 @@ public class AiAsk: Codable {
         try container.encode(mode, forKey: .mode)
         try container.encode(prompt, forKey: .prompt)
         try container.encode(items, forKey: .items)
+        try container.encodeIfPresent(dialogueHistory, forKey: .dialogueHistory)
+        try container.encodeIfPresent(includeCitations, forKey: .includeCitations)
         try container.encodeIfPresent(aiAgent, forKey: .aiAgent)
     }
 

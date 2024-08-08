@@ -11,10 +11,8 @@ Retrieves an image of a the user's avatar.
 
 This operation is performed by calling function `getUserAvatar`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-users-id-avatar/).
 
-<!-- sample get_users_id_avatar -->
+
 ```
 try await client.avatars.getUserAvatar(userId: user.id, downloadDestinationURL: URL(path: "\(Utils.temporaryDirectoryPath())\(Utils.getUUID())"))
 ```
@@ -44,10 +42,8 @@ Adds or updates a user avatar.
 
 This operation is performed by calling function `createUserAvatar`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-users-id-avatar/).
 
-<!-- sample post_users_id_avatar -->
+
 ```
 try await client.avatars.createUserAvatar(userId: user.id, requestBody: CreateUserAvatarRequestBody(pic: Utils.decodeBase64ByteStream(data: "iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAAA1BMVEW10NBjBBbqAAAAH0lEQVRoge3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAvg0hAAABmmDh1QAAAABJRU5ErkJggg=="), picContentType: "image/png", picFileName: "avatar.png"))
 ```
@@ -78,10 +74,8 @@ You cannot reverse this operation.
 
 This operation is performed by calling function `deleteUserAvatar`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/delete-users-id-avatar/).
 
-<!-- sample delete_users_id_avatar -->
+
 ```
 try await client.avatars.deleteUserAvatar(userId: user.id)
 ```

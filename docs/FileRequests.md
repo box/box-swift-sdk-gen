@@ -12,10 +12,8 @@ Retrieves the information about a file request.
 
 This operation is performed by calling function `getFileRequestById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-file-requests-id/).
 
-<!-- sample get_file_requests_id -->
+
 ```
 try await client.fileRequests.getFileRequestById(fileRequestId: updatedFileRequest.id)
 ```
@@ -42,10 +40,8 @@ deactivate a file request.
 
 This operation is performed by calling function `updateFileRequestById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/put-file-requests-id/).
 
-<!-- sample put_file_requests_id -->
+
 ```
 try await client.fileRequests.updateFileRequestById(fileRequestId: copiedFileRequest.id, requestBody: FileRequestUpdateRequest(title: "updated title", description: "updated description"))
 ```
@@ -73,10 +69,8 @@ Deletes a file request permanently.
 
 This operation is performed by calling function `deleteFileRequestById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/delete-file-requests-id/).
 
-<!-- sample delete_file_requests_id -->
+
 ```
 try await client.fileRequests.deleteFileRequestById(fileRequestId: updatedFileRequest.id)
 ```
@@ -104,10 +98,8 @@ and applies it to another folder.
 
 This operation is performed by calling function `createFileRequestCopy`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-file-requests-id-copy/).
 
-<!-- sample post_file_requests_id_copy -->
+
 ```
 try await client.fileRequests.createFileRequestCopy(fileRequestId: fileRequestId, requestBody: FileRequestCopyRequest(folder: FileRequestCopyRequestFolderField(id: fileRequest.folder.id, type: FileRequestCopyRequestFolderTypeField.folder)))
 ```

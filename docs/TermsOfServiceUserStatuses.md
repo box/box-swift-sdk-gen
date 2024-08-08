@@ -13,10 +13,8 @@ the terms and when.
 
 This operation is performed by calling function `getTermsOfServiceUserStatuses`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-terms-of-service-user-statuses/).
 
-<!-- sample get_terms_of_service_user_statuses -->
+
 ```
 try await client.termsOfServiceUserStatuses.getTermsOfServiceUserStatuses(queryParams: GetTermsOfServiceUserStatusesQueryParams(tosId: tos.id, userId: user.id))
 ```
@@ -42,10 +40,8 @@ Sets the status for a terms of service for a user.
 
 This operation is performed by calling function `createTermsOfServiceStatusForUser`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-terms-of-service-user-statuses/).
 
-<!-- sample post_terms_of_service_user_statuses -->
+
 ```
 try await client.termsOfServiceUserStatuses.createTermsOfServiceStatusForUser(requestBody: CreateTermsOfServiceStatusForUserRequestBody(tos: CreateTermsOfServiceStatusForUserRequestBodyTosField(id: tos.id), user: CreateTermsOfServiceStatusForUserRequestBodyUserField(id: user.id), isAccepted: false))
 ```
@@ -71,10 +67,8 @@ Updates the status for a terms of service for a user.
 
 This operation is performed by calling function `updateTermsOfServiceStatusForUserById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/put-terms-of-service-user-statuses-id/).
 
-<!-- sample put_terms_of_service_user_statuses_id -->
+
 ```
 try await client.termsOfServiceUserStatuses.updateTermsOfServiceStatusForUserById(termsOfServiceUserStatusId: createdTosUserStatus.id, requestBody: UpdateTermsOfServiceStatusForUserByIdRequestBody(isAccepted: true))
 ```

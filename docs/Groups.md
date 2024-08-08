@@ -14,10 +14,8 @@ must have admin permissions to inspect enterprise's groups.
 
 This operation is performed by calling function `getGroups`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-groups/).
 
-<!-- sample get_groups -->
+
 ```
 try await client.groups.getGroups()
 ```
@@ -45,10 +43,8 @@ permissions can create new groups.
 
 This operation is performed by calling function `createGroup`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-groups/).
 
-<!-- sample post_groups -->
+
 ```
 try await client.groups.createGroup(requestBody: CreateGroupRequestBody(name: groupName, description: groupDescription))
 ```
@@ -78,10 +74,8 @@ use this API.
 
 This operation is performed by calling function `getGroupById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-groups-id/).
 
-<!-- sample get_groups_id -->
+
 ```
 try await client.groups.getGroupById(groupId: group.id)
 ```
@@ -111,10 +105,8 @@ use this API.
 
 This operation is performed by calling function `updateGroupById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/put-groups-id/).
 
-<!-- sample put_groups_id -->
+
 ```
 try await client.groups.updateGroupById(groupId: group.id, requestBody: UpdateGroupByIdRequestBody(name: updatedGroupName))
 ```
@@ -145,10 +137,8 @@ admin-level permissions will be able to use this API.
 
 This operation is performed by calling function `deleteGroupById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/delete-groups-id/).
 
-<!-- sample delete_groups_id -->
+
 ```
 try await client.groups.deleteGroupById(groupId: group.id)
 ```

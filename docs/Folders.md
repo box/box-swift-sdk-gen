@@ -23,10 +23,8 @@ To fetch more items within the folder, use the
 
 This operation is performed by calling function `getFolderById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-folders-id/).
 
-<!-- sample get_folders_id -->
+
 ```
 try await client.folders.getFolderById(folderId: newFolder.id)
 ```
@@ -65,10 +63,8 @@ create shared links, update collaborations, and more.
 
 This operation is performed by calling function `updateFolderById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/put-folders-id/).
 
-<!-- sample put_folders_id -->
+
 ```
 try await downscopedClient.folders.updateFolderById(folderId: folder.id, requestBody: UpdateFolderByIdRequestBody(name: Utils.getUUID()))
 ```
@@ -108,10 +104,8 @@ the trash.
 
 This operation is performed by calling function `deleteFolderById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/delete-folders-id/).
 
-<!-- sample delete_folders_id -->
+
 ```
 try await parentClient.folders.deleteFolderById(folderId: folder.id)
 ```
@@ -144,10 +138,8 @@ use the [Get a folder](#get-folders-id) endpoint instead.
 
 This operation is performed by calling function `getFolderItems`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-folders-id-items/).
 
-<!-- sample get_folders_id_items -->
+
 ```
 try await client.folders.getFolderItems(folderId: folderOrigin.id)
 ```
@@ -175,10 +167,8 @@ Creates a new empty folder within the specified parent folder.
 
 This operation is performed by calling function `createFolder`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-folders/).
 
-<!-- sample post_folders -->
+
 ```
 try await parentClient.folders.createFolder(requestBody: CreateFolderRequestBody(name: Utils.getUUID(), parent: CreateFolderRequestBodyParentField(id: "0")))
 ```
@@ -212,10 +202,8 @@ The original folder will not be changed.
 
 This operation is performed by calling function `copyFolder`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-folders-id-copy/).
 
-<!-- sample post_folders_id_copy -->
+
 ```
 try await client.folders.copyFolder(folderId: folderOrigin.id, requestBody: CopyFolderRequestBody(parent: CopyFolderRequestBodyParentField(id: "0"), name: copiedFolderName))
 ```

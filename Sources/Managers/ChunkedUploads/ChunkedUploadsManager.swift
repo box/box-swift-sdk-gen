@@ -44,6 +44,23 @@ public class ChunkedUploadsManager {
         return try UploadSession.deserialize(from: response.data)
     }
 
+    /// Using this method with urls provided in response when creating a new upload session is preferred to use over GetFileUploadSessionById method. 
+    /// This allows to always upload your content to the closest Box data center and can significantly improve upload speed.
+    ///  Return information about an upload session.
+    /// 
+    /// The actual endpoint URL is returned by the [`Create upload session`](e://post-files-upload-sessions) endpoint.
+    ///
+    /// - Parameters:
+    ///   - url: URL of getFileUploadSessionById method
+    ///   - headers: Headers of getFileUploadSessionById method
+    /// - Returns: The `UploadSession`.
+    /// - Throws: The `GeneralError`.
+    public func getFileUploadSessionByUrl(url: String, headers: GetFileUploadSessionByUrlHeaders = GetFileUploadSessionByUrlHeaders()) async throws -> UploadSession {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: url, options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try UploadSession.deserialize(from: response.data)
+    }
+
     /// Return information about an upload session.
     /// 
     /// The actual endpoint URL is returned by the [`Create upload session`](e://post-files-upload-sessions) endpoint.
@@ -56,8 +73,27 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func getFileUploadSessionById(uploadSessionId: String, headers: GetFileUploadSessionByIdHeaders = GetFileUploadSessionByIdHeaders()) async throws -> UploadSession {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://{box-upload-server}/api/2.0/files/upload_sessions/")\(uploadSessionId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UploadSession.deserialize(from: response.data)
+    }
+
+    /// Using this method with urls provided in response when creating a new upload session is preferred to use over UploadFilePart method. 
+    /// This allows to always upload your content to the closest Box data center and can significantly improve upload speed.
+    ///  Uploads a chunk of a file for an upload session.
+    /// 
+    /// The actual endpoint URL is returned by the [`Create upload session`](e://post-files-upload-sessions)
+    /// and [`Get upload session`](e://get-files-upload-sessions-id) endpoints.
+    ///
+    /// - Parameters:
+    ///   - url: URL of uploadFilePart method
+    ///   - requestBody: Request body of uploadFilePart method
+    ///   - headers: Headers of uploadFilePart method
+    /// - Returns: The `UploadedPart`.
+    /// - Throws: The `GeneralError`.
+    public func uploadFilePartByUrl(url: String, requestBody: InputStream, headers: UploadFilePartByUrlHeaders) async throws -> UploadedPart {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["digest": Utils.Strings.toString(value: headers.digest), "content-range": Utils.Strings.toString(value: headers.contentRange)], headers.extraHeaders))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: url, options: FetchOptions(method: "PUT", headers: headersMap, fileStream: requestBody, contentType: "application/octet-stream", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try UploadedPart.deserialize(from: response.data)
     }
 
     /// Uploads a chunk of a file for an upload session.
@@ -74,8 +110,26 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func uploadFilePart(uploadSessionId: String, requestBody: InputStream, headers: UploadFilePartHeaders) async throws -> UploadedPart {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["digest": Utils.Strings.toString(value: headers.digest), "content-range": Utils.Strings.toString(value: headers.contentRange)], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://{box-upload-server}/api/2.0/files/upload_sessions/")\(uploadSessionId)", options: FetchOptions(method: "PUT", headers: headersMap, fileStream: requestBody, contentType: "application/octet-stream", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)", options: FetchOptions(method: "PUT", headers: headersMap, fileStream: requestBody, contentType: "application/octet-stream", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UploadedPart.deserialize(from: response.data)
+    }
+
+    /// Using this method with urls provided in response when creating a new upload session is preferred to use over DeleteFileUploadSessionById method. 
+    /// This allows to always upload your content to the closest Box data center and can significantly improve upload speed.
+    ///  Abort an upload session and discard all data uploaded.
+    /// 
+    /// This cannot be reversed.
+    /// 
+    /// The actual endpoint URL is returned by the [`Create upload session`](e://post-files-upload-sessions)
+    /// and [`Get upload session`](e://get-files-upload-sessions-id) endpoints.
+    ///
+    /// - Parameters:
+    ///   - url: URL of deleteFileUploadSessionById method
+    ///   - headers: Headers of deleteFileUploadSessionById method
+    /// - Throws: The `GeneralError`.
+    public func deleteFileUploadSessionByUrl(url: String, headers: DeleteFileUploadSessionByUrlHeaders = DeleteFileUploadSessionByUrlHeaders()) async throws {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: url, options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Abort an upload session and discard all data uploaded.
@@ -92,7 +146,27 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func deleteFileUploadSessionById(uploadSessionId: String, headers: DeleteFileUploadSessionByIdHeaders = DeleteFileUploadSessionByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://{box-upload-server}/api/2.0/files/upload_sessions/")\(uploadSessionId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+    }
+
+    /// Using this method with urls provided in response when creating a new upload session is preferred to use over GetFileUploadSessionParts method. 
+    /// This allows to always upload your content to the closest Box data center and can significantly improve upload speed.
+    ///  Return a list of the chunks uploaded to the upload session so far.
+    /// 
+    /// The actual endpoint URL is returned by the [`Create upload session`](e://post-files-upload-sessions)
+    /// and [`Get upload session`](e://get-files-upload-sessions-id) endpoints.
+    ///
+    /// - Parameters:
+    ///   - url: URL of getFileUploadSessionParts method
+    ///   - queryParams: Query parameters of getFileUploadSessionParts method
+    ///   - headers: Headers of getFileUploadSessionParts method
+    /// - Returns: The `UploadParts`.
+    /// - Throws: The `GeneralError`.
+    public func getFileUploadSessionPartsByUrl(url: String, queryParams: GetFileUploadSessionPartsByUrlQueryParams = GetFileUploadSessionPartsByUrlQueryParams(), headers: GetFileUploadSessionPartsByUrlHeaders = GetFileUploadSessionPartsByUrlHeaders()) async throws -> UploadParts {
+        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["offset": Utils.Strings.toString(value: queryParams.offset), "limit": Utils.Strings.toString(value: queryParams.limit)])
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: url, options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try UploadParts.deserialize(from: response.data)
     }
 
     /// Return a list of the chunks uploaded to the upload session so far.
@@ -110,8 +184,27 @@ public class ChunkedUploadsManager {
     public func getFileUploadSessionParts(uploadSessionId: String, queryParams: GetFileUploadSessionPartsQueryParams = GetFileUploadSessionPartsQueryParams(), headers: GetFileUploadSessionPartsHeaders = GetFileUploadSessionPartsHeaders()) async throws -> UploadParts {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["offset": Utils.Strings.toString(value: queryParams.offset), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://{box-upload-server}/api/2.0/files/upload_sessions/")\(uploadSessionId)\("/parts")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)\("/parts")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try UploadParts.deserialize(from: response.data)
+    }
+
+    /// Using this method with urls provided in response when creating a new upload session is preferred to use over CreateFileUploadSessionCommit method. 
+    /// This allows to always upload your content to the closest Box data center and can significantly improve upload speed.
+    ///  Close an upload session and create a file from the uploaded chunks.
+    /// 
+    /// The actual endpoint URL is returned by the [`Create upload session`](e://post-files-upload-sessions)
+    /// and [`Get upload session`](e://get-files-upload-sessions-id) endpoints.
+    ///
+    /// - Parameters:
+    ///   - url: URL of createFileUploadSessionCommit method
+    ///   - requestBody: Request body of createFileUploadSessionCommit method
+    ///   - headers: Headers of createFileUploadSessionCommit method
+    /// - Returns: The `Files`.
+    /// - Throws: The `GeneralError`.
+    public func createFileUploadSessionCommitByUrl(url: String, requestBody: CreateFileUploadSessionCommitByUrlRequestBody, headers: CreateFileUploadSessionCommitByUrlHeaders) async throws -> Files {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["digest": Utils.Strings.toString(value: headers.digest), "if-match": Utils.Strings.toString(value: headers.ifMatch), "if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch)], headers.extraHeaders))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: url, options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try Files.deserialize(from: response.data)
     }
 
     /// Close an upload session and create a file from the uploaded chunks.
@@ -128,7 +221,7 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func createFileUploadSessionCommit(uploadSessionId: String, requestBody: CreateFileUploadSessionCommitRequestBody, headers: CreateFileUploadSessionCommitHeaders) async throws -> Files {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["digest": Utils.Strings.toString(value: headers.digest), "if-match": Utils.Strings.toString(value: headers.ifMatch), "if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch)], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\("https://{box-upload-server}/api/2.0/files/upload_sessions/")\(uploadSessionId)\("/commit")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)\("/commit")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Files.deserialize(from: response.data)
     }
 
@@ -144,14 +237,14 @@ public class ChunkedUploadsManager {
         let bytesStart: Int = lastIndex + 1
         let bytesEnd: Int = lastIndex + chunkSize
         let contentRange: String = "\("bytes ")\(Utils.Strings.toString(value: bytesStart)!)\("-")\(Utils.Strings.toString(value: bytesEnd)!)\("/")\(Utils.Strings.toString(value: acc.fileSize)!)"
-        let uploadedPart: UploadedPart = try await self.uploadFilePart(uploadSessionId: acc.uploadSessionId, requestBody: Utils.generateByteStreamFromBuffer(buffer: chunkBuffer), headers: UploadFilePartHeaders(digest: digest, contentRange: contentRange))
+        let uploadedPart: UploadedPart = try await self.uploadFilePartByUrl(url: acc.uploadPartUrl, requestBody: Utils.generateByteStreamFromBuffer(buffer: chunkBuffer), headers: UploadFilePartByUrlHeaders(digest: digest, contentRange: contentRange))
         let part: UploadPart = uploadedPart.part!
         let partSha1: String = Utils.Strings.hextToBase64(value: part.sha1!)
         assert(partSha1 == sha1)
         assert(part.size! == chunkSize)
         assert(part.offset! == bytesStart)
         acc.fileHash.updateHash(data: chunkBuffer)
-        return PartAccumulator(lastIndex: bytesEnd, parts: parts + [part], fileSize: acc.fileSize, uploadSessionId: acc.uploadSessionId, fileHash: acc.fileHash)
+        return PartAccumulator(lastIndex: bytesEnd, parts: parts + [part], fileSize: acc.fileSize, uploadPartUrl: acc.uploadPartUrl, fileHash: acc.fileHash)
     }
 
     /// Starts the process of chunk uploading a big file. Should return a File object representing uploaded file.
@@ -165,20 +258,22 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func uploadBigFile(file: InputStream, fileName: String, fileSize: Int64, parentFolderId: String) async throws -> FileFull {
         let uploadSession: UploadSession = try await self.createFileUploadSession(requestBody: CreateFileUploadSessionRequestBody(folderId: parentFolderId, fileSize: fileSize, fileName: fileName))
-        let uploadSessionId: String = uploadSession.id!
+        let uploadPartUrl: String = uploadSession.sessionEndpoints!.uploadPart!
+        let commitUrl: String = uploadSession.sessionEndpoints!.commit!
+        let listPartsUrl: String = uploadSession.sessionEndpoints!.listParts!
         let partSize: Int64 = uploadSession.partSize!
         let totalParts: Int = uploadSession.totalParts!
         assert(partSize * Int64(totalParts) >= fileSize)
         assert(uploadSession.numPartsProcessed == 0)
         let fileHash: Hash = Hash(algorithm: HashName.sha1)
         let chunksIterator: AsyncStream<InputStream> = Utils.iterateChunks(stream: file, chunkSize: partSize, fileSize: fileSize)
-        let results: PartAccumulator = try await Utils.reduceIterator(iterator: chunksIterator, reducer: self.reducer, initialValue: PartAccumulator(lastIndex: -1, parts: [], fileSize: fileSize, uploadSessionId: uploadSessionId, fileHash: fileHash))
+        let results: PartAccumulator = try await Utils.reduceIterator(iterator: chunksIterator, reducer: self.reducer, initialValue: PartAccumulator(lastIndex: -1, parts: [], fileSize: fileSize, uploadPartUrl: uploadPartUrl, fileHash: fileHash))
         let parts: [UploadPart] = results.parts
-        let processedSessionParts: UploadParts = try await self.getFileUploadSessionParts(uploadSessionId: uploadSessionId)
+        let processedSessionParts: UploadParts = try await self.getFileUploadSessionPartsByUrl(url: listPartsUrl)
         assert(processedSessionParts.totalCount! == totalParts)
         let sha1: String = await fileHash.digestHash(encoding: "base64")
         let digest: String = "\("sha=")\(sha1)"
-        let committedSession: Files = try await self.createFileUploadSessionCommit(uploadSessionId: uploadSessionId, requestBody: CreateFileUploadSessionCommitRequestBody(parts: parts), headers: CreateFileUploadSessionCommitHeaders(digest: digest))
+        let committedSession: Files = try await self.createFileUploadSessionCommitByUrl(url: commitUrl, requestBody: CreateFileUploadSessionCommitByUrlRequestBody(parts: parts), headers: CreateFileUploadSessionCommitByUrlHeaders(digest: digest))
         return committedSession.entries![0]
     }
 

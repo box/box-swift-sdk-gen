@@ -18,10 +18,8 @@ the application, which can be enabled within the developer console.
 
 This operation is performed by calling function `createInvite`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-invites/).
 
-<!-- sample post_invites -->
+
 ```
 try await client.invites.createInvite(requestBody: CreateInviteRequestBody(enterprise: CreateInviteRequestBodyEnterpriseField(id: currentUser.enterprise!.id!), actionableBy: CreateInviteRequestBodyActionableByField(login: email)))
 ```
@@ -49,10 +47,8 @@ Returns the status of a user invite.
 
 This operation is performed by calling function `getInviteById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-invites-id/).
 
-<!-- sample get_invites_id -->
+
 ```
 try await client.invites.getInviteById(inviteId: invitation.id)
 ```

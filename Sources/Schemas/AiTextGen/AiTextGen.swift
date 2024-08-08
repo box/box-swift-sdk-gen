@@ -20,7 +20,7 @@ public class AiTextGen: Codable {
     public let items: [AiTextGenItemsField]
 
     /// The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
-    public let dialogueHistory: [AiTextGenDialogueHistoryField]?
+    public let dialogueHistory: [AiDialogueHistory]?
 
     public let aiAgent: AiAgentTextGen?
 
@@ -35,7 +35,7 @@ public class AiTextGen: Codable {
     ///     If the file size exceeds 1MB, the first 1MB of text representation will be processed.
     ///   - dialogueHistory: The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
     ///   - aiAgent: 
-    public init(prompt: String, items: [AiTextGenItemsField], dialogueHistory: [AiTextGenDialogueHistoryField]? = nil, aiAgent: AiAgentTextGen? = nil) {
+    public init(prompt: String, items: [AiTextGenItemsField], dialogueHistory: [AiDialogueHistory]? = nil, aiAgent: AiAgentTextGen? = nil) {
         self.prompt = prompt
         self.items = items
         self.dialogueHistory = dialogueHistory
@@ -46,7 +46,7 @@ public class AiTextGen: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         prompt = try container.decode(String.self, forKey: .prompt)
         items = try container.decode([AiTextGenItemsField].self, forKey: .items)
-        dialogueHistory = try container.decodeIfPresent([AiTextGenDialogueHistoryField].self, forKey: .dialogueHistory)
+        dialogueHistory = try container.decodeIfPresent([AiDialogueHistory].self, forKey: .dialogueHistory)
         aiAgent = try container.decodeIfPresent(AiAgentTextGen.self, forKey: .aiAgent)
     }
 

@@ -18,10 +18,8 @@ vice versa.
 
 This operation is performed by calling function `getWebhooks`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-webhooks/).
 
-<!-- sample get_webhooks -->
+
 ```
 try await client.webhooks.getWebhooks()
 ```
@@ -47,10 +45,8 @@ Creates a webhook.
 
 This operation is performed by calling function `createWebhook`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-webhooks/).
 
-<!-- sample post_webhooks -->
+
 ```
 try await client.webhooks.createWebhook(requestBody: CreateWebhookRequestBody(target: CreateWebhookRequestBodyTargetField(id: folder.id, type: CreateWebhookRequestBodyTargetTypeField.folder), address: "https://example.com/new-webhook", triggers: [CreateWebhookRequestBodyTriggersField.fIleUploaded]))
 ```
@@ -76,10 +72,8 @@ Retrieves a specific webhook
 
 This operation is performed by calling function `getWebhookById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-webhooks-id/).
 
-<!-- sample get_webhooks_id -->
+
 ```
 try await client.webhooks.getWebhookById(webhookId: webhook.id!)
 ```
@@ -105,10 +99,8 @@ Updates a webhook.
 
 This operation is performed by calling function `updateWebhookById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/put-webhooks-id/).
 
-<!-- sample put_webhooks_id -->
+
 ```
 try await client.webhooks.updateWebhookById(webhookId: webhook.id!, requestBody: UpdateWebhookByIdRequestBody(address: "https://example.com/updated-webhook"))
 ```
@@ -136,10 +128,8 @@ Deletes a webhook.
 
 This operation is performed by calling function `deleteWebhookById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/delete-webhooks-id/).
 
-<!-- sample delete_webhooks_id -->
+
 ```
 try await client.webhooks.deleteWebhookById(webhookId: webhook.id!)
 ```

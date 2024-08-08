@@ -14,10 +14,8 @@ use this endpoint.
 
 This operation is performed by calling function `getFolderLocks`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-folder-locks/).
 
-<!-- sample get_folder_locks -->
+
 ```
 try await client.folderLocks.getFolderLocks(queryParams: GetFolderLocksQueryParams(folderId: folder.id))
 ```
@@ -48,10 +46,8 @@ use this endpoint.
 
 This operation is performed by calling function `createFolderLock`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-folder-locks/).
 
-<!-- sample post_folder_locks -->
+
 ```
 try await client.folderLocks.createFolderLock(requestBody: CreateFolderLockRequestBody(folder: CreateFolderLockRequestBodyFolderField(id: folder.id, type: "folder"), lockedOperations: CreateFolderLockRequestBodyLockedOperationsField(move: true, delete: true)))
 ```
@@ -81,10 +77,8 @@ use this endpoint.
 
 This operation is performed by calling function `deleteFolderLockById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/delete-folder-locks-id/).
 
-<!-- sample delete_folder_locks_id -->
+
 ```
 try await client.folderLocks.deleteFolderLockById(folderLockId: folderLock.id!)
 ```

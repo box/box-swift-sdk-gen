@@ -10,10 +10,8 @@ Gets Box Sign templates created by a user.
 
 This operation is performed by calling function `getSignTemplates`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-sign-templates/).
 
-<!-- sample get_sign_templates -->
+
 ```
 try await client.signTemplates.getSignTemplates(queryParams: GetSignTemplatesQueryParams(limit: 2))
 ```
@@ -39,10 +37,8 @@ Fetches details of a specific Box Sign template.
 
 This operation is performed by calling function `getSignTemplateById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-sign-templates-id/).
 
-<!-- sample get_sign_templates_id -->
+
 ```
 try await client.signTemplates.getSignTemplateById(templateId: signTemplates.entries![0].id!)
 ```

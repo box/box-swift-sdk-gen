@@ -14,10 +14,8 @@ endpoint does not support pagination.
 
 This operation is performed by calling function `getFileTasks`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-files-id-tasks/).
 
-<!-- sample get_files_id_tasks -->
+
 ```
 try await client.tasks.getFileTasks(fileId: file.id)
 ```
@@ -47,10 +45,8 @@ will need to be assigned separately.
 
 This operation is performed by calling function `createTask`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-tasks/).
 
-<!-- sample post_tasks -->
+
 ```
 try await client.tasks.createTask(requestBody: CreateTaskRequestBody(item: CreateTaskRequestBodyItemField(type: CreateTaskRequestBodyItemTypeField.file, id: file.id), message: "test message", dueAt: date, action: CreateTaskRequestBodyActionField.review, completionRule: CreateTaskRequestBodyCompletionRuleField.allAssignees))
 ```
@@ -76,10 +72,8 @@ Retrieves information about a specific task.
 
 This operation is performed by calling function `getTaskById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-tasks-id/).
 
-<!-- sample get_tasks_id -->
+
 ```
 try await client.tasks.getTaskById(taskId: task.id!)
 ```
@@ -106,10 +100,8 @@ update its completion state.
 
 This operation is performed by calling function `updateTaskById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/put-tasks-id/).
 
-<!-- sample put_tasks_id -->
+
 ```
 try await client.tasks.updateTaskById(taskId: task.id!, requestBody: UpdateTaskByIdRequestBody(message: "updated message"))
 ```
@@ -137,10 +129,8 @@ Removes a task from a file.
 
 This operation is performed by calling function `deleteTaskById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/delete-tasks-id/).
 
-<!-- sample delete_tasks_id -->
+
 ```
 try await client.tasks.deleteTaskById(taskId: task.id!)
 ```

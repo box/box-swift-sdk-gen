@@ -17,10 +17,8 @@ marker-based pagination using the `marker` parameter.
 
 This operation is performed by calling function `getTrashedItems`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-folders-trash-items/).
 
-<!-- sample get_folders_trash_items -->
+
 ```
 try await client.trashedItems.getTrashedItems()
 ```

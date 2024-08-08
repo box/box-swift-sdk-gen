@@ -13,10 +13,8 @@ restriction based on provided ID.
 
 This operation is performed by calling function `getShieldInformationBarrierSegmentRestrictionById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-shield-information-barrier-segment-restrictions-id/).
 
-<!-- sample get_shield_information_barrier_segment_restrictions_id -->
+
 ```
 try await client.shieldInformationBarrierSegmentRestrictions.getShieldInformationBarrierSegmentRestrictionById(shieldInformationBarrierSegmentRestrictionId: segmentRestrictionId)
 ```
@@ -44,10 +42,8 @@ based on provided ID.
 
 This operation is performed by calling function `deleteShieldInformationBarrierSegmentRestrictionById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/delete-shield-information-barrier-segment-restrictions-id/).
 
-<!-- sample delete_shield_information_barrier_segment_restrictions_id -->
+
 ```
 try await client.shieldInformationBarrierSegmentRestrictions.deleteShieldInformationBarrierSegmentRestrictionById(shieldInformationBarrierSegmentRestrictionId: segmentRestrictionId)
 ```
@@ -74,10 +70,8 @@ based on provided segment ID.
 
 This operation is performed by calling function `getShieldInformationBarrierSegmentRestrictions`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-shield-information-barrier-segment-restrictions/).
 
-<!-- sample get_shield_information_barrier_segment_restrictions -->
+
 ```
 try await client.shieldInformationBarrierSegmentRestrictions.getShieldInformationBarrierSegmentRestrictions(queryParams: GetShieldInformationBarrierSegmentRestrictionsQueryParams(shieldInformationBarrierSegmentId: segmentId))
 ```
@@ -105,10 +99,8 @@ segment restriction object.
 
 This operation is performed by calling function `createShieldInformationBarrierSegmentRestriction`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-shield-information-barrier-segment-restrictions/).
 
-<!-- sample post_shield_information_barrier_segment_restrictions -->
+
 ```
 try await client.shieldInformationBarrierSegmentRestrictions.createShieldInformationBarrierSegmentRestriction(requestBody: CreateShieldInformationBarrierSegmentRestrictionRequestBody(restrictedSegment: CreateShieldInformationBarrierSegmentRestrictionRequestBodyRestrictedSegmentField(id: segmentToRestrictId, type: CreateShieldInformationBarrierSegmentRestrictionRequestBodyRestrictedSegmentTypeField.shieldInformationBarrierSegment), shieldInformationBarrierSegment: CreateShieldInformationBarrierSegmentRestrictionRequestBodyShieldInformationBarrierSegmentField(id: segmentId, type: CreateShieldInformationBarrierSegmentRestrictionRequestBodyShieldInformationBarrierSegmentTypeField.shieldInformationBarrierSegment), type: CreateShieldInformationBarrierSegmentRestrictionRequestBodyTypeField.shieldInformationBarrierSegmentRestriction))
 ```
