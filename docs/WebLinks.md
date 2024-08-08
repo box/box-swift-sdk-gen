@@ -12,10 +12,8 @@ Creates a web link object within a folder.
 
 This operation is performed by calling function `createWebLink`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-web-links/).
 
-<!-- sample post_web_links -->
+
 ```
 try await client.webLinks.createWebLink(requestBody: CreateWebLinkRequestBody(url: "https://www.box.com", parent: CreateWebLinkRequestBodyParentField(id: parent.id), name: Utils.getUUID(), description: "Weblink description"))
 ```
@@ -41,10 +39,8 @@ Retrieve information about a web link.
 
 This operation is performed by calling function `getWebLinkById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-web-links-id/).
 
-<!-- sample get_web_links_id -->
+
 ```
 try await client.webLinks.getWebLinkById(webLinkId: weblink.id)
 ```
@@ -70,10 +66,8 @@ Updates a web link object.
 
 This operation is performed by calling function `updateWebLinkById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/put-web-links-id/).
 
-<!-- sample put_web_links_id -->
+
 ```
 try await client.webLinks.updateWebLinkById(webLinkId: weblink.id, requestBody: UpdateWebLinkByIdRequestBody(name: updatedName, sharedLink: UpdateWebLinkByIdRequestBodySharedLinkField(access: UpdateWebLinkByIdRequestBodySharedLinkAccessField.open, password: password)))
 ```
@@ -101,10 +95,8 @@ Deletes a web link.
 
 This operation is performed by calling function `deleteWebLinkById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/delete-web-links-id/).
 
-<!-- sample delete_web_links_id -->
+
 ```
 try await client.webLinks.deleteWebLinkById(webLinkId: webLinkId)
 ```

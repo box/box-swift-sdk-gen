@@ -13,10 +13,8 @@ Cancels a sign request.
 
 This operation is performed by calling function `cancelSignRequest`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-sign-requests-id-cancel/).
 
-<!-- sample post_sign_requests_id_cancel -->
+
 ```
 try await client.signRequests.cancelSignRequest(signRequestId: createdSignRequest.id!)
 ```
@@ -42,8 +40,6 @@ Resends a signature request email to all outstanding signers.
 
 This operation is performed by calling function `resendSignRequest`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-sign-requests-id-resend/).
 
 *Currently we don't have an example for calling `resendSignRequest` in integration tests*
 
@@ -69,10 +65,8 @@ Gets a sign request by ID.
 
 This operation is performed by calling function `getSignRequestById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-sign-requests-id/).
 
-<!-- sample get_sign_requests_id -->
+
 ```
 try await client.signRequests.getSignRequestById(signRequestId: createdSignRequest.id!)
 ```
@@ -99,10 +93,8 @@ Gets signature requests created by a user. If the `sign_files` and/or
 
 This operation is performed by calling function `getSignRequests`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-sign-requests/).
 
-<!-- sample get_sign_requests -->
+
 ```
 try await client.signRequests.getSignRequests()
 ```
@@ -129,10 +121,8 @@ sending the signature request to signers.
 
 This operation is performed by calling function `createSignRequest`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-sign-requests/).
 
-<!-- sample post_sign_requests -->
+
 ```
 try await client.signRequests.createSignRequest(requestBody: SignRequestCreateRequest(signers: [SignRequestCreateSigner(email: signer1Email, signerGroupId: "user"), SignRequestCreateSigner(email: signer2Email, signerGroupId: "user")], parentFolder: FolderMini(id: destinationFolder.id), sourceFiles: [FileBase(id: fileToSign.id)]))
 ```

@@ -1,6 +1,7 @@
 import Foundation
 
-public class AiTextGenDialogueHistoryField: Codable {
+/// A context object that can hold prior prompts and answers.
+public class AiDialogueHistory: Codable {
     private enum CodingKeys: String, CodingKey {
         case prompt
         case answer
@@ -16,7 +17,7 @@ public class AiTextGenDialogueHistoryField: Codable {
     /// The ISO date formatted timestamp of when the previous answer to the prompt was created.
     public let createdAt: Date?
 
-    /// Initializer for a AiTextGenDialogueHistoryField.
+    /// Initializer for a AiDialogueHistory.
     ///
     /// - Parameters:
     ///   - prompt: The prompt previously provided by the client and answered by the LLM.

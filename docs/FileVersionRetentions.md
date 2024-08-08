@@ -15,10 +15,8 @@ see [files under retention](e://get-retention-policy-assignments-id-files-under-
 
 This operation is performed by calling function `getFileVersionRetentions`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-file-version-retentions/).
 
-<!-- sample get_file_version_retentions -->
+
 ```
 try await client.fileVersionRetentions.getFileVersionRetentions()
 ```
@@ -49,10 +47,8 @@ see [files under retention](e://get-retention-policy-assignments-id-files-under-
 
 This operation is performed by calling function `getFileVersionRetentionById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-file-version-retentions-id/).
 
-<!-- sample get_file_version_retentions_id -->
+
 ```
 try await client.fileVersionRetentions.getFileVersionRetentionById(fileVersionRetentionId: fileVersionRetention.id!)
 ```

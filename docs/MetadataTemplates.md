@@ -17,10 +17,8 @@ template.
 
 This operation is performed by calling function `getMetadataTemplatesByInstanceId`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-metadata-templates/).
 
-<!-- sample get_metadata_templates -->
+
 ```
 try await client.metadataTemplates.getMetadataTemplatesByInstanceId(queryParams: GetMetadataTemplatesByInstanceIdQueryParams(metadataInstanceId: createdMetadataInstance.id!))
 ```
@@ -50,10 +48,8 @@ an enterprise or globally, or list all templates applied to a file or folder.
 
 This operation is performed by calling function `getMetadataTemplate`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-metadata-templates-id-id-schema/).
 
-<!-- sample get_metadata_templates_id_id_schema -->
+
 ```
 try await client.metadataTemplates.getMetadataTemplate(scope: GetMetadataTemplateScope.enterprise, templateKey: template.templateKey!)
 ```
@@ -88,10 +84,8 @@ application of the operations, the metadata template will not be changed.
 
 This operation is performed by calling function `updateMetadataTemplate`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/put-metadata-templates-id-id-schema/).
 
-<!-- sample put_metadata_templates_id_id_schema -->
+
 ```
 try await client.metadataTemplates.updateMetadataTemplate(scope: UpdateMetadataTemplateScope.enterprise, templateKey: templateKey, requestBody: [UpdateMetadataTemplateRequestBody(op: UpdateMetadataTemplateRequestBodyOpField.addField, fieldKey: "newfieldname", data: ["type": "string", "displayName": "newFieldName"])])
 ```
@@ -123,10 +117,8 @@ This deletion is permanent and can not be reversed.
 
 This operation is performed by calling function `deleteMetadataTemplate`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/delete-metadata-templates-id-id-schema/).
 
-<!-- sample delete_metadata_templates_id_id_schema -->
+
 ```
 try await client.metadataTemplates.deleteMetadataTemplate(scope: DeleteMetadataTemplateScope.enterprise, templateKey: templateKey)
 ```
@@ -155,10 +147,8 @@ Retrieves a metadata template by its ID.
 
 This operation is performed by calling function `getMetadataTemplateById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-metadata-templates-id/).
 
-<!-- sample get_metadata_templates_id -->
+
 ```
 try await client.metadataTemplates.getMetadataTemplateById(templateId: template.id)
 ```
@@ -185,10 +175,8 @@ enterprises using Box.
 
 This operation is performed by calling function `getGlobalMetadataTemplates`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-metadata-templates-global/).
 
-<!-- sample get_metadata_templates_global -->
+
 ```
 try await client.metadataTemplates.getGlobalMetadataTemplates()
 ```
@@ -216,10 +204,8 @@ the user's enterprise
 
 This operation is performed by calling function `getEnterpriseMetadataTemplates`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-metadata-templates-enterprise/).
 
-<!-- sample get_metadata_templates_enterprise -->
+
 ```
 try await client.metadataTemplates.getEnterpriseMetadataTemplates()
 ```
@@ -247,10 +233,8 @@ files and folders.
 
 This operation is performed by calling function `createMetadataTemplate`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-metadata-templates-schema/).
 
-<!-- sample post_metadata_templates_schema -->
+
 ```
 try await client.metadataTemplates.createMetadataTemplate(requestBody: CreateMetadataTemplateRequestBody(scope: "enterprise", displayName: templateKey, templateKey: templateKey, fields: [CreateMetadataTemplateRequestBodyFieldsField(type: CreateMetadataTemplateRequestBodyFieldsTypeField.string, key: "testName", displayName: "testName")]))
 ```

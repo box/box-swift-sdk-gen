@@ -14,10 +14,8 @@ an enterprise.
 
 This operation is performed by calling function `getLegalHoldPolicies`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-legal-hold-policies/).
 
-<!-- sample get_legal_hold_policies -->
+
 ```
 try await client.legalHoldPolicies.getLegalHoldPolicies()
 ```
@@ -43,10 +41,8 @@ Create a new legal hold policy.
 
 This operation is performed by calling function `createLegalHoldPolicy`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-legal-hold-policies/).
 
-<!-- sample post_legal_hold_policies -->
+
 ```
 try await client.legalHoldPolicies.createLegalHoldPolicy(requestBody: CreateLegalHoldPolicyRequestBody(policyName: legalHoldPolicyName, description: legalHoldDescription, isOngoing: false, filterStartedAt: filterStartedAt, filterEndedAt: filterEndedAt))
 ```
@@ -72,10 +68,8 @@ Retrieve a legal hold policy.
 
 This operation is performed by calling function `getLegalHoldPolicyById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-legal-hold-policies-id/).
 
-<!-- sample get_legal_hold_policies_id -->
+
 ```
 try await client.legalHoldPolicies.getLegalHoldPolicyById(legalHoldPolicyId: legalHoldPolicyId)
 ```
@@ -101,10 +95,8 @@ Update legal hold policy.
 
 This operation is performed by calling function `updateLegalHoldPolicyById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/put-legal-hold-policies-id/).
 
-<!-- sample put_legal_hold_policies_id -->
+
 ```
 try await client.legalHoldPolicies.updateLegalHoldPolicyById(legalHoldPolicyId: legalHoldPolicyId, requestBody: UpdateLegalHoldPolicyByIdRequestBody(policyName: updatedLegalHoldPolicyName))
 ```
@@ -135,10 +127,8 @@ fully deleted yet when the response returns.
 
 This operation is performed by calling function `deleteLegalHoldPolicyById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/delete-legal-hold-policies-id/).
 
-<!-- sample delete_legal_hold_policies_id -->
+
 ```
 try await client.legalHoldPolicies.deleteLegalHoldPolicyById(legalHoldPolicyId: legalHoldPolicy.id)
 ```

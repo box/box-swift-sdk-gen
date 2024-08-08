@@ -13,10 +13,8 @@ segment member by its ID.
 
 This operation is performed by calling function `getShieldInformationBarrierSegmentMemberById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-shield-information-barrier-segment-members-id/).
 
-<!-- sample get_shield_information_barrier_segment_members_id -->
+
 ```
 try await client.shieldInformationBarrierSegmentMembers.getShieldInformationBarrierSegmentMemberById(shieldInformationBarrierSegmentMemberId: segmentMember.id!)
 ```
@@ -43,10 +41,8 @@ segment member based on provided ID.
 
 This operation is performed by calling function `deleteShieldInformationBarrierSegmentMemberById`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/delete-shield-information-barrier-segment-members-id/).
 
-<!-- sample delete_shield_information_barrier_segment_members_id -->
+
 ```
 try await client.shieldInformationBarrierSegmentMembers.deleteShieldInformationBarrierSegmentMemberById(shieldInformationBarrierSegmentMemberId: segmentMember.id!)
 ```
@@ -74,10 +70,8 @@ based on provided segment IDs.
 
 This operation is performed by calling function `getShieldInformationBarrierSegmentMembers`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-shield-information-barrier-segment-members/).
 
-<!-- sample get_shield_information_barrier_segment_members -->
+
 ```
 try await client.shieldInformationBarrierSegmentMembers.getShieldInformationBarrierSegmentMembers(queryParams: GetShieldInformationBarrierSegmentMembersQueryParams(shieldInformationBarrierSegmentId: segment.id!))
 ```
@@ -104,10 +98,8 @@ Creates a new shield information barrier segment member.
 
 This operation is performed by calling function `createShieldInformationBarrierSegmentMember`.
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-shield-information-barrier-segment-members/).
 
-<!-- sample post_shield_information_barrier_segment_members -->
+
 ```
 try await client.shieldInformationBarrierSegmentMembers.createShieldInformationBarrierSegmentMember(requestBody: CreateShieldInformationBarrierSegmentMemberRequestBody(shieldInformationBarrierSegment: CreateShieldInformationBarrierSegmentMemberRequestBodyShieldInformationBarrierSegmentField(id: segment.id!, type: CreateShieldInformationBarrierSegmentMemberRequestBodyShieldInformationBarrierSegmentTypeField.shieldInformationBarrierSegment), user: UserBase(id: Utils.getEnvironmentVariable(name: "USER_ID"))))
 ```
