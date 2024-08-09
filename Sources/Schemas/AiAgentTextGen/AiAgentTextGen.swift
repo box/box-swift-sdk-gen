@@ -8,7 +8,7 @@ public class AiAgentTextGen: Codable {
     }
 
     /// The type of AI agent used for generating text.
-    public let type: AiAgentTextGenTypeField?
+    public let type: AiAgentTextGenTypeField
 
     public let basicGen: AiAgentBasicGenTool?
 
@@ -17,20 +17,20 @@ public class AiAgentTextGen: Codable {
     /// - Parameters:
     ///   - type: The type of AI agent used for generating text.
     ///   - basicGen: 
-    public init(type: AiAgentTextGenTypeField? = nil, basicGen: AiAgentBasicGenTool? = nil) {
+    public init(type: AiAgentTextGenTypeField = AiAgentTextGenTypeField.aiAgentTextGen, basicGen: AiAgentBasicGenTool? = nil) {
         self.type = type
         self.basicGen = basicGen
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decodeIfPresent(AiAgentTextGenTypeField.self, forKey: .type)
+        type = try container.decode(AiAgentTextGenTypeField.self, forKey: .type)
         basicGen = try container.decodeIfPresent(AiAgentBasicGenTool.self, forKey: .basicGen)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encode(type, forKey: .type)
         try container.encodeIfPresent(basicGen, forKey: .basicGen)
     }
 
