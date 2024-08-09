@@ -14,8 +14,10 @@ folder with ID `0`.
 
 This operation is performed by calling function `getFolderMetadata`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-folders-id-metadata/).
 
-
+<!-- sample get_folders_id_metadata -->
 ```
 try await client.folderMetadata.getFolderMetadata(folderId: folder.id)
 ```
@@ -45,8 +47,10 @@ folder. This can not be used on the root folder with ID `0`.
 
 This operation is performed by calling function `getFolderMetadataById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-folders-id-metadata-id-id/).
 
-
+<!-- sample get_folders_id_metadata_id_id -->
 ```
 try await client.folderMetadata.getFolderMetadataById(folderId: folder.id, scope: GetFolderMetadataByIdScope.global, templateKey: "properties")
 ```
@@ -86,8 +90,10 @@ admin console.
 
 This operation is performed by calling function `createFolderMetadataById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-folders-id-metadata-id-id/).
 
-
+<!-- sample post_folders_id_metadata_id_id -->
 ```
 try await client.folderMetadata.createFolderMetadataById(folderId: folder.id, scope: CreateFolderMetadataByIdScope.global, templateKey: "properties", requestBody: ["abc": "xyz"])
 ```
@@ -127,8 +133,10 @@ application of the operations, the metadata instance will not be changed.
 
 This operation is performed by calling function `updateFolderMetadataById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-folders-id-metadata-id-id/).
 
-
+<!-- sample put_folders_id_metadata_id_id -->
 ```
 try await client.folderMetadata.updateFolderMetadataById(folderId: folder.id, scope: UpdateFolderMetadataByIdScope.global, templateKey: "properties", requestBody: [UpdateFolderMetadataByIdRequestBody(op: UpdateFolderMetadataByIdRequestBodyOpField.replace, path: "/abc", value: newValue)])
 ```
@@ -161,8 +169,10 @@ Deletes a piece of folder metadata.
 
 This operation is performed by calling function `deleteFolderMetadataById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-folders-id-metadata-id-id/).
 
-
+<!-- sample delete_folders_id_metadata_id_id -->
 ```
 try await client.folderMetadata.deleteFolderMetadataById(folderId: folder.id, scope: DeleteFolderMetadataByIdScope.global, templateKey: "properties")
 ```

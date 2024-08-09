@@ -13,8 +13,10 @@ domain restrictions.
 
 This operation is performed by calling function `getCollaborationWhitelistExemptTargets`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-collaboration-whitelist-exempt-targets/).
 
-
+<!-- sample get_collaboration_whitelist_exempt_targets -->
 ```
 try await client.collaborationAllowlistExemptTargets.getCollaborationWhitelistExemptTargets()
 ```
@@ -41,8 +43,10 @@ for collaborations.
 
 This operation is performed by calling function `createCollaborationWhitelistExemptTarget`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-collaboration-whitelist-exempt-targets/).
 
-
+<!-- sample post_collaboration_whitelist_exempt_targets -->
 ```
 try await client.collaborationAllowlistExemptTargets.createCollaborationWhitelistExemptTarget(requestBody: CreateCollaborationWhitelistExemptTargetRequestBody(user: CreateCollaborationWhitelistExemptTargetRequestBodyUserField(id: user.id)))
 ```
@@ -69,8 +73,10 @@ domain restrictions.
 
 This operation is performed by calling function `getCollaborationWhitelistExemptTargetById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-collaboration-whitelist-exempt-targets-id/).
 
-
+<!-- sample get_collaboration_whitelist_exempt_targets_id -->
 ```
 try await client.collaborationAllowlistExemptTargets.getCollaborationWhitelistExemptTargetById(collaborationWhitelistExemptTargetId: exemptTarget.id!)
 ```
@@ -97,8 +103,10 @@ of domains for collaborations.
 
 This operation is performed by calling function `deleteCollaborationWhitelistExemptTargetById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-collaboration-whitelist-exempt-targets-id/).
 
-
+<!-- sample delete_collaboration_whitelist_exempt_targets_id -->
 ```
 try await client.collaborationAllowlistExemptTargets.deleteCollaborationWhitelistExemptTargetById(collaborationWhitelistExemptTargetId: exemptTarget.id!)
 ```

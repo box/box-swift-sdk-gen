@@ -13,8 +13,10 @@ Retrieves the details about a file.
 
 This operation is performed by calling function `getFileById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-files-id/).
 
-
+<!-- sample get_files_id -->
 ```
 try await client.files.getFileById(fileId: file.id)
 ```
@@ -47,8 +49,10 @@ create a shared link, or lock a file.
 
 This operation is performed by calling function `updateFileById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-files-id/).
 
-
+<!-- sample put_files_id -->
 ```
 try await downscopedClient.files.updateFileById(fileId: file.id, requestBody: UpdateFileByIdRequestBody(name: Utils.getUUID()))
 ```
@@ -86,8 +90,10 @@ be permanently deleted from Box or moved to the trash.
 
 This operation is performed by calling function `deleteFileById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-files-id/).
 
-
+<!-- sample delete_files_id -->
 ```
 try await parentClient.files.deleteFileById(fileId: file.id)
 ```
@@ -114,8 +120,10 @@ Creates a copy of a file.
 
 This operation is performed by calling function `copyFile`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-files-id-copy/).
 
-
+<!-- sample post_files_id_copy -->
 ```
 try await client.files.copyFile(fileId: fileOrigin.id, requestBody: CopyFileRequestBody(parent: CopyFileRequestBodyParentField(id: "0"), name: copiedFileName))
 ```
@@ -158,8 +166,10 @@ Thumbnails can be generated for the image and video file formats listed
 
 This operation is performed by calling function `getFileThumbnailById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-files-id-thumbnail-id/).
 
-
+<!-- sample get_files_id_thumbnail_id -->
 ```
 try await client.files.getFileThumbnailById(fileId: thumbnailFile.id, extension_: GetFileThumbnailByIdExtension.png, downloadDestinationURL: destinationPath)
 ```

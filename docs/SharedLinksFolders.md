@@ -19,8 +19,10 @@ shared folder when only given a shared link.
 
 This operation is performed by calling function `findFolderForSharedLink`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-shared-items-folders/).
 
-
+<!-- sample get_shared_items#folders -->
 ```
 try await userClient.sharedLinksFolders.findFolderForSharedLink(queryParams: FindFolderForSharedLinkQueryParams(), headers: FindFolderForSharedLinkHeaders(boxapi: "\("shared_link=")\(folderFromApi.sharedLink!.url)\("&shared_link_password=incorrectPassword")"))
 ```
@@ -47,8 +49,10 @@ Gets the information for a shared link on a folder.
 
 This operation is performed by calling function `getSharedLinkForFolder`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-folders-id-get-shared-link/).
 
-
+<!-- sample get_folders_id#get_shared_link -->
 ```
 try await client.sharedLinksFolders.getSharedLinkForFolder(folderId: folder.id, queryParams: GetSharedLinkForFolderQueryParams(fields: "shared_link"))
 ```
@@ -77,8 +81,10 @@ Adds a shared link to a folder.
 
 This operation is performed by calling function `addShareLinkToFolder`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-folders-id-add-shared-link/).
 
-
+<!-- sample put_folders_id#add_shared_link -->
 ```
 try await client.sharedLinksFolders.addShareLinkToFolder(folderId: folder.id, requestBody: AddShareLinkToFolderRequestBody(sharedLink: AddShareLinkToFolderRequestBodySharedLinkField(access: AddShareLinkToFolderRequestBodySharedLinkAccessField.open, password: "Secret123@")), queryParams: AddShareLinkToFolderQueryParams(fields: "shared_link"))
 ```
@@ -109,8 +115,10 @@ Updates a shared link on a folder.
 
 This operation is performed by calling function `updateSharedLinkOnFolder`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-folders-id-update-shared-link/).
 
-
+<!-- sample put_folders_id#update_shared_link -->
 ```
 try await client.sharedLinksFolders.updateSharedLinkOnFolder(folderId: folder.id, requestBody: UpdateSharedLinkOnFolderRequestBody(sharedLink: UpdateSharedLinkOnFolderRequestBodySharedLinkField(access: UpdateSharedLinkOnFolderRequestBodySharedLinkAccessField.collaborators)), queryParams: UpdateSharedLinkOnFolderQueryParams(fields: "shared_link"))
 ```
@@ -141,6 +149,8 @@ Removes a shared link from a folder.
 
 This operation is performed by calling function `removeSharedLinkFromFolder`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-folders-id-remove-shared-link/).
 
 *Currently we don't have an example for calling `removeSharedLinkFromFolder` in integration tests*
 

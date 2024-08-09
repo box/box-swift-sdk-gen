@@ -13,8 +13,10 @@ Fetches all the storage policy assignment for an enterprise or user.
 
 This operation is performed by calling function `getStoragePolicyAssignments`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-storage-policy-assignments/).
 
-
+<!-- sample get_storage_policy_assignments -->
 ```
 try await client.storagePolicyAssignments.getStoragePolicyAssignments(queryParams: GetStoragePolicyAssignmentsQueryParams(resolvedForType: GetStoragePolicyAssignmentsQueryParamsResolvedForTypeField.user, resolvedForId: userId))
 ```
@@ -41,8 +43,10 @@ Creates a storage policy assignment for an enterprise or user.
 
 This operation is performed by calling function `createStoragePolicyAssignment`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-storage-policy-assignments/).
 
-
+<!-- sample post_storage_policy_assignments -->
 ```
 try await client.storagePolicyAssignments.createStoragePolicyAssignment(requestBody: CreateStoragePolicyAssignmentRequestBody(storagePolicy: CreateStoragePolicyAssignmentRequestBodyStoragePolicyField(id: policyId), assignedTo: CreateStoragePolicyAssignmentRequestBodyAssignedToField(id: userId, type: CreateStoragePolicyAssignmentRequestBodyAssignedToTypeField.user)))
 ```
@@ -68,8 +72,10 @@ Fetches a specific storage policy assignment.
 
 This operation is performed by calling function `getStoragePolicyAssignmentById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-storage-policy-assignments-id/).
 
-
+<!-- sample get_storage_policy_assignments_id -->
 ```
 try await client.storagePolicyAssignments.getStoragePolicyAssignmentById(storagePolicyAssignmentId: storagePolicyAssignment.id)
 ```
@@ -95,8 +101,10 @@ Updates a specific storage policy assignment.
 
 This operation is performed by calling function `updateStoragePolicyAssignmentById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-storage-policy-assignments-id/).
 
-
+<!-- sample put_storage_policy_assignments_id -->
 ```
 try await client.storagePolicyAssignments.updateStoragePolicyAssignmentById(storagePolicyAssignmentId: storagePolicyAssignment.id, requestBody: UpdateStoragePolicyAssignmentByIdRequestBody(storagePolicy: UpdateStoragePolicyAssignmentByIdRequestBodyStoragePolicyField(id: storagePolicy2.id)))
 ```
@@ -131,8 +139,10 @@ twice per user in a 24 hour time frame.
 
 This operation is performed by calling function `deleteStoragePolicyAssignmentById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-storage-policy-assignments-id/).
 
-
+<!-- sample delete_storage_policy_assignments_id -->
 ```
 try await client.storagePolicyAssignments.deleteStoragePolicyAssignmentById(storagePolicyAssignmentId: storagePolicyAssignment.id)
 ```

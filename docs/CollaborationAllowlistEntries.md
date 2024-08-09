@@ -13,8 +13,10 @@ for within the current enterprise.
 
 This operation is performed by calling function `getCollaborationWhitelistEntries`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-collaboration-whitelist-entries/).
 
-
+<!-- sample get_collaboration_whitelist_entries -->
 ```
 try await client.collaborationAllowlistEntries.getCollaborationWhitelistEntries()
 ```
@@ -41,8 +43,10 @@ collaboration for.
 
 This operation is performed by calling function `createCollaborationWhitelistEntry`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-collaboration-whitelist-entries/).
 
-
+<!-- sample post_collaboration_whitelist_entries -->
 ```
 try await client.collaborationAllowlistEntries.createCollaborationWhitelistEntry(requestBody: CreateCollaborationWhitelistEntryRequestBody(direction: CreateCollaborationWhitelistEntryRequestBodyDirectionField.inbound, domain: domain))
 ```
@@ -69,8 +73,10 @@ for within the current enterprise.
 
 This operation is performed by calling function `getCollaborationWhitelistEntryById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-collaboration-whitelist-entries-id/).
 
-
+<!-- sample get_collaboration_whitelist_entries_id -->
 ```
 try await client.collaborationAllowlistEntries.getCollaborationWhitelistEntryById(collaborationWhitelistEntryId: entry.id!)
 ```
@@ -97,8 +103,10 @@ collaborations for within the current enterprise.
 
 This operation is performed by calling function `deleteCollaborationWhitelistEntryById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-collaboration-whitelist-entries-id/).
 
-
+<!-- sample delete_collaboration_whitelist_entries_id -->
 ```
 try await client.collaborationAllowlistEntries.deleteCollaborationWhitelistEntryById(collaborationWhitelistEntryId: entry.id!)
 ```

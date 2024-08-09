@@ -17,8 +17,10 @@ URL explicitly, for example
 
 This operation is performed by calling function `getClassificationOnFolder`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-folders-id-metadata-enterprise-security-classification-6-vm-vochw-u-wo/).
 
-
+<!-- sample get_folders_id_metadata_enterprise_securityClassification-6VMVochwUWo -->
 ```
 try await client.folderClassifications.getClassificationOnFolder(folderId: folder.id)
 ```
@@ -52,8 +54,10 @@ URL explicitly, for example
 
 This operation is performed by calling function `addClassificationToFolder`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-folders-id-metadata-enterprise-security-classification-6-vm-vochw-u-wo/).
 
-
+<!-- sample post_folders_id_metadata_enterprise_securityClassification-6VMVochwUWo -->
 ```
 try await client.folderClassifications.addClassificationToFolder(folderId: folder.id, requestBody: AddClassificationToFolderRequestBody(boxSecurityClassificationKey: classification.key))
 ```
@@ -86,8 +90,10 @@ defined for the enterprise will be accepted.
 
 This operation is performed by calling function `updateClassificationOnFolder`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-folders-id-metadata-enterprise-security-classification-6-vm-vochw-u-wo/).
 
-
+<!-- sample put_folders_id_metadata_enterprise_securityClassification-6VMVochwUWo -->
 ```
 try await client.folderClassifications.updateClassificationOnFolder(folderId: folder.id, requestBody: [UpdateClassificationOnFolderRequestBody(value: secondClassification.key)])
 ```
@@ -119,8 +125,10 @@ URL explicitly, for example
 
 This operation is performed by calling function `deleteClassificationFromFolder`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-folders-id-metadata-enterprise-security-classification-6-vm-vochw-u-wo/).
 
-
+<!-- sample delete_folders_id_metadata_enterprise_securityClassification-6VMVochwUWo -->
 ```
 try await client.folderClassifications.deleteClassificationFromFolder(folderId: folder.id)
 ```

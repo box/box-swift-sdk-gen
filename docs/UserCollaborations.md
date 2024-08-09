@@ -12,8 +12,10 @@ Retrieves a single collaboration.
 
 This operation is performed by calling function `getCollaborationById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-collaborations-id/).
 
-
+<!-- sample get_collaborations_id -->
 ```
 try await client.userCollaborations.getCollaborationById(collaborationId: collaborationId)
 ```
@@ -43,8 +45,10 @@ accept collaboration invites.
 
 This operation is performed by calling function `updateCollaborationById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-collaborations-id/).
 
-
+<!-- sample put_collaborations_id -->
 ```
 try await client.userCollaborations.updateCollaborationById(collaborationId: collaborationId, requestBody: UpdateCollaborationByIdRequestBody(role: UpdateCollaborationByIdRequestBodyRoleField.viewer))
 ```
@@ -74,8 +78,10 @@ Deletes a single collaboration.
 
 This operation is performed by calling function `deleteCollaborationById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-collaborations-id/).
 
-
+<!-- sample delete_collaborations_id -->
 ```
 try await client.userCollaborations.deleteCollaborationById(collaborationId: groupCollaboration.id)
 ```
@@ -115,8 +121,10 @@ using `user_id`,
 
 This operation is performed by calling function `createCollaboration`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-collaborations/).
 
-
+<!-- sample post_collaborations -->
 ```
 try await client.userCollaborations.createCollaboration(requestBody: CreateCollaborationRequestBody(item: CreateCollaborationRequestBodyItemField(type: CreateCollaborationRequestBodyItemTypeField.file, id: file.id), accessibleBy: CreateCollaborationRequestBodyAccessibleByField(type: CreateCollaborationRequestBodyAccessibleByTypeField.user, id: Utils.getEnvironmentVariable(name: "USER_ID")), role: CreateCollaborationRequestBodyRoleField.editor))
 ```

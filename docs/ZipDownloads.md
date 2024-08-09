@@ -26,6 +26,8 @@ total size does not exceed 25GB.
 
 This operation is performed by calling function `createZipDownload`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-zip-downloads/).
 
 *Currently we don't have an example for calling `createZipDownload` in integration tests*
 
@@ -64,6 +66,8 @@ this endpoint.
 
 This operation is performed by calling function `getZipDownloadContent`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-zip-downloads-id-content/).
 
 *Currently we don't have an example for calling `getZipDownloadContent` in integration tests*
 
@@ -102,6 +106,8 @@ this endpoint.
 
 This operation is performed by calling function `getZipDownloadStatus`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-zip-downloads-id-status/).
 
 *Currently we don't have an example for calling `getZipDownloadStatus` in integration tests*
 

@@ -11,8 +11,10 @@ Retrieve the watermark for a folder.
 
 This operation is performed by calling function `getFolderWatermark`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-folders-id-watermark/).
 
-
+<!-- sample get_folders_id_watermark -->
 ```
 try await client.folderWatermarks.getFolderWatermark(folderId: folder.id)
 ```
@@ -39,8 +41,10 @@ Applies or update a watermark on a folder.
 
 This operation is performed by calling function `updateFolderWatermark`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-folders-id-watermark/).
 
-
+<!-- sample put_folders_id_watermark -->
 ```
 try await client.folderWatermarks.updateFolderWatermark(folderId: folder.id, requestBody: UpdateFolderWatermarkRequestBody(watermark: UpdateFolderWatermarkRequestBodyWatermarkField(imprint: UpdateFolderWatermarkRequestBodyWatermarkImprintField.default_)))
 ```
@@ -70,8 +74,10 @@ Removes the watermark from a folder.
 
 This operation is performed by calling function `deleteFolderWatermark`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-folders-id-watermark/).
 
-
+<!-- sample delete_folders_id_watermark -->
 ```
 try await client.folderWatermarks.deleteFolderWatermark(folderId: folder.id)
 ```

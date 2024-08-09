@@ -19,8 +19,10 @@ enterprise.
 
 This operation is performed by calling function `getUsers`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-users/).
 
-
+<!-- sample get_users -->
 ```
 try await client.users.getUsers()
 ```
@@ -48,8 +50,10 @@ admin permissions.
 
 This operation is performed by calling function `createUser`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-users/).
 
-
+<!-- sample post_users -->
 ```
 try await client.users.createUser(requestBody: CreateUserRequestBody(name: userName, isPlatformAccessOnly: true))
 ```
@@ -86,8 +90,10 @@ Use the `As-User` header to change who this API call is made on behalf of.
 
 This operation is performed by calling function `getUserMe`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-users-me/).
 
-
+<!-- sample get_users_me -->
 ```
 try await client.users.getUserMe()
 ```
@@ -123,8 +129,10 @@ null instead.
 
 This operation is performed by calling function `getUserById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-users-id/).
 
-
+<!-- sample get_users_id -->
 ```
 try await client.users.getUserById(userId: user.id)
 ```
@@ -159,8 +167,10 @@ admin permissions.
 
 This operation is performed by calling function `updateUserById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-users-id/).
 
-
+<!-- sample put_users_id -->
 ```
 try await client.users.updateUserById(userId: user.id, requestBody: UpdateUserByIdRequestBody(name: updatedUserName))
 ```
@@ -193,8 +203,10 @@ the user and their files.
 
 This operation is performed by calling function `deleteUserById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-users-id/).
 
-
+<!-- sample delete_users_id -->
 ```
 try await client.users.deleteUserById(userId: createdUser.id)
 ```

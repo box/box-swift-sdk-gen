@@ -11,8 +11,10 @@ assigned to a file version.
 
 This operation is performed by calling function `getFileVersionLegalHoldById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-file-version-legal-holds-id/).
 
-
+<!-- sample get_file_version_legal_holds_id -->
 ```
 try await client.fileVersionLegalHolds.getFileVersionLegalHoldById(fileVersionLegalHoldId: fileVersionLegalHoldId)
 ```
@@ -57,8 +59,10 @@ Once the re-architecture is completed this API will be deprecated.
 
 This operation is performed by calling function `getFileVersionLegalHolds`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-file-version-legal-holds/).
 
-
+<!-- sample get_file_version_legal_holds -->
 ```
 try await client.fileVersionLegalHolds.getFileVersionLegalHolds(queryParams: GetFileVersionLegalHoldsQueryParams(policyId: policyId))
 ```

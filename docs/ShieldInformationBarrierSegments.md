@@ -13,8 +13,10 @@ Retrieves shield information barrier segment based on provided ID..
 
 This operation is performed by calling function `getShieldInformationBarrierSegmentById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-shield-information-barrier-segments-id/).
 
-
+<!-- sample get_shield_information_barrier_segments_id -->
 ```
 try await client.shieldInformationBarrierSegments.getShieldInformationBarrierSegmentById(shieldInformationBarrierSegmentId: segmentId)
 ```
@@ -40,8 +42,10 @@ Updates the shield information barrier segment based on provided ID..
 
 This operation is performed by calling function `updateShieldInformationBarrierSegmentById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-shield-information-barrier-segments-id/).
 
-
+<!-- sample put_shield_information_barrier_segments_id -->
 ```
 try await client.shieldInformationBarrierSegments.updateShieldInformationBarrierSegmentById(shieldInformationBarrierSegmentId: segmentId, requestBody: UpdateShieldInformationBarrierSegmentByIdRequestBody(description: updatedSegmentDescription))
 ```
@@ -70,8 +74,10 @@ based on provided ID.
 
 This operation is performed by calling function `deleteShieldInformationBarrierSegmentById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-shield-information-barrier-segments-id/).
 
-
+<!-- sample delete_shield_information_barrier_segments_id -->
 ```
 try await client.shieldInformationBarrierSegments.deleteShieldInformationBarrierSegmentById(shieldInformationBarrierSegmentId: segment.id!)
 ```
@@ -98,8 +104,10 @@ for the specified Information Barrier ID.
 
 This operation is performed by calling function `getShieldInformationBarrierSegments`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-shield-information-barrier-segments/).
 
-
+<!-- sample get_shield_information_barrier_segments -->
 ```
 try await client.shieldInformationBarrierSegments.getShieldInformationBarrierSegments(queryParams: GetShieldInformationBarrierSegmentsQueryParams(shieldInformationBarrierId: barrierId))
 ```
@@ -125,8 +133,10 @@ Creates a shield information barrier segment.
 
 This operation is performed by calling function `createShieldInformationBarrierSegment`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-shield-information-barrier-segments/).
 
-
+<!-- sample post_shield_information_barrier_segments -->
 ```
 try await client.shieldInformationBarrierSegments.createShieldInformationBarrierSegment(requestBody: CreateShieldInformationBarrierSegmentRequestBody(shieldInformationBarrier: ShieldInformationBarrierBase(id: barrierId, type: ShieldInformationBarrierBaseTypeField.shieldInformationBarrier), name: segmentName))
 ```

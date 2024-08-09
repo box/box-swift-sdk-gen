@@ -22,8 +22,10 @@ by requesting it in the `fields` query parameter.
 
 This operation is performed by calling function `findFileForSharedLink`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-shared-items/).
 
-
+<!-- sample get_shared_items -->
 ```
 try await userClient.sharedLinksFiles.findFileForSharedLink(queryParams: FindFileForSharedLinkQueryParams(), headers: FindFileForSharedLinkHeaders(boxapi: "\("shared_link=")\(fileFromApi.sharedLink!.url)\("&shared_link_password=incorrectPassword")"))
 ```
@@ -50,8 +52,10 @@ Gets the information for a shared link on a file.
 
 This operation is performed by calling function `getSharedLinkForFile`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-files-id-get-shared-link/).
 
-
+<!-- sample get_files_id#get_shared_link -->
 ```
 try await client.sharedLinksFiles.getSharedLinkForFile(fileId: fileId, queryParams: GetSharedLinkForFileQueryParams(fields: "shared_link"))
 ```
@@ -80,8 +84,10 @@ Adds a shared link to a file.
 
 This operation is performed by calling function `addShareLinkToFile`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-files-id-add-shared-link/).
 
-
+<!-- sample put_files_id#add_shared_link -->
 ```
 try await client.sharedLinksFiles.addShareLinkToFile(fileId: fileId, requestBody: AddShareLinkToFileRequestBody(sharedLink: AddShareLinkToFileRequestBodySharedLinkField(access: AddShareLinkToFileRequestBodySharedLinkAccessField.open, password: "Secret123@")), queryParams: AddShareLinkToFileQueryParams(fields: "shared_link"))
 ```
@@ -112,8 +118,10 @@ Updates a shared link on a file.
 
 This operation is performed by calling function `updateSharedLinkOnFile`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-files-id-update-shared-link/).
 
-
+<!-- sample put_files_id#update_shared_link -->
 ```
 try await client.sharedLinksFiles.updateSharedLinkOnFile(fileId: fileId, requestBody: UpdateSharedLinkOnFileRequestBody(sharedLink: UpdateSharedLinkOnFileRequestBodySharedLinkField(access: UpdateSharedLinkOnFileRequestBodySharedLinkAccessField.collaborators)), queryParams: UpdateSharedLinkOnFileQueryParams(fields: "shared_link"))
 ```
@@ -144,6 +152,8 @@ Removes a shared link from a file.
 
 This operation is performed by calling function `removeSharedLinkFromFile`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-files-id-remove-shared-link/).
 
 *Currently we don't have an example for calling `removeSharedLinkFromFile` in integration tests*
 

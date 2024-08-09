@@ -13,8 +13,10 @@ Retrieves a list of comments for a file.
 
 This operation is performed by calling function `getFileComments`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-files-id-comments/).
 
-
+<!-- sample get_files_id_comments -->
 ```
 try await client.comments.getFileComments(fileId: fileId)
 ```
@@ -44,8 +46,10 @@ as information on the user who created the comment.
 
 This operation is performed by calling function `getCommentById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-comments-id/).
 
-
+<!-- sample get_comments_id -->
 ```
 try await client.comments.getCommentById(commentId: newComment.id!)
 ```
@@ -73,8 +77,10 @@ Update the message of a comment.
 
 This operation is performed by calling function `updateCommentById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-comments-id/).
 
-
+<!-- sample put_comments_id -->
 ```
 try await client.comments.updateCommentById(commentId: newReplyComment.id!, requestBody: UpdateCommentByIdRequestBody(message: newMessage))
 ```
@@ -104,8 +110,10 @@ Permanently deletes a comment.
 
 This operation is performed by calling function `deleteCommentById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-comments-id/).
 
-
+<!-- sample delete_comments_id -->
 ```
 try await client.comments.deleteCommentById(commentId: newComment.id!)
 ```
@@ -132,8 +140,10 @@ as a reply to an other comment.
 
 This operation is performed by calling function `createComment`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-comments/).
 
-
+<!-- sample post_comments -->
 ```
 try await client.comments.createComment(requestBody: CreateCommentRequestBody(message: message, item: CreateCommentRequestBodyItemField(id: newComment.id!, type: CreateCommentRequestBodyItemTypeField.comment)))
 ```

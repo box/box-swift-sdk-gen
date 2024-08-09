@@ -14,8 +14,10 @@ or have been invited to the file.
 
 This operation is performed by calling function `getFileCollaborations`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-files-id-collaborations/).
 
-
+<!-- sample get_files_id_collaborations -->
 ```
 try await client.listCollaborations.getFileCollaborations(fileId: file.id)
 ```
@@ -50,8 +52,10 @@ or have been invited to the folder.
 
 This operation is performed by calling function `getFolderCollaborations`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-folders-id-collaborations/).
 
-
+<!-- sample get_folders_id_collaborations -->
 ```
 try await client.listCollaborations.getFolderCollaborations(folderId: folder.id)
 ```
@@ -84,8 +88,10 @@ Retrieves all pending collaboration invites for this user.
 
 This operation is performed by calling function `getCollaborations`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-collaborations/).
 
-
+<!-- sample get_collaborations -->
 ```
 try await client.listCollaborations.getCollaborations(queryParams: GetCollaborationsQueryParams(status: GetCollaborationsQueryParamsStatusField.pending))
 ```
@@ -118,8 +124,10 @@ folders the group has access to and with what role.
 
 This operation is performed by calling function `getGroupCollaborations`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-groups-id-collaborations/).
 
-
+<!-- sample get_groups_id_collaborations -->
 ```
 try await client.listCollaborations.getGroupCollaborations(groupId: group.id)
 ```

@@ -15,8 +15,10 @@ folder with ID `0`.
 
 This operation is performed by calling function `getMetadataCascadePolicies`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-metadata-cascade-policies/).
 
-
+<!-- sample get_metadata_cascade_policies -->
 ```
 try await client.metadataCascadePolicies.getMetadataCascadePolicies(queryParams: GetMetadataCascadePoliciesQueryParams(folderId: folder.id))
 ```
@@ -47,8 +49,10 @@ be applied to the folder the policy is to be applied to.
 
 This operation is performed by calling function `createMetadataCascadePolicy`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-metadata-cascade-policies/).
 
-
+<!-- sample post_metadata_cascade_policies -->
 ```
 try await client.metadataCascadePolicies.createMetadataCascadePolicy(requestBody: CreateMetadataCascadePolicyRequestBody(folderId: folder.id, scope: CreateMetadataCascadePolicyRequestBodyScopeField.enterprise, templateKey: templateKey))
 ```
@@ -74,8 +78,10 @@ Retrieve a specific metadata cascade policy assigned to a folder.
 
 This operation is performed by calling function `getMetadataCascadePolicyById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-metadata-cascade-policies-id/).
 
-
+<!-- sample get_metadata_cascade_policies_id -->
 ```
 try await client.metadataCascadePolicies.getMetadataCascadePolicyById(metadataCascadePolicyId: cascadePolicyId)
 ```
@@ -101,8 +107,10 @@ Deletes a metadata cascade policy.
 
 This operation is performed by calling function `deleteMetadataCascadePolicyById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-metadata-cascade-policies-id/).
 
-
+<!-- sample delete_metadata_cascade_policies_id -->
 ```
 try await client.metadataCascadePolicies.deleteMetadataCascadePolicyById(metadataCascadePolicyId: cascadePolicyId)
 ```
@@ -132,8 +140,10 @@ folder.
 
 This operation is performed by calling function `applyMetadataCascadePolicy`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-metadata-cascade-policies-id-apply/).
 
-
+<!-- sample post_metadata_cascade_policies_id_apply -->
 ```
 try await client.metadataCascadePolicies.applyMetadataCascadePolicy(metadataCascadePolicyId: cascadePolicyId, requestBody: ApplyMetadataCascadePolicyRequestBody(conflictResolution: ApplyMetadataCascadePolicyRequestBodyConflictResolutionField.overwrite))
 ```

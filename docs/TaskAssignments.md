@@ -13,8 +13,10 @@ Lists all of the assignments for a given task.
 
 This operation is performed by calling function `getTaskAssignments`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-tasks-id-assignments/).
 
-
+<!-- sample get_tasks_id_assignments -->
 ```
 try await client.taskAssignments.getTaskAssignments(taskId: task.id!)
 ```
@@ -44,8 +46,10 @@ assignments.
 
 This operation is performed by calling function `createTaskAssignment`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-task-assignments/).
 
-
+<!-- sample post_task_assignments -->
 ```
 try await client.taskAssignments.createTaskAssignment(requestBody: CreateTaskAssignmentRequestBody(task: CreateTaskAssignmentRequestBodyTaskField(type: CreateTaskAssignmentRequestBodyTaskTypeField.task, id: task.id!), assignTo: CreateTaskAssignmentRequestBodyAssignToField(id: currentUser.id)))
 ```
@@ -71,8 +75,10 @@ Retrieves information about a task assignment.
 
 This operation is performed by calling function `getTaskAssignmentById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-task-assignments-id/).
 
-
+<!-- sample get_task_assignments_id -->
 ```
 try await client.taskAssignments.getTaskAssignmentById(taskAssignmentId: taskAssignment.id!)
 ```
@@ -100,8 +106,10 @@ used to update the state of a task assigned to a user.
 
 This operation is performed by calling function `updateTaskAssignmentById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-task-assignments-id/).
 
-
+<!-- sample put_task_assignments_id -->
 ```
 try await client.taskAssignments.updateTaskAssignmentById(taskAssignmentId: taskAssignment.id!, requestBody: UpdateTaskAssignmentByIdRequestBody(message: "updated message", resolutionState: UpdateTaskAssignmentByIdRequestBodyResolutionStateField.approved))
 ```
@@ -129,8 +137,10 @@ Deletes a specific task assignment.
 
 This operation is performed by calling function `deleteTaskAssignmentById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-task-assignments-id/).
 
-
+<!-- sample delete_task_assignments_id -->
 ```
 try await client.taskAssignments.deleteTaskAssignmentById(taskAssignmentId: taskAssignment.id!)
 ```

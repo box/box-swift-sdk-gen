@@ -17,8 +17,10 @@ URL explicitly, for example
 
 This operation is performed by calling function `getClassificationTemplate`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-metadata-templates-enterprise-security-classification-6-vm-vochw-u-wo-schema/).
 
-
+<!-- sample get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema -->
 ```
 try await client.classifications.getClassificationTemplate()
 ```
@@ -49,8 +51,10 @@ URL explicitly, for example
 
 This operation is performed by calling function `addClassification`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-metadata-templates-enterprise-security-classification-6-vm-vochw-u-wo-schema-add/).
 
-
+<!-- sample put_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema#add -->
 ```
 try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(colorId: 4, classificationDefinition: "Other description"))))])
 ```
@@ -83,8 +87,10 @@ URL explicitly, for example
 
 This operation is performed by calling function `updateClassification`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-metadata-templates-enterprise-security-classification-6-vm-vochw-u-wo-schema-update/).
 
-
+<!-- sample put_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema#update -->
 ```
 try await client.classifications.updateClassification(requestBody: [UpdateClassificationRequestBody(enumOptionKey: classification.key, data: UpdateClassificationRequestBodyDataField(key: updatedClassificationName, staticConfig: UpdateClassificationRequestBodyDataStaticConfigField(classification: UpdateClassificationRequestBodyDataStaticConfigClassificationField(colorId: 2, classificationDefinition: updatedClassificationDescription))))])
 ```
@@ -118,6 +124,8 @@ classifications.
 
 This operation is performed by calling function `createClassificationTemplate`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-metadata-templates-schema-classifications/).
 
 *Currently we don't have an example for calling `createClassificationTemplate` in integration tests*
 

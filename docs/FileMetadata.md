@@ -13,8 +13,10 @@ Retrieves all metadata for a given file.
 
 This operation is performed by calling function `getFileMetadata`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-files-id-metadata/).
 
-
+<!-- sample get_files_id_metadata -->
 ```
 try await client.fileMetadata.getFileMetadata(fileId: file.id)
 ```
@@ -44,8 +46,10 @@ file.
 
 This operation is performed by calling function `getFileMetadataById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-files-id-metadata-id-id/).
 
-
+<!-- sample get_files_id_metadata_id_id -->
 ```
 try await client.fileMetadata.getFileMetadataById(fileId: file.id, scope: GetFileMetadataByIdScope.global, templateKey: "properties")
 ```
@@ -81,8 +85,10 @@ any key-value pair.
 
 This operation is performed by calling function `createFileMetadataById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-files-id-metadata-id-id/).
 
-
+<!-- sample post_files_id_metadata_id_id -->
 ```
 try await client.fileMetadata.createFileMetadataById(fileId: file.id, scope: CreateFileMetadataByIdScope.global, templateKey: "properties", requestBody: ["abc": "xyz"])
 ```
@@ -122,8 +128,10 @@ application of the operations, the metadata instance will not be changed.
 
 This operation is performed by calling function `updateFileMetadataById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-files-id-metadata-id-id/).
 
-
+<!-- sample put_files_id_metadata_id_id -->
 ```
 try await client.fileMetadata.updateFileMetadataById(fileId: file.id, scope: UpdateFileMetadataByIdScope.global, templateKey: "properties", requestBody: [UpdateFileMetadataByIdRequestBody(op: UpdateFileMetadataByIdRequestBodyOpField.replace, path: "/abc", value: newValue)])
 ```
@@ -156,8 +164,10 @@ Deletes a piece of file metadata.
 
 This operation is performed by calling function `deleteFileMetadataById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-files-id-metadata-id-id/).
 
-
+<!-- sample delete_files_id_metadata_id_id -->
 ```
 try await client.fileMetadata.deleteFileMetadataById(fileId: file.id, scope: DeleteFileMetadataByIdScope.global, templateKey: "properties")
 ```

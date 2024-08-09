@@ -16,8 +16,10 @@ use this API.
 
 This operation is performed by calling function `getUserMemberships`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-users-id-memberships/).
 
-
+<!-- sample get_users_id_memberships -->
 ```
 try await client.memberships.getUserMemberships(userId: user.id)
 ```
@@ -48,8 +50,10 @@ use this API.
 
 This operation is performed by calling function `getGroupMemberships`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-groups-id-memberships/).
 
-
+<!-- sample get_groups_id_memberships -->
 ```
 try await client.memberships.getGroupMemberships(groupId: group.id)
 ```
@@ -79,8 +83,10 @@ admin-level permissions will be able to use this API.
 
 This operation is performed by calling function `createGroupMembership`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-group-memberships/).
 
-
+<!-- sample post_group_memberships -->
 ```
 try await client.memberships.createGroupMembership(requestBody: CreateGroupMembershipRequestBody(user: CreateGroupMembershipRequestBodyUserField(id: user.id), group: CreateGroupMembershipRequestBodyGroupField(id: group.id)))
 ```
@@ -110,8 +116,10 @@ use this API.
 
 This operation is performed by calling function `getGroupMembershipById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-group-memberships-id/).
 
-
+<!-- sample get_group_memberships_id -->
 ```
 try await client.memberships.getGroupMembershipById(groupMembershipId: groupMembership.id!)
 ```
@@ -141,8 +149,10 @@ use this API.
 
 This operation is performed by calling function `updateGroupMembershipById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-group-memberships-id/).
 
-
+<!-- sample put_group_memberships_id -->
 ```
 try await client.memberships.updateGroupMembershipById(groupMembershipId: groupMembership.id!, requestBody: UpdateGroupMembershipByIdRequestBody(role: UpdateGroupMembershipByIdRequestBodyRoleField.admin))
 ```
@@ -174,8 +184,10 @@ use this API.
 
 This operation is performed by calling function `deleteGroupMembershipById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-group-memberships-id/).
 
-
+<!-- sample delete_group_memberships_id -->
 ```
 try await client.memberships.deleteGroupMembershipById(groupMembershipId: groupMembership.id!)
 ```

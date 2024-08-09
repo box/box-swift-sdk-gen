@@ -14,8 +14,10 @@ scope within the developer console in to use this endpoint.
 
 This operation is performed by calling function `getWorkflows`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-workflows/).
 
-
+<!-- sample get_workflows -->
 ```
 try await adminClient.workflows.getWorkflows(queryParams: GetWorkflowsQueryParams(folderId: workflowFolderId))
 ```
@@ -44,8 +46,10 @@ scope within the developer console.
 
 This operation is performed by calling function `startWorkflow`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-workflows-id-start/).
 
-
+<!-- sample post_workflows_id_start -->
 ```
 try await adminClient.workflows.startWorkflow(workflowId: workflowToRun.id!, requestBody: StartWorkflowRequestBody(type: StartWorkflowRequestBodyTypeField.workflowParameters, flow: StartWorkflowRequestBodyFlowField(type: "flow", id: workflowToRun.flows![0].id!), files: [StartWorkflowRequestBodyFilesField(type: StartWorkflowRequestBodyFilesTypeField.file, id: workflowFileId)], folder: StartWorkflowRequestBodyFolderField(type: StartWorkflowRequestBodyFolderTypeField.folder, id: workflowFolderId)))
 ```

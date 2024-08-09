@@ -12,8 +12,10 @@ does not include the primary login for the user.
 
 This operation is performed by calling function `getUserEmailAliases`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/get-users-id-email-aliases/).
 
-
+<!-- sample get_users_id_email_aliases -->
 ```
 try await client.emailAliases.getUserEmailAliases(userId: newUser.id)
 ```
@@ -39,8 +41,10 @@ Adds a new email alias to a user account..
 
 This operation is performed by calling function `createUserEmailAlias`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/post-users-id-email-aliases/).
 
-
+<!-- sample post_users_id_email_aliases -->
 ```
 try await client.emailAliases.createUserEmailAlias(userId: newUser.id, requestBody: CreateUserEmailAliasRequestBody(email: newAliasEmail))
 ```
@@ -68,8 +72,10 @@ Removes an email alias from a user.
 
 This operation is performed by calling function `deleteUserEmailAliasById`.
 
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/delete-users-id-email-aliases-id/).
 
-
+<!-- sample delete_users_id_email_aliases_id -->
 ```
 try await client.emailAliases.deleteUserEmailAliasById(userId: newUser.id, emailAliasId: newAlias.id!)
 ```
