@@ -226,7 +226,7 @@ public class ChunkedUploadsManager {
     }
 
     public func reducer(acc: PartAccumulator, chunk: InputStream) async throws -> PartAccumulator {
-        let lastIndex: Int = acc.lastIndex
+        let lastIndex: Int64 = acc.lastIndex
         let parts: [UploadPart] = acc.parts
         let chunkBuffer: Data = Utils.readByteStream(byteStream: chunk)
         let hash: Hash = Hash(algorithm: HashName.sha1)
@@ -234,8 +234,8 @@ public class ChunkedUploadsManager {
         let sha1: String = await hash.digestHash(encoding: "base64")
         let digest: String = "\("sha=")\(sha1)"
         let chunkSize: Int = Utils.bufferLength(buffer: chunkBuffer)
-        let bytesStart: Int = lastIndex + 1
-        let bytesEnd: Int = lastIndex + chunkSize
+        let bytesStart: Int64 = lastIndex + 1
+        let bytesEnd: Int64 = lastIndex + Int64(chunkSize)
         let contentRange: String = "\("bytes ")\(Utils.Strings.toString(value: bytesStart)!)\("-")\(Utils.Strings.toString(value: bytesEnd)!)\("/")\(Utils.Strings.toString(value: acc.fileSize)!)"
         let uploadedPart: UploadedPart = try await self.uploadFilePartByUrl(url: acc.uploadPartUrl, requestBody: Utils.generateByteStreamFromBuffer(buffer: chunkBuffer), headers: UploadFilePartByUrlHeaders(digest: digest, contentRange: contentRange))
         let part: UploadPart = uploadedPart.part!

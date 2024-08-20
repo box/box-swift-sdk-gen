@@ -1,7 +1,7 @@
 import Foundation
 
 public class PartAccumulator {
-    public let lastIndex: Int
+    public let lastIndex: Int64
 
     public let parts: [UploadPart]
 
@@ -11,7 +11,7 @@ public class PartAccumulator {
 
     public let fileHash: Hash
 
-    public init(lastIndex: Int, parts: [UploadPart], fileSize: Int64, uploadPartUrl: String, fileHash: Hash) {
+    public init(lastIndex: Int64, parts: [UploadPart], fileSize: Int64, uploadPartUrl: String, fileHash: Hash) {
         self.lastIndex = lastIndex
         self.parts = parts
         self.fileSize = fileSize

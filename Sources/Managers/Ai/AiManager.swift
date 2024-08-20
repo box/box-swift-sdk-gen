@@ -15,12 +15,12 @@ public class AiManager {
     /// - Parameters:
     ///   - requestBody: Request body of createAiAsk method
     ///   - headers: Headers of createAiAsk method
-    /// - Returns: The `AiResponse`.
+    /// - Returns: The `AiResponseFull`.
     /// - Throws: The `GeneralError`.
-    public func createAiAsk(requestBody: AiAsk, headers: CreateAiAskHeaders = CreateAiAskHeaders()) async throws -> AiResponse {
+    public func createAiAsk(requestBody: AiAsk, headers: CreateAiAskHeaders = CreateAiAskHeaders()) async throws -> AiResponseFull {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/ask")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try AiResponse.deserialize(from: response.data)
+        return try AiResponseFull.deserialize(from: response.data)
     }
 
     /// Sends an AI request to supported LLMs and returns an answer specifically focused on the creation of new text.
