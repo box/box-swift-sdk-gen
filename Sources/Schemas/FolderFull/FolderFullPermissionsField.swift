@@ -34,7 +34,7 @@ public class FolderFullPermissionsField: Codable {
     public let canShare: Bool
 
     /// Specifies if the user can upload into this folder.
-    public let canUpload: Bool?
+    public let canUpload: Bool
 
     /// Initializer for a FolderFullPermissionsField.
     ///
@@ -50,7 +50,7 @@ public class FolderFullPermissionsField: Codable {
     ///     existing shared link on this item.
     ///   - canShare: Specifies if the user can create a shared link for this item.
     ///   - canUpload: Specifies if the user can upload into this folder.
-    public init(canDelete: Bool, canDownload: Bool, canInviteCollaborator: Bool, canRename: Bool, canSetShareAccess: Bool, canShare: Bool, canUpload: Bool? = nil) {
+    public init(canDelete: Bool, canDownload: Bool, canInviteCollaborator: Bool, canRename: Bool, canSetShareAccess: Bool, canShare: Bool, canUpload: Bool) {
         self.canDelete = canDelete
         self.canDownload = canDownload
         self.canInviteCollaborator = canInviteCollaborator
@@ -68,7 +68,7 @@ public class FolderFullPermissionsField: Codable {
         canRename = try container.decode(Bool.self, forKey: .canRename)
         canSetShareAccess = try container.decode(Bool.self, forKey: .canSetShareAccess)
         canShare = try container.decode(Bool.self, forKey: .canShare)
-        canUpload = try container.decodeIfPresent(Bool.self, forKey: .canUpload)
+        canUpload = try container.decode(Bool.self, forKey: .canUpload)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -79,7 +79,7 @@ public class FolderFullPermissionsField: Codable {
         try container.encode(canRename, forKey: .canRename)
         try container.encode(canSetShareAccess, forKey: .canSetShareAccess)
         try container.encode(canShare, forKey: .canShare)
-        try container.encodeIfPresent(canUpload, forKey: .canUpload)
+        try container.encode(canUpload, forKey: .canUpload)
     }
 
 }
