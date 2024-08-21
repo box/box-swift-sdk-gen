@@ -448,13 +448,13 @@ public class NetworkClient {
         // Close the InputStream
         inputStream.close()
         
-        let byteArray = [UInt8](data)
-        // Allocate memory for the buffer pointer and copy data into it
-        let pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: byteArray.count)
-        pointer.initialize(from: byteArray, count: byteArray.count)
+//        let byteArray = [UInt8](data)
+//        // Allocate memory for the buffer pointer and copy data into it
+//        let pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: byteArray.count)
+//        pointer.initialize(from: byteArray, count: byteArray.count)
         
         
-        return BufferInputStream(buffer: pointer, length: byteArray.count)
+        return BufferInputStream(data: data)
     }
     
 }
