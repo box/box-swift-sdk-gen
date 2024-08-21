@@ -1,5 +1,177 @@
 import Foundation
 
+
+/// A custom input stream that reads data from a pre-allocated buffer.
+class BufferInputStream: InputStream {
+    /// Pointer to the buffer from which data is read.
+    private let buffer: UnsafePointer<UInt8>
+    
+    /// Total length of the buffer.
+    private let length: Int
+    
+    /// Current reading position in the buffer.
+    private var position: Int = 0
+    
+    /// The current status of the stream.
+    private var _streamStatus: Stream.Status
+    
+    /// The error associated with the stream, if any.
+    private var _streamError: Error?
+    
+    /// The delegate for stream events.
+    private var _delegate: StreamDelegate?
+    
+    /// Initializes a new `BufferInputStream` with the specified buffer and length.
+    ///
+    /// - Parameters:
+    ///   - buffer: A pointer to the buffer from which to read data.
+    ///   - length: The length of the buffer.
+    init(buffer: UnsafePointer<UInt8>, length: Int) {
+        self.buffer = buffer
+        self.length = length
+        _streamStatus = .notOpen
+        super.init(data: Data())
+    }
+    
+    /// Reads data from the buffer into the provided buffer.
+    ///
+    /// - Parameters:
+    ///   - buffer: A pointer to the buffer where read data will be stored.
+    ///   - len: The maximum number of bytes to read.
+    /// - Returns: The number of bytes actually read, or 0 if no more data is available.
+    override func read(_ buffer: UnsafeMutablePointer<UInt8>, maxLength len: Int) -> Int {
+        // Ensure the stream is open before reading
+        guard _streamStatus == .open else {
+            return -1 // Stream must be open to read
+        }
+        
+        // If we've reached the end of the buffer, mark the stream as atEnd
+        guard position < length else {
+            _streamStatus = .atEnd
+            return 0
+        }
+        
+        guard buffer != nil else {
+            return -1 // Handle the case where buffer is nil
+        }
+        
+        // Calculate the number of bytes to read
+        let bytesToRead = min(len, length - position)
+        
+        memcpy(buffer, self.buffer + position, bytesToRead)
+        position += bytesToRead
+        
+        // If the end of the buffer is reached, mark the stream as atEnd
+        if position >= length {
+            _streamStatus = .atEnd
+        }
+        
+        return bytesToRead
+    }
+  
+//    
+//    override func read(_ buffer: UnsafeMutablePointer<UInt8>, maxLength len: Int) -> Int {
+//        // Ensure the stream is open before reading
+//        guard _streamStatus == .open else {
+//            return -1 // Stream must be open to read
+//        }
+//        
+//        // If we've reached the end of the buffer, mark the stream as atEnd
+//        guard position < length else {
+//            _streamStatus = .atEnd
+//            return 0
+//        }
+//        
+//        // Calculate the number of bytes to read
+//        let bytesToRead = min(len, length - position)
+//
+//        guard buffer != nil else {
+//            return -1 // Handle the case where buffer is nil
+//        }
+//        
+//        // Perform the byte copy operation using pointer arithmetic
+//        let srcPointer = self.buffer.advanced(by: position)
+//        let dstPointer = buffer
+//        
+//        dstPointer.initialize(from: srcPointer, count: bytesToRead)
+//        
+//        // Update the current reading position
+//        position += bytesToRead
+//        
+//        // If the end of the buffer is reached, mark the stream as atEnd
+//        if position >= length {
+//            _streamStatus = .atEnd
+//        }
+//        
+//        return bytesToRead
+//    }
+    
+    
+    /// Indicates whether the stream has bytes available to read.
+    override var hasBytesAvailable: Bool {
+        return position < length && _streamStatus == .open
+    }
+    
+    /// Closes the stream and sets the reading position to the end of the buffer.
+    override func close() {
+        position = length
+        _streamStatus = .closed
+    }
+    
+    /// Opens the stream and resets the reading position to the beginning of the buffer.
+    override func open() {
+        position = 0
+        _streamStatus = .open
+    }
+    
+    /// Resets the stream to its initial state without opening it.
+    func reset() {
+        position = 0
+        _streamStatus = .notOpen
+    }
+    
+    /// Returns the current status of the stream.
+    override var streamStatus: Stream.Status {
+        return _streamStatus
+    }
+    
+    /// Returns the error associated with the stream, if any.
+    override var streamError: Error? {
+        return _streamError
+    }
+    
+    /// The delegate for stream events.
+    override var delegate: StreamDelegate? {
+        get {
+            return _delegate
+        }
+        set {
+            _delegate = newValue
+        }
+    }
+    
+    /// Schedules the stream in the specified run loop for a given mode.
+    override func schedule(in _: RunLoop, forMode _: RunLoop.Mode) {}
+    
+    /// Removes the stream from the specified run loop for a given mode.
+    override func remove(from _: RunLoop, forMode _: RunLoop.Mode) {}
+    
+#if os(iOS) || os(macOS)
+
+    /// Returns a property of the stream identified by a given key.
+    override func property(forKey _: Stream.PropertyKey) -> Any? {
+        return nil
+    }
+
+    /// Sets a property of the stream identified by a given key.
+    override func setProperty(_: Any?, forKey _: Stream.PropertyKey) -> Bool {
+        return false
+    }
+
+#endif
+    
+}
+
 /// Utility methods
 public enum Utils {
     /// Helper methods for Url
@@ -218,7 +390,8 @@ public enum Utils {
     ///   - buffer: Data.
     /// - Returns: InputStream.
     public static func generateByteStreamFromBuffer(buffer: Data) -> InputStream {
-        return InputStream(data: buffer)
+         let byteArray = [UInt8](buffer)
+         return BufferInputStream(buffer: byteArray, length: byteArray.count)
     }
 
     /// Creates a Data from a given InputStream.
@@ -317,7 +490,7 @@ public enum Utils {
                         return
                     }
 
-                    continuation.yield(InputStream(data:Data(buffer.prefix(read))))
+                    continuation.yield(BufferInputStream(buffer: buffer, length: read))
                 }
             }
         }

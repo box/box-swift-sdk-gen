@@ -238,6 +238,7 @@ public class ChunkedUploadsManager {
         let bytesEnd: Int = lastIndex + chunkSize
         let contentRange: String = "\("bytes ")\(Utils.Strings.toString(value: bytesStart)!)\("-")\(Utils.Strings.toString(value: bytesEnd)!)\("/")\(Utils.Strings.toString(value: acc.fileSize)!)"
         let uploadedPart: UploadedPart = try await self.uploadFilePartByUrl(url: acc.uploadPartUrl, requestBody: Utils.generateByteStreamFromBuffer(buffer: chunkBuffer), headers: UploadFilePartByUrlHeaders(digest: digest, contentRange: contentRange))
+        print("uploaded file part: \(chunkSize)")
         let part: UploadPart = uploadedPart.part!
         let partSha1: String = Utils.Strings.hextToBase64(value: part.sha1!)
         assert(partSha1 == sha1)

@@ -17,7 +17,7 @@ public enum HTTPMethod: String, ExpressibleByStringLiteral, CaseIterable {
     case options = "OPTIONS"
 }
 
-/// Represents paremeters used for the request.
+/// Represents parameters used for the request.
 public class FetchOptions {
 
     /// The HTTP request method (e.g. get, post, delete)
@@ -65,7 +65,7 @@ public class FetchOptions {
     ///   - downloadDestinationURL: The URL on disk where the data will be saved
     ///   - contentType: Content type of the request.
     ///   - responseFormat: Expected format of the response: 'json', 'binary'
-    ///   - auth: The authentication sesson management used in the request.
+    ///   - auth: The authentication session management used in the request.
     ///   - networkSession: The URLSession holder along with the network configuration parameters
     public init(
         method: HTTPMethod = HTTPMethod.get,
@@ -91,5 +91,21 @@ public class FetchOptions {
         self.responseFormat = responseFormat
         self.auth = auth
         self.networkSession = networkSession
+    }
+    
+    func withFileStream(fileStream: InputStream) -> FetchOptions {
+        return FetchOptions(
+            method: method,
+            params: params,
+            headers: headers,
+            data: data,
+            fileStream: fileStream,
+            multipartData: multipartData,
+            downloadDestinationURL: downloadDestinationURL,
+            contentType: contentType,
+            responseFormat: responseFormat,
+            auth: auth,
+            networkSession: networkSession
+        )
     }
 }
