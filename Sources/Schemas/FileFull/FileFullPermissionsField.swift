@@ -39,23 +39,23 @@ public class FileFullPermissionsField: Codable {
     public let canShare: Bool
 
     /// Specifies if the user can place annotations on this file.
-    public let canAnnotate: Bool?
+    public let canAnnotate: Bool
 
     /// Specifies if the user can place comments on this file.
-    public let canComment: Bool?
+    public let canComment: Bool
 
     /// Specifies if the user can preview this file.
-    public let canPreview: Bool?
+    public let canPreview: Bool
 
     /// Specifies if the user can upload a new version of this file.
-    public let canUpload: Bool?
+    public let canUpload: Bool
 
     /// Specifies if the user view all annotations placed on this file
-    public let canViewAnnotationsAll: Bool?
+    public let canViewAnnotationsAll: Bool
 
     /// Specifies if the user view annotations placed by themselves
     /// on this file
-    public let canViewAnnotationsSelf: Bool?
+    public let canViewAnnotationsSelf: Bool
 
     /// Initializer for a FileFullPermissionsField.
     ///
@@ -77,7 +77,7 @@ public class FileFullPermissionsField: Codable {
     ///   - canViewAnnotationsAll: Specifies if the user view all annotations placed on this file
     ///   - canViewAnnotationsSelf: Specifies if the user view annotations placed by themselves
     ///     on this file
-    public init(canDelete: Bool, canDownload: Bool, canInviteCollaborator: Bool, canRename: Bool, canSetShareAccess: Bool, canShare: Bool, canAnnotate: Bool? = nil, canComment: Bool? = nil, canPreview: Bool? = nil, canUpload: Bool? = nil, canViewAnnotationsAll: Bool? = nil, canViewAnnotationsSelf: Bool? = nil) {
+    public init(canDelete: Bool, canDownload: Bool, canInviteCollaborator: Bool, canRename: Bool, canSetShareAccess: Bool, canShare: Bool, canAnnotate: Bool, canComment: Bool, canPreview: Bool, canUpload: Bool, canViewAnnotationsAll: Bool, canViewAnnotationsSelf: Bool) {
         self.canDelete = canDelete
         self.canDownload = canDownload
         self.canInviteCollaborator = canInviteCollaborator
@@ -100,12 +100,12 @@ public class FileFullPermissionsField: Codable {
         canRename = try container.decode(Bool.self, forKey: .canRename)
         canSetShareAccess = try container.decode(Bool.self, forKey: .canSetShareAccess)
         canShare = try container.decode(Bool.self, forKey: .canShare)
-        canAnnotate = try container.decodeIfPresent(Bool.self, forKey: .canAnnotate)
-        canComment = try container.decodeIfPresent(Bool.self, forKey: .canComment)
-        canPreview = try container.decodeIfPresent(Bool.self, forKey: .canPreview)
-        canUpload = try container.decodeIfPresent(Bool.self, forKey: .canUpload)
-        canViewAnnotationsAll = try container.decodeIfPresent(Bool.self, forKey: .canViewAnnotationsAll)
-        canViewAnnotationsSelf = try container.decodeIfPresent(Bool.self, forKey: .canViewAnnotationsSelf)
+        canAnnotate = try container.decode(Bool.self, forKey: .canAnnotate)
+        canComment = try container.decode(Bool.self, forKey: .canComment)
+        canPreview = try container.decode(Bool.self, forKey: .canPreview)
+        canUpload = try container.decode(Bool.self, forKey: .canUpload)
+        canViewAnnotationsAll = try container.decode(Bool.self, forKey: .canViewAnnotationsAll)
+        canViewAnnotationsSelf = try container.decode(Bool.self, forKey: .canViewAnnotationsSelf)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -116,12 +116,12 @@ public class FileFullPermissionsField: Codable {
         try container.encode(canRename, forKey: .canRename)
         try container.encode(canSetShareAccess, forKey: .canSetShareAccess)
         try container.encode(canShare, forKey: .canShare)
-        try container.encodeIfPresent(canAnnotate, forKey: .canAnnotate)
-        try container.encodeIfPresent(canComment, forKey: .canComment)
-        try container.encodeIfPresent(canPreview, forKey: .canPreview)
-        try container.encodeIfPresent(canUpload, forKey: .canUpload)
-        try container.encodeIfPresent(canViewAnnotationsAll, forKey: .canViewAnnotationsAll)
-        try container.encodeIfPresent(canViewAnnotationsSelf, forKey: .canViewAnnotationsSelf)
+        try container.encode(canAnnotate, forKey: .canAnnotate)
+        try container.encode(canComment, forKey: .canComment)
+        try container.encode(canPreview, forKey: .canPreview)
+        try container.encode(canUpload, forKey: .canUpload)
+        try container.encode(canViewAnnotationsAll, forKey: .canViewAnnotationsAll)
+        try container.encode(canViewAnnotationsSelf, forKey: .canViewAnnotationsSelf)
     }
 
 }
