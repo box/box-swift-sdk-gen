@@ -9,6 +9,8 @@ public class TemplateSigner: Codable {
         case isInPerson = "is_in_person"
         case order
         case signerGroupId = "signer_group_id"
+        case label
+        case publicId = "public_id"
     }
 
     public let inputs: [TemplateSignerInput]?
@@ -36,6 +38,12 @@ public class TemplateSigner: Codable {
     /// within Box Sign requests created from it.
     public let signerGroupId: String?
 
+    /// A placeholder label for the signer set by the template creator to differentiate between signers.
+    public let label: String?
+
+    /// An identifier for the signer. This can be used to identify a signer within the template.
+    public let publicId: String?
+
     /// Initializer for a TemplateSigner.
     ///
     /// - Parameters:
@@ -53,13 +61,17 @@ public class TemplateSigner: Codable {
     ///   - signerGroupId: If provided, this value points signers that are assigned the same inputs and belongs to same signer group.
     ///     A signer group is not a Box Group. It is an entity that belongs to the template itself and can only be used
     ///     within Box Sign requests created from it.
-    public init(inputs: [TemplateSignerInput]? = nil, email: String? = nil, role: TemplateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, signerGroupId: String? = nil) {
+    ///   - label: A placeholder label for the signer set by the template creator to differentiate between signers.
+    ///   - publicId: An identifier for the signer. This can be used to identify a signer within the template.
+    public init(inputs: [TemplateSignerInput]? = nil, email: String? = nil, role: TemplateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, signerGroupId: String? = nil, label: String? = nil, publicId: String? = nil) {
         self.inputs = inputs
         self.email = email
         self.role = role
         self.isInPerson = isInPerson
         self.order = order
         self.signerGroupId = signerGroupId
+        self.label = label
+        self.publicId = publicId
     }
 
     required public init(from decoder: Decoder) throws {
@@ -70,6 +82,8 @@ public class TemplateSigner: Codable {
         isInPerson = try container.decodeIfPresent(Bool.self, forKey: .isInPerson)
         order = try container.decodeIfPresent(Int64.self, forKey: .order)
         signerGroupId = try container.decodeIfPresent(String.self, forKey: .signerGroupId)
+        label = try container.decodeIfPresent(String.self, forKey: .label)
+        publicId = try container.decodeIfPresent(String.self, forKey: .publicId)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -80,6 +94,8 @@ public class TemplateSigner: Codable {
         try container.encodeIfPresent(isInPerson, forKey: .isInPerson)
         try container.encodeIfPresent(order, forKey: .order)
         try container.encodeIfPresent(signerGroupId, forKey: .signerGroupId)
+        try container.encodeIfPresent(label, forKey: .label)
+        try container.encodeIfPresent(publicId, forKey: .publicId)
     }
 
 }

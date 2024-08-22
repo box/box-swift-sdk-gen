@@ -15,11 +15,11 @@ public class AiAgentAsk: Codable {
 
     public let longText: AiAgentLongTextTool?
 
-    public let basicText: AiAgentBasicTextToolAsk?
+    public let basicText: AiAgentBasicTextTool?
 
     public let longTextMulti: AiAgentLongTextTool?
 
-    public let basicTextMulti: AiAgentBasicTextToolAsk?
+    public let basicTextMulti: AiAgentBasicTextTool?
 
     /// Initializer for a AiAgentAsk.
     ///
@@ -29,7 +29,7 @@ public class AiAgentAsk: Codable {
     ///   - basicText: 
     ///   - longTextMulti: 
     ///   - basicTextMulti: 
-    public init(type: AiAgentAskTypeField = AiAgentAskTypeField.aiAgentAsk, longText: AiAgentLongTextTool? = nil, basicText: AiAgentBasicTextToolAsk? = nil, longTextMulti: AiAgentLongTextTool? = nil, basicTextMulti: AiAgentBasicTextToolAsk? = nil) {
+    public init(type: AiAgentAskTypeField = AiAgentAskTypeField.aiAgentAsk, longText: AiAgentLongTextTool? = nil, basicText: AiAgentBasicTextTool? = nil, longTextMulti: AiAgentLongTextTool? = nil, basicTextMulti: AiAgentBasicTextTool? = nil) {
         self.type = type
         self.longText = longText
         self.basicText = basicText
@@ -41,9 +41,9 @@ public class AiAgentAsk: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         type = try container.decode(AiAgentAskTypeField.self, forKey: .type)
         longText = try container.decodeIfPresent(AiAgentLongTextTool.self, forKey: .longText)
-        basicText = try container.decodeIfPresent(AiAgentBasicTextToolAsk.self, forKey: .basicText)
+        basicText = try container.decodeIfPresent(AiAgentBasicTextTool.self, forKey: .basicText)
         longTextMulti = try container.decodeIfPresent(AiAgentLongTextTool.self, forKey: .longTextMulti)
-        basicTextMulti = try container.decodeIfPresent(AiAgentBasicTextToolAsk.self, forKey: .basicTextMulti)
+        basicTextMulti = try container.decodeIfPresent(AiAgentBasicTextTool.self, forKey: .basicTextMulti)
     }
 
     public func encode(to encoder: Encoder) throws {
