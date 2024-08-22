@@ -1,34 +1,34 @@
 import Foundation
 
 /// AI agent basic tool used to generate text.
-public class AiAgentBasicGenTool: AiAgentLongTextTool {
+public class AiAgentBasicGenTool: AiAgentLongTextToolTextGen {
     private enum CodingKeys: String, CodingKey {
         case contentTemplate = "content_template"
     }
 
     /// How the content should be included in a request to the LLM.
-    /// When passing this parameter, you must include `{content}`.
+    /// Input for `{content}` is optional, depending on the use.
     public let contentTemplate: String?
 
     /// Initializer for a AiAgentBasicGenTool.
     ///
     /// - Parameters:
-    ///   - model: The model to be used for the AI Agent for basic text.
+    ///   - model: The model used for the AI Agent for basic text.
+    ///   - numTokensForCompletion: The number of tokens for completion.
+    ///   - llmEndpointParams: The parameters for the LLM endpoint specific to OpenAI / Google models.
     ///   - systemMessage: System messages try to help the LLM "understand" its role and what it is supposed to do.
-    ///     This parameter requires using `{current_date}`.
+    ///     Input for `{current_date}` is optional, depending on the use.
     ///   - promptTemplate: The prompt template contains contextual information of the request and the user prompt.
     ///     
     ///     When using the `prompt_template` parameter, you **must include** input for `{user_question}`.
-    ///     Inputs for  `{current_date}` and`{content}` are optional, depending on the use.
-    ///   - numTokensForCompletion: The number of tokens for completion.
-    ///   - llmEndpointParams: 
+    ///     Inputs for `{current_date}` and `{content}` are optional, depending on the use.
     ///   - embeddings: 
     ///   - contentTemplate: How the content should be included in a request to the LLM.
-    ///     When passing this parameter, you must include `{content}`.
-    public init(model: String? = nil, systemMessage: String? = nil, promptTemplate: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi? = nil, embeddings: AiAgentLongTextToolEmbeddingsField? = nil, contentTemplate: String? = nil) {
+    ///     Input for `{content}` is optional, depending on the use.
+    public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi? = nil, systemMessage: String? = nil, promptTemplate: String? = nil, embeddings: AiAgentLongTextToolTextGenEmbeddingsField? = nil, contentTemplate: String? = nil) {
         self.contentTemplate = contentTemplate
 
-        super.init(model: model, systemMessage: systemMessage, promptTemplate: promptTemplate, numTokensForCompletion: numTokensForCompletion, llmEndpointParams: llmEndpointParams, embeddings: embeddings)
+        super.init(model: model, numTokensForCompletion: numTokensForCompletion, llmEndpointParams: llmEndpointParams, systemMessage: systemMessage, promptTemplate: promptTemplate, embeddings: embeddings)
     }
 
     required public init(from decoder: Decoder) throws {

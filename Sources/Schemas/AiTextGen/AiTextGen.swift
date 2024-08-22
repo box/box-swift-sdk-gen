@@ -19,7 +19,7 @@ public class AiTextGen: Codable {
     /// If the file size exceeds 1MB, the first 1MB of text representation will be processed.
     public let items: [AiTextGenItemsField]
 
-    /// The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
+    /// The history of prompts and answers previously passed to the LLM. This parameter provides the additional context to the LLM when generating the response.
     public let dialogueHistory: [AiDialogueHistory]?
 
     public let aiAgent: AiAgentTextGen?
@@ -33,7 +33,7 @@ public class AiTextGen: Codable {
     ///     
     ///     **Note**: Box AI handles documents with text representations up to 1MB in size.
     ///     If the file size exceeds 1MB, the first 1MB of text representation will be processed.
-    ///   - dialogueHistory: The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
+    ///   - dialogueHistory: The history of prompts and answers previously passed to the LLM. This parameter provides the additional context to the LLM when generating the response.
     ///   - aiAgent: 
     public init(prompt: String, items: [AiTextGenItemsField], dialogueHistory: [AiDialogueHistory]? = nil, aiAgent: AiAgentTextGen? = nil) {
         self.prompt = prompt
