@@ -1,16 +1,122 @@
 import Foundation
 
+//class BufferInputStream: InputStream {
+//    private let buffer: [UInt8]
+//    private var position: Int = 0
+//    private var length: Int
+//    private var _streamStatus: Stream.Status
+//    private var _streamError: Error?
+//    private var _delegate: StreamDelegate?
+//    
+//    init(buffer: [UInt8], length: Int) {
+//        self.buffer = buffer
+//        self.length = length
+//        self._streamStatus = .notOpen
+//        super.init(data: Data())
+//    }
+//    
+//    deinit {
+//        print("Deinit BufferInputStream!")
+//    }
+//    
+//    override func read(_ buffer: UnsafeMutablePointer<UInt8>, maxLength len: Int) -> Int {
+//        guard _streamStatus == .open else {
+//            return -1 // Stream must be open to read
+//        }
+//        
+//        // If we've reached the end of the buffer, mark the stream as atEnd
+//        if position >= length {
+//            _streamStatus = .atEnd
+//            return 0
+//        }
+//        
+//        // Calculate the number of bytes to read
+//        let bytesToRead = min(len, length - position)
+//        
+//
+//        let sourcePointer = self.buffer.withUnsafeBytes { $0.baseAddress! }
+//        let destinationPointer = buffer
+//        memcpy(destinationPointer, sourcePointer + position, bytesToRead)
+//        
+//
+//        // Update the position
+//        position += bytesToRead
+//        
+//        if position >= length {
+//            _streamStatus = .atEnd
+//        }
+//        
+//        return bytesToRead
+//    }
+//    
+//    override var hasBytesAvailable: Bool {
+//        return position < length && _streamStatus == .open
+//    }
+//    
+//    override func close() {
+//        position = length
+//        _streamStatus = .closed
+//    }
+//    
+//    override func open() {
+//        position = 0
+//        _streamStatus = .open
+//    }
+//    
+//    override var streamStatus: Stream.Status {
+//        return _streamStatus
+//    }
+//    
+//    override var streamError: Error? {
+//        return _streamError
+//    }
+//    
+//    override var delegate: StreamDelegate? {
+//        get {
+//            return _delegate
+//        }
+//        set {
+//            _delegate = newValue
+//        }
+//    }
+//    
+//    override func schedule(in _: RunLoop, forMode _: RunLoop.Mode) {}
+//    
+//    override func remove(from _: RunLoop, forMode _: RunLoop.Mode) {}
+//    
+//    #if os(iOS) || os(macOS)
+//    override func property(forKey _: Stream.PropertyKey) -> Any? {
+//        return nil
+//    }
+//    
+//    override func setProperty(_: Any?, forKey _: Stream.PropertyKey) -> Bool {
+//        return false
+//    }
+//    #endif
+//}
+
 class BufferInputStream: InputStream {
+    static var globalCounter: Int = 0
     private var data: Data
     private var position: Int = 0
     private var _streamStatus: Stream.Status
     private var _streamError: Error?
     private var _delegate: StreamDelegate?
+    private var instanceNumber: Int;
     
     override init(data: Data) {
         self.data = data
         self._streamStatus = .notOpen
+        self.instanceNumber = Self.globalCounter
+        Self.globalCounter += 1;
         super.init(data: Data())
+        
+        
+        print("Init Buffer nr \(instanceNumber)")
+    }
+    
+    deinit {
+        print("Deinit BufferInputStream nr \(instanceNumber)")
     }
     
     override func read(_ buffer: UnsafeMutablePointer<UInt8>, maxLength len: Int) -> Int {
@@ -30,6 +136,11 @@ class BufferInputStream: InputStream {
         // Copy data to the buffer
         let range = position..<position + bytesToRead
         data.copyBytes(to: buffer, from: range)
+        
+//        self.buffer.withUnsafeBytes { rawBufferPointer in
+//            let basePointer = rawBufferPointer.baseAddress!.advanced(by: position)
+//            memcpy(buffer, basePointer, bytesToRead)
+//        }
         
         // Update the position
         position += bytesToRead
@@ -442,6 +553,8 @@ public enum Utils {
 //         return BufferInputStream(buffer: byteArray, length: byteArray.count)
         
         return BufferInputStream(data: buffer)
+        
+        
     }
 
     /// Creates a Data from a given InputStream.
@@ -519,31 +632,92 @@ public enum Utils {
     ///   - chunkSize: Size of chunk
     ///   - fileSize: Size of the file
     /// - Returns: The asynchronous sequence AsyncStream
-    public static func iterateChunks(stream: InputStream, chunkSize: Int64, fileSize: Int64) -> AsyncStream<InputStream> {
-        return AsyncStream<InputStream> { continuation in
-            _Concurrency.Task {
-                stream.open()
-
-                let bufferSize = Int(chunkSize)
-                var buffer = [UInt8](repeating: 0, count: bufferSize)
-
-                defer {
-                    stream.close()
-                    continuation.finish()
-                }
-
-                while stream.hasBytesAvailable {
-                    let read = stream.read(&buffer, maxLength: buffer.count)
-                    if read < 0, let error = stream.streamError {
-                        throw error
-                    } else if read == 0 {
-                        return
-                    }
-
+    public static func iterateChunks(stream: InputStream, chunkSize: Int64, fileSize: Int64) -> RemoteDataSequence {
+        return RemoteDataSequence(inputStream: stream, chunkSize: chunkSize)
+//        return AsyncStream<InputStream> { continuation in
+//            _Concurrency.Task {
+//                try await withCheckedThrowingContinuation { c in
+//                    DispatchQueue.global().asyncAfter(
+//                        deadline: .now() + .milliseconds(10)
+//                    ) {
+//                        c.resume()
+//                    }
+//                }
+//                stream.open()
+//
+//                let bufferSize = Int(chunkSize)
+//                var buffer = [UInt8](repeating: 0, count: bufferSize)
+//                
+//                while stream.hasBytesAvailable {
+//                    print("before await")
+//                    try await withCheckedThrowingContinuation { c in
+//                        DispatchQueue.global().asyncAfter(
+//                            deadline: .now() + .milliseconds(10)
+//                        ) {
+//                            c.resume()
+//                        }
+//                    }
+////                    
+//                    let read = stream.read(&buffer, maxLength: buffer.count)
+//                    print("READ DATA")
+//                    if read < 0, let error = stream.streamError {
+//                        throw error
+//                    } else if read == 0 {
+//                        continuation.finish()
+//                        stream.close()
+//                        return
+//                    }
+//
+////                    continuation.yield(BufferInputStream(buffer: buffer, length: read))
+////                    continuation.yield(BufferInputStream(data: Data(buffer.prefix(read))))
+////                    print(buffer)
+//                    print("END READ")
 //                    continuation.yield(BufferInputStream(buffer: buffer, length: read))
-                    continuation.yield(BufferInputStream(data: Data(buffer.prefix(read))))
-                }
+//                              
+//                }
+//            }
+//        }
+    }
+    
+    
+    public struct RemoteDataSequence: AsyncSequence {
+        public typealias Element = InputStream
+
+        var inputStream: InputStream
+        var chunkSize: Int64
+        
+        
+        
+        public func makeAsyncIterator() -> RemoteDataIterator {
+            inputStream.open()
+            return RemoteDataIterator(inputStream: inputStream, chunkSize: chunkSize)
+        }
+    }
+    
+    public struct RemoteDataIterator: AsyncIteratorProtocol {
+        var inputStream: InputStream
+        var chunkSize: Int64
+
+        public mutating func next() async throws -> InputStream? {
+            print("I'm here")
+            let bufferSize = Int(chunkSize)
+            var buffer = [UInt8](repeating: 0, count: bufferSize)
+            
+            guard inputStream.hasBytesAvailable else {
+                return nil
             }
+            
+            let read = inputStream.read(&buffer, maxLength: buffer.count)
+            print("READ DATA")
+            if read < 0, let error = inputStream.streamError {
+                throw error
+            } else if read == 0 {
+                return nil
+            }
+
+//          return BufferInputStream(buffer: buffer, length: read)
+            print("Return BufferInputStrem")
+            return BufferInputStream(data: Data(bytes: buffer, count: read))
         }
     }
 
@@ -555,15 +729,16 @@ public enum Utils {
     ///   - initialValue: The initial value to start the reduction.
     /// - Returns: The result of combining all elements of the stream using the provided reducer function.
     /// - Throws: Any error thrown by the `reducer` closure during the reduction process.
-    public static func reduceIterator<T,U>(iterator: AsyncStream<T>, reducer: (U, T) async throws -> U, initialValue: U) async throws -> U
+    public static func reduceIterator<T,U>(iterator: RemoteDataSequence, reducer: @escaping (U, T) async throws -> U, initialValue: U) async throws -> U
     {
         var result = initialValue
 
-        for await item in iterator {
-            result = try await reducer(result, item)
+        for try await item in iterator {
+            print("execute await on reducer begin")
+            result = try await reducer(result, item as! T)
+            print("execute await on reducer end")
         }
 
         return result
     }
-
 }

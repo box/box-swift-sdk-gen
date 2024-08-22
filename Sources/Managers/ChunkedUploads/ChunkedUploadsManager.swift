@@ -237,6 +237,7 @@ public class ChunkedUploadsManager {
         let bytesStart: Int = lastIndex + 1
         let bytesEnd: Int = lastIndex + chunkSize
         let contentRange: String = "\("bytes ")\(Utils.Strings.toString(value: bytesStart)!)\("-")\(Utils.Strings.toString(value: bytesEnd)!)\("/")\(Utils.Strings.toString(value: acc.fileSize)!)"
+        print("read content-range: \(contentRange)")
         let uploadedPart: UploadedPart = try await self.uploadFilePartByUrl(url: acc.uploadPartUrl, requestBody: Utils.generateByteStreamFromBuffer(buffer: chunkBuffer), headers: UploadFilePartByUrlHeaders(digest: digest, contentRange: contentRange))
         print("uploaded file part: \(chunkSize)")
         let part: UploadPart = uploadedPart.part!
@@ -267,8 +268,11 @@ public class ChunkedUploadsManager {
         assert(partSize * Int64(totalParts) >= fileSize)
         assert(uploadSession.numPartsProcessed == 0)
         let fileHash: Hash = Hash(algorithm: HashName.sha1)
-        let chunksIterator: AsyncStream<InputStream> = Utils.iterateChunks(stream: file, chunkSize: partSize, fileSize: fileSize)
+        
+        let chunksIterator = Utils.iterateChunks(stream: file, chunkSize: partSize, fileSize: fileSize)
+        
         let results: PartAccumulator = try await Utils.reduceIterator(iterator: chunksIterator, reducer: self.reducer, initialValue: PartAccumulator(lastIndex: -1, parts: [], fileSize: fileSize, uploadPartUrl: uploadPartUrl, fileHash: fileHash))
+        
         let parts: [UploadPart] = results.parts
         let processedSessionParts: UploadParts = try await self.getFileUploadSessionPartsByUrl(url: listPartsUrl)
         assert(processedSessionParts.totalCount! == totalParts)

@@ -30,15 +30,15 @@ public class NetworkClient {
     /// - Throws: An error if the request fails for any reason.
     public func fetch(url: String, options: FetchOptions) async throws -> FetchResponse {
         var options = options
-        
-        if let fileStream = options.fileStream, !(fileStream is BufferInputStream) {
-            let buffered = createBufferInputStream(from: fileStream)
-            guard let buffered = buffered else {
-                fatalError("Wrong data")
-            }
-            
-            options = options.withFileStream(fileStream: buffered)
-        }
+//        
+//        if let fileStream = options.fileStream, !(fileStream is BufferInputStream) {
+//            let buffered = createBufferInputStream(from: fileStream)
+//            guard let buffered = buffered else {
+//                fatalError("Wrong data")
+//            }
+//            
+//            options = options.withFileStream(fileStream: buffered)
+//        }
         
         
         return try await fetch(
@@ -177,9 +177,9 @@ public class NetworkClient {
         try await updateRequestWithHeaders(&urlRequest, options: options, networkSession: networkSession)
         
         if let fileStream = options.fileStream {
-            if let bufferedInputStream = fileStream as? BufferInputStream {
-                bufferedInputStream.reset()
-            }
+//            if let bufferedInputStream = fileStream as? BufferInputStream {
+//                bufferedInputStream.reset()
+//            }
             
             urlRequest.httpBodyStream = fileStream
         } else if let multipartData = options.multipartData {
@@ -424,37 +424,37 @@ public class NetworkClient {
 //        return BufferInputStream(buffer: totalBuffer, length: totalLength)
 //    }
     
-    func createBufferInputStream(from inputStream: InputStream) -> BufferInputStream? {
-        // Open the input stream
-        inputStream.open()
-        
-        // Create a buffer to hold the data read from the InputStream
-        let bufferSize = 1024
-        var buffer = [UInt8](repeating: 0, count: bufferSize)
-        var data = Data()
-        
-        // Read data from the InputStream into the buffer
-        while inputStream.hasBytesAvailable {
-            let bytesRead = inputStream.read(&buffer, maxLength: bufferSize)
-            if bytesRead > 0 {
-                data.append(buffer, count: bytesRead)
-            } else if bytesRead < 0 {
-                // Handle error
-                print("Error reading from InputStream")
-                return nil
-            }
-        }
-        
-        // Close the InputStream
-        inputStream.close()
-        
-//        let byteArray = [UInt8](data)
-//        // Allocate memory for the buffer pointer and copy data into it
-//        let pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: byteArray.count)
-//        pointer.initialize(from: byteArray, count: byteArray.count)
-        
-        
-        return BufferInputStream(data: data)
-    }
-    
+//    func createBufferInputStream(from inputStream: InputStream) -> BufferInputStream? {
+//        // Open the input stream
+//        inputStream.open()
+//        
+//        // Create a buffer to hold the data read from the InputStream
+//        let bufferSize = 1024
+//        var buffer = [UInt8](repeating: 0, count: bufferSize)
+//        var data = Data()
+//        
+//        // Read data from the InputStream into the buffer
+//        while inputStream.hasBytesAvailable {
+//            let bytesRead = inputStream.read(&buffer, maxLength: bufferSize)
+//            if bytesRead > 0 {
+//                data.append(buffer, count: bytesRead)
+//            } else if bytesRead < 0 {
+//                // Handle error
+//                print("Error reading from InputStream")
+//                return nil
+//            }
+//        }
+//        
+//        // Close the InputStream
+//        inputStream.close()
+//        
+////        let byteArray = [UInt8](data)
+////        // Allocate memory for the buffer pointer and copy data into it
+////        let pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: byteArray.count)
+////        pointer.initialize(from: byteArray, count: byteArray.count)
+//        
+//        
+//        return BufferInputStream(data: data)
+//    }
+//    
 }
