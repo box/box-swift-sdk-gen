@@ -20,7 +20,7 @@ public class SignRequestsManager {
     /// - Throws: The `GeneralError`.
     public func cancelSignRequest(signRequestId: String, headers: CancelSignRequestHeaders = CancelSignRequestHeaders()) async throws -> SignRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)\("/cancel")", options: FetchOptions(method: "POST", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)\("/cancel")", method: "POST", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SignRequest.deserialize(from: response.data)
     }
 
@@ -33,7 +33,7 @@ public class SignRequestsManager {
     /// - Throws: The `GeneralError`.
     public func resendSignRequest(signRequestId: String, headers: ResendSignRequestHeaders = ResendSignRequestHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)\("/resend")", options: FetchOptions(method: "POST", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)\("/resend")", method: "POST", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Gets a sign request by ID.
@@ -46,7 +46,7 @@ public class SignRequestsManager {
     /// - Throws: The `GeneralError`.
     public func getSignRequestById(signRequestId: String, headers: GetSignRequestByIdHeaders = GetSignRequestByIdHeaders()) async throws -> SignRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SignRequest.deserialize(from: response.data)
     }
 
@@ -61,7 +61,7 @@ public class SignRequestsManager {
     public func getSignRequests(queryParams: GetSignRequestsQueryParams = GetSignRequestsQueryParams(), headers: GetSignRequestsHeaders = GetSignRequestsHeaders()) async throws -> SignRequests {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SignRequests.deserialize(from: response.data)
     }
 
@@ -75,7 +75,7 @@ public class SignRequestsManager {
     /// - Throws: The `GeneralError`.
     public func createSignRequest(requestBody: SignRequestCreateRequest, headers: CreateSignRequestHeaders = CreateSignRequestHeaders()) async throws -> SignRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SignRequest.deserialize(from: response.data)
     }
 

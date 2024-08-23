@@ -27,7 +27,7 @@ public class TasksManager {
     /// - Throws: The `GeneralError`.
     public func getFileTasks(fileId: String, headers: GetFileTasksHeaders = GetFileTasksHeaders()) async throws -> Tasks {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/tasks")", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/tasks")", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Tasks.deserialize(from: response.data)
     }
 
@@ -41,7 +41,7 @@ public class TasksManager {
     /// - Throws: The `GeneralError`.
     public func createTask(requestBody: CreateTaskRequestBody, headers: CreateTaskHeaders = CreateTaskHeaders()) async throws -> Task {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/tasks")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/tasks")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Task.deserialize(from: response.data)
     }
 
@@ -55,7 +55,7 @@ public class TasksManager {
     /// - Throws: The `GeneralError`.
     public func getTaskById(taskId: String, headers: GetTaskByIdHeaders = GetTaskByIdHeaders()) async throws -> Task {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/tasks/")\(taskId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/tasks/")\(taskId)", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Task.deserialize(from: response.data)
     }
 
@@ -71,7 +71,7 @@ public class TasksManager {
     /// - Throws: The `GeneralError`.
     public func updateTaskById(taskId: String, requestBody: UpdateTaskByIdRequestBody = UpdateTaskByIdRequestBody(), headers: UpdateTaskByIdHeaders = UpdateTaskByIdHeaders()) async throws -> Task {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/tasks/")\(taskId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/tasks/")\(taskId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Task.deserialize(from: response.data)
     }
 
@@ -84,7 +84,7 @@ public class TasksManager {
     /// - Throws: The `GeneralError`.
     public func deleteTaskById(taskId: String, headers: DeleteTaskByIdHeaders = DeleteTaskByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/tasks/")\(taskId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/tasks/")\(taskId)", method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

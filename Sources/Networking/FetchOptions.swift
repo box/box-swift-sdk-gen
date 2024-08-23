@@ -20,6 +20,9 @@ public enum HTTPMethod: String, ExpressibleByStringLiteral, CaseIterable {
 /// Represents paremeters used for the request.
 public class FetchOptions {
 
+    /// The HTTP request URL
+    public let url: String
+
     /// The HTTP request method (e.g. get, post, delete)
     public let method: HTTPMethod
 
@@ -56,6 +59,7 @@ public class FetchOptions {
     /// Initializer
     ///
     /// - Parameters:
+    ///   - url: The HTTP request URL.
     ///   - method: The HTTP request method (e.g. GET, POST, DELETE).
     ///   - params: Additional parameters to be passed in the URL that is called.
     ///   - headers: Additional information to be passed in the HTTP headers of the request.
@@ -68,6 +72,7 @@ public class FetchOptions {
     ///   - auth: The authentication sesson management used in the request.
     ///   - networkSession: The URLSession holder along with the network configuration parameters
     public init(
+        url: String,
         method: HTTPMethod = HTTPMethod.get,
         params: [String : ParameterConvertible?] = [:],
         headers: [String : ParameterConvertible?] = [:],
@@ -80,6 +85,7 @@ public class FetchOptions {
         auth: Authentication? = nil,
         networkSession: NetworkSession? = nil
     ) {
+        self.url = url
         self.method = method
         self.headers = headers
         self.params = params

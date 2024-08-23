@@ -11,8 +11,6 @@ class FetchConversation {
         case url(URL)
     }
 
-    /// The URL for the request.
-    let url: String
     /// Request options  that provides request-specific information, such as the request type, and body, query parameters.
     let options: FetchOptions
     /// Represents an URL request.
@@ -25,13 +23,11 @@ class FetchConversation {
     /// Initializer
     ///
     /// - Parameters:
-    ///   - url: The URL for the request.
     ///   - options: Request options  that provides request-specific information, such as the request type, and body, query parameters.
     ///   - urlRequest: Represents an URL request.
     ///   - urlResponse: Represents a response to an HTTP URL
     ///   - responseType: Represents response type, either data or downloaded file
-    init(url: String, options: FetchOptions, urlRequest: URLRequest, urlResponse: HTTPURLResponse, responseType: ResponseType) {
-        self.url = url
+    init(options: FetchOptions, urlRequest: URLRequest, urlResponse: HTTPURLResponse, responseType: ResponseType) {
         self.options = options
         self.urlRequest = urlRequest
         self.urlResponse = urlResponse
