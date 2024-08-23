@@ -24,13 +24,11 @@ public class NetworkClient {
     /// Executes requests
     ///
     /// - Parameters:
-    ///   - url: The URL for the request.
     ///   - options: Request options  that provides request-specific information, such as the request type, and body, query parameters.
     /// - Returns: Response of the request in the form of FetchResponse object.
     /// - Throws: An error if the request fails for any reason.
-    public func fetch(url: String, options: FetchOptions) async throws -> FetchResponse {
+    public func fetch(options: FetchOptions) async throws -> FetchResponse {
         return try await fetch(
-            url: url,
             options: options,
             networkSession: options.networkSession ?? NetworkSession(),
             attempt: 1
@@ -40,31 +38,28 @@ public class NetworkClient {
     /// Executes requests
     ///
     /// - Parameters:
-    ///   - url: The URL for the request.
     ///   - options: Request options  that provides request-specific information, such as the request type, and body, query parameters.
     ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
     ///   - attempt: The request attempt number.
     /// - Returns: Response of the request in the form of FetchResponse object.
     /// - Throws: An error if the request fails for any reason.
     private func fetch(
-        url: String,
         options: FetchOptions,
         networkSession: NetworkSession,
         attempt: Int
     ) async throws -> FetchResponse {
         let urlRequest = try await createRequest(
-            url: url,
             options: options,
             networkSession: networkSession
         )
 
         if let downloadDestinationURL = options.downloadDestinationURL {
             let (downloadUrl, urlResponse) = try await sendDownloadRequest(urlRequest, downloadDestinationURL: downloadDestinationURL, networkSession: networkSession)
-            let conversation = FetchConversation(url: url, options: options, urlRequest: urlRequest, urlResponse: urlResponse as! HTTPURLResponse, responseType: .url(downloadUrl))
+            let conversation = FetchConversation(options: options, urlRequest: urlRequest, urlResponse: urlResponse as! HTTPURLResponse, responseType: .url(downloadUrl))
             return try await processResponse(using: conversation, networkSession: networkSession, attempt: attempt)
         } else {
             let (data, urlResponse) =  try await sendDataRequest(urlRequest, networkSession: networkSession)
-            let conversation = FetchConversation(url: url, options: options, urlRequest: urlRequest, urlResponse: urlResponse as! HTTPURLResponse, responseType: .data(data))
+            let conversation = FetchConversation(options: options, urlRequest: urlRequest, urlResponse: urlResponse as! HTTPURLResponse, responseType: .data(data))
             return try await processResponse(using: conversation, networkSession: networkSession, attempt: attempt)
         }
     }
@@ -154,11 +149,10 @@ public class NetworkClient {
     /// - Returns: The URLRequest object which represents information about the request.
     /// - Throws: An error if the operation fails for any reason.
     private func createRequest(
-        url: String,
         options: FetchOptions,
         networkSession: NetworkSession
     ) async throws -> URLRequest {
-        var urlRequest = URLRequest(url: createEndpointUrl(url: url, params: options.params))
+        var urlRequest = URLRequest(url: createEndpointUrl(url: options.url, params: options.params))
         urlRequest.httpMethod = options.method.rawValue
 
         try await updateRequestWithHeaders(&urlRequest, options: options, networkSession: networkSession)
@@ -333,7 +327,7 @@ public class NetworkClient {
         // Unauthorized
         if statusCode == 401, let auth = conversation.options.auth  {
             _ = try await auth.refreshToken(networkSession: networkSession)
-            return try await fetch(url: conversation.url, options: conversation.options, networkSession: networkSession, attempt: attempt + 1)
+            return try await fetch(options: conversation.options, networkSession: networkSession, attempt: attempt + 1)
         }
 
         // Retryable
@@ -342,7 +336,7 @@ public class NetworkClient {
             ?? networkSession.networkSettings.retryStrategy.getRetryTimeout(attempt: attempt)
             try await wait(seconds: retryTimeout)
 
-            return try await fetch(url: conversation.url, options: conversation.options, networkSession: networkSession, attempt: attempt + 1)
+            return try await fetch(options: conversation.options, networkSession: networkSession, attempt: attempt + 1)
         }
 
         throw BoxAPIError(fromConversation: conversation)

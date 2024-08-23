@@ -23,7 +23,7 @@ public class FolderLocksManager {
     public func getFolderLocks(queryParams: GetFolderLocksQueryParams, headers: GetFolderLocksHeaders = GetFolderLocksHeaders()) async throws -> FolderLocks {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["folder_id": Utils.Strings.toString(value: queryParams.folderId)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folder_locks")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folder_locks")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try FolderLocks.deserialize(from: response.data)
     }
 
@@ -40,7 +40,7 @@ public class FolderLocksManager {
     /// - Throws: The `GeneralError`.
     public func createFolderLock(requestBody: CreateFolderLockRequestBody, headers: CreateFolderLockHeaders = CreateFolderLockHeaders()) async throws -> FolderLock {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folder_locks")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folder_locks")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try FolderLock.deserialize(from: response.data)
     }
 
@@ -56,7 +56,7 @@ public class FolderLocksManager {
     /// - Throws: The `GeneralError`.
     public func deleteFolderLockById(folderLockId: String, headers: DeleteFolderLockByIdHeaders = DeleteFolderLockByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folder_locks/")\(folderLockId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folder_locks/")\(folderLockId)", method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

@@ -19,7 +19,7 @@ public class AiManager {
     /// - Throws: The `GeneralError`.
     public func createAiAsk(requestBody: AiAsk, headers: CreateAiAskHeaders = CreateAiAskHeaders()) async throws -> AiResponseFull {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/ask")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/ask")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try AiResponseFull.deserialize(from: response.data)
     }
 
@@ -32,7 +32,7 @@ public class AiManager {
     /// - Throws: The `GeneralError`.
     public func createAiTextGen(requestBody: AiTextGen, headers: CreateAiTextGenHeaders = CreateAiTextGenHeaders()) async throws -> AiResponse {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/text_gen")", options: FetchOptions(method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/text_gen")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try AiResponse.deserialize(from: response.data)
     }
 
@@ -46,7 +46,7 @@ public class AiManager {
     public func getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams, headers: GetAiAgentDefaultConfigHeaders = GetAiAgentDefaultConfigHeaders()) async throws -> AiAgentAskOrAiAgentTextGen {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["mode": Utils.Strings.toString(value: queryParams.mode), "language": Utils.Strings.toString(value: queryParams.language), "model": Utils.Strings.toString(value: queryParams.model)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agent_default")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agent_default")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try AiAgentAskOrAiAgentTextGen.deserialize(from: response.data)
     }
 

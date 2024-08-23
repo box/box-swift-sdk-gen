@@ -22,7 +22,7 @@ public class UserCollaborationsManager {
     public func getCollaborationById(collaborationId: String, queryParams: GetCollaborationByIdQueryParams = GetCollaborationByIdQueryParams(), headers: GetCollaborationByIdHeaders = GetCollaborationByIdHeaders()) async throws -> Collaboration {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaborations/")\(collaborationId)", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaborations/")\(collaborationId)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Collaboration.deserialize(from: response.data)
     }
 
@@ -39,7 +39,7 @@ public class UserCollaborationsManager {
     /// - Throws: The `GeneralError`.
     public func updateCollaborationById(collaborationId: String, requestBody: UpdateCollaborationByIdRequestBody, headers: UpdateCollaborationByIdHeaders = UpdateCollaborationByIdHeaders()) async throws -> Collaboration {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaborations/")\(collaborationId)", options: FetchOptions(method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaborations/")\(collaborationId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Collaboration.deserialize(from: response.data)
     }
 
@@ -52,7 +52,7 @@ public class UserCollaborationsManager {
     /// - Throws: The `GeneralError`.
     public func deleteCollaborationById(collaborationId: String, headers: DeleteCollaborationByIdHeaders = DeleteCollaborationByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaborations/")\(collaborationId)", options: FetchOptions(method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaborations/")\(collaborationId)", method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Adds a collaboration for a single user or a single group to a file
@@ -79,7 +79,7 @@ public class UserCollaborationsManager {
     public func createCollaboration(requestBody: CreateCollaborationRequestBody, queryParams: CreateCollaborationQueryParams = CreateCollaborationQueryParams(), headers: CreateCollaborationHeaders = CreateCollaborationHeaders()) async throws -> Collaboration {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields), "notify": Utils.Strings.toString(value: queryParams.notify)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaborations")", options: FetchOptions(method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaborations")", method: "POST", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Collaboration.deserialize(from: response.data)
     }
 

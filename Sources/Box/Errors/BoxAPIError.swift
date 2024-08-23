@@ -46,7 +46,7 @@ extension BoxAPIError {
         let requestHeaders = conversation.options.headers.compactMapValues { $0?.paramValue }
         let requestInfo = RequestInfo(
             method: conversation.options.method.rawValue,
-            url: conversation.url,
+            url: conversation.options.url,
             queryParams: conversation.options.headers.compactMapValues { $0?.paramValue },
             headers:  requestHeaders,
             body:  requestHeaders[HTTPHeaderKey.contentType, default: ""].paramValue == HTTPHeaderContentTypeValue.urlEncoded
