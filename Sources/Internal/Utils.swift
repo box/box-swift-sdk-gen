@@ -852,13 +852,13 @@ public enum Utils {
     ///   - initialValue: The initial value to start the reduction.
     /// - Returns: The result of combining all elements of the stream using the provided reducer function.
     /// - Throws: Any error thrown by the `reducer` closure during the reduction process.
-    public static func reduceIterator<T,U>(iterator: StreamSequence, reducer: @escaping (U, T) async throws -> U, initialValue: U) async throws -> U
+    public static func reduceIterator<T,U,S>(iterator: S, reducer: @escaping (U, T) async throws -> U, initialValue: U) async throws -> U where S: Sequence, S.Element == T
     {
         var result = initialValue
 
         for item in iterator {
             print("execute await on reducer begin")
-            result = try await reducer(result, item as! T)
+            result = try await reducer(result, item)
             print("execute await on reducer end")
         }
 
