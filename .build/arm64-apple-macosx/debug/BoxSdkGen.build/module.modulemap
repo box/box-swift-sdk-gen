@@ -1,0 +1,4 @@
+module BoxSdkGen {
+    header "/Users/ajankowski/work/sdk/box-swift-sdk-gen/.build/arm64-apple-macosx/debug/BoxSdkGen.build/BoxSdkGen-Swift.h"
+    requires objc
+}

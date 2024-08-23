@@ -40,13 +40,16 @@ public class NetworkClient {
 //            options = options.withFileStream(fileStream: buffered)
 //        }
         
-        
-        return try await fetch(
+        print("FETCH")
+        let r =  try await fetch(
             url: url,
             options: options,
             networkSession: options.networkSession ?? NetworkSession(),
             attempt: 1
         )
+        
+        print("After fetch")
+        return r
         
     }
     
