@@ -21,7 +21,7 @@ public class FileVersionLegalHoldsManager {
     /// - Throws: The `GeneralError`.
     public func getFileVersionLegalHoldById(fileVersionLegalHoldId: String, headers: GetFileVersionLegalHoldByIdHeaders = GetFileVersionLegalHoldByIdHeaders()) async throws -> FileVersionLegalHold {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/file_version_legal_holds/")\(fileVersionLegalHoldId)", options: FetchOptions(method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/file_version_legal_holds/")\(fileVersionLegalHoldId)", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try FileVersionLegalHold.deserialize(from: response.data)
     }
 
@@ -54,7 +54,7 @@ public class FileVersionLegalHoldsManager {
     public func getFileVersionLegalHolds(queryParams: GetFileVersionLegalHoldsQueryParams, headers: GetFileVersionLegalHoldsHeaders = GetFileVersionLegalHoldsHeaders()) async throws -> FileVersionLegalHolds {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["policy_id": Utils.Strings.toString(value: queryParams.policyId), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/file_version_legal_holds")", options: FetchOptions(method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/file_version_legal_holds")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try FileVersionLegalHolds.deserialize(from: response.data)
     }
 

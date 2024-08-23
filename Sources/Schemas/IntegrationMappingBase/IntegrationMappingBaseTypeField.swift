@@ -1,5 +1,5 @@
 import Foundation
 
-public enum IntegrationMappingTypeField: String, CodableStringEnum {
+public enum IntegrationMappingBaseTypeField: String, CodableStringEnum {
     case integrationMapping = "integration_mapping"
 }
