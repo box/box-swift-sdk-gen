@@ -15,7 +15,7 @@ public class FolderClassificationsManager {
     /// 
     /// This API can also be called by including the enterprise ID in the
     /// URL explicitly, for example
-    /// `/folders/:id//enterprise_12345/securityClassification-6VMVochwUWo`.
+    /// `/folders/:id/enterprise_12345/securityClassification-6VMVochwUWo`.
     ///
     /// - Parameters:
     ///   - folderId: The unique identifier that represent a folder.
@@ -43,7 +43,7 @@ public class FolderClassificationsManager {
     /// 
     /// This API can also be called by including the enterprise ID in the
     /// URL explicitly, for example
-    /// `/folders/:id//enterprise_12345/securityClassification-6VMVochwUWo`.
+    /// `/folders/:id/enterprise_12345/securityClassification-6VMVochwUWo`.
     ///
     /// - Parameters:
     ///   - folderId: The unique identifier that represent a folder.
@@ -99,7 +99,7 @@ public class FolderClassificationsManager {
     /// 
     /// This API can also be called by including the enterprise ID in the
     /// URL explicitly, for example
-    /// `/folders/:id//enterprise_12345/securityClassification-6VMVochwUWo`.
+    /// `/folders/:id/enterprise_12345/securityClassification-6VMVochwUWo`.
     ///
     /// - Parameters:
     ///   - folderId: The unique identifier that represent a folder.
