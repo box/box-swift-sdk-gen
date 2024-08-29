@@ -26,6 +26,7 @@ Embrace the new generation of Box SDKs and unlock the full potential of the Box 
 - [Installing](#installing)
   - [Swift Package Manager](#swift-package-manager)
   - [Carthage](#carthage)
+  - [CocoaPods](#cocoapods)
 - [Getting Started](#getting-started)
 - [Integration Tests](#integration-tests)
   - [Running integration tests locally](#running-integration-tests-locally)
@@ -69,6 +70,25 @@ carthage bootstrap --use-xcframeworks
 And finally drag the built `xcframework` from Carthage/Build into your project.
 
 For more detailed instructions, please see the [official documentation for Carthage](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application).
+
+## CocoaPods
+
+CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects.
+To start using `BoxSdkGen` with CocoaPods, you need to add `BoxSdkGen` dependency to your `Podfile`:
+
+```shell
+pod 'BoxSdkGen'
+```
+
+Then run the following command in your project directory:
+
+```shell
+$ pod install
+```
+
+Now open your [project].xcworkspace and build.
+
+For more detailed instructions, please see the [official documentation for Cocoapods](https://guides.cocoapods.org/using/using-cocoapods.html).
 
 # Getting Started
 
