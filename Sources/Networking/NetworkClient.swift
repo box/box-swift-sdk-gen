@@ -28,6 +28,12 @@ public class NetworkClient {
     /// - Returns: Response of the request in the form of FetchResponse object.
     /// - Throws: An error if the request fails for any reason.
     public func fetch(options: FetchOptions) async throws -> FetchResponse {
+        var options = options
+        if let fileStream = options.fileStream, !(fileStream is MemoryInputStream) {
+            let memoryInputStream = MemoryInputStream(data: Utils.readByteStream(byteStream: fileStream))
+            options = options.withFileStream(fileStream: memoryInputStream)
+        }
+
         return try await fetch(
             options: options,
             networkSession: options.networkSession ?? NetworkSession(),
@@ -52,6 +58,10 @@ public class NetworkClient {
             options: options,
             networkSession: networkSession
         )
+
+        if let fileStream = options.fileStream, let memoryInputStream = fileStream as? MemoryInputStream, attempt > 1 {
+            memoryInputStream.reset()
+        }
 
         if let downloadDestinationURL = options.downloadDestinationURL {
             let (downloadUrl, urlResponse) = try await sendDownloadRequest(urlRequest, downloadDestinationURL: downloadDestinationURL, networkSession: networkSession)
