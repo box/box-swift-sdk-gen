@@ -18,6 +18,7 @@ public class FolderFull: Folder {
         case isAccessibleViaSharedLink = "is_accessible_via_shared_link"
         case canNonOwnersViewCollaborators = "can_non_owners_view_collaborators"
         case classification
+        case isAssociatedWithAppItem = "is_associated_with_app_item"
     }
 
     public let syncState: FolderFullSyncStateField?
@@ -66,6 +67,12 @@ public class FolderFull: Folder {
     public let canNonOwnersViewCollaborators: Bool?
 
     public let classification: FolderFullClassificationField?
+
+    /// This field will return true if the folder or any ancestor of the
+    /// folder is associated with at least one app item. Note that this will
+    /// return true even if the context user does not have access to the
+    /// app item(s) associated with the folder.
+    public let isAssociatedWithAppItem: Bool?
 
     /// Initializer for a FolderFull.
     ///
@@ -146,7 +153,11 @@ public class FolderFull: Folder {
     ///     It also restricts non-owners from inviting new
     ///     collaborators.
     ///   - classification: 
-    public init(id: String, etag: String? = nil, type: FolderBaseTypeField = FolderBaseTypeField.folder, sequenceId: String? = nil, name: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FolderPathCollectionField? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, trashedAt: Date? = nil, purgedAt: Date? = nil, contentCreatedAt: Date? = nil, contentModifiedAt: Date? = nil, ownedBy: UserMini? = nil, sharedLink: FolderSharedLinkField? = nil, folderUploadEmail: FolderFolderUploadEmailField? = nil, parent: FolderMini? = nil, itemStatus: FolderItemStatusField? = nil, itemCollection: Items? = nil, syncState: FolderFullSyncStateField? = nil, hasCollaborations: Bool? = nil, permissions: FolderFullPermissionsField? = nil, tags: [String]? = nil, canNonOwnersInvite: Bool? = nil, isExternallyOwned: Bool? = nil, metadata: FolderFullMetadataField? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, allowedSharedLinkAccessLevels: [FolderFullAllowedSharedLinkAccessLevelsField]? = nil, allowedInviteeRoles: [FolderFullAllowedInviteeRolesField]? = nil, watermarkInfo: FolderFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, canNonOwnersViewCollaborators: Bool? = nil, classification: FolderFullClassificationField? = nil) {
+    ///   - isAssociatedWithAppItem: This field will return true if the folder or any ancestor of the
+    ///     folder is associated with at least one app item. Note that this will
+    ///     return true even if the context user does not have access to the
+    ///     app item(s) associated with the folder.
+    public init(id: String, etag: String? = nil, type: FolderBaseTypeField = FolderBaseTypeField.folder, sequenceId: String? = nil, name: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FolderPathCollectionField? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, trashedAt: Date? = nil, purgedAt: Date? = nil, contentCreatedAt: Date? = nil, contentModifiedAt: Date? = nil, ownedBy: UserMini? = nil, sharedLink: FolderSharedLinkField? = nil, folderUploadEmail: FolderFolderUploadEmailField? = nil, parent: FolderMini? = nil, itemStatus: FolderItemStatusField? = nil, itemCollection: Items? = nil, syncState: FolderFullSyncStateField? = nil, hasCollaborations: Bool? = nil, permissions: FolderFullPermissionsField? = nil, tags: [String]? = nil, canNonOwnersInvite: Bool? = nil, isExternallyOwned: Bool? = nil, metadata: FolderFullMetadataField? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, allowedSharedLinkAccessLevels: [FolderFullAllowedSharedLinkAccessLevelsField]? = nil, allowedInviteeRoles: [FolderFullAllowedInviteeRolesField]? = nil, watermarkInfo: FolderFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, canNonOwnersViewCollaborators: Bool? = nil, classification: FolderFullClassificationField? = nil, isAssociatedWithAppItem: Bool? = nil) {
         self.syncState = syncState
         self.hasCollaborations = hasCollaborations
         self.permissions = permissions
@@ -161,6 +172,7 @@ public class FolderFull: Folder {
         self.isAccessibleViaSharedLink = isAccessibleViaSharedLink
         self.canNonOwnersViewCollaborators = canNonOwnersViewCollaborators
         self.classification = classification
+        self.isAssociatedWithAppItem = isAssociatedWithAppItem
 
         super.init(id: id, etag: etag, type: type, sequenceId: sequenceId, name: name, createdAt: createdAt, modifiedAt: modifiedAt, description: description, size: size, pathCollection: pathCollection, createdBy: createdBy, modifiedBy: modifiedBy, trashedAt: trashedAt, purgedAt: purgedAt, contentCreatedAt: contentCreatedAt, contentModifiedAt: contentModifiedAt, ownedBy: ownedBy, sharedLink: sharedLink, folderUploadEmail: folderUploadEmail, parent: parent, itemStatus: itemStatus, itemCollection: itemCollection)
     }
@@ -181,6 +193,7 @@ public class FolderFull: Folder {
         isAccessibleViaSharedLink = try container.decodeIfPresent(Bool.self, forKey: .isAccessibleViaSharedLink)
         canNonOwnersViewCollaborators = try container.decodeIfPresent(Bool.self, forKey: .canNonOwnersViewCollaborators)
         classification = try container.decodeIfPresent(FolderFullClassificationField.self, forKey: .classification)
+        isAssociatedWithAppItem = try container.decodeIfPresent(Bool.self, forKey: .isAssociatedWithAppItem)
 
         try super.init(from: decoder)
     }
@@ -201,6 +214,7 @@ public class FolderFull: Folder {
         try container.encodeIfPresent(isAccessibleViaSharedLink, forKey: .isAccessibleViaSharedLink)
         try container.encodeIfPresent(canNonOwnersViewCollaborators, forKey: .canNonOwnersViewCollaborators)
         try container.encodeIfPresent(classification, forKey: .classification)
+        try container.encodeIfPresent(isAssociatedWithAppItem, forKey: .isAssociatedWithAppItem)
         try super.encode(to: encoder)
     }
 

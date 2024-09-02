@@ -11,6 +11,8 @@ public class BoxClient {
 
     public let trashedFiles: TrashedFilesManager
 
+    public let appItemAssociations: AppItemAssociationsManager
+
     public let downloads: DownloadsManager
 
     public let uploads: UploadsManager
@@ -149,6 +151,7 @@ public class BoxClient {
         self.authorization = AuthorizationManager(auth: self.auth, networkSession: self.networkSession)
         self.files = FilesManager(auth: self.auth, networkSession: self.networkSession)
         self.trashedFiles = TrashedFilesManager(auth: self.auth, networkSession: self.networkSession)
+        self.appItemAssociations = AppItemAssociationsManager(auth: self.auth, networkSession: self.networkSession)
         self.downloads = DownloadsManager(auth: self.auth, networkSession: self.networkSession)
         self.uploads = UploadsManager(auth: self.auth, networkSession: self.networkSession)
         self.chunkedUploads = ChunkedUploadsManager(auth: self.auth, networkSession: self.networkSession)

@@ -9,6 +9,7 @@ public class Collaboration: Codable {
         case id
         case type
         case item
+        case appItem = "app_item"
         case accessibleBy = "accessible_by"
         case inviteEmail = "invite_email"
         case role
@@ -29,6 +30,8 @@ public class Collaboration: Codable {
     public let type: CollaborationTypeField
 
     public let item: FileOrFolderOrWebLink?
+
+    public let appItem: AppItem?
 
     public let accessibleBy: GroupMiniOrUserCollaborations?
 
@@ -74,6 +77,7 @@ public class Collaboration: Codable {
     ///   - id: The unique identifier for this collaboration.
     ///   - type: `collaboration`
     ///   - item: 
+    ///   - appItem: 
     ///   - accessibleBy: 
     ///   - inviteEmail: The email address used to invite an unregistered collaborator, if
     ///     they are not a registered user.
@@ -93,10 +97,11 @@ public class Collaboration: Codable {
     ///   - createdAt: When the collaboration object was created.
     ///   - modifiedAt: When the collaboration object was last modified.
     ///   - acceptanceRequirementsStatus: 
-    public init(id: String, type: CollaborationTypeField = CollaborationTypeField.collaboration, item: FileOrFolderOrWebLink? = nil, accessibleBy: GroupMiniOrUserCollaborations? = nil, inviteEmail: String? = nil, role: CollaborationRoleField? = nil, expiresAt: Date? = nil, isAccessOnly: Bool? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: Date? = nil, createdBy: UserCollaborations? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
+    public init(id: String, type: CollaborationTypeField = CollaborationTypeField.collaboration, item: FileOrFolderOrWebLink? = nil, appItem: AppItem? = nil, accessibleBy: GroupMiniOrUserCollaborations? = nil, inviteEmail: String? = nil, role: CollaborationRoleField? = nil, expiresAt: Date? = nil, isAccessOnly: Bool? = nil, status: CollaborationStatusField? = nil, acknowledgedAt: Date? = nil, createdBy: UserCollaborations? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, acceptanceRequirementsStatus: CollaborationAcceptanceRequirementsStatusField? = nil) {
         self.id = id
         self.type = type
         self.item = item
+        self.appItem = appItem
         self.accessibleBy = accessibleBy
         self.inviteEmail = inviteEmail
         self.role = role
@@ -115,6 +120,7 @@ public class Collaboration: Codable {
         id = try container.decode(String.self, forKey: .id)
         type = try container.decode(CollaborationTypeField.self, forKey: .type)
         item = try container.decodeIfPresent(FileOrFolderOrWebLink.self, forKey: .item)
+        appItem = try container.decodeIfPresent(AppItem.self, forKey: .appItem)
         accessibleBy = try container.decodeIfPresent(GroupMiniOrUserCollaborations.self, forKey: .accessibleBy)
         inviteEmail = try container.decodeIfPresent(String.self, forKey: .inviteEmail)
         role = try container.decodeIfPresent(CollaborationRoleField.self, forKey: .role)
@@ -153,6 +159,7 @@ public class Collaboration: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(item, forKey: .item)
+        try container.encodeIfPresent(appItem, forKey: .appItem)
         try container.encodeIfPresent(accessibleBy, forKey: .accessibleBy)
         try container.encodeIfPresent(inviteEmail, forKey: .inviteEmail)
         try container.encodeIfPresent(role, forKey: .role)
