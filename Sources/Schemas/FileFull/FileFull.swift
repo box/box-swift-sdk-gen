@@ -24,6 +24,7 @@ public class FileFull: File {
         case uploaderDisplayName = "uploader_display_name"
         case dispositionAt = "disposition_at"
         case sharedLinkPermissionOptions = "shared_link_permission_options"
+        case isAssociatedWithAppItem = "is_associated_with_app_item"
     }
 
     /// The version number of this file
@@ -83,6 +84,12 @@ public class FileFull: File {
     /// A list of the types of roles that user can be invited at
     /// when sharing this file.
     public let sharedLinkPermissionOptions: [FileFullSharedLinkPermissionOptionsField]?
+
+    /// This field will return true if the file or any ancestor of the file
+    /// is associated with at least one app item. Note that this will return
+    /// true even if the context user does not have access to the app item(s)
+    /// associated with the file.
+    public let isAssociatedWithAppItem: Bool?
 
     /// Initializer for a FileFull.
     ///
@@ -155,7 +162,11 @@ public class FileFull: File {
     ///   - dispositionAt: The retention expiration timestamp for the given file
     ///   - sharedLinkPermissionOptions: A list of the types of roles that user can be invited at
     ///     when sharing this file.
-    public init(id: String, etag: String? = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: Date? = nil, purgedAt: Date? = nil, contentCreatedAt: Date? = nil, contentModifiedAt: Date? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: FolderMini? = nil, itemStatus: FileItemStatusField? = nil, versionNumber: String? = nil, commentCount: Int64? = nil, permissions: FileFullPermissionsField? = nil, tags: [String]? = nil, lock: FileFullLockField? = nil, extension_: String? = nil, isPackage: Bool? = nil, expiringEmbedLink: FileFullExpiringEmbedLinkField? = nil, watermarkInfo: FileFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, allowedInviteeRoles: [FileFullAllowedInviteeRolesField]? = nil, isExternallyOwned: Bool? = nil, hasCollaborations: Bool? = nil, metadata: FileFullMetadataField? = nil, expiresAt: Date? = nil, representations: FileFullRepresentationsField? = nil, classification: FileFullClassificationField? = nil, uploaderDisplayName: String? = nil, dispositionAt: Date? = nil, sharedLinkPermissionOptions: [FileFullSharedLinkPermissionOptionsField]? = nil) {
+    ///   - isAssociatedWithAppItem: This field will return true if the file or any ancestor of the file
+    ///     is associated with at least one app item. Note that this will return
+    ///     true even if the context user does not have access to the app item(s)
+    ///     associated with the file.
+    public init(id: String, etag: String? = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: Date? = nil, purgedAt: Date? = nil, contentCreatedAt: Date? = nil, contentModifiedAt: Date? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: FolderMini? = nil, itemStatus: FileItemStatusField? = nil, versionNumber: String? = nil, commentCount: Int64? = nil, permissions: FileFullPermissionsField? = nil, tags: [String]? = nil, lock: FileFullLockField? = nil, extension_: String? = nil, isPackage: Bool? = nil, expiringEmbedLink: FileFullExpiringEmbedLinkField? = nil, watermarkInfo: FileFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, allowedInviteeRoles: [FileFullAllowedInviteeRolesField]? = nil, isExternallyOwned: Bool? = nil, hasCollaborations: Bool? = nil, metadata: FileFullMetadataField? = nil, expiresAt: Date? = nil, representations: FileFullRepresentationsField? = nil, classification: FileFullClassificationField? = nil, uploaderDisplayName: String? = nil, dispositionAt: Date? = nil, sharedLinkPermissionOptions: [FileFullSharedLinkPermissionOptionsField]? = nil, isAssociatedWithAppItem: Bool? = nil) {
         self.versionNumber = versionNumber
         self.commentCount = commentCount
         self.permissions = permissions
@@ -176,6 +187,7 @@ public class FileFull: File {
         self.uploaderDisplayName = uploaderDisplayName
         self.dispositionAt = dispositionAt
         self.sharedLinkPermissionOptions = sharedLinkPermissionOptions
+        self.isAssociatedWithAppItem = isAssociatedWithAppItem
 
         super.init(id: id, etag: etag, type: type, sequenceId: sequenceId, name: name, sha1: sha1, fileVersion: fileVersion, description: description, size: size, pathCollection: pathCollection, createdAt: createdAt, modifiedAt: modifiedAt, trashedAt: trashedAt, purgedAt: purgedAt, contentCreatedAt: contentCreatedAt, contentModifiedAt: contentModifiedAt, createdBy: createdBy, modifiedBy: modifiedBy, ownedBy: ownedBy, sharedLink: sharedLink, parent: parent, itemStatus: itemStatus)
     }
@@ -212,6 +224,7 @@ public class FileFull: File {
         }
 
         sharedLinkPermissionOptions = try container.decodeIfPresent([FileFullSharedLinkPermissionOptionsField].self, forKey: .sharedLinkPermissionOptions)
+        isAssociatedWithAppItem = try container.decodeIfPresent(Bool.self, forKey: .isAssociatedWithAppItem)
 
         try super.init(from: decoder)
     }
@@ -244,6 +257,7 @@ public class FileFull: File {
         }
 
         try container.encodeIfPresent(sharedLinkPermissionOptions, forKey: .sharedLinkPermissionOptions)
+        try container.encodeIfPresent(isAssociatedWithAppItem, forKey: .isAssociatedWithAppItem)
         try super.encode(to: encoder)
     }
 
