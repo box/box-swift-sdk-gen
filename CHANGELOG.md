@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.2](https://github.com/box/box-codegen/compare/0.3.1...0.3.2) (2024-09-05)
+
+
+### Bug Fixes
+
+* Add missing fields to Sign Template Signer and fix AI schema (box/box-openapi[#451](https://github.com/box/box-codegen/issues/451)) ([#206](https://github.com/box/box-codegen/issues/206)) ([31920e6](https://github.com/box/box-codegen/commit/31920e67692c16b0600c4c9f4c279e22d02e4598))
+* Fix `IntegrationMapping` schemas (box/box-codegen[#551](https://github.com/box/box-codegen/issues/551)) ([#203](https://github.com/box/box-codegen/issues/203)) ([0074ee3](https://github.com/box/box-codegen/commit/0074ee326627d01057cf50cb257d2291b646ab08))
+
+
+### New Features and Enhancements
+
+* Fix chunk upload in Swift (box/box-codegen[#555](https://github.com/box/box-codegen/issues/555)) ([#215](https://github.com/box/box-codegen/issues/215)) ([93ff568](https://github.com/box/box-codegen/commit/93ff5686415d99aa807d57d9e062f5a96380d707))
+* Include URL into `FetchOptions` (box/box-codegen[#549](https://github.com/box/box-codegen/issues/549)) ([#208](https://github.com/box/box-codegen/issues/208)) ([b65822d](https://github.com/box/box-codegen/commit/b65822d379b1d5e9be7b179ed754e725f5a499fa))
+
 ### [0.3.1](https://github.com/box/box-codegen/compare/0.3.0...0.3.1) (2024-08-22)
 
 
