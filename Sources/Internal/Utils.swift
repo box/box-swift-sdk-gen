@@ -289,53 +289,29 @@ public enum Utils {
     }
 
 
-    /// Iterates over a stream and yields chunks of it
+    /// Creates a StreamSequence from a given InputStream.
     ///
     /// - Parameters:
     ///   - stream: InputStream to iterate over
     ///   - chunkSize: Size of chunk
     ///   - fileSize: Size of the file
-    /// - Returns: The asynchronous sequence AsyncStream
-    public static func iterateChunks(stream: InputStream, chunkSize: Int64, fileSize: Int64) -> AsyncStream<InputStream> {
-        return AsyncStream<InputStream> { continuation in
-            _Concurrency.Task {
-                stream.open()
+    /// - Returns: The StreamSequence
+    public static func iterateChunks(stream: InputStream, chunkSize: Int64, fileSize: Int64) -> StreamSequence {
+        return StreamSequence(inputStream: stream, chunkSize: Int(chunkSize))
+   }
 
-                let bufferSize = Int(chunkSize)
-                var buffer = [UInt8](repeating: 0, count: bufferSize)
-
-                defer {
-                    stream.close()
-                    continuation.finish()
-                }
-
-                while stream.hasBytesAvailable {
-                    let read = stream.read(&buffer, maxLength: buffer.count)
-                    if read < 0, let error = stream.streamError {
-                        throw error
-                    } else if read == 0 {
-                        return
-                    }
-
-                    continuation.yield(InputStream(data:Data(buffer.prefix(read))))
-                }
-            }
-        }
-    }
-
-    /// Asynchronously reduces the elements of an `AsyncStream` using a specified reducer function and initial value.
+    /// Asynchronously reduces the elements of an `Sequence` using a specified reducer function and initial value.
     ///
     /// - Parameters:
-    ///   - iterator: The `AsyncStream` providing elements to be reduced.
+    ///   - iterator: The `Sequence` providing elements to be reduced.
     ///   - reducer: A closure that combines an accumulated value (`U`) with each element of the stream (`T`) asynchronously.
     ///   - initialValue: The initial value to start the reduction.
     /// - Returns: The result of combining all elements of the stream using the provided reducer function.
     /// - Throws: Any error thrown by the `reducer` closure during the reduction process.
-    public static func reduceIterator<T,U>(iterator: AsyncStream<T>, reducer: (U, T) async throws -> U, initialValue: U) async throws -> U
-    {
+    public static func reduceIterator<T,U,S>(iterator: S, reducer: @escaping (U, T) async throws -> U, initialValue: U) async throws -> U where S: Sequence, S.Element == T {
         var result = initialValue
 
-        for await item in iterator {
+        for item in iterator {
             result = try await reducer(result, item)
         }
 
