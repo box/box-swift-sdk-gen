@@ -18,7 +18,7 @@ See the endpoint docs at
 
 <!-- sample get_files_id -->
 ```
-try await client.files.getFileById(fileId: file.id)
+try await client.files.getFileById(fileId: fileId, queryParams: GetFileByIdQueryParams(fields: ["is_associated_with_app_item"]))
 ```
 
 ### Arguments

@@ -28,7 +28,7 @@ See the endpoint docs at
 
 <!-- sample get_folders_id -->
 ```
-try await client.folders.getFolderById(folderId: newFolder.id)
+try await client.folders.getFolderById(folderId: folderId, queryParams: GetFolderByIdQueryParams(fields: ["is_associated_with_app_item"]))
 ```
 
 ### Arguments

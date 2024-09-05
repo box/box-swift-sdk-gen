@@ -152,6 +152,7 @@ To run integration tests, you need several environment variables specifying your
 4. Set the `USER_ID` environment variable to its corresponding value from the `General Settings` tab the section `App Info` of your application.
 5. Set the `BOX_FILE_REQUEST_ID` environment variable to the ID of file request already created in the user account, `BOX_EXTERNAL_USER_EMAIL` with email of free external user which not belongs to any enterprise.
 6. Set the `WORKFLOW_FOLDER_ID` envornment variable to the ID of the Relay workflow that deletes the file that triggered the workflow. The workflow should have a manual start to be able to start it from the API.
+7. Set environment variable: `APP_ITEM_ASSOCIATION_FILE_ID` to the ID of the file with associated app item and `APP_ITEM_ASSOCIATION_FOLDER_ID` to the ID of the folder with associated app item.
 
 ### Running tests
 
