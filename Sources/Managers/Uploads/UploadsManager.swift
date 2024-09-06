@@ -39,6 +39,20 @@ public class UploadsManager {
         return try Files.deserialize(from: response.data)
     }
 
+    /// Performs a check to verify that a file will be accepted by Box
+    /// before you upload the entire file.
+    ///
+    /// - Parameters:
+    ///   - requestBody: Request body of preflightFileUploadCheck method
+    ///   - headers: Headers of preflightFileUploadCheck method
+    /// - Returns: The `UploadUrl`.
+    /// - Throws: The `GeneralError`.
+    public func preflightFileUploadCheck(requestBody: PreflightFileUploadCheckRequestBody = PreflightFileUploadCheckRequestBody(), headers: PreflightFileUploadCheckHeaders = PreflightFileUploadCheckHeaders()) async throws -> UploadUrl {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/content")", method: "OPTIONS", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try UploadUrl.deserialize(from: response.data)
+    }
+
     /// Uploads a small file to Box. For file sizes over 50MB we recommend
     /// using the Chunk Upload APIs.
     /// 
@@ -58,20 +72,6 @@ public class UploadsManager {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["content-md5": Utils.Strings.toString(value: headers.contentMd5)], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/content")", method: "POST", params: queryParamsMap, headers: headersMap, multipartData: [MultipartItem(partName: "attributes", data: try requestBody.attributes.serialize()), MultipartItem(partName: "file", fileStream: requestBody.file, fileName: requestBody.fileFileName, contentType: requestBody.fileContentType)], contentType: "multipart/form-data", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Files.deserialize(from: response.data)
-    }
-
-    /// Performs a check to verify that a file will be accepted by Box
-    /// before you upload the entire file.
-    ///
-    /// - Parameters:
-    ///   - requestBody: Request body of preflightFileUploadCheck method
-    ///   - headers: Headers of preflightFileUploadCheck method
-    /// - Returns: The `UploadUrl`.
-    /// - Throws: The `GeneralError`.
-    public func preflightFileUploadCheck(requestBody: PreflightFileUploadCheckRequestBody = PreflightFileUploadCheckRequestBody(), headers: PreflightFileUploadCheckHeaders = PreflightFileUploadCheckHeaders()) async throws -> UploadUrl {
-        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/content")", method: "OPTIONS", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try UploadUrl.deserialize(from: response.data)
     }
 
 }

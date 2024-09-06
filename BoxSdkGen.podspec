@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
   spec.version      = '0.4.0'
   spec.summary      = 'Official Box Swift Generated SDK'
   spec.homepage     = 'https://github.com/box/box-swift-sdk-gen'
-  spec.license      = 'Apache-2.0, http://www.apache.org/licenses/LICENSE-2.0'
+  spec.license      = '<PLEASE FILL OUT THIS FIELD>'
   spec.author       = { 'Box' => 'sdks@box.com' }
   spec.osx.deployment_target = '10.15'
   spec.ios.deployment_target = '13.0'
