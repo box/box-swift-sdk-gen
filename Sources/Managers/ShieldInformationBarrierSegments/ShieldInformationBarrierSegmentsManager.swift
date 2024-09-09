@@ -24,6 +24,19 @@ public class ShieldInformationBarrierSegmentsManager {
         return try ShieldInformationBarrierSegment.deserialize(from: response.data)
     }
 
+    /// Deletes the shield information barrier segment
+    /// based on provided ID.
+    ///
+    /// - Parameters:
+    ///   - shieldInformationBarrierSegmentId: The ID of the shield information barrier segment.
+    ///     Example: "3423"
+    ///   - headers: Headers of deleteShieldInformationBarrierSegmentById method
+    /// - Throws: The `GeneralError`.
+    public func deleteShieldInformationBarrierSegmentById(shieldInformationBarrierSegmentId: String, headers: DeleteShieldInformationBarrierSegmentByIdHeaders = DeleteShieldInformationBarrierSegmentByIdHeaders()) async throws {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segments/")\(shieldInformationBarrierSegmentId)", method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+    }
+
     /// Updates the shield information barrier segment based on provided ID..
     ///
     /// - Parameters:
@@ -37,19 +50,6 @@ public class ShieldInformationBarrierSegmentsManager {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segments/")\(shieldInformationBarrierSegmentId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ShieldInformationBarrierSegment.deserialize(from: response.data)
-    }
-
-    /// Deletes the shield information barrier segment
-    /// based on provided ID.
-    ///
-    /// - Parameters:
-    ///   - shieldInformationBarrierSegmentId: The ID of the shield information barrier segment.
-    ///     Example: "3423"
-    ///   - headers: Headers of deleteShieldInformationBarrierSegmentById method
-    /// - Throws: The `GeneralError`.
-    public func deleteShieldInformationBarrierSegmentById(shieldInformationBarrierSegmentId: String, headers: DeleteShieldInformationBarrierSegmentByIdHeaders = DeleteShieldInformationBarrierSegmentByIdHeaders()) async throws {
-        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barrier_segments/")\(shieldInformationBarrierSegmentId)", method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Retrieves a list of shield information barrier segment objects
