@@ -61,6 +61,28 @@ public class FileVersionsManager {
         return try FileVersionFull.deserialize(from: response.data)
     }
 
+    /// Move a file version to the trash.
+    /// 
+    /// Versions are only tracked for Box users with premium accounts.
+    ///
+    /// - Parameters:
+    ///   - fileId: The unique identifier that represents a file.
+    ///     
+    ///     The ID for any file can be determined
+    ///     by visiting a file in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/files/123`
+    ///     the `file_id` is `123`.
+    ///     Example: "12345"
+    ///   - fileVersionId: The ID of the file version
+    ///     Example: "1234"
+    ///   - headers: Headers of deleteFileVersionById method
+    /// - Throws: The `GeneralError`.
+    public func deleteFileVersionById(fileId: String, fileVersionId: String, headers: DeleteFileVersionByIdHeaders = DeleteFileVersionByIdHeaders()) async throws {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-match": Utils.Strings.toString(value: headers.ifMatch)], headers.extraHeaders))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/versions/")\(fileVersionId)", method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+    }
+
     /// Restores a specific version of a file after it was deleted.
     /// Don't use this endpoint to restore Box Notes,
     /// as it works with file formats such as PDF, DOC,
@@ -85,28 +107,6 @@ public class FileVersionsManager {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/versions/")\(fileVersionId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try FileVersionFull.deserialize(from: response.data)
-    }
-
-    /// Move a file version to the trash.
-    /// 
-    /// Versions are only tracked for Box users with premium accounts.
-    ///
-    /// - Parameters:
-    ///   - fileId: The unique identifier that represents a file.
-    ///     
-    ///     The ID for any file can be determined
-    ///     by visiting a file in the web application
-    ///     and copying the ID from the URL. For example,
-    ///     for the URL `https://*.app.box.com/files/123`
-    ///     the `file_id` is `123`.
-    ///     Example: "12345"
-    ///   - fileVersionId: The ID of the file version
-    ///     Example: "1234"
-    ///   - headers: Headers of deleteFileVersionById method
-    /// - Throws: The `GeneralError`.
-    public func deleteFileVersionById(fileId: String, fileVersionId: String, headers: DeleteFileVersionByIdHeaders = DeleteFileVersionByIdHeaders()) async throws {
-        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-match": Utils.Strings.toString(value: headers.ifMatch)], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/versions/")\(fileVersionId)", method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Promote a specific version of a file.

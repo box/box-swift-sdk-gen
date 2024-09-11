@@ -3,8 +3,8 @@
 
 - [List all file versions](#list-all-file-versions)
 - [Get file version](#get-file-version)
-- [Restore file version](#restore-file-version)
 - [Remove file version](#remove-file-version)
+- [Restore file version](#restore-file-version)
 - [Promote file version](#promote-file-version)
 
 ## List all file versions
@@ -80,39 +80,6 @@ Not all available fields are returned by default. Use the
 any specific fields.
 
 
-## Restore file version
-
-Restores a specific version of a file after it was deleted.
-Don't use this endpoint to restore Box Notes,
-as it works with file formats such as PDF, DOC,
-PPTX or similar.
-
-This operation is performed by calling function `updateFileVersionById`.
-
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/put-files-id-versions-id/).
-
-*Currently we don't have an example for calling `updateFileVersionById` in integration tests*
-
-### Arguments
-
-- fileId `String`
-  - The unique identifier that represents a file.  The ID for any file can be determined by visiting a file in the web application and copying the ID from the URL. For example, for the URL `https://*.app.box.com/files/123` the `file_id` is `123`. Example: "12345"
-- fileVersionId `String`
-  - The ID of the file version Example: "1234"
-- requestBody `UpdateFileVersionByIdRequestBody`
-  - Request body of updateFileVersionById method
-- headers `UpdateFileVersionByIdHeaders`
-  - Headers of updateFileVersionById method
-
-
-### Returns
-
-This function returns a value of type `FileVersionFull`.
-
-Returns a restored file version object.
-
-
 ## Remove file version
 
 Move a file version to the trash.
@@ -145,6 +112,39 @@ This function returns a value of type ``.
 
 Returns an empty response when the file has been successfully
 deleted.
+
+
+## Restore file version
+
+Restores a specific version of a file after it was deleted.
+Don't use this endpoint to restore Box Notes,
+as it works with file formats such as PDF, DOC,
+PPTX or similar.
+
+This operation is performed by calling function `updateFileVersionById`.
+
+See the endpoint docs at
+[API Reference](https://developer.box.com/reference/put-files-id-versions-id/).
+
+*Currently we don't have an example for calling `updateFileVersionById` in integration tests*
+
+### Arguments
+
+- fileId `String`
+  - The unique identifier that represents a file.  The ID for any file can be determined by visiting a file in the web application and copying the ID from the URL. For example, for the URL `https://*.app.box.com/files/123` the `file_id` is `123`. Example: "12345"
+- fileVersionId `String`
+  - The ID of the file version Example: "1234"
+- requestBody `UpdateFileVersionByIdRequestBody`
+  - Request body of updateFileVersionById method
+- headers `UpdateFileVersionByIdHeaders`
+  - Headers of updateFileVersionById method
+
+
+### Returns
+
+This function returns a value of type `FileVersionFull`.
+
+Returns a restored file version object.
 
 
 ## Promote file version
