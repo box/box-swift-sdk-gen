@@ -10,28 +10,6 @@ public class EventsManager {
         self.networkSession = networkSession
     }
 
-    /// Returns up to a year of past events for a given user
-    /// or for the entire enterprise.
-    /// 
-    /// By default this returns events for the authenticated user. To retrieve events
-    /// for the entire enterprise, set the `stream_type` to `admin_logs_streaming`
-    /// for live monitoring of new events, or `admin_logs` for querying across
-    /// historical events. The user making the API call will
-    /// need to have admin privileges, and the application will need to have the
-    /// scope `manage enterprise properties` checked.
-    ///
-    /// - Parameters:
-    ///   - queryParams: Query parameters of getEvents method
-    ///   - headers: Headers of getEvents method
-    /// - Returns: The `Events`.
-    /// - Throws: The `GeneralError`.
-    public func getEvents(queryParams: GetEventsQueryParams = GetEventsQueryParams(), headers: GetEventsHeaders = GetEventsHeaders()) async throws -> Events {
-        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["stream_type": Utils.Strings.toString(value: queryParams.streamType), "stream_position": Utils.Strings.toString(value: queryParams.streamPosition), "limit": Utils.Strings.toString(value: queryParams.limit), "event_type": Utils.Strings.toString(value: queryParams.eventType), "created_after": Utils.Strings.toString(value: queryParams.createdAfter), "created_before": Utils.Strings.toString(value: queryParams.createdBefore)])
-        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/events")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Events.deserialize(from: response.data)
-    }
-
     /// Returns a list of real-time servers that can be used for long-polling updates
     /// to the [event stream](#get-events).
     /// 
@@ -74,6 +52,28 @@ public class EventsManager {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/events")", method: "OPTIONS", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try RealtimeServers.deserialize(from: response.data)
+    }
+
+    /// Returns up to a year of past events for a given user
+    /// or for the entire enterprise.
+    /// 
+    /// By default this returns events for the authenticated user. To retrieve events
+    /// for the entire enterprise, set the `stream_type` to `admin_logs_streaming`
+    /// for live monitoring of new events, or `admin_logs` for querying across
+    /// historical events. The user making the API call will
+    /// need to have admin privileges, and the application will need to have the
+    /// scope `manage enterprise properties` checked.
+    ///
+    /// - Parameters:
+    ///   - queryParams: Query parameters of getEvents method
+    ///   - headers: Headers of getEvents method
+    /// - Returns: The `Events`.
+    /// - Throws: The `GeneralError`.
+    public func getEvents(queryParams: GetEventsQueryParams = GetEventsQueryParams(), headers: GetEventsHeaders = GetEventsHeaders()) async throws -> Events {
+        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["stream_type": Utils.Strings.toString(value: queryParams.streamType), "stream_position": Utils.Strings.toString(value: queryParams.streamPosition), "limit": Utils.Strings.toString(value: queryParams.limit), "event_type": Utils.Strings.toString(value: queryParams.eventType), "created_after": Utils.Strings.toString(value: queryParams.createdAfter), "created_before": Utils.Strings.toString(value: queryParams.createdBefore)])
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/events")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try Events.deserialize(from: response.data)
     }
 
 }
