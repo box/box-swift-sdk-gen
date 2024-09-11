@@ -17,9 +17,9 @@ public class FolderFullMetadataField: Codable {
 
     }
 
-    public let extraData: [String: [String: Metadata]]?
+    public let extraData: [String: [String: MetadataFull]]?
 
-    public init(extraData: [String: [String: Metadata]]? = nil) {
+    public init(extraData: [String: [String: MetadataFull]]? = nil) {
         self.extraData = extraData
     }
 
@@ -31,9 +31,9 @@ public class FolderFullMetadataField: Codable {
         let additionalKeys: [CodingKeys] = allKeys.filter({ (parent: CodingKeys) in !definedKeys.contains(where: { (child: CodingKeys) in child.stringValue == parent.stringValue }) })
 
         if !additionalKeys.isEmpty {
-            var additionalProperties: [String: [String: Metadata]] = [:]
+            var additionalProperties: [String: [String: MetadataFull]] = [:]
             for key in additionalKeys {
-                if let value = try? container.decode([String: Metadata].self, forKey: key) {
+                if let value = try? container.decode([String: MetadataFull].self, forKey: key) {
                     additionalProperties[key.stringValue] = value
                 }
 
