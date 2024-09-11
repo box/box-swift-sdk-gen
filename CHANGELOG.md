@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/box/box-codegen/compare/0.4.0...0.5.0) (2024-09-11)
+
+
+### Bug Fixes
+
+* Fix variants in metadata query results (box/box-openapi[#456](https://github.com/box/box-codegen/issues/456)) ([#232](https://github.com/box/box-codegen/issues/232)) ([be2fa52](https://github.com/box/box-codegen/commit/be2fa52bb0d086f6c9b20fd5c3bdcad4b98f3f37))
+
+
+### New Features and Enhancements
+
+* add Hubs Beta (box/box-openapi[#453](https://github.com/box/box-codegen/issues/453)) ([#220](https://github.com/box/box-codegen/issues/220)) ([546f487](https://github.com/box/box-codegen/commit/546f487bde9dae2407ff65620eb6e6a81e45b149))
+
 ## [0.4.0](https://github.com/box/box-codegen/compare/0.3.1...0.4.0) (2024-09-05)
 
 
