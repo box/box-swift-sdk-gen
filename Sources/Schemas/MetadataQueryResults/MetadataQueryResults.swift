@@ -14,7 +14,7 @@ public class MetadataQueryResults: Codable {
     /// By default, this endpoint returns only the most basic info about the
     /// items. To get additional fields for each item, including any of the
     /// metadata, use the `fields` attribute in the query.
-    public let entries: [FileOrFolder]?
+    public let entries: [FileFullOrFolderFull]?
 
     /// The limit that was used for this search. This will be the same as the
     /// `limit` query parameter unless that value exceeded the maximum value
@@ -37,7 +37,7 @@ public class MetadataQueryResults: Codable {
     ///     `limit` query parameter unless that value exceeded the maximum value
     ///     allowed.
     ///   - nextMarker: The marker for the start of the next page of results.
-    public init(entries: [FileOrFolder]? = nil, limit: Int64? = nil, nextMarker: String? = nil) {
+    public init(entries: [FileFullOrFolderFull]? = nil, limit: Int64? = nil, nextMarker: String? = nil) {
         self.entries = entries
         self.limit = limit
         self.nextMarker = nextMarker
@@ -45,7 +45,7 @@ public class MetadataQueryResults: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        entries = try container.decodeIfPresent([FileOrFolder].self, forKey: .entries)
+        entries = try container.decodeIfPresent([FileFullOrFolderFull].self, forKey: .entries)
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         nextMarker = try container.decodeIfPresent(String.self, forKey: .nextMarker)
     }
