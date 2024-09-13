@@ -217,8 +217,9 @@ public class NetworkClient {
     ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
     /// - Throws: An error if the operation fails for any reason.
     private func updateRequestWithAuthorizationHeader(_ urlRequest: inout URLRequest, options: FetchOptions, networkSession: NetworkSession) async throws {
-        if let auth = options.auth, let token = (try await auth.retrieveToken(networkSession: networkSession)).accessToken {
-            urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: HTTPHeaderKey.authorization)
+        if let auth = options.auth {
+            let authHeaderValue = try await auth.retrieveAuthorizationHeader(networkSession: networkSession)
+            urlRequest.setValue(authHeaderValue, forHTTPHeaderField: HTTPHeaderKey.authorization)
         }
     }
 
