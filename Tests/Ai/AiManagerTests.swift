@@ -11,7 +11,7 @@ class AiManagerTests: XCTestCase {
 
     public func testAskAiSingleItem() async throws {
         let fileToAsk: FileFull = try await CommonsManager().uploadNewFile()
-        let response: AiResponseFull = try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.singleItemQa, prompt: "which direction sun rises", items: [AiAskItemsField(id: fileToAsk.id, type: AiAskItemsTypeField.file, content: "Sun rises in the East")]))
+        let response: AiResponseFull = try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.singleItemQa, prompt: "which direction sun rises", items: [AiItemBase(id: fileToAsk.id, type: AiItemBaseTypeField.file, content: "Sun rises in the East")]))
         XCTAssertTrue(response.answer.contains("East"))
         XCTAssertTrue(response.completionReason == "done")
         try await client.files.deleteFileById(fileId: fileToAsk.id)
@@ -20,7 +20,7 @@ class AiManagerTests: XCTestCase {
     public func testAskAiMultipleItems() async throws {
         let fileToAsk1: FileFull = try await CommonsManager().uploadNewFile()
         let fileToAsk2: FileFull = try await CommonsManager().uploadNewFile()
-        let response: AiResponseFull = try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.multipleItemQa, prompt: "Which direction sun rises?", items: [AiAskItemsField(id: fileToAsk1.id, type: AiAskItemsTypeField.file, content: "Earth goes around the sun"), AiAskItemsField(id: fileToAsk2.id, type: AiAskItemsTypeField.file, content: "Sun rises in the East in the morning")]))
+        let response: AiResponseFull = try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.multipleItemQa, prompt: "Which direction sun rises?", items: [AiItemBase(id: fileToAsk1.id, type: AiItemBaseTypeField.file, content: "Earth goes around the sun"), AiItemBase(id: fileToAsk2.id, type: AiItemBaseTypeField.file, content: "Sun rises in the East in the morning")]))
         XCTAssertTrue(response.answer.contains("East"))
         XCTAssertTrue(response.completionReason == "done")
         try await client.files.deleteFileById(fileId: fileToAsk1.id)
@@ -36,10 +36,10 @@ class AiManagerTests: XCTestCase {
     }
 
     public func testGettingAiAskAgentConfig() async throws {
-        let aiAskConfig: AiAgentAskOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.ask, language: "en-US"))
+        let aiAskConfig: AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.ask, language: "en-US"))
     }
 
     public func testGettingAiTextGenAgentConfig() async throws {
-        let aiTextGenConfig: AiAgentAskOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.textGen, language: "en-US"))
+        let aiTextGenConfig: AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.textGen, language: "en-US"))
     }
 }

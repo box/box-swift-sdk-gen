@@ -6,7 +6,7 @@ public class AiAgentLongTextToolTextGenEmbeddingsStrategyField: Codable {
         case numTokensPerChunk = "num_tokens_per_chunk"
     }
 
-    /// The strategy used for the AI Agent for calculating embeddings.
+    /// The strategy used for the AI agent for calculating embeddings.
     public let id: String?
 
     /// The number of tokens per chunk.
@@ -15,7 +15,7 @@ public class AiAgentLongTextToolTextGenEmbeddingsStrategyField: Codable {
     /// Initializer for a AiAgentLongTextToolTextGenEmbeddingsStrategyField.
     ///
     /// - Parameters:
-    ///   - id: The strategy used for the AI Agent for calculating embeddings.
+    ///   - id: The strategy used for the AI agent for calculating embeddings.
     ///   - numTokensPerChunk: The number of tokens per chunk.
     public init(id: String? = nil, numTokensPerChunk: Int64? = nil) {
         self.id = id
