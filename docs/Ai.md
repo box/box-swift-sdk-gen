@@ -110,7 +110,10 @@ This operation is performed by calling function `createAiExtract`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/post-ai-extract/).
 
-*Currently we don't have an example for calling `createAiExtract` in integration tests*
+<!-- sample post_ai_extract -->
+```
+try await client.ai.createAiExtract(requestBody: AiExtract(prompt: "firstName, lastName, location, yearOfBirth, company", items: [AiItemBase(id: file.id)]))
+```
 
 ### Arguments
 

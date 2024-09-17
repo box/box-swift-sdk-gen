@@ -42,4 +42,15 @@ class AiManagerTests: XCTestCase {
     public func testGettingAiTextGenAgentConfig() async throws {
         let aiTextGenConfig: AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.textGen, language: "en-US"))
     }
+
+    public func testAiExtract() async throws {
+        let uploadedFiles: Files = try await client.uploads.uploadFile(requestBody: UploadFileRequestBody(attributes: UploadFileRequestBodyAttributesField(name: "\(Utils.getUUID())\(".txt")", parent: UploadFileRequestBodyAttributesParentField(id: "0")), file: Utils.stringToByteStream(text: "My name is John Doe. I live in San Francisco. I was born in 1990. I work at Box.")))
+        let file: FileFull = uploadedFiles.entries![0]
+        try await Utils.delayInSeconds(seconds: 1)
+        let response: AiResponse = try await client.ai.createAiExtract(requestBody: AiExtract(prompt: "firstName, lastName, location, yearOfBirth, company", items: [AiItemBase(id: file.id)]))
+        let expectedResponse: String = "{\"firstName\": \"John\", \"lastName\": \"Doe\", \"location\": \"San Francisco\", \"yearOfBirth\": \"1990\", \"company\": \"Box\"}"
+        XCTAssertTrue(response.answer == expectedResponse)
+        XCTAssertTrue(response.completionReason == "done")
+        try await client.files.deleteFileById(fileId: file.id)
+    }
 }

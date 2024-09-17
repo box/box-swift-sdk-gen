@@ -193,6 +193,15 @@ public enum Utils {
         return InputStream(data: Data(base64Encoded: data.data(using: .utf8)!)!)
     }
 
+    /// Creates InputStream from string.
+    ///
+    /// - Parameters:
+    ///   - data: string.
+    /// - Returns: InputStream.
+    public static func stringToByteStream(text: String) -> InputStream {
+        return InputStream(data: text.data(using: .utf8)!)
+    }
+
     /// Creates a Data instance of a given size with random values.
     ///
     /// - Parameters:
@@ -316,6 +325,21 @@ public enum Utils {
         }
 
         return result
+    }
+
+    /// Suspends the current task for the given duration of seconds.
+    ///
+    /// - Parameters:
+    ///   - seconds: Number of seconds to wait.
+    /// - Throws: An error if the operation fails for any reason.
+    public static func delayInSeconds(seconds: Int) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            DispatchQueue.global().asyncAfter(
+                deadline: .now() + .milliseconds(seconds * 1000)
+            ) {
+                continuation.resume()
+            }
+        }
     }
 
 }
