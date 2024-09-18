@@ -11,11 +11,11 @@ public class AiAgentLongTextToolTextGen: AiAgentBasicTextToolTextGen {
     /// Initializer for a AiAgentLongTextToolTextGen.
     ///
     /// - Parameters:
-    ///   - model: The model used for the AI Agent for basic text. For specific model values, see the [available models list](g://box-ai/supported-models).
+    ///   - model: The model used for the AI agent for basic text. For specific model values, see the [available models list](g://box-ai/supported-models).
     ///   - numTokensForCompletion: The number of tokens for completion.
     ///   - llmEndpointParams: The parameters for the LLM endpoint specific to OpenAI / Google models.
-    ///   - systemMessage: System messages try to help the LLM "understand" its role and what it is supposed to do.
-    ///     Input for `{current_date}` is optional, depending on the use.
+    ///   - systemMessage: System messages aim at helping the LLM understand its role and what it is supposed to do.
+    ///     The input for `{current_date}` is optional, depending on the use.
     ///   - promptTemplate: The prompt template contains contextual information of the request and the user prompt.
     ///     
     ///     When using the `prompt_template` parameter, you **must include** input for `{user_question}`.

@@ -8,7 +8,7 @@ public class AiAgentBasicTextToolBase: Codable {
         case llmEndpointParams = "llm_endpoint_params"
     }
 
-    /// The model used for the AI Agent for basic text. For specific model values, see the [available models list](g://box-ai/supported-models).
+    /// The model used for the AI agent for basic text. For specific model values, see the [available models list](g://box-ai/supported-models).
     public let model: String?
 
     /// The number of tokens for completion.
@@ -20,7 +20,7 @@ public class AiAgentBasicTextToolBase: Codable {
     /// Initializer for a AiAgentBasicTextToolBase.
     ///
     /// - Parameters:
-    ///   - model: The model used for the AI Agent for basic text. For specific model values, see the [available models list](g://box-ai/supported-models).
+    ///   - model: The model used for the AI agent for basic text. For specific model values, see the [available models list](g://box-ai/supported-models).
     ///   - numTokensForCompletion: The number of tokens for completion.
     ///   - llmEndpointParams: The parameters for the LLM endpoint specific to OpenAI / Google models.
     public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi? = nil) {

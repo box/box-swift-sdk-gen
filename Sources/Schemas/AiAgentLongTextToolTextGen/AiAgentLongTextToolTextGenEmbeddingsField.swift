@@ -6,7 +6,7 @@ public class AiAgentLongTextToolTextGenEmbeddingsField: Codable {
         case strategy
     }
 
-    /// The model used for the AI Agent for calculating embeddings.
+    /// The model used for the AI agent for calculating embeddings.
     public let model: String?
 
     public let strategy: AiAgentLongTextToolTextGenEmbeddingsStrategyField?
@@ -14,7 +14,7 @@ public class AiAgentLongTextToolTextGenEmbeddingsField: Codable {
     /// Initializer for a AiAgentLongTextToolTextGenEmbeddingsField.
     ///
     /// - Parameters:
-    ///   - model: The model used for the AI Agent for calculating embeddings.
+    ///   - model: The model used for the AI agent for calculating embeddings.
     ///   - strategy: 
     public init(model: String? = nil, strategy: AiAgentLongTextToolTextGenEmbeddingsStrategyField? = nil) {
         self.model = model

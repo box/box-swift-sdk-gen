@@ -25,12 +25,11 @@ public class AiLlmEndpointParamsOpenAi: Codable {
     /// mass are considered. We generally recommend altering this or temperature but not both.
     public let topP: Double?
 
-    /// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the 
+    /// A number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the 
     /// text so far, decreasing the model's likelihood to repeat the same line verbatim.
     public let frequencyPenalty: Double?
 
-    /// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, 
-    /// increasing the model's likelihood to talk about new topics.
+    /// A number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
     public let presencePenalty: Double?
 
     /// Up to 4 sequences where the API will stop generating further tokens.
@@ -47,10 +46,9 @@ public class AiLlmEndpointParamsOpenAi: Codable {
     ///   - topP: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results 
     ///     of the tokens with `top_p` probability mass. So 0.1 means only the tokens comprising the top 10% probability 
     ///     mass are considered. We generally recommend altering this or temperature but not both.
-    ///   - frequencyPenalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the 
+    ///   - frequencyPenalty: A number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the 
     ///     text so far, decreasing the model's likelihood to repeat the same line verbatim.
-    ///   - presencePenalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, 
-    ///     increasing the model's likelihood to talk about new topics.
+    ///   - presencePenalty: A number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
     ///   - stop: Up to 4 sequences where the API will stop generating further tokens.
     public init(type: AiLlmEndpointParamsOpenAiTypeField = AiLlmEndpointParamsOpenAiTypeField.openaiParams, temperature: Double? = nil, topP: Double? = nil, frequencyPenalty: Double? = nil, presencePenalty: Double? = nil, stop: String? = nil) {
         self.type = type

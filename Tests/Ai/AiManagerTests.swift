@@ -11,7 +11,7 @@ class AiManagerTests: XCTestCase {
 
     public func testAskAiSingleItem() async throws {
         let fileToAsk: FileFull = try await CommonsManager().uploadNewFile()
-        let response: AiResponseFull = try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.singleItemQa, prompt: "which direction sun rises", items: [AiAskItemsField(id: fileToAsk.id, type: AiAskItemsTypeField.file, content: "Sun rises in the East")]))
+        let response: AiResponseFull = try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.singleItemQa, prompt: "which direction sun rises", items: [AiItemBase(id: fileToAsk.id, type: AiItemBaseTypeField.file, content: "Sun rises in the East")]))
         XCTAssertTrue(response.answer.contains("East"))
         XCTAssertTrue(response.completionReason == "done")
         try await client.files.deleteFileById(fileId: fileToAsk.id)
@@ -20,7 +20,7 @@ class AiManagerTests: XCTestCase {
     public func testAskAiMultipleItems() async throws {
         let fileToAsk1: FileFull = try await CommonsManager().uploadNewFile()
         let fileToAsk2: FileFull = try await CommonsManager().uploadNewFile()
-        let response: AiResponseFull = try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.multipleItemQa, prompt: "Which direction sun rises?", items: [AiAskItemsField(id: fileToAsk1.id, type: AiAskItemsTypeField.file, content: "Earth goes around the sun"), AiAskItemsField(id: fileToAsk2.id, type: AiAskItemsTypeField.file, content: "Sun rises in the East in the morning")]))
+        let response: AiResponseFull = try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.multipleItemQa, prompt: "Which direction sun rises?", items: [AiItemBase(id: fileToAsk1.id, type: AiItemBaseTypeField.file, content: "Earth goes around the sun"), AiItemBase(id: fileToAsk2.id, type: AiItemBaseTypeField.file, content: "Sun rises in the East in the morning")]))
         XCTAssertTrue(response.answer.contains("East"))
         XCTAssertTrue(response.completionReason == "done")
         try await client.files.deleteFileById(fileId: fileToAsk1.id)
@@ -36,10 +36,21 @@ class AiManagerTests: XCTestCase {
     }
 
     public func testGettingAiAskAgentConfig() async throws {
-        let aiAskConfig: AiAgentAskOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.ask, language: "en-US"))
+        let aiAskConfig: AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.ask, language: "en-US"))
     }
 
     public func testGettingAiTextGenAgentConfig() async throws {
-        let aiTextGenConfig: AiAgentAskOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.textGen, language: "en-US"))
+        let aiTextGenConfig: AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen = try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.textGen, language: "en-US"))
+    }
+
+    public func testAiExtract() async throws {
+        let uploadedFiles: Files = try await client.uploads.uploadFile(requestBody: UploadFileRequestBody(attributes: UploadFileRequestBodyAttributesField(name: "\(Utils.getUUID())\(".txt")", parent: UploadFileRequestBodyAttributesParentField(id: "0")), file: Utils.stringToByteStream(text: "My name is John Doe. I live in San Francisco. I was born in 1990. I work at Box.")))
+        let file: FileFull = uploadedFiles.entries![0]
+        try await Utils.delayInSeconds(seconds: 1)
+        let response: AiResponse = try await client.ai.createAiExtract(requestBody: AiExtract(prompt: "firstName, lastName, location, yearOfBirth, company", items: [AiItemBase(id: file.id)]))
+        let expectedResponse: String = "{\"firstName\": \"John\", \"lastName\": \"Doe\", \"location\": \"San Francisco\", \"yearOfBirth\": \"1990\", \"company\": \"Box\"}"
+        XCTAssertTrue(response.answer == expectedResponse)
+        XCTAssertTrue(response.completionReason == "done")
+        try await client.files.deleteFileById(fileId: file.id)
     }
 }

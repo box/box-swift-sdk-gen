@@ -13,12 +13,10 @@ public class AiLlmEndpointParamsGoogle: Codable {
     /// This parameter is **required**.
     public let type: AiLlmEndpointParamsGoogleTypeField
 
-    /// The temperature is used for sampling during response generation, which occurs when `top-P` and `top-K` are applied. 
-    /// Temperature controls the degree of randomness in token selection.
+    /// The temperature is used for sampling during response generation, which occurs when `top-P` and `top-K` are applied. Temperature controls the degree of randomness in the token selection.
     public let temperature: Double?
 
-    /// `Top-P` changes how the model selects tokens for output. Tokens are selected from the most (see `top-K`) to least probable
-    /// until the sum of their probabilities equals the `top-P` value.
+    /// `Top-P` changes how the model selects tokens for output. Tokens are selected from the most (see `top-K`) to least probable until the sum of their probabilities equals the `top-P` value.
     public let topP: Double?
 
     /// `Top-K` changes how the model selects tokens for output. A `top-K` of 1 means the next selected token is
@@ -31,10 +29,8 @@ public class AiLlmEndpointParamsGoogle: Codable {
     /// - Parameters:
     ///   - type: The type of the AI LLM endpoint params object for Google.
     ///     This parameter is **required**.
-    ///   - temperature: The temperature is used for sampling during response generation, which occurs when `top-P` and `top-K` are applied. 
-    ///     Temperature controls the degree of randomness in token selection.
-    ///   - topP: `Top-P` changes how the model selects tokens for output. Tokens are selected from the most (see `top-K`) to least probable
-    ///     until the sum of their probabilities equals the `top-P` value.
+    ///   - temperature: The temperature is used for sampling during response generation, which occurs when `top-P` and `top-K` are applied. Temperature controls the degree of randomness in the token selection.
+    ///   - topP: `Top-P` changes how the model selects tokens for output. Tokens are selected from the most (see `top-K`) to least probable until the sum of their probabilities equals the `top-P` value.
     ///   - topK: `Top-K` changes how the model selects tokens for output. A `top-K` of 1 means the next selected token is
     ///     the most probable among all tokens in the model's vocabulary (also called greedy decoding),
     ///     while a `top-K` of 3 means that the next token is selected from among the three most probable tokens by using temperature.
