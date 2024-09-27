@@ -258,7 +258,8 @@ public enum Utils {
     /// - Parameters:
     ///   - url: URL for a file to read.
     /// - Returns: Data.
-    public static func readBufferFromFile(url: URL) -> Data {
+    public static func readBufferFromFile(filePath: String) -> Data {
+        let url: URL = URL(string: filePath)!
         return try! Data(contentsOf: url)
     }
 
