@@ -15,9 +15,9 @@ class DownloadsManagerTests: XCTestCase {
         let fileContentStream: InputStream = Utils.generateByteStreamFromBuffer(buffer: fileBuffer)
         let uploadedFiles: Files = try await client.uploads.uploadFile(requestBody: UploadFileRequestBody(attributes: UploadFileRequestBodyAttributesField(name: newFileName, parent: UploadFileRequestBodyAttributesParentField(id: "0")), file: fileContentStream))
         let uploadedFile: FileFull = uploadedFiles.entries![0]
-        let destinationPath: URL = URL(path: "\(Utils.temporaryDirectoryPath())\(Utils.getUUID())")
-        try await client.downloads.downloadFile(fileId: uploadedFile.id, downloadDestinationURL: destinationPath)
-        XCTAssertTrue(Utils.bufferEquals(buffer1: Utils.readBufferFromFile(url: destinationPath), buffer2: fileBuffer))
+        let destinationPathString: String = "\(Utils.temporaryDirectoryPath())\(Utils.getUUID())"
+        try await client.downloads.downloadFile(fileId: uploadedFile.id, downloadDestinationURL: URL(path: destinationPathString))
+        XCTAssertTrue(Utils.bufferEquals(buffer1: Utils.readBufferFromFile(filePath: destinationPathString), buffer2: fileBuffer))
         try await client.files.deleteFileById(fileId: uploadedFile.id)
     }
 }
