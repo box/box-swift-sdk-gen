@@ -15,7 +15,7 @@ public class IntegrationMapping: IntegrationMappingBase {
         case modifiedAt = "modified_at"
     }
 
-    /// Mapped item object for Slack or Teams
+    /// Mapped item object for Slack
     public let partnerItem: IntegrationMappingPartnerItemSlackUnion
 
     /// The Box folder, to which the object from the
@@ -55,7 +55,7 @@ public class IntegrationMapping: IntegrationMappingBase {
     ///   - id: A unique identifier of a folder mapping
     ///     (part of a composite key together
     ///     with `integration_type`)
-    ///   - partnerItem: Mapped item object for Slack or Teams
+    ///   - partnerItem: Mapped item object for Slack
     ///   - boxItem: The Box folder, to which the object from the
     ///     partner app domain (referenced in `partner_item_id`) is mapped
     ///   - type: Mapping type
