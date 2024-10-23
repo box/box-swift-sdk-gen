@@ -13,7 +13,7 @@ class FolderClassificationsManagerTests: XCTestCase {
         let classifications: [ClassificationTemplateFieldsOptionsField] = classificationTemplate.fields[0].options
         let currentNumberOfClassifications: Int = classifications.count
         if currentNumberOfClassifications == 1 {
-            let classificationTemplateWithNewClassification: ClassificationTemplate = try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(classificationDefinition: "Other description", colorId: 4))))])
+            let classificationTemplateWithNewClassification: ClassificationTemplate = try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(classificationDefinition: "Other description", colorId: Int64(4)))))])
             return classificationTemplateWithNewClassification.fields[0].options[1]
         }
 
