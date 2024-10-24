@@ -15,7 +15,7 @@ See the endpoint docs at
 
 <!-- sample get_sign_templates -->
 ```
-try await client.signTemplates.getSignTemplates(queryParams: GetSignTemplatesQueryParams(limit: 2))
+try await client.signTemplates.getSignTemplates(queryParams: GetSignTemplatesQueryParams(limit: Int64(2)))
 ```
 
 ### Arguments

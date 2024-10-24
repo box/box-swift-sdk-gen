@@ -64,7 +64,7 @@ public class CommonsManager {
         let classifications: [ClassificationTemplateFieldsOptionsField] = classificationTemplate.fields[0].options
         let currentNumberOfClassifications: Int = classifications.count
         if currentNumberOfClassifications == 0 {
-            let classificationTemplateWithNewClassification: ClassificationTemplate = try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(classificationDefinition: "Some description", colorId: 3))))])
+            let classificationTemplateWithNewClassification: ClassificationTemplate = try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(classificationDefinition: "Some description", colorId: Int64(3)))))])
             return classificationTemplateWithNewClassification.fields[0].options[0]
         }
 
