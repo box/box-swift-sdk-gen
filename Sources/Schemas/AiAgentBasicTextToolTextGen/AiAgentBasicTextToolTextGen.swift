@@ -29,7 +29,7 @@ public class AiAgentBasicTextToolTextGen: AiAgentBasicTextToolBase {
     ///     
     ///     When using the `prompt_template` parameter, you **must include** input for `{user_question}`.
     ///     Inputs for `{current_date}` and `{content}` are optional, depending on the use.
-    public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi? = nil, systemMessage: String? = nil, promptTemplate: String? = nil) {
+    public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParamsAwsOrAiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi? = nil, systemMessage: String? = nil, promptTemplate: String? = nil) {
         self.systemMessage = systemMessage
         self.promptTemplate = promptTemplate
 
