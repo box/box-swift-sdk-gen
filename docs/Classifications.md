@@ -56,7 +56,7 @@ See the endpoint docs at
 
 <!-- sample put_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema#add -->
 ```
-try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(colorId: 4, classificationDefinition: "Other description"))))])
+try await client.classifications.addClassification(requestBody: [AddClassificationRequestBody(data: AddClassificationRequestBodyDataField(key: Utils.getUUID(), staticConfig: AddClassificationRequestBodyDataStaticConfigField(classification: AddClassificationRequestBodyDataStaticConfigClassificationField(colorId: Int64(4), classificationDefinition: "Other description"))))])
 ```
 
 ### Arguments
@@ -92,7 +92,7 @@ See the endpoint docs at
 
 <!-- sample put_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema#update -->
 ```
-try await client.classifications.updateClassification(requestBody: [UpdateClassificationRequestBody(enumOptionKey: classification.key, data: UpdateClassificationRequestBodyDataField(key: updatedClassificationName, staticConfig: UpdateClassificationRequestBodyDataStaticConfigField(classification: UpdateClassificationRequestBodyDataStaticConfigClassificationField(colorId: 2, classificationDefinition: updatedClassificationDescription))))])
+try await client.classifications.updateClassification(requestBody: [UpdateClassificationRequestBody(enumOptionKey: classification.key, data: UpdateClassificationRequestBodyDataField(key: updatedClassificationName, staticConfig: UpdateClassificationRequestBodyDataStaticConfigField(classification: UpdateClassificationRequestBodyDataStaticConfigClassificationField(colorId: Int64(2), classificationDefinition: updatedClassificationDescription))))])
 ```
 
 ### Arguments
