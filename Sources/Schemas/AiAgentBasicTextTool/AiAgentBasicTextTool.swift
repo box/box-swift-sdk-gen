@@ -25,7 +25,7 @@ public class AiAgentBasicTextTool: AiAgentBasicTextToolBase {
     ///   - promptTemplate: The prompt template contains contextual information of the request and the user prompt.
     ///     When passing `prompt_template` parameters, you **must include** inputs for `{user_question}` and `{content}`.
     ///     `{current_date}` is optional, depending on the use.
-    public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi? = nil, systemMessage: String? = nil, promptTemplate: String? = nil) {
+    public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParamsAwsOrAiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi? = nil, systemMessage: String? = nil, promptTemplate: String? = nil) {
         self.systemMessage = systemMessage
         self.promptTemplate = promptTemplate
 
