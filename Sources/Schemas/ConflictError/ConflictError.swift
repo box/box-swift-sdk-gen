@@ -16,7 +16,7 @@ public class ConflictError: ClientError {
     ///   - helpUrl: A URL that links to more information about why this error occurred.
     ///   - requestId: A unique identifier for this response, which can be used
     ///     when contacting Box support.
-    public override init(type: ClientErrorTypeField? = nil, status: Int? = nil, code: ClientErrorCodeField? = nil, message: String? = nil, contextInfo: ClientErrorContextInfoField? = nil, helpUrl: String? = nil, requestId: String? = nil) {
+    public override init(type: ClientErrorTypeField? = nil, status: Int? = nil, code: ClientErrorCodeField? = nil, message: String? = nil, contextInfo: [String: String]? = nil, helpUrl: String? = nil, requestId: String? = nil) {
         super.init(type: type, status: status, code: code, message: message, contextInfo: contextInfo, helpUrl: helpUrl, requestId: requestId)
     }
 
