@@ -15,7 +15,7 @@ public class AiAgentBasicTextToolBase: Codable {
     public let numTokensForCompletion: Int64?
 
     /// The parameters for the LLM endpoint specific to OpenAI / Google models.
-    public let llmEndpointParams: AiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi?
+    public let llmEndpointParams: AiLlmEndpointParamsAwsOrAiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi?
 
     /// Initializer for a AiAgentBasicTextToolBase.
     ///
@@ -23,7 +23,7 @@ public class AiAgentBasicTextToolBase: Codable {
     ///   - model: The model used for the AI agent for basic text. For specific model values, see the [available models list](g://box-ai/supported-models).
     ///   - numTokensForCompletion: The number of tokens for completion.
     ///   - llmEndpointParams: The parameters for the LLM endpoint specific to OpenAI / Google models.
-    public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi? = nil) {
+    public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParamsAwsOrAiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi? = nil) {
         self.model = model
         self.numTokensForCompletion = numTokensForCompletion
         self.llmEndpointParams = llmEndpointParams
@@ -33,7 +33,7 @@ public class AiAgentBasicTextToolBase: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         model = try container.decodeIfPresent(String.self, forKey: .model)
         numTokensForCompletion = try container.decodeIfPresent(Int64.self, forKey: .numTokensForCompletion)
-        llmEndpointParams = try container.decodeIfPresent(AiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi.self, forKey: .llmEndpointParams)
+        llmEndpointParams = try container.decodeIfPresent(AiLlmEndpointParamsAwsOrAiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi.self, forKey: .llmEndpointParams)
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -21,7 +21,7 @@ public class AiAgentLongTextToolTextGen: AiAgentBasicTextToolTextGen {
     ///     When using the `prompt_template` parameter, you **must include** input for `{user_question}`.
     ///     Inputs for `{current_date}` and `{content}` are optional, depending on the use.
     ///   - embeddings: 
-    public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi? = nil, systemMessage: String? = nil, promptTemplate: String? = nil, embeddings: AiAgentLongTextToolTextGenEmbeddingsField? = nil) {
+    public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParamsAwsOrAiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi? = nil, systemMessage: String? = nil, promptTemplate: String? = nil, embeddings: AiAgentLongTextToolTextGenEmbeddingsField? = nil) {
         self.embeddings = embeddings
 
         super.init(model: model, numTokensForCompletion: numTokensForCompletion, llmEndpointParams: llmEndpointParams, systemMessage: systemMessage, promptTemplate: promptTemplate)
