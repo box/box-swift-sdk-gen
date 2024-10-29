@@ -1,111 +1,53 @@
-# UploadsManager
+# Uploads
 
+Uploads module is used to upload files to Box.
+It supports uploading files from an `InputStream`.
+For now, it only supports uploading small files without chunked upload.
 
-- [Upload file version](#upload-file-version)
-- [Preflight check before upload](#preflight-check-before-upload)
-- [Upload file](#upload-file)
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-## Upload file version
+- [Upload a File](#upload-a-file)
 
-Update a file's content. For file sizes over 50MB we recommend
-using the Chunk Upload APIs.
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-The `attributes` part of the body must come **before** the
-`file` part. Requests that do not follow this format when
-uploading the file will receive a HTTP `400` error with a
-`metadata_after_file_contents` error code.
+## Upload a File
 
-This operation is performed by calling function `uploadFileVersion`.
-
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-files-id-content/).
-
-<!-- sample post_files_id_content -->
-```
-try await client.uploads.uploadFileVersion(fileId: file.id, requestBody: UploadFileVersionRequestBody(attributes: UploadFileVersionRequestBodyAttributesField(name: file.name!), file: Utils.generateByteStream(size: 20)))
-```
-
-### Arguments
-
-- fileId `String`
-  - The unique identifier that represents a file.  The ID for any file can be determined by visiting a file in the web application and copying the ID from the URL. For example, for the URL `https://*.app.box.com/files/123` the `file_id` is `123`. Example: "12345"
-- requestBody `UploadFileVersionRequestBody`
-  - Request body of uploadFileVersion method
-- queryParams `UploadFileVersionQueryParams`
-  - Query parameters of uploadFileVersion method
-- headers `UploadFileVersionHeaders`
-  - Headers of uploadFileVersion method
-
-
-### Returns
-
-This function returns a value of type `Files`.
-
-Returns the new file object in a list.
-
-
-## Preflight check before upload
-
-Performs a check to verify that a file will be accepted by Box
-before you upload the entire file.
-
-This operation is performed by calling function `preflightFileUploadCheck`.
-
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/options-files-content/).
-
-*Currently we don't have an example for calling `preflightFileUploadCheck` in integration tests*
-
-### Arguments
-
-- requestBody `PreflightFileUploadCheckRequestBody`
-  - Request body of preflightFileUploadCheck method
-- headers `PreflightFileUploadCheckHeaders`
-  - Headers of preflightFileUploadCheck method
-
-
-### Returns
-
-This function returns a value of type `UploadUrl`.
-
-If the check passed, the response will include a session URL that
-can be used to upload the file to.
-
-
-## Upload file
-
-Uploads a small file to Box. For file sizes over 50MB we recommend
-using the Chunk Upload APIs.
-
-The `attributes` part of the body must come **before** the
-`file` part. Requests that do not follow this format when
-uploading the file will receive a HTTP `400` error with a
-`metadata_after_file_contents` error code.
-
-This operation is performed by calling function `uploadFile`.
-
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-files-content/).
+To upload a small file from an `InputStream`, call `client.uploads.uploadFile(requestBody:queryParams:headers)` method.
+This method returns a `Files` object which contains information about the uploaded files.
 
 <!-- sample post_files_content -->
+
+```swift
+// Create InputStream for a file based on URL
+guard let fileStream = InputStream(url: URL(string: "<URL_TO_YOUR_FILE>")!) else {
+    fatalError("Could not read a file")
+}
+
+// Create a request body with the required parameters
+let requestBody = UploadFileRequestBodyArg(
+    attributes: UploadFileRequestBodyArgAttributesField(
+        name: "filename.txt",
+        parent: UploadFileRequestBodyArgAttributesFieldParentField(id: "0")
+    ),
+    file: fileStream
+)
+
+// Call uploadFile method
+let files = try await client.uploads.uploadFile(requestBody: requestBody)
+
+// Print some data from the reponse
+if let file = files.entries?[0] {
+    print("File uploaded with id \(file.id), name \(file.name!)")
+}
 ```
-try await parentClient.uploads.uploadFile(requestBody: UploadFileRequestBody(attributes: UploadFileRequestBodyAttributesField(name: Utils.getUUID(), parent: UploadFileRequestBodyAttributesParentField(id: "0")), file: Utils.generateByteStream(size: 1024 * 1024)))
+
+If we want to upload a file based on the String type, we need to create an input stream as follows:
+
+```swift
+let stringContent: String = "File content from String"
+let data: Data = stringContent.data(using: .utf8)!
+let stream: InputStream = InputStream(data: data)
 ```
 
-### Arguments
-
-- requestBody `UploadFileRequestBody`
-  - Request body of uploadFile method
-- queryParams `UploadFileQueryParams`
-  - Query parameters of uploadFile method
-- headers `UploadFileHeaders`
-  - Headers of uploadFile method
-
-
-### Returns
-
-This function returns a value of type `Files`.
-
-Returns the new file object in a list.
-
-
+Then we just pass the created `stream` to the `file` argument when initializing the `UploadFileRequestBodyArg` object.
