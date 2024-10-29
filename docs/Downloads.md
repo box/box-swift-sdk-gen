@@ -1,48 +1,28 @@
-# DownloadsManager
+# Downloads
 
+Downloads module is used to download files from Box.
 
-- [Download file](#download-file)
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-## Download file
+- [Download a File](#download-a-file)
 
-Returns the contents of a file in binary format.
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-This operation is performed by calling function `downloadFile`.
+## Download a File
 
-See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-files-id-content/).
+To download a file to your device(local disk), call `client.downloads.downloadFile(fileId:downloadDestinationURL:queryParams:headers)` method
+with the ID of the file to download and a URL to the location (including name of the file) where the file should be downloaded to.
 
 <!-- sample get_files_id_content -->
+
+```swift
+let downloadsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+let destinationURL = downloadsDirectoryURL.appendingPathComponent("file.txt")
+
+let url = try await client.downloads.downloadFile(fileId: file.id, downloadDestinationURL: destinationURL)
+
+if let fileContent = try? String(contentsOf: url, encoding: .utf8) {
+    print("The content of the file: \(fileContent)")
+}
 ```
-try await client.downloads.downloadFile(fileId: uploadedFile.id, downloadDestinationURL: URL(path: destinationPathString))
-```
-
-### Arguments
-
-- fileId `String`
-  - The unique identifier that represents a file.  The ID for any file can be determined by visiting a file in the web application and copying the ID from the URL. For example, for the URL `https://*.app.box.com/files/123` the `file_id` is `123`. Example: "12345"
-- downloadDestinationURL `URL`
-  - The URL on disk where the file will be saved once it has been downloaded.
-- queryParams `DownloadFileQueryParams`
-  - Query parameters of downloadFile method
-- headers `DownloadFileHeaders`
-  - Headers of downloadFile method
-
-
-### Returns
-
-This function returns a value of type `URL`.
-
-Returns the requested file if the client has the **follow
-redirects** setting enabled to automatically
-follow HTTP `3xx` responses as redirects. If not, the request
-will return `302` instead.
-For details, see
-the [download file guide](g://downloads/file#download-url).If the file is not ready to be downloaded yet `Retry-After` header will
-be returned indicating the time in seconds after which the file will
-be available for the client to download.
-
-This response can occur when the file was uploaded immediately before the
-download request.
-
-
