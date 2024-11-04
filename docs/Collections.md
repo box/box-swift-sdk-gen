@@ -78,7 +78,10 @@ This operation is performed by calling function `getCollectionById`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-collections-id/).
 
-*Currently we don't have an example for calling `getCollectionById` in integration tests*
+<!-- sample get_collections_id -->
+```
+try await client.collections.getCollectionById(collectionId: collections.entries![0].id!)
+```
 
 ### Arguments
 
