@@ -44,4 +44,18 @@ public class CollectionsManager {
         return try Items.deserialize(from: response.data)
     }
 
+    /// Retrieves a collection by its ID.
+    ///
+    /// - Parameters:
+    ///   - collectionId: The ID of the collection.
+    ///     Example: "926489"
+    ///   - headers: Headers of getCollectionById method
+    /// - Returns: The `Collection`.
+    /// - Throws: The `GeneralError`.
+    public func getCollectionById(collectionId: String, headers: GetCollectionByIdHeaders = GetCollectionByIdHeaders()) async throws -> Collection {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collections/")\(collectionId)", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try Collection.deserialize(from: response.data)
+    }
+
 }
