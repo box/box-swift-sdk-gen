@@ -11,7 +11,9 @@ class CollectionsManagerTests: XCTestCase {
 
     public func testCollections() async throws {
         let collections: Collections = try await client.collections.getCollections()
-        let favouriteCollection: Collection = collections.entries![0]
+        let favouriteCollection: Collection = try await client.collections.getCollectionById(collectionId: collections.entries![0].id!)
+        XCTAssertTrue(Utils.Strings.toString(value: favouriteCollection.type!) == "collection")
+        XCTAssertTrue(Utils.Strings.toString(value: favouriteCollection.collectionType!) == "favorites")
         let collectionItems: Items = try await client.collections.getCollectionItems(collectionId: favouriteCollection.id!)
         let folder: FolderFull = try await client.folders.createFolder(requestBody: CreateFolderRequestBody(name: Utils.getUUID(), parent: CreateFolderRequestBodyParentField(id: "0")))
         try await client.folders.updateFolderById(folderId: folder.id, requestBody: UpdateFolderByIdRequestBody(collections: [UpdateFolderByIdRequestBodyCollectionsField(id: favouriteCollection.id)]))
