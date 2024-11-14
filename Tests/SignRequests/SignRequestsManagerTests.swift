@@ -55,6 +55,7 @@ class SignRequestsManagerTests: XCTestCase {
         let destinationFolder: FolderFull = try await CommonsManager().createNewFolder()
         let createdSignRequest: SignRequest = try await client.signRequests.createSignRequest(requestBody: SignRequestCreateRequest(signers: [SignRequestCreateSigner(email: signer1Email, signerGroupId: "user"), SignRequestCreateSigner(email: signer2Email, signerGroupId: "user")], sourceFiles: [FileBase(id: fileToSign.id)], parentFolder: FolderMini(id: destinationFolder.id)))
         XCTAssertTrue(createdSignRequest.signers!.count == 3)
+        XCTAssertTrue(createdSignRequest.signers![1].signerGroupId != nil)
         XCTAssertTrue(createdSignRequest.signers![1].signerGroupId == createdSignRequest.signers![2].signerGroupId)
         try await client.folders.deleteFolderById(folderId: destinationFolder.id, queryParams: DeleteFolderByIdQueryParams(recursive: true))
         try await client.files.deleteFileById(fileId: fileToSign.id)
