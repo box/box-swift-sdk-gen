@@ -199,12 +199,16 @@ public class ChunkedUploadsManager {
     ///   - url: URL of createFileUploadSessionCommit method
     ///   - requestBody: Request body of createFileUploadSessionCommit method
     ///   - headers: Headers of createFileUploadSessionCommit method
-    /// - Returns: The `Files`.
+    /// - Returns: The `Files?`.
     /// - Throws: The `GeneralError`.
-    public func createFileUploadSessionCommitByUrl(url: String, requestBody: CreateFileUploadSessionCommitByUrlRequestBody, headers: CreateFileUploadSessionCommitByUrlHeaders) async throws -> Files {
+    public func createFileUploadSessionCommitByUrl(url: String, requestBody: CreateFileUploadSessionCommitByUrlRequestBody, headers: CreateFileUploadSessionCommitByUrlHeaders) async throws -> Files? {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["digest": Utils.Strings.toString(value: headers.digest), "if-match": Utils.Strings.toString(value: headers.ifMatch), "if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch)], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: url, method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Files.deserialize(from: response.data)
+        if Utils.Strings.toString(value: response.status) == "202" {
+            return nil
+        }
+
+        return try Files?.deserialize(from: response.data)
     }
 
     /// Close an upload session and create a file from the uploaded chunks.
@@ -217,12 +221,16 @@ public class ChunkedUploadsManager {
     ///     Example: "D5E3F7A"
     ///   - requestBody: Request body of createFileUploadSessionCommit method
     ///   - headers: Headers of createFileUploadSessionCommit method
-    /// - Returns: The `Files`.
+    /// - Returns: The `Files?`.
     /// - Throws: The `GeneralError`.
-    public func createFileUploadSessionCommit(uploadSessionId: String, requestBody: CreateFileUploadSessionCommitRequestBody, headers: CreateFileUploadSessionCommitHeaders) async throws -> Files {
+    public func createFileUploadSessionCommit(uploadSessionId: String, requestBody: CreateFileUploadSessionCommitRequestBody, headers: CreateFileUploadSessionCommitHeaders) async throws -> Files? {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["digest": Utils.Strings.toString(value: headers.digest), "if-match": Utils.Strings.toString(value: headers.ifMatch), "if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch)], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)\("/commit")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Files.deserialize(from: response.data)
+        if Utils.Strings.toString(value: response.status) == "202" {
+            return nil
+        }
+
+        return try Files?.deserialize(from: response.data)
     }
 
     public func reducer(acc: PartAccumulator, chunk: InputStream) async throws -> PartAccumulator {
@@ -273,8 +281,8 @@ public class ChunkedUploadsManager {
         assert(processedSessionParts.totalCount! == totalParts)
         let sha1: String = await fileHash.digestHash(encoding: "base64")
         let digest: String = "\("sha=")\(sha1)"
-        let committedSession: Files = try await self.createFileUploadSessionCommitByUrl(url: commitUrl, requestBody: CreateFileUploadSessionCommitByUrlRequestBody(parts: parts), headers: CreateFileUploadSessionCommitByUrlHeaders(digest: digest))
-        return committedSession.entries![0]
+        let committedSession: Files? = try await self.createFileUploadSessionCommitByUrl(url: commitUrl, requestBody: CreateFileUploadSessionCommitByUrlRequestBody(parts: parts), headers: CreateFileUploadSessionCommitByUrlHeaders(digest: digest))
+        return committedSession!.entries![0]
     }
 
 }

@@ -326,7 +326,7 @@ public class NetworkClient {
         let isStatusCodeAcceptedWithRetryAfterHeader = statusCode == 202 && conversation.urlResponse.value(forHTTPHeaderField: HTTPHeaderKey.retryAfter) != nil
 
         // OK
-        if statusCode >= 200 && statusCode < 400 && !isStatusCodeAcceptedWithRetryAfterHeader {
+        if statusCode >= 200 && statusCode < 400 && (!isStatusCodeAcceptedWithRetryAfterHeader || attempt >= networkSession.networkSettings.maxRetryAttempts) {
             return conversation.convertToFetchResponse()
         }
 

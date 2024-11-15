@@ -132,6 +132,10 @@ public class FilesManager {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["min_height": Utils.Strings.toString(value: queryParams.minHeight), "min_width": Utils.Strings.toString(value: queryParams.minWidth), "max_height": Utils.Strings.toString(value: queryParams.maxHeight), "max_width": Utils.Strings.toString(value: queryParams.maxWidth)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/thumbnail.")\(extension_)", method: "GET", params: queryParamsMap, headers: headersMap, downloadDestinationURL: downloadDestinationURL, responseFormat: "binary", auth: self.auth, networkSession: self.networkSession))
+        if Utils.Strings.toString(value: response.status) == "202" {
+            return response.downloadDestinationURL!
+        }
+
         return response.downloadDestinationURL!
     }
 
