@@ -6,9 +6,6 @@ public class Collaborations: Codable {
         case limit
         case nextMarker = "next_marker"
         case prevMarker = "prev_marker"
-        case totalCount = "total_count"
-        case offset
-        case order
         case entries
     }
 
@@ -23,27 +20,6 @@ public class Collaborations: Codable {
     /// The marker for the start of the previous page of results.
     public let prevMarker: String?
 
-    /// One greater than the offset of the last entry in the entire collection.
-    /// The total number of entries in the collection may be less than
-    /// `total_count`.
-    /// 
-    /// This field is only returned for calls that use offset-based pagination.
-    /// For marker-based paginated APIs, this field will be omitted.
-    public let totalCount: Int64?
-
-    /// The 0-based offset of the first entry in this set. This will be the same
-    /// as the `offset` query parameter.
-    /// 
-    /// This field is only returned for calls that use offset-based pagination.
-    /// For marker-based paginated APIs, this field will be omitted.
-    public let offset: Int64?
-
-    /// The order by which items are returned.
-    /// 
-    /// This field is only returned for calls that use offset-based pagination.
-    /// For marker-based paginated APIs, this field will be omitted.
-    public let order: [CollaborationsOrderField]?
-
     /// A list of collaborations
     public let entries: [Collaboration]?
 
@@ -55,29 +31,11 @@ public class Collaborations: Codable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
-    ///   - totalCount: One greater than the offset of the last entry in the entire collection.
-    ///     The total number of entries in the collection may be less than
-    ///     `total_count`.
-    ///     
-    ///     This field is only returned for calls that use offset-based pagination.
-    ///     For marker-based paginated APIs, this field will be omitted.
-    ///   - offset: The 0-based offset of the first entry in this set. This will be the same
-    ///     as the `offset` query parameter.
-    ///     
-    ///     This field is only returned for calls that use offset-based pagination.
-    ///     For marker-based paginated APIs, this field will be omitted.
-    ///   - order: The order by which items are returned.
-    ///     
-    ///     This field is only returned for calls that use offset-based pagination.
-    ///     For marker-based paginated APIs, this field will be omitted.
     ///   - entries: A list of collaborations
-    public init(limit: Int64? = nil, nextMarker: String? = nil, prevMarker: String? = nil, totalCount: Int64? = nil, offset: Int64? = nil, order: [CollaborationsOrderField]? = nil, entries: [Collaboration]? = nil) {
+    public init(limit: Int64? = nil, nextMarker: String? = nil, prevMarker: String? = nil, entries: [Collaboration]? = nil) {
         self.limit = limit
         self.nextMarker = nextMarker
         self.prevMarker = prevMarker
-        self.totalCount = totalCount
-        self.offset = offset
-        self.order = order
         self.entries = entries
     }
 
@@ -86,9 +44,6 @@ public class Collaborations: Codable {
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         nextMarker = try container.decodeIfPresent(String.self, forKey: .nextMarker)
         prevMarker = try container.decodeIfPresent(String.self, forKey: .prevMarker)
-        totalCount = try container.decodeIfPresent(Int64.self, forKey: .totalCount)
-        offset = try container.decodeIfPresent(Int64.self, forKey: .offset)
-        order = try container.decodeIfPresent([CollaborationsOrderField].self, forKey: .order)
         entries = try container.decodeIfPresent([Collaboration].self, forKey: .entries)
     }
 
@@ -97,9 +52,6 @@ public class Collaborations: Codable {
         try container.encodeIfPresent(limit, forKey: .limit)
         try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
         try container.encodeIfPresent(prevMarker, forKey: .prevMarker)
-        try container.encodeIfPresent(totalCount, forKey: .totalCount)
-        try container.encodeIfPresent(offset, forKey: .offset)
-        try container.encodeIfPresent(order, forKey: .order)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
 
