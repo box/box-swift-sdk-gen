@@ -35,12 +35,16 @@ public class UserCollaborationsManager {
     ///     Example: "1234"
     ///   - requestBody: Request body of updateCollaborationById method
     ///   - headers: Headers of updateCollaborationById method
-    /// - Returns: The `Collaboration`.
+    /// - Returns: The `Collaboration?`.
     /// - Throws: The `GeneralError`.
-    public func updateCollaborationById(collaborationId: String, requestBody: UpdateCollaborationByIdRequestBody, headers: UpdateCollaborationByIdHeaders = UpdateCollaborationByIdHeaders()) async throws -> Collaboration {
+    public func updateCollaborationById(collaborationId: String, requestBody: UpdateCollaborationByIdRequestBody, headers: UpdateCollaborationByIdHeaders = UpdateCollaborationByIdHeaders()) async throws -> Collaboration? {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaborations/")\(collaborationId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Collaboration.deserialize(from: response.data)
+        if Utils.Strings.toString(value: response.status) == "204" {
+            return nil
+        }
+
+        return try Collaboration?.deserialize(from: response.data)
     }
 
     /// Deletes a single collaboration.

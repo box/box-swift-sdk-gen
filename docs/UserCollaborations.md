@@ -65,7 +65,7 @@ try await client.userCollaborations.updateCollaborationById(collaborationId: col
 
 ### Returns
 
-This function returns a value of type `Collaboration`.
+This function returns a value of type `Collaboration?`.
 
 Returns an updated collaboration object unless the owner has changed.If the role is changed to `owner`, the collaboration is deleted
 and a new collaboration is created. The previous `owner` of

@@ -52,8 +52,8 @@ class ChunkedUploadsManagerTests: XCTestCase {
         XCTAssertTrue(processedSession.id! == uploadSessionId)
         let sha1: String = await fileHash.digestHash(encoding: "base64")
         let digest: String = "\("sha=")\(sha1)"
-        let committedSession: Files = try await client.chunkedUploads.createFileUploadSessionCommit(uploadSessionId: uploadSessionId, requestBody: CreateFileUploadSessionCommitRequestBody(parts: parts), headers: CreateFileUploadSessionCommitHeaders(digest: digest))
-        XCTAssertTrue(committedSession.entries![0].name! == fileName)
+        let committedSession: Files? = try await client.chunkedUploads.createFileUploadSessionCommit(uploadSessionId: uploadSessionId, requestBody: CreateFileUploadSessionCommitRequestBody(parts: parts), headers: CreateFileUploadSessionCommitHeaders(digest: digest))
+        XCTAssertTrue(committedSession!.entries![0].name! == fileName)
         try await client.chunkedUploads.deleteFileUploadSessionById(uploadSessionId: uploadSessionId)
     }
 
@@ -105,8 +105,8 @@ class ChunkedUploadsManagerTests: XCTestCase {
         XCTAssertTrue(processedSession.id! == uploadSessionId)
         let sha1: String = await fileHash.digestHash(encoding: "base64")
         let digest: String = "\("sha=")\(sha1)"
-        let committedSession: Files = try await client.chunkedUploads.createFileUploadSessionCommitByUrl(url: commitUrl, requestBody: CreateFileUploadSessionCommitByUrlRequestBody(parts: parts), headers: CreateFileUploadSessionCommitByUrlHeaders(digest: digest))
-        XCTAssertTrue(committedSession.entries![0].name! == fileName)
+        let committedSession: Files? = try await client.chunkedUploads.createFileUploadSessionCommitByUrl(url: commitUrl, requestBody: CreateFileUploadSessionCommitByUrlRequestBody(parts: parts), headers: CreateFileUploadSessionCommitByUrlHeaders(digest: digest))
+        XCTAssertTrue(committedSession!.entries![0].name! == fileName)
         try await client.chunkedUploads.deleteFileUploadSessionByUrl(url: abortUrl)
     }
 
