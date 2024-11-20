@@ -7,22 +7,24 @@ public class CollaborationAcceptanceRequirementsStatusStrongPasswordRequirementF
     }
 
     /// Whether or not the enterprise that owns the content requires
-    /// a strong password to collaborate on the content.
+    /// a strong password to collaborate on the content, or enforces
+    /// an exposed password detection for the external collaborators.
     public let enterpriseHasStrongPasswordRequiredForExternalUsers: Bool?
 
-    /// Whether or not the user has a strong password set for their
-    /// account. The field is `null` when a strong password is not
-    /// required.
+    /// Whether or not the user has a strong and not exposed password set
+    /// for their account. The field is `null` when a strong password is
+    /// not required.
     public let userHasStrongPassword: Bool?
 
     /// Initializer for a CollaborationAcceptanceRequirementsStatusStrongPasswordRequirementField.
     ///
     /// - Parameters:
     ///   - enterpriseHasStrongPasswordRequiredForExternalUsers: Whether or not the enterprise that owns the content requires
-    ///     a strong password to collaborate on the content.
-    ///   - userHasStrongPassword: Whether or not the user has a strong password set for their
-    ///     account. The field is `null` when a strong password is not
-    ///     required.
+    ///     a strong password to collaborate on the content, or enforces
+    ///     an exposed password detection for the external collaborators.
+    ///   - userHasStrongPassword: Whether or not the user has a strong and not exposed password set
+    ///     for their account. The field is `null` when a strong password is
+    ///     not required.
     public init(enterpriseHasStrongPasswordRequiredForExternalUsers: Bool? = nil, userHasStrongPassword: Bool? = nil) {
         self.enterpriseHasStrongPasswordRequiredForExternalUsers = enterpriseHasStrongPasswordRequiredForExternalUsers
         self.userHasStrongPassword = userHasStrongPassword

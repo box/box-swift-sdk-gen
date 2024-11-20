@@ -12,6 +12,15 @@ public class GetFolderCollaborationsQueryParams {
     /// to the fields requested.
     public let fields: [String]?
 
+    /// The maximum number of items to return per page.
+    public let limit: Int64?
+
+    /// Defines the position marker at which to begin returning results. This is
+    /// used when paginating using marker-based pagination.
+    /// 
+    /// This requires `usemarker` to be set to `true`.
+    public let marker: String?
+
     /// Initializer for a GetFolderCollaborationsQueryParams.
     ///
     /// - Parameters:
@@ -24,8 +33,15 @@ public class GetFolderCollaborationsQueryParams {
     ///     the response unless explicitly specified, instead only
     ///     fields for the mini representation are returned, additional
     ///     to the fields requested.
-    public init(fields: [String]? = nil) {
+    ///   - limit: The maximum number of items to return per page.
+    ///   - marker: Defines the position marker at which to begin returning results. This is
+    ///     used when paginating using marker-based pagination.
+    ///     
+    ///     This requires `usemarker` to be set to `true`.
+    public init(fields: [String]? = nil, limit: Int64? = nil, marker: String? = nil) {
         self.fields = fields
+        self.limit = limit
+        self.marker = marker
     }
 
 }
