@@ -18,10 +18,10 @@ class CollectionsManagerTests: XCTestCase {
         let folder: FolderFull = try await client.folders.createFolder(requestBody: CreateFolderRequestBody(name: Utils.getUUID(), parent: CreateFolderRequestBodyParentField(id: "0")))
         try await client.folders.updateFolderById(folderId: folder.id, requestBody: UpdateFolderByIdRequestBody(collections: [UpdateFolderByIdRequestBodyCollectionsField(id: favouriteCollection.id)]))
         let collectionItemsAfterUpdate: ItemsOffsetPaginated = try await client.collections.getCollectionItems(collectionId: favouriteCollection.id!)
-        XCTAssertTrue(collectionItemsAfterUpdate.entries!.count == collectionItems.entries!.count + 1)
+        XCTAssertTrue(collectionItemsAfterUpdate.totalCount! == collectionItems.totalCount! + 1)
         try await client.folders.updateFolderById(folderId: folder.id, requestBody: UpdateFolderByIdRequestBody(collections: []))
         let collectionItemsAfterRemove: ItemsOffsetPaginated = try await client.collections.getCollectionItems(collectionId: favouriteCollection.id!)
-        XCTAssertTrue(collectionItemsAfterRemove.entries!.count == collectionItems.entries!.count)
+        XCTAssertTrue(collectionItemsAfterRemove.totalCount! == collectionItems.totalCount!)
         try await client.folders.deleteFolderById(folderId: folder.id)
     }
 }
