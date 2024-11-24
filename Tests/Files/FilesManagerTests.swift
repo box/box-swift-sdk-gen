@@ -40,7 +40,7 @@ class FilesManagerTests: XCTestCase {
         let updatedContentStream: InputStream = Utils.generateByteStream(size: 1024 * 1024)
         let uploadedFile: FileFull = try await uploadFile(fileName: newFileName, fileStream: updatedContentStream)
         let file: FileFull = try await client.files.getFileById(fileId: uploadedFile.id)
-        await XCTAssertThrowsErrorAsync(try await client.files.getFileById(fileId: uploadedFile.id, queryParams: GetFileByIdQueryParams(fields: ["name"]), headers: GetFileByIdHeaders(extraHeaders: ["if-none-match": file.etag])))
+        await XCTAssertThrowsErrorAsync(try await client.files.getFileById(fileId: uploadedFile.id, queryParams: GetFileByIdQueryParams(fields: ["name"]), headers: GetFileByIdHeaders(extraHeaders: ["if-none-match": file.etag!])))
         XCTAssertTrue(file.name == newFileName)
         try await client.files.deleteFileById(fileId: uploadedFile.id)
         let trashedFile: TrashFile = try await client.trashedFiles.getTrashedFileById(fileId: uploadedFile.id)
