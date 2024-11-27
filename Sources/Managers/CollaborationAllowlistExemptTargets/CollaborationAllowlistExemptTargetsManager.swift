@@ -64,7 +64,7 @@ public class CollaborationAllowlistExemptTargetsManager {
     /// - Throws: The `GeneralError`.
     public func deleteCollaborationWhitelistExemptTargetById(collaborationWhitelistExemptTargetId: String, headers: DeleteCollaborationWhitelistExemptTargetByIdHeaders = DeleteCollaborationWhitelistExemptTargetByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaboration_whitelist_exempt_targets/")\(collaborationWhitelistExemptTargetId)", method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/collaboration_whitelist_exempt_targets/")\(collaborationWhitelistExemptTargetId)", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
     }
 
 }

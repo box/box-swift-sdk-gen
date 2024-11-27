@@ -79,7 +79,7 @@ public class MetadataTemplatesManager {
     /// - Throws: The `GeneralError`.
     public func deleteMetadataTemplate(scope: DeleteMetadataTemplateScope, templateKey: String, headers: DeleteMetadataTemplateHeaders = DeleteMetadataTemplateHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(scope)\("/")\(templateKey)\("/schema")", method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/")\(scope)\("/")\(templateKey)\("/schema")", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Retrieves a metadata template by its ID.

@@ -13,6 +13,7 @@ class FoldersManagerTests: XCTestCase {
         let rootFolder: FolderFull = try await client.folders.getFolderById(folderId: "0")
         XCTAssertTrue(rootFolder.id == "0")
         XCTAssertTrue(rootFolder.name == "All Files")
+        XCTAssertTrue(Utils.Strings.toString(value: rootFolder.type) == "folder")
     }
 
     public func testGetFolderFullInfoWithExtraFields() async throws {

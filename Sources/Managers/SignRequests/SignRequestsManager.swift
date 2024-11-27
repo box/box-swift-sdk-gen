@@ -33,7 +33,7 @@ public class SignRequestsManager {
     /// - Throws: The `GeneralError`.
     public func resendSignRequest(signRequestId: String, headers: ResendSignRequestHeaders = ResendSignRequestHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)\("/resend")", method: "POST", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)\("/resend")", method: "POST", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Gets a sign request by ID.
