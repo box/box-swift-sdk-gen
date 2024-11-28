@@ -92,7 +92,7 @@ public class FoldersManager {
     public func deleteFolderById(folderId: String, queryParams: DeleteFolderByIdQueryParams = DeleteFolderByIdQueryParams(), headers: DeleteFolderByIdHeaders = DeleteFolderByIdHeaders()) async throws {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["recursive": Utils.Strings.toString(value: queryParams.recursive)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-match": Utils.Strings.toString(value: headers.ifMatch)], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)", method: "DELETE", params: queryParamsMap, headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)", method: "DELETE", params: queryParamsMap, headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Retrieves a page of items in a folder. These items can be files,

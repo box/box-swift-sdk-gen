@@ -67,7 +67,7 @@ public class FileRequestsManager {
     /// - Throws: The `GeneralError`.
     public func deleteFileRequestById(fileRequestId: String, headers: DeleteFileRequestByIdHeaders = DeleteFileRequestByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/file_requests/")\(fileRequestId)", method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/file_requests/")\(fileRequestId)", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Copies an existing file request that is already present on one folder,

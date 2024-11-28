@@ -87,7 +87,7 @@ public class SkillsManager {
     /// - Throws: The `GeneralError`.
     public func deleteBoxSkillCardsFromFile(fileId: String, headers: DeleteBoxSkillCardsFromFileHeaders = DeleteBoxSkillCardsFromFileHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata/global/boxSkillsCards")", method: "DELETE", headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata/global/boxSkillsCards")", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
     }
 
     /// An alternative method that can be used to overwrite and update all Box Skill
@@ -101,7 +101,7 @@ public class SkillsManager {
     /// - Throws: The `GeneralError`.
     public func updateAllSkillCardsOnFile(skillId: String, requestBody: UpdateAllSkillCardsOnFileRequestBody, headers: UpdateAllSkillCardsOnFileHeaders = UpdateAllSkillCardsOnFileHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/skill_invocations/")\(skillId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/skill_invocations/")\(skillId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
     }
 
 }

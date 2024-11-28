@@ -41,7 +41,7 @@ public class WorkflowsManager {
     /// - Throws: The `GeneralError`.
     public func startWorkflow(workflowId: String, requestBody: StartWorkflowRequestBody, headers: StartWorkflowHeaders = StartWorkflowHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/workflows/")\(workflowId)\("/start")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/workflows/")\(workflowId)\("/start")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
     }
 
 }

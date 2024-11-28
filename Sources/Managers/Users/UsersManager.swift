@@ -128,7 +128,7 @@ public class UsersManager {
     public func deleteUserById(userId: String, queryParams: DeleteUserByIdQueryParams = DeleteUserByIdQueryParams(), headers: DeleteUserByIdHeaders = DeleteUserByIdHeaders()) async throws {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["notify": Utils.Strings.toString(value: queryParams.notify), "force": Utils.Strings.toString(value: queryParams.force)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(userId)", method: "DELETE", params: queryParamsMap, headers: headersMap, responseFormat: nil, auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/")\(userId)", method: "DELETE", params: queryParamsMap, headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
     }
 
 }
