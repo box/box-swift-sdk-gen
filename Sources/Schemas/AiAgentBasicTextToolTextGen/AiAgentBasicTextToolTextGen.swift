@@ -1,6 +1,6 @@
 import Foundation
 
-/// AI agent tool used to handle basic text.
+/// AI agent processor used to handle basic text.
 public class AiAgentBasicTextToolTextGen: AiAgentBasicTextToolBase {
     private enum CodingKeys: String, CodingKey {
         case systemMessage = "system_message"
