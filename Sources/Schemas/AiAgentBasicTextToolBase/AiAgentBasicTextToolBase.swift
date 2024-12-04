@@ -1,6 +1,6 @@
 import Foundation
 
-/// AI agent tool used to handle basic text.
+/// AI agent processor used to handle basic text.
 public class AiAgentBasicTextToolBase: Codable {
     private enum CodingKeys: String, CodingKey {
         case model
