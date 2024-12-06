@@ -6,6 +6,7 @@ public class AiResponse: Codable {
         case answer
         case createdAt = "created_at"
         case completionReason = "completion_reason"
+        case aiAgentInfo = "ai_agent_info"
     }
 
     /// The answer provided by the LLM.
@@ -17,16 +18,20 @@ public class AiResponse: Codable {
     /// The reason the response finishes.
     public let completionReason: String?
 
+    public let aiAgentInfo: AiAgentInfo?
+
     /// Initializer for a AiResponse.
     ///
     /// - Parameters:
     ///   - answer: The answer provided by the LLM.
     ///   - createdAt: The ISO date formatted timestamp of when the answer to the prompt was created.
     ///   - completionReason: The reason the response finishes.
-    public init(answer: String, createdAt: Date, completionReason: String? = nil) {
+    ///   - aiAgentInfo: 
+    public init(answer: String, createdAt: Date, completionReason: String? = nil, aiAgentInfo: AiAgentInfo? = nil) {
         self.answer = answer
         self.createdAt = createdAt
         self.completionReason = completionReason
+        self.aiAgentInfo = aiAgentInfo
     }
 
     required public init(from decoder: Decoder) throws {
@@ -34,6 +39,7 @@ public class AiResponse: Codable {
         answer = try container.decode(String.self, forKey: .answer)
         createdAt = try Utils.Dates.dateTimeFromString(dateTime: try container.decode(String.self, forKey: .createdAt))
         completionReason = try container.decodeIfPresent(String.self, forKey: .completionReason)
+        aiAgentInfo = try container.decodeIfPresent(AiAgentInfo.self, forKey: .aiAgentInfo)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -41,6 +47,7 @@ public class AiResponse: Codable {
         try container.encode(answer, forKey: .answer)
         try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
         try container.encodeIfPresent(completionReason, forKey: .completionReason)
+        try container.encodeIfPresent(aiAgentInfo, forKey: .aiAgentInfo)
     }
 
 }

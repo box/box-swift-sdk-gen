@@ -1,6 +1,6 @@
 import Foundation
 
-/// AI agent tool used to to handle longer text.
+/// AI agent processor used to to handle longer text.
 public class AiAgentLongTextToolTextGen: AiAgentBasicTextToolTextGen {
     private enum CodingKeys: String, CodingKey {
         case embeddings
