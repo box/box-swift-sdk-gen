@@ -15,11 +15,12 @@ public class AiResponseFull: AiResponse {
     ///   - answer: The answer provided by the LLM.
     ///   - createdAt: The ISO date formatted timestamp of when the answer to the prompt was created.
     ///   - completionReason: The reason the response finishes.
+    ///   - aiAgentInfo: 
     ///   - citations: The citations of the LLM's answer reference.
-    public init(answer: String, createdAt: Date, completionReason: String? = nil, citations: [AiCitation]? = nil) {
+    public init(answer: String, createdAt: Date, completionReason: String? = nil, aiAgentInfo: AiAgentInfo? = nil, citations: [AiCitation]? = nil) {
         self.citations = citations
 
-        super.init(answer: answer, createdAt: createdAt, completionReason: completionReason)
+        super.init(answer: answer, createdAt: createdAt, completionReason: completionReason, aiAgentInfo: aiAgentInfo)
     }
 
     required public init(from decoder: Decoder) throws {
