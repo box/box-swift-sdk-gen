@@ -30,8 +30,6 @@ public class UpdateFolderByIdRequestBody: Codable {
     /// of the folder can invite new collaborators to the folder.
     public let canNonOwnersInvite: Bool?
 
-    /// The parent folder for this folder. Use this to move
-    /// the folder or to restore it out of the trash.
     public let parent: UpdateFolderByIdRequestBodyParentField?
 
     public let sharedLink: UpdateFolderByIdRequestBodySharedLinkField?
@@ -88,8 +86,7 @@ public class UpdateFolderByIdRequestBody: Codable {
     ///     (discontinued) and is not used by Box Drive.
     ///   - canNonOwnersInvite: Specifies if users who are not the owner
     ///     of the folder can invite new collaborators to the folder.
-    ///   - parent: The parent folder for this folder. Use this to move
-    ///     the folder or to restore it out of the trash.
+    ///   - parent: 
     ///   - sharedLink: 
     ///   - folderUploadEmail: 
     ///   - tags: The tags for this item. These tags are shown in
