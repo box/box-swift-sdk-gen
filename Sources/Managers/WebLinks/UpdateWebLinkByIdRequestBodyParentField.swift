@@ -9,14 +9,14 @@ public class UpdateWebLinkByIdRequestBodyParentField: Codable {
     /// The ID of parent item
     public let id: String?
 
-    /// The input for `{user_id}` is optional. Moving to non-root folder is not allowed when `{user_id}` is present. Parent folder id should be zero when `{user_id}` is provided.
+    /// The input for `user_id` is optional. Moving to non-root folder is not allowed when `user_id` is present. Parent folder id should be zero when `user_id` is provided.
     public let userId: String?
 
     /// Initializer for a UpdateWebLinkByIdRequestBodyParentField.
     ///
     /// - Parameters:
     ///   - id: The ID of parent item
-    ///   - userId: The input for `{user_id}` is optional. Moving to non-root folder is not allowed when `{user_id}` is present. Parent folder id should be zero when `{user_id}` is provided.
+    ///   - userId: The input for `user_id` is optional. Moving to non-root folder is not allowed when `user_id` is present. Parent folder id should be zero when `user_id` is provided.
     public init(id: String? = nil, userId: String? = nil) {
         self.id = id
         self.userId = userId
