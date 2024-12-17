@@ -49,19 +49,18 @@ public class SignRequestCreateRequest: SignRequestBase {
     ///   - prefillTags: When a document contains sign-related tags in the content, you can prefill them using this `prefill_tags` by referencing the 'id' of the tag as the `external_id` field of the prefill tag.
     ///   - daysValid: Set the number of days after which the created signature request will automatically expire if not completed. By default, we do not apply any expiration date on signature requests, and the signature request does not expire.
     ///   - externalId: This can be used to reference an ID in an external system that the sign request is related to.
-    ///   - isPhoneVerificationRequiredToView: Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.
     ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
     ///   - externalSystemName: Used as an optional system name to appear in the signature log next to the signers who have been assigned the `embed_url_external_id`.
     ///   - sourceFiles: List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
     ///   - signatureColor: Force a specific color for the signature (blue, black, or red)
     ///   - parentFolder: 
-    public init(signers: [SignRequestCreateSigner], isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil, externalSystemName: String? = nil, sourceFiles: [FileBase]? = nil, signatureColor: SignRequestCreateRequestSignatureColorField? = nil, parentFolder: FolderMini? = nil) {
+    public init(signers: [SignRequestCreateSigner], isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, templateId: String? = nil, externalSystemName: String? = nil, sourceFiles: [FileBase]? = nil, signatureColor: SignRequestCreateRequestSignatureColorField? = nil, parentFolder: FolderMini? = nil) {
         self.signers = signers
         self.sourceFiles = sourceFiles
         self.signatureColor = signatureColor
         self.parentFolder = parentFolder
 
-        super.init(isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, isPhoneVerificationRequiredToView: isPhoneVerificationRequiredToView, templateId: templateId, externalSystemName: externalSystemName)
+        super.init(isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, templateId: templateId, externalSystemName: externalSystemName)
     }
 
     required public init(from decoder: Decoder) throws {

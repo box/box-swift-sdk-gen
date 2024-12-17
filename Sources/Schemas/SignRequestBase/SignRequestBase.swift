@@ -14,7 +14,6 @@ public class SignRequestBase: Codable {
         case prefillTags = "prefill_tags"
         case daysValid = "days_valid"
         case externalId = "external_id"
-        case isPhoneVerificationRequiredToView = "is_phone_verification_required_to_view"
         case templateId = "template_id"
         case externalSystemName = "external_system_name"
     }
@@ -52,9 +51,6 @@ public class SignRequestBase: Codable {
     /// This can be used to reference an ID in an external system that the sign request is related to.
     public let externalId: String?
 
-    /// Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.
-    public let isPhoneVerificationRequiredToView: Bool?
-
     /// When a signature request is created from a template this field will indicate the id of that template.
     public let templateId: String?
 
@@ -75,10 +71,9 @@ public class SignRequestBase: Codable {
     ///   - prefillTags: When a document contains sign-related tags in the content, you can prefill them using this `prefill_tags` by referencing the 'id' of the tag as the `external_id` field of the prefill tag.
     ///   - daysValid: Set the number of days after which the created signature request will automatically expire if not completed. By default, we do not apply any expiration date on signature requests, and the signature request does not expire.
     ///   - externalId: This can be used to reference an ID in an external system that the sign request is related to.
-    ///   - isPhoneVerificationRequiredToView: Forces signers to verify a text message prior to viewing the document. You must specify the phone number of signers to have this setting apply to them.
     ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
     ///   - externalSystemName: Used as an optional system name to appear in the signature log next to the signers who have been assigned the `embed_url_external_id`.
-    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, isPhoneVerificationRequiredToView: Bool? = nil, templateId: String? = nil, externalSystemName: String? = nil) {
+    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, templateId: String? = nil, externalSystemName: String? = nil) {
         self.isDocumentPreparationNeeded = isDocumentPreparationNeeded
         self.redirectUrl = redirectUrl
         self.declinedRedirectUrl = declinedRedirectUrl
@@ -90,7 +85,6 @@ public class SignRequestBase: Codable {
         self.prefillTags = prefillTags
         self.daysValid = daysValid
         self.externalId = externalId
-        self.isPhoneVerificationRequiredToView = isPhoneVerificationRequiredToView
         self.templateId = templateId
         self.externalSystemName = externalSystemName
     }
@@ -108,7 +102,6 @@ public class SignRequestBase: Codable {
         prefillTags = try container.decodeIfPresent([SignRequestPrefillTag].self, forKey: .prefillTags)
         daysValid = try container.decodeIfPresent(Int64.self, forKey: .daysValid)
         externalId = try container.decodeIfPresent(String.self, forKey: .externalId)
-        isPhoneVerificationRequiredToView = try container.decodeIfPresent(Bool.self, forKey: .isPhoneVerificationRequiredToView)
         templateId = try container.decodeIfPresent(String.self, forKey: .templateId)
         externalSystemName = try container.decodeIfPresent(String.self, forKey: .externalSystemName)
     }
@@ -126,7 +119,6 @@ public class SignRequestBase: Codable {
         try container.encodeIfPresent(prefillTags, forKey: .prefillTags)
         try container.encodeIfPresent(daysValid, forKey: .daysValid)
         try container.encodeIfPresent(externalId, forKey: .externalId)
-        try container.encodeIfPresent(isPhoneVerificationRequiredToView, forKey: .isPhoneVerificationRequiredToView)
         try container.encodeIfPresent(templateId, forKey: .templateId)
         try container.encodeIfPresent(externalSystemName, forKey: .externalSystemName)
     }
