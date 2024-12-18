@@ -13,7 +13,7 @@ class SignRequestsManagerTests: XCTestCase {
         let signerEmail: String = "\(Utils.getUUID())\("@box.com")"
         let fileToSign: FileFull = try await CommonsManager().uploadNewFile()
         let destinationFolder: FolderFull = try await CommonsManager().createNewFolder()
-        let createdSignRequest: SignRequest = try await client.signRequests.createSignRequest(requestBody: SignRequestCreateRequest(signers: [SignRequestCreateSigner(email: signerEmail, role: SignRequestCreateSignerRoleField.signer, isInPerson: false, embedUrlExternalUserId: "123", declinedRedirectUrl: "https://www.box.com", loginRequired: false, password: "password", suppressNotifications: true)], isDocumentPreparationNeeded: false, redirectUrl: "https://www.box.com", declinedRedirectUrl: "https://www.box.com", areTextSignaturesEnabled: true, emailSubject: "Sign this document", emailMessage: "Please sign this document", areRemindersEnabled: true, name: "Sign Request", prefillTags: [SignRequestPrefillTag(documentTagId: "0", dateValue: try Utils.Dates.dateFromString(date: "2035-01-01"))], daysValid: Int64(30), externalId: "123", isPhoneVerificationRequiredToView: false, externalSystemName: "BoxSignIntegration", sourceFiles: [FileBase(id: fileToSign.id)], parentFolder: FolderMini(id: destinationFolder.id)))
+        let createdSignRequest: SignRequest = try await client.signRequests.createSignRequest(requestBody: SignRequestCreateRequest(signers: [SignRequestCreateSigner(email: signerEmail, role: SignRequestCreateSignerRoleField.signer, isInPerson: false, embedUrlExternalUserId: "123", declinedRedirectUrl: "https://www.box.com", loginRequired: false, password: "password", suppressNotifications: true)], isDocumentPreparationNeeded: false, redirectUrl: "https://www.box.com", declinedRedirectUrl: "https://www.box.com", areTextSignaturesEnabled: true, emailSubject: "Sign this document", emailMessage: "Please sign this document", areRemindersEnabled: true, name: "Sign Request", prefillTags: [SignRequestPrefillTag(documentTagId: "0", dateValue: try Utils.Dates.dateFromString(date: "2035-01-01"))], daysValid: Int64(30), externalId: "123", externalSystemName: "BoxSignIntegration", sourceFiles: [FileBase(id: fileToSign.id)], parentFolder: FolderMini(id: destinationFolder.id)))
         XCTAssertTrue(createdSignRequest.areRemindersEnabled == true)
         XCTAssertTrue(createdSignRequest.areTextSignaturesEnabled == true)
         XCTAssertTrue(createdSignRequest.daysValid == 30)
@@ -23,7 +23,6 @@ class SignRequestsManagerTests: XCTestCase {
         XCTAssertTrue(createdSignRequest.externalId == "123")
         XCTAssertTrue(createdSignRequest.externalSystemName == "BoxSignIntegration")
         XCTAssertTrue(createdSignRequest.isDocumentPreparationNeeded == false)
-        XCTAssertTrue(createdSignRequest.isPhoneVerificationRequiredToView == false)
         XCTAssertTrue(createdSignRequest.name == "Sign Request")
         XCTAssertTrue(createdSignRequest.redirectUrl == "https://www.box.com")
         XCTAssertTrue(createdSignRequest.signFiles!.files![0].name == fileToSign.name)

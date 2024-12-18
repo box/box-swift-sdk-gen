@@ -12,7 +12,6 @@ public class SignRequestCreateSigner: Codable {
         case redirectUrl = "redirect_url"
         case declinedRedirectUrl = "declined_redirect_url"
         case loginRequired = "login_required"
-        case verificationPhoneNumber = "verification_phone_number"
         case password
         case signerGroupId = "signer_group_id"
         case suppressNotifications = "suppress_notifications"
@@ -56,14 +55,8 @@ public class SignRequestCreateSigner: Codable {
     /// If set to true, the signer will need to log in to a Box account
     /// before signing the request. If the signer does not have
     /// an existing account, they will have the option to create
-    /// a free Box account. Cannot be selected in combination with
-    /// `verification_phone_number`.
+    /// a free Box account.
     public let loginRequired: Bool?
-
-    /// If set, this phone number will be used to verify the signer
-    /// via two-factor authentication before they are able to sign the document.
-    /// Cannot be selected in combination with `login_required`.
-    public let verificationPhoneNumber: String?
 
     /// If set, the signer is required to enter the password before they are able
     /// to sign a document. This field is write only.
@@ -108,11 +101,7 @@ public class SignRequestCreateSigner: Codable {
     ///   - loginRequired: If set to true, the signer will need to log in to a Box account
     ///     before signing the request. If the signer does not have
     ///     an existing account, they will have the option to create
-    ///     a free Box account. Cannot be selected in combination with
-    ///     `verification_phone_number`.
-    ///   - verificationPhoneNumber: If set, this phone number will be used to verify the signer
-    ///     via two-factor authentication before they are able to sign the document.
-    ///     Cannot be selected in combination with `login_required`.
+    ///     a free Box account.
     ///   - password: If set, the signer is required to enter the password before they are able
     ///     to sign a document. This field is write only.
     ///   - signerGroupId: If set, signers who have the same value will be assigned to the same input and to the same signer group.
@@ -123,7 +112,7 @@ public class SignRequestCreateSigner: Codable {
     ///     determine which signers belongs to same group. A successful response will provide a generated UUID value
     ///     instead for signers in the same signer group.
     ///   - suppressNotifications: If true, no emails about the sign request will be sent
-    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil, signerGroupId: String? = nil, suppressNotifications: Bool? = nil) {
+    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, password: String? = nil, signerGroupId: String? = nil, suppressNotifications: Bool? = nil) {
         self.email = email
         self.role = role
         self.isInPerson = isInPerson
@@ -132,7 +121,6 @@ public class SignRequestCreateSigner: Codable {
         self.redirectUrl = redirectUrl
         self.declinedRedirectUrl = declinedRedirectUrl
         self.loginRequired = loginRequired
-        self.verificationPhoneNumber = verificationPhoneNumber
         self.password = password
         self.signerGroupId = signerGroupId
         self.suppressNotifications = suppressNotifications
@@ -148,7 +136,6 @@ public class SignRequestCreateSigner: Codable {
         redirectUrl = try container.decodeIfPresent(String.self, forKey: .redirectUrl)
         declinedRedirectUrl = try container.decodeIfPresent(String.self, forKey: .declinedRedirectUrl)
         loginRequired = try container.decodeIfPresent(Bool.self, forKey: .loginRequired)
-        verificationPhoneNumber = try container.decodeIfPresent(String.self, forKey: .verificationPhoneNumber)
         password = try container.decodeIfPresent(String.self, forKey: .password)
         signerGroupId = try container.decodeIfPresent(String.self, forKey: .signerGroupId)
         suppressNotifications = try container.decodeIfPresent(Bool.self, forKey: .suppressNotifications)
@@ -164,7 +151,6 @@ public class SignRequestCreateSigner: Codable {
         try container.encodeIfPresent(redirectUrl, forKey: .redirectUrl)
         try container.encodeIfPresent(declinedRedirectUrl, forKey: .declinedRedirectUrl)
         try container.encodeIfPresent(loginRequired, forKey: .loginRequired)
-        try container.encodeIfPresent(verificationPhoneNumber, forKey: .verificationPhoneNumber)
         try container.encodeIfPresent(password, forKey: .password)
         try container.encodeIfPresent(signerGroupId, forKey: .signerGroupId)
         try container.encodeIfPresent(suppressNotifications, forKey: .suppressNotifications)
