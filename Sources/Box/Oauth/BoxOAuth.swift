@@ -56,7 +56,7 @@ public class BoxOAuth: Authentication {
         return token!
     }
 
-    /// Get a new access token for the app user.
+    /// Get a new access token for the platform app user.
     ///
     /// - Parameters:
     ///   - networkSession: An object to keep network session state

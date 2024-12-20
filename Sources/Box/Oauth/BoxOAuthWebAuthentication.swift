@@ -7,7 +7,7 @@ class BoxOAuthWebAuthentication {
 
     /// The placeholder of a `clientId` used in  `defaultCallbackUrlSchemeFormat`.
     private static let clientIdPlaceholder = "<<CLIENT ID>>"
-    /// The default URL scheme format used to create the custom URL scheme that the app expects in the callback URL
+    /// The default URL scheme format used to create the custom URL scheme that the platform app expects in the callback URL
     private static let defaultCallbackUrlSchemeFormat = "boxsdk-\(clientIdPlaceholder)://boxsdkoauth2redirect"
 
     /// The initial URL pointing to the authentication webpage
@@ -22,7 +22,7 @@ class BoxOAuthWebAuthentication {
     }
 
     /// This methods uses ASWebAuthenticationSession to obtain a authorization code from the authentication webpage.
-    /// The page will be loaded in a secure view controller. From the webpage, the user can authenticate herself and grant access to the app.
+    /// The page will be loaded in a secure view controller. From the webpage, the user can authenticate herself and grant access to the platform app.
     /// On completion, the service will send the authorization code.
     ///
     /// - Parameters:
@@ -65,7 +65,7 @@ class BoxOAuthWebAuthentication {
         }
 
     /// This methods uses ASWebAuthenticationSession to obtain a authorization code from the authentication webpage.
-    /// The page will be loaded in a secure view controller. From the webpage, the user can authenticate herself and grant access to the app.
+    /// The page will be loaded in a secure view controller. From the webpage, the user can authenticate herself and grant access to the platform app.
     ///
     /// - Parameters:
     ///   - options: The parameters for the authorization URL.
