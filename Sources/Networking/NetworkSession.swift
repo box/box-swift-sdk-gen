@@ -21,18 +21,24 @@ open class NetworkSession {
     /// Additional network settings.
     public let networkSettings: NetworkSettings
 
+   /// Network client
+   public let networkClient: NetworkClient
+
     /// Initializer
     ///
     /// - Parameters:
     ///   - additionalHeaders: A dictionary of headers, which are appended to each API request
     ///   - configuration: A configuration object that specifies certain behaviors, such as caching policies, timeouts, proxies, pipelining, TLS versions to support, cookie policies, and credential storage.
-    ///   - networkSettings:Additional network settings that allow you to configure things such as retryStrategy, maxRetryAttempts.
+    ///   - networkSettings: Additional network settings that allow you to configure things such as retryStrategy, maxRetryAttempts.
     public init(
+        // TODO: Move networkClient to BoxNetworkClient class
+        networkClient: NetworkClient = BoxNetworkClient(),
         additionalHeaders: [String: String] = [:],
         configuration: URLSessionConfiguration = URLSessionConfiguration.default,
         networkSettings: NetworkSettings = NetworkSettings(),
         baseUrls: BaseUrls = BaseUrls()
     ) {
+        self.networkClient = networkClient
         self.additionalHeaders = additionalHeaders
         self.configuration = configuration
         self.session = URLSession(configuration: configuration, delegate: nil, delegateQueue: nil)
@@ -46,7 +52,7 @@ open class NetworkSession {
     /// - Parameters:
     ///   - additionalHeaders: Dictionary of headers, which are appended to each API request
     public func withAdditionalHeaders(additionalHeaders: [String: String]) -> NetworkSession {
-        return NetworkSession(additionalHeaders: Utils.Dictionary.merge(self.additionalHeaders, additionalHeaders), configuration: self.configuration, networkSettings: networkSettings, baseUrls: baseUrls)
+        return NetworkSession(networkClient: networkClient, additionalHeaders: Utils.Dictionary.merge(self.additionalHeaders, additionalHeaders), configuration: self.configuration, networkSettings: networkSettings, baseUrls: baseUrls)
     }
 
     /// Generate a fresh network session by duplicating the existing configuration and network parameters,
@@ -55,6 +61,15 @@ open class NetworkSession {
     /// - Parameters:
     ///   - baseUrls: Custom base urls
     public func withCustomBaseUrls(baseUrls: BaseUrls) -> NetworkSession {
-        return NetworkSession(additionalHeaders: self.additionalHeaders, configuration: self.configuration, networkSettings: networkSettings, baseUrls: baseUrls)
+        return NetworkSession(networkClient: networkClient, additionalHeaders: self.additionalHeaders, configuration: self.configuration, networkSettings: networkSettings, baseUrls: baseUrls)
+    }
+
+    /// Generate a fresh network session by duplicating the existing configuration and network parameters,
+    /// while also including custom network settings to be used for every API call.
+    ///
+    /// - Parameters:
+    ///   - networkSettings: Additional network settings.
+    public func withNetworkClient(networkClient: NetworkClient) -> NetworkSession {
+        return NetworkSession(networkClient: networkClient, additionalHeaders: self.additionalHeaders, configuration: self.configuration, networkSettings: networkSettings, baseUrls: baseUrls)
     }
 }

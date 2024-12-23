@@ -14,12 +14,11 @@ enum HTTPHeaderContentTypeValue {
 }
 
 /// Networking layer interface
-public class NetworkClient {
-    public static let shared = NetworkClient()
+public class DefaultNetworkClient: NetworkClient {
 
     private let utilityQueue = DispatchQueue.global(qos: .utility)
 
-    private init(){}
+    public init(){}
 
     /// Executes requests
     ///
@@ -200,10 +199,6 @@ public class NetworkClient {
 
         if let contentType = options.contentType {
             urlRequest.setValue(contentType, forHTTPHeaderField: HTTPHeaderKey.contentType)
-        }
-
-        for (key, value) in BoxConstants.analyticsHeaders {
-            urlRequest.setValue(value, forHTTPHeaderField: key)
         }
 
         try await updateRequestWithAuthorizationHeader(&urlRequest, options: options, networkSession: networkSession)

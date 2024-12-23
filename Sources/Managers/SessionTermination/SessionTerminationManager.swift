@@ -22,7 +22,7 @@ public class SessionTerminationManager {
     /// - Throws: The `GeneralError`.
     public func terminateUsersSessions(requestBody: TerminateUsersSessionsRequestBody, headers: TerminateUsersSessionsHeaders = TerminateUsersSessionsHeaders()) async throws -> SessionTerminationMessage {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/terminate_sessions")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/users/terminate_sessions")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SessionTerminationMessage.deserialize(from: response.data)
     }
 
@@ -38,7 +38,7 @@ public class SessionTerminationManager {
     /// - Throws: The `GeneralError`.
     public func terminateGroupsSessions(requestBody: TerminateGroupsSessionsRequestBody, headers: TerminateGroupsSessionsHeaders = TerminateGroupsSessionsHeaders()) async throws -> SessionTerminationMessage {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/groups/terminate_sessions")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/groups/terminate_sessions")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try SessionTerminationMessage.deserialize(from: response.data)
     }
 

@@ -22,7 +22,7 @@ public class MetadataCascadePoliciesManager {
     public func getMetadataCascadePolicies(queryParams: GetMetadataCascadePoliciesQueryParams, headers: GetMetadataCascadePoliciesHeaders = GetMetadataCascadePoliciesHeaders()) async throws -> MetadataCascadePolicies {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["folder_id": Utils.Strings.toString(value: queryParams.folderId), "owner_enterprise_id": Utils.Strings.toString(value: queryParams.ownerEnterpriseId), "marker": Utils.Strings.toString(value: queryParams.marker), "offset": Utils.Strings.toString(value: queryParams.offset)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataCascadePolicies.deserialize(from: response.data)
     }
 
@@ -40,7 +40,7 @@ public class MetadataCascadePoliciesManager {
     /// - Throws: The `GeneralError`.
     public func createMetadataCascadePolicy(requestBody: CreateMetadataCascadePolicyRequestBody, headers: CreateMetadataCascadePolicyHeaders = CreateMetadataCascadePolicyHeaders()) async throws -> MetadataCascadePolicy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataCascadePolicy.deserialize(from: response.data)
     }
 
@@ -54,7 +54,7 @@ public class MetadataCascadePoliciesManager {
     /// - Throws: The `GeneralError`.
     public func getMetadataCascadePolicyById(metadataCascadePolicyId: String, headers: GetMetadataCascadePolicyByIdHeaders = GetMetadataCascadePolicyByIdHeaders()) async throws -> MetadataCascadePolicy {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies/")\(metadataCascadePolicyId)", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies/")\(metadataCascadePolicyId)", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try MetadataCascadePolicy.deserialize(from: response.data)
     }
 
@@ -67,7 +67,7 @@ public class MetadataCascadePoliciesManager {
     /// - Throws: The `GeneralError`.
     public func deleteMetadataCascadePolicyById(metadataCascadePolicyId: String, headers: DeleteMetadataCascadePolicyByIdHeaders = DeleteMetadataCascadePolicyByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies/")\(metadataCascadePolicyId)", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies/")\(metadataCascadePolicyId)", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Force the metadata on a folder with a metadata cascade policy to be applied to
@@ -83,7 +83,7 @@ public class MetadataCascadePoliciesManager {
     /// - Throws: The `GeneralError`.
     public func applyMetadataCascadePolicy(metadataCascadePolicyId: String, requestBody: ApplyMetadataCascadePolicyRequestBody, headers: ApplyMetadataCascadePolicyHeaders = ApplyMetadataCascadePolicyHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies/")\(metadataCascadePolicyId)\("/apply")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_cascade_policies/")\(metadataCascadePolicyId)\("/apply")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
     }
 
 }
