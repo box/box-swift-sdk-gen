@@ -50,7 +50,7 @@ print("My user ID is \(me.id)")
 
 ## Client Credentials Grant
 
-Before using Client Credentials Grant Auth make sure you set up correctly your Box App.
+Before using Client Credentials Grant Auth make sure you set up correctly your Box platform app.
 The guide with all required steps can be found here: [Setup with Client Credentials Grant][ccg_guide]
 
 Client Credentials Grant Auth method allows you to obtain an access token by having client credentials

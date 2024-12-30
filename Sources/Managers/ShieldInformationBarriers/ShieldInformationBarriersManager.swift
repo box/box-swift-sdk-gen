@@ -20,7 +20,7 @@ public class ShieldInformationBarriersManager {
     /// - Throws: The `GeneralError`.
     public func getShieldInformationBarrierById(shieldInformationBarrierId: String, headers: GetShieldInformationBarrierByIdHeaders = GetShieldInformationBarrierByIdHeaders()) async throws -> ShieldInformationBarrier {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barriers/")\(shieldInformationBarrierId)", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barriers/")\(shieldInformationBarrierId)", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ShieldInformationBarrier.deserialize(from: response.data)
     }
 
@@ -33,7 +33,7 @@ public class ShieldInformationBarriersManager {
     /// - Throws: The `GeneralError`.
     public func updateShieldInformationBarrierStatus(requestBody: UpdateShieldInformationBarrierStatusRequestBody, headers: UpdateShieldInformationBarrierStatusHeaders = UpdateShieldInformationBarrierStatusHeaders()) async throws -> ShieldInformationBarrier {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barriers/change_status")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barriers/change_status")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ShieldInformationBarrier.deserialize(from: response.data)
     }
 
@@ -48,7 +48,7 @@ public class ShieldInformationBarriersManager {
     public func getShieldInformationBarriers(queryParams: GetShieldInformationBarriersQueryParams = GetShieldInformationBarriersQueryParams(), headers: GetShieldInformationBarriersHeaders = GetShieldInformationBarriersHeaders()) async throws -> ShieldInformationBarriers {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barriers")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barriers")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ShieldInformationBarriers.deserialize(from: response.data)
     }
 
@@ -63,7 +63,7 @@ public class ShieldInformationBarriersManager {
     /// - Throws: The `GeneralError`.
     public func createShieldInformationBarrier(requestBody: CreateShieldInformationBarrierRequestBody, headers: CreateShieldInformationBarrierHeaders = CreateShieldInformationBarrierHeaders()) async throws -> ShieldInformationBarrier {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barriers")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shield_information_barriers")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try ShieldInformationBarrier.deserialize(from: response.data)
     }
 

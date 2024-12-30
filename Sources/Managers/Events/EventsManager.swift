@@ -50,7 +50,7 @@ public class EventsManager {
     /// - Throws: The `GeneralError`.
     public func getEventsWithLongPolling(headers: GetEventsWithLongPollingHeaders = GetEventsWithLongPollingHeaders()) async throws -> RealtimeServers {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/events")", method: "OPTIONS", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/events")", method: "OPTIONS", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try RealtimeServers.deserialize(from: response.data)
     }
 
@@ -72,7 +72,7 @@ public class EventsManager {
     public func getEvents(queryParams: GetEventsQueryParams = GetEventsQueryParams(), headers: GetEventsHeaders = GetEventsHeaders()) async throws -> Events {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["stream_type": Utils.Strings.toString(value: queryParams.streamType), "stream_position": Utils.Strings.toString(value: queryParams.streamPosition), "limit": Utils.Strings.toString(value: queryParams.limit), "event_type": Utils.Strings.toString(value: queryParams.eventType), "created_after": Utils.Strings.toString(value: queryParams.createdAfter), "created_before": Utils.Strings.toString(value: queryParams.createdBefore)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await NetworkClient.shared.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/events")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/events")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try Events.deserialize(from: response.data)
     }
 
