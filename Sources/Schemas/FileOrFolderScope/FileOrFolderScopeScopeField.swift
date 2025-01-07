@@ -14,4 +14,5 @@ public enum FileOrFolderScopeScopeField: String, CodableStringEnum {
     case itemRename = "item_rename"
     case itemShare = "item_share"
     case itemUpload = "item_upload"
+    case itemRead = "item_read"
 }
