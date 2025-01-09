@@ -18,7 +18,7 @@ URL explicitly, for example
 This operation is performed by calling function `getClassificationTemplate`.
 
 See the endpoint docs at
-[API Reference](https://developer.box.com/reference/get-metadata-templates-enterprise-security-classification-6-vm-vochw-u-wo-schema/).
+[API Reference](https://developer.box.com/reference/get-metadata-templates-enterprise-securityClassification-6VMVochwUWo-schema/).
 
 <!-- sample get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema -->
 ```
@@ -52,7 +52,7 @@ URL explicitly, for example
 This operation is performed by calling function `addClassification`.
 
 See the endpoint docs at
-[API Reference](https://developer.box.com/reference/put-metadata-templates-enterprise-security-classification-6-vm-vochw-u-wo-schema-add/).
+[API Reference](https://developer.box.com/reference/put-metadata-templates-enterprise-securityClassification-6VMVochwUWo-schema--add/).
 
 <!-- sample put_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema#add -->
 ```
@@ -88,7 +88,7 @@ URL explicitly, for example
 This operation is performed by calling function `updateClassification`.
 
 See the endpoint docs at
-[API Reference](https://developer.box.com/reference/put-metadata-templates-enterprise-security-classification-6-vm-vochw-u-wo-schema-update/).
+[API Reference](https://developer.box.com/reference/put-metadata-templates-enterprise-securityClassification-6VMVochwUWo-schema--update/).
 
 <!-- sample put_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema#update -->
 ```
@@ -125,7 +125,7 @@ classifications.
 This operation is performed by calling function `createClassificationTemplate`.
 
 See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-metadata-templates-schema-classifications/).
+[API Reference](https://developer.box.com/reference/post-metadata-templates-schema--classifications/).
 
 *Currently we don't have an example for calling `createClassificationTemplate` in integration tests*
 

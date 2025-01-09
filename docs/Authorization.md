@@ -56,7 +56,7 @@ Box API calls.
 This operation is performed by calling function `requestAccessToken`.
 
 See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-oauth-2-token/).
+[API Reference](https://developer.box.com/reference/post-oauth2-token/).
 
 *Currently we don't have an example for calling `requestAccessToken` in integration tests*
 
@@ -84,7 +84,7 @@ Refresh an Access Token using its client ID, secret, and refresh token.
 This operation is performed by calling function `refreshAccessToken`.
 
 See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-oauth-2-token-refresh/).
+[API Reference](https://developer.box.com/reference/post-oauth2-token--refresh/).
 
 *Currently we don't have an example for calling `refreshAccessToken` in integration tests*
 
@@ -113,7 +113,7 @@ that has been previously authenticated.
 This operation is performed by calling function `revokeAccessToken`.
 
 See the endpoint docs at
-[API Reference](https://developer.box.com/reference/post-oauth-2-revoke/).
+[API Reference](https://developer.box.com/reference/post-oauth2-revoke/).
 
 *Currently we don't have an example for calling `revokeAccessToken` in integration tests*
 
