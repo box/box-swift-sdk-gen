@@ -145,6 +145,10 @@ public class BoxClient {
 
     public let ai: AiManager
 
+    public let docgenTemplate: DocgenTemplateManager
+
+    public let docgen: DocgenManager
+
     public init(auth: Authentication, networkSession: NetworkSession = NetworkSession(baseUrls: BaseUrls())) {
         self.auth = auth
         self.networkSession = networkSession
@@ -218,6 +222,8 @@ public class BoxClient {
         self.signTemplates = SignTemplatesManager(auth: self.auth, networkSession: self.networkSession)
         self.integrationMappings = IntegrationMappingsManager(auth: self.auth, networkSession: self.networkSession)
         self.ai = AiManager(auth: self.auth, networkSession: self.networkSession)
+        self.docgenTemplate = DocgenTemplateManager(auth: self.auth, networkSession: self.networkSession)
+        self.docgen = DocgenManager(auth: self.auth, networkSession: self.networkSession)
     }
 
     /// Create a new client to impersonate user with the provided ID. All calls made with the new client will be made in context of the impersonated user, leaving the original client unmodified.
