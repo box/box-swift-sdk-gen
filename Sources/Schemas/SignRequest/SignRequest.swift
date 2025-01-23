@@ -14,6 +14,9 @@ public class SignRequest: SignRequestBase {
         case signFiles = "sign_files"
         case autoExpireAt = "auto_expire_at"
         case parentFolder = "parent_folder"
+        case collaboratorLevel = "collaborator_level"
+        case senderEmail = "sender_email"
+        case senderId = "sender_id"
     }
 
     /// object type
@@ -54,6 +57,15 @@ public class SignRequest: SignRequestBase {
 
     public let parentFolder: FolderMini?
 
+    /// The collaborator level of the user to the sign request. Values can include "owner", "editor", and "viewer"
+    public let collaboratorLevel: String?
+
+    /// The email address of the sender of the sign request.
+    public let senderEmail: String?
+
+    /// The user ID of the sender of the sign request.
+    public let senderId: Int64?
+
     /// Initializer for a SignRequest.
     ///
     /// - Parameters:
@@ -88,7 +100,10 @@ public class SignRequest: SignRequestBase {
     ///     and can be downloaded at any point in the signing process.
     ///   - autoExpireAt: Uses `days_valid` to calculate the date and time, in GMT, the sign request will expire if unsigned.
     ///   - parentFolder: 
-    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, templateId: String? = nil, externalSystemName: String? = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: String? = nil, id: String? = nil, prepareUrl: String? = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: Date? = nil, parentFolder: FolderMini? = nil) {
+    ///   - collaboratorLevel: The collaborator level of the user to the sign request. Values can include "owner", "editor", and "viewer"
+    ///   - senderEmail: The email address of the sender of the sign request.
+    ///   - senderId: The user ID of the sender of the sign request.
+    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, templateId: String? = nil, externalSystemName: String? = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: String? = nil, id: String? = nil, prepareUrl: String? = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: Date? = nil, parentFolder: FolderMini? = nil, collaboratorLevel: String? = nil, senderEmail: String? = nil, senderId: Int64? = nil) {
         self.type = type
         self.sourceFiles = sourceFiles
         self.signers = signers
@@ -100,6 +115,9 @@ public class SignRequest: SignRequestBase {
         self.signFiles = signFiles
         self.autoExpireAt = autoExpireAt
         self.parentFolder = parentFolder
+        self.collaboratorLevel = collaboratorLevel
+        self.senderEmail = senderEmail
+        self.senderId = senderId
 
         super.init(isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, templateId: templateId, externalSystemName: externalSystemName)
     }
@@ -122,6 +140,9 @@ public class SignRequest: SignRequestBase {
         }
 
         parentFolder = try container.decodeIfPresent(FolderMini.self, forKey: .parentFolder)
+        collaboratorLevel = try container.decodeIfPresent(String.self, forKey: .collaboratorLevel)
+        senderEmail = try container.decodeIfPresent(String.self, forKey: .senderEmail)
+        senderId = try container.decodeIfPresent(Int64.self, forKey: .senderId)
 
         try super.init(from: decoder)
     }
@@ -142,6 +163,9 @@ public class SignRequest: SignRequestBase {
         }
 
         try container.encodeIfPresent(parentFolder, forKey: .parentFolder)
+        try container.encodeIfPresent(collaboratorLevel, forKey: .collaboratorLevel)
+        try container.encodeIfPresent(senderEmail, forKey: .senderEmail)
+        try container.encodeIfPresent(senderId, forKey: .senderId)
         try super.encode(to: encoder)
     }
 
