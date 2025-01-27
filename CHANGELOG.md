@@ -33,6 +33,37 @@ All notable changes to this project will be documented in this file. See [standa
 * update client error schema to support schema errors (box/box-openapi[#467](https://github.com/box/box-swift-sdk-gen/issues/467)) ([#266](https://github.com/box/box-swift-sdk-gen/issues/266)) ([4bcf843](https://github.com/box/box-swift-sdk-gen/commit/4bcf8439b03e8f3726e51f210bfa71ed3d8d6793))
 * Use `retrieveAuthorizationHeader` method in fetch (box/box-codegen[#565](https://github.com/box/box-swift-sdk-gen/issues/565)) ([#235](https://github.com/box/box-swift-sdk-gen/issues/235)) ([f68e141](https://github.com/box/box-swift-sdk-gen/commit/f68e14174476a40b959280c391475ac8fef644e1))
 
+## [0.6.0](https://github.com/box/box-swift-sdk-gen/compare/0.5.0...0.6.0) (2025-01-27)
+
+
+### Bug Fixes
+
+* Add missing token scope (box/box-openapi[#490](https://github.com/box/box-swift-sdk-gen/issues/490)) ([#319](https://github.com/box/box-swift-sdk-gen/issues/319)) ([220134e](https://github.com/box/box-swift-sdk-gen/commit/220134efb4ba42628de51561749ae218707d5121))
+* Change signature of `readBufferFromFile` method (box/box-codegen[#575](https://github.com/box/box-swift-sdk-gen/issues/575)) ([#250](https://github.com/box/box-swift-sdk-gen/issues/250)) ([21e08ff](https://github.com/box/box-swift-sdk-gen/commit/21e08ff673da44c0dfe502c5fbbc14e382ef368b))
+* Correct types of `paged` and `thumb` properties in File representation (box/box-openapi[#503](https://github.com/box/box-swift-sdk-gen/issues/503)) ([#347](https://github.com/box/box-swift-sdk-gen/issues/347)) ([58ff930](https://github.com/box/box-swift-sdk-gen/commit/58ff9305b34306ca506b08d43b72f95349322172))
+* fix `IntegrationMapping` schemas description (box/box-openapi[#463](https://github.com/box/box-swift-sdk-gen/issues/463)) ([#257](https://github.com/box/box-swift-sdk-gen/issues/257)) ([794f315](https://github.com/box/box-swift-sdk-gen/commit/794f31548687b4e78e6f96b1a922e7e32dce0b9b))
+* Fix invalid variant config for Integration mapping Slack (box/box-openapi[#492](https://github.com/box/box-swift-sdk-gen/issues/492)) ([#322](https://github.com/box/box-swift-sdk-gen/issues/322)) ([97f4f94](https://github.com/box/box-swift-sdk-gen/commit/97f4f944555997b5e09afd66eb9c07008fae8a94))
+* Fix order of fields in the `IntegrationMapping` schema (box/box-openapi[#497](https://github.com/box/box-swift-sdk-gen/issues/497)) ([#335](https://github.com/box/box-swift-sdk-gen/issues/335)) ([cb28e6d](https://github.com/box/box-swift-sdk-gen/commit/cb28e6db015d84b59e6dccf6a2fa90c26de20efa))
+* remove unused parameter from `SignRequest` (box/box-openapi[#489](https://github.com/box/box-swift-sdk-gen/issues/489)) ([#310](https://github.com/box/box-swift-sdk-gen/issues/310)) ([879897b](https://github.com/box/box-swift-sdk-gen/commit/879897bec80669a46effc2528ec19ce15d7df3b1))
+* Support status codes with no content (box/box-codegen[#604](https://github.com/box/box-swift-sdk-gen/issues/604)) ([#284](https://github.com/box/box-swift-sdk-gen/issues/284)) ([5823d2b](https://github.com/box/box-swift-sdk-gen/commit/5823d2b1591cb1c817e36a43a78cb41498fcf1b4))
+* update client error schema to support schema errors (box/box-openapi[#467](https://github.com/box/box-swift-sdk-gen/issues/467)) ([#259](https://github.com/box/box-swift-sdk-gen/issues/259)) ([40e2279](https://github.com/box/box-swift-sdk-gen/commit/40e2279e222df4a88278125a6a9a13ee4605cd69))
+* update collaboration, metadata and collection resources (box/box-openapi[#483](https://github.com/box/box-swift-sdk-gen/issues/483)) ([#286](https://github.com/box/box-swift-sdk-gen/issues/286)) ([f5b190a](https://github.com/box/box-swift-sdk-gen/commit/f5b190a648f0c567abe688bd111a5b7c779a036c))
+
+
+### New Features and Enhancements
+
+* Add `aiAgent` info to `AiResponse` (box/box-openapi[#485](https://github.com/box/box-swift-sdk-gen/issues/485)) ([#304](https://github.com/box/box-swift-sdk-gen/issues/304)) ([b614a6f](https://github.com/box/box-swift-sdk-gen/commit/b614a6fe72689ed56947b05cac26a5b62104a621))
+* add AI LLM endpoint AWS `params` (box/box-openapi[#478](https://github.com/box/box-swift-sdk-gen/issues/478)) ([#267](https://github.com/box/box-swift-sdk-gen/issues/267)) ([36ee37d](https://github.com/box/box-swift-sdk-gen/commit/36ee37d96ce0a50292036c02e4663fd124544736))
+* Add Box Sign shared requests (box/box-openapi[#504](https://github.com/box/box-swift-sdk-gen/issues/504)) ([#348](https://github.com/box/box-swift-sdk-gen/issues/348)) ([2f5e2f1](https://github.com/box/box-swift-sdk-gen/commit/2f5e2f150d45f833fda2ef6e61e6c946ed0c36ad))
+* Add support for replacing the network client implementation (box/box-codegen[#629](https://github.com/box/box-swift-sdk-gen/issues/629)) ([#313](https://github.com/box/box-swift-sdk-gen/issues/313)) ([e08a117](https://github.com/box/box-swift-sdk-gen/commit/e08a117c34e782b83a1fdd7a471938351cd00c6e))
+* Expose method for making custom HTTP requests (box/box-codegen[#610](https://github.com/box/box-swift-sdk-gen/issues/610)) ([#297](https://github.com/box/box-swift-sdk-gen/issues/297)) ([f7da2e3](https://github.com/box/box-swift-sdk-gen/commit/f7da2e31f8e49cdd0b0e62e798d7d93bcea6c50b))
+* Support `ai/extract` and `ai/extract_structured` endpoints (box/box-codegen[#564](https://github.com/box/box-swift-sdk-gen/issues/564)) ([#239](https://github.com/box/box-swift-sdk-gen/issues/239)) ([9b5d6e9](https://github.com/box/box-swift-sdk-gen/commit/9b5d6e9f31cbcc2411f34be1572ec91c7e4808cf))
+* Support Box Doc Gen API (box/box-codegen[#644](https://github.com/box/box-swift-sdk-gen/issues/644)) ([#343](https://github.com/box/box-swift-sdk-gen/issues/343)) ([8ef2533](https://github.com/box/box-swift-sdk-gen/commit/8ef25335ecba4fcf2243c8043edc7edc46dbe932))
+* Support get collection by ID endpoint (box/box-codegen[#595](https://github.com/box/box-swift-sdk-gen/issues/595)) ([#276](https://github.com/box/box-swift-sdk-gen/issues/276)) ([112828f](https://github.com/box/box-swift-sdk-gen/commit/112828fc499c3148c385dde6adb4fcfe5b791495))
+* Support optional `userId` parameter for updating files, folders and web links (box/box-openapi[#488](https://github.com/box/box-swift-sdk-gen/issues/488)) ([#308](https://github.com/box/box-swift-sdk-gen/issues/308)) ([8bd13d0](https://github.com/box/box-swift-sdk-gen/commit/8bd13d024e7f74a15c3377ddfd54bfcdbec71e2b))
+* update client error schema to support schema errors (box/box-openapi[#467](https://github.com/box/box-swift-sdk-gen/issues/467)) ([#266](https://github.com/box/box-swift-sdk-gen/issues/266)) ([4bcf843](https://github.com/box/box-swift-sdk-gen/commit/4bcf8439b03e8f3726e51f210bfa71ed3d8d6793))
+* Use `retrieveAuthorizationHeader` method in fetch (box/box-codegen[#565](https://github.com/box/box-swift-sdk-gen/issues/565)) ([#235](https://github.com/box/box-swift-sdk-gen/issues/235)) ([f68e141](https://github.com/box/box-swift-sdk-gen/commit/f68e14174476a40b959280c391475ac8fef644e1))
+
 ## [0.5.0](https://github.com/box/box-codegen/compare/0.4.0...0.5.0) (2024-09-11)
 
 
