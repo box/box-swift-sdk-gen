@@ -3,6 +3,7 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+- [Authentication](#authentication)
 - [Authentication methods](#authentication-methods)
   - [Developer Token](#developer-token)
   - [Client Credentials Grant](#client-credentials-grant)
@@ -12,6 +13,8 @@
   - [OAuth 2.0 Auth](#oauth-20-auth)
     - [Login flow (recommended)](#login-flow-recommended)
     - [Manual flow](#manual-flow)
+- [Retrieve current access token](#retrieve-current-access-token)
+- [Refresh access token](#refresh-access-token)
 - [Revoke token](#revoke-token)
 - [Downscope token](#downscope-token)
 - [Token storage](#token-storage)
@@ -220,6 +223,28 @@ You need to provide the authorization code to the SDK to obtain an access token,
 ```swift
 auth.getTokensAuthorizationCodeGrant(authorizationCode: "<<YOUR_AUTHORIZATION_CODE>>")
 let client = BoxClient(auth: oauth)
+```
+
+# Retrieve current access token
+
+After initializing the authentication object, the SDK will able to retrieve the access token.
+To retrieve the current access token you can use the following code:
+
+<!-- sample post_oauth2_token -->
+
+```swift
+try await auth.retrieveToken();
+```
+
+# Refresh access token
+
+Access tokens are short-lived and need to be refreshed periodically. The SDK will automatically refresh the token when needed.
+If you want to manually refresh the token, you can use the following code:
+
+<!-- sample post_oauth2_token refresh -->
+
+```swift
+try await auth.refreshToken();
 ```
 
 # Revoke token
