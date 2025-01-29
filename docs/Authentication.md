@@ -216,13 +216,17 @@ After a user logs in and grants your application access to their Box account,
 they will be redirected to your application's `redirectUri` which will contain
 an authorization code. This code can then be used along with your client ID and
 client secret to establish an API connection.
-You need to provide the authorization code to the SDK to obtain an access token, then you can use the SDK as usual.
+You need to provide the auth code to the SDK to obtain an access token.
+Calling `auth.getTokensAuthorizationCodeGrant(authorizationCode: "<<YOUR_AUTHORIZATION_CODE>>")` will exchange the auth
+code for an access token and save it in the `BoxOAuth` token storage. The SDK will automatically refresh
+the token when needed.
+All you need to do is create a client object with the `BoxOAuth` object and start making API calls.
 
 <!-- sample post_oauth2_token --->
 
 ```swift
 auth.getTokensAuthorizationCodeGrant(authorizationCode: "<<YOUR_AUTHORIZATION_CODE>>")
-let client = BoxClient(auth: oauth)
+let client = BoxClient(auth: auth)
 ```
 
 # Retrieve current access token
