@@ -74,12 +74,12 @@ public class AiManager {
     /// - Parameters:
     ///   - requestBody: Request body of createAiExtractStructured method
     ///   - headers: Headers of createAiExtractStructured method
-    /// - Returns: The `AiExtractResponse`.
+    /// - Returns: The `AiExtractStructuredResponse`.
     /// - Throws: The `GeneralError`.
-    public func createAiExtractStructured(requestBody: AiExtractStructured, headers: CreateAiExtractStructuredHeaders = CreateAiExtractStructuredHeaders()) async throws -> AiExtractResponse {
+    public func createAiExtractStructured(requestBody: AiExtractStructured, headers: CreateAiExtractStructuredHeaders = CreateAiExtractStructuredHeaders()) async throws -> AiExtractStructuredResponse {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/extract_structured")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try AiExtractResponse.deserialize(from: response.data)
+        return try AiExtractStructuredResponse.deserialize(from: response.data)
     }
 
 }
