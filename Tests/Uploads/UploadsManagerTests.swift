@@ -22,4 +22,10 @@ class UploadsManagerTests: XCTestCase {
         XCTAssertTrue(newFileVersion.name == newFileVersionName)
         try await client.files.deleteFileById(fileId: newFileVersion.id)
     }
+
+    public func testPreflightCheck() async throws {
+        let newFileName: String = Utils.getUUID()
+        let preflightCheckResult: UploadUrl = try await client.uploads.preflightFileUploadCheck(requestBody: PreflightFileUploadCheckRequestBody(name: newFileName, size: 1024 * 1024, parent: PreflightFileUploadCheckRequestBodyParentField(id: "0")))
+        XCTAssertTrue(preflightCheckResult.uploadUrl != "")
+    }
 }
