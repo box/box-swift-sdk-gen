@@ -13,6 +13,7 @@
   - [OAuth 2.0 Auth](#oauth-20-auth)
     - [Login flow (recommended)](#login-flow-recommended)
     - [Manual flow](#manual-flow)
+    - [Injecting existing token into BoxOAuth](#injecting-existing-token-into-boxoauth)
 - [Retrieve current access token](#retrieve-current-access-token)
 - [Refresh access token](#refresh-access-token)
 - [Revoke token](#revoke-token)
@@ -229,9 +230,32 @@ auth.getTokensAuthorizationCodeGrant(authorizationCode: "<<YOUR_AUTHORIZATION_CO
 let client = BoxClient(auth: auth)
 ```
 
+### Injecting existing token into BoxOAuth
+
+If you already have an access token and refresh token, you can initialize `BoxOAuth` with them.
+You can achieve this by feeding `BoxOAuth` with token storage containing the token.
+This can be useful when you want to reuse the token between runs of your application.
+
+```swift
+let accessToken = AccessToken(accessToken: "<ACCESS_TOKEN>", refreshToken: "<REFRESH_TOKEN>")
+let tokenStorage = InMemoryTokenStorage()
+try await tokenStorage.store(token: accessToken)
+
+let config = OAuthConfig(
+    clientId: "YOUR_CLIENT_ID",
+    clientSecret: "YOUR_CLIENT_SECRET",
+    tokenStorage: tokenStorage
+)
+let auth = BoxOAuth(config: config)
+let client = BoxClient(auth: auth)
+```
+
+Alternatively, you can create a custom implementation of `TokenStorage` protocol and pass it to the `BoxOAuth` object.
+See the [Custom storage](#custom-storage) section for more information.
+
 # Retrieve current access token
 
-After initializing the authentication object, the SDK will able to retrieve the access token.
+After initializing the authentication object, the SDK will be able to retrieve the access token.
 To retrieve the current access token you can use the following code:
 
 <!-- sample post_oauth2_token -->
@@ -335,6 +359,20 @@ You can also provide a custom token storage class. All you need to do is create 
 protocol and pass an instance of your class to the AuthConfig constructor.
 
 ```swift
+class MyCustomTokenStorage: TokenStorage {
+    func store(token: AccessToken) async throws {
+        // store token in your custom storage
+    }
+
+    func get() async throws -> AccessToken? {
+        // retrieve token from your custom storage
+    }
+
+    func clear() async throws {
+        // clear token from your custom storage
+    }
+}
+
 let auth = BoxOAuth(config:
         OAuthConfig(
           clientId: "<<YOUR CLIENT ID HERE>>",
