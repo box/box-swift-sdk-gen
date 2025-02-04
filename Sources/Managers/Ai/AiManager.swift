@@ -15,12 +15,16 @@ public class AiManager {
     /// - Parameters:
     ///   - requestBody: Request body of createAiAsk method
     ///   - headers: Headers of createAiAsk method
-    /// - Returns: The `AiResponseFull`.
+    /// - Returns: The `AiResponseFull?`.
     /// - Throws: The `GeneralError`.
-    public func createAiAsk(requestBody: AiAsk, headers: CreateAiAskHeaders = CreateAiAskHeaders()) async throws -> AiResponseFull {
+    public func createAiAsk(requestBody: AiAsk, headers: CreateAiAskHeaders = CreateAiAskHeaders()) async throws -> AiResponseFull? {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/ask")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try AiResponseFull.deserialize(from: response.data)
+        if Utils.Strings.toString(value: response.status) == "204" {
+            return nil
+        }
+
+        return try AiResponseFull?.deserialize(from: response.data)
     }
 
     /// Sends an AI request to supported Large Language Models (LLMs) and returns generated text based on the provided prompt.
