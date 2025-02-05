@@ -22,7 +22,7 @@ public class AiAsk: Codable {
     /// **Note**: Box AI handles documents with text representations up to 1MB in size, or a maximum of 25 files, whichever comes first.
     /// If the file size exceeds 1MB, the first 1MB of text representation will be processed.
     /// If you set `mode` parameter to `single_item_qa`, the `items` array can have one element only. 
-    public let items: [AiItemBase]
+    public let items: [AiItemAsk]
 
     /// The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
     public let dialogueHistory: [AiDialogueHistory]?
@@ -45,7 +45,7 @@ public class AiAsk: Codable {
     ///   - dialogueHistory: The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
     ///   - includeCitations: A flag to indicate whether citations should be returned.
     ///   - aiAgent: 
-    public init(mode: AiAskModeField, prompt: String, items: [AiItemBase], dialogueHistory: [AiDialogueHistory]? = nil, includeCitations: Bool? = nil, aiAgent: AiAgentAsk? = nil) {
+    public init(mode: AiAskModeField, prompt: String, items: [AiItemAsk], dialogueHistory: [AiDialogueHistory]? = nil, includeCitations: Bool? = nil, aiAgent: AiAgentAsk? = nil) {
         self.mode = mode
         self.prompt = prompt
         self.items = items
@@ -58,7 +58,7 @@ public class AiAsk: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         mode = try container.decode(AiAskModeField.self, forKey: .mode)
         prompt = try container.decode(String.self, forKey: .prompt)
-        items = try container.decode([AiItemBase].self, forKey: .items)
+        items = try container.decode([AiItemAsk].self, forKey: .items)
         dialogueHistory = try container.decodeIfPresent([AiDialogueHistory].self, forKey: .dialogueHistory)
         includeCitations = try container.decodeIfPresent(Bool.self, forKey: .includeCitations)
         aiAgent = try container.decodeIfPresent(AiAgentAsk.self, forKey: .aiAgent)
