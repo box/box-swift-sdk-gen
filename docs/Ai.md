@@ -18,7 +18,7 @@ See the endpoint docs at
 
 <!-- sample post_ai_ask -->
 ```
-try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.multipleItemQa, prompt: "Which direction sun rises?", items: [AiItemAsk(id: fileToAsk1.id, type: AiItemAskTypeField.file, content: "Earth goes around the sun"), AiItemAsk(id: fileToAsk2.id, type: AiItemAskTypeField.file, content: "Sun rises in the East in the morning")]))
+try await client.ai.createAiAsk(requestBody: AiAsk(mode: AiAskModeField.singleItemQa, prompt: "which direction sun rises", items: [AiItemAsk(id: fileToAsk.id, type: AiItemAskTypeField.file, content: "Sun rises in the East")]))
 ```
 
 ### Arguments
@@ -76,7 +76,7 @@ See the endpoint docs at
 
 <!-- sample get_ai_agent_default -->
 ```
-try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.textGen, language: "en-US"))
+try await client.ai.getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams(mode: GetAiAgentDefaultConfigQueryParamsModeField.ask, language: "en-US"))
 ```
 
 ### Arguments

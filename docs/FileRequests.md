@@ -17,7 +17,7 @@ See the endpoint docs at
 
 <!-- sample get_file_requests_id -->
 ```
-try await client.fileRequests.getFileRequestById(fileRequestId: updatedFileRequest.id)
+try await client.fileRequests.getFileRequestById(fileRequestId: fileRequestId)
 ```
 
 ### Arguments

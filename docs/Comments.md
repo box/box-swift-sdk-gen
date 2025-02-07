@@ -145,7 +145,7 @@ See the endpoint docs at
 
 <!-- sample post_comments -->
 ```
-try await client.comments.createComment(requestBody: CreateCommentRequestBody(message: message, item: CreateCommentRequestBodyItemField(id: newComment.id!, type: CreateCommentRequestBodyItemTypeField.comment)))
+try await client.comments.createComment(requestBody: CreateCommentRequestBody(message: message, item: CreateCommentRequestBodyItemField(id: fileId, type: CreateCommentRequestBodyItemTypeField.file)))
 ```
 
 ### Arguments

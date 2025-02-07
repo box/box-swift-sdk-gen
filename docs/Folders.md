@@ -28,7 +28,7 @@ See the endpoint docs at
 
 <!-- sample get_folders_id -->
 ```
-try await client.folders.getFolderById(folderId: folderId, queryParams: GetFolderByIdQueryParams(fields: ["is_associated_with_app_item"]))
+try await client.folders.getFolderById(folderId: "0")
 ```
 
 ### Arguments
@@ -70,7 +70,7 @@ See the endpoint docs at
 
 <!-- sample put_folders_id -->
 ```
-try await downscopedClient.folders.updateFolderById(folderId: folder.id, requestBody: UpdateFolderByIdRequestBody(name: Utils.getUUID()))
+try await client.folders.updateFolderById(folderId: folderToUpdate.id, requestBody: UpdateFolderByIdRequestBody(name: updatedName, description: "Updated description"))
 ```
 
 ### Arguments
@@ -113,7 +113,7 @@ See the endpoint docs at
 
 <!-- sample delete_folders_id -->
 ```
-try await parentClient.folders.deleteFolderById(folderId: folder.id)
+try await client.folders.deleteFolderById(folderId: newFolder.id)
 ```
 
 ### Arguments
@@ -180,7 +180,7 @@ See the endpoint docs at
 
 <!-- sample post_folders -->
 ```
-try await parentClient.folders.createFolder(requestBody: CreateFolderRequestBody(name: Utils.getUUID(), parent: CreateFolderRequestBodyParentField(id: "0")))
+try await client.folders.createFolder(requestBody: CreateFolderRequestBody(name: newFolderName, parent: CreateFolderRequestBodyParentField(id: "0")))
 ```
 
 ### Arguments

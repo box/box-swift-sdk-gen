@@ -47,7 +47,7 @@ See the endpoint docs at
 
 <!-- sample post_retention_policies -->
 ```
-try await client.retentionPolicies.createRetentionPolicy(requestBody: CreateRetentionPolicyRequestBody(policyName: Utils.getUUID(), policyType: CreateRetentionPolicyRequestBodyPolicyTypeField.finite, dispositionAction: CreateRetentionPolicyRequestBodyDispositionActionField.removeRetention, retentionLength: "1", description: description, canOwnerExtendRetention: false, retentionType: CreateRetentionPolicyRequestBodyRetentionTypeField.modifiable))
+try await client.retentionPolicies.createRetentionPolicy(requestBody: CreateRetentionPolicyRequestBody(policyName: retentionPolicyName, policyType: CreateRetentionPolicyRequestBodyPolicyTypeField.finite, areOwnersNotified: true, canOwnerExtendRetention: true, description: retentionDescription, dispositionAction: CreateRetentionPolicyRequestBodyDispositionActionField.removeRetention, retentionLength: "1", retentionType: CreateRetentionPolicyRequestBodyRetentionTypeField.modifiable))
 ```
 
 ### Arguments

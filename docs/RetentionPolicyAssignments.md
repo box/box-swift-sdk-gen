@@ -51,7 +51,7 @@ See the endpoint docs at
 
 <!-- sample post_retention_policy_assignments -->
 ```
-try await client.retentionPolicyAssignments.createRetentionPolicyAssignment(requestBody: CreateRetentionPolicyAssignmentRequestBody(policyId: retentionPolicy.id, assignTo: CreateRetentionPolicyAssignmentRequestBodyAssignToField(id: folder.id, type: CreateRetentionPolicyAssignmentRequestBodyAssignToTypeField.folder)))
+try await client.retentionPolicyAssignments.createRetentionPolicyAssignment(requestBody: CreateRetentionPolicyAssignmentRequestBody(policyId: retentionPolicy.id, assignTo: CreateRetentionPolicyAssignmentRequestBodyAssignToField(type: CreateRetentionPolicyAssignmentRequestBodyAssignToTypeField.folder, id: folder.id)))
 ```
 
 ### Arguments

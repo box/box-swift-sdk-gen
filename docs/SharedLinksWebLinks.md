@@ -24,7 +24,7 @@ See the endpoint docs at
 
 <!-- sample get_shared_items#web_links -->
 ```
-try await userClient.sharedLinksWebLinks.findWebLinkForSharedLink(queryParams: FindWebLinkForSharedLinkQueryParams(), headers: FindWebLinkForSharedLinkHeaders(boxapi: "\("shared_link=")\(webLinkFromApi.sharedLink!.url)\("&shared_link_password=incorrectPassword")"))
+try await userClient.sharedLinksWebLinks.findWebLinkForSharedLink(queryParams: FindWebLinkForSharedLinkQueryParams(), headers: FindWebLinkForSharedLinkHeaders(boxapi: "\("shared_link=")\(webLinkFromApi.sharedLink!.url)\("&shared_link_password=Secret123@")"))
 ```
 
 ### Arguments
