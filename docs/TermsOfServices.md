@@ -104,7 +104,7 @@ See the endpoint docs at
 
 <!-- sample put_terms_of_services_id -->
 ```
-try await client.termsOfServices.updateTermsOfServiceById(termsOfServiceId: tos.id, requestBody: UpdateTermsOfServiceByIdRequestBody(status: UpdateTermsOfServiceByIdRequestBodyStatusField.disabled, text: "Updated TOS"))
+try await client.termsOfServices.updateTermsOfServiceById(termsOfServiceId: tos.id, requestBody: UpdateTermsOfServiceByIdRequestBody(status: UpdateTermsOfServiceByIdRequestBodyStatusField.disabled, text: "TOS"))
 ```
 
 ### Arguments

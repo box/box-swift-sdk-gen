@@ -19,7 +19,7 @@ See the endpoint docs at
 
 <!-- sample post_docgen_templates_v2025.0 -->
 ```
-try await client.docgenTemplate.createDocgenTemplateV2025R0(requestBody: DocGenTemplateCreateRequestV2025R0(file: FileReferenceV2025R0(id: uploadedFile.id)))
+try await client.docgenTemplate.createDocgenTemplateV2025R0(requestBody: DocGenTemplateCreateRequestV2025R0(file: FileReferenceV2025R0(id: file.id)))
 ```
 
 ### Arguments

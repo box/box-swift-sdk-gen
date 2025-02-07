@@ -16,7 +16,7 @@ See the endpoint docs at
 
 <!-- sample get_users_id_avatar -->
 ```
-try await client.avatars.getUserAvatar(userId: user.id, downloadDestinationURL: URL(path: "\(Utils.temporaryDirectoryPath())\(Utils.getUUID())"))
+try await client.avatars.getUserAvatar(userId: user.id, downloadDestinationURL: destinationPath)
 ```
 
 ### Arguments

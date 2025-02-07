@@ -55,7 +55,7 @@ See the endpoint docs at
 
 <!-- sample post_users -->
 ```
-try await client.users.createUser(requestBody: CreateUserRequestBody(name: userName, isPlatformAccessOnly: true))
+try await client.users.createUser(requestBody: CreateUserRequestBody(name: userName, login: userLogin, isPlatformAccessOnly: true))
 ```
 
 ### Arguments
@@ -208,7 +208,7 @@ See the endpoint docs at
 
 <!-- sample delete_users_id -->
 ```
-try await client.users.deleteUserById(userId: createdUser.id)
+try await client.users.deleteUserById(userId: user.id)
 ```
 
 ### Arguments

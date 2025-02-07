@@ -24,7 +24,7 @@ See the endpoint docs at
 
 <!-- sample get_shared_items#folders -->
 ```
-try await userClient.sharedLinksFolders.findFolderForSharedLink(queryParams: FindFolderForSharedLinkQueryParams(), headers: FindFolderForSharedLinkHeaders(boxapi: "\("shared_link=")\(folderFromApi.sharedLink!.url)\("&shared_link_password=incorrectPassword")"))
+try await userClient.sharedLinksFolders.findFolderForSharedLink(queryParams: FindFolderForSharedLinkQueryParams(), headers: FindFolderForSharedLinkHeaders(boxapi: "\("shared_link=")\(folderFromApi.sharedLink!.url)\("&shared_link_password=Secret123@")"))
 ```
 
 ### Arguments

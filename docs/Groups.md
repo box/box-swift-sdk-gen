@@ -83,7 +83,7 @@ See the endpoint docs at
 
 <!-- sample get_groups_id -->
 ```
-try await client.groups.getGroupById(groupId: group.id)
+try await client.groups.getGroupById(groupId: group.id, queryParams: GetGroupByIdQueryParams(fields: ["id", "name", "description", "group_type"]))
 ```
 
 ### Arguments

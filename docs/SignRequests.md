@@ -134,7 +134,7 @@ See the endpoint docs at
 
 <!-- sample post_sign_requests -->
 ```
-try await client.signRequests.createSignRequest(requestBody: SignRequestCreateRequest(signers: [SignRequestCreateSigner(email: signer1Email, signerGroupId: "user"), SignRequestCreateSigner(email: signer2Email, signerGroupId: "user")], parentFolder: FolderMini(id: destinationFolder.id), sourceFiles: [FileBase(id: fileToSign.id)]))
+try await client.signRequests.createSignRequest(requestBody: SignRequestCreateRequest(signers: [SignRequestCreateSigner(email: signerEmail, suppressNotifications: true, declinedRedirectUrl: "https://www.box.com", embedUrlExternalUserId: "123", isInPerson: false, loginRequired: false, password: "password", role: SignRequestCreateSignerRoleField.signer)], areRemindersEnabled: true, areTextSignaturesEnabled: true, daysValid: Int64(30), declinedRedirectUrl: "https://www.box.com", emailMessage: "Please sign this document", emailSubject: "Sign this document", externalId: "123", externalSystemName: "BoxSignIntegration", isDocumentPreparationNeeded: false, name: "Sign Request", parentFolder: FolderMini(id: destinationFolder.id), redirectUrl: "https://www.box.com", prefillTags: [SignRequestPrefillTag(dateValue: try Utils.Dates.dateFromString(date: "2035-01-01"), documentTagId: "0")], sourceFiles: [FileBase(id: fileToSign.id)]))
 ```
 
 ### Arguments

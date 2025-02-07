@@ -62,7 +62,7 @@ See the endpoint docs at
 
 <!-- sample get_files_id_trash -->
 ```
-try await client.trashedFiles.getTrashedFileById(fileId: uploadedFile.id)
+try await client.trashedFiles.getTrashedFileById(fileId: file.id)
 ```
 
 ### Arguments

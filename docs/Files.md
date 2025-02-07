@@ -18,7 +18,7 @@ See the endpoint docs at
 
 <!-- sample get_files_id -->
 ```
-try await client.files.getFileById(fileId: fileId, queryParams: GetFileByIdQueryParams(fields: ["is_associated_with_app_item"]))
+try await client.files.getFileById(fileId: uploadedFile.id, queryParams: GetFileByIdQueryParams(fields: ["is_externally_owned", "has_collaborations"]))
 ```
 
 ### Arguments
@@ -54,7 +54,7 @@ See the endpoint docs at
 
 <!-- sample put_files_id -->
 ```
-try await downscopedClient.files.updateFileById(fileId: file.id, requestBody: UpdateFileByIdRequestBody(name: Utils.getUUID()))
+try await client.files.updateFileById(fileId: fileToUpdate.id, requestBody: UpdateFileByIdRequestBody(name: updatedName, description: "Updated description"))
 ```
 
 ### Arguments
@@ -95,7 +95,7 @@ See the endpoint docs at
 
 <!-- sample delete_files_id -->
 ```
-try await parentClient.files.deleteFileById(fileId: file.id)
+try await client.files.deleteFileById(fileId: thumbnailFile.id)
 ```
 
 ### Arguments

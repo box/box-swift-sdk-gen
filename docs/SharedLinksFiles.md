@@ -27,7 +27,7 @@ See the endpoint docs at
 
 <!-- sample get_shared_items -->
 ```
-try await userClient.sharedLinksFiles.findFileForSharedLink(queryParams: FindFileForSharedLinkQueryParams(), headers: FindFileForSharedLinkHeaders(boxapi: "\("shared_link=")\(fileFromApi.sharedLink!.url)\("&shared_link_password=incorrectPassword")"))
+try await userClient.sharedLinksFiles.findFileForSharedLink(queryParams: FindFileForSharedLinkQueryParams(), headers: FindFileForSharedLinkHeaders(boxapi: "\("shared_link=")\(fileFromApi.sharedLink!.url)\("&shared_link_password=Secret123@")"))
 ```
 
 ### Arguments

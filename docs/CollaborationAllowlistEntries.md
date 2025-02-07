@@ -78,7 +78,7 @@ See the endpoint docs at
 
 <!-- sample get_collaboration_whitelist_entries_id -->
 ```
-try await client.collaborationAllowlistEntries.getCollaborationWhitelistEntryById(collaborationWhitelistEntryId: entry.id!)
+try await client.collaborationAllowlistEntries.getCollaborationWhitelistEntryById(collaborationWhitelistEntryId: newEntry.id!)
 ```
 
 ### Arguments
