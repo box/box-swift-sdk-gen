@@ -14,7 +14,7 @@ public class AiExtract: Codable {
     /// The items that LLM will process. Currently, you can use files only.
     public let items: [AiItemBase]
 
-    public let aiAgent: AiAgentExtract?
+    public let aiAgent: AiAgentExtractOrAiAgentReference?
 
     /// Initializer for a AiExtract.
     ///
@@ -22,7 +22,7 @@ public class AiExtract: Codable {
     ///   - prompt: The prompt provided to a Large Language Model (LLM) in the request. The prompt can be up to 10000 characters long and it can be an XML or a JSON schema.
     ///   - items: The items that LLM will process. Currently, you can use files only.
     ///   - aiAgent: 
-    public init(prompt: String, items: [AiItemBase], aiAgent: AiAgentExtract? = nil) {
+    public init(prompt: String, items: [AiItemBase], aiAgent: AiAgentExtractOrAiAgentReference? = nil) {
         self.prompt = prompt
         self.items = items
         self.aiAgent = aiAgent
@@ -32,7 +32,7 @@ public class AiExtract: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         prompt = try container.decode(String.self, forKey: .prompt)
         items = try container.decode([AiItemBase].self, forKey: .items)
-        aiAgent = try container.decodeIfPresent(AiAgentExtract.self, forKey: .aiAgent)
+        aiAgent = try container.decodeIfPresent(AiAgentExtractOrAiAgentReference.self, forKey: .aiAgent)
     }
 
     public func encode(to encoder: Encoder) throws {

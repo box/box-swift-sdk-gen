@@ -21,7 +21,7 @@ public class AiAsk: Codable {
     /// 
     /// **Note**: Box AI handles documents with text representations up to 1MB in size, or a maximum of 25 files, whichever comes first.
     /// If the file size exceeds 1MB, the first 1MB of text representation will be processed.
-    /// If you set `mode` parameter to `single_item_qa`, the `items` array can have one element only. 
+    /// If you set `mode` parameter to `single_item_qa`, the `items` array can have one element only.
     public let items: [AiItemAsk]
 
     /// The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
@@ -30,7 +30,7 @@ public class AiAsk: Codable {
     /// A flag to indicate whether citations should be returned.
     public let includeCitations: Bool?
 
-    public let aiAgent: AiAgentAsk?
+    public let aiAgent: AiAgentAskOrAiAgentReference?
 
     /// Initializer for a AiAsk.
     ///
@@ -41,11 +41,11 @@ public class AiAsk: Codable {
     ///     
     ///     **Note**: Box AI handles documents with text representations up to 1MB in size, or a maximum of 25 files, whichever comes first.
     ///     If the file size exceeds 1MB, the first 1MB of text representation will be processed.
-    ///     If you set `mode` parameter to `single_item_qa`, the `items` array can have one element only. 
+    ///     If you set `mode` parameter to `single_item_qa`, the `items` array can have one element only.
     ///   - dialogueHistory: The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
     ///   - includeCitations: A flag to indicate whether citations should be returned.
     ///   - aiAgent: 
-    public init(mode: AiAskModeField, prompt: String, items: [AiItemAsk], dialogueHistory: [AiDialogueHistory]? = nil, includeCitations: Bool? = nil, aiAgent: AiAgentAsk? = nil) {
+    public init(mode: AiAskModeField, prompt: String, items: [AiItemAsk], dialogueHistory: [AiDialogueHistory]? = nil, includeCitations: Bool? = nil, aiAgent: AiAgentAskOrAiAgentReference? = nil) {
         self.mode = mode
         self.prompt = prompt
         self.items = items
@@ -61,7 +61,7 @@ public class AiAsk: Codable {
         items = try container.decode([AiItemAsk].self, forKey: .items)
         dialogueHistory = try container.decodeIfPresent([AiDialogueHistory].self, forKey: .dialogueHistory)
         includeCitations = try container.decodeIfPresent(Bool.self, forKey: .includeCitations)
-        aiAgent = try container.decodeIfPresent(AiAgentAsk.self, forKey: .aiAgent)
+        aiAgent = try container.decodeIfPresent(AiAgentAskOrAiAgentReference.self, forKey: .aiAgent)
     }
 
     public func encode(to encoder: Encoder) throws {
