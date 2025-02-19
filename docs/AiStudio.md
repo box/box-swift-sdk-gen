@@ -16,7 +16,10 @@ This operation is performed by calling function `getAiAgents`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-ai-agents/).
 
-*Currently we don't have an example for calling `getAiAgents` in integration tests*
+<!-- sample get_ai_agents -->
+```
+try await client.aiStudio.getAiAgents()
+```
 
 ### Arguments
 
@@ -42,7 +45,10 @@ This operation is performed by calling function `createAiAgent`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/post-ai-agents/).
 
-*Currently we don't have an example for calling `createAiAgent` in integration tests*
+<!-- sample post_ai_agents -->
+```
+try await client.aiStudio.createAiAgent(requestBody: CreateAiAgent(name: agentName, accessState: "enabled", ask: AiStudioAgentAsk(accessState: "enabled", description: "desc1")))
+```
 
 ### Arguments
 
@@ -68,7 +74,10 @@ This operation is performed by calling function `updateAiAgentById`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/put-ai-agents-id/).
 
-*Currently we don't have an example for calling `updateAiAgentById` in integration tests*
+<!-- sample put_ai_agents_id -->
+```
+try await client.aiStudio.updateAiAgentById(agentId: createdAgent.id, requestBody: CreateAiAgent(name: agentName, accessState: "enabled", ask: AiStudioAgentAsk(accessState: "disabled", description: "desc2")))
+```
 
 ### Arguments
 
@@ -96,7 +105,10 @@ This operation is performed by calling function `getAiAgentById`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-ai-agents-id/).
 
-*Currently we don't have an example for calling `getAiAgentById` in integration tests*
+<!-- sample get_ai_agents_id -->
+```
+try await client.aiStudio.getAiAgentById(agentId: createdAgent.id, queryParams: GetAiAgentByIdQueryParams(fields: ["ask"]))
+```
 
 ### Arguments
 
@@ -124,7 +136,10 @@ This operation is performed by calling function `deleteAiAgentById`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/delete-ai-agents-id/).
 
-*Currently we don't have an example for calling `deleteAiAgentById` in integration tests*
+<!-- sample delete_ai_agents_id -->
+```
+try await client.aiStudio.deleteAiAgentById(agentId: createdAgent.id)
+```
 
 ### Arguments
 
