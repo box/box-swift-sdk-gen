@@ -10,7 +10,7 @@ public class GetSignRequestsQueryParams {
     /// The maximum number of items to return per page.
     public let limit: Int64?
 
-    /// A list of sender emails to filter the signature requests by sender. 
+    /// A list of sender emails to filter the signature requests by sender.
     /// If provided, `shared_requests` must be set to `true`.
     public let senders: [String]?
 
@@ -28,7 +28,7 @@ public class GetSignRequestsQueryParams {
     ///     
     ///     This requires `usemarker` to be set to `true`.
     ///   - limit: The maximum number of items to return per page.
-    ///   - senders: A list of sender emails to filter the signature requests by sender. 
+    ///   - senders: A list of sender emails to filter the signature requests by sender.
     ///     If provided, `shared_requests` must be set to `true`.
     ///   - sharedRequests: If set to `true`, only includes requests that user is not an owner,
     ///     but user is a collaborator. Collaborator access is determined by the

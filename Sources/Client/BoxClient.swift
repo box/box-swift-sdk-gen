@@ -145,6 +145,8 @@ public class BoxClient {
 
     public let ai: AiManager
 
+    public let aiStudio: AiStudioManager
+
     public let docgenTemplate: DocgenTemplateManager
 
     public let docgen: DocgenManager
@@ -222,6 +224,7 @@ public class BoxClient {
         self.signTemplates = SignTemplatesManager(auth: self.auth, networkSession: self.networkSession)
         self.integrationMappings = IntegrationMappingsManager(auth: self.auth, networkSession: self.networkSession)
         self.ai = AiManager(auth: self.auth, networkSession: self.networkSession)
+        self.aiStudio = AiStudioManager(auth: self.auth, networkSession: self.networkSession)
         self.docgenTemplate = DocgenTemplateManager(auth: self.auth, networkSession: self.networkSession)
         self.docgen = DocgenManager(auth: self.auth, networkSession: self.networkSession)
     }

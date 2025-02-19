@@ -14,9 +14,9 @@ public class AiExtractStructuredMetadataTemplateField: Codable {
     public let type: AiExtractStructuredMetadataTemplateTypeField?
 
     /// The scope of the metadata template that can either be global or
-    /// enterprise. 
+    /// enterprise.
     /// * The **global** scope is used for templates that are
-    /// available to any Box enterprise. 
+    /// available to any Box enterprise.
     /// * The **enterprise** scope represents templates created within a specific enterprise,
     ///   containing the ID of that enterprise.
     public let scope: String?
@@ -27,9 +27,9 @@ public class AiExtractStructuredMetadataTemplateField: Codable {
     ///   - templateKey: The name of the metadata template.
     ///   - type: Value is always `metadata_template`.
     ///   - scope: The scope of the metadata template that can either be global or
-    ///     enterprise. 
+    ///     enterprise.
     ///     * The **global** scope is used for templates that are
-    ///     available to any Box enterprise. 
+    ///     available to any Box enterprise.
     ///     * The **enterprise** scope represents templates created within a specific enterprise,
     ///       containing the ID of that enterprise.
     public init(templateKey: String? = nil, type: AiExtractStructuredMetadataTemplateTypeField? = nil, scope: String? = nil) {
