@@ -48,7 +48,7 @@ See the endpoint docs at
 
 <!-- sample post_legal_hold_policies -->
 ```
-try await client.legalHoldPolicies.createLegalHoldPolicy(requestBody: CreateLegalHoldPolicyRequestBody(policyName: legalHoldPolicyName, description: legalHoldDescription, isOngoing: true))
+try await client.legalHoldPolicies.createLegalHoldPolicy(requestBody: CreateLegalHoldPolicyRequestBody(policyName: legalHoldPolicyName, description: legalHoldDescription, isOngoing: false, filterStartedAt: filterStartedAt, filterEndedAt: filterEndedAt))
 ```
 
 ### Arguments
@@ -140,7 +140,7 @@ See the endpoint docs at
 
 <!-- sample delete_legal_hold_policies_id -->
 ```
-try await client.legalHoldPolicies.deleteLegalHoldPolicyById(legalHoldPolicyId: legalHoldPolicyId)
+try await client.legalHoldPolicies.deleteLegalHoldPolicyById(legalHoldPolicyId: legalHoldPolicy.id)
 ```
 
 ### Arguments
