@@ -11,7 +11,7 @@ class WebhooksManagerTests: XCTestCase {
 
     public func testWebhooksCrud() async throws {
         let folder: FolderFull = try await client.folders.createFolder(requestBody: CreateFolderRequestBody(name: Utils.getUUID(), parent: CreateFolderRequestBodyParentField(id: "0")))
-        let webhook: Webhook = try await client.webhooks.createWebhook(requestBody: CreateWebhookRequestBody(target: CreateWebhookRequestBodyTargetField(id: folder.id, type: CreateWebhookRequestBodyTargetTypeField.folder), address: "https://example.com/new-webhook", triggers: [CreateWebhookRequestBodyTriggersField.fIleUploaded]))
+        let webhook: Webhook = try await client.webhooks.createWebhook(requestBody: CreateWebhookRequestBody(target: CreateWebhookRequestBodyTargetField(id: folder.id, type: CreateWebhookRequestBodyTargetTypeField.folder), address: "https://example.com/new-webhook", triggers: [CreateWebhookRequestBodyTriggersField.fileUploaded]))
         XCTAssertTrue(webhook.target!.id == folder.id)
         XCTAssertTrue(Utils.Strings.toString(value: webhook.target!.type) == "folder")
         XCTAssertTrue(webhook.triggers!.count == ["FILE.UPLOADED"].count)
