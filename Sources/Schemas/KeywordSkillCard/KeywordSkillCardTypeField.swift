@@ -1,5 +1,25 @@
 import Foundation
 
-public enum KeywordSkillCardTypeField: String, CodableStringEnum {
-    case skillCard = "skill_card"
+public enum KeywordSkillCardTypeField: CodableStringEnum {
+    case skillCard
+    case customValue(String)
+
+    public init(rawValue value: String) {
+        switch value.lowercased() {
+        case "skill_card".lowercased():
+            self = .skillCard
+        default:
+            self = .customValue(value)
+        }
+    }
+
+    public var rawValue: String {
+        switch self {
+        case .skillCard:
+            return "skill_card"
+        case .customValue(let value):
+            return value
+        }
+    }
+
 }
