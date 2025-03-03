@@ -11,17 +11,13 @@ public class AiAsk: Codable {
         case aiAgent = "ai_agent"
     }
 
-    /// The mode specifies if this request is for a single or multiple items. If you select `single_item_qa` the `items` array can have one element only. Selecting `multiple_item_qa` allows you to provide up to 25 items.
+    /// Box AI handles text documents with text representations up to 1MB in size, or a maximum of 25 files, whichever comes first. If the text file size exceeds 1MB, the first 1MB of text representation will be processed. Box AI handles image documents with a resolution of 1024 x 1024 pixels, with a maximum of 5 images or 5 pages for multi-page images. If the number of image or image pages exceeds 5, the first 5 images or pages will be processed. If you set mode parameter to `single_item_qa`, the items array can have one element only. Currently Box AI does not support multi-modal requests. If both images and text are sent Box AI will only process the text.
     public let mode: AiAskModeField
 
     /// The prompt provided by the client to be answered by the LLM. The prompt's length is limited to 10000 characters.
     public let prompt: String
 
     /// The items to be processed by the LLM, often files.
-    /// 
-    /// **Note**: Box AI handles documents with text representations up to 1MB in size, or a maximum of 25 files, whichever comes first.
-    /// If the file size exceeds 1MB, the first 1MB of text representation will be processed.
-    /// If you set `mode` parameter to `single_item_qa`, the `items` array can have one element only.
     public let items: [AiItemAsk]
 
     /// The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
@@ -35,13 +31,9 @@ public class AiAsk: Codable {
     /// Initializer for a AiAsk.
     ///
     /// - Parameters:
-    ///   - mode: The mode specifies if this request is for a single or multiple items. If you select `single_item_qa` the `items` array can have one element only. Selecting `multiple_item_qa` allows you to provide up to 25 items.
+    ///   - mode: Box AI handles text documents with text representations up to 1MB in size, or a maximum of 25 files, whichever comes first. If the text file size exceeds 1MB, the first 1MB of text representation will be processed. Box AI handles image documents with a resolution of 1024 x 1024 pixels, with a maximum of 5 images or 5 pages for multi-page images. If the number of image or image pages exceeds 5, the first 5 images or pages will be processed. If you set mode parameter to `single_item_qa`, the items array can have one element only. Currently Box AI does not support multi-modal requests. If both images and text are sent Box AI will only process the text.
     ///   - prompt: The prompt provided by the client to be answered by the LLM. The prompt's length is limited to 10000 characters.
     ///   - items: The items to be processed by the LLM, often files.
-    ///     
-    ///     **Note**: Box AI handles documents with text representations up to 1MB in size, or a maximum of 25 files, whichever comes first.
-    ///     If the file size exceeds 1MB, the first 1MB of text representation will be processed.
-    ///     If you set `mode` parameter to `single_item_qa`, the `items` array can have one element only.
     ///   - dialogueHistory: The history of prompts and answers previously passed to the LLM. This provides additional context to the LLM in generating the response.
     ///   - includeCitations: A flag to indicate whether citations should be returned.
     ///   - aiAgent: 
