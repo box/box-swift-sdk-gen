@@ -1,6 +1,6 @@
 import Foundation
 
-public class UpdateIntegrationMappingTeamsByIdRequestBody: Codable {
+public class UpdateTeamsIntegrationMappingByIdRequestBody: Codable {
     private enum CodingKeys: String, CodingKey {
         case boxItem = "box_item"
     }

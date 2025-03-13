@@ -84,11 +84,11 @@ public class IntegrationMappingsManager {
     /// use this endpoint.
     ///
     /// - Parameters:
-    ///   - queryParams: Query parameters of getIntegrationMappingTeams method
-    ///   - headers: Headers of getIntegrationMappingTeams method
+    ///   - queryParams: Query parameters of getTeamsIntegrationMapping method
+    ///   - headers: Headers of getTeamsIntegrationMapping method
     /// - Returns: The `IntegrationMappingsTeams`.
     /// - Throws: The `GeneralError`.
-    public func getIntegrationMappingTeams(queryParams: GetIntegrationMappingTeamsQueryParams = GetIntegrationMappingTeamsQueryParams(), headers: GetIntegrationMappingTeamsHeaders = GetIntegrationMappingTeamsHeaders()) async throws -> IntegrationMappingsTeams {
+    public func getTeamsIntegrationMapping(queryParams: GetTeamsIntegrationMappingQueryParams = GetTeamsIntegrationMappingQueryParams(), headers: GetTeamsIntegrationMappingHeaders = GetTeamsIntegrationMappingHeaders()) async throws -> IntegrationMappingsTeams {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["partner_item_type": Utils.Strings.toString(value: queryParams.partnerItemType), "partner_item_id": Utils.Strings.toString(value: queryParams.partnerItemId), "box_item_id": Utils.Strings.toString(value: queryParams.boxItemId), "box_item_type": Utils.Strings.toString(value: queryParams.boxItemType)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/teams")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
@@ -101,11 +101,11 @@ public class IntegrationMappingsManager {
     /// use this endpoint.
     ///
     /// - Parameters:
-    ///   - requestBody: Request body of createIntegrationMappingTeams method
-    ///   - headers: Headers of createIntegrationMappingTeams method
+    ///   - requestBody: Request body of createTeamsIntegrationMapping method
+    ///   - headers: Headers of createTeamsIntegrationMapping method
     /// - Returns: The `IntegrationMappingTeams`.
     /// - Throws: The `GeneralError`.
-    public func createIntegrationMappingTeams(requestBody: IntegrationMappingTeamsCreateRequest, headers: CreateIntegrationMappingTeamsHeaders = CreateIntegrationMappingTeamsHeaders()) async throws -> IntegrationMappingTeams {
+    public func createTeamsIntegrationMapping(requestBody: IntegrationMappingTeamsCreateRequest, headers: CreateTeamsIntegrationMappingHeaders = CreateTeamsIntegrationMappingHeaders()) async throws -> IntegrationMappingTeams {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/teams")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try IntegrationMappingTeams.deserialize(from: response.data)
@@ -119,11 +119,11 @@ public class IntegrationMappingsManager {
     /// - Parameters:
     ///   - integrationMappingId: An ID of an integration mapping
     ///     Example: "11235432"
-    ///   - requestBody: Request body of updateIntegrationMappingTeamsById method
-    ///   - headers: Headers of updateIntegrationMappingTeamsById method
+    ///   - requestBody: Request body of updateTeamsIntegrationMappingById method
+    ///   - headers: Headers of updateTeamsIntegrationMappingById method
     /// - Returns: The `IntegrationMappingTeams`.
     /// - Throws: The `GeneralError`.
-    public func updateIntegrationMappingTeamsById(integrationMappingId: String, requestBody: UpdateIntegrationMappingTeamsByIdRequestBody = UpdateIntegrationMappingTeamsByIdRequestBody(), headers: UpdateIntegrationMappingTeamsByIdHeaders = UpdateIntegrationMappingTeamsByIdHeaders()) async throws -> IntegrationMappingTeams {
+    public func updateTeamsIntegrationMappingById(integrationMappingId: String, requestBody: UpdateTeamsIntegrationMappingByIdRequestBody = UpdateTeamsIntegrationMappingByIdRequestBody(), headers: UpdateTeamsIntegrationMappingByIdHeaders = UpdateTeamsIntegrationMappingByIdHeaders()) async throws -> IntegrationMappingTeams {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/teams/")\(integrationMappingId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
         return try IntegrationMappingTeams.deserialize(from: response.data)
@@ -136,9 +136,9 @@ public class IntegrationMappingsManager {
     /// - Parameters:
     ///   - integrationMappingId: An ID of an integration mapping
     ///     Example: "11235432"
-    ///   - headers: Headers of deleteIntegrationMappingTeamsById method
+    ///   - headers: Headers of deleteTeamsIntegrationMappingById method
     /// - Throws: The `GeneralError`.
-    public func deleteIntegrationMappingTeamsById(integrationMappingId: String, headers: DeleteIntegrationMappingTeamsByIdHeaders = DeleteIntegrationMappingTeamsByIdHeaders()) async throws {
+    public func deleteTeamsIntegrationMappingById(integrationMappingId: String, headers: DeleteTeamsIntegrationMappingByIdHeaders = DeleteTeamsIntegrationMappingByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/teams/")\(integrationMappingId)", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
     }
