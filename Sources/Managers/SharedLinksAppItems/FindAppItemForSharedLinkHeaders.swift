@@ -1,6 +1,6 @@
 import Foundation
 
-public class GetSharedItemAppItemsHeaders {
+public class FindAppItemForSharedLinkHeaders {
     /// A header containing the shared link and optional password for the
     /// shared link.
     /// 
@@ -10,7 +10,7 @@ public class GetSharedItemAppItemsHeaders {
     /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
-    /// Initializer for a GetSharedItemAppItemsHeaders.
+    /// Initializer for a FindAppItemForSharedLinkHeaders.
     ///
     /// - Parameters:
     ///   - boxapi: A header containing the shared link and optional password for the
