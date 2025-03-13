@@ -58,6 +58,9 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     before signing the request. If the signer does not have
     ///     an existing account, they will have the option to create
     ///     a free Box account.
+    ///   - verificationPhoneNumber: If set, this phone number will be used to verify the signer
+    ///     via two-factor authentication before they are able to sign the document.
+    ///     Cannot be selected in combination with `login_required`.
     ///   - password: If set, the signer is required to enter the password before they are able
     ///     to sign a document. This field is write only.
     ///   - signerGroupId: If set, signers who have the same value will be assigned to the same input and to the same signer group.
@@ -78,14 +81,14 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     only if the `embed_url_external_user_id`
     ///     parameter was passed in the
     ///     `create Box Sign request` call.
-    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, password: String? = nil, signerGroupId: String? = nil, suppressNotifications: Bool? = nil, hasViewedDocument: Bool? = nil, signerDecision: SignRequestSignerSignerDecisionField? = nil, inputs: [SignRequestSignerInput]? = nil, embedUrl: String? = nil, iframeableEmbedUrl: String? = nil) {
+    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil, signerGroupId: String? = nil, suppressNotifications: Bool? = nil, hasViewedDocument: Bool? = nil, signerDecision: SignRequestSignerSignerDecisionField? = nil, inputs: [SignRequestSignerInput]? = nil, embedUrl: String? = nil, iframeableEmbedUrl: String? = nil) {
         self.hasViewedDocument = hasViewedDocument
         self.signerDecision = signerDecision
         self.inputs = inputs
         self.embedUrl = embedUrl
         self.iframeableEmbedUrl = iframeableEmbedUrl
 
-        super.init(email: email, role: role, isInPerson: isInPerson, order: order, embedUrlExternalUserId: embedUrlExternalUserId, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, loginRequired: loginRequired, password: password, signerGroupId: signerGroupId, suppressNotifications: suppressNotifications)
+        super.init(email: email, role: role, isInPerson: isInPerson, order: order, embedUrlExternalUserId: embedUrlExternalUserId, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, loginRequired: loginRequired, verificationPhoneNumber: verificationPhoneNumber, password: password, signerGroupId: signerGroupId, suppressNotifications: suppressNotifications)
     }
 
     required public init(from decoder: Decoder) throws {
