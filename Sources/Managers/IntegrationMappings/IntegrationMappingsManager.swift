@@ -79,4 +79,68 @@ public class IntegrationMappingsManager {
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/slack/")\(integrationMappingId)", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
     }
 
+    /// Lists [Teams integration mappings](https://support.box.com/hc/en-us/articles/360044681474-Using-Box-for-Teams) in a users' enterprise.
+    /// You need Admin or Co-Admin role to
+    /// use this endpoint.
+    ///
+    /// - Parameters:
+    ///   - queryParams: Query parameters of getIntegrationMappingTeams method
+    ///   - headers: Headers of getIntegrationMappingTeams method
+    /// - Returns: The `IntegrationMappingsTeams`.
+    /// - Throws: The `GeneralError`.
+    public func getIntegrationMappingTeams(queryParams: GetIntegrationMappingTeamsQueryParams = GetIntegrationMappingTeamsQueryParams(), headers: GetIntegrationMappingTeamsHeaders = GetIntegrationMappingTeamsHeaders()) async throws -> IntegrationMappingsTeams {
+        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["partner_item_type": Utils.Strings.toString(value: queryParams.partnerItemType), "partner_item_id": Utils.Strings.toString(value: queryParams.partnerItemId), "box_item_id": Utils.Strings.toString(value: queryParams.boxItemId), "box_item_type": Utils.Strings.toString(value: queryParams.boxItemType)])
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/teams")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try IntegrationMappingsTeams.deserialize(from: response.data)
+    }
+
+    /// Creates a [Teams integration mapping](https://support.box.com/hc/en-us/articles/360044681474-Using-Box-for-Teams)
+    /// by mapping a Teams channel to a Box item.
+    /// You need Admin or Co-Admin role to
+    /// use this endpoint.
+    ///
+    /// - Parameters:
+    ///   - requestBody: Request body of createIntegrationMappingTeams method
+    ///   - headers: Headers of createIntegrationMappingTeams method
+    /// - Returns: The `IntegrationMappingTeams`.
+    /// - Throws: The `GeneralError`.
+    public func createIntegrationMappingTeams(requestBody: IntegrationMappingTeamsCreateRequest, headers: CreateIntegrationMappingTeamsHeaders = CreateIntegrationMappingTeamsHeaders()) async throws -> IntegrationMappingTeams {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/teams")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try IntegrationMappingTeams.deserialize(from: response.data)
+    }
+
+    /// Updates a [Teams integration mapping](https://support.box.com/hc/en-us/articles/360044681474-Using-Box-for-Teams).
+    /// Supports updating the Box folder ID and options.
+    /// You need Admin or Co-Admin role to
+    /// use this endpoint.
+    ///
+    /// - Parameters:
+    ///   - integrationMappingId: An ID of an integration mapping
+    ///     Example: "11235432"
+    ///   - requestBody: Request body of updateIntegrationMappingTeamsById method
+    ///   - headers: Headers of updateIntegrationMappingTeamsById method
+    /// - Returns: The `IntegrationMappingTeams`.
+    /// - Throws: The `GeneralError`.
+    public func updateIntegrationMappingTeamsById(integrationMappingId: String, requestBody: UpdateIntegrationMappingTeamsByIdRequestBody = UpdateIntegrationMappingTeamsByIdRequestBody(), headers: UpdateIntegrationMappingTeamsByIdHeaders = UpdateIntegrationMappingTeamsByIdHeaders()) async throws -> IntegrationMappingTeams {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/teams/")\(integrationMappingId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try IntegrationMappingTeams.deserialize(from: response.data)
+    }
+
+    /// Deletes a [Teams integration mapping](https://support.box.com/hc/en-us/articles/360044681474-Using-Box-for-Teams).
+    /// You need Admin or Co-Admin role to
+    /// use this endpoint.
+    ///
+    /// - Parameters:
+    ///   - integrationMappingId: An ID of an integration mapping
+    ///     Example: "11235432"
+    ///   - headers: Headers of deleteIntegrationMappingTeamsById method
+    /// - Throws: The `GeneralError`.
+    public func deleteIntegrationMappingTeamsById(integrationMappingId: String, headers: DeleteIntegrationMappingTeamsByIdHeaders = DeleteIntegrationMappingTeamsByIdHeaders()) async throws {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/integration_mappings/teams/")\(integrationMappingId)", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
+    }
+
 }
