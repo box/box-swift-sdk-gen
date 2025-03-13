@@ -1,10 +1,10 @@
 import Foundation
 
-public class DeleteIntegrationMappingTeamsByIdHeaders {
+public class GetTeamsIntegrationMappingHeaders {
     /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
-    /// Initializer for a DeleteIntegrationMappingTeamsByIdHeaders.
+    /// Initializer for a GetTeamsIntegrationMappingHeaders.
     ///
     /// - Parameters:
     ///   - extraHeaders: Extra headers that will be included in the HTTP request.
