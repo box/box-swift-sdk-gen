@@ -73,6 +73,8 @@ public class BoxClient {
 
     public let sharedLinksWebLinks: SharedLinksWebLinksManager
 
+    public let sharedLinksAppItems: SharedLinksAppItemsManager
+
     public let users: UsersManager
 
     public let sessionTermination: SessionTerminationManager
@@ -188,6 +190,7 @@ public class BoxClient {
         self.webLinks = WebLinksManager(auth: self.auth, networkSession: self.networkSession)
         self.trashedWebLinks = TrashedWebLinksManager(auth: self.auth, networkSession: self.networkSession)
         self.sharedLinksWebLinks = SharedLinksWebLinksManager(auth: self.auth, networkSession: self.networkSession)
+        self.sharedLinksAppItems = SharedLinksAppItemsManager(auth: self.auth, networkSession: self.networkSession)
         self.users = UsersManager(auth: self.auth, networkSession: self.networkSession)
         self.sessionTermination = SessionTerminationManager(auth: self.auth, networkSession: self.networkSession)
         self.avatars = AvatarsManager(auth: self.auth, networkSession: self.networkSession)
