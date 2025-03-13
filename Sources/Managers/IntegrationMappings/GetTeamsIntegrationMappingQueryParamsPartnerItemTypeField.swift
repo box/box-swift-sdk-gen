@@ -1,6 +1,6 @@
 import Foundation
 
-public enum GetIntegrationMappingTeamsQueryParamsPartnerItemTypeField: CodableStringEnum {
+public enum GetTeamsIntegrationMappingQueryParamsPartnerItemTypeField: CodableStringEnum {
     case channel
     case team
     case customValue(String)

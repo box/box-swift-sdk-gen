@@ -1,6 +1,6 @@
 import Foundation
 
-public enum GetIntegrationMappingTeamsQueryParamsBoxItemTypeField: CodableStringEnum {
+public enum GetTeamsIntegrationMappingQueryParamsBoxItemTypeField: CodableStringEnum {
     case folder
     case customValue(String)
 
