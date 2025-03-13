@@ -1421,6 +1421,7 @@
 		305262021E133887BC8A421B /* GetInviteByIdQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC29EE5ECCE1429AC32179F /* GetInviteByIdQueryParams.swift */; };
 		3052B9D580BC73134090205C /* GetRecentItemsQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247215C4D037451FC62A129B /* GetRecentItemsQueryParams.swift */; };
 		30566B1497881507013382E4 /* AiExtractStructured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243BDAD3A546B1AF87C1871 /* AiExtractStructured.swift */; };
+		3057C3046F05648FBAAF00CB /* FindAppItemForSharedLinkHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F259E42DDF59EC2BC5708E /* FindAppItemForSharedLinkHeaders.swift */; };
 		3058206398A88673F6734DED /* TimelineSkillCardSkillCardTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB3195CE26DD61B3BC2A5D5 /* TimelineSkillCardSkillCardTypeField.swift */; };
 		30643CDEBFB980A5C2F4AC5B /* BoxNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5647823B917F24962DCBA0 /* BoxNetworkClient.swift */; };
 		3067D2A3B29C485A0A0C3C93 /* UpdateFileVersionByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6B279981C3A0A97BCC3280 /* UpdateFileVersionByIdHeaders.swift */; };
@@ -2465,7 +2466,6 @@
 		50EF5D58F5932DCD1B8D4244 /* FileClassificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06521B1232D8B9616B1CBD47 /* FileClassificationsManager.swift */; };
 		50F24108141BEF578CC1B417 /* DocGenTemplateCreateRequestV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375EC6F3F8A5E63D8DE573E2 /* DocGenTemplateCreateRequestV2025R0.swift */; };
 		50F2DA03451DB0AE6A011CD8 /* UserFullEnterpriseTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4098B1E297F09E34BB272B4D /* UserFullEnterpriseTypeField.swift */; };
-		50F78CC72BF30A1F0F64D9E6 /* GetSharedItemAppItemsHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0200C605E44186E0FB90F7D5 /* GetSharedItemAppItemsHeaders.swift */; };
 		5109E0F4FF6951E7627DEC6C /* CreateMetadataCascadePolicyRequestBodyScopeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3363AB4643771C01C61CB0 /* CreateMetadataCascadePolicyRequestBodyScopeField.swift */; };
 		51155D2EA6A9A32708CD7BFE /* SignRequestSignerInputContentTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED7EEBD2B52E5F94FD79EAF /* SignRequestSignerInputContentTypeField.swift */; };
 		51167E4BF24CF5BCFEFCEF6D /* GetMetadataTemplateHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8921903D2970E5CB700D5A46 /* GetMetadataTemplateHeaders.swift */; };
@@ -2841,6 +2841,7 @@
 		5F11470130B18D83589C02FB /* JsonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B48FB8FDD47DBDDB49546 /* JsonUtils.swift */; };
 		5F11EE7565960726B8EC1D7B /* TrashFolderRestored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46180C5AFB0053C701BC4B34 /* TrashFolderRestored.swift */; };
 		5F154468EB493790B4C3EBED /* FileVersionBaseV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC42836D4E6C3D89BE88ACB9 /* FileVersionBaseV2025R0.swift */; };
+		5F16F065222FA80F0C4563A3 /* FindAppItemForSharedLinkHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F259E42DDF59EC2BC5708E /* FindAppItemForSharedLinkHeaders.swift */; };
 		5F1E31B1FAD7B532E7215928 /* CreateTaskRequestBodyActionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C947AB2C45D460DD0D6E39 /* CreateTaskRequestBodyActionField.swift */; };
 		5F235462B7A3BD9DADC50293 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB94D412161B5405301C588C /* NetworkSession.swift */; };
 		5F2D31FF0975402D456B18AF /* GetStoragePolicyByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFDE2D3F38311993764337 /* GetStoragePolicyByIdHeaders.swift */; };
@@ -3105,7 +3106,6 @@
 		67FA0494FD33E49A6B6C5446 /* CreateFileMetadataByIdScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE52CE0A684920F854B69CF /* CreateFileMetadataByIdScope.swift */; };
 		67FA84ECEF0985FFB5D298AD /* GetFileByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E90B63CC0F2FA52B59CCFC5 /* GetFileByIdHeaders.swift */; };
 		67FF95CA41C4A1DE9B2E5D00 /* CreateTaskAssignmentRequestBodyTaskField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF419A041B41E475B73B2183 /* CreateTaskAssignmentRequestBodyTaskField.swift */; };
-		680609DFB4951EB75000A767 /* GetSharedItemAppItemsHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0200C605E44186E0FB90F7D5 /* GetSharedItemAppItemsHeaders.swift */; };
 		680BCBD3493E4C6A8AB03728 /* SignRequestCreateRequestSignatureColorField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FAACBB67E2CB87DA8BB621 /* SignRequestCreateRequestSignatureColorField.swift */; };
 		6811BEB85BF122A9502F3D68 /* CreateGroupMembershipRequestBodyGroupField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6CB6FA276B0D6D282EFDCF /* CreateGroupMembershipRequestBodyGroupField.swift */; };
 		68190359768FFA60031F41F4 /* GetFileRequestByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F71A960128E714CF0077937 /* GetFileRequestByIdHeaders.swift */; };
@@ -4422,6 +4422,7 @@
 		934704A76D8A620F09EE6B30 /* SignTemplateAdditionalInfoNonEditableField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF1A566BDECA81D5E8D866 /* SignTemplateAdditionalInfoNonEditableField.swift */; };
 		936B4CCE08CB83F4C5289DF7 /* AiLlmEndpointParamsGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B656BF1ACD4241FB5046D /* AiLlmEndpointParamsGoogle.swift */; };
 		937218271F81649A93EC9831 /* UpdateClassificationRequestBodyDataStaticConfigField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D001F0501F67CBA9E092BF2 /* UpdateClassificationRequestBodyDataStaticConfigField.swift */; };
+		9375B4FC946942D311D7446F /* FindAppItemForSharedLinkHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F259E42DDF59EC2BC5708E /* FindAppItemForSharedLinkHeaders.swift */; };
 		937BE9B04E18DD6F92D986E8 /* PreflightFileUploadCheckHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ED963EC0665A78E5DF6A66 /* PreflightFileUploadCheckHeaders.swift */; };
 		937CAD8E33C695116F68B42E /* UploadFilePartByUrlHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3D38C50B035146274F3C25 /* UploadFilePartByUrlHeaders.swift */; };
 		939EF4E9A2D89E6EA62D0BF1 /* DocGenBatchCreateRequestV2025R0DestinationFolderTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A75693EC252661DA03280B /* DocGenBatchCreateRequestV2025R0DestinationFolderTypeField.swift */; };
@@ -4707,7 +4708,6 @@
 		9CA7150653D88F3F63D2FD6F /* FolderFullWatermarkInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522A7EB575A2E3968AA73373 /* FolderFullWatermarkInfoField.swift */; };
 		9CA96CA0E89F5F645E172CA6 /* AppItemAssociationTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C3669B2A7A38774D688780 /* AppItemAssociationTypeField.swift */; };
 		9CAB93784693F7B18AACF9A6 /* Collaborations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D642C7EC545C9CC6B6804B2 /* Collaborations.swift */; };
-		9CBC36123CEE29B7345E1AE2 /* GetSharedItemAppItemsHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0200C605E44186E0FB90F7D5 /* GetSharedItemAppItemsHeaders.swift */; };
 		9CC28CEC88D4DD32FDADAB94 /* UpdateTermsOfServiceByIdRequestBodyStatusField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E9785CFA6E07690AFBA8AA /* UpdateTermsOfServiceByIdRequestBodyStatusField.swift */; };
 		9CC4F32597F7C2D2AB049F05 /* FileVersionBaseV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC42836D4E6C3D89BE88ACB9 /* FileVersionBaseV2025R0.swift */; };
 		9CCD3C5CF66D6AE7832BED10 /* CreateWebhookRequestBodyTargetField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6628ACAA184DE730C28D8 /* CreateWebhookRequestBodyTargetField.swift */; };
@@ -4733,7 +4733,6 @@
 		9DAEF8253FFB38A87CECEF8F /* FindFileForSharedLinkHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594C0A765CE18434E723D912 /* FindFileForSharedLinkHeaders.swift */; };
 		9DB91480F77A475B395AA883 /* UpdateFolderByIdRequestBodyFolderUploadEmailField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AD5F5E9B5805724A1EBE6 /* UpdateFolderByIdRequestBodyFolderUploadEmailField.swift */; };
 		9DC17815D061DA39FA596075 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0175D501C4A89284B98C4AF /* Items.swift */; };
-		9DC6745EE0A4340DDF7AF2B3 /* GetSharedItemAppItemsHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0200C605E44186E0FB90F7D5 /* GetSharedItemAppItemsHeaders.swift */; };
 		9DD598A005E88235CE4AD1FD /* TrashFileRestoredPathCollectionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C8AB78FA71BA387DC4BB6 /* TrashFileRestoredPathCollectionField.swift */; };
 		9DDD0780276D08276ED0C787 /* UpdateLegalHoldPolicyByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74231FE05F8A759DE4F6AFC8 /* UpdateLegalHoldPolicyByIdHeaders.swift */; };
 		9DF142DF0BBE6D8E6B5AFE86 /* SkillInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB564A184DCC23ECFBDB6C05 /* SkillInvocation.swift */; };
@@ -5181,7 +5180,6 @@
 		AD39C5A4951F5FD497712F90 /* TrashFilePathCollectionEntriesTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298658CDE296068EE358CC9A /* TrashFilePathCollectionEntriesTypeField.swift */; };
 		AD578AFE7FC7BEC10EE81A1B /* CollaborationAllowlistExemptTargetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29E9A5D2F128A6AB90C3C3F /* CollaborationAllowlistExemptTargetsManager.swift */; };
 		AD63AB8F7A51CCC2813C49A1 /* ResponseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A117DF09A34E26AEE1506646 /* ResponseInfo.swift */; };
-		AD65ED130B858BB80F1E1DDA /* GetSharedItemAppItemsHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0200C605E44186E0FB90F7D5 /* GetSharedItemAppItemsHeaders.swift */; };
 		AD6AA42936506AA31D2502EE /* DeleteCommentByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0098EC1A356B621592DC0C9D /* DeleteCommentByIdHeaders.swift */; };
 		AD6B3754F750FBB268D31BB1 /* CreateZipDownloadHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE82E7E7EC315B4D2B0121BC /* CreateZipDownloadHeaders.swift */; };
 		AD6C9910B6EC4097F15F598A /* WorkflowFlowsTriggerScopeObjectTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75724B26313D82AEF96FF732 /* WorkflowFlowsTriggerScopeObjectTypeField.swift */; };
@@ -6275,6 +6273,7 @@
 		D2234F6EE43144EFC9E254B8 /* ShieldInformationBarrierReportBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8B76AD9B86B2CB6AC84078 /* ShieldInformationBarrierReportBase.swift */; };
 		D22D3FF021A77C85E72125DB /* PostOAuth2TokenRefreshAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE74F043497ABA1FC02D232C /* PostOAuth2TokenRefreshAccessToken.swift */; };
 		D234AA0E55DC0D80EEEDFABE /* GetEnterpriseDevicePinnersHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510083DDA00DDDC0ED26D4AD /* GetEnterpriseDevicePinnersHeaders.swift */; };
+		D23971C3CCA3B0CEFA5FD580 /* FindAppItemForSharedLinkHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F259E42DDF59EC2BC5708E /* FindAppItemForSharedLinkHeaders.swift */; };
 		D24DD36EDE4C1C7582950266 /* UserFullRoleField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAB711218BC2A0F9625A91D /* UserFullRoleField.swift */; };
 		D24EDCCBA587AA320A5F2E9F /* TrashFolderRestoredTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0AB16CFB052F4AC5AB3FC7 /* TrashFolderRestoredTypeField.swift */; };
 		D2672A7840D4B44BF661E560 /* FilePathCollectionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3F820A206B5F4C23EF02D6 /* FilePathCollectionField.swift */; };
@@ -6692,6 +6691,7 @@
 		DFF94FDAE0DE97C42F79C793 /* GetUserMeHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87FCCDA4F0997B91CE75F88 /* GetUserMeHeaders.swift */; };
 		E00402A977FFE34D8D5DC9BB /* GroupMembershipTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B730A923AF5BA072968E61F /* GroupMembershipTypeField.swift */; };
 		E00445AC08918BE631623E2A /* StoragePolicyMini.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF12B7E2BA9639D570004D3D /* StoragePolicyMini.swift */; };
+		E01055E919181E896A35C62C /* FindAppItemForSharedLinkHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F259E42DDF59EC2BC5708E /* FindAppItemForSharedLinkHeaders.swift */; };
 		E01C2C4B412AD845707B2B8D /* TemplateSignerInputDimensionsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3E4CC3E927C07901DA9221 /* TemplateSignerInputDimensionsField.swift */; };
 		E0236CE778D62659381E8875 /* ShieldInformationBarrierSegmentTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793830D4DC717B66BF30A843 /* ShieldInformationBarrierSegmentTypeField.swift */; };
 		E02900123EF8E59587A4EEDE /* MetadataQueryOrderByDirectionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE39269B3AD03CBA36CCB6B /* MetadataQueryOrderByDirectionField.swift */; };
@@ -7681,7 +7681,6 @@
 		0123262AEC9B96ECB53C363D /* CreateAiAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAiAgent.swift; sourceTree = "<group>"; };
 		0147D295DEE8681E2C6FD4BD /* GetSharedLinkForWebLinkHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSharedLinkForWebLinkHeaders.swift; sourceTree = "<group>"; };
 		014E8685E6F17E1C8161D5BD /* PostOAuth2TokenActorTokenTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOAuth2TokenActorTokenTypeField.swift; sourceTree = "<group>"; };
-		0200C605E44186E0FB90F7D5 /* GetSharedItemAppItemsHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSharedItemAppItemsHeaders.swift; sourceTree = "<group>"; };
 		021C382C5664E247D1F0FB9B /* TermsOfServiceTosTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceTosTypeField.swift; sourceTree = "<group>"; };
 		0232F1A2B6D9BE673CAEF9B2 /* FindWebLinkForSharedLinkQueryParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindWebLinkForSharedLinkQueryParams.swift; sourceTree = "<group>"; };
 		029D07BA444706BCBB582C69 /* UpdateAllSkillCardsOnFileRequestBodyUsageField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAllSkillCardsOnFileRequestBodyUsageField.swift; sourceTree = "<group>"; };
@@ -9170,6 +9169,7 @@
 		F974915D5B61B5FC615CBC71 /* AddShareLinkToFileQueryParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddShareLinkToFileQueryParams.swift; sourceTree = "<group>"; };
 		F99192B8C64DE2516BFA39E9 /* StoragePolicyAssignmentsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragePolicyAssignmentsManager.swift; sourceTree = "<group>"; };
 		F9AD244EF6691C5A25159703 /* CollaborationTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationTypeField.swift; sourceTree = "<group>"; };
+		F9F259E42DDF59EC2BC5708E /* FindAppItemForSharedLinkHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAppItemForSharedLinkHeaders.swift; sourceTree = "<group>"; };
 		FA209550D16B18B29EA3AFD2 /* GroupMiniGroupTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMiniGroupTypeField.swift; sourceTree = "<group>"; };
 		FA49D5B4F083B6C56AEC9264 /* MetadataTemplateFieldsTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataTemplateFieldsTypeField.swift; sourceTree = "<group>"; };
 		FA73D96C5EF80BFF97DB0FA1 /* UploadsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadsManager.swift; sourceTree = "<group>"; };
@@ -11030,7 +11030,7 @@
 		7256AA03401E65879C172AFD /* SharedLinksAppItems */ = {
 			isa = PBXGroup;
 			children = (
-				0200C605E44186E0FB90F7D5 /* GetSharedItemAppItemsHeaders.swift */,
+				F9F259E42DDF59EC2BC5708E /* FindAppItemForSharedLinkHeaders.swift */,
 				D181352BD3C524C7AC7406BD /* SharedLinksAppItemsManager.swift */,
 			);
 			path = SharedLinksAppItems;
@@ -14561,6 +14561,7 @@
 				293B44905DE41C173806FE31 /* FilesManager.swift in Sources */,
 				8D8AB7CA2ADA97B691CE1A4D /* FilesOnHold.swift in Sources */,
 				6B5DC15CB30F4542694E81F7 /* FilesUnderRetention.swift in Sources */,
+				5F16F065222FA80F0C4563A3 /* FindAppItemForSharedLinkHeaders.swift in Sources */,
 				43694057CF43015C98DB0A94 /* FindFileForSharedLinkHeaders.swift in Sources */,
 				A98E61A34A719497233D7A59 /* FindFileForSharedLinkQueryParams.swift in Sources */,
 				98EDF8E8ABD23B5A3D0A644E /* FindFolderForSharedLinkHeaders.swift in Sources */,
@@ -14753,7 +14754,6 @@
 				3A8D9F9B7E277C54BB1F20B1 /* GetRetentionPolicyAssignmentsQueryParamsTypeField.swift in Sources */,
 				AF41667061FBED23CDF1A551 /* GetRetentionPolicyByIdHeaders.swift in Sources */,
 				E3ADC9D194D5CDE646435806 /* GetRetentionPolicyByIdQueryParams.swift in Sources */,
-				680609DFB4951EB75000A767 /* GetSharedItemAppItemsHeaders.swift in Sources */,
 				A88F98CA7F2795C0D77602A5 /* GetSharedLinkForFileHeaders.swift in Sources */,
 				F371266BA6A5966CD61AA0AA /* GetSharedLinkForFileQueryParams.swift in Sources */,
 				058124328B938A2081988DF9 /* GetSharedLinkForFolderHeaders.swift in Sources */,
@@ -16099,6 +16099,7 @@
 				49748915A311499861CE80ED /* FilesManager.swift in Sources */,
 				05D06FBA9ABC4528A18348B2 /* FilesOnHold.swift in Sources */,
 				13C0FE40495A7CE13196245E /* FilesUnderRetention.swift in Sources */,
+				9375B4FC946942D311D7446F /* FindAppItemForSharedLinkHeaders.swift in Sources */,
 				9DAEF8253FFB38A87CECEF8F /* FindFileForSharedLinkHeaders.swift in Sources */,
 				C1092A75FAF146DF4C527220 /* FindFileForSharedLinkQueryParams.swift in Sources */,
 				765B94AB4661B742DA50B947 /* FindFolderForSharedLinkHeaders.swift in Sources */,
@@ -16291,7 +16292,6 @@
 				23C5ED367C0D41BD9C51516F /* GetRetentionPolicyAssignmentsQueryParamsTypeField.swift in Sources */,
 				E7FD36D0B521D58EA5835514 /* GetRetentionPolicyByIdHeaders.swift in Sources */,
 				8F5391710BC0B2A529D16EC8 /* GetRetentionPolicyByIdQueryParams.swift in Sources */,
-				AD65ED130B858BB80F1E1DDA /* GetSharedItemAppItemsHeaders.swift in Sources */,
 				6BA84AAD3C50694CC3947959 /* GetSharedLinkForFileHeaders.swift in Sources */,
 				0E7BD8839B0DAF6265DEE9FE /* GetSharedLinkForFileQueryParams.swift in Sources */,
 				D3047E725FE207BB12B1B14E /* GetSharedLinkForFolderHeaders.swift in Sources */,
@@ -17637,6 +17637,7 @@
 				02B14DAD70D816629003AC92 /* FilesManager.swift in Sources */,
 				6DE3731F2AE8F57301AF0C2C /* FilesOnHold.swift in Sources */,
 				7992796A89FB9A7753CBF91E /* FilesUnderRetention.swift in Sources */,
+				E01055E919181E896A35C62C /* FindAppItemForSharedLinkHeaders.swift in Sources */,
 				783133B173EB4815C082F21E /* FindFileForSharedLinkHeaders.swift in Sources */,
 				F2D10E21EEAC3EF536C9A16D /* FindFileForSharedLinkQueryParams.swift in Sources */,
 				8B60E3553AD63F01214AB132 /* FindFolderForSharedLinkHeaders.swift in Sources */,
@@ -17829,7 +17830,6 @@
 				46B764292FA22210C57E4337 /* GetRetentionPolicyAssignmentsQueryParamsTypeField.swift in Sources */,
 				7605F795B68C686B8AF8F91F /* GetRetentionPolicyByIdHeaders.swift in Sources */,
 				81D146CFFAF1DA4A72C235A1 /* GetRetentionPolicyByIdQueryParams.swift in Sources */,
-				50F78CC72BF30A1F0F64D9E6 /* GetSharedItemAppItemsHeaders.swift in Sources */,
 				597AF1556411A5E17D32EB80 /* GetSharedLinkForFileHeaders.swift in Sources */,
 				8E473A8F3002F5317D96D7CC /* GetSharedLinkForFileQueryParams.swift in Sources */,
 				0855EF76F9C90D7EF28728E5 /* GetSharedLinkForFolderHeaders.swift in Sources */,
@@ -19175,6 +19175,7 @@
 				8190201A08E3F4166D10DC19 /* FilesManager.swift in Sources */,
 				9643A390F5B0C37F98BE987E /* FilesOnHold.swift in Sources */,
 				147EE80DD11D56DD04703C98 /* FilesUnderRetention.swift in Sources */,
+				D23971C3CCA3B0CEFA5FD580 /* FindAppItemForSharedLinkHeaders.swift in Sources */,
 				DF0A86C6D8877B0A5A0F5392 /* FindFileForSharedLinkHeaders.swift in Sources */,
 				D4B76B84B46EEA4D47D4D547 /* FindFileForSharedLinkQueryParams.swift in Sources */,
 				4F191DA02A7CB3C7034342C0 /* FindFolderForSharedLinkHeaders.swift in Sources */,
@@ -19367,7 +19368,6 @@
 				011A68ED5D4A6A84F25E9051 /* GetRetentionPolicyAssignmentsQueryParamsTypeField.swift in Sources */,
 				F256A403518B4FAAB23714D9 /* GetRetentionPolicyByIdHeaders.swift in Sources */,
 				2630A3364DF85CCB0600492C /* GetRetentionPolicyByIdQueryParams.swift in Sources */,
-				9CBC36123CEE29B7345E1AE2 /* GetSharedItemAppItemsHeaders.swift in Sources */,
 				588E639CB5BE519C11D8728A /* GetSharedLinkForFileHeaders.swift in Sources */,
 				F8BBDD54A2069190D2682C32 /* GetSharedLinkForFileQueryParams.swift in Sources */,
 				A3C62A2B09E77AF0D84D72C0 /* GetSharedLinkForFolderHeaders.swift in Sources */,
@@ -20713,6 +20713,7 @@
 				6D01CDF82349610F02B833BF /* FilesManager.swift in Sources */,
 				F302AB8F1324BE8BA4F07239 /* FilesOnHold.swift in Sources */,
 				740613AEF16714DDA027A0D2 /* FilesUnderRetention.swift in Sources */,
+				3057C3046F05648FBAAF00CB /* FindAppItemForSharedLinkHeaders.swift in Sources */,
 				65ED675EB2E1DBD655D4EE41 /* FindFileForSharedLinkHeaders.swift in Sources */,
 				034C3BA0E06B1EFED8214ED8 /* FindFileForSharedLinkQueryParams.swift in Sources */,
 				E5E3A635425C0A9A52225066 /* FindFolderForSharedLinkHeaders.swift in Sources */,
@@ -20905,7 +20906,6 @@
 				09490F881759EC52667C9F53 /* GetRetentionPolicyAssignmentsQueryParamsTypeField.swift in Sources */,
 				F1D4B3B70B9AF8A09DD04A34 /* GetRetentionPolicyByIdHeaders.swift in Sources */,
 				8177C4C601C68C98A129B791 /* GetRetentionPolicyByIdQueryParams.swift in Sources */,
-				9DC6745EE0A4340DDF7AF2B3 /* GetSharedItemAppItemsHeaders.swift in Sources */,
 				844EBC73BB437292E8004BF2 /* GetSharedLinkForFileHeaders.swift in Sources */,
 				4FDC082DEDEB9FF213871653 /* GetSharedLinkForFileQueryParams.swift in Sources */,
 				6C4E664705CBE7811F24D333 /* GetSharedLinkForFolderHeaders.swift in Sources */,
