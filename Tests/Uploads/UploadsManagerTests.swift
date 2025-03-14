@@ -23,6 +23,18 @@ class UploadsManagerTests: XCTestCase {
         try await client.files.deleteFileById(fileId: newFileVersion.id)
     }
 
+    public func testUploadFileWithPreflightCheck() async throws {
+        let newFileName: String = Utils.getUUID()
+        let fileContentStream: InputStream = Utils.generateByteStream(size: 1024 * 1024)
+        await XCTAssertThrowsErrorAsync(try await client.uploads.uploadWithPreflightCheck(requestBody: UploadWithPreflightCheckRequestBody(attributes: UploadWithPreflightCheckRequestBodyAttributesField(name: newFileName, parent: UploadWithPreflightCheckRequestBodyAttributesParentField(id: "0"), size: -1), file: fileContentStream)))
+        let uploadFilesWithPreflight: Files = try await client.uploads.uploadWithPreflightCheck(requestBody: UploadWithPreflightCheckRequestBody(attributes: UploadWithPreflightCheckRequestBodyAttributesField(name: newFileName, parent: UploadWithPreflightCheckRequestBodyAttributesParentField(id: "0"), size: 1024 * 1024), file: fileContentStream))
+        let file: FileFull = uploadFilesWithPreflight.entries![0]
+        XCTAssertTrue(file.name == newFileName)
+        XCTAssertTrue(file.size == 1024 * 1024)
+        await XCTAssertThrowsErrorAsync(try await client.uploads.uploadWithPreflightCheck(requestBody: UploadWithPreflightCheckRequestBody(attributes: UploadWithPreflightCheckRequestBodyAttributesField(name: newFileName, parent: UploadWithPreflightCheckRequestBodyAttributesParentField(id: "0"), size: 1024 * 1024), file: fileContentStream)))
+        try await client.files.deleteFileById(fileId: file.id)
+    }
+
     public func testPreflightCheck() async throws {
         let newFileName: String = Utils.getUUID()
         let preflightCheckResult: UploadUrl = try await client.uploads.preflightFileUploadCheck(requestBody: PreflightFileUploadCheckRequestBody(name: newFileName, size: 1024 * 1024, parent: PreflightFileUploadCheckRequestBodyParentField(id: "0")))

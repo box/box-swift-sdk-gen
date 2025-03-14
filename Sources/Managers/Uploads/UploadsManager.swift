@@ -74,4 +74,24 @@ public class UploadsManager {
         return try Files.deserialize(from: response.data)
     }
 
+    ///  Upload a file with a preflight check
+    ///
+    /// - Parameters:
+    ///   - requestBody: 
+    ///   - queryParams: Query parameters of uploadFile method
+    ///   - headers: Headers of uploadFile method
+    /// - Returns: The `Files`.
+    /// - Throws: The `GeneralError`.
+    public func uploadWithPreflightCheck(requestBody: UploadWithPreflightCheckRequestBody, queryParams: UploadWithPreflightCheckQueryParams = UploadWithPreflightCheckQueryParams(), headers: UploadWithPreflightCheckHeaders = UploadWithPreflightCheckHeaders()) async throws -> Files {
+        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["content-md5": Utils.Strings.toString(value: headers.contentMd5)], headers.extraHeaders))
+        let preflightUploadUrl: UploadUrl = try await self.preflightFileUploadCheck(requestBody: PreflightFileUploadCheckRequestBody(name: requestBody.attributes.name, size: requestBody.attributes.size, parent: PreflightFileUploadCheckRequestBodyParentField(id: requestBody.attributes.parent.id)), headers: PreflightFileUploadCheckHeaders(extraHeaders: headers.extraHeaders))
+        if preflightUploadUrl.uploadUrl == nil || !(preflightUploadUrl.uploadUrl!.contains("http")) {
+            throw BoxSDKError(message: "Unable to get preflight upload URL")
+        }
+
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: preflightUploadUrl.uploadUrl!, method: "POST", params: queryParamsMap, headers: headersMap, multipartData: [MultipartItem(partName: "attributes", data: try requestBody.attributes.serialize()), MultipartItem(partName: "file", fileStream: requestBody.file, fileName: requestBody.fileFileName, contentType: requestBody.fileContentType)], contentType: "multipart/form-data", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        return try Files.deserialize(from: response.data)
+    }
+
 }
