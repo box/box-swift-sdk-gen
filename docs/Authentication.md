@@ -232,21 +232,13 @@ let client = BoxClient(auth: auth)
 
 ### Injecting existing token into BoxOAuth
 
-If you already have an access token and refresh token, you can initialize `BoxOAuth` with them.
-You can achieve this by feeding `BoxOAuth` with token storage containing the token.
-This can be useful when you want to reuse the token between runs of your application.
+If you already have an access token and refresh token, you can inject them into the `BoxOAuth` token storage
+to avoid repeating the authentication process. This can be useful when you want to reuse the token
+between runs of your application.
 
 ```swift
 let accessToken = AccessToken(accessToken: "<ACCESS_TOKEN>", refreshToken: "<REFRESH_TOKEN>")
-let tokenStorage = InMemoryTokenStorage()
-try await tokenStorage.store(token: accessToken)
-
-let config = OAuthConfig(
-    clientId: "YOUR_CLIENT_ID",
-    clientSecret: "YOUR_CLIENT_SECRET",
-    tokenStorage: tokenStorage
-)
-let auth = BoxOAuth(config: config)
+try await auth.tokenStorage.store(token: accessToken)
 let client = BoxClient(auth: auth)
 ```
 
