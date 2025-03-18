@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.1](https://github.com/box/box-swift-sdk-gen/compare/0.6.0...0.6.1) (2025-03-18)
+
+
+### Bug Fixes
+
+* add `verification_phone_number` property to create sign request (box/box-openapi[#515](https://github.com/box/box-swift-sdk-gen/issues/515)) ([#391](https://github.com/box/box-swift-sdk-gen/issues/391)) ([717b3a8](https://github.com/box/box-swift-sdk-gen/commit/717b3a8b285dfab92a9446cbd84443caa8dde148))
+
+
+### New Features and Enhancements
+
+* add find app item for shared link endpoint (box/box-openapi[#514](https://github.com/box/box-swift-sdk-gen/issues/514)) ([#390](https://github.com/box/box-swift-sdk-gen/issues/390)) ([07b9be5](https://github.com/box/box-swift-sdk-gen/commit/07b9be5d523f3d3fb89bdbb240e4ca9628a3736d))
+* Add hubs support to `/ai/ask` (box/box-codegen[#656](https://github.com/box/box-swift-sdk-gen/issues/656)) ([#364](https://github.com/box/box-swift-sdk-gen/issues/364)) ([9a49864](https://github.com/box/box-swift-sdk-gen/commit/9a4986499eaefffdb4f2593968d59eaf030f516f))
+* add Integration Mappings Teams API (box/box-openapi[#517](https://github.com/box/box-swift-sdk-gen/issues/517)) ([#393](https://github.com/box/box-swift-sdk-gen/issues/393)) ([b9ed4e3](https://github.com/box/box-swift-sdk-gen/commit/b9ed4e35d17f85c1d2bc2a4e9e148ae009551348))
+* Expose token storage for authentication classes (box/box-codegen[#682](https://github.com/box/box-swift-sdk-gen/issues/682)) ([#400](https://github.com/box/box-swift-sdk-gen/issues/400)) ([08221e5](https://github.com/box/box-swift-sdk-gen/commit/08221e59cabc4042ea1d43bf578c2069ad66b444))
+* Support AI Studio API (box/box-codegen[#626](https://github.com/box/box-swift-sdk-gen/issues/626)) ([#375](https://github.com/box/box-swift-sdk-gen/issues/375)) ([802571d](https://github.com/box/box-swift-sdk-gen/commit/802571dd34977ae2ebf674dbdddd3e140829b819))
+* Support unknown enum values in Swift (box/box-codegen[#670](https://github.com/box/box-swift-sdk-gen/issues/670)) ([#382](https://github.com/box/box-swift-sdk-gen/issues/382)) ([8fe7ff4](https://github.com/box/box-swift-sdk-gen/commit/8fe7ff45fa4e45f743acd4450270d945b0afd393))
+* Support upload with preflight check (box/box-codegen[#676](https://github.com/box/box-swift-sdk-gen/issues/676)) ([#399](https://github.com/box/box-swift-sdk-gen/issues/399)) ([1befb4c](https://github.com/box/box-swift-sdk-gen/commit/1befb4c1b4898375ea3ab353c7149fd10adc1f17))
+* Update `/ai/extract_structured` response schema (box/box-codegen[#641](https://github.com/box/box-swift-sdk-gen/issues/641)) ([#358](https://github.com/box/box-swift-sdk-gen/issues/358)) ([430611a](https://github.com/box/box-swift-sdk-gen/commit/430611a0036258d5f3ff8e1c6de0b833255ce0ed))
+
 ## [0.6.0](https://github.com/box/box-swift-sdk-gen/compare/0.5.0...0.6.0) (2025-01-27)
 
 
