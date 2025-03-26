@@ -25,7 +25,7 @@ public class AuthorizationManager {
     public func authorizeUser(queryParams: AuthorizeUserQueryParams, headers: AuthorizeUserHeaders = AuthorizeUserHeaders()) async throws {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["response_type": Utils.Strings.toString(value: queryParams.responseType), "client_id": Utils.Strings.toString(value: queryParams.clientId), "redirect_uri": Utils.Strings.toString(value: queryParams.redirectUri), "state": Utils.Strings.toString(value: queryParams.state), "scope": Utils.Strings.toString(value: queryParams.scope)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.oauth2Url)\("/authorize")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.oauth2Url)\("/authorize")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Request an Access Token using either a client-side obtained OAuth 2.0
@@ -48,8 +48,8 @@ public class AuthorizationManager {
     /// - Throws: The `GeneralError`.
     public func requestAccessToken(requestBody: PostOAuth2Token, headers: RequestAccessTokenHeaders = RequestAccessTokenHeaders()) async throws -> AccessToken {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/oauth2/token")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/x-www-form-urlencoded", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try AccessToken.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/oauth2/token")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/x-www-form-urlencoded", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try AccessToken.deserialize(from: response.data!)
     }
 
     /// Refresh an Access Token using its client ID, secret, and refresh token.
@@ -61,8 +61,8 @@ public class AuthorizationManager {
     /// - Throws: The `GeneralError`.
     public func refreshAccessToken(requestBody: PostOAuth2TokenRefreshAccessToken, headers: RefreshAccessTokenHeaders = RefreshAccessTokenHeaders()) async throws -> AccessToken {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/oauth2/token#refresh")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/x-www-form-urlencoded", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try AccessToken.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/oauth2/token#refresh")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/x-www-form-urlencoded", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try AccessToken.deserialize(from: response.data!)
     }
 
     /// Revoke an active Access Token, effectively logging a user out
@@ -74,7 +74,7 @@ public class AuthorizationManager {
     /// - Throws: The `GeneralError`.
     public func revokeAccessToken(requestBody: PostOAuth2Revoke, headers: RevokeAccessTokenHeaders = RevokeAccessTokenHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/oauth2/revoke")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/x-www-form-urlencoded", responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/oauth2/revoke")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/x-www-form-urlencoded", responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

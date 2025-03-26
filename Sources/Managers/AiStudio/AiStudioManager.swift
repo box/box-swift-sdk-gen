@@ -20,8 +20,8 @@ public class AiStudioManager {
     public func getAiAgents(queryParams: GetAiAgentsQueryParams = GetAiAgentsQueryParams(), headers: GetAiAgentsHeaders = GetAiAgentsHeaders()) async throws -> AiMultipleAgentResponse {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["mode": Utils.Strings.toString(value: queryParams.mode), "fields": Utils.Strings.toString(value: queryParams.fields), "agent_state": Utils.Strings.toString(value: queryParams.agentState), "include_box_default": Utils.Strings.toString(value: queryParams.includeBoxDefault), "marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try AiMultipleAgentResponse.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try AiMultipleAgentResponse.deserialize(from: response.data!)
     }
 
     /// Creates an AI agent. At least one of the following capabilities must be provided: `ask`, `text_gen`, `extract`.
@@ -33,8 +33,8 @@ public class AiStudioManager {
     /// - Throws: The `GeneralError`.
     public func createAiAgent(requestBody: CreateAiAgent, headers: CreateAiAgentHeaders = CreateAiAgentHeaders()) async throws -> AiSingleAgentResponseFull {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try AiSingleAgentResponseFull.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try AiSingleAgentResponseFull.deserialize(from: response.data!)
     }
 
     /// Updates an AI agent.
@@ -48,8 +48,8 @@ public class AiStudioManager {
     /// - Throws: The `GeneralError`.
     public func updateAiAgentById(agentId: String, requestBody: CreateAiAgent, headers: UpdateAiAgentByIdHeaders = UpdateAiAgentByIdHeaders()) async throws -> AiSingleAgentResponseFull {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents/")\(agentId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try AiSingleAgentResponseFull.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents/")\(agentId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try AiSingleAgentResponseFull.deserialize(from: response.data!)
     }
 
     /// Gets an AI Agent using the `agent_id` parameter.
@@ -64,8 +64,8 @@ public class AiStudioManager {
     public func getAiAgentById(agentId: String, queryParams: GetAiAgentByIdQueryParams = GetAiAgentByIdQueryParams(), headers: GetAiAgentByIdHeaders = GetAiAgentByIdHeaders()) async throws -> AiSingleAgentResponseFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents/")\(agentId)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try AiSingleAgentResponseFull.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents/")\(agentId)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try AiSingleAgentResponseFull.deserialize(from: response.data!)
     }
 
     /// Deletes an AI agent using the provided parameters.
@@ -77,7 +77,7 @@ public class AiStudioManager {
     /// - Throws: The `GeneralError`.
     public func deleteAiAgentById(agentId: String, headers: DeleteAiAgentByIdHeaders = DeleteAiAgentByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents/")\(agentId)", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agents/")\(agentId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

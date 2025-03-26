@@ -19,8 +19,8 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func createFileUploadSession(requestBody: CreateFileUploadSessionRequestBody, headers: CreateFileUploadSessionHeaders = CreateFileUploadSessionHeaders()) async throws -> UploadSession {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try UploadSession.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try UploadSession.deserialize(from: response.data!)
     }
 
     /// Creates an upload session for an existing file.
@@ -40,8 +40,8 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func createFileUploadSessionForExistingFile(fileId: String, requestBody: CreateFileUploadSessionForExistingFileRequestBody, headers: CreateFileUploadSessionForExistingFileHeaders = CreateFileUploadSessionForExistingFileHeaders()) async throws -> UploadSession {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/")\(fileId)\("/upload_sessions")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try UploadSession.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/")\(fileId)\("/upload_sessions")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try UploadSession.deserialize(from: response.data!)
     }
 
     /// Using this method with urls provided in response when creating a new upload session is preferred to use over GetFileUploadSessionById method. 
@@ -57,8 +57,8 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func getFileUploadSessionByUrl(url: String, headers: GetFileUploadSessionByUrlHeaders = GetFileUploadSessionByUrlHeaders()) async throws -> UploadSession {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: url, method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try UploadSession.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: url, method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try UploadSession.deserialize(from: response.data!)
     }
 
     /// Return information about an upload session.
@@ -73,8 +73,8 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func getFileUploadSessionById(uploadSessionId: String, headers: GetFileUploadSessionByIdHeaders = GetFileUploadSessionByIdHeaders()) async throws -> UploadSession {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try UploadSession.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try UploadSession.deserialize(from: response.data!)
     }
 
     /// Using this method with urls provided in response when creating a new upload session is preferred to use over UploadFilePart method. 
@@ -92,8 +92,8 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func uploadFilePartByUrl(url: String, requestBody: InputStream, headers: UploadFilePartByUrlHeaders) async throws -> UploadedPart {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["digest": Utils.Strings.toString(value: headers.digest), "content-range": Utils.Strings.toString(value: headers.contentRange)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: url, method: "PUT", headers: headersMap, fileStream: requestBody, contentType: "application/octet-stream", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try UploadedPart.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: url, method: "PUT", headers: headersMap, fileStream: requestBody, contentType: "application/octet-stream", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try UploadedPart.deserialize(from: response.data!)
     }
 
     /// Uploads a chunk of a file for an upload session.
@@ -110,8 +110,8 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func uploadFilePart(uploadSessionId: String, requestBody: InputStream, headers: UploadFilePartHeaders) async throws -> UploadedPart {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["digest": Utils.Strings.toString(value: headers.digest), "content-range": Utils.Strings.toString(value: headers.contentRange)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)", method: "PUT", headers: headersMap, fileStream: requestBody, contentType: "application/octet-stream", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try UploadedPart.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)", method: "PUT", headers: headersMap, fileStream: requestBody, contentType: "application/octet-stream", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try UploadedPart.deserialize(from: response.data!)
     }
 
     /// Using this method with urls provided in response when creating a new upload session is preferred to use over DeleteFileUploadSessionById method. 
@@ -129,7 +129,7 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func deleteFileUploadSessionByUrl(url: String, headers: DeleteFileUploadSessionByUrlHeaders = DeleteFileUploadSessionByUrlHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: url, method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: url, method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Abort an upload session and discard all data uploaded.
@@ -146,7 +146,7 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func deleteFileUploadSessionById(uploadSessionId: String, headers: DeleteFileUploadSessionByIdHeaders = DeleteFileUploadSessionByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Using this method with urls provided in response when creating a new upload session is preferred to use over GetFileUploadSessionParts method. 
@@ -165,8 +165,8 @@ public class ChunkedUploadsManager {
     public func getFileUploadSessionPartsByUrl(url: String, queryParams: GetFileUploadSessionPartsByUrlQueryParams = GetFileUploadSessionPartsByUrlQueryParams(), headers: GetFileUploadSessionPartsByUrlHeaders = GetFileUploadSessionPartsByUrlHeaders()) async throws -> UploadParts {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["offset": Utils.Strings.toString(value: queryParams.offset), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: url, method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try UploadParts.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: url, method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try UploadParts.deserialize(from: response.data!)
     }
 
     /// Return a list of the chunks uploaded to the upload session so far.
@@ -184,8 +184,8 @@ public class ChunkedUploadsManager {
     public func getFileUploadSessionParts(uploadSessionId: String, queryParams: GetFileUploadSessionPartsQueryParams = GetFileUploadSessionPartsQueryParams(), headers: GetFileUploadSessionPartsHeaders = GetFileUploadSessionPartsHeaders()) async throws -> UploadParts {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["offset": Utils.Strings.toString(value: queryParams.offset), "limit": Utils.Strings.toString(value: queryParams.limit)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)\("/parts")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try UploadParts.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)\("/parts")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try UploadParts.deserialize(from: response.data!)
     }
 
     /// Using this method with urls provided in response when creating a new upload session is preferred to use over CreateFileUploadSessionCommit method. 
@@ -203,12 +203,12 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func createFileUploadSessionCommitByUrl(url: String, requestBody: CreateFileUploadSessionCommitByUrlRequestBody, headers: CreateFileUploadSessionCommitByUrlHeaders) async throws -> Files? {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["digest": Utils.Strings.toString(value: headers.digest), "if-match": Utils.Strings.toString(value: headers.ifMatch), "if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: url, method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: url, method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         if Utils.Strings.toString(value: response.status) == "202" {
             return nil
         }
 
-        return try Files?.deserialize(from: response.data)
+        return try Files?.deserialize(from: response.data!)
     }
 
     /// Close an upload session and create a file from the uploaded chunks.
@@ -225,12 +225,12 @@ public class ChunkedUploadsManager {
     /// - Throws: The `GeneralError`.
     public func createFileUploadSessionCommit(uploadSessionId: String, requestBody: CreateFileUploadSessionCommitRequestBody, headers: CreateFileUploadSessionCommitHeaders) async throws -> Files? {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["digest": Utils.Strings.toString(value: headers.digest), "if-match": Utils.Strings.toString(value: headers.ifMatch), "if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)\("/commit")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.uploadUrl)\("/2.0/files/upload_sessions/")\(uploadSessionId)\("/commit")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         if Utils.Strings.toString(value: response.status) == "202" {
             return nil
         }
 
-        return try Files?.deserialize(from: response.data)
+        return try Files?.deserialize(from: response.data!)
     }
 
     public func reducer(acc: PartAccumulator, chunk: InputStream) async throws -> PartAccumulator {
