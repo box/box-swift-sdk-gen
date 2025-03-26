@@ -31,8 +31,8 @@ public class FileClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func getClassificationOnFile(fileId: String, headers: GetClassificationOnFileHeaders = GetClassificationOnFileHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Classification.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try Classification.deserialize(from: response.data!)
     }
 
     /// Adds a classification to a file by specifying the label of the
@@ -57,8 +57,8 @@ public class FileClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func addClassificationToFile(fileId: String, requestBody: AddClassificationToFileRequestBody = AddClassificationToFileRequestBody(), headers: AddClassificationToFileHeaders = AddClassificationToFileHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Classification.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try Classification.deserialize(from: response.data!)
     }
 
     /// Updates a classification on a file.
@@ -82,8 +82,8 @@ public class FileClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func updateClassificationOnFile(fileId: String, requestBody: [UpdateClassificationOnFileRequestBody], headers: UpdateClassificationOnFileHeaders = UpdateClassificationOnFileHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Classification.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try Classification.deserialize(from: response.data!)
     }
 
     /// Removes any classifications from a file.
@@ -105,7 +105,7 @@ public class FileClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func deleteClassificationFromFile(fileId: String, headers: DeleteClassificationFromFileHeaders = DeleteClassificationFromFileHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

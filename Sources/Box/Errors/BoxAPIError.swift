@@ -43,11 +43,11 @@ extension BoxAPIError {
     /// - Parameters:
     ///   - fromConversation: Represents a data combined with the request and the corresponding response.
     convenience init(fromConversation conversation: FetchConversation, message: String? = nil) {
-        let requestHeaders = conversation.options.headers.compactMapValues { $0?.paramValue }
+        let requestHeaders = conversation.options.headers ?? [:]
         let requestInfo = RequestInfo(
-            method: conversation.options.method.rawValue,
+            method: conversation.options.method.uppercased(),
             url: conversation.options.url,
-            queryParams: conversation.options.headers.compactMapValues { $0?.paramValue },
+            queryParams: conversation.options.params ?? [:],
             headers:  requestHeaders,
             body:  requestHeaders[HTTPHeaderKey.contentType, default: ""].paramValue == HTTPHeaderContentTypeValue.urlEncoded
             ? try? conversation.options.data?.toUrlParams()
