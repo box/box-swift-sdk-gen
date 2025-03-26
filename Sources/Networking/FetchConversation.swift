@@ -20,6 +20,7 @@ class FetchConversation {
     /// Represents response type, either data or downloaded file
     let responseType: ResponseType
 
+
     /// Initializer
     ///
     /// - Parameters:
@@ -38,11 +39,17 @@ class FetchConversation {
     ///
     /// - Returns: An instance of the`FetchResponse`.
     func convertToFetchResponse() -> FetchResponse {
+        let headers: [String: String] = urlResponse.allHeaderFields.reduce(into: [:]) { result, pair in
+            if let key = pair.key as? String, let value = pair.value as? String {
+                result[key] = value
+            }
+        }
+
         switch self.responseType {
         case let .data(data):
-            return FetchResponse(status: urlResponse.statusCode, data: SerializedData(data: data))
+            return FetchResponse(status: urlResponse.statusCode, headers: headers, url: options.url, data: SerializedData(data: data))
         case let .url(url):
-            return FetchResponse(status: urlResponse.statusCode, data: SerializedData(data: Data()), downloadDestinationURL: url)
+            return FetchResponse(status: urlResponse.statusCode, headers: headers, url: options.url, data: nil, downloadDestinationUrl: url)
         }
     }
 }

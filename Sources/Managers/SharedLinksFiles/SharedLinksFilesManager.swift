@@ -29,8 +29,8 @@ public class SharedLinksFilesManager {
     public func findFileForSharedLink(queryParams: FindFileForSharedLinkQueryParams = FindFileForSharedLinkQueryParams(), headers: FindFileForSharedLinkHeaders) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["if-none-match": Utils.Strings.toString(value: headers.ifNoneMatch), "boxapi": Utils.Strings.toString(value: headers.boxapi)], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shared_items")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileFull.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/shared_items")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try FileFull.deserialize(from: response.data!)
     }
 
     /// Gets the information for a shared link on a file.
@@ -51,8 +51,8 @@ public class SharedLinksFilesManager {
     public func getSharedLinkForFile(fileId: String, queryParams: GetSharedLinkForFileQueryParams, headers: GetSharedLinkForFileHeaders = GetSharedLinkForFileHeaders()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("#get_shared_link")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileFull.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("#get_shared_link")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try FileFull.deserialize(from: response.data!)
     }
 
     /// Adds a shared link to a file.
@@ -74,8 +74,8 @@ public class SharedLinksFilesManager {
     public func addShareLinkToFile(fileId: String, requestBody: AddShareLinkToFileRequestBody = AddShareLinkToFileRequestBody(), queryParams: AddShareLinkToFileQueryParams, headers: AddShareLinkToFileHeaders = AddShareLinkToFileHeaders()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("#add_shared_link")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileFull.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("#add_shared_link")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try FileFull.deserialize(from: response.data!)
     }
 
     /// Updates a shared link on a file.
@@ -97,8 +97,8 @@ public class SharedLinksFilesManager {
     public func updateSharedLinkOnFile(fileId: String, requestBody: UpdateSharedLinkOnFileRequestBody = UpdateSharedLinkOnFileRequestBody(), queryParams: UpdateSharedLinkOnFileQueryParams, headers: UpdateSharedLinkOnFileHeaders = UpdateSharedLinkOnFileHeaders()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("#update_shared_link")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileFull.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("#update_shared_link")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try FileFull.deserialize(from: response.data!)
     }
 
     /// Removes a shared link from a file.
@@ -120,8 +120,8 @@ public class SharedLinksFilesManager {
     public func removeSharedLinkFromFile(fileId: String, requestBody: RemoveSharedLinkFromFileRequestBody = RemoveSharedLinkFromFileRequestBody(), queryParams: RemoveSharedLinkFromFileQueryParams, headers: RemoveSharedLinkFromFileHeaders = RemoveSharedLinkFromFileHeaders()) async throws -> FileFull {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["fields": Utils.Strings.toString(value: queryParams.fields)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("#remove_shared_link")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileFull.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("#remove_shared_link")", method: "PUT", params: queryParamsMap, headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try FileFull.deserialize(from: response.data!)
     }
 
 }

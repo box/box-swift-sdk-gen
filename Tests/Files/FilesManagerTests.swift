@@ -20,7 +20,7 @@ class FilesManagerTests: XCTestCase {
         let thumbnailFile: FileFull = try await uploadFile(fileName: thumbnailFileName, fileStream: thumbnailContentStream)
         let destinationPathString: String = "\(Utils.temporaryDirectoryPath())\(Utils.getUUID())"
         let destinationPath: URL = URL(path: destinationPathString)
-        try await client.files.getFileThumbnailById(fileId: thumbnailFile.id, extension_: GetFileThumbnailByIdExtension.png, downloadDestinationURL: destinationPath)
+        try await client.files.getFileThumbnailById(fileId: thumbnailFile.id, extension_: GetFileThumbnailByIdExtension.png, downloadDestinationUrl: destinationPath)
         XCTAssertTrue(Utils.bufferEquals(buffer1: Utils.readBufferFromFile(filePath: destinationPathString), buffer2: Utils.readByteStream(byteStream: thumbnailContentStream)) == false)
         try await client.files.deleteFileById(fileId: thumbnailFile.id)
     }

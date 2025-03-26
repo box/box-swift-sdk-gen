@@ -34,8 +34,8 @@ public class ZipDownloadsManager {
     /// - Throws: The `GeneralError`.
     public func createZipDownload(requestBody: ZipDownloadRequest, headers: CreateZipDownloadHeaders = CreateZipDownloadHeaders()) async throws -> ZipDownload {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/zip_downloads")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try ZipDownload.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/zip_downloads")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try ZipDownload.deserialize(from: response.data!)
     }
 
     /// Returns the contents of a `zip` archive in binary format. This URL does not
@@ -55,14 +55,14 @@ public class ZipDownloadsManager {
     /// - Parameters:
     ///   - downloadUrl: The URL that can be used to download created `zip` archive.
     ///      Example: `https://dl.boxcloud.com/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/content`
-    ///   - downloadDestinationURL: The URL on disk where the file will be saved once it has been downloaded.
+    ///   - downloadDestinationUrl: The URL on disk where the file will be saved once it has been downloaded.
     ///   - headers: Headers of getZipDownloadContent method
-    /// - Returns: The `URL`.
+    /// - Returns: The `URL?`.
     /// - Throws: The `GeneralError`.
-    public func getZipDownloadContent(downloadUrl: String, downloadDestinationURL: URL, headers: GetZipDownloadContentHeaders = GetZipDownloadContentHeaders()) async throws -> URL {
+    public func getZipDownloadContent(downloadUrl: String, downloadDestinationUrl: URL, headers: GetZipDownloadContentHeaders = GetZipDownloadContentHeaders()) async throws -> URL? {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: downloadUrl, method: "GET", headers: headersMap, downloadDestinationURL: downloadDestinationURL, responseFormat: "binary", auth: self.auth, networkSession: self.networkSession))
-        return response.downloadDestinationURL!
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: downloadUrl, method: "GET", headers: headersMap, responseFormat: ResponseFormat.binary, downloadDestinationUrl: downloadDestinationUrl, auth: self.auth, networkSession: self.networkSession))
+        return response.downloadDestinationUrl!
     }
 
     /// Returns the download status of a `zip` archive, allowing an application to
@@ -86,8 +86,8 @@ public class ZipDownloadsManager {
     /// - Throws: The `GeneralError`.
     public func getZipDownloadStatus(statusUrl: String, headers: GetZipDownloadStatusHeaders = GetZipDownloadStatusHeaders()) async throws -> ZipDownloadStatus {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: statusUrl, method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try ZipDownloadStatus.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: statusUrl, method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try ZipDownloadStatus.deserialize(from: response.data!)
     }
 
 }

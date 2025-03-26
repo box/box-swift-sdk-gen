@@ -6,6 +6,11 @@ divided across resource managers.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+- [Client](#client)
+- [Make custom HTTP request](#make-custom-http-request)
+  - [JSON request](#json-request)
+  - [Multi-part request](#multi-part-request)
+  - [Binary response](#binary-response)
 - [Additional headers](#additional-headers)
   - [As-User header](#as-user-header)
   - [Suppress notifications](#suppress-notifications)
@@ -13,6 +18,95 @@ divided across resource managers.
 - [Custom Base URLs](#custom-base-urls)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# Make custom HTTP request
+
+You can make custom HTTP requests using the `client.makeRequest()` method.
+This method allows you to make any HTTP request to the Box API. It will automatically use authentication and
+network configuration settings from the client.
+The method accepts a `FetchOptions` object as an argument and returns a `FetchResponse` object.
+
+## JSON request
+
+The following example demonstrates how to make a custom POST request to create a new folder in the root folder.
+
+```swift
+let requestBodyPost: String = "\("{\"name\": \"myFolderName\", \"parent\": { \"id\": \"0\"}}")"
+let response: FetchResponse = try await client.makeRequest(
+    fetchOptions: FetchOptions(
+        url: "https://api.box.com/2.0/folders",
+        method: "POST",
+        data: JsonUtils.jsonToSerializedData(text: requestBodyPost)
+    )
+)
+
+let responseContent = String(data: response.data?.data ?? Data(), encoding: .utf8) ?? ""
+print("Received status code: \(response.status)")
+print("Response content: \(responseContent)")
+
+// We can also deserialize the response content to json dictionary so we can access the values by key
+if let jsonDict = JsonUtils.sdToJsonDictionary(from: response.data) {
+    print("Created folder name: \(jsonDict["name"] ?? "")" )
+}
+```
+
+## Multi-part request
+
+The following example demonstrates how to make a custom multipart request that uploads a file to a folder.
+
+```swift
+let multipartAttributes: String = "\("{\"name\": \"newFileName\", \"parent\": { \"id\":\"0\"}}")"
+
+guard let fileContentStream = InputStream(url: URL(string: "<URL_TO_YOUR_FILE>")!) else {
+    fatalError("Could not read a file")
+}
+
+let multipartItems = [
+    MultipartItem(partName: "attributes", data: JsonUtils.jsonToSerializedData(text: multipartAttributes)),
+    MultipartItem(partName: "file", fileStream: fileContentStream)
+]
+
+let response: FetchResponse = try await client.makeRequest(
+    fetchOptions: FetchOptions(
+        url: "https://upload.box.com/api/2.0/files/content",
+        method: "POST",
+        multipartData: multipartItems,
+        contentType: "multipart/form-data"
+    )
+)
+
+print("Received status code: \(response.status)")
+```
+
+## Binary response
+
+The following example demonstrates how to make a custom request to download a file.
+You must specify the `responseFormat` parameter in the `FetchOptions` object as `ResponseFormat.binary`
+and set the `downloadDestinationUrl` parameter to indicate where the file should be saved.
+
+```swift
+// Path to the file where the downloaded content will be saved
+let downloadPathString: String = "\(Utils.temporaryDirectoryPath())\(Utils.getUUID())"
+let fileId = "123456789";
+
+let response: FetchResponse = try await client.makeRequest(
+    fetchOptions: FetchOptions(
+        url: "\("https://api.box.com/2.0/files/")\(fileId)\("/content")",
+        method: "GET",
+        responseFormat: ResponseFormat.binary,
+        downloadDestinationUrl: URL(path: downloadPathString)
+    )
+)
+
+print("Received status code: \(response.status)")
+
+// If the request is successful, the file content will be saved to the specified path
+if response.status == 200 {
+    if let url = URL(string: downloadPathString), let data = try? Data(contentsOf: url){
+        print("File content: \(String(decoding: data, as: UTF8.self))")
+    }
+}
+```
 
 # Additional headers
 
