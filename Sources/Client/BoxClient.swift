@@ -232,6 +232,19 @@ public class BoxClient {
         self.docgen = DocgenManager(auth: self.auth, networkSession: self.networkSession)
     }
 
+    /// Make a custom http request using the client authentication and network session.
+    ///
+    /// - Parameters:
+    ///   - fetchOptions: Options to be passed to the fetch call
+    /// - Returns: The `FetchResponse`.
+    /// - Throws: The `GeneralError`.
+    public func makeRequest(fetchOptions: FetchOptions) async throws -> FetchResponse {
+        let auth: Authentication = fetchOptions.auth == nil ? self.auth : fetchOptions.auth!
+        let networkSession: NetworkSession = fetchOptions.networkSession == nil ? self.networkSession : fetchOptions.networkSession!
+        let enrichedFetchOptions: FetchOptions = FetchOptions(url: fetchOptions.url, method: fetchOptions.method, params: fetchOptions.params, headers: fetchOptions.headers, data: fetchOptions.data, fileStream: fetchOptions.fileStream, multipartData: fetchOptions.multipartData, contentType: fetchOptions.contentType, responseFormat: fetchOptions.responseFormat, downloadDestinationUrl: fetchOptions.downloadDestinationUrl, auth: auth, networkSession: networkSession)
+        return try await networkSession.networkClient.fetch(options: enrichedFetchOptions)
+    }
+
     /// Create a new client to impersonate user with the provided ID. All calls made with the new client will be made in context of the impersonated user, leaving the original client unmodified.
     ///
     /// - Parameters:

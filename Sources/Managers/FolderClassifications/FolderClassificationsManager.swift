@@ -34,8 +34,8 @@ public class FolderClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func getClassificationOnFolder(folderId: String, headers: GetClassificationOnFolderHeaders = GetClassificationOnFolderHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Classification.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try Classification.deserialize(from: response.data!)
     }
 
     /// Adds a classification to a folder by specifying the label of the
@@ -63,8 +63,8 @@ public class FolderClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func addClassificationToFolder(folderId: String, requestBody: AddClassificationToFolderRequestBody = AddClassificationToFolderRequestBody(), headers: AddClassificationToFolderHeaders = AddClassificationToFolderHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Classification.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try Classification.deserialize(from: response.data!)
     }
 
     /// Updates a classification on a folder.
@@ -91,8 +91,8 @@ public class FolderClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func updateClassificationOnFolder(folderId: String, requestBody: [UpdateClassificationOnFolderRequestBody], headers: UpdateClassificationOnFolderHeaders = UpdateClassificationOnFolderHeaders()) async throws -> Classification {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try Classification.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try Classification.deserialize(from: response.data!)
     }
 
     /// Removes any classifications from a folder.
@@ -117,7 +117,7 @@ public class FolderClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func deleteClassificationFromFolder(folderId: String, headers: DeleteClassificationFromFolderHeaders = DeleteClassificationFromFolderHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folders/")\(folderId)\("/metadata/enterprise/securityClassification-6VMVochwUWo")", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }

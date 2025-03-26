@@ -25,8 +25,8 @@ public class FileVersionRetentionsManager {
     public func getFileVersionRetentions(queryParams: GetFileVersionRetentionsQueryParams = GetFileVersionRetentionsQueryParams(), headers: GetFileVersionRetentionsHeaders = GetFileVersionRetentionsHeaders()) async throws -> FileVersionRetentions {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["file_id": Utils.Strings.toString(value: queryParams.fileId), "file_version_id": Utils.Strings.toString(value: queryParams.fileVersionId), "policy_id": Utils.Strings.toString(value: queryParams.policyId), "disposition_action": Utils.Strings.toString(value: queryParams.dispositionAction), "disposition_before": Utils.Strings.toString(value: queryParams.dispositionBefore), "disposition_after": Utils.Strings.toString(value: queryParams.dispositionAfter), "limit": Utils.Strings.toString(value: queryParams.limit), "marker": Utils.Strings.toString(value: queryParams.marker)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/file_version_retentions")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileVersionRetentions.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/file_version_retentions")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try FileVersionRetentions.deserialize(from: response.data!)
     }
 
     /// Returns information about a file version retention.
@@ -44,8 +44,8 @@ public class FileVersionRetentionsManager {
     /// - Throws: The `GeneralError`.
     public func getFileVersionRetentionById(fileVersionRetentionId: String, headers: GetFileVersionRetentionByIdHeaders = GetFileVersionRetentionByIdHeaders()) async throws -> FileVersionRetention {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/file_version_retentions/")\(fileVersionRetentionId)", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FileVersionRetention.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/file_version_retentions/")\(fileVersionRetentionId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try FileVersionRetention.deserialize(from: response.data!)
     }
 
 }
