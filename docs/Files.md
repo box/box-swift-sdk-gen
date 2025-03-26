@@ -171,7 +171,7 @@ See the endpoint docs at
 
 <!-- sample get_files_id_thumbnail_id -->
 ```
-try await client.files.getFileThumbnailById(fileId: thumbnailFile.id, extension_: GetFileThumbnailByIdExtension.png, downloadDestinationURL: destinationPath)
+try await client.files.getFileThumbnailById(fileId: thumbnailFile.id, extension_: GetFileThumbnailByIdExtension.png, downloadDestinationUrl: destinationPath)
 ```
 
 ### Arguments
@@ -180,7 +180,7 @@ try await client.files.getFileThumbnailById(fileId: thumbnailFile.id, extension_
   - The unique identifier that represents a file.  The ID for any file can be determined by visiting a file in the web application and copying the ID from the URL. For example, for the URL `https://*.app.box.com/files/123` the `file_id` is `123`. Example: "12345"
 - extension_ `GetFileThumbnailByIdExtension`
   - The file format for the thumbnail Example: "png"
-- downloadDestinationURL `URL`
+- downloadDestinationUrl `URL`
   - The URL on disk where the file will be saved once it has been downloaded.
 - queryParams `GetFileThumbnailByIdQueryParams`
   - Query parameters of getFileThumbnailById method
@@ -190,7 +190,7 @@ try await client.files.getFileThumbnailById(fileId: thumbnailFile.id, extension_
 
 ### Returns
 
-This function returns a value of type `URL`.
+This function returns a value of type `URL?`.
 
 When a thumbnail can be created the thumbnail data will be
 returned in the body of the response.Sometimes generating a thumbnail can take a few seconds. In these

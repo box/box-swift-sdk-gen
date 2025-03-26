@@ -19,12 +19,12 @@ public class AiManager {
     /// - Throws: The `GeneralError`.
     public func createAiAsk(requestBody: AiAsk, headers: CreateAiAskHeaders = CreateAiAskHeaders()) async throws -> AiResponseFull? {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/ask")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/ask")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         if Utils.Strings.toString(value: response.status) == "204" {
             return nil
         }
 
-        return try AiResponseFull?.deserialize(from: response.data)
+        return try AiResponseFull?.deserialize(from: response.data!)
     }
 
     /// Sends an AI request to supported Large Language Models (LLMs) and returns generated text based on the provided prompt.
@@ -36,8 +36,8 @@ public class AiManager {
     /// - Throws: The `GeneralError`.
     public func createAiTextGen(requestBody: AiTextGen, headers: CreateAiTextGenHeaders = CreateAiTextGenHeaders()) async throws -> AiResponse {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/text_gen")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try AiResponse.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/text_gen")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try AiResponse.deserialize(from: response.data!)
     }
 
     /// Get the AI agent default config
@@ -50,8 +50,8 @@ public class AiManager {
     public func getAiAgentDefaultConfig(queryParams: GetAiAgentDefaultConfigQueryParams, headers: GetAiAgentDefaultConfigHeaders = GetAiAgentDefaultConfigHeaders()) async throws -> AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["mode": Utils.Strings.toString(value: queryParams.mode), "language": Utils.Strings.toString(value: queryParams.language), "model": Utils.Strings.toString(value: queryParams.model)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agent_default")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai_agent_default")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen.deserialize(from: response.data!)
     }
 
     /// Sends an AI request to supported Large Language Models (LLMs) and extracts metadata in form of key-value pairs.
@@ -65,8 +65,8 @@ public class AiManager {
     /// - Throws: The `GeneralError`.
     public func createAiExtract(requestBody: AiExtract, headers: CreateAiExtractHeaders = CreateAiExtractHeaders()) async throws -> AiResponse {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/extract")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try AiResponse.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/extract")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try AiResponse.deserialize(from: response.data!)
     }
 
     /// Sends an AI request to supported Large Language Models (LLMs) and returns extracted metadata as a set of key-value pairs.
@@ -82,8 +82,8 @@ public class AiManager {
     /// - Throws: The `GeneralError`.
     public func createAiExtractStructured(requestBody: AiExtractStructured, headers: CreateAiExtractStructuredHeaders = CreateAiExtractStructuredHeaders()) async throws -> AiExtractStructuredResponse {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/extract_structured")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try AiExtractStructuredResponse.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/ai/extract_structured")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try AiExtractStructuredResponse.deserialize(from: response.data!)
     }
 
 }

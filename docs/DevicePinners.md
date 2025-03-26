@@ -14,7 +14,10 @@ This operation is performed by calling function `getDevicePinnerById`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-device-pinners-id/).
 
-*Currently we don't have an example for calling `getDevicePinnerById` in integration tests*
+<!-- sample get_device_pinners_id -->
+```
+try await client.devicePinners.getDevicePinnerById(devicePinnerId: devicePinnerId)
+```
 
 ### Arguments
 
@@ -40,7 +43,10 @@ This operation is performed by calling function `deleteDevicePinnerById`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/delete-device-pinners-id/).
 
-*Currently we don't have an example for calling `deleteDevicePinnerById` in integration tests*
+<!-- sample delete_device_pinners_id -->
+```
+try await client.devicePinners.deleteDevicePinnerById(devicePinnerId: devicePinnerId)
+```
 
 ### Arguments
 
@@ -69,7 +75,10 @@ This operation is performed by calling function `getEnterpriseDevicePinners`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-enterprises-id-device-pinners/).
 
-*Currently we don't have an example for calling `getEnterpriseDevicePinners` in integration tests*
+<!-- sample get_enterprises_id_device_pinners -->
+```
+try await client.devicePinners.getEnterpriseDevicePinners(enterpriseId: enterpriseId)
+```
 
 ### Arguments
 

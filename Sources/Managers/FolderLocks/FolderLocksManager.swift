@@ -23,8 +23,8 @@ public class FolderLocksManager {
     public func getFolderLocks(queryParams: GetFolderLocksQueryParams, headers: GetFolderLocksHeaders = GetFolderLocksHeaders()) async throws -> FolderLocks {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["folder_id": Utils.Strings.toString(value: queryParams.folderId)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folder_locks")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FolderLocks.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folder_locks")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try FolderLocks.deserialize(from: response.data!)
     }
 
     /// Creates a folder lock on a folder, preventing it from being moved and/or
@@ -40,8 +40,8 @@ public class FolderLocksManager {
     /// - Throws: The `GeneralError`.
     public func createFolderLock(requestBody: CreateFolderLockRequestBody, headers: CreateFolderLockHeaders = CreateFolderLockHeaders()) async throws -> FolderLock {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folder_locks")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try FolderLock.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folder_locks")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try FolderLock.deserialize(from: response.data!)
     }
 
     /// Deletes a folder lock on a given folder.
@@ -56,7 +56,7 @@ public class FolderLocksManager {
     /// - Throws: The `GeneralError`.
     public func deleteFolderLockById(folderLockId: String, headers: DeleteFolderLockByIdHeaders = DeleteFolderLockByIdHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folder_locks/")\(folderLockId)", method: "DELETE", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/folder_locks/")\(folderLockId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
 }
