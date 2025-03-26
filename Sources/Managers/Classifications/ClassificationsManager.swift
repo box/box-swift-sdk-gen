@@ -23,8 +23,8 @@ public class ClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func getClassificationTemplate(headers: GetClassificationTemplateHeaders = GetClassificationTemplateHeaders()) async throws -> ClassificationTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema")", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try ClassificationTemplate.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema")", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try ClassificationTemplate.deserialize(from: response.data!)
     }
 
     /// Adds one or more new classifications to the list of classifications
@@ -41,8 +41,8 @@ public class ClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func addClassification(requestBody: [AddClassificationRequestBody], headers: AddClassificationHeaders = AddClassificationHeaders()) async throws -> ClassificationTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema#add")", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try ClassificationTemplate.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema#add")", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try ClassificationTemplate.deserialize(from: response.data!)
     }
 
     /// Updates the labels and descriptions of one or more classifications
@@ -59,8 +59,8 @@ public class ClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func updateClassification(requestBody: [UpdateClassificationRequestBody], headers: UpdateClassificationHeaders = UpdateClassificationHeaders()) async throws -> ClassificationTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema#update")", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try ClassificationTemplate.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema#update")", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json-patch+json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try ClassificationTemplate.deserialize(from: response.data!)
     }
 
     /// When an enterprise does not yet have any classifications, this API call
@@ -78,8 +78,8 @@ public class ClassificationsManager {
     /// - Throws: The `GeneralError`.
     public func createClassificationTemplate(requestBody: CreateClassificationTemplateRequestBody, headers: CreateClassificationTemplateHeaders = CreateClassificationTemplateHeaders()) async throws -> ClassificationTemplate {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/schema#classifications")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try ClassificationTemplate.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/metadata_templates/schema#classifications")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try ClassificationTemplate.deserialize(from: response.data!)
     }
 
 }

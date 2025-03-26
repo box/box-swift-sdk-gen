@@ -75,7 +75,7 @@ See the endpoint docs at
 
 - downloadUrl `String`
   - The URL that can be used to download created `zip` archive.  Example: `https://dl.boxcloud.com/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/content`
-- downloadDestinationURL `URL`
+- downloadDestinationUrl `URL`
   - The URL on disk where the file will be saved once it has been downloaded.
 - headers `GetZipDownloadContentHeaders`
   - Headers of getZipDownloadContent method
@@ -83,7 +83,7 @@ See the endpoint docs at
 
 ### Returns
 
-This function returns a value of type `URL`.
+This function returns a value of type `URL?`.
 
 Returns the content of the items requested for this download, formatted as
 a stream of files and folders in a `zip` archive.

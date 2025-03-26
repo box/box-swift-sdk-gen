@@ -52,8 +52,8 @@ public class BoxNetworkClient: NetworkClient {
             memoryInputStream.reset()
         }
 
-        if let downloadDestinationURL = options.downloadDestinationURL {
-            let (downloadUrl, urlResponse) = try await sendDownloadRequest(urlRequest, downloadDestinationURL: downloadDestinationURL, networkSession: networkSession)
+        if let downloadDestinationUrl = options.downloadDestinationUrl, options.responseFormat == .binary {
+            let (downloadUrl, urlResponse) = try await sendDownloadRequest(urlRequest, downloadDestinationURL: downloadDestinationUrl, networkSession: networkSession)
             let conversation = FetchConversation(options: options, urlRequest: urlRequest, urlResponse: urlResponse as! HTTPURLResponse, responseType: .url(downloadUrl))
             return try await processResponse(using: conversation, networkSession: networkSession, attempt: attempt)
         } else {
@@ -152,7 +152,7 @@ public class BoxNetworkClient: NetworkClient {
         networkSession: NetworkSession
     ) async throws -> URLRequest {
         var urlRequest = URLRequest(url: createEndpointUrl(url: options.url, params: options.params))
-        urlRequest.httpMethod = options.method.rawValue
+        urlRequest.httpMethod = options.method.uppercased()
 
         try await updateRequestWithHeaders(&urlRequest, options: options, networkSession: networkSession)
 
@@ -181,15 +181,13 @@ public class BoxNetworkClient: NetworkClient {
     ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
     /// - Throws: An error if the operation fails for any reason.
     private func updateRequestWithHeaders(_ urlRequest: inout URLRequest, options: FetchOptions, networkSession: NetworkSession) async throws {
-        urlRequest.allHTTPHeaderFields = options.headers.compactMapValues { $0?.paramValue }
+        urlRequest.allHTTPHeaderFields = options.headers
 
         for (key, value) in networkSession.additionalHeaders {
             urlRequest.setValue(value, forHTTPHeaderField: key)
         }
 
-        if let contentType = options.contentType {
-            urlRequest.setValue(contentType, forHTTPHeaderField: HTTPHeaderKey.contentType)
-        }
+        urlRequest.setValue(options.contentType, forHTTPHeaderField: HTTPHeaderKey.contentType)
 
         for (key, value) in BoxConstants.analyticsHeaders {
             urlRequest.setValue(value, forHTTPHeaderField: key)

@@ -16,14 +16,14 @@ See the endpoint docs at
 
 <!-- sample get_users_id_avatar -->
 ```
-try await client.avatars.getUserAvatar(userId: user.id, downloadDestinationURL: destinationPath)
+try await client.avatars.getUserAvatar(userId: user.id, downloadDestinationUrl: destinationPath)
 ```
 
 ### Arguments
 
 - userId `String`
   - The ID of the user. Example: "12345"
-- downloadDestinationURL `URL`
+- downloadDestinationUrl `URL`
   - The URL on disk where the file will be saved once it has been downloaded.
 - headers `GetUserAvatarHeaders`
   - Headers of getUserAvatar method
@@ -31,7 +31,7 @@ try await client.avatars.getUserAvatar(userId: user.id, downloadDestinationURL: 
 
 ### Returns
 
-This function returns a value of type `URL`.
+This function returns a value of type `URL?`.
 
 When an avatar can be found for the user the
 image data will be returned in the body of the

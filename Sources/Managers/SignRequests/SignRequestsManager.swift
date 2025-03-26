@@ -20,8 +20,8 @@ public class SignRequestsManager {
     /// - Throws: The `GeneralError`.
     public func cancelSignRequest(signRequestId: String, headers: CancelSignRequestHeaders = CancelSignRequestHeaders()) async throws -> SignRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)\("/cancel")", method: "POST", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try SignRequest.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)\("/cancel")", method: "POST", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try SignRequest.deserialize(from: response.data!)
     }
 
     /// Resends a signature request email to all outstanding signers.
@@ -33,7 +33,7 @@ public class SignRequestsManager {
     /// - Throws: The `GeneralError`.
     public func resendSignRequest(signRequestId: String, headers: ResendSignRequestHeaders = ResendSignRequestHeaders()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)\("/resend")", method: "POST", headers: headersMap, responseFormat: "no_content", auth: self.auth, networkSession: self.networkSession))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)\("/resend")", method: "POST", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
     }
 
     /// Gets a sign request by ID.
@@ -46,8 +46,8 @@ public class SignRequestsManager {
     /// - Throws: The `GeneralError`.
     public func getSignRequestById(signRequestId: String, headers: GetSignRequestByIdHeaders = GetSignRequestByIdHeaders()) async throws -> SignRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)", method: "GET", headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try SignRequest.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests/")\(signRequestId)", method: "GET", headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try SignRequest.deserialize(from: response.data!)
     }
 
     /// Gets signature requests created by a user. If the `sign_files` and/or
@@ -61,8 +61,8 @@ public class SignRequestsManager {
     public func getSignRequests(queryParams: GetSignRequestsQueryParams = GetSignRequestsQueryParams(), headers: GetSignRequestsHeaders = GetSignRequestsHeaders()) async throws -> SignRequests {
         let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["marker": Utils.Strings.toString(value: queryParams.marker), "limit": Utils.Strings.toString(value: queryParams.limit), "senders": Utils.Strings.toString(value: queryParams.senders), "shared_requests": Utils.Strings.toString(value: queryParams.sharedRequests)])
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try SignRequests.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests")", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try SignRequests.deserialize(from: response.data!)
     }
 
     /// Creates a signature request. This involves preparing a document for signing and
@@ -75,8 +75,8 @@ public class SignRequestsManager {
     /// - Throws: The `GeneralError`.
     public func createSignRequest(requestBody: SignRequestCreateRequest, headers: CreateSignRequestHeaders = CreateSignRequestHeaders()) async throws -> SignRequest {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
-        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: "json", auth: self.auth, networkSession: self.networkSession))
-        return try SignRequest.deserialize(from: response.data)
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/sign_requests")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try SignRequest.deserialize(from: response.data!)
     }
 
 }
