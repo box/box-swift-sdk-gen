@@ -34,12 +34,12 @@ extension RequestInfo {
     /// Get a dictionary representing a `RequestInfo`.
     ///
     /// - Returns: A dictionary representing a `RequestInfo`.
-    func getDictionary() -> [String: Any] {
+    func getDictionary(dataSanitizer: DataSanitizer) -> [String: Any] {
         var dict = [String: Any]()
         dict["method"] = method
         dict["url"] = url
         dict["queryParams"] = queryParams
-        dict["headers"] = headers
+        dict["headers"] = dataSanitizer.sanitizeHeaders(headers: headers)
         dict["body"] = body
         return dict
     }

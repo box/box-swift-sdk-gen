@@ -343,4 +343,18 @@ public enum Utils {
         }
     }
 
+    /// Sanitizes a map by replacing the values of specified keys with a sanitized value.
+    ///
+    /// - Parameters:
+    ///   - mapToSanitize: The map to sanitize.
+    ///   - keysToSanitize: The keys to sanitize.
+    /// - Returns: A new map with the specified keys sanitized.
+    public static func sanitizeMap(mapToSanitize: [String: String], keysToSanitize: [String: String]) -> [String: String] {
+        return mapToSanitize.map { key, value in
+            (key, keysToSanitize.keys.contains(key.lowercased()) ? JsonUtils.sanitizedValue() : value)
+        }
+        .reduce(into: [String: String]()) { result, pair in
+            result[pair.0] = pair.1
+        }
+    }
 }
