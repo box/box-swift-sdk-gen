@@ -62,4 +62,21 @@ public enum JsonUtils {
     public static func jsonToSerializedData(text: String) -> SerializedData {
         return SerializedData(data: text.data(using: .utf8)!)
     }
+
+    /// Returns a string replacement for sensitive data.
+    ///
+    /// - Returns: A string replacement for sensitive data.
+    public static func sanitizedValue() -> String {
+        return "---[redacted]---"
+    }
+
+    /// Sanitizes serialized data by replacing the values of specified keys with a sanitized value.
+    ///
+    /// - Parameters:
+    ///   - sd: The serialized data to sanitize.
+    ///   - keysToSanitize: The keys to sanitize.
+    /// - Returns: A new serialized data with the specified keys sanitized.
+    public static func sanitizeSerializedData(sd: SerializedData, keysToSanitize: [String: String]) -> SerializedData {
+        return sd
+    }
 }

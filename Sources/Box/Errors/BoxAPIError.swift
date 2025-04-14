@@ -10,6 +10,7 @@ public class BoxAPIError: BoxSDKError {
     /// The response information
     public let responseInfo: ResponseInfo
 
+    public let dataSanitizer: DataSanitizer
     /// Initializer
     ///
     /// - Parameters:
@@ -18,9 +19,10 @@ public class BoxAPIError: BoxSDKError {
     ///   - responseInfo: The response information
     ///   - timestamp: The timestamp of the error
     ///   - error: The underlying error which caused this error, if any.
-    public init(message: String, requestInfo: RequestInfo, responseInfo: ResponseInfo, timestamp: Date? = nil, error: Error? = nil) {
+    public init(message: String, requestInfo: RequestInfo, responseInfo: ResponseInfo, timestamp: Date? = nil, error: Error? = nil, dataSanitizer: DataSanitizer = DataSanitizer()) {
         self.requestInfo = requestInfo
         self.responseInfo = responseInfo
+        self.dataSanitizer = dataSanitizer
 
         super.init(message: message, timestamp: timestamp, error: error, name: "BoxAPIError")
     }
@@ -30,8 +32,8 @@ public class BoxAPIError: BoxSDKError {
     /// - Returns: A dictionary representing the APIError.
     override public func getDictionary() -> [String: Any] {
         var dict = super.getDictionary()
-        dict["request"] = requestInfo.getDictionary()
-        dict["response"] = responseInfo.getDictionary()
+        dict["request"] = requestInfo.getDictionary(dataSanitizer: self.dataSanitizer)
+        dict["response"] = responseInfo.getDictionary(dataSanitizer: self.dataSanitizer)
         return dict
     }
 
@@ -75,7 +77,8 @@ extension BoxAPIError {
         self.init(
             message: message ?? Self.createMessage(fromResponse: responseInfo),
             requestInfo: requestInfo,
-            responseInfo: responseInfo
+            responseInfo: responseInfo,
+            dataSanitizer: conversation.options.networkSession?.dataSanitizer ?? DataSanitizer()
         )
     }
 
