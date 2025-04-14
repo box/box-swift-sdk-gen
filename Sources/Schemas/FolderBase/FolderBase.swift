@@ -22,7 +22,7 @@ public class FolderBase: Codable {
     /// The HTTP `etag` of this folder. This can be used within some API
     /// endpoints in the `If-Match` and `If-None-Match` headers to only
     /// perform changes on the folder if (no) changes have happened.
-    public let etag: String?
+    @CodableTriState public private(set) var etag: String?
 
     /// `folder`
     public let type: FolderBaseTypeField
@@ -41,9 +41,9 @@ public class FolderBase: Codable {
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
     ///   - type: `folder`
-    public init(id: String, etag: String? = nil, type: FolderBaseTypeField = FolderBaseTypeField.folder) {
+    public init(id: String, etag: TriStateField<String> = nil, type: FolderBaseTypeField = FolderBaseTypeField.folder) {
         self.id = id
-        self.etag = etag
+        self._etag = CodableTriState(state: etag)
         self.type = type
     }
 
@@ -57,7 +57,7 @@ public class FolderBase: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
-        try container.encodeIfPresent(etag, forKey: .etag)
+        try container.encode(field: _etag.state, forKey: .etag)
         try container.encode(type, forKey: .type)
     }
 

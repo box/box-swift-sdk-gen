@@ -25,14 +25,14 @@ public class UpdateFileByIdRequestBody: Codable {
 
     public let parent: UpdateFileByIdRequestBodyParentField?
 
-    public let sharedLink: UpdateFileByIdRequestBodySharedLinkField?
+    @CodableTriState public private(set) var sharedLink: UpdateFileByIdRequestBodySharedLinkField?
 
     /// Defines a lock on an item. This prevents the item from being
     /// moved, renamed, or otherwise changed by anyone other than the user
     /// who created the lock.
     /// 
     /// Set this to `null` to remove the lock.
-    public let lock: UpdateFileByIdRequestBodyLockField?
+    @CodableTriState public private(set) var lock: UpdateFileByIdRequestBodyLockField?
 
     /// The retention expiration timestamp for the given file. This
     /// date cannot be shortened once set on a file.
@@ -52,7 +52,7 @@ public class UpdateFileByIdRequestBody: Codable {
     /// the file from all collections.
     /// 
     /// [1]: e://get-collections
-    public let collections: [UpdateFileByIdRequestBodyCollectionsField]?
+    @CodableTriState public private(set) var collections: [UpdateFileByIdRequestBodyCollectionsField]?
 
     /// The tags for this item. These tags are shown in
     /// the Box web app and mobile apps next to an item.
@@ -102,15 +102,15 @@ public class UpdateFileByIdRequestBody: Codable {
     ///     
     ///     There is a limit of 100 tags per item, and 10,000
     ///     unique tags per enterprise.
-    public init(name: String? = nil, description: String? = nil, parent: UpdateFileByIdRequestBodyParentField? = nil, sharedLink: UpdateFileByIdRequestBodySharedLinkField? = nil, lock: UpdateFileByIdRequestBodyLockField? = nil, dispositionAt: Date? = nil, permissions: UpdateFileByIdRequestBodyPermissionsField? = nil, collections: [UpdateFileByIdRequestBodyCollectionsField]? = nil, tags: [String]? = nil) {
+    public init(name: String? = nil, description: String? = nil, parent: UpdateFileByIdRequestBodyParentField? = nil, sharedLink: TriStateField<UpdateFileByIdRequestBodySharedLinkField> = nil, lock: TriStateField<UpdateFileByIdRequestBodyLockField> = nil, dispositionAt: Date? = nil, permissions: UpdateFileByIdRequestBodyPermissionsField? = nil, collections: TriStateField<[UpdateFileByIdRequestBodyCollectionsField]> = nil, tags: [String]? = nil) {
         self.name = name
         self.description = description
         self.parent = parent
-        self.sharedLink = sharedLink
-        self.lock = lock
+        self._sharedLink = CodableTriState(state: sharedLink)
+        self._lock = CodableTriState(state: lock)
         self.dispositionAt = dispositionAt
         self.permissions = permissions
-        self.collections = collections
+        self._collections = CodableTriState(state: collections)
         self.tags = tags
     }
 
@@ -121,12 +121,7 @@ public class UpdateFileByIdRequestBody: Codable {
         parent = try container.decodeIfPresent(UpdateFileByIdRequestBodyParentField.self, forKey: .parent)
         sharedLink = try container.decodeIfPresent(UpdateFileByIdRequestBodySharedLinkField.self, forKey: .sharedLink)
         lock = try container.decodeIfPresent(UpdateFileByIdRequestBodyLockField.self, forKey: .lock)
-        if let _dispositionAt = try container.decodeIfPresent(String.self, forKey: .dispositionAt) {
-            dispositionAt = try Utils.Dates.dateTimeFromString(dateTime: _dispositionAt)
-        } else {
-            dispositionAt = nil
-        }
-
+        dispositionAt = try container.decodeDateTimeIfPresent(forKey: .dispositionAt)
         permissions = try container.decodeIfPresent(UpdateFileByIdRequestBodyPermissionsField.self, forKey: .permissions)
         collections = try container.decodeIfPresent([UpdateFileByIdRequestBodyCollectionsField].self, forKey: .collections)
         tags = try container.decodeIfPresent([String].self, forKey: .tags)
@@ -137,14 +132,11 @@ public class UpdateFileByIdRequestBody: Codable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(parent, forKey: .parent)
-        try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
-        try container.encodeIfPresent(lock, forKey: .lock)
-        if let dispositionAt = dispositionAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: dispositionAt), forKey: .dispositionAt)
-        }
-
+        try container.encode(field: _sharedLink.state, forKey: .sharedLink)
+        try container.encode(field: _lock.state, forKey: .lock)
+        try container.encodeDateTimeIfPresent(field: dispositionAt, forKey: .dispositionAt)
         try container.encodeIfPresent(permissions, forKey: .permissions)
-        try container.encodeIfPresent(collections, forKey: .collections)
+        try container.encode(field: _collections.state, forKey: .collections)
         try container.encodeIfPresent(tags, forKey: .tags)
     }
 

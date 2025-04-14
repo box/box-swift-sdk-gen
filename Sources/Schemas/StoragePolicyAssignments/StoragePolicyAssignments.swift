@@ -15,10 +15,10 @@ public class StoragePolicyAssignments: Codable {
     public let limit: Int64?
 
     /// The marker for the start of the next page of results.
-    public let nextMarker: String?
+    @CodableTriState public private(set) var nextMarker: String?
 
     /// The marker for the start of the previous page of results.
-    public let prevMarker: String?
+    @CodableTriState public private(set) var prevMarker: String?
 
     /// A list of storage policy assignments
     public let entries: [StoragePolicyAssignment]?
@@ -32,10 +32,10 @@ public class StoragePolicyAssignments: Codable {
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
     ///   - entries: A list of storage policy assignments
-    public init(limit: Int64? = nil, nextMarker: String? = nil, prevMarker: String? = nil, entries: [StoragePolicyAssignment]? = nil) {
+    public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, entries: [StoragePolicyAssignment]? = nil) {
         self.limit = limit
-        self.nextMarker = nextMarker
-        self.prevMarker = prevMarker
+        self._nextMarker = CodableTriState(state: nextMarker)
+        self._prevMarker = CodableTriState(state: prevMarker)
         self.entries = entries
     }
 
@@ -50,8 +50,8 @@ public class StoragePolicyAssignments: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(limit, forKey: .limit)
-        try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
-        try container.encodeIfPresent(prevMarker, forKey: .prevMarker)
+        try container.encode(field: _nextMarker.state, forKey: .nextMarker)
+        try container.encode(field: _prevMarker.state, forKey: .prevMarker)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
 

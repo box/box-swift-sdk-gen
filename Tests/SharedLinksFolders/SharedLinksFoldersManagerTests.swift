@@ -11,7 +11,7 @@ class SharedLinksFoldersManagerTests: XCTestCase {
 
     public func testSharedLinksFolders() async throws {
         let folder: FolderFull = try await client.folders.createFolder(requestBody: CreateFolderRequestBody(name: Utils.getUUID(), parent: CreateFolderRequestBodyParentField(id: "0")))
-        try await client.sharedLinksFolders.addShareLinkToFolder(folderId: folder.id, requestBody: AddShareLinkToFolderRequestBody(sharedLink: AddShareLinkToFolderRequestBodySharedLinkField(access: AddShareLinkToFolderRequestBodySharedLinkAccessField.open, password: "Secret123@")), queryParams: AddShareLinkToFolderQueryParams(fields: "shared_link"))
+        try await client.sharedLinksFolders.addShareLinkToFolder(folderId: folder.id, requestBody: AddShareLinkToFolderRequestBody(sharedLink: AddShareLinkToFolderRequestBodySharedLinkField(access: AddShareLinkToFolderRequestBodySharedLinkAccessField.open, password: .value("Secret123@"))), queryParams: AddShareLinkToFolderQueryParams(fields: "shared_link"))
         let folderFromApi: FolderFull = try await client.sharedLinksFolders.getSharedLinkForFolder(folderId: folder.id, queryParams: GetSharedLinkForFolderQueryParams(fields: "shared_link"))
         XCTAssertTrue(Utils.Strings.toString(value: folderFromApi.sharedLink!.access) == "open")
         let userId: String = Utils.getEnvironmentVariable(name: "USER_ID")

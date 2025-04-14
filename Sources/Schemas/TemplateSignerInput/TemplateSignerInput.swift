@@ -29,13 +29,13 @@ public class TemplateSignerInput: SignRequestPrefillTag {
     public let isRequired: Bool?
 
     /// Document identifier.
-    public let documentId: String?
+    @CodableTriState public private(set) var documentId: String?
 
     /// When the input is of the type `dropdown` this values will be filled with all the dropdown options.
-    public let dropdownChoices: [String]?
+    @CodableTriState public private(set) var dropdownChoices: [String]?
 
     /// When the input is of type `radio` they can be grouped to gather with this identifier.
-    public let groupId: String?
+    @CodableTriState public private(set) var groupId: String?
 
     /// Where the input is located on a page.
     public let coordinates: TemplateSignerInputCoordinatesField?
@@ -44,7 +44,7 @@ public class TemplateSignerInput: SignRequestPrefillTag {
     public let dimensions: TemplateSignerInputDimensionsField?
 
     /// The label field is used especially for text, attachment, radio, and checkbox type inputs.
-    public let label: String?
+    @CodableTriState public private(set) var label: String?
 
     /// Whether this input was defined as read-only(immutable by signers) or not
     public let readOnly: Bool?
@@ -67,17 +67,17 @@ public class TemplateSignerInput: SignRequestPrefillTag {
     ///   - dimensions: The size of the input.
     ///   - label: The label field is used especially for text, attachment, radio, and checkbox type inputs.
     ///   - readOnly: Whether this input was defined as read-only(immutable by signers) or not
-    public init(pageIndex: Int64, documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: Date? = nil, type: TemplateSignerInputTypeField? = nil, contentType: TemplateSignerInputContentTypeField? = nil, isRequired: Bool? = nil, documentId: String? = nil, dropdownChoices: [String]? = nil, groupId: String? = nil, coordinates: TemplateSignerInputCoordinatesField? = nil, dimensions: TemplateSignerInputDimensionsField? = nil, label: String? = nil, readOnly: Bool? = nil) {
+    public init(pageIndex: Int64, documentTagId: TriStateField<String> = nil, textValue: TriStateField<String> = nil, checkboxValue: TriStateField<Bool> = nil, dateValue: TriStateField<Date> = nil, type: TemplateSignerInputTypeField? = nil, contentType: TemplateSignerInputContentTypeField? = nil, isRequired: Bool? = nil, documentId: TriStateField<String> = nil, dropdownChoices: TriStateField<[String]> = nil, groupId: TriStateField<String> = nil, coordinates: TemplateSignerInputCoordinatesField? = nil, dimensions: TemplateSignerInputDimensionsField? = nil, label: TriStateField<String> = nil, readOnly: Bool? = nil) {
         self.pageIndex = pageIndex
         self.type = type
         self.contentType = contentType
         self.isRequired = isRequired
-        self.documentId = documentId
-        self.dropdownChoices = dropdownChoices
-        self.groupId = groupId
+        self._documentId = CodableTriState(state: documentId)
+        self._dropdownChoices = CodableTriState(state: dropdownChoices)
+        self._groupId = CodableTriState(state: groupId)
         self.coordinates = coordinates
         self.dimensions = dimensions
-        self.label = label
+        self._label = CodableTriState(state: label)
         self.readOnly = readOnly
 
         super.init(documentTagId: documentTagId, textValue: textValue, checkboxValue: checkboxValue, dateValue: dateValue)
@@ -106,12 +106,12 @@ public class TemplateSignerInput: SignRequestPrefillTag {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(contentType, forKey: .contentType)
         try container.encodeIfPresent(isRequired, forKey: .isRequired)
-        try container.encodeIfPresent(documentId, forKey: .documentId)
-        try container.encodeIfPresent(dropdownChoices, forKey: .dropdownChoices)
-        try container.encodeIfPresent(groupId, forKey: .groupId)
+        try container.encode(field: _documentId.state, forKey: .documentId)
+        try container.encode(field: _dropdownChoices.state, forKey: .dropdownChoices)
+        try container.encode(field: _groupId.state, forKey: .groupId)
         try container.encodeIfPresent(coordinates, forKey: .coordinates)
         try container.encodeIfPresent(dimensions, forKey: .dimensions)
-        try container.encodeIfPresent(label, forKey: .label)
+        try container.encode(field: _label.state, forKey: .label)
         try container.encodeIfPresent(readOnly, forKey: .readOnly)
         try super.encode(to: encoder)
     }

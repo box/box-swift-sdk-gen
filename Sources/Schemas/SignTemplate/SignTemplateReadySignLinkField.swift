@@ -14,17 +14,17 @@ public class SignTemplateReadySignLinkField: Codable {
     public let url: String?
 
     /// Request name.
-    public let name: String?
+    @CodableTriState public private(set) var name: String?
 
     /// Extra instructions for all signers.
-    public let instructions: String?
+    @CodableTriState public private(set) var instructions: String?
 
     /// The destination folder to place final,
     /// signed document and signing
     /// log. Only `ID` and `type` fields are required.
     /// The root folder,
     /// folder ID `0`, cannot be used.
-    public let folderId: String?
+    @CodableTriState public private(set) var folderId: String?
 
     /// Whether to disable notifications when
     /// a signer has signed.
@@ -47,11 +47,11 @@ public class SignTemplateReadySignLinkField: Codable {
     ///   - isNotificationDisabled: Whether to disable notifications when
     ///     a signer has signed.
     ///   - isActive: Whether the ready sign link is enabled or not.
-    public init(url: String? = nil, name: String? = nil, instructions: String? = nil, folderId: String? = nil, isNotificationDisabled: Bool? = nil, isActive: Bool? = nil) {
+    public init(url: String? = nil, name: TriStateField<String> = nil, instructions: TriStateField<String> = nil, folderId: TriStateField<String> = nil, isNotificationDisabled: Bool? = nil, isActive: Bool? = nil) {
         self.url = url
-        self.name = name
-        self.instructions = instructions
-        self.folderId = folderId
+        self._name = CodableTriState(state: name)
+        self._instructions = CodableTriState(state: instructions)
+        self._folderId = CodableTriState(state: folderId)
         self.isNotificationDisabled = isNotificationDisabled
         self.isActive = isActive
     }
@@ -69,9 +69,9 @@ public class SignTemplateReadySignLinkField: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(url, forKey: .url)
-        try container.encodeIfPresent(name, forKey: .name)
-        try container.encodeIfPresent(instructions, forKey: .instructions)
-        try container.encodeIfPresent(folderId, forKey: .folderId)
+        try container.encode(field: _name.state, forKey: .name)
+        try container.encode(field: _instructions.state, forKey: .instructions)
+        try container.encode(field: _folderId.state, forKey: .folderId)
         try container.encodeIfPresent(isNotificationDisabled, forKey: .isNotificationDisabled)
         try container.encodeIfPresent(isActive, forKey: .isActive)
     }

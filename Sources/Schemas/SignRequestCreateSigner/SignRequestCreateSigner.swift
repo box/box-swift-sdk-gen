@@ -20,7 +20,7 @@ public class SignRequestCreateSigner: Codable {
 
     /// Email address of the signer.
     /// The email address of the signer is required when making signature requests, except when using templates that are configured to include emails.
-    public let email: String?
+    @CodableTriState public private(set) var email: String?
 
     /// Defines the role of the signer in the signature request. A `signer`
     /// must sign the document and an `approver` must approve the document. A
@@ -37,7 +37,7 @@ public class SignRequestCreateSigner: Codable {
 
     /// User ID for the signer in an external application responsible
     /// for authentication when accessing the embed URL.
-    public let embedUrlExternalUserId: String?
+    @CodableTriState public private(set) var embedUrlExternalUserId: String?
 
     /// The URL that a signer will be redirected
     /// to after signing a document. Defining this URL
@@ -45,28 +45,28 @@ public class SignRequestCreateSigner: Codable {
     /// settings for a specific signer.
     /// If no declined redirect URL is specified,
     /// this URL will be used for decline actions as well.
-    public let redirectUrl: String?
+    @CodableTriState public private(set) var redirectUrl: String?
 
     /// The URL that a signer will be redirect
     /// to after declining to sign a document.
     /// Defining this URL overrides default or global
     /// declined redirect URL settings for a specific signer.
-    public let declinedRedirectUrl: String?
+    @CodableTriState public private(set) var declinedRedirectUrl: String?
 
     /// If set to true, the signer will need to log in to a Box account
     /// before signing the request. If the signer does not have
     /// an existing account, they will have the option to create
     /// a free Box account.
-    public let loginRequired: Bool?
+    @CodableTriState public private(set) var loginRequired: Bool?
 
     /// If set, this phone number will be used to verify the signer
     /// via two-factor authentication before they are able to sign the document.
     /// Cannot be selected in combination with `login_required`.
-    public let verificationPhoneNumber: String?
+    @CodableTriState public private(set) var verificationPhoneNumber: String?
 
     /// If set, the signer is required to enter the password before they are able
     /// to sign a document. This field is write only.
-    public let password: String?
+    @CodableTriState public private(set) var password: String?
 
     /// If set, signers who have the same value will be assigned to the same input and to the same signer group.
     /// A signer group is not a Box Group. It is an entity that belongs to a Sign Request and can only be
@@ -75,10 +75,10 @@ public class SignRequestCreateSigner: Codable {
     /// as it was intended for an individual signer. The value provided can be any string and only used to
     /// determine which signers belongs to same group. A successful response will provide a generated UUID value
     /// instead for signers in the same signer group.
-    public let signerGroupId: String?
+    @CodableTriState public private(set) var signerGroupId: String?
 
     /// If true, no emails about the sign request will be sent
-    public let suppressNotifications: Bool?
+    @CodableTriState public private(set) var suppressNotifications: Bool?
 
     /// Initializer for a SignRequestCreateSigner.
     ///
@@ -121,19 +121,19 @@ public class SignRequestCreateSigner: Codable {
     ///     determine which signers belongs to same group. A successful response will provide a generated UUID value
     ///     instead for signers in the same signer group.
     ///   - suppressNotifications: If true, no emails about the sign request will be sent
-    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil, signerGroupId: String? = nil, suppressNotifications: Bool? = nil) {
-        self.email = email
+    public init(email: TriStateField<String> = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: TriStateField<String> = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, loginRequired: TriStateField<Bool> = nil, verificationPhoneNumber: TriStateField<String> = nil, password: TriStateField<String> = nil, signerGroupId: TriStateField<String> = nil, suppressNotifications: TriStateField<Bool> = nil) {
+        self._email = CodableTriState(state: email)
         self.role = role
         self.isInPerson = isInPerson
         self.order = order
-        self.embedUrlExternalUserId = embedUrlExternalUserId
-        self.redirectUrl = redirectUrl
-        self.declinedRedirectUrl = declinedRedirectUrl
-        self.loginRequired = loginRequired
-        self.verificationPhoneNumber = verificationPhoneNumber
-        self.password = password
-        self.signerGroupId = signerGroupId
-        self.suppressNotifications = suppressNotifications
+        self._embedUrlExternalUserId = CodableTriState(state: embedUrlExternalUserId)
+        self._redirectUrl = CodableTriState(state: redirectUrl)
+        self._declinedRedirectUrl = CodableTriState(state: declinedRedirectUrl)
+        self._loginRequired = CodableTriState(state: loginRequired)
+        self._verificationPhoneNumber = CodableTriState(state: verificationPhoneNumber)
+        self._password = CodableTriState(state: password)
+        self._signerGroupId = CodableTriState(state: signerGroupId)
+        self._suppressNotifications = CodableTriState(state: suppressNotifications)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -154,18 +154,18 @@ public class SignRequestCreateSigner: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(email, forKey: .email)
+        try container.encode(field: _email.state, forKey: .email)
         try container.encodeIfPresent(role, forKey: .role)
         try container.encodeIfPresent(isInPerson, forKey: .isInPerson)
         try container.encodeIfPresent(order, forKey: .order)
-        try container.encodeIfPresent(embedUrlExternalUserId, forKey: .embedUrlExternalUserId)
-        try container.encodeIfPresent(redirectUrl, forKey: .redirectUrl)
-        try container.encodeIfPresent(declinedRedirectUrl, forKey: .declinedRedirectUrl)
-        try container.encodeIfPresent(loginRequired, forKey: .loginRequired)
-        try container.encodeIfPresent(verificationPhoneNumber, forKey: .verificationPhoneNumber)
-        try container.encodeIfPresent(password, forKey: .password)
-        try container.encodeIfPresent(signerGroupId, forKey: .signerGroupId)
-        try container.encodeIfPresent(suppressNotifications, forKey: .suppressNotifications)
+        try container.encode(field: _embedUrlExternalUserId.state, forKey: .embedUrlExternalUserId)
+        try container.encode(field: _redirectUrl.state, forKey: .redirectUrl)
+        try container.encode(field: _declinedRedirectUrl.state, forKey: .declinedRedirectUrl)
+        try container.encode(field: _loginRequired.state, forKey: .loginRequired)
+        try container.encode(field: _verificationPhoneNumber.state, forKey: .verificationPhoneNumber)
+        try container.encode(field: _password.state, forKey: .password)
+        try container.encode(field: _signerGroupId.state, forKey: .signerGroupId)
+        try container.encode(field: _suppressNotifications.state, forKey: .suppressNotifications)
     }
 
 }

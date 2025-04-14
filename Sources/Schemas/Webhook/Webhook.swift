@@ -46,12 +46,7 @@ public class Webhook: WebhookMini {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
         address = try container.decodeIfPresent(String.self, forKey: .address)
         triggers = try container.decodeIfPresent([WebhookTriggersField].self, forKey: .triggers)
 
@@ -61,10 +56,7 @@ public class Webhook: WebhookMini {
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(address, forKey: .address)
         try container.encodeIfPresent(triggers, forKey: .triggers)
         try super.encode(to: encoder)

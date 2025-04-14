@@ -92,12 +92,7 @@ public class UpdateSharedLinkOnFolderRequestBodySharedLinkField: Codable {
         access = try container.decodeIfPresent(UpdateSharedLinkOnFolderRequestBodySharedLinkAccessField.self, forKey: .access)
         password = try container.decodeIfPresent(String.self, forKey: .password)
         vanityName = try container.decodeIfPresent(String.self, forKey: .vanityName)
-        if let _unsharedAt = try container.decodeIfPresent(String.self, forKey: .unsharedAt) {
-            unsharedAt = try Utils.Dates.dateTimeFromString(dateTime: _unsharedAt)
-        } else {
-            unsharedAt = nil
-        }
-
+        unsharedAt = try container.decodeDateTimeIfPresent(forKey: .unsharedAt)
         permissions = try container.decodeIfPresent(UpdateSharedLinkOnFolderRequestBodySharedLinkPermissionsField.self, forKey: .permissions)
     }
 
@@ -106,10 +101,7 @@ public class UpdateSharedLinkOnFolderRequestBodySharedLinkField: Codable {
         try container.encodeIfPresent(access, forKey: .access)
         try container.encodeIfPresent(password, forKey: .password)
         try container.encodeIfPresent(vanityName, forKey: .vanityName)
-        if let unsharedAt = unsharedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: unsharedAt), forKey: .unsharedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: unsharedAt, forKey: .unsharedAt)
         try container.encodeIfPresent(permissions, forKey: .permissions)
     }
 

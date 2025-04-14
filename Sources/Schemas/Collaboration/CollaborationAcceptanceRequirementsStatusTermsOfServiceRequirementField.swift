@@ -8,7 +8,7 @@ public class CollaborationAcceptanceRequirementsStatusTermsOfServiceRequirementF
 
     /// Whether or not the terms of service have been accepted.  The
     /// field is `null` when there is no terms of service required.
-    public let isAccepted: Bool?
+    @CodableTriState public private(set) var isAccepted: Bool?
 
     public let termsOfService: TermsOfServiceBase?
 
@@ -18,8 +18,8 @@ public class CollaborationAcceptanceRequirementsStatusTermsOfServiceRequirementF
     ///   - isAccepted: Whether or not the terms of service have been accepted.  The
     ///     field is `null` when there is no terms of service required.
     ///   - termsOfService: 
-    public init(isAccepted: Bool? = nil, termsOfService: TermsOfServiceBase? = nil) {
-        self.isAccepted = isAccepted
+    public init(isAccepted: TriStateField<Bool> = nil, termsOfService: TermsOfServiceBase? = nil) {
+        self._isAccepted = CodableTriState(state: isAccepted)
         self.termsOfService = termsOfService
     }
 
@@ -31,7 +31,7 @@ public class CollaborationAcceptanceRequirementsStatusTermsOfServiceRequirementF
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(isAccepted, forKey: .isAccepted)
+        try container.encode(field: _isAccepted.state, forKey: .isAccepted)
         try container.encodeIfPresent(termsOfService, forKey: .termsOfService)
     }
 

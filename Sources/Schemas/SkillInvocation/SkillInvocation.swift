@@ -75,12 +75,7 @@ public class SkillInvocation: Codable {
         skill = try container.decodeIfPresent(SkillInvocationSkillField.self, forKey: .skill)
         token = try container.decodeIfPresent(SkillInvocationTokenField.self, forKey: .token)
         status = try container.decodeIfPresent(SkillInvocationStatusField.self, forKey: .status)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
         trigger = try container.decodeIfPresent(String.self, forKey: .trigger)
         enterprise = try container.decodeIfPresent(SkillInvocationEnterpriseField.self, forKey: .enterprise)
         source = try container.decodeIfPresent(FileOrFolder.self, forKey: .source)
@@ -94,10 +89,7 @@ public class SkillInvocation: Codable {
         try container.encodeIfPresent(skill, forKey: .skill)
         try container.encodeIfPresent(token, forKey: .token)
         try container.encodeIfPresent(status, forKey: .status)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(trigger, forKey: .trigger)
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
         try container.encodeIfPresent(source, forKey: .source)

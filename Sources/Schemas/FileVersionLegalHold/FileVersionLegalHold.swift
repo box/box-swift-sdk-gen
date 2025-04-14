@@ -55,12 +55,7 @@ public class FileVersionLegalHold: Codable {
         fileVersion = try container.decodeIfPresent(FileVersionMini.self, forKey: .fileVersion)
         file = try container.decodeIfPresent(FileMini.self, forKey: .file)
         legalHoldPolicyAssignments = try container.decodeIfPresent([LegalHoldPolicyAssignment].self, forKey: .legalHoldPolicyAssignments)
-        if let _deletedAt = try container.decodeIfPresent(String.self, forKey: .deletedAt) {
-            deletedAt = try Utils.Dates.dateTimeFromString(dateTime: _deletedAt)
-        } else {
-            deletedAt = nil
-        }
-
+        deletedAt = try container.decodeDateTimeIfPresent(forKey: .deletedAt)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -70,10 +65,7 @@ public class FileVersionLegalHold: Codable {
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
         try container.encodeIfPresent(file, forKey: .file)
         try container.encodeIfPresent(legalHoldPolicyAssignments, forKey: .legalHoldPolicyAssignments)
-        if let deletedAt = deletedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: deletedAt), forKey: .deletedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: deletedAt, forKey: .deletedAt)
     }
 
 }

@@ -20,10 +20,10 @@ public class SignRequestCreateRequest: SignRequestBase {
     public let signers: [SignRequestCreateSigner]
 
     /// List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
-    public let sourceFiles: [FileBase]?
+    @CodableTriState public private(set) var sourceFiles: [FileBase]?
 
     /// Force a specific color for the signature (blue, black, or red)
-    public let signatureColor: SignRequestCreateRequestSignatureColorField?
+    @CodableTriState public private(set) var signatureColor: SignRequestCreateRequestSignatureColorField?
 
     public let parentFolder: FolderMini?
 
@@ -54,10 +54,10 @@ public class SignRequestCreateRequest: SignRequestBase {
     ///   - sourceFiles: List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
     ///   - signatureColor: Force a specific color for the signature (blue, black, or red)
     ///   - parentFolder: 
-    public init(signers: [SignRequestCreateSigner], isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, templateId: String? = nil, externalSystemName: String? = nil, sourceFiles: [FileBase]? = nil, signatureColor: SignRequestCreateRequestSignatureColorField? = nil, parentFolder: FolderMini? = nil) {
+    public init(signers: [SignRequestCreateSigner], isDocumentPreparationNeeded: Bool? = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: TriStateField<Int64> = nil, externalId: TriStateField<String> = nil, templateId: TriStateField<String> = nil, externalSystemName: TriStateField<String> = nil, sourceFiles: TriStateField<[FileBase]> = nil, signatureColor: TriStateField<SignRequestCreateRequestSignatureColorField> = nil, parentFolder: FolderMini? = nil) {
         self.signers = signers
-        self.sourceFiles = sourceFiles
-        self.signatureColor = signatureColor
+        self._sourceFiles = CodableTriState(state: sourceFiles)
+        self._signatureColor = CodableTriState(state: signatureColor)
         self.parentFolder = parentFolder
 
         super.init(isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, templateId: templateId, externalSystemName: externalSystemName)
@@ -76,8 +76,8 @@ public class SignRequestCreateRequest: SignRequestBase {
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(signers, forKey: .signers)
-        try container.encodeIfPresent(sourceFiles, forKey: .sourceFiles)
-        try container.encodeIfPresent(signatureColor, forKey: .signatureColor)
+        try container.encode(field: _sourceFiles.state, forKey: .sourceFiles)
+        try container.encode(field: _signatureColor.state, forKey: .signatureColor)
         try container.encodeIfPresent(parentFolder, forKey: .parentFolder)
         try super.encode(to: encoder)
     }

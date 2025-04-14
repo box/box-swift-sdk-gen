@@ -20,7 +20,7 @@ class RetentionPoliciesManagerTests: XCTestCase {
         let retentionPolicies: RetentionPolicies = try await client.retentionPolicies.getRetentionPolicies()
         XCTAssertTrue(retentionPolicies.entries!.count > 0)
         let updatedRetentionPolicyName: String = Utils.getUUID()
-        let updatedRetentionPolicy: RetentionPolicy = try await client.retentionPolicies.updateRetentionPolicyById(retentionPolicyId: retentionPolicy.id, requestBody: UpdateRetentionPolicyByIdRequestBody(policyName: updatedRetentionPolicyName))
+        let updatedRetentionPolicy: RetentionPolicy = try await client.retentionPolicies.updateRetentionPolicyById(retentionPolicyId: retentionPolicy.id, requestBody: UpdateRetentionPolicyByIdRequestBody(policyName: .value(updatedRetentionPolicyName)))
         XCTAssertTrue(updatedRetentionPolicy.policyName == updatedRetentionPolicyName)
         try await client.retentionPolicies.deleteRetentionPolicyById(retentionPolicyId: retentionPolicy.id)
     }

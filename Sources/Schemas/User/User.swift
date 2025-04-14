@@ -60,7 +60,7 @@ public class User: UserMini {
     /// notifications are sent. When it's confirmed, this will be
     /// the email address to which notifications are sent instead of
     /// to the primary email address.
-    public let notificationEmail: UserNotificationEmailField?
+    @CodableTriState public private(set) var notificationEmail: UserNotificationEmailField?
 
     /// Initializer for a User.
     ///
@@ -86,7 +86,7 @@ public class User: UserMini {
     ///     notifications are sent. When it's confirmed, this will be
     ///     the email address to which notifications are sent instead of
     ///     to the primary email address.
-    public init(id: String, type: UserBaseTypeField = UserBaseTypeField.user, name: String? = nil, login: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, language: String? = nil, timezone: String? = nil, spaceAmount: Int64? = nil, spaceUsed: Int64? = nil, maxUploadSize: Int64? = nil, status: UserStatusField? = nil, jobTitle: String? = nil, phone: String? = nil, address: String? = nil, avatarUrl: String? = nil, notificationEmail: UserNotificationEmailField? = nil) {
+    public init(id: String, type: UserBaseTypeField = UserBaseTypeField.user, name: String? = nil, login: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, language: String? = nil, timezone: String? = nil, spaceAmount: Int64? = nil, spaceUsed: Int64? = nil, maxUploadSize: Int64? = nil, status: UserStatusField? = nil, jobTitle: String? = nil, phone: String? = nil, address: String? = nil, avatarUrl: String? = nil, notificationEmail: TriStateField<UserNotificationEmailField> = nil) {
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
         self.language = language
@@ -99,25 +99,15 @@ public class User: UserMini {
         self.phone = phone
         self.address = address
         self.avatarUrl = avatarUrl
-        self.notificationEmail = notificationEmail
+        self._notificationEmail = CodableTriState(state: notificationEmail)
 
         super.init(id: id, type: type, name: name, login: login)
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
-        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
-            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
-        } else {
-            modifiedAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
+        modifiedAt = try container.decodeDateTimeIfPresent(forKey: .modifiedAt)
         language = try container.decodeIfPresent(String.self, forKey: .language)
         timezone = try container.decodeIfPresent(String.self, forKey: .timezone)
         spaceAmount = try container.decodeIfPresent(Int64.self, forKey: .spaceAmount)
@@ -135,14 +125,8 @@ public class User: UserMini {
 
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
-        if let modifiedAt = modifiedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
+        try container.encodeDateTimeIfPresent(field: modifiedAt, forKey: .modifiedAt)
         try container.encodeIfPresent(language, forKey: .language)
         try container.encodeIfPresent(timezone, forKey: .timezone)
         try container.encodeIfPresent(spaceAmount, forKey: .spaceAmount)
@@ -153,7 +137,7 @@ public class User: UserMini {
         try container.encodeIfPresent(phone, forKey: .phone)
         try container.encodeIfPresent(address, forKey: .address)
         try container.encodeIfPresent(avatarUrl, forKey: .avatarUrl)
-        try container.encodeIfPresent(notificationEmail, forKey: .notificationEmail)
+        try container.encode(field: _notificationEmail.state, forKey: .notificationEmail)
         try super.encode(to: encoder)
     }
 

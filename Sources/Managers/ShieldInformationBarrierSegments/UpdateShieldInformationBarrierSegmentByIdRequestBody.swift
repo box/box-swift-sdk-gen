@@ -11,7 +11,7 @@ public class UpdateShieldInformationBarrierSegmentByIdRequestBody: Codable {
 
     /// The updated description for
     /// the shield information barrier segment.
-    public let description: String?
+    @CodableTriState public private(set) var description: String?
 
     /// Initializer for a UpdateShieldInformationBarrierSegmentByIdRequestBody.
     ///
@@ -19,9 +19,9 @@ public class UpdateShieldInformationBarrierSegmentByIdRequestBody: Codable {
     ///   - name: The updated name for the shield information barrier segment.
     ///   - description: The updated description for
     ///     the shield information barrier segment.
-    public init(name: String? = nil, description: String? = nil) {
+    public init(name: String? = nil, description: TriStateField<String> = nil) {
         self.name = name
-        self.description = description
+        self._description = CodableTriState(state: description)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -33,7 +33,7 @@ public class UpdateShieldInformationBarrierSegmentByIdRequestBody: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(name, forKey: .name)
-        try container.encodeIfPresent(description, forKey: .description)
+        try container.encode(field: _description.state, forKey: .description)
     }
 
 }

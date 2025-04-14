@@ -29,7 +29,7 @@ public class SignRequest: SignRequestBase {
     public let signers: [SignRequestSigner]?
 
     /// Force a specific color for the signature (blue, black, or red).
-    public let signatureColor: String?
+    @CodableTriState public private(set) var signatureColor: String?
 
     /// Box Sign request ID.
     public let id: String?
@@ -40,7 +40,7 @@ public class SignRequest: SignRequestBase {
     /// using the UI. The signature request is not
     /// sent until the preparation
     /// phase is complete.
-    public let prepareUrl: String?
+    @CodableTriState public private(set) var prepareUrl: String?
 
     public let signingLog: FileMini?
 
@@ -53,18 +53,18 @@ public class SignRequest: SignRequestBase {
     public let signFiles: SignRequestSignFilesField?
 
     /// Uses `days_valid` to calculate the date and time, in GMT, the sign request will expire if unsigned.
-    public let autoExpireAt: Date?
+    @CodableTriState public private(set) var autoExpireAt: Date?
 
     public let parentFolder: FolderMini?
 
     /// The collaborator level of the user to the sign request. Values can include "owner", "editor", and "viewer"
-    public let collaboratorLevel: String?
+    @CodableTriState public private(set) var collaboratorLevel: String?
 
     /// The email address of the sender of the sign request.
-    public let senderEmail: String?
+    @CodableTriState public private(set) var senderEmail: String?
 
     /// The user ID of the sender of the sign request.
-    public let senderId: Int64?
+    @CodableTriState public private(set) var senderId: Int64?
 
     /// Initializer for a SignRequest.
     ///
@@ -103,21 +103,21 @@ public class SignRequest: SignRequestBase {
     ///   - collaboratorLevel: The collaborator level of the user to the sign request. Values can include "owner", "editor", and "viewer"
     ///   - senderEmail: The email address of the sender of the sign request.
     ///   - senderId: The user ID of the sender of the sign request.
-    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: String? = nil, emailMessage: String? = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: Int64? = nil, externalId: String? = nil, templateId: String? = nil, externalSystemName: String? = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: String? = nil, id: String? = nil, prepareUrl: String? = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: Date? = nil, parentFolder: FolderMini? = nil, collaboratorLevel: String? = nil, senderEmail: String? = nil, senderId: Int64? = nil) {
+    public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: TriStateField<Int64> = nil, externalId: TriStateField<String> = nil, templateId: TriStateField<String> = nil, externalSystemName: TriStateField<String> = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: TriStateField<String> = nil, id: String? = nil, prepareUrl: TriStateField<String> = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: TriStateField<Date> = nil, parentFolder: FolderMini? = nil, collaboratorLevel: TriStateField<String> = nil, senderEmail: TriStateField<String> = nil, senderId: TriStateField<Int64> = nil) {
         self.type = type
         self.sourceFiles = sourceFiles
         self.signers = signers
-        self.signatureColor = signatureColor
+        self._signatureColor = CodableTriState(state: signatureColor)
         self.id = id
-        self.prepareUrl = prepareUrl
+        self._prepareUrl = CodableTriState(state: prepareUrl)
         self.signingLog = signingLog
         self.status = status
         self.signFiles = signFiles
-        self.autoExpireAt = autoExpireAt
+        self._autoExpireAt = CodableTriState(state: autoExpireAt)
         self.parentFolder = parentFolder
-        self.collaboratorLevel = collaboratorLevel
-        self.senderEmail = senderEmail
-        self.senderId = senderId
+        self._collaboratorLevel = CodableTriState(state: collaboratorLevel)
+        self._senderEmail = CodableTriState(state: senderEmail)
+        self._senderId = CodableTriState(state: senderId)
 
         super.init(isDocumentPreparationNeeded: isDocumentPreparationNeeded, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, areTextSignaturesEnabled: areTextSignaturesEnabled, emailSubject: emailSubject, emailMessage: emailMessage, areRemindersEnabled: areRemindersEnabled, name: name, prefillTags: prefillTags, daysValid: daysValid, externalId: externalId, templateId: templateId, externalSystemName: externalSystemName)
     }
@@ -133,12 +133,7 @@ public class SignRequest: SignRequestBase {
         signingLog = try container.decodeIfPresent(FileMini.self, forKey: .signingLog)
         status = try container.decodeIfPresent(SignRequestStatusField.self, forKey: .status)
         signFiles = try container.decodeIfPresent(SignRequestSignFilesField.self, forKey: .signFiles)
-        if let _autoExpireAt = try container.decodeIfPresent(String.self, forKey: .autoExpireAt) {
-            autoExpireAt = try Utils.Dates.dateTimeFromString(dateTime: _autoExpireAt)
-        } else {
-            autoExpireAt = nil
-        }
-
+        autoExpireAt = try container.decodeDateTimeIfPresent(forKey: .autoExpireAt)
         parentFolder = try container.decodeIfPresent(FolderMini.self, forKey: .parentFolder)
         collaboratorLevel = try container.decodeIfPresent(String.self, forKey: .collaboratorLevel)
         senderEmail = try container.decodeIfPresent(String.self, forKey: .senderEmail)
@@ -152,20 +147,17 @@ public class SignRequest: SignRequestBase {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(sourceFiles, forKey: .sourceFiles)
         try container.encodeIfPresent(signers, forKey: .signers)
-        try container.encodeIfPresent(signatureColor, forKey: .signatureColor)
+        try container.encode(field: _signatureColor.state, forKey: .signatureColor)
         try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(prepareUrl, forKey: .prepareUrl)
+        try container.encode(field: _prepareUrl.state, forKey: .prepareUrl)
         try container.encodeIfPresent(signingLog, forKey: .signingLog)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(signFiles, forKey: .signFiles)
-        if let autoExpireAt = autoExpireAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: autoExpireAt), forKey: .autoExpireAt)
-        }
-
+        try container.encodeDateTime(field: _autoExpireAt.state, forKey: .autoExpireAt)
         try container.encodeIfPresent(parentFolder, forKey: .parentFolder)
-        try container.encodeIfPresent(collaboratorLevel, forKey: .collaboratorLevel)
-        try container.encodeIfPresent(senderEmail, forKey: .senderEmail)
-        try container.encodeIfPresent(senderId, forKey: .senderId)
+        try container.encode(field: _collaboratorLevel.state, forKey: .collaboratorLevel)
+        try container.encode(field: _senderEmail.state, forKey: .senderEmail)
+        try container.encode(field: _senderId.state, forKey: .senderId)
         try super.encode(to: encoder)
     }
 

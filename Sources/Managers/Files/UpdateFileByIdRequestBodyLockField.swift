@@ -31,22 +31,14 @@ public class UpdateFileByIdRequestBodyLockField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         access = try container.decodeIfPresent(UpdateFileByIdRequestBodyLockAccessField.self, forKey: .access)
-        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
-            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
-        } else {
-            expiresAt = nil
-        }
-
+        expiresAt = try container.decodeDateTimeIfPresent(forKey: .expiresAt)
         isDownloadPrevented = try container.decodeIfPresent(Bool.self, forKey: .isDownloadPrevented)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(access, forKey: .access)
-        if let expiresAt = expiresAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: expiresAt, forKey: .expiresAt)
         try container.encodeIfPresent(isDownloadPrevented, forKey: .isDownloadPrevented)
     }
 

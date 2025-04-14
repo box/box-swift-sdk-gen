@@ -24,7 +24,7 @@ class WeblinksManagerTests: XCTestCase {
         XCTAssertTrue(weblinkById.id == weblink.id)
         XCTAssertTrue(weblinkById.url == url)
         let updatedName: String = Utils.getUUID()
-        let updatedWeblink: WebLink = try await client.webLinks.updateWebLinkById(webLinkId: weblink.id, requestBody: UpdateWebLinkByIdRequestBody(name: updatedName, sharedLink: UpdateWebLinkByIdRequestBodySharedLinkField(access: UpdateWebLinkByIdRequestBodySharedLinkAccessField.open, password: password)))
+        let updatedWeblink: WebLink = try await client.webLinks.updateWebLinkById(webLinkId: weblink.id, requestBody: UpdateWebLinkByIdRequestBody(name: updatedName, sharedLink: UpdateWebLinkByIdRequestBodySharedLinkField(access: UpdateWebLinkByIdRequestBodySharedLinkAccessField.open, password: .value(password))))
         XCTAssertTrue(updatedWeblink.name == updatedName)
         XCTAssertTrue(Utils.Strings.toString(value: updatedWeblink.sharedLink!.access!) == "open")
         try await client.webLinks.deleteWebLinkById(webLinkId: weblink.id)

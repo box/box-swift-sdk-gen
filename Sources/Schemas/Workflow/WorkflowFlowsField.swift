@@ -49,12 +49,7 @@ public class WorkflowFlowsField: Codable {
         type = try container.decodeIfPresent(WorkflowFlowsTypeField.self, forKey: .type)
         trigger = try container.decodeIfPresent(WorkflowFlowsTriggerField.self, forKey: .trigger)
         outcomes = try container.decodeIfPresent([WorkflowFlowsOutcomesField].self, forKey: .outcomes)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
     }
 
@@ -64,10 +59,7 @@ public class WorkflowFlowsField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(trigger, forKey: .trigger)
         try container.encodeIfPresent(outcomes, forKey: .outcomes)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
     }
 

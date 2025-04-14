@@ -57,12 +57,7 @@ public class WebhookInvocation: Codable {
         type = try container.decodeIfPresent(WebhookInvocationTypeField.self, forKey: .type)
         webhook = try container.decodeIfPresent(Webhook.self, forKey: .webhook)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
         trigger = try container.decodeIfPresent(WebhookInvocationTriggerField.self, forKey: .trigger)
         source = try container.decodeIfPresent(FileOrFolder.self, forKey: .source)
     }
@@ -73,10 +68,7 @@ public class WebhookInvocation: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(webhook, forKey: .webhook)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(trigger, forKey: .trigger)
         try container.encodeIfPresent(source, forKey: .source)
     }

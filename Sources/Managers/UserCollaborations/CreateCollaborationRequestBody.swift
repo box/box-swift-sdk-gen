@@ -101,12 +101,7 @@ public class CreateCollaborationRequestBody: Codable {
         role = try container.decode(CreateCollaborationRequestBodyRoleField.self, forKey: .role)
         isAccessOnly = try container.decodeIfPresent(Bool.self, forKey: .isAccessOnly)
         canViewPath = try container.decodeIfPresent(Bool.self, forKey: .canViewPath)
-        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
-            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
-        } else {
-            expiresAt = nil
-        }
-
+        expiresAt = try container.decodeDateTimeIfPresent(forKey: .expiresAt)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -116,10 +111,7 @@ public class CreateCollaborationRequestBody: Codable {
         try container.encode(role, forKey: .role)
         try container.encodeIfPresent(isAccessOnly, forKey: .isAccessOnly)
         try container.encodeIfPresent(canViewPath, forKey: .canViewPath)
-        if let expiresAt = expiresAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: expiresAt, forKey: .expiresAt)
     }
 
 }

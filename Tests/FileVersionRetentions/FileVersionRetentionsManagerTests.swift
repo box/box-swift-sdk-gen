@@ -16,7 +16,7 @@ class FileVersionRetentionsManagerTests: XCTestCase {
         XCTAssertTrue(retentionPolicy.canOwnerExtendRetention == false)
         XCTAssertTrue(Utils.Strings.toString(value: retentionPolicy.retentionType) == "modifiable")
         let folder: FolderFull = try await CommonsManager().createNewFolder()
-        let retentionPolicyAssignment: RetentionPolicyAssignment = try await client.retentionPolicyAssignments.createRetentionPolicyAssignment(requestBody: CreateRetentionPolicyAssignmentRequestBody(policyId: retentionPolicy.id, assignTo: CreateRetentionPolicyAssignmentRequestBodyAssignToField(type: CreateRetentionPolicyAssignmentRequestBodyAssignToTypeField.folder, id: folder.id)))
+        let retentionPolicyAssignment: RetentionPolicyAssignment = try await client.retentionPolicyAssignments.createRetentionPolicyAssignment(requestBody: CreateRetentionPolicyAssignmentRequestBody(policyId: retentionPolicy.id, assignTo: CreateRetentionPolicyAssignmentRequestBodyAssignToField(type: CreateRetentionPolicyAssignmentRequestBodyAssignToTypeField.folder, id: .value(folder.id))))
         XCTAssertTrue(retentionPolicyAssignment.retentionPolicy!.id == retentionPolicy.id)
         XCTAssertTrue(retentionPolicyAssignment.assignedTo!.id == folder.id)
         XCTAssertTrue(Utils.Strings.toString(value: retentionPolicyAssignment.assignedTo!.type) == Utils.Strings.toString(value: folder.type))

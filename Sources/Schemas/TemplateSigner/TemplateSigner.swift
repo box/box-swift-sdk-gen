@@ -16,7 +16,7 @@ public class TemplateSigner: Codable {
     public let inputs: [TemplateSignerInput]?
 
     /// Email address of the signer
-    public let email: String?
+    @CodableTriState public private(set) var email: String?
 
     /// Defines the role of the signer in the signature request. A role of
     /// `signer` needs to sign the document, a role `approver`
@@ -36,10 +36,10 @@ public class TemplateSigner: Codable {
     /// If provided, this value points signers that are assigned the same inputs and belongs to same signer group.
     /// A signer group is not a Box Group. It is an entity that belongs to the template itself and can only be used
     /// within Box Sign requests created from it.
-    public let signerGroupId: String?
+    @CodableTriState public private(set) var signerGroupId: String?
 
     /// A placeholder label for the signer set by the template creator to differentiate between signers.
-    public let label: String?
+    @CodableTriState public private(set) var label: String?
 
     /// An identifier for the signer. This can be used to identify a signer within the template.
     public let publicId: String?
@@ -63,14 +63,14 @@ public class TemplateSigner: Codable {
     ///     within Box Sign requests created from it.
     ///   - label: A placeholder label for the signer set by the template creator to differentiate between signers.
     ///   - publicId: An identifier for the signer. This can be used to identify a signer within the template.
-    public init(inputs: [TemplateSignerInput]? = nil, email: String? = nil, role: TemplateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, signerGroupId: String? = nil, label: String? = nil, publicId: String? = nil) {
+    public init(inputs: [TemplateSignerInput]? = nil, email: TriStateField<String> = nil, role: TemplateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, signerGroupId: TriStateField<String> = nil, label: TriStateField<String> = nil, publicId: String? = nil) {
         self.inputs = inputs
-        self.email = email
+        self._email = CodableTriState(state: email)
         self.role = role
         self.isInPerson = isInPerson
         self.order = order
-        self.signerGroupId = signerGroupId
-        self.label = label
+        self._signerGroupId = CodableTriState(state: signerGroupId)
+        self._label = CodableTriState(state: label)
         self.publicId = publicId
     }
 
@@ -89,12 +89,12 @@ public class TemplateSigner: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(inputs, forKey: .inputs)
-        try container.encodeIfPresent(email, forKey: .email)
+        try container.encode(field: _email.state, forKey: .email)
         try container.encodeIfPresent(role, forKey: .role)
         try container.encodeIfPresent(isInPerson, forKey: .isInPerson)
         try container.encodeIfPresent(order, forKey: .order)
-        try container.encodeIfPresent(signerGroupId, forKey: .signerGroupId)
-        try container.encodeIfPresent(label, forKey: .label)
+        try container.encode(field: _signerGroupId.state, forKey: .signerGroupId)
+        try container.encode(field: _label.state, forKey: .label)
         try container.encodeIfPresent(publicId, forKey: .publicId)
     }
 

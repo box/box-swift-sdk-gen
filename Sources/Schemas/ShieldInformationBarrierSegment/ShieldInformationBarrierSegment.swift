@@ -73,19 +73,9 @@ public class ShieldInformationBarrierSegment: Codable {
         shieldInformationBarrier = try container.decodeIfPresent(ShieldInformationBarrierBase.self, forKey: .shieldInformationBarrier)
         name = try container.decodeIfPresent(String.self, forKey: .name)
         description = try container.decodeIfPresent(String.self, forKey: .description)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
-        if let _updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) {
-            updatedAt = try Utils.Dates.dateTimeFromString(dateTime: _updatedAt)
-        } else {
-            updatedAt = nil
-        }
-
+        updatedAt = try container.decodeDateTimeIfPresent(forKey: .updatedAt)
         updatedBy = try container.decodeIfPresent(UserBase.self, forKey: .updatedBy)
     }
 
@@ -96,15 +86,9 @@ public class ShieldInformationBarrierSegment: Codable {
         try container.encodeIfPresent(shieldInformationBarrier, forKey: .shieldInformationBarrier)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(description, forKey: .description)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let updatedAt = updatedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: updatedAt), forKey: .updatedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: updatedAt, forKey: .updatedAt)
         try container.encodeIfPresent(updatedBy, forKey: .updatedBy)
     }
 

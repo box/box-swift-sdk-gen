@@ -23,7 +23,7 @@ public class AiStudioAgentAsk: Codable {
     public let type: AiStudioAgentAskTypeField
 
     /// Custom instructions for the agent.
-    public let customInstructions: String?
+    @CodableTriState public private(set) var customInstructions: String?
 
     public let longText: AiStudioAgentLongTextTool?
 
@@ -44,11 +44,11 @@ public class AiStudioAgentAsk: Codable {
     ///   - basicText: 
     ///   - longTextMulti: 
     ///   - basicTextMulti: 
-    public init(accessState: String, description: String, type: AiStudioAgentAskTypeField = AiStudioAgentAskTypeField.aiAgentAsk, customInstructions: String? = nil, longText: AiStudioAgentLongTextTool? = nil, basicText: AiStudioAgentBasicTextTool? = nil, longTextMulti: AiStudioAgentLongTextTool? = nil, basicTextMulti: AiStudioAgentBasicTextTool? = nil) {
+    public init(accessState: String, description: String, type: AiStudioAgentAskTypeField = AiStudioAgentAskTypeField.aiAgentAsk, customInstructions: TriStateField<String> = nil, longText: AiStudioAgentLongTextTool? = nil, basicText: AiStudioAgentBasicTextTool? = nil, longTextMulti: AiStudioAgentLongTextTool? = nil, basicTextMulti: AiStudioAgentBasicTextTool? = nil) {
         self.accessState = accessState
         self.description = description
         self.type = type
-        self.customInstructions = customInstructions
+        self._customInstructions = CodableTriState(state: customInstructions)
         self.longText = longText
         self.basicText = basicText
         self.longTextMulti = longTextMulti
@@ -72,7 +72,7 @@ public class AiStudioAgentAsk: Codable {
         try container.encode(accessState, forKey: .accessState)
         try container.encode(description, forKey: .description)
         try container.encode(type, forKey: .type)
-        try container.encodeIfPresent(customInstructions, forKey: .customInstructions)
+        try container.encode(field: _customInstructions.state, forKey: .customInstructions)
         try container.encodeIfPresent(longText, forKey: .longText)
         try container.encodeIfPresent(basicText, forKey: .basicText)
         try container.encodeIfPresent(longTextMulti, forKey: .longTextMulti)

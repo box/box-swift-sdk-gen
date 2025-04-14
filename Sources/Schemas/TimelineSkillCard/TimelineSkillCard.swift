@@ -67,12 +67,7 @@ public class TimelineSkillCard: Codable {
         skill = try container.decode(TimelineSkillCardSkillField.self, forKey: .skill)
         invocation = try container.decode(TimelineSkillCardInvocationField.self, forKey: .invocation)
         entries = try container.decode([TimelineSkillCardEntriesField].self, forKey: .entries)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
         type = try container.decode(TimelineSkillCardTypeField.self, forKey: .type)
         skillCardType = try container.decode(TimelineSkillCardSkillCardTypeField.self, forKey: .skillCardType)
         skillCardTitle = try container.decodeIfPresent(TimelineSkillCardSkillCardTitleField.self, forKey: .skillCardTitle)
@@ -84,10 +79,7 @@ public class TimelineSkillCard: Codable {
         try container.encode(skill, forKey: .skill)
         try container.encode(invocation, forKey: .invocation)
         try container.encode(entries, forKey: .entries)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encode(type, forKey: .type)
         try container.encode(skillCardType, forKey: .skillCardType)
         try container.encodeIfPresent(skillCardTitle, forKey: .skillCardTitle)

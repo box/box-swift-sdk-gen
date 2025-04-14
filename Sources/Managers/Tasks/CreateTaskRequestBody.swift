@@ -67,12 +67,7 @@ public class CreateTaskRequestBody: Codable {
         item = try container.decode(CreateTaskRequestBodyItemField.self, forKey: .item)
         action = try container.decodeIfPresent(CreateTaskRequestBodyActionField.self, forKey: .action)
         message = try container.decodeIfPresent(String.self, forKey: .message)
-        if let _dueAt = try container.decodeIfPresent(String.self, forKey: .dueAt) {
-            dueAt = try Utils.Dates.dateTimeFromString(dateTime: _dueAt)
-        } else {
-            dueAt = nil
-        }
-
+        dueAt = try container.decodeDateTimeIfPresent(forKey: .dueAt)
         completionRule = try container.decodeIfPresent(CreateTaskRequestBodyCompletionRuleField.self, forKey: .completionRule)
     }
 
@@ -81,10 +76,7 @@ public class CreateTaskRequestBody: Codable {
         try container.encode(item, forKey: .item)
         try container.encodeIfPresent(action, forKey: .action)
         try container.encodeIfPresent(message, forKey: .message)
-        if let dueAt = dueAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: dueAt), forKey: .dueAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: dueAt, forKey: .dueAt)
         try container.encodeIfPresent(completionRule, forKey: .completionRule)
     }
 

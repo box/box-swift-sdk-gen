@@ -69,18 +69,8 @@ public class IntegrationMappingTeams: IntegrationMappingBase {
         boxItem = try container.decode(FolderReference.self, forKey: .boxItem)
         integrationType = try container.decodeIfPresent(IntegrationMappingTeamsIntegrationTypeField.self, forKey: .integrationType)
         isOverriddenByManualMapping = try container.decodeIfPresent(Bool.self, forKey: .isOverriddenByManualMapping)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
-        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
-            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
-        } else {
-            modifiedAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
+        modifiedAt = try container.decodeDateTimeIfPresent(forKey: .modifiedAt)
 
         try super.init(from: decoder)
     }
@@ -91,14 +81,8 @@ public class IntegrationMappingTeams: IntegrationMappingBase {
         try container.encode(boxItem, forKey: .boxItem)
         try container.encodeIfPresent(integrationType, forKey: .integrationType)
         try container.encodeIfPresent(isOverriddenByManualMapping, forKey: .isOverriddenByManualMapping)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
-        if let modifiedAt = modifiedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
+        try container.encodeDateTimeIfPresent(field: modifiedAt, forKey: .modifiedAt)
         try super.encode(to: encoder)
     }
 

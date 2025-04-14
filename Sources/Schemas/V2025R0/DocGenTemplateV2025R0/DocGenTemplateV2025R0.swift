@@ -7,15 +7,15 @@ public class DocGenTemplateV2025R0: DocGenTemplateBaseV2025R0 {
     }
 
     /// The name of the template
-    public let fileName: String?
+    @CodableTriState public private(set) var fileName: String?
 
     /// Initializer for a DocGenTemplateV2025R0.
     ///
     /// - Parameters:
     ///   - file: 
     ///   - fileName: The name of the template
-    public init(file: FileReferenceV2025R0? = nil, fileName: String? = nil) {
-        self.fileName = fileName
+    public init(file: FileReferenceV2025R0? = nil, fileName: TriStateField<String> = nil) {
+        self._fileName = CodableTriState(state: fileName)
 
         super.init(file: file)
     }
@@ -29,7 +29,7 @@ public class DocGenTemplateV2025R0: DocGenTemplateBaseV2025R0 {
 
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(fileName, forKey: .fileName)
+        try container.encode(field: _fileName.state, forKey: .fileName)
         try super.encode(to: encoder)
     }
 

@@ -90,12 +90,7 @@ public class UpdateCollaborationByIdRequestBody: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         role = try container.decode(UpdateCollaborationByIdRequestBodyRoleField.self, forKey: .role)
         status = try container.decodeIfPresent(UpdateCollaborationByIdRequestBodyStatusField.self, forKey: .status)
-        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
-            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
-        } else {
-            expiresAt = nil
-        }
-
+        expiresAt = try container.decodeDateTimeIfPresent(forKey: .expiresAt)
         canViewPath = try container.decodeIfPresent(Bool.self, forKey: .canViewPath)
     }
 
@@ -103,10 +98,7 @@ public class UpdateCollaborationByIdRequestBody: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(role, forKey: .role)
         try container.encodeIfPresent(status, forKey: .status)
-        if let expiresAt = expiresAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: expiresAt, forKey: .expiresAt)
         try container.encodeIfPresent(canViewPath, forKey: .canViewPath)
     }
 

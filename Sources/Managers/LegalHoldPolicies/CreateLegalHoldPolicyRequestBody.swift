@@ -98,18 +98,8 @@ public class CreateLegalHoldPolicyRequestBody: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         policyName = try container.decode(String.self, forKey: .policyName)
         description = try container.decodeIfPresent(String.self, forKey: .description)
-        if let _filterStartedAt = try container.decodeIfPresent(String.self, forKey: .filterStartedAt) {
-            filterStartedAt = try Utils.Dates.dateTimeFromString(dateTime: _filterStartedAt)
-        } else {
-            filterStartedAt = nil
-        }
-
-        if let _filterEndedAt = try container.decodeIfPresent(String.self, forKey: .filterEndedAt) {
-            filterEndedAt = try Utils.Dates.dateTimeFromString(dateTime: _filterEndedAt)
-        } else {
-            filterEndedAt = nil
-        }
-
+        filterStartedAt = try container.decodeDateTimeIfPresent(forKey: .filterStartedAt)
+        filterEndedAt = try container.decodeDateTimeIfPresent(forKey: .filterEndedAt)
         isOngoing = try container.decodeIfPresent(Bool.self, forKey: .isOngoing)
     }
 
@@ -117,14 +107,8 @@ public class CreateLegalHoldPolicyRequestBody: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(policyName, forKey: .policyName)
         try container.encodeIfPresent(description, forKey: .description)
-        if let filterStartedAt = filterStartedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: filterStartedAt), forKey: .filterStartedAt)
-        }
-
-        if let filterEndedAt = filterEndedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: filterEndedAt), forKey: .filterEndedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: filterStartedAt, forKey: .filterStartedAt)
+        try container.encodeDateTimeIfPresent(field: filterEndedAt, forKey: .filterEndedAt)
         try container.encodeIfPresent(isOngoing, forKey: .isOngoing)
     }
 

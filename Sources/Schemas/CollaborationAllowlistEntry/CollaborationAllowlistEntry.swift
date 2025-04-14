@@ -54,12 +54,7 @@ public class CollaborationAllowlistEntry: Codable {
         domain = try container.decodeIfPresent(String.self, forKey: .domain)
         direction = try container.decodeIfPresent(CollaborationAllowlistEntryDirectionField.self, forKey: .direction)
         enterprise = try container.decodeIfPresent(CollaborationAllowlistEntryEnterpriseField.self, forKey: .enterprise)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -69,10 +64,7 @@ public class CollaborationAllowlistEntry: Codable {
         try container.encodeIfPresent(domain, forKey: .domain)
         try container.encodeIfPresent(direction, forKey: .direction)
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
     }
 
 }

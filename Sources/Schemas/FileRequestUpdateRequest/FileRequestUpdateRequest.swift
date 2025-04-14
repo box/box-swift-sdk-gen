@@ -116,12 +116,7 @@ public class FileRequestUpdateRequest: Codable {
         status = try container.decodeIfPresent(FileRequestUpdateRequestStatusField.self, forKey: .status)
         isEmailRequired = try container.decodeIfPresent(Bool.self, forKey: .isEmailRequired)
         isDescriptionRequired = try container.decodeIfPresent(Bool.self, forKey: .isDescriptionRequired)
-        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
-            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
-        } else {
-            expiresAt = nil
-        }
-
+        expiresAt = try container.decodeDateTimeIfPresent(forKey: .expiresAt)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -131,10 +126,7 @@ public class FileRequestUpdateRequest: Codable {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(isEmailRequired, forKey: .isEmailRequired)
         try container.encodeIfPresent(isDescriptionRequired, forKey: .isDescriptionRequired)
-        if let expiresAt = expiresAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: expiresAt, forKey: .expiresAt)
     }
 
 }

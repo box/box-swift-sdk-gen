@@ -85,24 +85,9 @@ public class TaskAssignment: Codable {
         item = try container.decodeIfPresent(FileMini.self, forKey: .item)
         assignedTo = try container.decodeIfPresent(UserMini.self, forKey: .assignedTo)
         message = try container.decodeIfPresent(String.self, forKey: .message)
-        if let _completedAt = try container.decodeIfPresent(String.self, forKey: .completedAt) {
-            completedAt = try Utils.Dates.dateTimeFromString(dateTime: _completedAt)
-        } else {
-            completedAt = nil
-        }
-
-        if let _assignedAt = try container.decodeIfPresent(String.self, forKey: .assignedAt) {
-            assignedAt = try Utils.Dates.dateTimeFromString(dateTime: _assignedAt)
-        } else {
-            assignedAt = nil
-        }
-
-        if let _remindedAt = try container.decodeIfPresent(String.self, forKey: .remindedAt) {
-            remindedAt = try Utils.Dates.dateTimeFromString(dateTime: _remindedAt)
-        } else {
-            remindedAt = nil
-        }
-
+        completedAt = try container.decodeDateTimeIfPresent(forKey: .completedAt)
+        assignedAt = try container.decodeDateTimeIfPresent(forKey: .assignedAt)
+        remindedAt = try container.decodeDateTimeIfPresent(forKey: .remindedAt)
         resolutionState = try container.decodeIfPresent(TaskAssignmentResolutionStateField.self, forKey: .resolutionState)
         assignedBy = try container.decodeIfPresent(UserMini.self, forKey: .assignedBy)
     }
@@ -114,18 +99,9 @@ public class TaskAssignment: Codable {
         try container.encodeIfPresent(item, forKey: .item)
         try container.encodeIfPresent(assignedTo, forKey: .assignedTo)
         try container.encodeIfPresent(message, forKey: .message)
-        if let completedAt = completedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: completedAt), forKey: .completedAt)
-        }
-
-        if let assignedAt = assignedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: assignedAt), forKey: .assignedAt)
-        }
-
-        if let remindedAt = remindedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: remindedAt), forKey: .remindedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: completedAt, forKey: .completedAt)
+        try container.encodeDateTimeIfPresent(field: assignedAt, forKey: .assignedAt)
+        try container.encodeDateTimeIfPresent(field: remindedAt, forKey: .remindedAt)
         try container.encodeIfPresent(resolutionState, forKey: .resolutionState)
         try container.encodeIfPresent(assignedBy, forKey: .assignedBy)
     }

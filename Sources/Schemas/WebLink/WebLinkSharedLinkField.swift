@@ -51,14 +51,14 @@ public class WebLinkSharedLinkField: Codable {
     /// extension so that the file will be saved with the right file type.
     /// 
     /// This property will be `null` for folders.
-    public let downloadUrl: String?
+    @CodableTriState public private(set) var downloadUrl: String?
 
     /// The "Custom URL" that can also be used to preview the item on Box.  Custom
     /// URLs can only be created or modified in the Box Web application.
-    public let vanityUrl: String?
+    @CodableTriState public private(set) var vanityUrl: String?
 
     /// The custom name of a shared link, as used in the `vanity_url` field.
-    public let vanityName: String?
+    @CodableTriState public private(set) var vanityName: String?
 
     /// The access level for this shared link.
     /// 
@@ -73,7 +73,7 @@ public class WebLinkSharedLinkField: Codable {
 
     /// The date and time when this link will be unshared. This field can only be
     /// set by users with paid accounts.
-    public let unsharedAt: Date?
+    @CodableTriState public private(set) var unsharedAt: Date?
 
     /// Defines if this link allows a user to preview, edit, and download an item.
     /// These permissions refer to the shared link only and
@@ -123,18 +123,18 @@ public class WebLinkSharedLinkField: Codable {
     ///   - permissions: Defines if this link allows a user to preview, edit, and download an item.
     ///     These permissions refer to the shared link only and
     ///     do not supersede permissions applied to the item itself.
-    public init(url: String, effectiveAccess: WebLinkSharedLinkEffectiveAccessField, effectivePermission: WebLinkSharedLinkEffectivePermissionField, isPasswordEnabled: Bool, downloadCount: Int64, previewCount: Int64, downloadUrl: String? = nil, vanityUrl: String? = nil, vanityName: String? = nil, access: WebLinkSharedLinkAccessField? = nil, unsharedAt: Date? = nil, permissions: WebLinkSharedLinkPermissionsField? = nil) {
+    public init(url: String, effectiveAccess: WebLinkSharedLinkEffectiveAccessField, effectivePermission: WebLinkSharedLinkEffectivePermissionField, isPasswordEnabled: Bool, downloadCount: Int64, previewCount: Int64, downloadUrl: TriStateField<String> = nil, vanityUrl: TriStateField<String> = nil, vanityName: TriStateField<String> = nil, access: WebLinkSharedLinkAccessField? = nil, unsharedAt: TriStateField<Date> = nil, permissions: WebLinkSharedLinkPermissionsField? = nil) {
         self.url = url
         self.effectiveAccess = effectiveAccess
         self.effectivePermission = effectivePermission
         self.isPasswordEnabled = isPasswordEnabled
         self.downloadCount = downloadCount
         self.previewCount = previewCount
-        self.downloadUrl = downloadUrl
-        self.vanityUrl = vanityUrl
-        self.vanityName = vanityName
+        self._downloadUrl = CodableTriState(state: downloadUrl)
+        self._vanityUrl = CodableTriState(state: vanityUrl)
+        self._vanityName = CodableTriState(state: vanityName)
         self.access = access
-        self.unsharedAt = unsharedAt
+        self._unsharedAt = CodableTriState(state: unsharedAt)
         self.permissions = permissions
     }
 
@@ -150,12 +150,7 @@ public class WebLinkSharedLinkField: Codable {
         vanityUrl = try container.decodeIfPresent(String.self, forKey: .vanityUrl)
         vanityName = try container.decodeIfPresent(String.self, forKey: .vanityName)
         access = try container.decodeIfPresent(WebLinkSharedLinkAccessField.self, forKey: .access)
-        if let _unsharedAt = try container.decodeIfPresent(String.self, forKey: .unsharedAt) {
-            unsharedAt = try Utils.Dates.dateTimeFromString(dateTime: _unsharedAt)
-        } else {
-            unsharedAt = nil
-        }
-
+        unsharedAt = try container.decodeDateTimeIfPresent(forKey: .unsharedAt)
         permissions = try container.decodeIfPresent(WebLinkSharedLinkPermissionsField.self, forKey: .permissions)
     }
 
@@ -167,14 +162,11 @@ public class WebLinkSharedLinkField: Codable {
         try container.encode(isPasswordEnabled, forKey: .isPasswordEnabled)
         try container.encode(downloadCount, forKey: .downloadCount)
         try container.encode(previewCount, forKey: .previewCount)
-        try container.encodeIfPresent(downloadUrl, forKey: .downloadUrl)
-        try container.encodeIfPresent(vanityUrl, forKey: .vanityUrl)
-        try container.encodeIfPresent(vanityName, forKey: .vanityName)
+        try container.encode(field: _downloadUrl.state, forKey: .downloadUrl)
+        try container.encode(field: _vanityUrl.state, forKey: .vanityUrl)
+        try container.encode(field: _vanityName.state, forKey: .vanityName)
         try container.encodeIfPresent(access, forKey: .access)
-        if let unsharedAt = unsharedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: unsharedAt), forKey: .unsharedAt)
-        }
-
+        try container.encodeDateTime(field: _unsharedAt.state, forKey: .unsharedAt)
         try container.encodeIfPresent(permissions, forKey: .permissions)
     }
 

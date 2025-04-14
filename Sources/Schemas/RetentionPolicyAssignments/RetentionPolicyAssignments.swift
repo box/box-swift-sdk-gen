@@ -17,7 +17,7 @@ public class RetentionPolicyAssignments: Codable {
     public let limit: Int64?
 
     /// The marker for the start of the next page of results.
-    public let nextMarker: String?
+    @CodableTriState public private(set) var nextMarker: String?
 
     /// Initializer for a RetentionPolicyAssignments.
     ///
@@ -27,10 +27,10 @@ public class RetentionPolicyAssignments: Codable {
     ///     `limit` query parameter unless that value exceeded the maximum value
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
-    public init(entries: [RetentionPolicyAssignment]? = nil, limit: Int64? = nil, nextMarker: String? = nil) {
+    public init(entries: [RetentionPolicyAssignment]? = nil, limit: Int64? = nil, nextMarker: TriStateField<String> = nil) {
         self.entries = entries
         self.limit = limit
-        self.nextMarker = nextMarker
+        self._nextMarker = CodableTriState(state: nextMarker)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -44,7 +44,7 @@ public class RetentionPolicyAssignments: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(entries, forKey: .entries)
         try container.encodeIfPresent(limit, forKey: .limit)
-        try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
+        try container.encode(field: _nextMarker.state, forKey: .nextMarker)
     }
 
 }

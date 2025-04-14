@@ -23,7 +23,7 @@ class ShieldInformationBarrierSegmentsManagerTests: XCTestCase {
         XCTAssertTrue(segmentFromApi.description! == segmentDescription)
         XCTAssertTrue(segmentFromApi.shieldInformationBarrier!.id == barrierId)
         let updatedSegmentDescription: String = "updated barrier segment description"
-        let updatedSegment: ShieldInformationBarrierSegment = try await client.shieldInformationBarrierSegments.updateShieldInformationBarrierSegmentById(shieldInformationBarrierSegmentId: segmentId, requestBody: UpdateShieldInformationBarrierSegmentByIdRequestBody(description: updatedSegmentDescription))
+        let updatedSegment: ShieldInformationBarrierSegment = try await client.shieldInformationBarrierSegments.updateShieldInformationBarrierSegmentById(shieldInformationBarrierSegmentId: segmentId, requestBody: UpdateShieldInformationBarrierSegmentByIdRequestBody(description: .value(updatedSegmentDescription)))
         XCTAssertTrue(updatedSegment.description! == updatedSegmentDescription)
         try await client.shieldInformationBarrierSegments.deleteShieldInformationBarrierSegmentById(shieldInformationBarrierSegmentId: segmentId)
         await XCTAssertThrowsErrorAsync(try await client.shieldInformationBarrierSegments.getShieldInformationBarrierSegmentById(shieldInformationBarrierSegmentId: segmentId))

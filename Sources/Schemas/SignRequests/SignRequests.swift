@@ -15,7 +15,7 @@ public class SignRequests: Codable {
     public let limit: Int64?
 
     /// The marker for the start of the next page of results.
-    public let nextMarker: String?
+    @CodableTriState public private(set) var nextMarker: String?
 
     /// A list of Box Sign requests.
     public let entries: [SignRequest]?
@@ -28,9 +28,9 @@ public class SignRequests: Codable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - entries: A list of Box Sign requests.
-    public init(limit: Int64? = nil, nextMarker: String? = nil, entries: [SignRequest]? = nil) {
+    public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, entries: [SignRequest]? = nil) {
         self.limit = limit
-        self.nextMarker = nextMarker
+        self._nextMarker = CodableTriState(state: nextMarker)
         self.entries = entries
     }
 
@@ -44,7 +44,7 @@ public class SignRequests: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(limit, forKey: .limit)
-        try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
+        try container.encode(field: _nextMarker.state, forKey: .nextMarker)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
 

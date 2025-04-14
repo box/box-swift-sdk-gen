@@ -27,7 +27,7 @@ public class ClientError: Codable {
     /// A free-form object that contains additional context
     /// about the error. The possible fields are defined on
     /// a per-endpoint basis. `message` is only one example.
-    public let contextInfo: [String: String]?
+    @CodableTriState public private(set) var contextInfo: [String: String]?
 
     /// A URL that links to more information about why this error occurred.
     public let helpUrl: String?
@@ -49,12 +49,12 @@ public class ClientError: Codable {
     ///   - helpUrl: A URL that links to more information about why this error occurred.
     ///   - requestId: A unique identifier for this response, which can be used
     ///     when contacting Box support.
-    public init(type: ClientErrorTypeField? = nil, status: Int? = nil, code: ClientErrorCodeField? = nil, message: String? = nil, contextInfo: [String: String]? = nil, helpUrl: String? = nil, requestId: String? = nil) {
+    public init(type: ClientErrorTypeField? = nil, status: Int? = nil, code: ClientErrorCodeField? = nil, message: String? = nil, contextInfo: TriStateField<[String: String]> = nil, helpUrl: String? = nil, requestId: String? = nil) {
         self.type = type
         self.status = status
         self.code = code
         self.message = message
-        self.contextInfo = contextInfo
+        self._contextInfo = CodableTriState(state: contextInfo)
         self.helpUrl = helpUrl
         self.requestId = requestId
     }
@@ -76,7 +76,7 @@ public class ClientError: Codable {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(code, forKey: .code)
         try container.encodeIfPresent(message, forKey: .message)
-        try container.encodeIfPresent(contextInfo, forKey: .contextInfo)
+        try container.encode(field: _contextInfo.state, forKey: .contextInfo)
         try container.encodeIfPresent(helpUrl, forKey: .helpUrl)
         try container.encodeIfPresent(requestId, forKey: .requestId)
     }

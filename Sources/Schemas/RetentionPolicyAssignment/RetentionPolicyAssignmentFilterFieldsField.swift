@@ -7,11 +7,11 @@ public class RetentionPolicyAssignmentFilterFieldsField: Codable {
     }
 
     /// The metadata attribute key id.
-    public let field: String?
+    @CodableTriState public private(set) var field: String?
 
     /// The metadata attribute field id. For value, only
     /// enum and multiselect types are supported.
-    public let value: String?
+    @CodableTriState public private(set) var value: String?
 
     /// Initializer for a RetentionPolicyAssignmentFilterFieldsField.
     ///
@@ -19,9 +19,9 @@ public class RetentionPolicyAssignmentFilterFieldsField: Codable {
     ///   - field: The metadata attribute key id.
     ///   - value: The metadata attribute field id. For value, only
     ///     enum and multiselect types are supported.
-    public init(field: String? = nil, value: String? = nil) {
-        self.field = field
-        self.value = value
+    public init(field: TriStateField<String> = nil, value: TriStateField<String> = nil) {
+        self._field = CodableTriState(state: field)
+        self._value = CodableTriState(state: value)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -32,8 +32,8 @@ public class RetentionPolicyAssignmentFilterFieldsField: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(field, forKey: .field)
-        try container.encodeIfPresent(value, forKey: .value)
+        try container.encode(field: _field.state, forKey: .field)
+        try container.encode(field: _value.state, forKey: .value)
     }
 
 }

@@ -59,18 +59,8 @@ public class TermsOfService: TermsOfServiceBase {
         enterprise = try container.decodeIfPresent(TermsOfServiceEnterpriseField.self, forKey: .enterprise)
         tosType = try container.decodeIfPresent(TermsOfServiceTosTypeField.self, forKey: .tosType)
         text = try container.decodeIfPresent(String.self, forKey: .text)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
-        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
-            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
-        } else {
-            modifiedAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
+        modifiedAt = try container.decodeDateTimeIfPresent(forKey: .modifiedAt)
 
         try super.init(from: decoder)
     }
@@ -81,14 +71,8 @@ public class TermsOfService: TermsOfServiceBase {
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
         try container.encodeIfPresent(tosType, forKey: .tosType)
         try container.encodeIfPresent(text, forKey: .text)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
-        if let modifiedAt = modifiedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
+        try container.encodeDateTimeIfPresent(field: modifiedAt, forKey: .modifiedAt)
         try super.encode(to: encoder)
     }
 

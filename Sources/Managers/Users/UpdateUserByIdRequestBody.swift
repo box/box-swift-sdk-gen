@@ -27,7 +27,7 @@ public class UpdateUserByIdRequestBody: Codable {
 
     /// Set this to `null` to roll the user out of the enterprise
     /// and make them a free user
-    public let enterprise: String?
+    @CodableTriState public private(set) var enterprise: String?
 
     /// Whether the user should receive an email when they
     /// are rolled out of an enterprise
@@ -100,7 +100,7 @@ public class UpdateUserByIdRequestBody: Codable {
     /// to the primary email address.
     /// 
     /// Set this value to `null` to remove the notification email.
-    public let notificationEmail: UpdateUserByIdRequestBodyNotificationEmailField?
+    @CodableTriState public private(set) var notificationEmail: UpdateUserByIdRequestBodyNotificationEmailField?
 
     /// An external identifier for an app user, which can be used to look
     /// up the user. This can be used to tie user IDs from external
@@ -156,8 +156,8 @@ public class UpdateUserByIdRequestBody: Codable {
     ///     
     ///     Note: In order to update this field, you need to request a token
     ///     using the application that created the app user.
-    public init(enterprise: String? = nil, notify: Bool? = nil, name: String? = nil, login: String? = nil, role: UpdateUserByIdRequestBodyRoleField? = nil, language: String? = nil, isSyncEnabled: Bool? = nil, jobTitle: String? = nil, phone: String? = nil, address: String? = nil, trackingCodes: [TrackingCode]? = nil, canSeeManagedUsers: Bool? = nil, timezone: String? = nil, isExternalCollabRestricted: Bool? = nil, isExemptFromDeviceLimits: Bool? = nil, isExemptFromLoginVerification: Bool? = nil, isPasswordResetRequired: Bool? = nil, status: UpdateUserByIdRequestBodyStatusField? = nil, spaceAmount: Int64? = nil, notificationEmail: UpdateUserByIdRequestBodyNotificationEmailField? = nil, externalAppUserId: String? = nil) {
-        self.enterprise = enterprise
+    public init(enterprise: TriStateField<String> = nil, notify: Bool? = nil, name: String? = nil, login: String? = nil, role: UpdateUserByIdRequestBodyRoleField? = nil, language: String? = nil, isSyncEnabled: Bool? = nil, jobTitle: String? = nil, phone: String? = nil, address: String? = nil, trackingCodes: [TrackingCode]? = nil, canSeeManagedUsers: Bool? = nil, timezone: String? = nil, isExternalCollabRestricted: Bool? = nil, isExemptFromDeviceLimits: Bool? = nil, isExemptFromLoginVerification: Bool? = nil, isPasswordResetRequired: Bool? = nil, status: UpdateUserByIdRequestBodyStatusField? = nil, spaceAmount: Int64? = nil, notificationEmail: TriStateField<UpdateUserByIdRequestBodyNotificationEmailField> = nil, externalAppUserId: String? = nil) {
+        self._enterprise = CodableTriState(state: enterprise)
         self.notify = notify
         self.name = name
         self.login = login
@@ -176,7 +176,7 @@ public class UpdateUserByIdRequestBody: Codable {
         self.isPasswordResetRequired = isPasswordResetRequired
         self.status = status
         self.spaceAmount = spaceAmount
-        self.notificationEmail = notificationEmail
+        self._notificationEmail = CodableTriState(state: notificationEmail)
         self.externalAppUserId = externalAppUserId
     }
 
@@ -207,7 +207,7 @@ public class UpdateUserByIdRequestBody: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(enterprise, forKey: .enterprise)
+        try container.encode(field: _enterprise.state, forKey: .enterprise)
         try container.encodeIfPresent(notify, forKey: .notify)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(login, forKey: .login)
@@ -226,7 +226,7 @@ public class UpdateUserByIdRequestBody: Codable {
         try container.encodeIfPresent(isPasswordResetRequired, forKey: .isPasswordResetRequired)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(spaceAmount, forKey: .spaceAmount)
-        try container.encodeIfPresent(notificationEmail, forKey: .notificationEmail)
+        try container.encode(field: _notificationEmail.state, forKey: .notificationEmail)
         try container.encodeIfPresent(externalAppUserId, forKey: .externalAppUserId)
     }
 

@@ -14,7 +14,7 @@ public class ShieldInformationBarrierSegments: Codable {
     public let limit: Int64?
 
     /// The marker for the start of the next page of results.
-    public let nextMarker: String?
+    @CodableTriState public private(set) var nextMarker: String?
 
     /// A list of shield information barrier
     /// segments
@@ -29,9 +29,9 @@ public class ShieldInformationBarrierSegments: Codable {
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - entries: A list of shield information barrier
     ///     segments
-    public init(limit: Int64? = nil, nextMarker: String? = nil, entries: [ShieldInformationBarrierSegment]? = nil) {
+    public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, entries: [ShieldInformationBarrierSegment]? = nil) {
         self.limit = limit
-        self.nextMarker = nextMarker
+        self._nextMarker = CodableTriState(state: nextMarker)
         self.entries = entries
     }
 
@@ -45,7 +45,7 @@ public class ShieldInformationBarrierSegments: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(limit, forKey: .limit)
-        try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
+        try container.encode(field: _nextMarker.state, forKey: .nextMarker)
         try container.encodeIfPresent(entries, forKey: .entries)
     }
 

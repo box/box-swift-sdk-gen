@@ -37,7 +37,7 @@ public class AiResponse: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         answer = try container.decode(String.self, forKey: .answer)
-        createdAt = try Utils.Dates.dateTimeFromString(dateTime: try container.decode(String.self, forKey: .createdAt))
+        createdAt = try container.decodeDateTime(forKey: .createdAt)
         completionReason = try container.decodeIfPresent(String.self, forKey: .completionReason)
         aiAgentInfo = try container.decodeIfPresent(AiAgentInfo.self, forKey: .aiAgentInfo)
     }
@@ -45,7 +45,7 @@ public class AiResponse: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(answer, forKey: .answer)
-        try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
+        try container.encodeDateTime(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(completionReason, forKey: .completionReason)
         try container.encodeIfPresent(aiAgentInfo, forKey: .aiAgentInfo)
     }

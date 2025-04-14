@@ -58,12 +58,7 @@ public class UpdateTaskByIdRequestBody: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         action = try container.decodeIfPresent(UpdateTaskByIdRequestBodyActionField.self, forKey: .action)
         message = try container.decodeIfPresent(String.self, forKey: .message)
-        if let _dueAt = try container.decodeIfPresent(String.self, forKey: .dueAt) {
-            dueAt = try Utils.Dates.dateTimeFromString(dateTime: _dueAt)
-        } else {
-            dueAt = nil
-        }
-
+        dueAt = try container.decodeDateTimeIfPresent(forKey: .dueAt)
         completionRule = try container.decodeIfPresent(UpdateTaskByIdRequestBodyCompletionRuleField.self, forKey: .completionRule)
     }
 
@@ -71,10 +66,7 @@ public class UpdateTaskByIdRequestBody: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(action, forKey: .action)
         try container.encodeIfPresent(message, forKey: .message)
-        if let dueAt = dueAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: dueAt), forKey: .dueAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: dueAt, forKey: .dueAt)
         try container.encodeIfPresent(completionRule, forKey: .completionRule)
     }
 

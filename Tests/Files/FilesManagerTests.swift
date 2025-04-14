@@ -56,6 +56,13 @@ class FilesManagerTests: XCTestCase {
         try await client.files.deleteFileById(fileId: updatedFile.id)
     }
 
+    public func testFileLock() async throws {
+        let file: FileFull = try await CommonsManager().uploadNewFile()
+        let fileWithLock: FileFull = try await client.files.updateFileById(fileId: file.id, requestBody: UpdateFileByIdRequestBody(lock: .value(UpdateFileByIdRequestBodyLockField(access: UpdateFileByIdRequestBodyLockAccessField.lock))), queryParams: UpdateFileByIdQueryParams(fields: ["lock"]))
+        XCTAssertTrue(fileWithLock.lock != nil)
+        try await client.files.deleteFileById(fileId: file.id)
+    }
+
     public func testCopyFile() async throws {
         let fileOrigin: FileFull = try await CommonsManager().uploadNewFile()
         let copiedFileName: String = Utils.getUUID()

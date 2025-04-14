@@ -20,7 +20,7 @@ public class AiStudioAgentTextGen: Codable {
     public let type: AiStudioAgentTextGenTypeField
 
     /// Custom instructions for the agent.
-    public let customInstructions: String?
+    @CodableTriState public private(set) var customInstructions: String?
 
     public let basicGen: AiStudioAgentBasicGenTool?
 
@@ -32,11 +32,11 @@ public class AiStudioAgentTextGen: Codable {
     ///   - type: The type of AI agent used for generating text.
     ///   - customInstructions: Custom instructions for the agent.
     ///   - basicGen: 
-    public init(accessState: String, description: String, type: AiStudioAgentTextGenTypeField = AiStudioAgentTextGenTypeField.aiAgentTextGen, customInstructions: String? = nil, basicGen: AiStudioAgentBasicGenTool? = nil) {
+    public init(accessState: String, description: String, type: AiStudioAgentTextGenTypeField = AiStudioAgentTextGenTypeField.aiAgentTextGen, customInstructions: TriStateField<String> = nil, basicGen: AiStudioAgentBasicGenTool? = nil) {
         self.accessState = accessState
         self.description = description
         self.type = type
-        self.customInstructions = customInstructions
+        self._customInstructions = CodableTriState(state: customInstructions)
         self.basicGen = basicGen
     }
 
@@ -54,7 +54,7 @@ public class AiStudioAgentTextGen: Codable {
         try container.encode(accessState, forKey: .accessState)
         try container.encode(description, forKey: .description)
         try container.encode(type, forKey: .type)
-        try container.encodeIfPresent(customInstructions, forKey: .customInstructions)
+        try container.encode(field: _customInstructions.state, forKey: .customInstructions)
         try container.encodeIfPresent(basicGen, forKey: .basicGen)
     }
 

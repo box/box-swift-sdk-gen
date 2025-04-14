@@ -64,12 +64,7 @@ public class FolderLock: Codable {
         id = try container.decodeIfPresent(String.self, forKey: .id)
         type = try container.decodeIfPresent(String.self, forKey: .type)
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
         lockedOperations = try container.decodeIfPresent(FolderLockLockedOperationsField.self, forKey: .lockedOperations)
         lockType = try container.decodeIfPresent(String.self, forKey: .lockType)
     }
@@ -80,10 +75,7 @@ public class FolderLock: Codable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(lockedOperations, forKey: .lockedOperations)
         try container.encodeIfPresent(lockType, forKey: .lockType)
     }
