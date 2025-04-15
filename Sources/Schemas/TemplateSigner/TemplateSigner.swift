@@ -11,6 +11,9 @@ public class TemplateSigner: Codable {
         case signerGroupId = "signer_group_id"
         case label
         case publicId = "public_id"
+        case isPasswordRequired = "is_password_required"
+        case isPhoneNumberRequired = "is_phone_number_required"
+        case loginRequired = "login_required"
     }
 
     public let inputs: [TemplateSignerInput]?
@@ -44,6 +47,17 @@ public class TemplateSigner: Codable {
     /// An identifier for the signer. This can be used to identify a signer within the template.
     public let publicId: String?
 
+    /// If true for signers with a defined email, the password provided when the template was created is used by default. 
+    /// If true for signers without a specified / defined email, the creator needs to provide a password when using the template.
+    @CodableTriState public private(set) var isPasswordRequired: Bool?
+
+    /// If true for signers with a defined email, the phone number provided when the template was created is used by default. 
+    /// If true for signers without a specified / defined email, the template creator needs to provide a phone number when creating a request.
+    @CodableTriState public private(set) var isPhoneNumberRequired: Bool?
+
+    /// If true, the signer is required to login to access the document.
+    @CodableTriState public private(set) var loginRequired: Bool?
+
     /// Initializer for a TemplateSigner.
     ///
     /// - Parameters:
@@ -63,7 +77,12 @@ public class TemplateSigner: Codable {
     ///     within Box Sign requests created from it.
     ///   - label: A placeholder label for the signer set by the template creator to differentiate between signers.
     ///   - publicId: An identifier for the signer. This can be used to identify a signer within the template.
-    public init(inputs: [TemplateSignerInput]? = nil, email: TriStateField<String> = nil, role: TemplateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, signerGroupId: TriStateField<String> = nil, label: TriStateField<String> = nil, publicId: String? = nil) {
+    ///   - isPasswordRequired: If true for signers with a defined email, the password provided when the template was created is used by default. 
+    ///     If true for signers without a specified / defined email, the creator needs to provide a password when using the template.
+    ///   - isPhoneNumberRequired: If true for signers with a defined email, the phone number provided when the template was created is used by default. 
+    ///     If true for signers without a specified / defined email, the template creator needs to provide a phone number when creating a request.
+    ///   - loginRequired: If true, the signer is required to login to access the document.
+    public init(inputs: [TemplateSignerInput]? = nil, email: TriStateField<String> = nil, role: TemplateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, signerGroupId: TriStateField<String> = nil, label: TriStateField<String> = nil, publicId: String? = nil, isPasswordRequired: TriStateField<Bool> = nil, isPhoneNumberRequired: TriStateField<Bool> = nil, loginRequired: TriStateField<Bool> = nil) {
         self.inputs = inputs
         self._email = CodableTriState(state: email)
         self.role = role
@@ -72,6 +91,9 @@ public class TemplateSigner: Codable {
         self._signerGroupId = CodableTriState(state: signerGroupId)
         self._label = CodableTriState(state: label)
         self.publicId = publicId
+        self._isPasswordRequired = CodableTriState(state: isPasswordRequired)
+        self._isPhoneNumberRequired = CodableTriState(state: isPhoneNumberRequired)
+        self._loginRequired = CodableTriState(state: loginRequired)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -84,6 +106,9 @@ public class TemplateSigner: Codable {
         signerGroupId = try container.decodeIfPresent(String.self, forKey: .signerGroupId)
         label = try container.decodeIfPresent(String.self, forKey: .label)
         publicId = try container.decodeIfPresent(String.self, forKey: .publicId)
+        isPasswordRequired = try container.decodeIfPresent(Bool.self, forKey: .isPasswordRequired)
+        isPhoneNumberRequired = try container.decodeIfPresent(Bool.self, forKey: .isPhoneNumberRequired)
+        loginRequired = try container.decodeIfPresent(Bool.self, forKey: .loginRequired)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -96,6 +121,9 @@ public class TemplateSigner: Codable {
         try container.encode(field: _signerGroupId.state, forKey: .signerGroupId)
         try container.encode(field: _label.state, forKey: .label)
         try container.encodeIfPresent(publicId, forKey: .publicId)
+        try container.encode(field: _isPasswordRequired.state, forKey: .isPasswordRequired)
+        try container.encode(field: _isPhoneNumberRequired.state, forKey: .isPhoneNumberRequired)
+        try container.encode(field: _loginRequired.state, forKey: .loginRequired)
     }
 
 }
