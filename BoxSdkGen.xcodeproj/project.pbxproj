@@ -13942,6 +13942,8 @@
 			dependencies = (
 			);
 			name = BoxSdkGen_watchOS;
+			packageProductDependencies = (
+			);
 			productName = BoxSdkGen_watchOS;
 			productReference = 7309936F8740B59A0DB3CC08 /* BoxSdkGen.framework */;
 			productType = "com.apple.product-type.framework";
@@ -13958,6 +13960,8 @@
 			dependencies = (
 			);
 			name = BoxSdkGen_macOS;
+			packageProductDependencies = (
+			);
 			productName = BoxSdkGen_macOS;
 			productReference = D43BE4A7FB166BBAA1023A07 /* BoxSdkGen.framework */;
 			productType = "com.apple.product-type.framework";
@@ -13974,6 +13978,8 @@
 			dependencies = (
 			);
 			name = BoxSdkGen_tvOS;
+			packageProductDependencies = (
+			);
 			productName = BoxSdkGen_tvOS;
 			productReference = C3AE1758A329122017298588 /* BoxSdkGen.framework */;
 			productType = "com.apple.product-type.framework";
@@ -13990,6 +13996,8 @@
 			dependencies = (
 			);
 			name = BoxSdkGen_visionOS;
+			packageProductDependencies = (
+			);
 			productName = BoxSdkGen_visionOS;
 			productReference = 10EAA57F74A06B7070AD0271 /* BoxSdkGen.framework */;
 			productType = "com.apple.product-type.framework";
@@ -14006,6 +14014,8 @@
 			dependencies = (
 			);
 			name = BoxSdkGen_iOS;
+			packageProductDependencies = (
+			);
 			productName = BoxSdkGen_iOS;
 			productReference = 73E5F4A42A0A227676CC6618 /* BoxSdkGen.framework */;
 			productType = "com.apple.product-type.framework";
@@ -14030,6 +14040,8 @@
 				en,
 			);
 			mainGroup = 47F467DE023DFEDC03202AF8;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 54;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
