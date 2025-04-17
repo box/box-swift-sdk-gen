@@ -16,7 +16,8 @@ class FilesManagerTests: XCTestCase {
 
     public func testGetFileThumbnail() async throws {
         let thumbnailFileName: String = Utils.getUUID()
-        let thumbnailContentStream: InputStream = Utils.generateByteStream(size: 1024 * 1024)
+        let thumbnailBuffer: Data = Utils.generateByteBuffer(size: 1024 * 1024)
+        let thumbnailContentStream: InputStream = Utils.generateByteStreamFromBuffer(buffer: thumbnailBuffer)
         let thumbnailFile: FileFull = try await uploadFile(fileName: thumbnailFileName, fileStream: thumbnailContentStream)
         let destinationPathString: String = "\(Utils.temporaryDirectoryPath())\(Utils.getUUID())"
         let destinationPath: URL = URL(path: destinationPathString)
