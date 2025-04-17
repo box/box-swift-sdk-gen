@@ -39,7 +39,7 @@ public class MetadataFull: Metadata {
     /// application.
     public let typeVersion: Int64?
 
-    public let extraData: [String: String]?
+    public let extraData: [String: AnyCodable]?
 
     /// Initializer for a MetadataFull.
     ///
@@ -63,7 +63,7 @@ public class MetadataFull: Metadata {
     ///     internal system property and should not be used by a client
     ///     application.
     ///   - extraData: 
-    public init(parent: String? = nil, template: String? = nil, scope: String? = nil, version: Int64? = nil, canEdit: Bool? = nil, id: String? = nil, type: String? = nil, typeVersion: Int64? = nil, extraData: [String: String]? = nil) {
+    public init(parent: String? = nil, template: String? = nil, scope: String? = nil, version: Int64? = nil, canEdit: Bool? = nil, id: String? = nil, type: String? = nil, typeVersion: Int64? = nil, extraData: [String: AnyCodable]? = nil) {
         self.canEdit = canEdit
         self.id = id
         self.type = type
@@ -85,9 +85,9 @@ public class MetadataFull: Metadata {
         let additionalKeys: [CodingKeys] = allKeys.filter({ (parent: CodingKeys) in !definedKeys.contains(where: { (child: CodingKeys) in child.stringValue == parent.stringValue }) })
 
         if !additionalKeys.isEmpty {
-            var additionalProperties: [String: String] = [:]
+            var additionalProperties: [String: AnyCodable] = [:]
             for key in additionalKeys {
-                if let value = try? container.decode(String.self, forKey: key) {
+                if let value = try? container.decode(AnyCodable.self, forKey: key) {
                     additionalProperties[key.stringValue] = value
                 }
 

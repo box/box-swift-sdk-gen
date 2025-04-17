@@ -1,4 +1,4 @@
 import Foundation
 
 /// A generic event source type.
-public typealias GenericSource = [String: String]
+public typealias GenericSource = [String: AnyCodable]

@@ -20,6 +20,13 @@ extension Int: ParameterConvertible {
     }
 }
 
+extension Double: ParameterConvertible {
+    /// Query parameter value
+    public var paramValue: String? {
+        return String(self)
+    }
+}
+
 extension Bool: ParameterConvertible {
     /// Query parameter value
     public var paramValue: String? {
