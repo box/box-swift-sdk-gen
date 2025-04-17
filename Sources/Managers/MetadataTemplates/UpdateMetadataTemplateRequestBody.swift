@@ -18,7 +18,7 @@ public class UpdateMetadataTemplateRequestBody: Codable {
 
     /// The data for the operation. This will vary depending on the
     /// operation being performed.
-    public let data: [String: String]?
+    public let data: [String: AnyCodable]?
 
     /// For operations that affect a single field this defines the key of
     /// the field that is affected.
@@ -63,7 +63,7 @@ public class UpdateMetadataTemplateRequestBody: Codable {
     ///     defines the key of the option that is affected.
     ///   - multiSelectOptionKeys: For operations that affect multiple multi select options this
     ///     defines the keys of the options that are affected.
-    public init(op: UpdateMetadataTemplateRequestBodyOpField, data: [String: String]? = nil, fieldKey: String? = nil, fieldKeys: [String]? = nil, enumOptionKey: String? = nil, enumOptionKeys: [String]? = nil, multiSelectOptionKey: String? = nil, multiSelectOptionKeys: [String]? = nil) {
+    public init(op: UpdateMetadataTemplateRequestBodyOpField, data: [String: AnyCodable]? = nil, fieldKey: String? = nil, fieldKeys: [String]? = nil, enumOptionKey: String? = nil, enumOptionKeys: [String]? = nil, multiSelectOptionKey: String? = nil, multiSelectOptionKeys: [String]? = nil) {
         self.op = op
         self.data = data
         self.fieldKey = fieldKey
@@ -77,7 +77,7 @@ public class UpdateMetadataTemplateRequestBody: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         op = try container.decode(UpdateMetadataTemplateRequestBodyOpField.self, forKey: .op)
-        data = try container.decodeIfPresent([String: String].self, forKey: .data)
+        data = try container.decodeIfPresent([String: AnyCodable].self, forKey: .data)
         fieldKey = try container.decodeIfPresent(String.self, forKey: .fieldKey)
         fieldKeys = try container.decodeIfPresent([String].self, forKey: .fieldKeys)
         enumOptionKey = try container.decodeIfPresent(String.self, forKey: .enumOptionKey)

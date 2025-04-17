@@ -1,3 +1,3 @@
 import Foundation
 
-public typealias CreateFileMetadataByIdRequestBody = [String: String]
+public typealias CreateFileMetadataByIdRequestBody = [String: AnyCodable]

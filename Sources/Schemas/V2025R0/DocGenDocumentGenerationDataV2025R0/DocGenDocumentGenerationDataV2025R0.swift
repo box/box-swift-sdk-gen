@@ -10,14 +10,14 @@ public class DocGenDocumentGenerationDataV2025R0: Codable {
     /// File name of the output file.
     public let generatedFileName: String
 
-    public let userInput: [String: String]
+    public let userInput: [String: AnyCodable]
 
     /// Initializer for a DocGenDocumentGenerationDataV2025R0.
     ///
     /// - Parameters:
     ///   - generatedFileName: File name of the output file.
     ///   - userInput: 
-    public init(generatedFileName: String, userInput: [String: String]) {
+    public init(generatedFileName: String, userInput: [String: AnyCodable]) {
         self.generatedFileName = generatedFileName
         self.userInput = userInput
     }
@@ -25,7 +25,7 @@ public class DocGenDocumentGenerationDataV2025R0: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         generatedFileName = try container.decode(String.self, forKey: .generatedFileName)
-        userInput = try container.decode([String: String].self, forKey: .userInput)
+        userInput = try container.decode([String: AnyCodable].self, forKey: .userInput)
     }
 
     public func encode(to encoder: Encoder) throws {

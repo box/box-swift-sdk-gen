@@ -38,7 +38,7 @@ public class MetadataQuery: Codable {
     /// Set of arguments corresponding to the parameters specified in the
     /// `query`. The type of each parameter used in the `query_params` must match
     /// the type of the corresponding metadata template field.
-    public let queryParams: [String: String]?
+    public let queryParams: [String: AnyCodable]?
 
     /// A list of template fields and directions to sort the metadata query
     /// results by.
@@ -121,7 +121,7 @@ public class MetadataQuery: Codable {
     ///     of the metadata instance identified by the `scope` and `templateKey` plus
     ///     the field specified by the `field` name. Multiple fields for the same
     ///     `scope` and `templateKey` can be defined.
-    public init(from: String, ancestorFolderId: String, query: String? = nil, queryParams: [String: String]? = nil, orderBy: [MetadataQueryOrderByField]? = nil, limit: Int64? = nil, marker: String? = nil, fields: [String]? = nil) {
+    public init(from: String, ancestorFolderId: String, query: String? = nil, queryParams: [String: AnyCodable]? = nil, orderBy: [MetadataQueryOrderByField]? = nil, limit: Int64? = nil, marker: String? = nil, fields: [String]? = nil) {
         self.from = from
         self.ancestorFolderId = ancestorFolderId
         self.query = query
@@ -137,7 +137,7 @@ public class MetadataQuery: Codable {
         from = try container.decode(String.self, forKey: .from)
         ancestorFolderId = try container.decode(String.self, forKey: .ancestorFolderId)
         query = try container.decodeIfPresent(String.self, forKey: .query)
-        queryParams = try container.decodeIfPresent([String: String].self, forKey: .queryParams)
+        queryParams = try container.decodeIfPresent([String: AnyCodable].self, forKey: .queryParams)
         orderBy = try container.decodeIfPresent([MetadataQueryOrderByField].self, forKey: .orderBy)
         limit = try container.decodeIfPresent(Int64.self, forKey: .limit)
         marker = try container.decodeIfPresent(String.self, forKey: .marker)

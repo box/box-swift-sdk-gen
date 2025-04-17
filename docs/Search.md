@@ -18,7 +18,10 @@ This operation is performed by calling function `searchByMetadataQuery`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/post-metadata-queries-execute-read/).
 
-*Currently we don't have an example for calling `searchByMetadataQuery` in integration tests*
+<!-- sample post_metadata_queries_execute_read -->
+```
+try await client.search.searchByMetadataQuery(requestBody: MetadataQuery(ancestorFolderId: "0", from: searchFrom, query: "name = :name AND age < :age AND birthDate >= :birthDate AND countryCode = :countryCode AND sports = :sports", queryParams: ["name": "John", "age": 50, "birthDate": "2001-01-01T02:20:10.120Z", "countryCode": "US", "sports": ["basketball", "tennis"]]))
+```
 
 ### Arguments
 
