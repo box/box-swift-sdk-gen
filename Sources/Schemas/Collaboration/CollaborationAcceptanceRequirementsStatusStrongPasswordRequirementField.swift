@@ -14,7 +14,7 @@ public class CollaborationAcceptanceRequirementsStatusStrongPasswordRequirementF
     /// Whether or not the user has a strong and not exposed password set
     /// for their account. The field is `null` when a strong password is
     /// not required.
-    public let userHasStrongPassword: Bool?
+    @CodableTriState public private(set) var userHasStrongPassword: Bool?
 
     /// Initializer for a CollaborationAcceptanceRequirementsStatusStrongPasswordRequirementField.
     ///
@@ -25,9 +25,9 @@ public class CollaborationAcceptanceRequirementsStatusStrongPasswordRequirementF
     ///   - userHasStrongPassword: Whether or not the user has a strong and not exposed password set
     ///     for their account. The field is `null` when a strong password is
     ///     not required.
-    public init(enterpriseHasStrongPasswordRequiredForExternalUsers: Bool? = nil, userHasStrongPassword: Bool? = nil) {
+    public init(enterpriseHasStrongPasswordRequiredForExternalUsers: Bool? = nil, userHasStrongPassword: TriStateField<Bool> = nil) {
         self.enterpriseHasStrongPasswordRequiredForExternalUsers = enterpriseHasStrongPasswordRequiredForExternalUsers
-        self.userHasStrongPassword = userHasStrongPassword
+        self._userHasStrongPassword = CodableTriState(state: userHasStrongPassword)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -39,7 +39,7 @@ public class CollaborationAcceptanceRequirementsStatusStrongPasswordRequirementF
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(enterpriseHasStrongPasswordRequiredForExternalUsers, forKey: .enterpriseHasStrongPasswordRequiredForExternalUsers)
-        try container.encodeIfPresent(userHasStrongPassword, forKey: .userHasStrongPassword)
+        try container.encode(field: _userHasStrongPassword.state, forKey: .userHasStrongPassword)
     }
 
 }

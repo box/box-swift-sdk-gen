@@ -28,7 +28,7 @@ public class UpdateWebLinkByIdRequestBodySharedLinkField: Codable {
     /// long and include a number, upper case letter, or
     /// a non-numeric or non-alphabetic character.
     /// A password can only be set when `access` is set to `open`.
-    public let password: String?
+    @CodableTriState public private(set) var password: String?
 
     /// Defines a custom vanity name to use in the shared link URL,
     /// for example `https://app.box.com/v/my-shared-link`.
@@ -75,9 +75,9 @@ public class UpdateWebLinkByIdRequestBodySharedLinkField: Codable {
     ///     expire. This field can only be set by
     ///     users with paid accounts. The value must be greater than the
     ///     current date and time.
-    public init(access: UpdateWebLinkByIdRequestBodySharedLinkAccessField? = nil, password: String? = nil, vanityName: String? = nil, unsharedAt: Date? = nil) {
+    public init(access: UpdateWebLinkByIdRequestBodySharedLinkAccessField? = nil, password: TriStateField<String> = nil, vanityName: String? = nil, unsharedAt: Date? = nil) {
         self.access = access
-        self.password = password
+        self._password = CodableTriState(state: password)
         self.vanityName = vanityName
         self.unsharedAt = unsharedAt
     }
@@ -87,23 +87,15 @@ public class UpdateWebLinkByIdRequestBodySharedLinkField: Codable {
         access = try container.decodeIfPresent(UpdateWebLinkByIdRequestBodySharedLinkAccessField.self, forKey: .access)
         password = try container.decodeIfPresent(String.self, forKey: .password)
         vanityName = try container.decodeIfPresent(String.self, forKey: .vanityName)
-        if let _unsharedAt = try container.decodeIfPresent(String.self, forKey: .unsharedAt) {
-            unsharedAt = try Utils.Dates.dateTimeFromString(dateTime: _unsharedAt)
-        } else {
-            unsharedAt = nil
-        }
-
+        unsharedAt = try container.decodeDateTimeIfPresent(forKey: .unsharedAt)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(access, forKey: .access)
-        try container.encodeIfPresent(password, forKey: .password)
+        try container.encode(field: _password.state, forKey: .password)
         try container.encodeIfPresent(vanityName, forKey: .vanityName)
-        if let unsharedAt = unsharedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: unsharedAt), forKey: .unsharedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: unsharedAt, forKey: .unsharedAt)
     }
 
 }

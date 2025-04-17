@@ -18,7 +18,7 @@ class RetentionPolicyAssignmentsManagerTests: XCTestCase {
         let file: FileFull = files.entries![0]
         let newVersions: Files = try await client.uploads.uploadFileVersion(fileId: file.id, requestBody: UploadFileVersionRequestBody(attributes: UploadFileVersionRequestBodyAttributesField(name: Utils.getUUID()), file: Utils.generateByteStream(size: 20)))
         let newVersion: FileFull = newVersions.entries![0]
-        let retentionPolicyAssignment: RetentionPolicyAssignment = try await client.retentionPolicyAssignments.createRetentionPolicyAssignment(requestBody: CreateRetentionPolicyAssignmentRequestBody(policyId: retentionPolicy.id, assignTo: CreateRetentionPolicyAssignmentRequestBodyAssignToField(type: CreateRetentionPolicyAssignmentRequestBodyAssignToTypeField.folder, id: folder.id)))
+        let retentionPolicyAssignment: RetentionPolicyAssignment = try await client.retentionPolicyAssignments.createRetentionPolicyAssignment(requestBody: CreateRetentionPolicyAssignmentRequestBody(policyId: retentionPolicy.id, assignTo: CreateRetentionPolicyAssignmentRequestBodyAssignToField(type: CreateRetentionPolicyAssignmentRequestBodyAssignToTypeField.folder, id: .value(folder.id))))
         XCTAssertTrue(retentionPolicyAssignment.retentionPolicy!.id == retentionPolicy.id)
         XCTAssertTrue(retentionPolicyAssignment.assignedTo!.id == folder.id)
         let retentionPolicyAssignmentById: RetentionPolicyAssignment = try await client.retentionPolicyAssignments.getRetentionPolicyAssignmentById(retentionPolicyAssignmentId: retentionPolicyAssignment.id)

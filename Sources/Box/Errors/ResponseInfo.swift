@@ -56,7 +56,7 @@ extension ResponseInfo {
         var dict = [String: Any]()
         dict["statusCode"] = statusCode
         dict["headers"] = dataSanitizer.sanitizeHeaders(headers: headers)
-        dict["body"] = try? JsonUtils.sdToJson(data: dataSanitizer.sanitizeBody(body: body!))
+        dict["rawBody"] = rawBody
         dict["code"] = code
         dict["contextInfo"] = contextInfo
         dict["requestId"] = requestId

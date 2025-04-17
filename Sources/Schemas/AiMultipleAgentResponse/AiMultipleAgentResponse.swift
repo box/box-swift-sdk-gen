@@ -18,10 +18,10 @@ public class AiMultipleAgentResponse: Codable {
     public let limit: Int64?
 
     /// The marker for the start of the next page of results.
-    public let nextMarker: String?
+    @CodableTriState public private(set) var nextMarker: String?
 
     /// The marker for the start of the previous page of results.
-    public let prevMarker: String?
+    @CodableTriState public private(set) var prevMarker: String?
 
     /// Initializer for a AiMultipleAgentResponse.
     ///
@@ -32,11 +32,11 @@ public class AiMultipleAgentResponse: Codable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
-    public init(entries: [AiSingleAgentResponseFull], limit: Int64? = nil, nextMarker: String? = nil, prevMarker: String? = nil) {
+    public init(entries: [AiSingleAgentResponseFull], limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil) {
         self.entries = entries
         self.limit = limit
-        self.nextMarker = nextMarker
-        self.prevMarker = prevMarker
+        self._nextMarker = CodableTriState(state: nextMarker)
+        self._prevMarker = CodableTriState(state: prevMarker)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -51,8 +51,8 @@ public class AiMultipleAgentResponse: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(entries, forKey: .entries)
         try container.encodeIfPresent(limit, forKey: .limit)
-        try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
-        try container.encodeIfPresent(prevMarker, forKey: .prevMarker)
+        try container.encode(field: _nextMarker.state, forKey: .nextMarker)
+        try container.encode(field: _prevMarker.state, forKey: .prevMarker)
     }
 
 }

@@ -18,10 +18,10 @@ public class Users: Codable {
     public let limit: Int64?
 
     /// The marker for the start of the next page of results.
-    public let nextMarker: String?
+    @CodableTriState public private(set) var nextMarker: String?
 
     /// The marker for the start of the previous page of results.
-    public let prevMarker: String?
+    @CodableTriState public private(set) var prevMarker: String?
 
     /// One greater than the offset of the last entry in the entire collection.
     /// The total number of entries in the collection may be less than
@@ -71,10 +71,10 @@ public class Users: Codable {
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
     ///   - entries: A list of users
-    public init(limit: Int64? = nil, nextMarker: String? = nil, prevMarker: String? = nil, totalCount: Int64? = nil, offset: Int64? = nil, order: [UsersOrderField]? = nil, entries: [UserFull]? = nil) {
+    public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, totalCount: Int64? = nil, offset: Int64? = nil, order: [UsersOrderField]? = nil, entries: [UserFull]? = nil) {
         self.limit = limit
-        self.nextMarker = nextMarker
-        self.prevMarker = prevMarker
+        self._nextMarker = CodableTriState(state: nextMarker)
+        self._prevMarker = CodableTriState(state: prevMarker)
         self.totalCount = totalCount
         self.offset = offset
         self.order = order
@@ -95,8 +95,8 @@ public class Users: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(limit, forKey: .limit)
-        try container.encodeIfPresent(nextMarker, forKey: .nextMarker)
-        try container.encodeIfPresent(prevMarker, forKey: .prevMarker)
+        try container.encode(field: _nextMarker.state, forKey: .nextMarker)
+        try container.encode(field: _prevMarker.state, forKey: .prevMarker)
         try container.encodeIfPresent(totalCount, forKey: .totalCount)
         try container.encodeIfPresent(offset, forKey: .offset)
         try container.encodeIfPresent(order, forKey: .order)

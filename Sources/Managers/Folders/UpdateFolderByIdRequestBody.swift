@@ -34,7 +34,7 @@ public class UpdateFolderByIdRequestBody: Codable {
 
     public let sharedLink: UpdateFolderByIdRequestBodySharedLinkField?
 
-    public let folderUploadEmail: UpdateFolderByIdRequestBodyFolderUploadEmailField?
+    @CodableTriState public private(set) var folderUploadEmail: UpdateFolderByIdRequestBodyFolderUploadEmailField?
 
     /// The tags for this item. These tags are shown in
     /// the Box web app and mobile apps next to an item.
@@ -62,7 +62,7 @@ public class UpdateFolderByIdRequestBody: Codable {
     /// the folder from all collections.
     /// 
     /// [1]: e://get-collections
-    public let collections: [UpdateFolderByIdRequestBodyCollectionsField]?
+    @CodableTriState public private(set) var collections: [UpdateFolderByIdRequestBodyCollectionsField]?
 
     /// Restricts collaborators who are not the owner of
     /// this folder from viewing other collaborations on
@@ -121,17 +121,17 @@ public class UpdateFolderByIdRequestBody: Codable {
     ///     When setting this field to `false`, it is required
     ///     to also set `can_non_owners_invite_collaborators` to
     ///     `false` if it has not already been set.
-    public init(name: String? = nil, description: String? = nil, syncState: UpdateFolderByIdRequestBodySyncStateField? = nil, canNonOwnersInvite: Bool? = nil, parent: UpdateFolderByIdRequestBodyParentField? = nil, sharedLink: UpdateFolderByIdRequestBodySharedLinkField? = nil, folderUploadEmail: UpdateFolderByIdRequestBodyFolderUploadEmailField? = nil, tags: [String]? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, collections: [UpdateFolderByIdRequestBodyCollectionsField]? = nil, canNonOwnersViewCollaborators: Bool? = nil) {
+    public init(name: String? = nil, description: String? = nil, syncState: UpdateFolderByIdRequestBodySyncStateField? = nil, canNonOwnersInvite: Bool? = nil, parent: UpdateFolderByIdRequestBodyParentField? = nil, sharedLink: UpdateFolderByIdRequestBodySharedLinkField? = nil, folderUploadEmail: TriStateField<UpdateFolderByIdRequestBodyFolderUploadEmailField> = nil, tags: [String]? = nil, isCollaborationRestrictedToEnterprise: Bool? = nil, collections: TriStateField<[UpdateFolderByIdRequestBodyCollectionsField]> = nil, canNonOwnersViewCollaborators: Bool? = nil) {
         self.name = name
         self.description = description
         self.syncState = syncState
         self.canNonOwnersInvite = canNonOwnersInvite
         self.parent = parent
         self.sharedLink = sharedLink
-        self.folderUploadEmail = folderUploadEmail
+        self._folderUploadEmail = CodableTriState(state: folderUploadEmail)
         self.tags = tags
         self.isCollaborationRestrictedToEnterprise = isCollaborationRestrictedToEnterprise
-        self.collections = collections
+        self._collections = CodableTriState(state: collections)
         self.canNonOwnersViewCollaborators = canNonOwnersViewCollaborators
     }
 
@@ -158,10 +158,10 @@ public class UpdateFolderByIdRequestBody: Codable {
         try container.encodeIfPresent(canNonOwnersInvite, forKey: .canNonOwnersInvite)
         try container.encodeIfPresent(parent, forKey: .parent)
         try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
-        try container.encodeIfPresent(folderUploadEmail, forKey: .folderUploadEmail)
+        try container.encode(field: _folderUploadEmail.state, forKey: .folderUploadEmail)
         try container.encodeIfPresent(tags, forKey: .tags)
         try container.encodeIfPresent(isCollaborationRestrictedToEnterprise, forKey: .isCollaborationRestrictedToEnterprise)
-        try container.encodeIfPresent(collections, forKey: .collections)
+        try container.encode(field: _collections.state, forKey: .collections)
         try container.encodeIfPresent(canNonOwnersViewCollaborators, forKey: .canNonOwnersViewCollaborators)
     }
 

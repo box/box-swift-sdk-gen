@@ -21,7 +21,7 @@ public class AiStudioAgentExtract: Codable {
     public let type: AiStudioAgentExtractTypeField
 
     /// Custom instructions for the agent.
-    public let customInstructions: String?
+    @CodableTriState public private(set) var customInstructions: String?
 
     public let longText: AiStudioAgentLongTextTool?
 
@@ -36,11 +36,11 @@ public class AiStudioAgentExtract: Codable {
     ///   - customInstructions: Custom instructions for the agent.
     ///   - longText: 
     ///   - basicText: 
-    public init(accessState: String, description: String, type: AiStudioAgentExtractTypeField = AiStudioAgentExtractTypeField.aiAgentExtract, customInstructions: String? = nil, longText: AiStudioAgentLongTextTool? = nil, basicText: AiStudioAgentBasicTextTool? = nil) {
+    public init(accessState: String, description: String, type: AiStudioAgentExtractTypeField = AiStudioAgentExtractTypeField.aiAgentExtract, customInstructions: TriStateField<String> = nil, longText: AiStudioAgentLongTextTool? = nil, basicText: AiStudioAgentBasicTextTool? = nil) {
         self.accessState = accessState
         self.description = description
         self.type = type
-        self.customInstructions = customInstructions
+        self._customInstructions = CodableTriState(state: customInstructions)
         self.longText = longText
         self.basicText = basicText
     }
@@ -60,7 +60,7 @@ public class AiStudioAgentExtract: Codable {
         try container.encode(accessState, forKey: .accessState)
         try container.encode(description, forKey: .description)
         try container.encode(type, forKey: .type)
-        try container.encodeIfPresent(customInstructions, forKey: .customInstructions)
+        try container.encode(field: _customInstructions.state, forKey: .customInstructions)
         try container.encodeIfPresent(longText, forKey: .longText)
         try container.encodeIfPresent(basicText, forKey: .basicText)
     }

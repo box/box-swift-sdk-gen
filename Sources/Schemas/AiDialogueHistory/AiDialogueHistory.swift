@@ -33,22 +33,14 @@ public class AiDialogueHistory: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         prompt = try container.decodeIfPresent(String.self, forKey: .prompt)
         answer = try container.decodeIfPresent(String.self, forKey: .answer)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(prompt, forKey: .prompt)
         try container.encodeIfPresent(answer, forKey: .answer)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
     }
 
 }

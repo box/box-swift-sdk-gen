@@ -31,21 +31,13 @@ public class UploadFileVersionRequestBodyAttributesField: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
-        if let _contentModifiedAt = try container.decodeIfPresent(String.self, forKey: .contentModifiedAt) {
-            contentModifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _contentModifiedAt)
-        } else {
-            contentModifiedAt = nil
-        }
-
+        contentModifiedAt = try container.decodeDateTimeIfPresent(forKey: .contentModifiedAt)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
-        if let contentModifiedAt = contentModifiedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: contentModifiedAt), forKey: .contentModifiedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: contentModifiedAt, forKey: .contentModifiedAt)
     }
 
 }

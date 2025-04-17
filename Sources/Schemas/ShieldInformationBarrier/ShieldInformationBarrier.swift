@@ -79,26 +79,11 @@ public class ShieldInformationBarrier: Codable {
         type = try container.decodeIfPresent(ShieldInformationBarrierTypeField.self, forKey: .type)
         enterprise = try container.decodeIfPresent(EnterpriseBase.self, forKey: .enterprise)
         status = try container.decodeIfPresent(ShieldInformationBarrierStatusField.self, forKey: .status)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
-        if let _updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) {
-            updatedAt = try Utils.Dates.dateTimeFromString(dateTime: _updatedAt)
-        } else {
-            updatedAt = nil
-        }
-
+        updatedAt = try container.decodeDateTimeIfPresent(forKey: .updatedAt)
         updatedBy = try container.decodeIfPresent(UserBase.self, forKey: .updatedBy)
-        if let _enabledAt = try container.decodeIfPresent(String.self, forKey: .enabledAt) {
-            enabledAt = try Utils.Dates.dateTimeFromString(dateTime: _enabledAt)
-        } else {
-            enabledAt = nil
-        }
-
+        enabledAt = try container.decodeDateTimeIfPresent(forKey: .enabledAt)
         enabledBy = try container.decodeIfPresent(UserBase.self, forKey: .enabledBy)
     }
 
@@ -108,20 +93,11 @@ public class ShieldInformationBarrier: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
         try container.encodeIfPresent(status, forKey: .status)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let updatedAt = updatedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: updatedAt), forKey: .updatedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: updatedAt, forKey: .updatedAt)
         try container.encodeIfPresent(updatedBy, forKey: .updatedBy)
-        if let enabledAt = enabledAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: enabledAt), forKey: .enabledAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: enabledAt, forKey: .enabledAt)
         try container.encodeIfPresent(enabledBy, forKey: .enabledBy)
     }
 

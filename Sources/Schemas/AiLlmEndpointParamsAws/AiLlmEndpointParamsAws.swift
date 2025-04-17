@@ -15,12 +15,12 @@ public class AiLlmEndpointParamsAws: Codable {
     /// What sampling temperature to use, between 0 and 1. Higher values like 0.8 will make the output more random, 
     /// while lower values like 0.2 will make it more focused and deterministic. 
     /// We generally recommend altering this or `top_p` but not both.
-    public let temperature: Double?
+    @CodableTriState public private(set) var temperature: Double?
 
     /// An alternative to sampling with temperature, called nucleus sampling, where the model considers the results 
     /// of the tokens with `top_p` probability mass. So 0.1 means only the tokens comprising the top 10% probability 
     /// mass are considered. We generally recommend altering this or temperature but not both.
-    public let topP: Double?
+    @CodableTriState public private(set) var topP: Double?
 
     /// Initializer for a AiLlmEndpointParamsAws.
     ///
@@ -33,10 +33,10 @@ public class AiLlmEndpointParamsAws: Codable {
     ///   - topP: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results 
     ///     of the tokens with `top_p` probability mass. So 0.1 means only the tokens comprising the top 10% probability 
     ///     mass are considered. We generally recommend altering this or temperature but not both.
-    public init(type: AiLlmEndpointParamsAwsTypeField = AiLlmEndpointParamsAwsTypeField.awsParams, temperature: Double? = nil, topP: Double? = nil) {
+    public init(type: AiLlmEndpointParamsAwsTypeField = AiLlmEndpointParamsAwsTypeField.awsParams, temperature: TriStateField<Double> = nil, topP: TriStateField<Double> = nil) {
         self.type = type
-        self.temperature = temperature
-        self.topP = topP
+        self._temperature = CodableTriState(state: temperature)
+        self._topP = CodableTriState(state: topP)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -49,8 +49,8 @@ public class AiLlmEndpointParamsAws: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type, forKey: .type)
-        try container.encodeIfPresent(temperature, forKey: .temperature)
-        try container.encodeIfPresent(topP, forKey: .topP)
+        try container.encode(field: _temperature.state, forKey: .temperature)
+        try container.encode(field: _topP.state, forKey: .topP)
     }
 
 }

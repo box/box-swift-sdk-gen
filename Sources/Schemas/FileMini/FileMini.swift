@@ -40,7 +40,7 @@ public class FileMini: FileBase {
     ///   - sha1: The SHA1 hash of the file. This can be used to compare the contents
     ///     of a file on Box with a local file.
     ///   - fileVersion: 
-    public init(id: String, etag: String? = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil) {
+    public init(id: String, etag: TriStateField<String> = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil) {
         self.sequenceId = sequenceId
         self.name = name
         self.sha1 = sha1

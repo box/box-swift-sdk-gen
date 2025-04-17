@@ -31,17 +31,17 @@ public class FileVersion: FileVersionMini {
     public let modifiedBy: UserMini?
 
     /// When the file version object was trashed.
-    public let trashedAt: Date?
+    @CodableTriState public private(set) var trashedAt: Date?
 
     public let trashedBy: UserMini?
 
     /// When the file version was restored from the trash.
-    public let restoredAt: Date?
+    @CodableTriState public private(set) var restoredAt: Date?
 
     public let restoredBy: UserMini?
 
     /// When the file version object will be permanently deleted.
-    public let purgedAt: Date?
+    @CodableTriState public private(set) var purgedAt: Date?
 
     public let uploaderDisplayName: String?
 
@@ -62,17 +62,17 @@ public class FileVersion: FileVersionMini {
     ///   - restoredBy: 
     ///   - purgedAt: When the file version object will be permanently deleted.
     ///   - uploaderDisplayName: 
-    public init(id: String, type: FileVersionBaseTypeField = FileVersionBaseTypeField.fileVersion, sha1: String? = nil, name: String? = nil, size: Int64? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, modifiedBy: UserMini? = nil, trashedAt: Date? = nil, trashedBy: UserMini? = nil, restoredAt: Date? = nil, restoredBy: UserMini? = nil, purgedAt: Date? = nil, uploaderDisplayName: String? = nil) {
+    public init(id: String, type: FileVersionBaseTypeField = FileVersionBaseTypeField.fileVersion, sha1: String? = nil, name: String? = nil, size: Int64? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, modifiedBy: UserMini? = nil, trashedAt: TriStateField<Date> = nil, trashedBy: UserMini? = nil, restoredAt: TriStateField<Date> = nil, restoredBy: UserMini? = nil, purgedAt: TriStateField<Date> = nil, uploaderDisplayName: String? = nil) {
         self.name = name
         self.size = size
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
         self.modifiedBy = modifiedBy
-        self.trashedAt = trashedAt
+        self._trashedAt = CodableTriState(state: trashedAt)
         self.trashedBy = trashedBy
-        self.restoredAt = restoredAt
+        self._restoredAt = CodableTriState(state: restoredAt)
         self.restoredBy = restoredBy
-        self.purgedAt = purgedAt
+        self._purgedAt = CodableTriState(state: purgedAt)
         self.uploaderDisplayName = uploaderDisplayName
 
         super.init(id: id, type: type, sha1: sha1)
@@ -82,39 +82,14 @@ public class FileVersion: FileVersionMini {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decodeIfPresent(String.self, forKey: .name)
         size = try container.decodeIfPresent(Int64.self, forKey: .size)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
-        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
-            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
-        } else {
-            modifiedAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
+        modifiedAt = try container.decodeDateTimeIfPresent(forKey: .modifiedAt)
         modifiedBy = try container.decodeIfPresent(UserMini.self, forKey: .modifiedBy)
-        if let _trashedAt = try container.decodeIfPresent(String.self, forKey: .trashedAt) {
-            trashedAt = try Utils.Dates.dateTimeFromString(dateTime: _trashedAt)
-        } else {
-            trashedAt = nil
-        }
-
+        trashedAt = try container.decodeDateTimeIfPresent(forKey: .trashedAt)
         trashedBy = try container.decodeIfPresent(UserMini.self, forKey: .trashedBy)
-        if let _restoredAt = try container.decodeIfPresent(String.self, forKey: .restoredAt) {
-            restoredAt = try Utils.Dates.dateTimeFromString(dateTime: _restoredAt)
-        } else {
-            restoredAt = nil
-        }
-
+        restoredAt = try container.decodeDateTimeIfPresent(forKey: .restoredAt)
         restoredBy = try container.decodeIfPresent(UserMini.self, forKey: .restoredBy)
-        if let _purgedAt = try container.decodeIfPresent(String.self, forKey: .purgedAt) {
-            purgedAt = try Utils.Dates.dateTimeFromString(dateTime: _purgedAt)
-        } else {
-            purgedAt = nil
-        }
-
+        purgedAt = try container.decodeDateTimeIfPresent(forKey: .purgedAt)
         uploaderDisplayName = try container.decodeIfPresent(String.self, forKey: .uploaderDisplayName)
 
         try super.init(from: decoder)
@@ -124,29 +99,14 @@ public class FileVersion: FileVersionMini {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(size, forKey: .size)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
-        if let modifiedAt = modifiedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
+        try container.encodeDateTimeIfPresent(field: modifiedAt, forKey: .modifiedAt)
         try container.encodeIfPresent(modifiedBy, forKey: .modifiedBy)
-        if let trashedAt = trashedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: trashedAt), forKey: .trashedAt)
-        }
-
+        try container.encodeDateTime(field: _trashedAt.state, forKey: .trashedAt)
         try container.encodeIfPresent(trashedBy, forKey: .trashedBy)
-        if let restoredAt = restoredAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: restoredAt), forKey: .restoredAt)
-        }
-
+        try container.encodeDateTime(field: _restoredAt.state, forKey: .restoredAt)
         try container.encodeIfPresent(restoredBy, forKey: .restoredBy)
-        if let purgedAt = purgedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: purgedAt), forKey: .purgedAt)
-        }
-
+        try container.encodeDateTime(field: _purgedAt.state, forKey: .purgedAt)
         try container.encodeIfPresent(uploaderDisplayName, forKey: .uploaderDisplayName)
         try super.encode(to: encoder)
     }

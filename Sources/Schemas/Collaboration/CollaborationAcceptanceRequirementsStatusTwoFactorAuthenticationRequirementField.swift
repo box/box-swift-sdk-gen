@@ -14,7 +14,7 @@ public class CollaborationAcceptanceRequirementsStatusTwoFactorAuthenticationReq
     /// Whether or not the user has two-factor authentication
     /// enabled. The field is `null` when two-factor
     /// authentication is not required.
-    public let userHasTwoFactorAuthenticationEnabled: Bool?
+    @CodableTriState public private(set) var userHasTwoFactorAuthenticationEnabled: Bool?
 
     /// Initializer for a CollaborationAcceptanceRequirementsStatusTwoFactorAuthenticationRequirementField.
     ///
@@ -25,9 +25,9 @@ public class CollaborationAcceptanceRequirementsStatusTwoFactorAuthenticationReq
     ///   - userHasTwoFactorAuthenticationEnabled: Whether or not the user has two-factor authentication
     ///     enabled. The field is `null` when two-factor
     ///     authentication is not required.
-    public init(enterpriseHasTwoFactorAuthEnabled: Bool? = nil, userHasTwoFactorAuthenticationEnabled: Bool? = nil) {
+    public init(enterpriseHasTwoFactorAuthEnabled: Bool? = nil, userHasTwoFactorAuthenticationEnabled: TriStateField<Bool> = nil) {
         self.enterpriseHasTwoFactorAuthEnabled = enterpriseHasTwoFactorAuthEnabled
-        self.userHasTwoFactorAuthenticationEnabled = userHasTwoFactorAuthenticationEnabled
+        self._userHasTwoFactorAuthenticationEnabled = CodableTriState(state: userHasTwoFactorAuthenticationEnabled)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -39,7 +39,7 @@ public class CollaborationAcceptanceRequirementsStatusTwoFactorAuthenticationReq
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(enterpriseHasTwoFactorAuthEnabled, forKey: .enterpriseHasTwoFactorAuthEnabled)
-        try container.encodeIfPresent(userHasTwoFactorAuthenticationEnabled, forKey: .userHasTwoFactorAuthenticationEnabled)
+        try container.encode(field: _userHasTwoFactorAuthenticationEnabled.state, forKey: .userHasTwoFactorAuthenticationEnabled)
     }
 
 }

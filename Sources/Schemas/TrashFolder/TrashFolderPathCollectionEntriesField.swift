@@ -16,10 +16,10 @@ public class TrashFolderPathCollectionEntriesField: Codable {
     public let id: String?
 
     /// This field is null for the Trash folder
-    public let sequenceId: String?
+    @CodableTriState public private(set) var sequenceId: String?
 
     /// This field is null for the Trash folder
-    public let etag: String?
+    @CodableTriState public private(set) var etag: String?
 
     /// The name of the Trash folder.
     public let name: String?
@@ -32,11 +32,11 @@ public class TrashFolderPathCollectionEntriesField: Codable {
     ///   - sequenceId: This field is null for the Trash folder
     ///   - etag: This field is null for the Trash folder
     ///   - name: The name of the Trash folder.
-    public init(type: TrashFolderPathCollectionEntriesTypeField? = nil, id: String? = nil, sequenceId: String? = nil, etag: String? = nil, name: String? = nil) {
+    public init(type: TrashFolderPathCollectionEntriesTypeField? = nil, id: String? = nil, sequenceId: TriStateField<String> = nil, etag: TriStateField<String> = nil, name: String? = nil) {
         self.type = type
         self.id = id
-        self.sequenceId = sequenceId
-        self.etag = etag
+        self._sequenceId = CodableTriState(state: sequenceId)
+        self._etag = CodableTriState(state: etag)
         self.name = name
     }
 
@@ -53,8 +53,8 @@ public class TrashFolderPathCollectionEntriesField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(sequenceId, forKey: .sequenceId)
-        try container.encodeIfPresent(etag, forKey: .etag)
+        try container.encode(field: _sequenceId.state, forKey: .sequenceId)
+        try container.encode(field: _etag.state, forKey: .etag)
         try container.encodeIfPresent(name, forKey: .name)
     }
 

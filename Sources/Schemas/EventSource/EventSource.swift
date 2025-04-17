@@ -31,7 +31,7 @@ public class EventSource: Codable {
     /// have a classification set.
     public let classification: EventSourceClassificationField?
 
-    public let parent: FolderMini?
+    @CodableTriState public private(set) var parent: FolderMini?
 
     public let ownedBy: UserMini?
 
@@ -51,12 +51,12 @@ public class EventSource: Codable {
     ///     have a classification set.
     ///   - parent: 
     ///   - ownedBy: 
-    public init(itemType: EventSourceItemTypeField, itemId: String, itemName: String, classification: EventSourceClassificationField? = nil, parent: FolderMini? = nil, ownedBy: UserMini? = nil) {
+    public init(itemType: EventSourceItemTypeField, itemId: String, itemName: String, classification: EventSourceClassificationField? = nil, parent: TriStateField<FolderMini> = nil, ownedBy: UserMini? = nil) {
         self.itemType = itemType
         self.itemId = itemId
         self.itemName = itemName
         self.classification = classification
-        self.parent = parent
+        self._parent = CodableTriState(state: parent)
         self.ownedBy = ownedBy
     }
 
@@ -76,7 +76,7 @@ public class EventSource: Codable {
         try container.encode(itemId, forKey: .itemId)
         try container.encode(itemName, forKey: .itemName)
         try container.encodeIfPresent(classification, forKey: .classification)
-        try container.encodeIfPresent(parent, forKey: .parent)
+        try container.encode(field: _parent.state, forKey: .parent)
         try container.encodeIfPresent(ownedBy, forKey: .ownedBy)
     }
 

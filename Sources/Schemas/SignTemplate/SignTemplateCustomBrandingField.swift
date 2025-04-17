@@ -9,16 +9,16 @@ public class SignTemplateCustomBrandingField: Codable {
     }
 
     /// Name of the company
-    public let companyName: String?
+    @CodableTriState public private(set) var companyName: String?
 
     /// Custom branding logo URI in the form of a base64 image.
-    public let logoUri: String?
+    @CodableTriState public private(set) var logoUri: String?
 
     /// Custom branding color in hex.
-    public let brandingColor: String?
+    @CodableTriState public private(set) var brandingColor: String?
 
     /// Content of the email footer.
-    public let emailFooterText: String?
+    @CodableTriState public private(set) var emailFooterText: String?
 
     /// Initializer for a SignTemplateCustomBrandingField.
     ///
@@ -27,11 +27,11 @@ public class SignTemplateCustomBrandingField: Codable {
     ///   - logoUri: Custom branding logo URI in the form of a base64 image.
     ///   - brandingColor: Custom branding color in hex.
     ///   - emailFooterText: Content of the email footer.
-    public init(companyName: String? = nil, logoUri: String? = nil, brandingColor: String? = nil, emailFooterText: String? = nil) {
-        self.companyName = companyName
-        self.logoUri = logoUri
-        self.brandingColor = brandingColor
-        self.emailFooterText = emailFooterText
+    public init(companyName: TriStateField<String> = nil, logoUri: TriStateField<String> = nil, brandingColor: TriStateField<String> = nil, emailFooterText: TriStateField<String> = nil) {
+        self._companyName = CodableTriState(state: companyName)
+        self._logoUri = CodableTriState(state: logoUri)
+        self._brandingColor = CodableTriState(state: brandingColor)
+        self._emailFooterText = CodableTriState(state: emailFooterText)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -44,10 +44,10 @@ public class SignTemplateCustomBrandingField: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(companyName, forKey: .companyName)
-        try container.encodeIfPresent(logoUri, forKey: .logoUri)
-        try container.encodeIfPresent(brandingColor, forKey: .brandingColor)
-        try container.encodeIfPresent(emailFooterText, forKey: .emailFooterText)
+        try container.encode(field: _companyName.state, forKey: .companyName)
+        try container.encode(field: _logoUri.state, forKey: .logoUri)
+        try container.encode(field: _brandingColor.state, forKey: .brandingColor)
+        try container.encode(field: _emailFooterText.state, forKey: .emailFooterText)
     }
 
 }

@@ -85,19 +85,9 @@ public class AiSingleAgentResponse: Codable {
         accessState = try container.decode(String.self, forKey: .accessState)
         type = try container.decodeIfPresent(AiSingleAgentResponseTypeField.self, forKey: .type)
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
         modifiedBy = try container.decodeIfPresent(UserBase.self, forKey: .modifiedBy)
-        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
-            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
-        } else {
-            modifiedAt = nil
-        }
-
+        modifiedAt = try container.decodeDateTimeIfPresent(forKey: .modifiedAt)
         iconReference = try container.decodeIfPresent(String.self, forKey: .iconReference)
         allowedEntities = try container.decodeIfPresent([AiAgentAllowedEntity].self, forKey: .allowedEntities)
     }
@@ -110,15 +100,9 @@ public class AiSingleAgentResponse: Codable {
         try container.encode(accessState, forKey: .accessState)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedBy, forKey: .modifiedBy)
-        if let modifiedAt = modifiedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: modifiedAt, forKey: .modifiedAt)
         try container.encodeIfPresent(iconReference, forKey: .iconReference)
         try container.encodeIfPresent(allowedEntities, forKey: .allowedEntities)
     }

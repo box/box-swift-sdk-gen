@@ -15,7 +15,7 @@ class IntegrationMappingsManagerTests: XCTestCase {
         let partnerItemId: String = "1"
         let userId: String = Utils.getEnvironmentVariable(name: "USER_ID")
         let userClient: BoxClient = CommonsManager().getDefaultClientWithUserSubject(userId: userId)
-        await XCTAssertThrowsErrorAsync(try await userClient.integrationMappings.createSlackIntegrationMapping(requestBody: IntegrationMappingSlackCreateRequest(partnerItem: IntegrationMappingPartnerItemSlack(id: partnerItemId, slackOrgId: slackOrgId), boxItem: IntegrationMappingBoxItemSlack(id: folder.id))))
+        await XCTAssertThrowsErrorAsync(try await userClient.integrationMappings.createSlackIntegrationMapping(requestBody: IntegrationMappingSlackCreateRequest(partnerItem: IntegrationMappingPartnerItemSlack(id: partnerItemId, slackOrgId: .value(slackOrgId)), boxItem: IntegrationMappingBoxItemSlack(id: folder.id))))
         let integrationMappings: IntegrationMappings = try await userClient.integrationMappings.getSlackIntegrationMapping()
         XCTAssertTrue(integrationMappings.entries!.count == 0)
         let integrationMappingId: String = "123456"

@@ -58,11 +58,11 @@ public class TrashWebLinkRestored: Codable {
 
     /// The time at which this bookmark was put in the
     /// trash - becomes `null` after restore.
-    public let trashedAt: String?
+    @CodableTriState public private(set) var trashedAt: String?
 
     /// The time at which this bookmark will be permanently
     /// deleted - becomes `null` after restore.
-    public let purgedAt: String?
+    @CodableTriState public private(set) var purgedAt: String?
 
     public let createdBy: UserMini?
 
@@ -73,7 +73,7 @@ public class TrashWebLinkRestored: Codable {
     /// The shared link for this bookmark. This will
     /// be `null` if a bookmark had been trashed, even though the original shared
     /// link does become active again.
-    public let sharedLink: String?
+    @CodableTriState public private(set) var sharedLink: String?
 
     /// Whether this item is deleted or not. Values include `active`,
     /// `trashed` if the file has been moved to the trash, and `deleted` if
@@ -110,7 +110,7 @@ public class TrashWebLinkRestored: Codable {
     ///   - itemStatus: Whether this item is deleted or not. Values include `active`,
     ///     `trashed` if the file has been moved to the trash, and `deleted` if
     ///     the file has been permanently deleted
-    public init(sequenceId: String, pathCollection: TrashWebLinkRestoredPathCollectionField, type: TrashWebLinkRestoredTypeField? = nil, id: String? = nil, etag: String? = nil, name: String? = nil, url: String? = nil, parent: FolderMini? = nil, description: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: String? = nil, purgedAt: String? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: String? = nil, itemStatus: TrashWebLinkRestoredItemStatusField? = nil) {
+    public init(sequenceId: String, pathCollection: TrashWebLinkRestoredPathCollectionField, type: TrashWebLinkRestoredTypeField? = nil, id: String? = nil, etag: String? = nil, name: String? = nil, url: String? = nil, parent: FolderMini? = nil, description: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: TriStateField<String> = nil, purgedAt: TriStateField<String> = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: TriStateField<String> = nil, itemStatus: TrashWebLinkRestoredItemStatusField? = nil) {
         self.sequenceId = sequenceId
         self.pathCollection = pathCollection
         self.type = type
@@ -122,12 +122,12 @@ public class TrashWebLinkRestored: Codable {
         self.description = description
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
-        self.trashedAt = trashedAt
-        self.purgedAt = purgedAt
+        self._trashedAt = CodableTriState(state: trashedAt)
+        self._purgedAt = CodableTriState(state: purgedAt)
         self.createdBy = createdBy
         self.modifiedBy = modifiedBy
         self.ownedBy = ownedBy
-        self.sharedLink = sharedLink
+        self._sharedLink = CodableTriState(state: sharedLink)
         self.itemStatus = itemStatus
     }
 
@@ -142,18 +142,8 @@ public class TrashWebLinkRestored: Codable {
         url = try container.decodeIfPresent(String.self, forKey: .url)
         parent = try container.decodeIfPresent(FolderMini.self, forKey: .parent)
         description = try container.decodeIfPresent(String.self, forKey: .description)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
-        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
-            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
-        } else {
-            modifiedAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
+        modifiedAt = try container.decodeDateTimeIfPresent(forKey: .modifiedAt)
         trashedAt = try container.decodeIfPresent(String.self, forKey: .trashedAt)
         purgedAt = try container.decodeIfPresent(String.self, forKey: .purgedAt)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
@@ -174,20 +164,14 @@ public class TrashWebLinkRestored: Codable {
         try container.encodeIfPresent(url, forKey: .url)
         try container.encodeIfPresent(parent, forKey: .parent)
         try container.encodeIfPresent(description, forKey: .description)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
-        if let modifiedAt = modifiedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
-        }
-
-        try container.encodeIfPresent(trashedAt, forKey: .trashedAt)
-        try container.encodeIfPresent(purgedAt, forKey: .purgedAt)
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
+        try container.encodeDateTimeIfPresent(field: modifiedAt, forKey: .modifiedAt)
+        try container.encode(field: _trashedAt.state, forKey: .trashedAt)
+        try container.encode(field: _purgedAt.state, forKey: .purgedAt)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(modifiedBy, forKey: .modifiedBy)
         try container.encodeIfPresent(ownedBy, forKey: .ownedBy)
-        try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
+        try container.encode(field: _sharedLink.state, forKey: .sharedLink)
         try container.encodeIfPresent(itemStatus, forKey: .itemStatus)
     }
 

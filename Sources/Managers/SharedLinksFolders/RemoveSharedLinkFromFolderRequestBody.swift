@@ -7,15 +7,15 @@ public class RemoveSharedLinkFromFolderRequestBody: Codable {
 
     /// By setting this value to `null`, the shared link
     /// is removed from the folder.
-    public let sharedLink: RemoveSharedLinkFromFolderRequestBodySharedLinkField?
+    @CodableTriState public private(set) var sharedLink: RemoveSharedLinkFromFolderRequestBodySharedLinkField?
 
     /// Initializer for a RemoveSharedLinkFromFolderRequestBody.
     ///
     /// - Parameters:
     ///   - sharedLink: By setting this value to `null`, the shared link
     ///     is removed from the folder.
-    public init(sharedLink: RemoveSharedLinkFromFolderRequestBodySharedLinkField? = nil) {
-        self.sharedLink = sharedLink
+    public init(sharedLink: TriStateField<RemoveSharedLinkFromFolderRequestBodySharedLinkField> = nil) {
+        self._sharedLink = CodableTriState(state: sharedLink)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -25,7 +25,7 @@ public class RemoveSharedLinkFromFolderRequestBody: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
+        try container.encode(field: _sharedLink.state, forKey: .sharedLink)
     }
 
 }

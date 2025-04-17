@@ -100,12 +100,7 @@ public class ZipDownload: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         downloadUrl = try container.decodeIfPresent(String.self, forKey: .downloadUrl)
         statusUrl = try container.decodeIfPresent(String.self, forKey: .statusUrl)
-        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
-            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
-        } else {
-            expiresAt = nil
-        }
-
+        expiresAt = try container.decodeDateTimeIfPresent(forKey: .expiresAt)
         nameConflicts = try container.decodeIfPresent([[ZipDownloadNameConflictsField]].self, forKey: .nameConflicts)
     }
 
@@ -113,10 +108,7 @@ public class ZipDownload: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(downloadUrl, forKey: .downloadUrl)
         try container.encodeIfPresent(statusUrl, forKey: .statusUrl)
-        if let expiresAt = expiresAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: expiresAt, forKey: .expiresAt)
         try container.encodeIfPresent(nameConflicts, forKey: .nameConflicts)
     }
 

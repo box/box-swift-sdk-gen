@@ -9,7 +9,7 @@ public class RetentionPolicyAssignmentAssignedToField: Codable {
     /// The ID of the folder, enterprise, or metadata template
     /// the policy is assigned to.
     /// Set to null or omit when type is set to enterprise.
-    public let id: String?
+    @CodableTriState public private(set) var id: String?
 
     /// The type of resource the policy is assigned to.
     public let type: RetentionPolicyAssignmentAssignedToTypeField?
@@ -21,8 +21,8 @@ public class RetentionPolicyAssignmentAssignedToField: Codable {
     ///     the policy is assigned to.
     ///     Set to null or omit when type is set to enterprise.
     ///   - type: The type of resource the policy is assigned to.
-    public init(id: String? = nil, type: RetentionPolicyAssignmentAssignedToTypeField? = nil) {
-        self.id = id
+    public init(id: TriStateField<String> = nil, type: RetentionPolicyAssignmentAssignedToTypeField? = nil) {
+        self._id = CodableTriState(state: id)
         self.type = type
     }
 
@@ -34,7 +34,7 @@ public class RetentionPolicyAssignmentAssignedToField: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
+        try container.encode(field: _id.state, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
     }
 

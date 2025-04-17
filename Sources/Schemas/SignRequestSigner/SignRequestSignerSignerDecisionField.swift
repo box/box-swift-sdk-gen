@@ -14,7 +14,7 @@ public class SignRequestSignerSignerDecisionField: Codable {
     public let finalizedAt: Date?
 
     /// Additional info about the decision, such as the decline reason from the signer.
-    public let additionalInfo: String?
+    @CodableTriState public private(set) var additionalInfo: String?
 
     /// Initializer for a SignRequestSignerSignerDecisionField.
     ///
@@ -22,32 +22,24 @@ public class SignRequestSignerSignerDecisionField: Codable {
     ///   - type: Type of decision made by the signer.
     ///   - finalizedAt: Date and Time that the decision was made.
     ///   - additionalInfo: Additional info about the decision, such as the decline reason from the signer.
-    public init(type: SignRequestSignerSignerDecisionTypeField? = nil, finalizedAt: Date? = nil, additionalInfo: String? = nil) {
+    public init(type: SignRequestSignerSignerDecisionTypeField? = nil, finalizedAt: Date? = nil, additionalInfo: TriStateField<String> = nil) {
         self.type = type
         self.finalizedAt = finalizedAt
-        self.additionalInfo = additionalInfo
+        self._additionalInfo = CodableTriState(state: additionalInfo)
     }
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         type = try container.decodeIfPresent(SignRequestSignerSignerDecisionTypeField.self, forKey: .type)
-        if let _finalizedAt = try container.decodeIfPresent(String.self, forKey: .finalizedAt) {
-            finalizedAt = try Utils.Dates.dateTimeFromString(dateTime: _finalizedAt)
-        } else {
-            finalizedAt = nil
-        }
-
+        finalizedAt = try container.decodeDateTimeIfPresent(forKey: .finalizedAt)
         additionalInfo = try container.decodeIfPresent(String.self, forKey: .additionalInfo)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(type, forKey: .type)
-        if let finalizedAt = finalizedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: finalizedAt), forKey: .finalizedAt)
-        }
-
-        try container.encodeIfPresent(additionalInfo, forKey: .additionalInfo)
+        try container.encodeDateTimeIfPresent(field: finalizedAt, forKey: .finalizedAt)
+        try container.encode(field: _additionalInfo.state, forKey: .additionalInfo)
     }
 
 }

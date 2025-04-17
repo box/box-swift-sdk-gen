@@ -20,10 +20,10 @@ public class IntegrationMappingPartnerItemSlack: Codable {
     public let type: IntegrationMappingPartnerItemSlackTypeField
 
     /// ID of the Slack workspace with which the item is associated. Use this parameter if Box for Slack is installed at a workspace level. Do not use `slack_org_id` at the same time.
-    public let slackWorkspaceId: String?
+    @CodableTriState public private(set) var slackWorkspaceId: String?
 
     /// ID of the Slack org with which the item is associated. Use this parameter if Box for Slack is installed at the org level. Do not use `slack_workspace_id` at the same time.
-    public let slackOrgId: String?
+    @CodableTriState public private(set) var slackOrgId: String?
 
     /// Initializer for a IntegrationMappingPartnerItemSlack.
     ///
@@ -32,11 +32,11 @@ public class IntegrationMappingPartnerItemSlack: Codable {
     ///   - type: Type of the mapped item referenced in `id`
     ///   - slackWorkspaceId: ID of the Slack workspace with which the item is associated. Use this parameter if Box for Slack is installed at a workspace level. Do not use `slack_org_id` at the same time.
     ///   - slackOrgId: ID of the Slack org with which the item is associated. Use this parameter if Box for Slack is installed at the org level. Do not use `slack_workspace_id` at the same time.
-    public init(id: String, type: IntegrationMappingPartnerItemSlackTypeField = IntegrationMappingPartnerItemSlackTypeField.channel, slackWorkspaceId: String? = nil, slackOrgId: String? = nil) {
+    public init(id: String, type: IntegrationMappingPartnerItemSlackTypeField = IntegrationMappingPartnerItemSlackTypeField.channel, slackWorkspaceId: TriStateField<String> = nil, slackOrgId: TriStateField<String> = nil) {
         self.id = id
         self.type = type
-        self.slackWorkspaceId = slackWorkspaceId
-        self.slackOrgId = slackOrgId
+        self._slackWorkspaceId = CodableTriState(state: slackWorkspaceId)
+        self._slackOrgId = CodableTriState(state: slackOrgId)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -51,8 +51,8 @@ public class IntegrationMappingPartnerItemSlack: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(type, forKey: .type)
-        try container.encodeIfPresent(slackWorkspaceId, forKey: .slackWorkspaceId)
-        try container.encodeIfPresent(slackOrgId, forKey: .slackOrgId)
+        try container.encode(field: _slackWorkspaceId.state, forKey: .slackWorkspaceId)
+        try container.encode(field: _slackOrgId.state, forKey: .slackOrgId)
     }
 
 }

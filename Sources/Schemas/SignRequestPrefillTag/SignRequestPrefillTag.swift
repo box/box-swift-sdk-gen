@@ -11,16 +11,16 @@ public class SignRequestPrefillTag: Codable {
     }
 
     /// This references the ID of a specific tag contained in a file of the signature request.
-    public let documentTagId: String?
+    @CodableTriState public private(set) var documentTagId: String?
 
     /// Text prefill value
-    public let textValue: String?
+    @CodableTriState public private(set) var textValue: String?
 
     /// Checkbox prefill value
-    public let checkboxValue: Bool?
+    @CodableTriState public private(set) var checkboxValue: Bool?
 
     /// Date prefill value
-    public let dateValue: Date?
+    @CodableTriState public private(set) var dateValue: Date?
 
     /// Initializer for a SignRequestPrefillTag.
     ///
@@ -29,11 +29,11 @@ public class SignRequestPrefillTag: Codable {
     ///   - textValue: Text prefill value
     ///   - checkboxValue: Checkbox prefill value
     ///   - dateValue: Date prefill value
-    public init(documentTagId: String? = nil, textValue: String? = nil, checkboxValue: Bool? = nil, dateValue: Date? = nil) {
-        self.documentTagId = documentTagId
-        self.textValue = textValue
-        self.checkboxValue = checkboxValue
-        self.dateValue = dateValue
+    public init(documentTagId: TriStateField<String> = nil, textValue: TriStateField<String> = nil, checkboxValue: TriStateField<Bool> = nil, dateValue: TriStateField<Date> = nil) {
+        self._documentTagId = CodableTriState(state: documentTagId)
+        self._textValue = CodableTriState(state: textValue)
+        self._checkboxValue = CodableTriState(state: checkboxValue)
+        self._dateValue = CodableTriState(state: dateValue)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -41,23 +41,15 @@ public class SignRequestPrefillTag: Codable {
         documentTagId = try container.decodeIfPresent(String.self, forKey: .documentTagId)
         textValue = try container.decodeIfPresent(String.self, forKey: .textValue)
         checkboxValue = try container.decodeIfPresent(Bool.self, forKey: .checkboxValue)
-        if let _dateValue = try container.decodeIfPresent(String.self, forKey: .dateValue) {
-            dateValue = try Utils.Dates.dateFromString(date: _dateValue)
-        } else {
-            dateValue = nil
-        }
-
+        dateValue = try container.decodeDateIfPresent(forKey: .dateValue)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(documentTagId, forKey: .documentTagId)
-        try container.encodeIfPresent(textValue, forKey: .textValue)
-        try container.encodeIfPresent(checkboxValue, forKey: .checkboxValue)
-        if let dateValue = dateValue {
-            try container.encode(Utils.Dates.dateToString(date: dateValue), forKey: .dateValue)
-        }
-
+        try container.encode(field: _documentTagId.state, forKey: .documentTagId)
+        try container.encode(field: _textValue.state, forKey: .textValue)
+        try container.encode(field: _checkboxValue.state, forKey: .checkboxValue)
+        try container.encodeDate(field: _dateValue.state, forKey: .dateValue)
     }
 
 }

@@ -29,7 +29,7 @@ public class FolderMini: FolderBase {
     ///   - type: `folder`
     ///   - sequenceId: 
     ///   - name: The name of the folder.
-    public init(id: String, etag: String? = nil, type: FolderBaseTypeField = FolderBaseTypeField.folder, sequenceId: String? = nil, name: String? = nil) {
+    public init(id: String, etag: TriStateField<String> = nil, type: FolderBaseTypeField = FolderBaseTypeField.folder, sequenceId: String? = nil, name: String? = nil) {
         self.sequenceId = sequenceId
         self.name = name
 

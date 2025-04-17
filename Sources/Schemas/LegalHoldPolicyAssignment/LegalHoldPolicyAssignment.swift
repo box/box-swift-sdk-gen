@@ -62,18 +62,8 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
         legalHoldPolicy = try container.decodeIfPresent(LegalHoldPolicyMini.self, forKey: .legalHoldPolicy)
         assignedTo = try container.decodeIfPresent(FileOrFolderOrWebLink.self, forKey: .assignedTo)
         assignedBy = try container.decodeIfPresent(UserMini.self, forKey: .assignedBy)
-        if let _assignedAt = try container.decodeIfPresent(String.self, forKey: .assignedAt) {
-            assignedAt = try Utils.Dates.dateTimeFromString(dateTime: _assignedAt)
-        } else {
-            assignedAt = nil
-        }
-
-        if let _deletedAt = try container.decodeIfPresent(String.self, forKey: .deletedAt) {
-            deletedAt = try Utils.Dates.dateTimeFromString(dateTime: _deletedAt)
-        } else {
-            deletedAt = nil
-        }
-
+        assignedAt = try container.decodeDateTimeIfPresent(forKey: .assignedAt)
+        deletedAt = try container.decodeDateTimeIfPresent(forKey: .deletedAt)
 
         try super.init(from: decoder)
     }
@@ -83,14 +73,8 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
         try container.encodeIfPresent(legalHoldPolicy, forKey: .legalHoldPolicy)
         try container.encodeIfPresent(assignedTo, forKey: .assignedTo)
         try container.encodeIfPresent(assignedBy, forKey: .assignedBy)
-        if let assignedAt = assignedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: assignedAt), forKey: .assignedAt)
-        }
-
-        if let deletedAt = deletedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: deletedAt), forKey: .deletedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: assignedAt, forKey: .assignedAt)
+        try container.encodeDateTimeIfPresent(field: deletedAt, forKey: .deletedAt)
         try super.encode(to: encoder)
     }
 

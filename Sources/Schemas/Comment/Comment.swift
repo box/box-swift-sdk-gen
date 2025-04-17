@@ -56,18 +56,8 @@ public class Comment: CommentBase {
         isReplyComment = try container.decodeIfPresent(Bool.self, forKey: .isReplyComment)
         message = try container.decodeIfPresent(String.self, forKey: .message)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
-        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
-            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
-        } else {
-            modifiedAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
+        modifiedAt = try container.decodeDateTimeIfPresent(forKey: .modifiedAt)
         item = try container.decodeIfPresent(CommentItemField.self, forKey: .item)
 
         try super.init(from: decoder)
@@ -78,14 +68,8 @@ public class Comment: CommentBase {
         try container.encodeIfPresent(isReplyComment, forKey: .isReplyComment)
         try container.encodeIfPresent(message, forKey: .message)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
-        if let modifiedAt = modifiedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
+        try container.encodeDateTimeIfPresent(field: modifiedAt, forKey: .modifiedAt)
         try container.encodeIfPresent(item, forKey: .item)
         try super.encode(to: encoder)
     }

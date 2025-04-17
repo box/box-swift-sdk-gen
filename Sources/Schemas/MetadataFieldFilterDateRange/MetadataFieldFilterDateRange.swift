@@ -38,30 +38,14 @@ public class MetadataFieldFilterDateRange: Codable {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        if let _lt = try container.decodeIfPresent(String.self, forKey: .lt) {
-            lt = try Utils.Dates.dateTimeFromString(dateTime: _lt)
-        } else {
-            lt = nil
-        }
-
-        if let _gt = try container.decodeIfPresent(String.self, forKey: .gt) {
-            gt = try Utils.Dates.dateTimeFromString(dateTime: _gt)
-        } else {
-            gt = nil
-        }
-
+        lt = try container.decodeDateTimeIfPresent(forKey: .lt)
+        gt = try container.decodeDateTimeIfPresent(forKey: .gt)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        if let lt = lt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: lt), forKey: .lt)
-        }
-
-        if let gt = gt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: gt), forKey: .gt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: lt, forKey: .lt)
+        try container.encodeDateTimeIfPresent(field: gt, forKey: .gt)
     }
 
 }

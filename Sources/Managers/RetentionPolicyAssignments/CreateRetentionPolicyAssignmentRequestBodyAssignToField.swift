@@ -12,7 +12,7 @@ public class CreateRetentionPolicyAssignmentRequestBodyAssignToField: Codable {
     /// The ID of item to assign the policy to.
     /// Set to `null` or omit when `type` is set to
     /// `enterprise`.
-    public let id: String?
+    @CodableTriState public private(set) var id: String?
 
     /// Initializer for a CreateRetentionPolicyAssignmentRequestBodyAssignToField.
     ///
@@ -21,9 +21,9 @@ public class CreateRetentionPolicyAssignmentRequestBodyAssignToField: Codable {
     ///   - id: The ID of item to assign the policy to.
     ///     Set to `null` or omit when `type` is set to
     ///     `enterprise`.
-    public init(type: CreateRetentionPolicyAssignmentRequestBodyAssignToTypeField, id: String? = nil) {
+    public init(type: CreateRetentionPolicyAssignmentRequestBodyAssignToTypeField, id: TriStateField<String> = nil) {
         self.type = type
-        self.id = id
+        self._id = CodableTriState(state: id)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -35,7 +35,7 @@ public class CreateRetentionPolicyAssignmentRequestBodyAssignToField: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type, forKey: .type)
-        try container.encodeIfPresent(id, forKey: .id)
+        try container.encode(field: _id.state, forKey: .id)
     }
 
 }

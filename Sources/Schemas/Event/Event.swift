@@ -77,18 +77,8 @@ public class Event: Codable {
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         type = try container.decodeIfPresent(String.self, forKey: .type)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
-        if let _recordedAt = try container.decodeIfPresent(String.self, forKey: .recordedAt) {
-            recordedAt = try Utils.Dates.dateTimeFromString(dateTime: _recordedAt)
-        } else {
-            recordedAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
+        recordedAt = try container.decodeDateTimeIfPresent(forKey: .recordedAt)
         eventId = try container.decodeIfPresent(String.self, forKey: .eventId)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
         eventType = try container.decodeIfPresent(EventEventTypeField.self, forKey: .eventType)
@@ -100,14 +90,8 @@ public class Event: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(type, forKey: .type)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
-        if let recordedAt = recordedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: recordedAt), forKey: .recordedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
+        try container.encodeDateTimeIfPresent(field: recordedAt, forKey: .recordedAt)
         try container.encodeIfPresent(eventId, forKey: .eventId)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(eventType, forKey: .eventType)

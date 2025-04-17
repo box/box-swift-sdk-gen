@@ -49,12 +49,7 @@ public class RecentItem: Codable {
         type = try container.decodeIfPresent(String.self, forKey: .type)
         item = try container.decodeIfPresent(FileFullOrFolderFullOrWebLink.self, forKey: .item)
         interactionType = try container.decodeIfPresent(RecentItemInteractionTypeField.self, forKey: .interactionType)
-        if let _interactedAt = try container.decodeIfPresent(String.self, forKey: .interactedAt) {
-            interactedAt = try Utils.Dates.dateTimeFromString(dateTime: _interactedAt)
-        } else {
-            interactedAt = nil
-        }
-
+        interactedAt = try container.decodeDateTimeIfPresent(forKey: .interactedAt)
         interactionSharedLink = try container.decodeIfPresent(String.self, forKey: .interactionSharedLink)
     }
 
@@ -63,10 +58,7 @@ public class RecentItem: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(item, forKey: .item)
         try container.encodeIfPresent(interactionType, forKey: .interactionType)
-        if let interactedAt = interactedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: interactedAt), forKey: .interactedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: interactedAt, forKey: .interactedAt)
         try container.encodeIfPresent(interactionSharedLink, forKey: .interactionSharedLink)
     }
 

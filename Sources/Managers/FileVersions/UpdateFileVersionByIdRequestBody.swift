@@ -7,15 +7,15 @@ public class UpdateFileVersionByIdRequestBody: Codable {
 
     /// Set this to `null` to clear
     /// the date and restore the file.
-    public let trashedAt: String?
+    @CodableTriState public private(set) var trashedAt: String?
 
     /// Initializer for a UpdateFileVersionByIdRequestBody.
     ///
     /// - Parameters:
     ///   - trashedAt: Set this to `null` to clear
     ///     the date and restore the file.
-    public init(trashedAt: String? = nil) {
-        self.trashedAt = trashedAt
+    public init(trashedAt: TriStateField<String> = nil) {
+        self._trashedAt = CodableTriState(state: trashedAt)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -25,7 +25,7 @@ public class UpdateFileVersionByIdRequestBody: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(trashedAt, forKey: .trashedAt)
+        try container.encode(field: _trashedAt.state, forKey: .trashedAt)
     }
 
 }

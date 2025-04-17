@@ -29,16 +29,16 @@ public class SignTemplate: Codable {
     public let id: String?
 
     /// The name of the template.
-    public let name: String?
+    @CodableTriState public private(set) var name: String?
 
     /// Subject of signature request email. This is cleaned by sign request. If this field is not passed, a default subject will be used.
-    public let emailSubject: String?
+    @CodableTriState public private(set) var emailSubject: String?
 
     /// Message to include in signature request email. The field is cleaned through sanitization of specific characters. However, some html tags are allowed. Links included in the message are also converted to hyperlinks in the email. The message may contain the following html tags including `a`, `abbr`, `acronym`, `b`, `blockquote`, `code`, `em`, `i`, `ul`, `li`, `ol`, and `strong`. Be aware that when the text to html ratio is too high, the email may end up in spam filters. Custom styles on these tags are not allowed. If this field is not passed, a default message will be used.
-    public let emailMessage: String?
+    @CodableTriState public private(set) var emailMessage: String?
 
     /// Set the number of days after which the created signature request will automatically expire if not completed. By default, we do not apply any expiration date on signature requests, and the signature request does not expire.
-    public let daysValid: Int64?
+    @CodableTriState public private(set) var daysValid: Int64?
 
     public let parentFolder: FolderMini?
 
@@ -73,11 +73,11 @@ public class SignTemplate: Codable {
     public let additionalInfo: SignTemplateAdditionalInfoField?
 
     /// Box's ready-sign link feature enables you to create a link to a signature request that you've created from a template. Use this link when you want to post a signature request on a public form — such as an email, social media post, or web page — without knowing who the signers will be. Note: The ready-sign link feature is limited to Enterprise Plus customers and not available to Box Verified Enterprises.
-    public let readySignLink: SignTemplateReadySignLinkField?
+    @CodableTriState public private(set) var readySignLink: SignTemplateReadySignLinkField?
 
     /// Custom branding applied to notifications
     /// and signature requests.
-    public let customBranding: SignTemplateCustomBrandingField?
+    @CodableTriState public private(set) var customBranding: SignTemplateCustomBrandingField?
 
     /// Initializer for a SignTemplate.
     ///
@@ -106,13 +106,13 @@ public class SignTemplate: Codable {
     ///   - readySignLink: Box's ready-sign link feature enables you to create a link to a signature request that you've created from a template. Use this link when you want to post a signature request on a public form — such as an email, social media post, or web page — without knowing who the signers will be. Note: The ready-sign link feature is limited to Enterprise Plus customers and not available to Box Verified Enterprises.
     ///   - customBranding: Custom branding applied to notifications
     ///     and signature requests.
-    public init(type: SignTemplateTypeField? = nil, id: String? = nil, name: String? = nil, emailSubject: String? = nil, emailMessage: String? = nil, daysValid: Int64? = nil, parentFolder: FolderMini? = nil, sourceFiles: [FileMini]? = nil, areFieldsLocked: Bool? = nil, areOptionsLocked: Bool? = nil, areRecipientsLocked: Bool? = nil, areEmailSettingsLocked: Bool? = nil, areFilesLocked: Bool? = nil, signers: [TemplateSigner]? = nil, additionalInfo: SignTemplateAdditionalInfoField? = nil, readySignLink: SignTemplateReadySignLinkField? = nil, customBranding: SignTemplateCustomBrandingField? = nil) {
+    public init(type: SignTemplateTypeField? = nil, id: String? = nil, name: TriStateField<String> = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, daysValid: TriStateField<Int64> = nil, parentFolder: FolderMini? = nil, sourceFiles: [FileMini]? = nil, areFieldsLocked: Bool? = nil, areOptionsLocked: Bool? = nil, areRecipientsLocked: Bool? = nil, areEmailSettingsLocked: Bool? = nil, areFilesLocked: Bool? = nil, signers: [TemplateSigner]? = nil, additionalInfo: SignTemplateAdditionalInfoField? = nil, readySignLink: TriStateField<SignTemplateReadySignLinkField> = nil, customBranding: TriStateField<SignTemplateCustomBrandingField> = nil) {
         self.type = type
         self.id = id
-        self.name = name
-        self.emailSubject = emailSubject
-        self.emailMessage = emailMessage
-        self.daysValid = daysValid
+        self._name = CodableTriState(state: name)
+        self._emailSubject = CodableTriState(state: emailSubject)
+        self._emailMessage = CodableTriState(state: emailMessage)
+        self._daysValid = CodableTriState(state: daysValid)
         self.parentFolder = parentFolder
         self.sourceFiles = sourceFiles
         self.areFieldsLocked = areFieldsLocked
@@ -122,8 +122,8 @@ public class SignTemplate: Codable {
         self.areFilesLocked = areFilesLocked
         self.signers = signers
         self.additionalInfo = additionalInfo
-        self.readySignLink = readySignLink
-        self.customBranding = customBranding
+        self._readySignLink = CodableTriState(state: readySignLink)
+        self._customBranding = CodableTriState(state: customBranding)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -151,10 +151,10 @@ public class SignTemplate: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(name, forKey: .name)
-        try container.encodeIfPresent(emailSubject, forKey: .emailSubject)
-        try container.encodeIfPresent(emailMessage, forKey: .emailMessage)
-        try container.encodeIfPresent(daysValid, forKey: .daysValid)
+        try container.encode(field: _name.state, forKey: .name)
+        try container.encode(field: _emailSubject.state, forKey: .emailSubject)
+        try container.encode(field: _emailMessage.state, forKey: .emailMessage)
+        try container.encode(field: _daysValid.state, forKey: .daysValid)
         try container.encodeIfPresent(parentFolder, forKey: .parentFolder)
         try container.encodeIfPresent(sourceFiles, forKey: .sourceFiles)
         try container.encodeIfPresent(areFieldsLocked, forKey: .areFieldsLocked)
@@ -164,8 +164,8 @@ public class SignTemplate: Codable {
         try container.encodeIfPresent(areFilesLocked, forKey: .areFilesLocked)
         try container.encodeIfPresent(signers, forKey: .signers)
         try container.encodeIfPresent(additionalInfo, forKey: .additionalInfo)
-        try container.encodeIfPresent(readySignLink, forKey: .readySignLink)
-        try container.encodeIfPresent(customBranding, forKey: .customBranding)
+        try container.encode(field: _readySignLink.state, forKey: .readySignLink)
+        try container.encode(field: _customBranding.state, forKey: .customBranding)
     }
 
 }

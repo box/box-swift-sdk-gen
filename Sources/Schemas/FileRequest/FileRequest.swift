@@ -47,7 +47,7 @@ public class FileRequest: Codable {
     /// 
     /// This defaults to description of the file request that was
     /// copied to create this file request.
-    public let description: String?
+    @CodableTriState public private(set) var description: String?
 
     /// The status of the file request. This defaults
     /// to `active`.
@@ -97,7 +97,7 @@ public class FileRequest: Codable {
     /// header, a change will only be performed on the  file request if the `etag`
     /// on the file request still matches the `etag` provided in the `If-Match`
     /// header.
-    public let etag: String?
+    @CodableTriState public private(set) var etag: String?
 
     public let createdBy: UserMini?
 
@@ -161,20 +161,20 @@ public class FileRequest: Codable {
     ///     header.
     ///   - createdBy: 
     ///   - updatedBy: 
-    public init(id: String, folder: FolderMini, createdAt: Date, updatedAt: Date, type: FileRequestTypeField = FileRequestTypeField.fileRequest, title: String? = nil, description: String? = nil, status: FileRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: Date? = nil, url: String? = nil, etag: String? = nil, createdBy: UserMini? = nil, updatedBy: UserMini? = nil) {
+    public init(id: String, folder: FolderMini, createdAt: Date, updatedAt: Date, type: FileRequestTypeField = FileRequestTypeField.fileRequest, title: String? = nil, description: TriStateField<String> = nil, status: FileRequestStatusField? = nil, isEmailRequired: Bool? = nil, isDescriptionRequired: Bool? = nil, expiresAt: Date? = nil, url: String? = nil, etag: TriStateField<String> = nil, createdBy: UserMini? = nil, updatedBy: UserMini? = nil) {
         self.id = id
         self.folder = folder
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.type = type
         self.title = title
-        self.description = description
+        self._description = CodableTriState(state: description)
         self.status = status
         self.isEmailRequired = isEmailRequired
         self.isDescriptionRequired = isDescriptionRequired
         self.expiresAt = expiresAt
         self.url = url
-        self.etag = etag
+        self._etag = CodableTriState(state: etag)
         self.createdBy = createdBy
         self.updatedBy = updatedBy
     }
@@ -183,20 +183,15 @@ public class FileRequest: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         folder = try container.decode(FolderMini.self, forKey: .folder)
-        createdAt = try Utils.Dates.dateTimeFromString(dateTime: try container.decode(String.self, forKey: .createdAt))
-        updatedAt = try Utils.Dates.dateTimeFromString(dateTime: try container.decode(String.self, forKey: .updatedAt))
+        createdAt = try container.decodeDateTime(forKey: .createdAt)
+        updatedAt = try container.decodeDateTime(forKey: .updatedAt)
         type = try container.decode(FileRequestTypeField.self, forKey: .type)
         title = try container.decodeIfPresent(String.self, forKey: .title)
         description = try container.decodeIfPresent(String.self, forKey: .description)
         status = try container.decodeIfPresent(FileRequestStatusField.self, forKey: .status)
         isEmailRequired = try container.decodeIfPresent(Bool.self, forKey: .isEmailRequired)
         isDescriptionRequired = try container.decodeIfPresent(Bool.self, forKey: .isDescriptionRequired)
-        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
-            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
-        } else {
-            expiresAt = nil
-        }
-
+        expiresAt = try container.decodeDateTimeIfPresent(forKey: .expiresAt)
         url = try container.decodeIfPresent(String.self, forKey: .url)
         etag = try container.decodeIfPresent(String.self, forKey: .etag)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
@@ -207,20 +202,17 @@ public class FileRequest: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(folder, forKey: .folder)
-        try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        try container.encode(Utils.Dates.dateTimeToString(dateTime: updatedAt), forKey: .updatedAt)
+        try container.encodeDateTime(field: createdAt, forKey: .createdAt)
+        try container.encodeDateTime(field: updatedAt, forKey: .updatedAt)
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(title, forKey: .title)
-        try container.encodeIfPresent(description, forKey: .description)
+        try container.encode(field: _description.state, forKey: .description)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(isEmailRequired, forKey: .isEmailRequired)
         try container.encodeIfPresent(isDescriptionRequired, forKey: .isDescriptionRequired)
-        if let expiresAt = expiresAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: expiresAt, forKey: .expiresAt)
         try container.encodeIfPresent(url, forKey: .url)
-        try container.encodeIfPresent(etag, forKey: .etag)
+        try container.encode(field: _etag.state, forKey: .etag)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(updatedBy, forKey: .updatedBy)
     }

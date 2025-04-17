@@ -53,18 +53,8 @@ public class UploadWithPreflightCheckRequestBodyAttributesField: Codable {
         name = try container.decode(String.self, forKey: .name)
         parent = try container.decode(UploadWithPreflightCheckRequestBodyAttributesParentField.self, forKey: .parent)
         size = try container.decode(Int.self, forKey: .size)
-        if let _contentCreatedAt = try container.decodeIfPresent(String.self, forKey: .contentCreatedAt) {
-            contentCreatedAt = try Utils.Dates.dateTimeFromString(dateTime: _contentCreatedAt)
-        } else {
-            contentCreatedAt = nil
-        }
-
-        if let _contentModifiedAt = try container.decodeIfPresent(String.self, forKey: .contentModifiedAt) {
-            contentModifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _contentModifiedAt)
-        } else {
-            contentModifiedAt = nil
-        }
-
+        contentCreatedAt = try container.decodeDateTimeIfPresent(forKey: .contentCreatedAt)
+        contentModifiedAt = try container.decodeDateTimeIfPresent(forKey: .contentModifiedAt)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -72,14 +62,8 @@ public class UploadWithPreflightCheckRequestBodyAttributesField: Codable {
         try container.encode(name, forKey: .name)
         try container.encode(parent, forKey: .parent)
         try container.encode(size, forKey: .size)
-        if let contentCreatedAt = contentCreatedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: contentCreatedAt), forKey: .contentCreatedAt)
-        }
-
-        if let contentModifiedAt = contentModifiedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: contentModifiedAt), forKey: .contentModifiedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: contentCreatedAt, forKey: .contentCreatedAt)
+        try container.encodeDateTimeIfPresent(field: contentModifiedAt, forKey: .contentModifiedAt)
     }
 
 }

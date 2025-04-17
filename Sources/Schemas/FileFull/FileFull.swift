@@ -37,7 +37,7 @@ public class FileFull: File {
 
     public let tags: [String]?
 
-    public let lock: FileFullLockField?
+    @CodableTriState public private(set) var lock: FileFullLockField?
 
     /// Indicates the (optional) file extension for this file. By default,
     /// this is set to an empty string.
@@ -70,7 +70,7 @@ public class FileFull: File {
     public let metadata: FileFullMetadataField?
 
     /// When the file will automatically be deleted
-    public let expiresAt: Date?
+    @CodableTriState public private(set) var expiresAt: Date?
 
     public let representations: FileFullRepresentationsField?
 
@@ -79,11 +79,11 @@ public class FileFull: File {
     public let uploaderDisplayName: String?
 
     /// The retention expiration timestamp for the given file
-    public let dispositionAt: Date?
+    @CodableTriState public private(set) var dispositionAt: Date?
 
     /// A list of the types of roles that user can be invited at
     /// when sharing this file.
-    public let sharedLinkPermissionOptions: [FileFullSharedLinkPermissionOptionsField]?
+    @CodableTriState public private(set) var sharedLinkPermissionOptions: [FileFullSharedLinkPermissionOptionsField]?
 
     /// This field will return true if the file or any ancestor of the file
     /// is associated with at least one app item. Note that this will return
@@ -166,12 +166,12 @@ public class FileFull: File {
     ///     is associated with at least one app item. Note that this will return
     ///     true even if the context user does not have access to the app item(s)
     ///     associated with the file.
-    public init(id: String, etag: String? = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: Date? = nil, purgedAt: Date? = nil, contentCreatedAt: Date? = nil, contentModifiedAt: Date? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: FolderMini? = nil, itemStatus: FileItemStatusField? = nil, versionNumber: String? = nil, commentCount: Int64? = nil, permissions: FileFullPermissionsField? = nil, tags: [String]? = nil, lock: FileFullLockField? = nil, extension_: String? = nil, isPackage: Bool? = nil, expiringEmbedLink: FileFullExpiringEmbedLinkField? = nil, watermarkInfo: FileFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, allowedInviteeRoles: [FileFullAllowedInviteeRolesField]? = nil, isExternallyOwned: Bool? = nil, hasCollaborations: Bool? = nil, metadata: FileFullMetadataField? = nil, expiresAt: Date? = nil, representations: FileFullRepresentationsField? = nil, classification: FileFullClassificationField? = nil, uploaderDisplayName: String? = nil, dispositionAt: Date? = nil, sharedLinkPermissionOptions: [FileFullSharedLinkPermissionOptionsField]? = nil, isAssociatedWithAppItem: Bool? = nil) {
+    public init(id: String, etag: TriStateField<String> = nil, type: FileBaseTypeField = FileBaseTypeField.file, sequenceId: String? = nil, name: String? = nil, sha1: String? = nil, fileVersion: FileVersionMini? = nil, description: String? = nil, size: Int64? = nil, pathCollection: FilePathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: TriStateField<Date> = nil, purgedAt: TriStateField<Date> = nil, contentCreatedAt: TriStateField<Date> = nil, contentModifiedAt: TriStateField<Date> = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: FileSharedLinkField? = nil, parent: TriStateField<FolderMini> = nil, itemStatus: FileItemStatusField? = nil, versionNumber: String? = nil, commentCount: Int64? = nil, permissions: FileFullPermissionsField? = nil, tags: [String]? = nil, lock: TriStateField<FileFullLockField> = nil, extension_: String? = nil, isPackage: Bool? = nil, expiringEmbedLink: FileFullExpiringEmbedLinkField? = nil, watermarkInfo: FileFullWatermarkInfoField? = nil, isAccessibleViaSharedLink: Bool? = nil, allowedInviteeRoles: [FileFullAllowedInviteeRolesField]? = nil, isExternallyOwned: Bool? = nil, hasCollaborations: Bool? = nil, metadata: FileFullMetadataField? = nil, expiresAt: TriStateField<Date> = nil, representations: FileFullRepresentationsField? = nil, classification: FileFullClassificationField? = nil, uploaderDisplayName: String? = nil, dispositionAt: TriStateField<Date> = nil, sharedLinkPermissionOptions: TriStateField<[FileFullSharedLinkPermissionOptionsField]> = nil, isAssociatedWithAppItem: Bool? = nil) {
         self.versionNumber = versionNumber
         self.commentCount = commentCount
         self.permissions = permissions
         self.tags = tags
-        self.lock = lock
+        self._lock = CodableTriState(state: lock)
         self.extension_ = extension_
         self.isPackage = isPackage
         self.expiringEmbedLink = expiringEmbedLink
@@ -181,12 +181,12 @@ public class FileFull: File {
         self.isExternallyOwned = isExternallyOwned
         self.hasCollaborations = hasCollaborations
         self.metadata = metadata
-        self.expiresAt = expiresAt
+        self._expiresAt = CodableTriState(state: expiresAt)
         self.representations = representations
         self.classification = classification
         self.uploaderDisplayName = uploaderDisplayName
-        self.dispositionAt = dispositionAt
-        self.sharedLinkPermissionOptions = sharedLinkPermissionOptions
+        self._dispositionAt = CodableTriState(state: dispositionAt)
+        self._sharedLinkPermissionOptions = CodableTriState(state: sharedLinkPermissionOptions)
         self.isAssociatedWithAppItem = isAssociatedWithAppItem
 
         super.init(id: id, etag: etag, type: type, sequenceId: sequenceId, name: name, sha1: sha1, fileVersion: fileVersion, description: description, size: size, pathCollection: pathCollection, createdAt: createdAt, modifiedAt: modifiedAt, trashedAt: trashedAt, purgedAt: purgedAt, contentCreatedAt: contentCreatedAt, contentModifiedAt: contentModifiedAt, createdBy: createdBy, modifiedBy: modifiedBy, ownedBy: ownedBy, sharedLink: sharedLink, parent: parent, itemStatus: itemStatus)
@@ -208,21 +208,11 @@ public class FileFull: File {
         isExternallyOwned = try container.decodeIfPresent(Bool.self, forKey: .isExternallyOwned)
         hasCollaborations = try container.decodeIfPresent(Bool.self, forKey: .hasCollaborations)
         metadata = try container.decodeIfPresent(FileFullMetadataField.self, forKey: .metadata)
-        if let _expiresAt = try container.decodeIfPresent(String.self, forKey: .expiresAt) {
-            expiresAt = try Utils.Dates.dateTimeFromString(dateTime: _expiresAt)
-        } else {
-            expiresAt = nil
-        }
-
+        expiresAt = try container.decodeDateTimeIfPresent(forKey: .expiresAt)
         representations = try container.decodeIfPresent(FileFullRepresentationsField.self, forKey: .representations)
         classification = try container.decodeIfPresent(FileFullClassificationField.self, forKey: .classification)
         uploaderDisplayName = try container.decodeIfPresent(String.self, forKey: .uploaderDisplayName)
-        if let _dispositionAt = try container.decodeIfPresent(String.self, forKey: .dispositionAt) {
-            dispositionAt = try Utils.Dates.dateTimeFromString(dateTime: _dispositionAt)
-        } else {
-            dispositionAt = nil
-        }
-
+        dispositionAt = try container.decodeDateTimeIfPresent(forKey: .dispositionAt)
         sharedLinkPermissionOptions = try container.decodeIfPresent([FileFullSharedLinkPermissionOptionsField].self, forKey: .sharedLinkPermissionOptions)
         isAssociatedWithAppItem = try container.decodeIfPresent(Bool.self, forKey: .isAssociatedWithAppItem)
 
@@ -235,7 +225,7 @@ public class FileFull: File {
         try container.encodeIfPresent(commentCount, forKey: .commentCount)
         try container.encodeIfPresent(permissions, forKey: .permissions)
         try container.encodeIfPresent(tags, forKey: .tags)
-        try container.encodeIfPresent(lock, forKey: .lock)
+        try container.encode(field: _lock.state, forKey: .lock)
         try container.encodeIfPresent(extension_, forKey: .extension_)
         try container.encodeIfPresent(isPackage, forKey: .isPackage)
         try container.encodeIfPresent(expiringEmbedLink, forKey: .expiringEmbedLink)
@@ -245,18 +235,12 @@ public class FileFull: File {
         try container.encodeIfPresent(isExternallyOwned, forKey: .isExternallyOwned)
         try container.encodeIfPresent(hasCollaborations, forKey: .hasCollaborations)
         try container.encodeIfPresent(metadata, forKey: .metadata)
-        if let expiresAt = expiresAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: expiresAt), forKey: .expiresAt)
-        }
-
+        try container.encodeDateTime(field: _expiresAt.state, forKey: .expiresAt)
         try container.encodeIfPresent(representations, forKey: .representations)
         try container.encodeIfPresent(classification, forKey: .classification)
         try container.encodeIfPresent(uploaderDisplayName, forKey: .uploaderDisplayName)
-        if let dispositionAt = dispositionAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: dispositionAt), forKey: .dispositionAt)
-        }
-
-        try container.encodeIfPresent(sharedLinkPermissionOptions, forKey: .sharedLinkPermissionOptions)
+        try container.encodeDateTime(field: _dispositionAt.state, forKey: .dispositionAt)
+        try container.encode(field: _sharedLinkPermissionOptions.state, forKey: .sharedLinkPermissionOptions)
         try container.encodeIfPresent(isAssociatedWithAppItem, forKey: .isAssociatedWithAppItem)
         try super.encode(to: encoder)
     }

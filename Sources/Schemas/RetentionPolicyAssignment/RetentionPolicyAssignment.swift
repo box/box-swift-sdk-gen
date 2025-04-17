@@ -31,7 +31,7 @@ public class RetentionPolicyAssignment: Codable {
 
     /// An array of field objects. Values are only returned if the `assigned_to`
     /// type is `metadata_template`. Otherwise, the array is blank.
-    public let filterFields: [RetentionPolicyAssignmentFilterFieldsField]?
+    @CodableTriState public private(set) var filterFields: [RetentionPolicyAssignmentFilterFieldsField]?
 
     public let assignedBy: UserMini?
 
@@ -61,12 +61,12 @@ public class RetentionPolicyAssignment: Codable {
     ///   - startDateField: The date the retention policy assignment begins.
     ///     If the `assigned_to` type is `metadata_template`,
     ///     this field can be a date field's metadata attribute key id.
-    public init(id: String, type: RetentionPolicyAssignmentTypeField = RetentionPolicyAssignmentTypeField.retentionPolicyAssignment, retentionPolicy: RetentionPolicyMini? = nil, assignedTo: RetentionPolicyAssignmentAssignedToField? = nil, filterFields: [RetentionPolicyAssignmentFilterFieldsField]? = nil, assignedBy: UserMini? = nil, assignedAt: Date? = nil, startDateField: String? = nil) {
+    public init(id: String, type: RetentionPolicyAssignmentTypeField = RetentionPolicyAssignmentTypeField.retentionPolicyAssignment, retentionPolicy: RetentionPolicyMini? = nil, assignedTo: RetentionPolicyAssignmentAssignedToField? = nil, filterFields: TriStateField<[RetentionPolicyAssignmentFilterFieldsField]> = nil, assignedBy: UserMini? = nil, assignedAt: Date? = nil, startDateField: String? = nil) {
         self.id = id
         self.type = type
         self.retentionPolicy = retentionPolicy
         self.assignedTo = assignedTo
-        self.filterFields = filterFields
+        self._filterFields = CodableTriState(state: filterFields)
         self.assignedBy = assignedBy
         self.assignedAt = assignedAt
         self.startDateField = startDateField
@@ -80,12 +80,7 @@ public class RetentionPolicyAssignment: Codable {
         assignedTo = try container.decodeIfPresent(RetentionPolicyAssignmentAssignedToField.self, forKey: .assignedTo)
         filterFields = try container.decodeIfPresent([RetentionPolicyAssignmentFilterFieldsField].self, forKey: .filterFields)
         assignedBy = try container.decodeIfPresent(UserMini.self, forKey: .assignedBy)
-        if let _assignedAt = try container.decodeIfPresent(String.self, forKey: .assignedAt) {
-            assignedAt = try Utils.Dates.dateTimeFromString(dateTime: _assignedAt)
-        } else {
-            assignedAt = nil
-        }
-
+        assignedAt = try container.decodeDateTimeIfPresent(forKey: .assignedAt)
         startDateField = try container.decodeIfPresent(String.self, forKey: .startDateField)
     }
 
@@ -95,12 +90,9 @@ public class RetentionPolicyAssignment: Codable {
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(retentionPolicy, forKey: .retentionPolicy)
         try container.encodeIfPresent(assignedTo, forKey: .assignedTo)
-        try container.encodeIfPresent(filterFields, forKey: .filterFields)
+        try container.encode(field: _filterFields.state, forKey: .filterFields)
         try container.encodeIfPresent(assignedBy, forKey: .assignedBy)
-        if let assignedAt = assignedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: assignedAt), forKey: .assignedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: assignedAt, forKey: .assignedAt)
         try container.encodeIfPresent(startDateField, forKey: .startDateField)
     }
 

@@ -13,7 +13,7 @@ class SharedLinksWebLinksManagerTests: XCTestCase {
         let parent: FolderFull = try await client.folders.getFolderById(folderId: "0")
         let webLink: WebLink = try await client.webLinks.createWebLink(requestBody: CreateWebLinkRequestBody(url: "https://www.box.com", parent: CreateWebLinkRequestBodyParentField(id: parent.id), name: Utils.getUUID(), description: "Weblink description"))
         let webLinkId: String = webLink.id
-        try await client.sharedLinksWebLinks.addShareLinkToWebLink(webLinkId: webLinkId, requestBody: AddShareLinkToWebLinkRequestBody(sharedLink: AddShareLinkToWebLinkRequestBodySharedLinkField(access: AddShareLinkToWebLinkRequestBodySharedLinkAccessField.open, password: "Secret123@")), queryParams: AddShareLinkToWebLinkQueryParams(fields: "shared_link"))
+        try await client.sharedLinksWebLinks.addShareLinkToWebLink(webLinkId: webLinkId, requestBody: AddShareLinkToWebLinkRequestBody(sharedLink: AddShareLinkToWebLinkRequestBodySharedLinkField(access: AddShareLinkToWebLinkRequestBodySharedLinkAccessField.open, password: .value("Secret123@"))), queryParams: AddShareLinkToWebLinkQueryParams(fields: "shared_link"))
         let webLinkFromApi: WebLink = try await client.sharedLinksWebLinks.getSharedLinkForWebLink(webLinkId: webLinkId, queryParams: GetSharedLinkForWebLinkQueryParams(fields: "shared_link"))
         XCTAssertTrue(Utils.Strings.toString(value: webLinkFromApi.sharedLink!.access) == "open")
         let userId: String = Utils.getEnvironmentVariable(name: "USER_ID")

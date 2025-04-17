@@ -64,7 +64,7 @@ public class TrashFolder: Codable {
     /// The HTTP `etag` of this folder. This can be used within some API
     /// endpoints in the `If-Match` and `If-None-Match` headers to only
     /// perform changes on the folder if (no) changes have happened.
-    public let etag: String?
+    @CodableTriState public private(set) var etag: String?
 
     /// `folder`
     public let type: TrashFolderTypeField
@@ -74,36 +74,36 @@ public class TrashFolder: Codable {
     /// The date and time when the folder was created. This value may
     /// be `null` for some folders such as the root folder or the trash
     /// folder.
-    public let createdAt: Date?
+    @CodableTriState public private(set) var createdAt: Date?
 
     /// The date and time when the folder was last updated. This value may
     /// be `null` for some folders such as the root folder or the trash
     /// folder.
-    public let modifiedAt: Date?
+    @CodableTriState public private(set) var modifiedAt: Date?
 
     /// The time at which this folder was put in the trash.
-    public let trashedAt: Date?
+    @CodableTriState public private(set) var trashedAt: Date?
 
     /// The time at which this folder is expected to be purged
     /// from the trash.
-    public let purgedAt: Date?
+    @CodableTriState public private(set) var purgedAt: Date?
 
     /// The date and time at which this folder was originally
     /// created.
-    public let contentCreatedAt: Date?
+    @CodableTriState public private(set) var contentCreatedAt: Date?
 
     /// The date and time at which this folder was last updated.
-    public let contentModifiedAt: Date?
+    @CodableTriState public private(set) var contentModifiedAt: Date?
 
     /// The shared link for this folder. This will
     /// be `null` if a folder has been trashed, since the link will no longer
     /// be active.
-    public let sharedLink: String?
+    @CodableTriState public private(set) var sharedLink: String?
 
     /// The folder upload email for this folder. This will
     /// be `null` if a folder has been trashed, since the upload will no longer
     /// work.
-    public let folderUploadEmail: String?
+    @CodableTriState public private(set) var folderUploadEmail: String?
 
     public let parent: FolderMini?
 
@@ -156,7 +156,7 @@ public class TrashFolder: Codable {
     ///     be `null` if a folder has been trashed, since the upload will no longer
     ///     work.
     ///   - parent: 
-    public init(id: String, name: String, description: String, size: Int64, pathCollection: TrashFolderPathCollectionField, createdBy: UserMini, modifiedBy: UserMini, ownedBy: UserMini, itemStatus: TrashFolderItemStatusField, etag: String? = nil, type: TrashFolderTypeField = TrashFolderTypeField.folder, sequenceId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: Date? = nil, purgedAt: Date? = nil, contentCreatedAt: Date? = nil, contentModifiedAt: Date? = nil, sharedLink: String? = nil, folderUploadEmail: String? = nil, parent: FolderMini? = nil) {
+    public init(id: String, name: String, description: String, size: Int64, pathCollection: TrashFolderPathCollectionField, createdBy: UserMini, modifiedBy: UserMini, ownedBy: UserMini, itemStatus: TrashFolderItemStatusField, etag: TriStateField<String> = nil, type: TrashFolderTypeField = TrashFolderTypeField.folder, sequenceId: String? = nil, createdAt: TriStateField<Date> = nil, modifiedAt: TriStateField<Date> = nil, trashedAt: TriStateField<Date> = nil, purgedAt: TriStateField<Date> = nil, contentCreatedAt: TriStateField<Date> = nil, contentModifiedAt: TriStateField<Date> = nil, sharedLink: TriStateField<String> = nil, folderUploadEmail: TriStateField<String> = nil, parent: FolderMini? = nil) {
         self.id = id
         self.name = name
         self.description = description
@@ -166,17 +166,17 @@ public class TrashFolder: Codable {
         self.modifiedBy = modifiedBy
         self.ownedBy = ownedBy
         self.itemStatus = itemStatus
-        self.etag = etag
+        self._etag = CodableTriState(state: etag)
         self.type = type
         self.sequenceId = sequenceId
-        self.createdAt = createdAt
-        self.modifiedAt = modifiedAt
-        self.trashedAt = trashedAt
-        self.purgedAt = purgedAt
-        self.contentCreatedAt = contentCreatedAt
-        self.contentModifiedAt = contentModifiedAt
-        self.sharedLink = sharedLink
-        self.folderUploadEmail = folderUploadEmail
+        self._createdAt = CodableTriState(state: createdAt)
+        self._modifiedAt = CodableTriState(state: modifiedAt)
+        self._trashedAt = CodableTriState(state: trashedAt)
+        self._purgedAt = CodableTriState(state: purgedAt)
+        self._contentCreatedAt = CodableTriState(state: contentCreatedAt)
+        self._contentModifiedAt = CodableTriState(state: contentModifiedAt)
+        self._sharedLink = CodableTriState(state: sharedLink)
+        self._folderUploadEmail = CodableTriState(state: folderUploadEmail)
         self.parent = parent
     }
 
@@ -194,42 +194,12 @@ public class TrashFolder: Codable {
         etag = try container.decodeIfPresent(String.self, forKey: .etag)
         type = try container.decode(TrashFolderTypeField.self, forKey: .type)
         sequenceId = try container.decodeIfPresent(String.self, forKey: .sequenceId)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
-        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
-            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
-        } else {
-            modifiedAt = nil
-        }
-
-        if let _trashedAt = try container.decodeIfPresent(String.self, forKey: .trashedAt) {
-            trashedAt = try Utils.Dates.dateTimeFromString(dateTime: _trashedAt)
-        } else {
-            trashedAt = nil
-        }
-
-        if let _purgedAt = try container.decodeIfPresent(String.self, forKey: .purgedAt) {
-            purgedAt = try Utils.Dates.dateTimeFromString(dateTime: _purgedAt)
-        } else {
-            purgedAt = nil
-        }
-
-        if let _contentCreatedAt = try container.decodeIfPresent(String.self, forKey: .contentCreatedAt) {
-            contentCreatedAt = try Utils.Dates.dateTimeFromString(dateTime: _contentCreatedAt)
-        } else {
-            contentCreatedAt = nil
-        }
-
-        if let _contentModifiedAt = try container.decodeIfPresent(String.self, forKey: .contentModifiedAt) {
-            contentModifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _contentModifiedAt)
-        } else {
-            contentModifiedAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
+        modifiedAt = try container.decodeDateTimeIfPresent(forKey: .modifiedAt)
+        trashedAt = try container.decodeDateTimeIfPresent(forKey: .trashedAt)
+        purgedAt = try container.decodeDateTimeIfPresent(forKey: .purgedAt)
+        contentCreatedAt = try container.decodeDateTimeIfPresent(forKey: .contentCreatedAt)
+        contentModifiedAt = try container.decodeDateTimeIfPresent(forKey: .contentModifiedAt)
         sharedLink = try container.decodeIfPresent(String.self, forKey: .sharedLink)
         folderUploadEmail = try container.decodeIfPresent(String.self, forKey: .folderUploadEmail)
         parent = try container.decodeIfPresent(FolderMini.self, forKey: .parent)
@@ -246,35 +216,17 @@ public class TrashFolder: Codable {
         try container.encode(modifiedBy, forKey: .modifiedBy)
         try container.encode(ownedBy, forKey: .ownedBy)
         try container.encode(itemStatus, forKey: .itemStatus)
-        try container.encodeIfPresent(etag, forKey: .etag)
+        try container.encode(field: _etag.state, forKey: .etag)
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(sequenceId, forKey: .sequenceId)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
-        if let modifiedAt = modifiedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
-        }
-
-        if let trashedAt = trashedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: trashedAt), forKey: .trashedAt)
-        }
-
-        if let purgedAt = purgedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: purgedAt), forKey: .purgedAt)
-        }
-
-        if let contentCreatedAt = contentCreatedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: contentCreatedAt), forKey: .contentCreatedAt)
-        }
-
-        if let contentModifiedAt = contentModifiedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: contentModifiedAt), forKey: .contentModifiedAt)
-        }
-
-        try container.encodeIfPresent(sharedLink, forKey: .sharedLink)
-        try container.encodeIfPresent(folderUploadEmail, forKey: .folderUploadEmail)
+        try container.encodeDateTime(field: _createdAt.state, forKey: .createdAt)
+        try container.encodeDateTime(field: _modifiedAt.state, forKey: .modifiedAt)
+        try container.encodeDateTime(field: _trashedAt.state, forKey: .trashedAt)
+        try container.encodeDateTime(field: _purgedAt.state, forKey: .purgedAt)
+        try container.encodeDateTime(field: _contentCreatedAt.state, forKey: .contentCreatedAt)
+        try container.encodeDateTime(field: _contentModifiedAt.state, forKey: .contentModifiedAt)
+        try container.encode(field: _sharedLink.state, forKey: .sharedLink)
+        try container.encode(field: _folderUploadEmail.state, forKey: .folderUploadEmail)
         try container.encodeIfPresent(parent, forKey: .parent)
     }
 

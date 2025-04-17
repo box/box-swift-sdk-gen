@@ -115,36 +115,11 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
         status = try container.decodeIfPresent(LegalHoldPolicyStatusField.self, forKey: .status)
         assignmentCounts = try container.decodeIfPresent(LegalHoldPolicyAssignmentCountsField.self, forKey: .assignmentCounts)
         createdBy = try container.decodeIfPresent(UserMini.self, forKey: .createdBy)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
-        if let _modifiedAt = try container.decodeIfPresent(String.self, forKey: .modifiedAt) {
-            modifiedAt = try Utils.Dates.dateTimeFromString(dateTime: _modifiedAt)
-        } else {
-            modifiedAt = nil
-        }
-
-        if let _deletedAt = try container.decodeIfPresent(String.self, forKey: .deletedAt) {
-            deletedAt = try Utils.Dates.dateTimeFromString(dateTime: _deletedAt)
-        } else {
-            deletedAt = nil
-        }
-
-        if let _filterStartedAt = try container.decodeIfPresent(String.self, forKey: .filterStartedAt) {
-            filterStartedAt = try Utils.Dates.dateTimeFromString(dateTime: _filterStartedAt)
-        } else {
-            filterStartedAt = nil
-        }
-
-        if let _filterEndedAt = try container.decodeIfPresent(String.self, forKey: .filterEndedAt) {
-            filterEndedAt = try Utils.Dates.dateTimeFromString(dateTime: _filterEndedAt)
-        } else {
-            filterEndedAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
+        modifiedAt = try container.decodeDateTimeIfPresent(forKey: .modifiedAt)
+        deletedAt = try container.decodeDateTimeIfPresent(forKey: .deletedAt)
+        filterStartedAt = try container.decodeDateTimeIfPresent(forKey: .filterStartedAt)
+        filterEndedAt = try container.decodeDateTimeIfPresent(forKey: .filterEndedAt)
         releaseNotes = try container.decodeIfPresent(String.self, forKey: .releaseNotes)
 
         try super.init(from: decoder)
@@ -157,26 +132,11 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(assignmentCounts, forKey: .assignmentCounts)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
-        if let modifiedAt = modifiedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: modifiedAt), forKey: .modifiedAt)
-        }
-
-        if let deletedAt = deletedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: deletedAt), forKey: .deletedAt)
-        }
-
-        if let filterStartedAt = filterStartedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: filterStartedAt), forKey: .filterStartedAt)
-        }
-
-        if let filterEndedAt = filterEndedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: filterEndedAt), forKey: .filterEndedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
+        try container.encodeDateTimeIfPresent(field: modifiedAt, forKey: .modifiedAt)
+        try container.encodeDateTimeIfPresent(field: deletedAt, forKey: .deletedAt)
+        try container.encodeDateTimeIfPresent(field: filterStartedAt, forKey: .filterStartedAt)
+        try container.encodeDateTimeIfPresent(field: filterEndedAt, forKey: .filterEndedAt)
         try container.encodeIfPresent(releaseNotes, forKey: .releaseNotes)
         try super.encode(to: encoder)
     }

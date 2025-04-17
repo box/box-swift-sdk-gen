@@ -15,12 +15,12 @@ public class SignRequestSigner: SignRequestCreateSigner {
     public let hasViewedDocument: Bool?
 
     /// Final decision made by the signer.
-    public let signerDecision: SignRequestSignerSignerDecisionField?
+    @CodableTriState public private(set) var signerDecision: SignRequestSignerSignerDecisionField?
 
     public let inputs: [SignRequestSignerInput]?
 
     /// URL to direct a signer to for signing
-    public let embedUrl: String?
+    @CodableTriState public private(set) var embedUrl: String?
 
     /// This URL is specifically designed for
     /// signing documents within an HTML `iframe` tag.
@@ -28,7 +28,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
     /// only if the `embed_url_external_user_id`
     /// parameter was passed in the
     /// `create Box Sign request` call.
-    public let iframeableEmbedUrl: String?
+    @CodableTriState public private(set) var iframeableEmbedUrl: String?
 
     /// Initializer for a SignRequestSigner.
     ///
@@ -81,12 +81,12 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     only if the `embed_url_external_user_id`
     ///     parameter was passed in the
     ///     `create Box Sign request` call.
-    public init(email: String? = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: String? = nil, redirectUrl: String? = nil, declinedRedirectUrl: String? = nil, loginRequired: Bool? = nil, verificationPhoneNumber: String? = nil, password: String? = nil, signerGroupId: String? = nil, suppressNotifications: Bool? = nil, hasViewedDocument: Bool? = nil, signerDecision: SignRequestSignerSignerDecisionField? = nil, inputs: [SignRequestSignerInput]? = nil, embedUrl: String? = nil, iframeableEmbedUrl: String? = nil) {
+    public init(email: TriStateField<String> = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: TriStateField<String> = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, loginRequired: TriStateField<Bool> = nil, verificationPhoneNumber: TriStateField<String> = nil, password: TriStateField<String> = nil, signerGroupId: TriStateField<String> = nil, suppressNotifications: TriStateField<Bool> = nil, hasViewedDocument: Bool? = nil, signerDecision: TriStateField<SignRequestSignerSignerDecisionField> = nil, inputs: [SignRequestSignerInput]? = nil, embedUrl: TriStateField<String> = nil, iframeableEmbedUrl: TriStateField<String> = nil) {
         self.hasViewedDocument = hasViewedDocument
-        self.signerDecision = signerDecision
+        self._signerDecision = CodableTriState(state: signerDecision)
         self.inputs = inputs
-        self.embedUrl = embedUrl
-        self.iframeableEmbedUrl = iframeableEmbedUrl
+        self._embedUrl = CodableTriState(state: embedUrl)
+        self._iframeableEmbedUrl = CodableTriState(state: iframeableEmbedUrl)
 
         super.init(email: email, role: role, isInPerson: isInPerson, order: order, embedUrlExternalUserId: embedUrlExternalUserId, redirectUrl: redirectUrl, declinedRedirectUrl: declinedRedirectUrl, loginRequired: loginRequired, verificationPhoneNumber: verificationPhoneNumber, password: password, signerGroupId: signerGroupId, suppressNotifications: suppressNotifications)
     }
@@ -105,10 +105,10 @@ public class SignRequestSigner: SignRequestCreateSigner {
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(hasViewedDocument, forKey: .hasViewedDocument)
-        try container.encodeIfPresent(signerDecision, forKey: .signerDecision)
+        try container.encode(field: _signerDecision.state, forKey: .signerDecision)
         try container.encodeIfPresent(inputs, forKey: .inputs)
-        try container.encodeIfPresent(embedUrl, forKey: .embedUrl)
-        try container.encodeIfPresent(iframeableEmbedUrl, forKey: .iframeableEmbedUrl)
+        try container.encode(field: _embedUrl.state, forKey: .embedUrl)
+        try container.encode(field: _iframeableEmbedUrl.state, forKey: .iframeableEmbedUrl)
         try super.encode(to: encoder)
     }
 

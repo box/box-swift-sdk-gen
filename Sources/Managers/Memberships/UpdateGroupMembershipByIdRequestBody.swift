@@ -19,7 +19,7 @@ public class UpdateGroupMembershipByIdRequestBody: Codable {
     /// Specifying a value of `null` for this object will disable
     /// all configurable permissions. Specifying permissions will set
     /// them accordingly, omitted permissions will be enabled by default.
-    public let configurablePermissions: [String: Bool]?
+    @CodableTriState public private(set) var configurablePermissions: [String: Bool]?
 
     /// Initializer for a UpdateGroupMembershipByIdRequestBody.
     ///
@@ -35,9 +35,9 @@ public class UpdateGroupMembershipByIdRequestBody: Codable {
     ///     Specifying a value of `null` for this object will disable
     ///     all configurable permissions. Specifying permissions will set
     ///     them accordingly, omitted permissions will be enabled by default.
-    public init(role: UpdateGroupMembershipByIdRequestBodyRoleField? = nil, configurablePermissions: [String: Bool]? = nil) {
+    public init(role: UpdateGroupMembershipByIdRequestBodyRoleField? = nil, configurablePermissions: TriStateField<[String: Bool]> = nil) {
         self.role = role
-        self.configurablePermissions = configurablePermissions
+        self._configurablePermissions = CodableTriState(state: configurablePermissions)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -49,7 +49,7 @@ public class UpdateGroupMembershipByIdRequestBody: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(role, forKey: .role)
-        try container.encodeIfPresent(configurablePermissions, forKey: .configurablePermissions)
+        try container.encode(field: _configurablePermissions.state, forKey: .configurablePermissions)
     }
 
 }

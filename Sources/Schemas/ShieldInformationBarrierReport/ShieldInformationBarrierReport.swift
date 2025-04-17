@@ -58,19 +58,9 @@ public class ShieldInformationBarrierReport: ShieldInformationBarrierReportBase 
         shieldInformationBarrier = try container.decodeIfPresent(ShieldInformationBarrierReference.self, forKey: .shieldInformationBarrier)
         status = try container.decodeIfPresent(ShieldInformationBarrierReportStatusField.self, forKey: .status)
         details = try container.decodeIfPresent(ShieldInformationBarrierReportDetails.self, forKey: .details)
-        if let _createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) {
-            createdAt = try Utils.Dates.dateTimeFromString(dateTime: _createdAt)
-        } else {
-            createdAt = nil
-        }
-
+        createdAt = try container.decodeDateTimeIfPresent(forKey: .createdAt)
         createdBy = try container.decodeIfPresent(UserBase.self, forKey: .createdBy)
-        if let _updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) {
-            updatedAt = try Utils.Dates.dateTimeFromString(dateTime: _updatedAt)
-        } else {
-            updatedAt = nil
-        }
-
+        updatedAt = try container.decodeDateTimeIfPresent(forKey: .updatedAt)
 
         try super.init(from: decoder)
     }
@@ -80,15 +70,9 @@ public class ShieldInformationBarrierReport: ShieldInformationBarrierReportBase 
         try container.encodeIfPresent(shieldInformationBarrier, forKey: .shieldInformationBarrier)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(details, forKey: .details)
-        if let createdAt = createdAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: createdAt), forKey: .createdAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
-        if let updatedAt = updatedAt {
-            try container.encode(Utils.Dates.dateTimeToString(dateTime: updatedAt), forKey: .updatedAt)
-        }
-
+        try container.encodeDateTimeIfPresent(field: updatedAt, forKey: .updatedAt)
         try super.encode(to: encoder)
     }
 
