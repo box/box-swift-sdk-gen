@@ -57,7 +57,7 @@ See the endpoint docs at
 
 <!-- sample post_integration_mappings_slack -->
 ```
-try await userClient.integrationMappings.createSlackIntegrationMapping(requestBody: IntegrationMappingSlackCreateRequest(partnerItem: IntegrationMappingPartnerItemSlack(id: partnerItemId, slackOrgId: slackOrgId), boxItem: IntegrationMappingBoxItemSlack(id: folder.id)))
+try await userClient.integrationMappings.createSlackIntegrationMapping(requestBody: IntegrationMappingSlackCreateRequest(partnerItem: IntegrationMappingPartnerItemSlack(id: slackPartnerItemId, slackOrgId: slackOrgId), boxItem: IntegrationMappingBoxItemSlack(id: folder.id)))
 ```
 
 ### Arguments
@@ -90,7 +90,7 @@ See the endpoint docs at
 
 <!-- sample put_integration_mappings_slack_id -->
 ```
-try await userClient.integrationMappings.updateSlackIntegrationMappingById(integrationMappingId: integrationMappingId, requestBody: UpdateSlackIntegrationMappingByIdRequestBody(boxItem: IntegrationMappingBoxItemSlack(id: "1234567")))
+try await userClient.integrationMappings.updateSlackIntegrationMappingById(integrationMappingId: slackIntegrationMapping.id, requestBody: UpdateSlackIntegrationMappingByIdRequestBody(boxItem: IntegrationMappingBoxItemSlack(id: folder.id)))
 ```
 
 ### Arguments
@@ -125,7 +125,7 @@ See the endpoint docs at
 
 <!-- sample delete_integration_mappings_slack_id -->
 ```
-try await userClient.integrationMappings.deleteSlackIntegrationMappingById(integrationMappingId: integrationMappingId)
+try await userClient.integrationMappings.deleteSlackIntegrationMappingById(integrationMappingId: slackIntegrationMapping.id)
 ```
 
 ### Arguments
