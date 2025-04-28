@@ -136,10 +136,7 @@ This operation is performed by calling function `updateFolderMetadataById`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/put-folders-id-metadata-id-id/).
 
-<!-- sample put_folders_id_metadata_id_id -->
-```
-try await client.folderMetadata.updateFolderMetadataById(folderId: folder.id, scope: UpdateFolderMetadataByIdScope.global, templateKey: "properties", requestBody: [UpdateFolderMetadataByIdRequestBody(op: UpdateFolderMetadataByIdRequestBodyOpField.replace, path: "/abc", value: newValue)])
-```
+*Currently we don't have an example for calling `updateFolderMetadataById` in integration tests*
 
 ### Arguments
 
