@@ -131,10 +131,7 @@ This operation is performed by calling function `updateFileMetadataById`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/put-files-id-metadata-id-id/).
 
-<!-- sample put_files_id_metadata_id_id -->
-```
-try await client.fileMetadata.updateFileMetadataById(fileId: file.id, scope: UpdateFileMetadataByIdScope.global, templateKey: "properties", requestBody: [UpdateFileMetadataByIdRequestBody(op: UpdateFileMetadataByIdRequestBodyOpField.replace, path: "/abc", value: newValue)])
-```
+*Currently we don't have an example for calling `updateFileMetadataById` in integration tests*
 
 ### Arguments
 
