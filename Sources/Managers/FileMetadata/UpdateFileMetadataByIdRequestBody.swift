@@ -21,16 +21,7 @@ public class UpdateFileMetadataByIdRequestBody: Codable {
     /// characters and must be escaped in the key.
     public let path: String?
 
-    /// The value to be set or tested.
-    /// 
-    /// Required for `add`, `replace`, and `test` operations. For `add`,
-    /// if the value exists already the previous value will be overwritten
-    /// by the new value. For `replace`, the value must exist before
-    /// replacing.
-    /// 
-    /// For `test`, the existing value at the `path` location must match
-    /// the specified value.
-    public let value: String?
+    public let value: MetadataInstanceValue?
 
     /// The location in the metadata JSON object to move or copy a value
     /// from. Required for `move` or `copy` operations and must be in the
@@ -49,19 +40,11 @@ public class UpdateFileMetadataByIdRequestBody: Codable {
     ///     The path must always be prefixed with a `/` to represent the root
     ///     of the template. The characters `~` and `/` are reserved
     ///     characters and must be escaped in the key.
-    ///   - value: The value to be set or tested.
-    ///     
-    ///     Required for `add`, `replace`, and `test` operations. For `add`,
-    ///     if the value exists already the previous value will be overwritten
-    ///     by the new value. For `replace`, the value must exist before
-    ///     replacing.
-    ///     
-    ///     For `test`, the existing value at the `path` location must match
-    ///     the specified value.
+    ///   - value: 
     ///   - from: The location in the metadata JSON object to move or copy a value
     ///     from. Required for `move` or `copy` operations and must be in the
     ///     format of a [JSON-Pointer](https://tools.ietf.org/html/rfc6901).
-    public init(op: UpdateFileMetadataByIdRequestBodyOpField? = nil, path: String? = nil, value: String? = nil, from: String? = nil) {
+    public init(op: UpdateFileMetadataByIdRequestBodyOpField? = nil, path: String? = nil, value: MetadataInstanceValue? = nil, from: String? = nil) {
         self.op = op
         self.path = path
         self.value = value
@@ -72,7 +55,7 @@ public class UpdateFileMetadataByIdRequestBody: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         op = try container.decodeIfPresent(UpdateFileMetadataByIdRequestBodyOpField.self, forKey: .op)
         path = try container.decodeIfPresent(String.self, forKey: .path)
-        value = try container.decodeIfPresent(String.self, forKey: .value)
+        value = try container.decodeIfPresent(MetadataInstanceValue.self, forKey: .value)
         from = try container.decodeIfPresent(String.self, forKey: .from)
     }
 

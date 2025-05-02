@@ -8,11 +8,11 @@ public class AiSingleAgentResponseFull: AiSingleAgentResponse {
         case extract
     }
 
-    public let ask: AiStudioAgentAsk?
+    public let ask: AiStudioAgentAskResponse?
 
-    public let textGen: AiStudioAgentTextGen?
+    public let textGen: AiStudioAgentTextGenResponse?
 
-    public let extract: AiStudioAgentExtract?
+    public let extract: AiStudioAgentExtractResponse?
 
     /// Initializer for a AiSingleAgentResponseFull.
     ///
@@ -31,7 +31,7 @@ public class AiSingleAgentResponseFull: AiSingleAgentResponse {
     ///   - ask: 
     ///   - textGen: 
     ///   - extract: 
-    public init(id: String, origin: String, name: String, accessState: String, type: AiSingleAgentResponseTypeField? = nil, createdBy: UserBase? = nil, createdAt: Date? = nil, modifiedBy: UserBase? = nil, modifiedAt: Date? = nil, iconReference: String? = nil, allowedEntities: [AiAgentAllowedEntity]? = nil, ask: AiStudioAgentAsk? = nil, textGen: AiStudioAgentTextGen? = nil, extract: AiStudioAgentExtract? = nil) {
+    public init(id: String, origin: String, name: String, accessState: String, type: AiSingleAgentResponseTypeField? = nil, createdBy: UserBase? = nil, createdAt: Date? = nil, modifiedBy: UserBase? = nil, modifiedAt: Date? = nil, iconReference: String? = nil, allowedEntities: [AiAgentAllowedEntity]? = nil, ask: AiStudioAgentAskResponse? = nil, textGen: AiStudioAgentTextGenResponse? = nil, extract: AiStudioAgentExtractResponse? = nil) {
         self.ask = ask
         self.textGen = textGen
         self.extract = extract
@@ -41,9 +41,9 @@ public class AiSingleAgentResponseFull: AiSingleAgentResponse {
 
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        ask = try container.decodeIfPresent(AiStudioAgentAsk.self, forKey: .ask)
-        textGen = try container.decodeIfPresent(AiStudioAgentTextGen.self, forKey: .textGen)
-        extract = try container.decodeIfPresent(AiStudioAgentExtract.self, forKey: .extract)
+        ask = try container.decodeIfPresent(AiStudioAgentAskResponse.self, forKey: .ask)
+        textGen = try container.decodeIfPresent(AiStudioAgentTextGenResponse.self, forKey: .textGen)
+        extract = try container.decodeIfPresent(AiStudioAgentExtractResponse.self, forKey: .extract)
 
         try super.init(from: decoder)
     }
