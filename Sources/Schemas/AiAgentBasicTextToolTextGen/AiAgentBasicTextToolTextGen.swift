@@ -22,14 +22,14 @@ public class AiAgentBasicTextToolTextGen: AiAgentBasicTextToolBase {
     /// - Parameters:
     ///   - model: The model used for the AI agent for basic text. For specific model values, see the [available models list](g://box-ai/supported-models).
     ///   - numTokensForCompletion: The number of tokens for completion.
-    ///   - llmEndpointParams: The parameters for the LLM endpoint specific to OpenAI / Google models.
+    ///   - llmEndpointParams: 
     ///   - systemMessage: System messages aim at helping the LLM understand its role and what it is supposed to do.
     ///     The input for `{current_date}` is optional, depending on the use.
     ///   - promptTemplate: The prompt template contains contextual information of the request and the user prompt.
     ///     
     ///     When using the `prompt_template` parameter, you **must include** input for `{user_question}`.
     ///     Inputs for `{current_date}` and `{content}` are optional, depending on the use.
-    public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParamsAwsOrAiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi? = nil, systemMessage: String? = nil, promptTemplate: String? = nil) {
+    public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParams? = nil, systemMessage: String? = nil, promptTemplate: String? = nil) {
         self.systemMessage = systemMessage
         self.promptTemplate = promptTemplate
 
