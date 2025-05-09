@@ -14,7 +14,7 @@ public class AiStudioAgentBasicGenTool: AiAgentBasicGenTool {
     /// - Parameters:
     ///   - model: The model used for the AI agent for basic text. For specific model values, see the [available models list](g://box-ai/supported-models).
     ///   - numTokensForCompletion: The number of tokens for completion.
-    ///   - llmEndpointParams: The parameters for the LLM endpoint specific to OpenAI / Google models.
+    ///   - llmEndpointParams: 
     ///   - systemMessage: System messages aim at helping the LLM understand its role and what it is supposed to do.
     ///     The input for `{current_date}` is optional, depending on the use.
     ///   - promptTemplate: The prompt template contains contextual information of the request and the user prompt.
@@ -25,7 +25,7 @@ public class AiStudioAgentBasicGenTool: AiAgentBasicGenTool {
     ///   - contentTemplate: How the content should be included in a request to the LLM.
     ///     Input for `{content}` is optional, depending on the use.
     ///   - isCustomInstructionsIncluded: True if system message contains custom instructions placeholder, false otherwise
-    public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParamsAwsOrAiLlmEndpointParamsGoogleOrAiLlmEndpointParamsOpenAi? = nil, systemMessage: String? = nil, promptTemplate: String? = nil, embeddings: AiAgentLongTextToolTextGenEmbeddingsField? = nil, contentTemplate: String? = nil, isCustomInstructionsIncluded: Bool? = nil) {
+    public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParams? = nil, systemMessage: String? = nil, promptTemplate: String? = nil, embeddings: AiAgentLongTextToolTextGenEmbeddingsField? = nil, contentTemplate: String? = nil, isCustomInstructionsIncluded: Bool? = nil) {
         self.isCustomInstructionsIncluded = isCustomInstructionsIncluded
 
         super.init(model: model, numTokensForCompletion: numTokensForCompletion, llmEndpointParams: llmEndpointParams, systemMessage: systemMessage, promptTemplate: promptTemplate, embeddings: embeddings, contentTemplate: contentTemplate)
