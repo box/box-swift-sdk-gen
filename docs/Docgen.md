@@ -15,10 +15,7 @@ This operation is performed by calling function `getDocgenJobByIdV2025R0`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2025.0/get-docgen-jobs-id/).
 
-<!-- sample get_docgen_jobs_id_v2025.0 -->
-```
-try await client.docgen.getDocgenJobByIdV2025R0(jobId: docgenJobs.entries![0].id)
-```
+*Currently we don't have an example for calling `getDocgenJobByIdV2025R0` in integration tests*
 
 ### Arguments
 
@@ -44,10 +41,7 @@ This operation is performed by calling function `getDocgenJobsV2025R0`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2025.0/get-docgen-jobs/).
 
-<!-- sample get_docgen_jobs_v2025.0 -->
-```
-try await client.docgen.getDocgenJobsV2025R0()
-```
+*Currently we don't have an example for calling `getDocgenJobsV2025R0` in integration tests*
 
 ### Arguments
 
@@ -73,10 +67,7 @@ This operation is performed by calling function `getDocgenBatchJobByIdV2025R0`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2025.0/get-docgen-batch-jobs-id/).
 
-<!-- sample get_docgen_batch_jobs_id_v2025.0 -->
-```
-try await client.docgen.getDocgenBatchJobByIdV2025R0(batchId: docgenBatch.id)
-```
+*Currently we don't have an example for calling `getDocgenBatchJobByIdV2025R0` in integration tests*
 
 ### Arguments
 
@@ -104,10 +95,7 @@ This operation is performed by calling function `createDocgenBatchV2025R0`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2025.0/post-docgen-batches/).
 
-<!-- sample post_docgen_batches_v2025.0 -->
-```
-try await client.docgen.createDocgenBatchV2025R0(requestBody: DocGenBatchCreateRequestV2025R0(file: FileReferenceV2025R0(id: uploadedFile.id), inputSource: "api", destinationFolder: DocGenBatchCreateRequestV2025R0DestinationFolderField(id: folder.id), outputType: "pdf", documentGenerationData: [DocGenDocumentGenerationDataV2025R0(generatedFileName: "test", userInput: ["abc": "xyz"])]))
-```
+*Currently we don't have an example for calling `createDocgenBatchV2025R0` in integration tests*
 
 ### Arguments
 
