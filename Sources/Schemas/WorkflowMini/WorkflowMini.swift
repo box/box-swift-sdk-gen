@@ -4,7 +4,7 @@ import Foundation
 /// 
 /// You application must be authorized to use the `Manage Box Relay` application
 /// scope within the developer console in order to use this resource.
-public class WorkflowMini: Codable {
+public class WorkflowMini: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -12,6 +12,15 @@ public class WorkflowMini: Codable {
         case description
         case isEnabled = "is_enabled"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for the workflow
     public let id: String?
@@ -60,6 +69,20 @@ public class WorkflowMini: Codable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(isEnabled, forKey: .isEnabled)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

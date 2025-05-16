@@ -1,12 +1,21 @@
 import Foundation
 
 /// A Box Doc Gen template tag object.
-public class DocGenTagV2025R0: Codable {
+public class DocGenTagV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case tagContent = "tag_content"
         case tagType = "tag_type"
         case jsonPaths = "json_paths"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The content of the tag.
     public let tagContent: String
@@ -41,6 +50,20 @@ public class DocGenTagV2025R0: Codable {
         try container.encode(tagContent, forKey: .tagContent)
         try container.encode(tagType, forKey: .tagType)
         try container.encode(jsonPaths, forKey: .jsonPaths)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

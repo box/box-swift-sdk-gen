@@ -1,6 +1,6 @@
 import Foundation
 
-public class CreateRetentionPolicyRequestBody: Codable {
+public class CreateRetentionPolicyRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case policyName = "policy_name"
         case policyType = "policy_type"
@@ -12,6 +12,15 @@ public class CreateRetentionPolicyRequestBody: Codable {
         case areOwnersNotified = "are_owners_notified"
         case customNotificationRecipients = "custom_notification_recipients"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The name for the retention policy
     public let policyName: String
@@ -150,6 +159,20 @@ public class CreateRetentionPolicyRequestBody: Codable {
         try container.encodeIfPresent(canOwnerExtendRetention, forKey: .canOwnerExtendRetention)
         try container.encodeIfPresent(areOwnersNotified, forKey: .areOwnersNotified)
         try container.encodeIfPresent(customNotificationRecipients, forKey: .customNotificationRecipients)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

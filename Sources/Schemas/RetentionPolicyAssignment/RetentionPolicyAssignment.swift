@@ -4,7 +4,7 @@ import Foundation
 /// the files a retention policy retains.
 /// Assignments can retain files based on their folder or metadata,
 /// or hold all files in the enterprise.
-public class RetentionPolicyAssignment: Codable {
+public class RetentionPolicyAssignment: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -15,6 +15,15 @@ public class RetentionPolicyAssignment: Codable {
         case assignedAt = "assigned_at"
         case startDateField = "start_date_field"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for a retention policy assignment.
     public let id: String
@@ -94,6 +103,20 @@ public class RetentionPolicyAssignment: Codable {
         try container.encodeIfPresent(assignedBy, forKey: .assignedBy)
         try container.encodeDateTimeIfPresent(field: assignedAt, forKey: .assignedAt)
         try container.encodeIfPresent(startDateField, forKey: .startDateField)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

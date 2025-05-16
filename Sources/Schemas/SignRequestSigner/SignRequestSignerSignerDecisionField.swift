@@ -1,11 +1,20 @@
 import Foundation
 
-public class SignRequestSignerSignerDecisionField: Codable {
+public class SignRequestSignerSignerDecisionField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
         case finalizedAt = "finalized_at"
         case additionalInfo = "additional_info"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Type of decision made by the signer.
     public let type: SignRequestSignerSignerDecisionTypeField?
@@ -40,6 +49,20 @@ public class SignRequestSignerSignerDecisionField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeDateTimeIfPresent(field: finalizedAt, forKey: .finalizedAt)
         try container.encode(field: _additionalInfo.state, forKey: .additionalInfo)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,12 +1,21 @@
 import Foundation
 
 /// A metadata template used to filter the search results.
-public class MetadataFilter: Codable {
+public class MetadataFilter: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case scope
         case templateKey
         case filters
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Specifies the scope of the template to filter search results by.
     /// 
@@ -81,6 +90,20 @@ public class MetadataFilter: Codable {
         try container.encodeIfPresent(scope, forKey: .scope)
         try container.encodeIfPresent(templateKey, forKey: .templateKey)
         try container.encodeIfPresent(filters, forKey: .filters)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

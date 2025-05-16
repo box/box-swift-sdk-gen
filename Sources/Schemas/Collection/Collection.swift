@@ -8,13 +8,22 @@ import Foundation
 /// The contents of a collection can be explored in a
 /// similar way to which the contents of a folder is
 /// explored.
-public class Collection: Codable {
+public class Collection: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
         case name
         case collectionType = "collection_type"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for this collection.
     public let id: String?
@@ -60,6 +69,20 @@ public class Collection: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(collectionType, forKey: .collectionType)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

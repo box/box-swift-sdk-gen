@@ -1,12 +1,21 @@
 import Foundation
 
-public class CreateShieldInformationBarrierSegmentRestrictionRequestBody: Codable {
+public class CreateShieldInformationBarrierSegmentRestrictionRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case shieldInformationBarrierSegment = "shield_information_barrier_segment"
         case restrictedSegment = "restricted_segment"
         case type
         case shieldInformationBarrier = "shield_information_barrier"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The `type` and `id` of the requested
     /// shield information barrier segment.
@@ -53,6 +62,20 @@ public class CreateShieldInformationBarrierSegmentRestrictionRequestBody: Codabl
         try container.encode(restrictedSegment, forKey: .restrictedSegment)
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(shieldInformationBarrier, forKey: .shieldInformationBarrier)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

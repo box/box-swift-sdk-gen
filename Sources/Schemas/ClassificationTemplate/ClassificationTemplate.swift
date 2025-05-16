@@ -2,7 +2,7 @@ import Foundation
 
 /// A metadata template that holds the security classifications
 /// defined by an enterprise.
-public class ClassificationTemplate: Codable {
+public class ClassificationTemplate: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case scope
@@ -13,6 +13,15 @@ public class ClassificationTemplate: Codable {
         case hidden
         case copyInstanceOnItemCopy
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The ID of the classification template.
     public let id: String
@@ -96,6 +105,20 @@ public class ClassificationTemplate: Codable {
         try container.encode(displayName, forKey: .displayName)
         try container.encodeIfPresent(hidden, forKey: .hidden)
         try container.encodeIfPresent(copyInstanceOnItemCopy, forKey: .copyInstanceOnItemCopy)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

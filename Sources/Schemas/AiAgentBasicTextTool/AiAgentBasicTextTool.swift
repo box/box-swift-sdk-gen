@@ -7,6 +7,15 @@ public class AiAgentBasicTextTool: AiAgentBasicTextToolBase {
         case promptTemplate = "prompt_template"
     }
 
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public override var rawData: [String: Any]? {
+        return _rawData
+    }
+
+
     /// System messages try to help the LLM "understand" its role and what it is supposed to do.
     public let systemMessage: String?
 
@@ -45,6 +54,20 @@ public class AiAgentBasicTextTool: AiAgentBasicTextToolBase {
         try container.encodeIfPresent(systemMessage, forKey: .systemMessage)
         try container.encodeIfPresent(promptTemplate, forKey: .promptTemplate)
         try super.encode(to: encoder)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    override func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    override func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

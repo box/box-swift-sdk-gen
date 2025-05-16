@@ -2,13 +2,22 @@ import Foundation
 
 /// Represents a successful request to create a `zip` archive of a list of files
 /// and folders.
-public class ZipDownload: Codable {
+public class ZipDownload: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case downloadUrl = "download_url"
         case statusUrl = "status_url"
         case expiresAt = "expires_at"
         case nameConflicts = "name_conflicts"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The URL that can be used to download the `zip` archive. A `Get` request to
     /// this URL will start streaming the items requested. By default, this URL
@@ -110,6 +119,20 @@ public class ZipDownload: Codable {
         try container.encodeIfPresent(statusUrl, forKey: .statusUrl)
         try container.encodeDateTimeIfPresent(field: expiresAt, forKey: .expiresAt)
         try container.encodeIfPresent(nameConflicts, forKey: .nameConflicts)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

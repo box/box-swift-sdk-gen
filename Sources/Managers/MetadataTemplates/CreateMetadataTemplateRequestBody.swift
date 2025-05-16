@@ -1,6 +1,6 @@
 import Foundation
 
-public class CreateMetadataTemplateRequestBody: Codable {
+public class CreateMetadataTemplateRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case scope
         case displayName
@@ -9,6 +9,15 @@ public class CreateMetadataTemplateRequestBody: Codable {
         case fields
         case copyInstanceOnItemCopy
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The scope of the metadata template to create. Applications can
     /// only create templates for use within the authenticated user's
@@ -94,6 +103,20 @@ public class CreateMetadataTemplateRequestBody: Codable {
         try container.encodeIfPresent(hidden, forKey: .hidden)
         try container.encodeIfPresent(fields, forKey: .fields)
         try container.encodeIfPresent(copyInstanceOnItemCopy, forKey: .copyInstanceOnItemCopy)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

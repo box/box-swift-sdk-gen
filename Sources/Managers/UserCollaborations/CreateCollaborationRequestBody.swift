@@ -1,6 +1,6 @@
 import Foundation
 
-public class CreateCollaborationRequestBody: Codable {
+public class CreateCollaborationRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case item
         case accessibleBy = "accessible_by"
@@ -9,6 +9,15 @@ public class CreateCollaborationRequestBody: Codable {
         case canViewPath = "can_view_path"
         case expiresAt = "expires_at"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The item to attach the comment to.
     public let item: CreateCollaborationRequestBodyItemField
@@ -112,6 +121,20 @@ public class CreateCollaborationRequestBody: Codable {
         try container.encodeIfPresent(isAccessOnly, forKey: .isAccessOnly)
         try container.encodeIfPresent(canViewPath, forKey: .canViewPath)
         try container.encodeDateTimeIfPresent(field: expiresAt, forKey: .expiresAt)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

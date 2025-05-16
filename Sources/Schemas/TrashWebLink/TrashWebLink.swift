@@ -1,7 +1,7 @@
 import Foundation
 
 /// Represents a trashed web link.
-public class TrashWebLink: Codable {
+public class TrashWebLink: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
         case id
@@ -22,6 +22,15 @@ public class TrashWebLink: Codable {
         case sharedLink = "shared_link"
         case itemStatus = "item_status"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// `web_link`
     public let type: TrashWebLinkTypeField?
@@ -169,6 +178,20 @@ public class TrashWebLink: Codable {
         try container.encodeIfPresent(ownedBy, forKey: .ownedBy)
         try container.encode(field: _sharedLink.state, forKey: .sharedLink)
         try container.encodeIfPresent(itemStatus, forKey: .itemStatus)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

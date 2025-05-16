@@ -1,12 +1,21 @@
 import Foundation
 
-public class UpdateTaskByIdRequestBody: Codable {
+public class UpdateTaskByIdRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case action
         case message
         case dueAt = "due_at"
         case completionRule = "completion_rule"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The action the task assignee will be prompted to do. Must be
     /// 
@@ -68,6 +77,20 @@ public class UpdateTaskByIdRequestBody: Codable {
         try container.encodeIfPresent(message, forKey: .message)
         try container.encodeDateTimeIfPresent(field: dueAt, forKey: .dueAt)
         try container.encodeIfPresent(completionRule, forKey: .completionRule)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

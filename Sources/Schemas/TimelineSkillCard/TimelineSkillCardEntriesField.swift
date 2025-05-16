@@ -1,11 +1,20 @@
 import Foundation
 
-public class TimelineSkillCardEntriesField: Codable {
+public class TimelineSkillCardEntriesField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case text
         case appears
         case imageUrl = "image_url"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The text of the entry. This would be the display
     /// name for an item being placed on the timeline, for example the name
@@ -58,6 +67,20 @@ public class TimelineSkillCardEntriesField: Codable {
         try container.encodeIfPresent(text, forKey: .text)
         try container.encodeIfPresent(appears, forKey: .appears)
         try container.encodeIfPresent(imageUrl, forKey: .imageUrl)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

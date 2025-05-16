@@ -1,11 +1,20 @@
 import Foundation
 
-public class UpdateBoxSkillCardsOnFileRequestBody: Codable {
+public class UpdateBoxSkillCardsOnFileRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case op
         case path
         case value
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// `replace`
     public let op: UpdateBoxSkillCardsOnFileRequestBodyOpField?
@@ -43,6 +52,20 @@ public class UpdateBoxSkillCardsOnFileRequestBody: Codable {
         try container.encodeIfPresent(op, forKey: .op)
         try container.encodeIfPresent(path, forKey: .path)
         try container.encodeIfPresent(value, forKey: .value)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

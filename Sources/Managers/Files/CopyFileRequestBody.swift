@@ -1,11 +1,20 @@
 import Foundation
 
-public class CopyFileRequestBody: Codable {
+public class CopyFileRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case parent
         case name
         case version
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The destination folder to copy the file to.
     public let parent: CopyFileRequestBodyParentField
@@ -52,6 +61,20 @@ public class CopyFileRequestBody: Codable {
         try container.encode(parent, forKey: .parent)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(version, forKey: .version)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 /// A token that can be used to make authenticated API calls.
-public class AccessToken: Codable {
+public class AccessToken: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case accessToken = "access_token"
         case expiresIn = "expires_in"
@@ -10,6 +10,15 @@ public class AccessToken: Codable {
         case refreshToken = "refresh_token"
         case issuedTokenType = "issued_token_type"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The requested access token.
     public let accessToken: String?
@@ -73,6 +82,20 @@ public class AccessToken: Codable {
         try container.encodeIfPresent(restrictedTo, forKey: .restrictedTo)
         try container.encodeIfPresent(refreshToken, forKey: .refreshToken)
         try container.encodeIfPresent(issuedTokenType, forKey: .issuedTokenType)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

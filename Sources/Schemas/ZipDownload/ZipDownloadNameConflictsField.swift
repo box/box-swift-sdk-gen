@@ -1,12 +1,21 @@
 import Foundation
 
-public class ZipDownloadNameConflictsField: Codable {
+public class ZipDownloadNameConflictsField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
         case originalName = "original_name"
         case downloadName = "download_name"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The identifier of the item
     public let id: String?
@@ -50,6 +59,20 @@ public class ZipDownloadNameConflictsField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(originalName, forKey: .originalName)
         try container.encodeIfPresent(downloadName, forKey: .downloadName)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 /// The schema for AI agent create request.
-public class CreateAiAgent: Codable {
+public class CreateAiAgent: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case name
         case accessState = "access_state"
@@ -12,6 +12,15 @@ public class CreateAiAgent: Codable {
         case textGen = "text_gen"
         case extract
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The name of the AI Agent.
     public let name: String
@@ -80,6 +89,20 @@ public class CreateAiAgent: Codable {
         try container.encodeIfPresent(ask, forKey: .ask)
         try container.encodeIfPresent(textGen, forKey: .textGen)
         try container.encodeIfPresent(extract, forKey: .extract)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

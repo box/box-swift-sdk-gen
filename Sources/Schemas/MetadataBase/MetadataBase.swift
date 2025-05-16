@@ -1,13 +1,22 @@
 import Foundation
 
 /// The base representation of a metadata instance.
-public class MetadataBase: Codable {
+public class MetadataBase: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case parent = "$parent"
         case template = "$template"
         case scope = "$scope"
         case version = "$version"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The identifier of the item that this metadata instance
     /// has been attached to. This combines the `type` and the `id`
@@ -61,6 +70,20 @@ public class MetadataBase: Codable {
         try container.encodeIfPresent(template, forKey: .template)
         try container.encodeIfPresent(scope, forKey: .scope)
         try container.encodeIfPresent(version, forKey: .version)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

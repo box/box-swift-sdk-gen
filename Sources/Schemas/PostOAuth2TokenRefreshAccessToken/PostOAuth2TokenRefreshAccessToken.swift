@@ -2,13 +2,22 @@ import Foundation
 
 /// A request to refresh an Access Token. Use this API to refresh an expired
 /// Access Token using a valid Refresh Token.
-public class PostOAuth2TokenRefreshAccessToken: Codable {
+public class PostOAuth2TokenRefreshAccessToken: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case clientId = "client_id"
         case clientSecret = "client_secret"
         case refreshToken = "refresh_token"
         case grantType = "grant_type"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The client ID of the application requesting to refresh the token.
     public let clientId: String
@@ -50,6 +59,20 @@ public class PostOAuth2TokenRefreshAccessToken: Codable {
         try container.encode(clientSecret, forKey: .clientSecret)
         try container.encode(refreshToken, forKey: .refreshToken)
         try container.encode(grantType, forKey: .grantType)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

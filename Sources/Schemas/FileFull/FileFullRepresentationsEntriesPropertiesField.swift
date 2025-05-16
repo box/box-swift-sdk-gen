@@ -1,11 +1,20 @@
 import Foundation
 
-public class FileFullRepresentationsEntriesPropertiesField: Codable {
+public class FileFullRepresentationsEntriesPropertiesField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case dimensions
         case paged
         case thumb
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The width by height size of this representation in pixels.
     public let dimensions: String?
@@ -44,6 +53,20 @@ public class FileFullRepresentationsEntriesPropertiesField: Codable {
         try container.encodeIfPresent(dimensions, forKey: .dimensions)
         try container.encodeIfPresent(paged, forKey: .paged)
         try container.encodeIfPresent(thumb, forKey: .thumb)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public class UpdateAllSkillCardsOnFileRequestBody: Codable {
+public class UpdateAllSkillCardsOnFileRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case status
         case metadata
@@ -8,6 +8,15 @@ public class UpdateAllSkillCardsOnFileRequestBody: Codable {
         case fileVersion = "file_version"
         case usage
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Defines the status of this invocation. Set this to `success` when setting Skill cards.
     public let status: UpdateAllSkillCardsOnFileRequestBodyStatusField
@@ -66,6 +75,20 @@ public class UpdateAllSkillCardsOnFileRequestBody: Codable {
         try container.encode(file, forKey: .file)
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
         try container.encodeIfPresent(usage, forKey: .usage)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

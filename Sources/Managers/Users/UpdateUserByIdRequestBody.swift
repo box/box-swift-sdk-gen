@@ -1,6 +1,6 @@
 import Foundation
 
-public class UpdateUserByIdRequestBody: Codable {
+public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case enterprise
         case notify
@@ -24,6 +24,15 @@ public class UpdateUserByIdRequestBody: Codable {
         case notificationEmail = "notification_email"
         case externalAppUserId = "external_app_user_id"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Set this to `null` to roll the user out of the enterprise
     /// and make them a free user
@@ -228,6 +237,20 @@ public class UpdateUserByIdRequestBody: Codable {
         try container.encodeIfPresent(spaceAmount, forKey: .spaceAmount)
         try container.encode(field: _notificationEmail.state, forKey: .notificationEmail)
         try container.encodeIfPresent(externalAppUserId, forKey: .externalAppUserId)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,12 +1,21 @@
 import Foundation
 
-public class SkillInvocationTokenReadField: Codable {
+public class SkillInvocationTokenReadField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case accessToken = "access_token"
         case expiresIn = "expires_in"
         case tokenType = "token_type"
         case restrictedTo = "restricted_to"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The requested access token.
     public let accessToken: String?
@@ -52,6 +61,20 @@ public class SkillInvocationTokenReadField: Codable {
         try container.encodeIfPresent(expiresIn, forKey: .expiresIn)
         try container.encodeIfPresent(tokenType, forKey: .tokenType)
         try container.encodeIfPresent(restrictedTo, forKey: .restrictedTo)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

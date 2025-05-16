@@ -2,7 +2,7 @@ import Foundation
 
 /// Create a search using SQL-like syntax to return items that match specific
 /// metadata.
-public class MetadataQuery: Codable {
+public class MetadataQuery: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case from
         case ancestorFolderId = "ancestor_folder_id"
@@ -13,6 +13,15 @@ public class MetadataQuery: Codable {
         case marker
         case fields
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Specifies the template used in the query. Must be in the form
     /// `scope.templateKey`. Not all templates can be used in this field,
@@ -154,6 +163,20 @@ public class MetadataQuery: Codable {
         try container.encodeIfPresent(limit, forKey: .limit)
         try container.encodeIfPresent(marker, forKey: .marker)
         try container.encodeIfPresent(fields, forKey: .fields)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

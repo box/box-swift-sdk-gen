@@ -2,7 +2,7 @@ import Foundation
 
 /// Folder locks define access restrictions placed by folder owners
 /// to prevent specific folders from being moved or deleted.
-public class FolderLock: Codable {
+public class FolderLock: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case folder
         case id
@@ -12,6 +12,15 @@ public class FolderLock: Codable {
         case lockedOperations = "locked_operations"
         case lockType = "lock_type"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     public let folder: FolderMini?
 
@@ -78,6 +87,20 @@ public class FolderLock: Codable {
         try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(lockedOperations, forKey: .lockedOperations)
         try container.encodeIfPresent(lockType, forKey: .lockType)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

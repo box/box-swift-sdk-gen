@@ -1,11 +1,20 @@
 import Foundation
 
-public class CreateCommentRequestBody: Codable {
+public class CreateCommentRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case message
         case item
         case taggedMessage = "tagged_message"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The text of the comment.
     /// 
@@ -66,6 +75,20 @@ public class CreateCommentRequestBody: Codable {
         try container.encode(message, forKey: .message)
         try container.encode(item, forKey: .item)
         try container.encodeIfPresent(taggedMessage, forKey: .taggedMessage)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

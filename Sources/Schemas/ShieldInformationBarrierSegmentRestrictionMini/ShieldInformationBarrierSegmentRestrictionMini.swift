@@ -9,6 +9,15 @@ public class ShieldInformationBarrierSegmentRestrictionMini: ShieldInformationBa
         case restrictedSegment = "restricted_segment"
     }
 
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public override var rawData: [String: Any]? {
+        return _rawData
+    }
+
+
     /// The `type` and `id` of the
     /// requested shield information barrier segment.
     public let shieldInformationBarrierSegment: ShieldInformationBarrierSegmentRestrictionMiniShieldInformationBarrierSegmentField
@@ -47,6 +56,20 @@ public class ShieldInformationBarrierSegmentRestrictionMini: ShieldInformationBa
         try container.encode(shieldInformationBarrierSegment, forKey: .shieldInformationBarrierSegment)
         try container.encode(restrictedSegment, forKey: .restrictedSegment)
         try super.encode(to: encoder)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    override func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    override func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

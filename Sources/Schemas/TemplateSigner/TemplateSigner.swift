@@ -1,7 +1,7 @@
 import Foundation
 
 /// The schema for a Signer for Templates
-public class TemplateSigner: Codable {
+public class TemplateSigner: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case inputs
         case email
@@ -15,6 +15,15 @@ public class TemplateSigner: Codable {
         case isPhoneNumberRequired = "is_phone_number_required"
         case loginRequired = "login_required"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     public let inputs: [TemplateSignerInput]?
 
@@ -124,6 +133,20 @@ public class TemplateSigner: Codable {
         try container.encode(field: _isPasswordRequired.state, forKey: .isPasswordRequired)
         try container.encode(field: _isPhoneNumberRequired.state, forKey: .isPhoneNumberRequired)
         try container.encode(field: _loginRequired.state, forKey: .loginRequired)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

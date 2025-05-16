@@ -93,6 +93,10 @@ public enum Utils {
                 return try? encodable.serializeToString()
             }
 
+            if let array = value as? [Any] {
+                return array.map { Utils.Strings.toString(value: $0) }.paramValue
+            }
+
             return nil
         }
 
@@ -308,7 +312,7 @@ public enum Utils {
     /// - Returns: The StreamSequence
     public static func iterateChunks(stream: InputStream, chunkSize: Int64, fileSize: Int64) -> StreamSequence {
         return StreamSequence(inputStream: stream, chunkSize: Int(chunkSize))
-   }
+    }
 
     /// Asynchronously reduces the elements of an `Sequence` using a specified reducer function and initial value.
     ///
@@ -356,5 +360,35 @@ public enum Utils {
         .reduce(into: [String: String]()) { result, pair in
             result[pair.0] = pair.1
         }
+    }
+
+    /// Gets the value from an object raw data using a key.
+    ///
+    /// - Parameters:
+    ///   - obj: The object to get the value from.
+    ///   - key: The key to use for getting the value.
+    /// - Returns: The value associated with the key, or nil if not found.
+    public static func getValueFromObjectRawData(obj: Any, key: String) -> Any? {
+        guard let readable = obj as? RawJSONReadable,
+              var current = readable.getRawData() else {
+            return nil
+        }
+
+        let keys = key.split(separator: ".").map(String.init)
+        for (index, k) in keys.enumerated() {
+            if let nested = current[k] {
+                if index == keys.count - 1 {
+                    return nested
+                } else if let dict = nested as? [String: Any] {
+                    current = dict
+                } else {
+                    return nil
+                }
+            } else {
+                return nil
+            }
+        }
+
+        return nil
     }
 }

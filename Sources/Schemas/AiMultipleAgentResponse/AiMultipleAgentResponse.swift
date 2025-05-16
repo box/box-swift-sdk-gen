@@ -1,13 +1,22 @@
 import Foundation
 
 /// List of AI Agents with pagination.
-public class AiMultipleAgentResponse: Codable {
+public class AiMultipleAgentResponse: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case entries
         case limit
         case nextMarker = "next_marker"
         case prevMarker = "prev_marker"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The list of AI Agents.
     public let entries: [AiSingleAgentResponseFull]
@@ -53,6 +62,20 @@ public class AiMultipleAgentResponse: Codable {
         try container.encodeIfPresent(limit, forKey: .limit)
         try container.encode(field: _nextMarker.state, forKey: .nextMarker)
         try container.encode(field: _prevMarker.state, forKey: .prevMarker)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

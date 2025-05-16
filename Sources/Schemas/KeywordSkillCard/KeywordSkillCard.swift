@@ -1,7 +1,7 @@
 import Foundation
 
 /// A skill card that contains a set of keywords
-public class KeywordSkillCard: Codable {
+public class KeywordSkillCard: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case skill
         case invocation
@@ -11,6 +11,15 @@ public class KeywordSkillCard: Codable {
         case skillCardType = "skill_card_type"
         case skillCardTitle = "skill_card_title"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The service that applied this metadata.
     public let skill: KeywordSkillCardSkillField
@@ -75,6 +84,20 @@ public class KeywordSkillCard: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(skillCardType, forKey: .skillCardType)
         try container.encodeIfPresent(skillCardTitle, forKey: .skillCardTitle)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

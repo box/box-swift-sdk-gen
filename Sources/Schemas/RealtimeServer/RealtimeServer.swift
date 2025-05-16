@@ -2,7 +2,7 @@ import Foundation
 
 /// A real-time server that can be used for
 /// long polling user events
-public class RealtimeServer: Codable {
+public class RealtimeServer: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
         case url
@@ -10,6 +10,15 @@ public class RealtimeServer: Codable {
         case maxRetries = "max_retries"
         case retryTimeout = "retry_timeout"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// `realtime_server`
     public let type: String?
@@ -72,6 +81,20 @@ public class RealtimeServer: Codable {
         try container.encodeIfPresent(ttl, forKey: .ttl)
         try container.encodeIfPresent(maxRetries, forKey: .maxRetries)
         try container.encodeIfPresent(retryTimeout, forKey: .retryTimeout)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

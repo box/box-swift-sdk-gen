@@ -21,6 +21,15 @@ public class FolderFull: Folder {
         case isAssociatedWithAppItem = "is_associated_with_app_item"
     }
 
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public override var rawData: [String: Any]? {
+        return _rawData
+    }
+
+
     public let syncState: FolderFullSyncStateField?
 
     /// Specifies if this folder has any other collaborators.
@@ -216,6 +225,20 @@ public class FolderFull: Folder {
         try container.encodeIfPresent(classification, forKey: .classification)
         try container.encodeIfPresent(isAssociatedWithAppItem, forKey: .isAssociatedWithAppItem)
         try super.encode(to: encoder)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    override func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    override func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

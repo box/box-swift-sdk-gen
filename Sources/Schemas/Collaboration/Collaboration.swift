@@ -4,7 +4,7 @@ import Foundation
 /// folders, similar to access control lists. A collaboration object grants a
 /// user or group access to a file or folder with permissions defined by a
 /// specific role.
-public class Collaboration: Codable {
+public class Collaboration: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -22,6 +22,15 @@ public class Collaboration: Codable {
         case modifiedAt = "modified_at"
         case acceptanceRequirementsStatus = "acceptance_requirements_status"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for this collaboration.
     public let id: String
@@ -151,6 +160,20 @@ public class Collaboration: Codable {
         try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeDateTimeIfPresent(field: modifiedAt, forKey: .modifiedAt)
         try container.encodeIfPresent(acceptanceRequirementsStatus, forKey: .acceptanceRequirementsStatus)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

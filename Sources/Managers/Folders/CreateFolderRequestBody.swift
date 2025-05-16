@@ -1,12 +1,21 @@
 import Foundation
 
-public class CreateFolderRequestBody: Codable {
+public class CreateFolderRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case name
         case parent
         case folderUploadEmail = "folder_upload_email"
         case syncState = "sync_state"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The name for the new folder.
     /// 
@@ -67,6 +76,20 @@ public class CreateFolderRequestBody: Codable {
         try container.encode(parent, forKey: .parent)
         try container.encodeIfPresent(folderUploadEmail, forKey: .folderUploadEmail)
         try container.encodeIfPresent(syncState, forKey: .syncState)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

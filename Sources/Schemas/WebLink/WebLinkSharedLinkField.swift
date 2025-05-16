@@ -1,6 +1,6 @@
 import Foundation
 
-public class WebLinkSharedLinkField: Codable {
+public class WebLinkSharedLinkField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case url
         case effectiveAccess = "effective_access"
@@ -15,6 +15,15 @@ public class WebLinkSharedLinkField: Codable {
         case unsharedAt = "unshared_at"
         case permissions
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The URL that can be used to access the item on Box.
     /// 
@@ -168,6 +177,20 @@ public class WebLinkSharedLinkField: Codable {
         try container.encodeIfPresent(access, forKey: .access)
         try container.encodeDateTime(field: _unsharedAt.state, forKey: .unsharedAt)
         try container.encodeIfPresent(permissions, forKey: .permissions)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

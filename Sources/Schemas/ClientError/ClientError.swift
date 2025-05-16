@@ -1,7 +1,7 @@
 import Foundation
 
 /// A generic error
-public class ClientError: Codable {
+public class ClientError: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
         case status
@@ -11,6 +11,15 @@ public class ClientError: Codable {
         case helpUrl = "help_url"
         case requestId = "request_id"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// error
     public let type: ClientErrorTypeField?
@@ -79,6 +88,20 @@ public class ClientError: Codable {
         try container.encode(field: _contextInfo.state, forKey: .contextInfo)
         try container.encodeIfPresent(helpUrl, forKey: .helpUrl)
         try container.encodeIfPresent(requestId, forKey: .requestId)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

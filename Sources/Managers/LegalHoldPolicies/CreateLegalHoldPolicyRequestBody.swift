@@ -1,6 +1,6 @@
 import Foundation
 
-public class CreateLegalHoldPolicyRequestBody: Codable {
+public class CreateLegalHoldPolicyRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case policyName = "policy_name"
         case description
@@ -8,6 +8,15 @@ public class CreateLegalHoldPolicyRequestBody: Codable {
         case filterEndedAt = "filter_ended_at"
         case isOngoing = "is_ongoing"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The name of the policy.
     public let policyName: String
@@ -110,6 +119,20 @@ public class CreateLegalHoldPolicyRequestBody: Codable {
         try container.encodeDateTimeIfPresent(field: filterStartedAt, forKey: .filterStartedAt)
         try container.encodeDateTimeIfPresent(field: filterEndedAt, forKey: .filterEndedAt)
         try container.encodeIfPresent(isOngoing, forKey: .isOngoing)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

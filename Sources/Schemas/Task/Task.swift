@@ -3,7 +3,7 @@ import Foundation
 /// A task allows for file-centric workflows within Box. Users can
 /// create tasks on files and assign them to other users for them to complete the
 /// tasks.
-public class Task: Codable {
+public class Task: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -17,6 +17,15 @@ public class Task: Codable {
         case createdAt = "created_at"
         case completionRule = "completion_rule"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for this task
     public let id: String?
@@ -118,6 +127,20 @@ public class Task: Codable {
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(completionRule, forKey: .completionRule)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

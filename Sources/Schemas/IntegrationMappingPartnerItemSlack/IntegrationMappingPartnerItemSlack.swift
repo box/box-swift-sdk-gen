@@ -5,13 +5,22 @@ import Foundation
 /// Depending if Box for Slack is installed at the org or workspace level,
 /// provide **either** `slack_org_id` **or** `slack_workspace_id`.
 /// Do not use both parameters at the same time.
-public class IntegrationMappingPartnerItemSlack: Codable {
+public class IntegrationMappingPartnerItemSlack: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
         case slackWorkspaceId = "slack_workspace_id"
         case slackOrgId = "slack_org_id"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// ID of the mapped item (of type referenced in `type`)
     public let id: String
@@ -53,6 +62,20 @@ public class IntegrationMappingPartnerItemSlack: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(field: _slackWorkspaceId.state, forKey: .slackWorkspaceId)
         try container.encode(field: _slackOrgId.state, forKey: .slackOrgId)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

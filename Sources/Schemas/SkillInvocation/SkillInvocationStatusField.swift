@@ -1,12 +1,21 @@
 import Foundation
 
-public class SkillInvocationStatusField: Codable {
+public class SkillInvocationStatusField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case state
         case message
         case errorCode = "error_code"
         case additionalInfo = "additional_info"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The state of this event.
     /// 
@@ -66,6 +75,20 @@ public class SkillInvocationStatusField: Codable {
         try container.encodeIfPresent(message, forKey: .message)
         try container.encodeIfPresent(errorCode, forKey: .errorCode)
         try container.encodeIfPresent(additionalInfo, forKey: .additionalInfo)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

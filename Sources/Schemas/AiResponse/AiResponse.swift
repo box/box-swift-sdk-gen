@@ -1,13 +1,22 @@
 import Foundation
 
 /// AI response
-public class AiResponse: Codable {
+public class AiResponse: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case answer
         case createdAt = "created_at"
         case completionReason = "completion_reason"
         case aiAgentInfo = "ai_agent_info"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The answer provided by the LLM.
     public let answer: String
@@ -48,6 +57,20 @@ public class AiResponse: Codable {
         try container.encodeDateTime(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(completionReason, forKey: .completionReason)
         try container.encodeIfPresent(aiAgentInfo, forKey: .aiAgentInfo)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

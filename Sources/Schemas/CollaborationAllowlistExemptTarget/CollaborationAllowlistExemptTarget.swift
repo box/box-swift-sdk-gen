@@ -2,7 +2,7 @@ import Foundation
 
 /// The user that is exempt from any of the restrictions
 /// imposed by the list of allowed collaboration domains for this enterprise.
-public class CollaborationAllowlistExemptTarget: Codable {
+public class CollaborationAllowlistExemptTarget: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -11,6 +11,15 @@ public class CollaborationAllowlistExemptTarget: Codable {
         case createdAt = "created_at"
         case modifiedAt = "modified_at"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for this exemption
     public let id: String?
@@ -64,6 +73,20 @@ public class CollaborationAllowlistExemptTarget: Codable {
         try container.encodeIfPresent(user, forKey: .user)
         try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeDateTimeIfPresent(field: modifiedAt, forKey: .modifiedAt)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -6,6 +6,15 @@ public class DocGenTemplateV2025R0: DocGenTemplateBaseV2025R0 {
         case fileName = "file_name"
     }
 
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public override var rawData: [String: Any]? {
+        return _rawData
+    }
+
+
     /// The name of the template
     @CodableTriState public private(set) var fileName: String?
 
@@ -31,6 +40,20 @@ public class DocGenTemplateV2025R0: DocGenTemplateBaseV2025R0 {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(field: _fileName.state, forKey: .fileName)
         try super.encode(to: encoder)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    override func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    override func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

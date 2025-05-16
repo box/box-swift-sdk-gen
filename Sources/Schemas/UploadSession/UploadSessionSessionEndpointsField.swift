@@ -1,6 +1,6 @@
 import Foundation
 
-public class UploadSessionSessionEndpointsField: Codable {
+public class UploadSessionSessionEndpointsField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case uploadPart = "upload_part"
         case commit
@@ -9,6 +9,15 @@ public class UploadSessionSessionEndpointsField: Codable {
         case status
         case logEvent = "log_event"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The URL to upload parts to
     public let uploadPart: String?
@@ -64,6 +73,20 @@ public class UploadSessionSessionEndpointsField: Codable {
         try container.encodeIfPresent(listParts, forKey: .listParts)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(logEvent, forKey: .logEvent)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

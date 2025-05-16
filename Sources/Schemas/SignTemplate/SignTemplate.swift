@@ -1,7 +1,7 @@
 import Foundation
 
 /// A Box Sign template object
-public class SignTemplate: Codable {
+public class SignTemplate: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
         case id
@@ -21,6 +21,15 @@ public class SignTemplate: Codable {
         case readySignLink = "ready_sign_link"
         case customBranding = "custom_branding"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// object type
     public let type: SignTemplateTypeField?
@@ -166,6 +175,20 @@ public class SignTemplate: Codable {
         try container.encodeIfPresent(additionalInfo, forKey: .additionalInfo)
         try container.encode(field: _readySignLink.state, forKey: .readySignLink)
         try container.encode(field: _customBranding.state, forKey: .customBranding)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

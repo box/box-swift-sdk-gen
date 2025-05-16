@@ -11,7 +11,7 @@ import Foundation
 /// File retention API is now **deprecated**. 
 /// To get information about files and file versions under retention,
 /// see [files under retention](e://get-retention-policy-assignments-id-files-under-retention) or [file versions under retention](e://get-retention-policy-assignments-id-file-versions-under-retention) endpoints.
-public class FileVersionRetention: Codable {
+public class FileVersionRetention: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -21,6 +21,15 @@ public class FileVersionRetention: Codable {
         case dispositionAt = "disposition_at"
         case winningRetentionPolicy = "winning_retention_policy"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for this file version retention.
     public let id: String?
@@ -84,6 +93,20 @@ public class FileVersionRetention: Codable {
         try container.encodeDateTimeIfPresent(field: appliedAt, forKey: .appliedAt)
         try container.encodeDateTimeIfPresent(field: dispositionAt, forKey: .dispositionAt)
         try container.encodeIfPresent(winningRetentionPolicy, forKey: .winningRetentionPolicy)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

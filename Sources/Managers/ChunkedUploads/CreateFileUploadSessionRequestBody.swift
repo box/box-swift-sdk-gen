@@ -1,11 +1,20 @@
 import Foundation
 
-public class CreateFileUploadSessionRequestBody: Codable {
+public class CreateFileUploadSessionRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case folderId = "folder_id"
         case fileSize = "file_size"
         case fileName = "file_name"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The ID of the folder to upload the new file to.
     public let folderId: String
@@ -40,6 +49,20 @@ public class CreateFileUploadSessionRequestBody: Codable {
         try container.encode(folderId, forKey: .folderId)
         try container.encode(fileSize, forKey: .fileSize)
         try container.encode(fileName, forKey: .fileName)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public class UpdateFolderByIdRequestBodySharedLinkField: Codable {
+public class UpdateFolderByIdRequestBodySharedLinkField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case access
         case password
@@ -8,6 +8,15 @@ public class UpdateFolderByIdRequestBodySharedLinkField: Codable {
         case unsharedAt = "unshared_at"
         case permissions
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The level of access for the shared link. This can be
     /// restricted to anyone with the link (`open`), only people
@@ -99,6 +108,20 @@ public class UpdateFolderByIdRequestBodySharedLinkField: Codable {
         try container.encodeIfPresent(vanityName, forKey: .vanityName)
         try container.encodeDateTimeIfPresent(field: unsharedAt, forKey: .unsharedAt)
         try container.encodeIfPresent(permissions, forKey: .permissions)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,12 +1,21 @@
 import Foundation
 
-public class UploadFileRequestBodyAttributesField: Codable {
+public class UploadFileRequestBodyAttributesField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case name
         case parent
         case contentCreatedAt = "content_created_at"
         case contentModifiedAt = "content_modified_at"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The name of the file
     public let name: String
@@ -56,6 +65,20 @@ public class UploadFileRequestBodyAttributesField: Codable {
         try container.encode(parent, forKey: .parent)
         try container.encodeDateTimeIfPresent(field: contentCreatedAt, forKey: .contentCreatedAt)
         try container.encodeDateTimeIfPresent(field: contentModifiedAt, forKey: .contentModifiedAt)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

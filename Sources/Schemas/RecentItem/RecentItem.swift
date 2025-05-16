@@ -1,7 +1,7 @@
 import Foundation
 
 /// A recent item accessed by a user.
-public class RecentItem: Codable {
+public class RecentItem: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
         case item
@@ -9,6 +9,15 @@ public class RecentItem: Codable {
         case interactedAt = "interacted_at"
         case interactionSharedLink = "interaction_shared_link"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// `recent_item`
     public let type: String?
@@ -60,6 +69,20 @@ public class RecentItem: Codable {
         try container.encodeIfPresent(interactionType, forKey: .interactionType)
         try container.encodeDateTimeIfPresent(field: interactedAt, forKey: .interactedAt)
         try container.encodeIfPresent(interactionSharedLink, forKey: .interactionSharedLink)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,9 +1,18 @@
 import Foundation
 
-public class FileFullRepresentationsEntriesContentField: Codable {
+public class FileFullRepresentationsEntriesContentField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case urlTemplate = "url_template"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The download URL that can be used to fetch the representation.
     /// Make sure to make an authenticated API call to this endpoint.
@@ -72,6 +81,20 @@ public class FileFullRepresentationsEntriesContentField: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(urlTemplate, forKey: .urlTemplate)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

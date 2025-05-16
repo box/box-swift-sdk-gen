@@ -2,7 +2,7 @@ import Foundation
 
 /// A standard representation of a
 /// shield information barrier object
-public class ShieldInformationBarrier: Codable {
+public class ShieldInformationBarrier: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -15,6 +15,15 @@ public class ShieldInformationBarrier: Codable {
         case enabledAt = "enabled_at"
         case enabledBy = "enabled_by"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for the shield information barrier
     public let id: String?
@@ -99,6 +108,20 @@ public class ShieldInformationBarrier: Codable {
         try container.encodeIfPresent(updatedBy, forKey: .updatedBy)
         try container.encodeDateTimeIfPresent(field: enabledAt, forKey: .enabledAt)
         try container.encodeIfPresent(enabledBy, forKey: .enabledBy)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

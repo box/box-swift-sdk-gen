@@ -1,7 +1,7 @@
 import Foundation
 
 /// The schema for creating a Box Doc Gen job batch request.
-public class DocGenBatchCreateRequestV2025R0: Codable {
+public class DocGenBatchCreateRequestV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case file
         case inputSource = "input_source"
@@ -10,6 +10,15 @@ public class DocGenBatchCreateRequestV2025R0: Codable {
         case documentGenerationData = "document_generation_data"
         case fileVersion = "file_version"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     public let file: FileReferenceV2025R0
 
@@ -61,6 +70,20 @@ public class DocGenBatchCreateRequestV2025R0: Codable {
         try container.encode(outputType, forKey: .outputType)
         try container.encode(documentGenerationData, forKey: .documentGenerationData)
         try container.encodeIfPresent(fileVersion, forKey: .fileVersion)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

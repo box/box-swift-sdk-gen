@@ -1,11 +1,20 @@
 import Foundation
 
-public class BaseUrls: Codable {
+public class BaseUrls: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case baseUrl = "base_url"
         case uploadUrl = "upload_url"
         case oauth2Url = "oauth2_url"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     public let baseUrl: String
 
@@ -31,6 +40,20 @@ public class BaseUrls: Codable {
         try container.encode(baseUrl, forKey: .baseUrl)
         try container.encode(uploadUrl, forKey: .uploadUrl)
         try container.encode(oauth2Url, forKey: .oauth2Url)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -2,7 +2,7 @@ import Foundation
 
 /// The schema for a Signer object used in
 /// for creating a Box Sign request object.
-public class SignRequestCreateSigner: Codable {
+public class SignRequestCreateSigner: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case email
         case role
@@ -17,6 +17,15 @@ public class SignRequestCreateSigner: Codable {
         case signerGroupId = "signer_group_id"
         case suppressNotifications = "suppress_notifications"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Email address of the signer.
     /// The email address of the signer is required when making signature requests, except when using templates that are configured to include emails.
@@ -166,6 +175,20 @@ public class SignRequestCreateSigner: Codable {
         try container.encode(field: _password.state, forKey: .password)
         try container.encode(field: _signerGroupId.state, forKey: .signerGroupId)
         try container.encode(field: _suppressNotifications.state, forKey: .suppressNotifications)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,11 +1,20 @@
 import Foundation
 
-public class CreateCollaborationRequestBodyAccessibleByField: Codable {
+public class CreateCollaborationRequestBodyAccessibleByField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
         case id
         case login
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The type of collaborator to invite.
     public let type: CreateCollaborationRequestBodyAccessibleByTypeField
@@ -50,6 +59,20 @@ public class CreateCollaborationRequestBodyAccessibleByField: Codable {
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(login, forKey: .login)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 /// A request for a new OAuth 2.0 token
-public class PostOAuth2Token: Codable {
+public class PostOAuth2Token: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case grantType = "grant_type"
         case clientId = "client_id"
@@ -19,6 +19,15 @@ public class PostOAuth2Token: Codable {
         case boxSubjectId = "box_subject_id"
         case boxSharedLink = "box_shared_link"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The type of request being made, either using a client-side obtained
     /// authorization code, a refresh token, a JWT assertion, client credentials
@@ -215,6 +224,20 @@ public class PostOAuth2Token: Codable {
         try container.encodeIfPresent(boxSubjectType, forKey: .boxSubjectType)
         try container.encodeIfPresent(boxSubjectId, forKey: .boxSubjectId)
         try container.encodeIfPresent(boxSharedLink, forKey: .boxSharedLink)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

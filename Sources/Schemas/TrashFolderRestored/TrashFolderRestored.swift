@@ -1,7 +1,7 @@
 import Foundation
 
 /// Represents a folder restored from the trash.
-public class TrashFolderRestored: Codable {
+public class TrashFolderRestored: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case etag
@@ -25,6 +25,15 @@ public class TrashFolderRestored: Codable {
         case parent
         case itemStatus = "item_status"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier that represent a folder.
     /// 
@@ -230,6 +239,20 @@ public class TrashFolderRestored: Codable {
         try container.encode(field: _folderUploadEmail.state, forKey: .folderUploadEmail)
         try container.encodeIfPresent(parent, forKey: .parent)
         try container.encodeIfPresent(itemStatus, forKey: .itemStatus)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

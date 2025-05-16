@@ -1,12 +1,21 @@
 import Foundation
 
-public class WorkflowFlowsOutcomesIfRejectedField: Codable {
+public class WorkflowFlowsOutcomesIfRejectedField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
         case name
         case actionType = "action_type"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The identifier of the outcome
     public let id: String?
@@ -47,6 +56,20 @@ public class WorkflowFlowsOutcomesIfRejectedField: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(actionType, forKey: .actionType)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

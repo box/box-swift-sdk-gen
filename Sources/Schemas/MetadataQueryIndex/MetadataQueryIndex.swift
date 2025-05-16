@@ -1,13 +1,22 @@
 import Foundation
 
 /// A metadata query index
-public class MetadataQueryIndex: Codable {
+public class MetadataQueryIndex: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
         case status
         case id
         case fields
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Value is always `metadata_query_index`
     public let type: String
@@ -49,6 +58,20 @@ public class MetadataQueryIndex: Codable {
         try container.encode(status, forKey: .status)
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(fields, forKey: .fields)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

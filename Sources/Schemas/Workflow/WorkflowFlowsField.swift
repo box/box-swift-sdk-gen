@@ -1,6 +1,6 @@
 import Foundation
 
-public class WorkflowFlowsField: Codable {
+public class WorkflowFlowsField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -9,6 +9,15 @@ public class WorkflowFlowsField: Codable {
         case createdAt = "created_at"
         case createdBy = "created_by"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The identifier of the flow
     public let id: String?
@@ -61,6 +70,20 @@ public class WorkflowFlowsField: Codable {
         try container.encodeIfPresent(outcomes, forKey: .outcomes)
         try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }
