@@ -2,7 +2,7 @@ import Foundation
 
 /// An entry that describes an approved domain for which users can collaborate
 /// with files and folders in your enterprise or vice versa.
-public class CollaborationAllowlistEntry: Codable {
+public class CollaborationAllowlistEntry: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -11,6 +11,15 @@ public class CollaborationAllowlistEntry: Codable {
         case enterprise
         case createdAt = "created_at"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for this entry
     public let id: String?
@@ -65,6 +74,20 @@ public class CollaborationAllowlistEntry: Codable {
         try container.encodeIfPresent(direction, forKey: .direction)
         try container.encodeIfPresent(enterprise, forKey: .enterprise)
         try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

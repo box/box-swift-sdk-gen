@@ -1,6 +1,6 @@
 import Foundation
 
-public class CreateTaskRequestBody: Codable {
+public class CreateTaskRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case item
         case action
@@ -8,6 +8,15 @@ public class CreateTaskRequestBody: Codable {
         case dueAt = "due_at"
         case completionRule = "completion_rule"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The file to attach the task to.
     public let item: CreateTaskRequestBodyItemField
@@ -78,6 +87,20 @@ public class CreateTaskRequestBody: Codable {
         try container.encodeIfPresent(message, forKey: .message)
         try container.encodeDateTimeIfPresent(field: dueAt, forKey: .dueAt)
         try container.encodeIfPresent(completionRule, forKey: .completionRule)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

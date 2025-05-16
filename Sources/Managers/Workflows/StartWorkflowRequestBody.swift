@@ -1,6 +1,6 @@
 import Foundation
 
-public class StartWorkflowRequestBody: Codable {
+public class StartWorkflowRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case flow
         case files
@@ -8,6 +8,15 @@ public class StartWorkflowRequestBody: Codable {
         case type
         case outcomes
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The flow that will be triggered
     public let flow: StartWorkflowRequestBodyFlowField
@@ -58,6 +67,20 @@ public class StartWorkflowRequestBody: Codable {
         try container.encode(folder, forKey: .folder)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(outcomes, forKey: .outcomes)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 /// The status of a `zip` archive being downloaded.
-public class ZipDownloadStatus: Codable {
+public class ZipDownloadStatus: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case totalFileCount = "total_file_count"
         case downloadedFileCount = "downloaded_file_count"
@@ -9,6 +9,15 @@ public class ZipDownloadStatus: Codable {
         case skippedFolderCount = "skipped_folder_count"
         case state
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The total number of files in the archive.
     public let totalFileCount: Int64?
@@ -69,6 +78,20 @@ public class ZipDownloadStatus: Codable {
         try container.encodeIfPresent(skippedFileCount, forKey: .skippedFileCount)
         try container.encodeIfPresent(skippedFolderCount, forKey: .skippedFolderCount)
         try container.encodeIfPresent(state, forKey: .state)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

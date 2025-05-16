@@ -1,13 +1,22 @@
 import Foundation
 
 /// The assignment of a storage policy to a user or enterprise
-public class StoragePolicyAssignment: Codable {
+public class StoragePolicyAssignment: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
         case storagePolicy = "storage_policy"
         case assignedTo = "assigned_to"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for a storage policy assignment.
     public let id: String
@@ -47,6 +56,20 @@ public class StoragePolicyAssignment: Codable {
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(storagePolicy, forKey: .storagePolicy)
         try container.encodeIfPresent(assignedTo, forKey: .assignedTo)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

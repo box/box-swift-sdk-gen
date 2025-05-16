@@ -1,7 +1,7 @@
 import Foundation
 
 /// The request body to update a file request.
-public class FileRequestUpdateRequest: Codable {
+public class FileRequestUpdateRequest: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case title
         case description
@@ -10,6 +10,15 @@ public class FileRequestUpdateRequest: Codable {
         case isDescriptionRequired = "is_description_required"
         case expiresAt = "expires_at"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// An optional new title for the file request. This can be
     /// used to change the title of the file request.
@@ -127,6 +136,20 @@ public class FileRequestUpdateRequest: Codable {
         try container.encodeIfPresent(isEmailRequired, forKey: .isEmailRequired)
         try container.encodeIfPresent(isDescriptionRequired, forKey: .isDescriptionRequired)
         try container.encodeDateTimeIfPresent(field: expiresAt, forKey: .expiresAt)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

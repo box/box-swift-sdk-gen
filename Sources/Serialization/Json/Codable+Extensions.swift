@@ -16,7 +16,13 @@ extension Encodable {
 
 extension Decodable {
     public static func decode(from data: Data, with decoder: JSONDecoder = JSONDecoder()) throws -> Self {
-        return try decoder.decode(Self.self, from: data)
+        let obj =  try decoder.decode(Self.self, from: data)
+
+        if let jsonStorage = obj as? RawJSONReadable {
+            jsonStorage.setRawData(rawData: JsonUtils.dataToJsonDictionary(from: data))
+        }
+
+        return obj
     }
 
     public static func decode(string: String, with decoder: JSONDecoder = JSONDecoder()) throws -> Self {

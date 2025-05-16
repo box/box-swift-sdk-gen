@@ -1,12 +1,21 @@
 import Foundation
 
-public class UpdateCollaborationByIdRequestBody: Codable {
+public class UpdateCollaborationByIdRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case role
         case status
         case expiresAt = "expires_at"
         case canViewPath = "can_view_path"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The level of access granted.
     public let role: UpdateCollaborationByIdRequestBodyRoleField
@@ -100,6 +109,20 @@ public class UpdateCollaborationByIdRequestBody: Codable {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeDateTimeIfPresent(field: expiresAt, forKey: .expiresAt)
         try container.encodeIfPresent(canViewPath, forKey: .canViewPath)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

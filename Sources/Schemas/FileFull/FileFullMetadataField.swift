@@ -1,6 +1,6 @@
 import Foundation
 
-public class FileFullMetadataField: Codable {
+public class FileFullMetadataField: Codable, RawJSONReadable {
     private struct CodingKeys: CodingKey {
 
         var intValue: Int?
@@ -16,6 +16,15 @@ public class FileFullMetadataField: Codable {
         }
 
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     public let extraData: [String: [String: MetadataFull]]?
 
@@ -56,6 +65,20 @@ public class FileFullMetadataField: Codable {
 
         }
 
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

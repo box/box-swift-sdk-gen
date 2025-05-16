@@ -1,11 +1,20 @@
 import Foundation
 
-public class AiAgentInfoModelsField: Codable {
+public class AiAgentInfoModelsField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case name
         case provider
         case supportedPurpose = "supported_purpose"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The name of the model used for the request
     public let name: String?
@@ -40,6 +49,20 @@ public class AiAgentInfoModelsField: Codable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(provider, forKey: .provider)
         try container.encodeIfPresent(supportedPurpose, forKey: .supportedPurpose)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

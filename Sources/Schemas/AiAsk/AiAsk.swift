@@ -1,7 +1,7 @@
 import Foundation
 
 /// AI ask request object
-public class AiAsk: Codable {
+public class AiAsk: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case mode
         case prompt
@@ -10,6 +10,15 @@ public class AiAsk: Codable {
         case includeCitations = "include_citations"
         case aiAgent = "ai_agent"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Box AI handles text documents with text representations up to 1MB in size, or a maximum of 25 files, whichever comes first. If the text file size exceeds 1MB, the first 1MB of text representation will be processed. Box AI handles image documents with a resolution of 1024 x 1024 pixels, with a maximum of 5 images or 5 pages for multi-page images. If the number of image or image pages exceeds 5, the first 5 images or pages will be processed. If you set mode parameter to `single_item_qa`, the items array can have one element only. Currently Box AI does not support multi-modal requests. If both images and text are sent Box AI will only process the text.
     public let mode: AiAskModeField
@@ -64,6 +73,20 @@ public class AiAsk: Codable {
         try container.encodeIfPresent(dialogueHistory, forKey: .dialogueHistory)
         try container.encodeIfPresent(includeCitations, forKey: .includeCitations)
         try container.encodeIfPresent(aiAgent, forKey: .aiAgent)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

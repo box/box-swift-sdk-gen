@@ -1,7 +1,7 @@
 import Foundation
 
 /// The metadata assigned to a using for Box skills.
-public class SkillCardsMetadata: Codable {
+public class SkillCardsMetadata: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case canEdit = "$canEdit"
         case id = "$id"
@@ -13,6 +13,15 @@ public class SkillCardsMetadata: Codable {
         case version = "$version"
         case cards
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Whether the user can edit this metadata
     public let canEdit: Bool?
@@ -97,6 +106,20 @@ public class SkillCardsMetadata: Codable {
         try container.encodeIfPresent(typeVersion, forKey: .typeVersion)
         try container.encodeIfPresent(version, forKey: .version)
         try container.encodeIfPresent(cards, forKey: .cards)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

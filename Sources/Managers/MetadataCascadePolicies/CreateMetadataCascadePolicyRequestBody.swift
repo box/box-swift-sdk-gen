@@ -1,11 +1,20 @@
 import Foundation
 
-public class CreateMetadataCascadePolicyRequestBody: Codable {
+public class CreateMetadataCascadePolicyRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case folderId = "folder_id"
         case scope
         case templateKey
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The ID of the folder to apply the policy to. This folder will
     /// need to already have an instance of the targeted metadata
@@ -74,6 +83,20 @@ public class CreateMetadataCascadePolicyRequestBody: Codable {
         try container.encode(folderId, forKey: .folderId)
         try container.encode(scope, forKey: .scope)
         try container.encode(templateKey, forKey: .templateKey)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

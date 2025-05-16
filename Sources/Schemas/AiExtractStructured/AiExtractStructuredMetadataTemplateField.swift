@@ -1,11 +1,20 @@
 import Foundation
 
-public class AiExtractStructuredMetadataTemplateField: Codable {
+public class AiExtractStructuredMetadataTemplateField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case templateKey = "template_key"
         case type
         case scope
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The name of the metadata template.
     public let templateKey: String?
@@ -50,6 +59,20 @@ public class AiExtractStructuredMetadataTemplateField: Codable {
         try container.encodeIfPresent(templateKey, forKey: .templateKey)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(scope, forKey: .scope)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

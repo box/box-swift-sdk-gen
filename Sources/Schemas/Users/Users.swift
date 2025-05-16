@@ -1,7 +1,7 @@
 import Foundation
 
 /// A list of users.
-public class Users: Codable {
+public class Users: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case limit
         case nextMarker = "next_marker"
@@ -11,6 +11,15 @@ public class Users: Codable {
         case order
         case entries
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The limit that was used for these entries. This will be the same as the
     /// `limit` query parameter unless that value exceeded the maximum value
@@ -101,6 +110,20 @@ public class Users: Codable {
         try container.encodeIfPresent(offset, forKey: .offset)
         try container.encodeIfPresent(order, forKey: .order)
         try container.encodeIfPresent(entries, forKey: .entries)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

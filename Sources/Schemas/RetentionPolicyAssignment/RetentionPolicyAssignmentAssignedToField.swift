@@ -1,10 +1,19 @@
 import Foundation
 
-public class RetentionPolicyAssignmentAssignedToField: Codable {
+public class RetentionPolicyAssignmentAssignedToField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The ID of the folder, enterprise, or metadata template
     /// the policy is assigned to.
@@ -36,6 +45,20 @@ public class RetentionPolicyAssignmentAssignedToField: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(field: _id.state, forKey: .id)
         try container.encodeIfPresent(type, forKey: .type)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

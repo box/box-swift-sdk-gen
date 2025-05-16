@@ -18,6 +18,15 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
         case releaseNotes = "release_notes"
     }
 
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public override var rawData: [String: Any]? {
+        return _rawData
+    }
+
+
     /// Name of the legal hold policy.
     public let policyName: String?
 
@@ -139,6 +148,20 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
         try container.encodeDateTimeIfPresent(field: filterEndedAt, forKey: .filterEndedAt)
         try container.encodeIfPresent(releaseNotes, forKey: .releaseNotes)
         try super.encode(to: encoder)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    override func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    override func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

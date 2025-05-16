@@ -3,12 +3,21 @@ import Foundation
 /// The bare basic representation of a file, the minimal
 /// amount of fields returned when using the `fields` query
 /// parameter.
-public class FileBase: Codable {
+public class FileBase: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case etag
         case type
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier that represent a file.
     /// 
@@ -59,6 +68,20 @@ public class FileBase: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(field: _etag.state, forKey: .etag)
         try container.encode(type, forKey: .type)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

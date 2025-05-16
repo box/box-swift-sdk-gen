@@ -1,6 +1,6 @@
 import Foundation
 
-public class FileFullPermissionsField: Codable {
+public class FileFullPermissionsField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case canDelete = "can_delete"
         case canDownload = "can_download"
@@ -15,6 +15,15 @@ public class FileFullPermissionsField: Codable {
         case canViewAnnotationsAll = "can_view_annotations_all"
         case canViewAnnotationsSelf = "can_view_annotations_self"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Specifies if the current user can delete this item.
     public let canDelete: Bool
@@ -122,6 +131,20 @@ public class FileFullPermissionsField: Codable {
         try container.encode(canUpload, forKey: .canUpload)
         try container.encode(canViewAnnotationsAll, forKey: .canViewAnnotationsAll)
         try container.encode(canViewAnnotationsSelf, forKey: .canViewAnnotationsSelf)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

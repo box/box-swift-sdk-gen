@@ -1,6 +1,6 @@
 import Foundation
 
-public class FileFullLockField: Codable {
+public class FileFullLockField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -10,6 +10,15 @@ public class FileFullLockField: Codable {
         case isDownloadPrevented = "is_download_prevented"
         case appType = "app_type"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for this lock
     public let id: String?
@@ -77,6 +86,20 @@ public class FileFullLockField: Codable {
         try container.encodeDateTimeIfPresent(field: expiredAt, forKey: .expiredAt)
         try container.encodeIfPresent(isDownloadPrevented, forKey: .isDownloadPrevented)
         try container.encode(field: _appType.state, forKey: .appType)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

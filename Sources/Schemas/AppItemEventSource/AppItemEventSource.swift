@@ -1,7 +1,7 @@
 import Foundation
 
 /// The AppItem that triggered an event in the event stream.
-public class AppItemEventSource: Codable {
+public class AppItemEventSource: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case appItemType = "app_item_type"
@@ -9,6 +9,15 @@ public class AppItemEventSource: Codable {
         case user
         case group
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The id of the `AppItem`
     public let id: String
@@ -57,6 +66,20 @@ public class AppItemEventSource: Codable {
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(user, forKey: .user)
         try container.encodeIfPresent(group, forKey: .group)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 /// A Box Skill metadata card that puts a status message in the metadata sidebar.
-public class StatusSkillCard: Codable {
+public class StatusSkillCard: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case status
         case skill
@@ -11,6 +11,15 @@ public class StatusSkillCard: Codable {
         case skillCardType = "skill_card_type"
         case skillCardTitle = "skill_card_title"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Sets the status of the skill. This can be used to show a message to the user while the Skill is processing the data, or if it was not able to process the file.
     public let status: StatusSkillCardStatusField
@@ -75,6 +84,20 @@ public class StatusSkillCard: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(skillCardType, forKey: .skillCardType)
         try container.encodeIfPresent(skillCardTitle, forKey: .skillCardTitle)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

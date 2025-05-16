@@ -9,6 +9,15 @@ public class DocGenJobFullV2025R0: DocGenJobV2025R0 {
         case createdAt = "created_at"
     }
 
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public override var rawData: [String: Any]? {
+        return _rawData
+    }
+
+
     public let createdBy: UserBaseV2025R0
 
     public let enterprise: EnterpriseReferenceV2025R0
@@ -61,6 +70,20 @@ public class DocGenJobFullV2025R0: DocGenJobV2025R0 {
         try container.encode(source, forKey: .source)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try super.encode(to: encoder)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    override func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    override func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -3,12 +3,21 @@ import Foundation
 /// An app item represents an content object owned by an application. It can
 /// group files and folders together from different paths. That set can be shared
 /// via a collaboration.
-public class AppItem: Codable {
+public class AppItem: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case applicationType = "application_type"
         case type
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for this app item.
     public let id: String
@@ -43,6 +52,20 @@ public class AppItem: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(applicationType, forKey: .applicationType)
         try container.encode(type, forKey: .type)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

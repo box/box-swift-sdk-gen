@@ -1,11 +1,20 @@
 import Foundation
 
 /// An OAuth 2.0 error
-public class OAuth2Error: Codable {
+public class OAuth2Error: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case error
         case errorDescription = "error_description"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The type of the error returned.
     public let error: String?
@@ -33,6 +42,20 @@ public class OAuth2Error: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(error, forKey: .error)
         try container.encodeIfPresent(errorDescription, forKey: .errorDescription)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -3,13 +3,22 @@ import Foundation
 /// An app item association represents an association between a file or
 /// folder and an app item. Associations between a folder and an app item
 /// cascade down to all descendants of the folder.
-public class AppItemAssociation: Codable {
+public class AppItemAssociation: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case appItem = "app_item"
         case item
         case type
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for this app item association.
     public let id: String
@@ -49,6 +58,20 @@ public class AppItemAssociation: Codable {
         try container.encode(appItem, forKey: .appItem)
         try container.encode(item, forKey: .item)
         try container.encode(type, forKey: .type)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

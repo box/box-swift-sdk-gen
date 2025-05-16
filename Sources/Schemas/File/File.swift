@@ -21,6 +21,15 @@ public class File: FileMini {
         case itemStatus = "item_status"
     }
 
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public override var rawData: [String: Any]? {
+        return _rawData
+    }
+
+
     /// The optional description of this file.
     /// If the description exceeds 255 characters, the first 255 characters
     /// are set as a file description and the rest of it is ignored.
@@ -173,6 +182,20 @@ public class File: FileMini {
         try container.encode(field: _parent.state, forKey: .parent)
         try container.encodeIfPresent(itemStatus, forKey: .itemStatus)
         try super.encode(to: encoder)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    override func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    override func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,12 +1,21 @@
 import Foundation
 
 /// A request to create a Slack Integration Mapping object
-public class IntegrationMappingSlackCreateRequest: Codable {
+public class IntegrationMappingSlackCreateRequest: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case partnerItem = "partner_item"
         case boxItem = "box_item"
         case options
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     public let partnerItem: IntegrationMappingPartnerItemSlack
 
@@ -32,6 +41,20 @@ public class IntegrationMappingSlackCreateRequest: Codable {
         try container.encode(partnerItem, forKey: .partnerItem)
         try container.encode(boxItem, forKey: .boxItem)
         try container.encodeIfPresent(options, forKey: .options)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

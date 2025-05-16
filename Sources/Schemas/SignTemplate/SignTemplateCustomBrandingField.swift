@@ -1,12 +1,21 @@
 import Foundation
 
-public class SignTemplateCustomBrandingField: Codable {
+public class SignTemplateCustomBrandingField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case companyName = "company_name"
         case logoUri = "logo_uri"
         case brandingColor = "branding_color"
         case emailFooterText = "email_footer_text"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Name of the company
     @CodableTriState public private(set) var companyName: String?
@@ -48,6 +57,20 @@ public class SignTemplateCustomBrandingField: Codable {
         try container.encode(field: _logoUri.state, forKey: .logoUri)
         try container.encode(field: _brandingColor.state, forKey: .brandingColor)
         try container.encode(field: _emailFooterText.state, forKey: .emailFooterText)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

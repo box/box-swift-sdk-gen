@@ -1,12 +1,21 @@
 import Foundation
 
-public class CreateRetentionPolicyAssignmentRequestBody: Codable {
+public class CreateRetentionPolicyAssignmentRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case policyId = "policy_id"
         case assignTo = "assign_to"
         case filterFields = "filter_fields"
         case startDateField = "start_date_field"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The ID of the retention policy to assign
     public let policyId: String
@@ -60,6 +69,20 @@ public class CreateRetentionPolicyAssignmentRequestBody: Codable {
         try container.encode(assignTo, forKey: .assignTo)
         try container.encodeIfPresent(filterFields, forKey: .filterFields)
         try container.encodeIfPresent(startDateField, forKey: .startDateField)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public class ClassificationTemplateFieldsField: Codable {
+public class ClassificationTemplateFieldsField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case options
@@ -9,6 +9,15 @@ public class ClassificationTemplateFieldsField: Codable {
         case displayName
         case hidden
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique ID of the field.
     public let id: String
@@ -66,6 +75,20 @@ public class ClassificationTemplateFieldsField: Codable {
         try container.encode(key, forKey: .key)
         try container.encode(displayName, forKey: .displayName)
         try container.encodeIfPresent(hidden, forKey: .hidden)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

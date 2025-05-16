@@ -1,7 +1,7 @@
 import Foundation
 
 /// An upload session for chunk uploading a file.
-public class UploadSession: Codable {
+public class UploadSession: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -11,6 +11,15 @@ public class UploadSession: Codable {
         case numPartsProcessed = "num_parts_processed"
         case sessionEndpoints = "session_endpoints"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for this session
     public let id: String?
@@ -88,6 +97,20 @@ public class UploadSession: Codable {
         try container.encodeIfPresent(totalParts, forKey: .totalParts)
         try container.encodeIfPresent(numPartsProcessed, forKey: .numPartsProcessed)
         try container.encodeIfPresent(sessionEndpoints, forKey: .sessionEndpoints)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 /// The event that is sent to a webhook address when an event happens.
-public class WebhookInvocation: Codable {
+public class WebhookInvocation: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -11,6 +11,15 @@ public class WebhookInvocation: Codable {
         case trigger
         case source
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for this webhook invocation
     public let id: String?
@@ -71,6 +80,20 @@ public class WebhookInvocation: Codable {
         try container.encodeDateTimeIfPresent(field: createdAt, forKey: .createdAt)
         try container.encodeIfPresent(trigger, forKey: .trigger)
         try container.encodeIfPresent(source, forKey: .source)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

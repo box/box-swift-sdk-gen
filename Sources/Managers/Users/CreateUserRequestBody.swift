@@ -1,6 +1,6 @@
 import Foundation
 
-public class CreateUserRequestBody: Codable {
+public class CreateUserRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case name
         case login
@@ -21,6 +21,15 @@ public class CreateUserRequestBody: Codable {
         case status
         case externalAppUserId = "external_app_user_id"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The name of the user
     public let name: String
@@ -184,6 +193,20 @@ public class CreateUserRequestBody: Codable {
         try container.encodeIfPresent(isExemptFromLoginVerification, forKey: .isExemptFromLoginVerification)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(externalAppUserId, forKey: .externalAppUserId)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public class CreateGroupRequestBody: Codable {
+public class CreateGroupRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case name
         case provenance
@@ -9,6 +9,15 @@ public class CreateGroupRequestBody: Codable {
         case invitabilityLevel = "invitability_level"
         case memberViewabilityLevel = "member_viewability_level"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The name of the new group to be created. This name must be unique
     /// within the enterprise.
@@ -132,6 +141,20 @@ public class CreateGroupRequestBody: Codable {
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(invitabilityLevel, forKey: .invitabilityLevel)
         try container.encodeIfPresent(memberViewabilityLevel, forKey: .memberViewabilityLevel)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

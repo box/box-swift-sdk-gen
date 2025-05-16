@@ -5,7 +5,7 @@ import Foundation
 /// 
 /// To get more details about the classification applied to an item,
 /// request the classification metadata template.
-public class Classification: Codable {
+public class Classification: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case boxSecurityClassificationKey = "Box__Security__Classification__Key"
         case parent = "$parent"
@@ -16,6 +16,15 @@ public class Classification: Codable {
         case typeVersion = "$typeVersion"
         case canEdit = "$canEdit"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The name of the classification applied to the item.
     public let boxSecurityClassificationKey: String?
@@ -103,6 +112,20 @@ public class Classification: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(typeVersion, forKey: .typeVersion)
         try container.encodeIfPresent(canEdit, forKey: .canEdit)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

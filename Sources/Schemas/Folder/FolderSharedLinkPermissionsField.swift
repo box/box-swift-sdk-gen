@@ -1,11 +1,20 @@
 import Foundation
 
-public class FolderSharedLinkPermissionsField: Codable {
+public class FolderSharedLinkPermissionsField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case canDownload = "can_download"
         case canPreview = "can_preview"
         case canEdit = "can_edit"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Defines if the shared link allows for the item to be downloaded. For
     /// shared links on folders, this also applies to any items in the folder.
@@ -60,6 +69,20 @@ public class FolderSharedLinkPermissionsField: Codable {
         try container.encode(canDownload, forKey: .canDownload)
         try container.encode(canPreview, forKey: .canPreview)
         try container.encode(canEdit, forKey: .canEdit)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -2,7 +2,7 @@ import Foundation
 
 /// A standard representation of a file request, as returned
 /// from any file request API endpoints by default.
-public class FileRequest: Codable {
+public class FileRequest: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case folder
@@ -20,6 +20,15 @@ public class FileRequest: Codable {
         case createdBy = "created_by"
         case updatedBy = "updated_by"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for this file request.
     public let id: String
@@ -215,6 +224,20 @@ public class FileRequest: Codable {
         try container.encode(field: _etag.state, forKey: .etag)
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encodeIfPresent(updatedBy, forKey: .updatedBy)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

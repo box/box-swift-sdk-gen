@@ -1,6 +1,6 @@
 import Foundation
 
-public class TrashWebLinkPathCollectionEntriesField: Codable {
+public class TrashWebLinkPathCollectionEntriesField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
         case id
@@ -8,6 +8,15 @@ public class TrashWebLinkPathCollectionEntriesField: Codable {
         case etag
         case name
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// `folder`
     public let type: TrashWebLinkPathCollectionEntriesTypeField?
@@ -56,6 +65,20 @@ public class TrashWebLinkPathCollectionEntriesField: Codable {
         try container.encode(field: _sequenceId.state, forKey: .sequenceId)
         try container.encode(field: _etag.state, forKey: .etag)
         try container.encodeIfPresent(name, forKey: .name)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

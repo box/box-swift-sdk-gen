@@ -1,7 +1,7 @@
 import Foundation
 
 /// The AI Agent to be used for ask.
-public class AiStudioAgentAsk: Codable {
+public class AiStudioAgentAsk: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case accessState = "access_state"
         case description
@@ -12,6 +12,15 @@ public class AiStudioAgentAsk: Codable {
         case longTextMulti = "long_text_multi"
         case basicTextMulti = "basic_text_multi"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The state of the AI Agent capability. Possible values are: `enabled` and `disabled`.
     public let accessState: String
@@ -77,6 +86,20 @@ public class AiStudioAgentAsk: Codable {
         try container.encodeIfPresent(basicText, forKey: .basicText)
         try container.encodeIfPresent(longTextMulti, forKey: .longTextMulti)
         try container.encodeIfPresent(basicTextMulti, forKey: .basicTextMulti)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

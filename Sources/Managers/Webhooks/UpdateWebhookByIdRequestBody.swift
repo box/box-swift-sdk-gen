@@ -1,11 +1,20 @@
 import Foundation
 
-public class UpdateWebhookByIdRequestBody: Codable {
+public class UpdateWebhookByIdRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case target
         case address
         case triggers
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The item that will trigger the webhook
     public let target: UpdateWebhookByIdRequestBodyTargetField?
@@ -42,6 +51,20 @@ public class UpdateWebhookByIdRequestBody: Codable {
         try container.encodeIfPresent(target, forKey: .target)
         try container.encodeIfPresent(address, forKey: .address)
         try container.encodeIfPresent(triggers, forKey: .triggers)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

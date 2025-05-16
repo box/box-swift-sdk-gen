@@ -1,7 +1,7 @@
 import Foundation
 
 /// A standard representation of a signature request object.
-public class SignRequestBase: Codable {
+public class SignRequestBase: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case isDocumentPreparationNeeded = "is_document_preparation_needed"
         case redirectUrl = "redirect_url"
@@ -17,6 +17,15 @@ public class SignRequestBase: Codable {
         case templateId = "template_id"
         case externalSystemName = "external_system_name"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Indicates if the sender should receive a `prepare_url` in the response to complete document preparation using the UI.
     public let isDocumentPreparationNeeded: Bool?
@@ -121,6 +130,20 @@ public class SignRequestBase: Codable {
         try container.encode(field: _externalId.state, forKey: .externalId)
         try container.encode(field: _templateId.state, forKey: .templateId)
         try container.encode(field: _externalSystemName.state, forKey: .externalSystemName)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

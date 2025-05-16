@@ -2,7 +2,7 @@ import Foundation
 
 /// File version legal hold is an entity representing all
 /// holds on a File Version.
-public class FileVersionLegalHold: Codable {
+public class FileVersionLegalHold: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -11,6 +11,15 @@ public class FileVersionLegalHold: Codable {
         case legalHoldPolicyAssignments = "legal_hold_policy_assignments"
         case deletedAt = "deleted_at"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier for this file version legal hold
     public let id: String?
@@ -66,6 +75,20 @@ public class FileVersionLegalHold: Codable {
         try container.encodeIfPresent(file, forKey: .file)
         try container.encodeIfPresent(legalHoldPolicyAssignments, forKey: .legalHoldPolicyAssignments)
         try container.encodeDateTimeIfPresent(field: deletedAt, forKey: .deletedAt)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public class UpdateMetadataTemplateRequestBody: Codable {
+public class UpdateMetadataTemplateRequestBody: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case op
         case data
@@ -11,6 +11,15 @@ public class UpdateMetadataTemplateRequestBody: Codable {
         case multiSelectOptionKey
         case multiSelectOptionKeys
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The type of change to perform on the template. Some
     /// of these are hazardous as they will change existing templates.
@@ -96,6 +105,20 @@ public class UpdateMetadataTemplateRequestBody: Codable {
         try container.encodeIfPresent(enumOptionKeys, forKey: .enumOptionKeys)
         try container.encodeIfPresent(multiSelectOptionKey, forKey: .multiSelectOptionKey)
         try container.encodeIfPresent(multiSelectOptionKeys, forKey: .multiSelectOptionKeys)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

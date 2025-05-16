@@ -1,7 +1,7 @@
 import Foundation
 
 /// Represents a file restored from the trash.
-public class TrashFileRestored: Codable {
+public class TrashFileRestored: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case sequenceId = "sequence_id"
@@ -26,6 +26,15 @@ public class TrashFileRestored: Codable {
         case sharedLink = "shared_link"
         case parent
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The unique identifier that represent a file.
     /// 
@@ -226,6 +235,20 @@ public class TrashFileRestored: Codable {
         try container.encodeIfPresent(createdBy, forKey: .createdBy)
         try container.encode(field: _sharedLink.state, forKey: .sharedLink)
         try container.encodeIfPresent(parent, forKey: .parent)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

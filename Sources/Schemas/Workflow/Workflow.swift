@@ -9,6 +9,15 @@ public class Workflow: WorkflowMini {
         case flows
     }
 
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public override var rawData: [String: Any]? {
+        return _rawData
+    }
+
+
     /// A list of flows assigned to a workflow.
     public let flows: [WorkflowFlowsField]?
 
@@ -38,6 +47,20 @@ public class Workflow: WorkflowMini {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(flows, forKey: .flows)
         try super.encode(to: encoder)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    override func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    override func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

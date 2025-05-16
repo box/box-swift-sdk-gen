@@ -41,13 +41,21 @@ public enum JsonUtils {
 
     /// Converts SerializedData to a JSON dictionary.
     ///
-    /// - Parameter obj: The SerializedData object.
+    /// - Parameter from: The SerializedData object.
     /// - Returns: A dictionary representation of the JSON data, or nil if the conversion fails.
     public static func sdToJsonDictionary(from obj: SerializedData?) -> [String: Any]? {
         guard let jsonData = try? obj?.toJson() else {
             return nil
         }
 
+        return dataToJsonDictionary(from: jsonData)
+    }
+
+    /// Converts Data to a JSON dictionary.
+    ///
+    /// - Parameter from: The Data object.
+    /// - Returns: A dictionary representation of the JSON data, or nil if the conversion fails.
+    public static func dataToJsonDictionary(from jsonData: Data) -> [String: Any]? {
         guard let jsonObject = try? JSONSerialization.jsonObject(with: jsonData, options: []), let jsonDict = jsonObject as? [String: Any] else {
             return nil
         }

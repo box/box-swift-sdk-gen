@@ -1,11 +1,20 @@
 import Foundation
 
-public class UpdateFileByIdRequestBodyLockField: Codable {
+public class UpdateFileByIdRequestBodyLockField: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case access
         case expiresAt = "expires_at"
         case isDownloadPrevented = "is_download_prevented"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The type of this object.
     public let access: UpdateFileByIdRequestBodyLockAccessField?
@@ -40,6 +49,20 @@ public class UpdateFileByIdRequestBodyLockField: Codable {
         try container.encodeIfPresent(access, forKey: .access)
         try container.encodeDateTimeIfPresent(field: expiresAt, forKey: .expiresAt)
         try container.encodeIfPresent(isDownloadPrevented, forKey: .isDownloadPrevented)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

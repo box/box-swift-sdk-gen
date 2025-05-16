@@ -2,7 +2,7 @@ import Foundation
 
 /// The source file or folder that triggered an event in
 /// the event stream.
-public class EventSource: Codable {
+public class EventSource: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case itemType = "item_type"
         case itemId = "item_id"
@@ -11,6 +11,15 @@ public class EventSource: Codable {
         case parent
         case ownedBy = "owned_by"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The type of the item that the event
     /// represents. Can be `file` or `folder`.
@@ -78,6 +87,20 @@ public class EventSource: Codable {
         try container.encodeIfPresent(classification, forKey: .classification)
         try container.encode(field: _parent.state, forKey: .parent)
         try container.encodeIfPresent(ownedBy, forKey: .ownedBy)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

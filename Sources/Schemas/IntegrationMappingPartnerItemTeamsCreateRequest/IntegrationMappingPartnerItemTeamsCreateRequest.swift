@@ -1,13 +1,22 @@
 import Foundation
 
 /// The schema for an integration mapping mapped item object for type Teams.
-public class IntegrationMappingPartnerItemTeamsCreateRequest: Codable {
+public class IntegrationMappingPartnerItemTeamsCreateRequest: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
         case id
         case tenantId = "tenant_id"
         case teamId = "team_id"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// Type of the mapped item referenced in `id`
     public let type: IntegrationMappingPartnerItemTeamsCreateRequestTypeField
@@ -49,6 +58,20 @@ public class IntegrationMappingPartnerItemTeamsCreateRequest: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(tenantId, forKey: .tenantId)
         try container.encode(teamId, forKey: .teamId)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

@@ -1,13 +1,22 @@
 import Foundation
 
 /// AI text gen request object
-public class AiTextGen: Codable {
+public class AiTextGen: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case prompt
         case items
         case dialogueHistory = "dialogue_history"
         case aiAgent = "ai_agent"
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The prompt provided by the client to be answered by the LLM. The prompt's length is limited to 10000 characters.
     public let prompt: String
@@ -56,6 +65,20 @@ public class AiTextGen: Codable {
         try container.encode(items, forKey: .items)
         try container.encodeIfPresent(dialogueHistory, forKey: .dialogueHistory)
         try container.encodeIfPresent(aiAgent, forKey: .aiAgent)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }

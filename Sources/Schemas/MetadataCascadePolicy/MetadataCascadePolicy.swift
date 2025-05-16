@@ -2,7 +2,7 @@ import Foundation
 
 /// A metadata cascade policy automatically applies a metadata template instance
 /// to all the files and folders within the targeted folder.
-public class MetadataCascadePolicy: Codable {
+public class MetadataCascadePolicy: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
         case type
@@ -11,6 +11,15 @@ public class MetadataCascadePolicy: Codable {
         case scope
         case templateKey
     }
+
+    /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
+    private var _rawData: [String: Any]?
+
+    /// Returns the raw dictionary data associated with the instance. This is a read-only property.
+    public var rawData: [String: Any]? {
+        return _rawData
+    }
+
 
     /// The ID of the metadata cascade policy object
     public let id: String
@@ -102,6 +111,20 @@ public class MetadataCascadePolicy: Codable {
         try container.encodeIfPresent(parent, forKey: .parent)
         try container.encodeIfPresent(scope, forKey: .scope)
         try container.encodeIfPresent(templateKey, forKey: .templateKey)
+    }
+
+    /// Sets the raw JSON data.
+    ///
+    /// - Parameters:
+    ///   - rawData: A dictionary containing the raw JSON data
+    func setRawData(rawData: [String: Any]?) {
+        self._rawData = rawData
+    }
+
+    /// Gets the raw JSON data
+    /// - Returns: The `[String: Any]?`.
+    func getRawData() -> [String: Any]? {
+        return self._rawData
     }
 
 }
