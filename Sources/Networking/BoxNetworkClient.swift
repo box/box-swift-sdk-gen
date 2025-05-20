@@ -292,6 +292,8 @@ public class BoxNetworkClient: NetworkClient {
         let nonNullQueryParams: [String: String] = params.compactMapValues { $0?.paramValue }
         var components = URLComponents(url: URL(string: url)!, resolvingAgainstBaseURL: true)!
         components.queryItems = nonNullQueryParams.map { URLQueryItem(name: $0.key, value: $0.value) }
+        components.percentEncodedQuery = components.percentEncodedQuery?
+            .replacingOccurrences(of: "+", with: "%2B")
 
         return components.url!
     }
