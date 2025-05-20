@@ -39,8 +39,7 @@ public enum AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(AiAgentAskOrAiAgentExtractOrAiAgentExtractStructuredOrAiAgentTextGen.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key type"))
-
+                    break
                 }
             }
 
