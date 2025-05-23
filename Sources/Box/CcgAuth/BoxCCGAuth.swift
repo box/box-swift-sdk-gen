@@ -93,7 +93,7 @@ public class BoxCCGAuth: Authentication {
     /// - Returns: The `AccessToken`.
     /// - Throws: The `GeneralError`.
     public func downscopeToken(scopes: [String], resource: String? = nil, sharedLink: String? = nil, networkSession: NetworkSession? = nil) async throws -> AccessToken {
-        let token: AccessToken? = try await self.tokenStorage.get()
+        let token: AccessToken? = try await self.retrieveToken(networkSession: networkSession)
         if token == nil {
             throw BoxSDKError(message: "No access token is available. Make an API call to retrieve a token before calling this method.")
         }

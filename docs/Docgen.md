@@ -15,7 +15,10 @@ This operation is performed by calling function `getDocgenJobByIdV2025R0`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2025.0/get-docgen-jobs-id/).
 
-*Currently we don't have an example for calling `getDocgenJobByIdV2025R0` in integration tests*
+<!-- sample get_docgen_jobs_id_v2025.0 -->
+```
+try await client.docgen.getDocgenJobByIdV2025R0(jobId: docgenJobItemFromList.id)
+```
 
 ### Arguments
 
@@ -41,7 +44,10 @@ This operation is performed by calling function `getDocgenJobsV2025R0`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2025.0/get-docgen-jobs/).
 
-*Currently we don't have an example for calling `getDocgenJobsV2025R0` in integration tests*
+<!-- sample get_docgen_jobs_v2025.0 -->
+```
+try await client.docgen.getDocgenJobsV2025R0(queryParams: GetDocgenJobsV2025R0QueryParams(limit: Int64(500)))
+```
 
 ### Arguments
 
@@ -67,7 +73,10 @@ This operation is performed by calling function `getDocgenBatchJobByIdV2025R0`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2025.0/get-docgen-batch-jobs-id/).
 
-*Currently we don't have an example for calling `getDocgenBatchJobByIdV2025R0` in integration tests*
+<!-- sample get_docgen_batch_jobs_id_v2025.0 -->
+```
+try await client.docgen.getDocgenBatchJobByIdV2025R0(batchId: docgenBatch.id)
+```
 
 ### Arguments
 
@@ -95,7 +104,10 @@ This operation is performed by calling function `createDocgenBatchV2025R0`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2025.0/post-docgen-batches/).
 
-*Currently we don't have an example for calling `createDocgenBatchV2025R0` in integration tests*
+<!-- sample post_docgen_batches_v2025.0 -->
+```
+try await client.docgen.createDocgenBatchV2025R0(requestBody: DocGenBatchCreateRequestV2025R0(file: FileReferenceV2025R0(id: uploadedFile.id), inputSource: "api", destinationFolder: DocGenBatchCreateRequestV2025R0DestinationFolderField(id: folder.id), outputType: "pdf", documentGenerationData: [DocGenDocumentGenerationDataV2025R0(generatedFileName: "test", userInput: ["abc": "xyz"])]))
+```
 
 ### Arguments
 

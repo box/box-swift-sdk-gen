@@ -18,8 +18,7 @@ public enum IntegrationMappingPartnerItemSlackUnion: Codable {
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(IntegrationMappingPartnerItemSlackUnion.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key type"))
-
+                    break
                 }
             }
 

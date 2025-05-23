@@ -45,7 +45,10 @@ This operation is performed by calling function `getEventsWithLongPolling`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/options-events/).
 
-*Currently we don't have an example for calling `getEventsWithLongPolling` in integration tests*
+<!-- sample options_events -->
+```
+try await client.events.getEventsWithLongPolling()
+```
 
 ### Arguments
 
@@ -78,7 +81,10 @@ This operation is performed by calling function `getEvents`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-events/).
 
-*Currently we don't have an example for calling `getEvents` in integration tests*
+<!-- sample get_events -->
+```
+try await client.events.getEvents()
+```
 
 ### Arguments
 

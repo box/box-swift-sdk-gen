@@ -32,8 +32,7 @@ public enum FileOrFolderOrWebLink: Codable {
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(FileOrFolderOrWebLink.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key type"))
-
+                    break
                 }
             }
 
