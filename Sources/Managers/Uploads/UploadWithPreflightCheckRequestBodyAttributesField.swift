@@ -18,7 +18,10 @@ public class UploadWithPreflightCheckRequestBodyAttributesField: Codable, RawJSO
     }
 
 
-    /// The name of the file
+    /// The name of the file.
+    /// 
+    /// File names must be unique within their parent folder. The name check is case-insensitive, so a file
+    /// named `New File` cannot be created in a parent folder that already contains a folder named `new file`.
     public let name: String
 
     /// The parent folder to upload the file to
@@ -40,7 +43,10 @@ public class UploadWithPreflightCheckRequestBodyAttributesField: Codable, RawJSO
     /// Initializer for a UploadWithPreflightCheckRequestBodyAttributesField.
     ///
     /// - Parameters:
-    ///   - name: The name of the file
+    ///   - name: The name of the file.
+    ///     
+    ///     File names must be unique within their parent folder. The name check is case-insensitive, so a file
+    ///     named `New File` cannot be created in a parent folder that already contains a folder named `new file`.
     ///   - parent: The parent folder to upload the file to
     ///   - size: The size of the file in bytes
     ///   - contentCreatedAt: Defines the time the file was originally created at.
