@@ -6,6 +6,7 @@ public class AiAgentExtract: Codable, RawJSONReadable {
         case type
         case longText = "long_text"
         case basicText = "basic_text"
+        case basicImage = "basic_image"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -24,16 +25,20 @@ public class AiAgentExtract: Codable, RawJSONReadable {
 
     public let basicText: AiAgentBasicTextTool?
 
+    public let basicImage: AiAgentBasicTextTool?
+
     /// Initializer for a AiAgentExtract.
     ///
     /// - Parameters:
     ///   - type: The type of AI agent to be used for extraction.
     ///   - longText: 
     ///   - basicText: 
-    public init(type: AiAgentExtractTypeField = AiAgentExtractTypeField.aiAgentExtract, longText: AiAgentLongTextTool? = nil, basicText: AiAgentBasicTextTool? = nil) {
+    ///   - basicImage: 
+    public init(type: AiAgentExtractTypeField = AiAgentExtractTypeField.aiAgentExtract, longText: AiAgentLongTextTool? = nil, basicText: AiAgentBasicTextTool? = nil, basicImage: AiAgentBasicTextTool? = nil) {
         self.type = type
         self.longText = longText
         self.basicText = basicText
+        self.basicImage = basicImage
     }
 
     required public init(from decoder: Decoder) throws {
@@ -41,6 +46,7 @@ public class AiAgentExtract: Codable, RawJSONReadable {
         type = try container.decode(AiAgentExtractTypeField.self, forKey: .type)
         longText = try container.decodeIfPresent(AiAgentLongTextTool.self, forKey: .longText)
         basicText = try container.decodeIfPresent(AiAgentBasicTextTool.self, forKey: .basicText)
+        basicImage = try container.decodeIfPresent(AiAgentBasicTextTool.self, forKey: .basicImage)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -48,6 +54,7 @@ public class AiAgentExtract: Codable, RawJSONReadable {
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(longText, forKey: .longText)
         try container.encodeIfPresent(basicText, forKey: .basicText)
+        try container.encodeIfPresent(basicImage, forKey: .basicImage)
     }
 
     /// Sets the raw JSON data.

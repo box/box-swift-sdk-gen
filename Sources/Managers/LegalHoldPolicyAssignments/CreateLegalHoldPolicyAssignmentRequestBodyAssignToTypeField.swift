@@ -5,6 +5,8 @@ public enum CreateLegalHoldPolicyAssignmentRequestBodyAssignToTypeField: Codable
     case fileVersion
     case folder
     case user
+    case ownership
+    case interaction
     case customValue(String)
 
     public init(rawValue value: String) {
@@ -17,6 +19,10 @@ public enum CreateLegalHoldPolicyAssignmentRequestBodyAssignToTypeField: Codable
             self = .folder
         case "user".lowercased():
             self = .user
+        case "ownership".lowercased():
+            self = .ownership
+        case "interaction".lowercased():
+            self = .interaction
         default:
             self = .customValue(value)
         }
@@ -32,6 +38,10 @@ public enum CreateLegalHoldPolicyAssignmentRequestBodyAssignToTypeField: Codable
             return "folder"
         case .user:
             return "user"
+        case .ownership:
+            return "ownership"
+        case .interaction:
+            return "interaction"
         case .customValue(let value):
             return value
         }
