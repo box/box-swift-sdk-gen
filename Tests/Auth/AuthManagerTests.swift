@@ -11,6 +11,13 @@ class AuthManagerTests: XCTestCase {
         XCTAssertTrue(authUrl == "https://account.box.com/api/oauth2/authorize?client_id=OAUTH_CLIENT_ID&response_type=code" || authUrl == "https://account.box.com/api/oauth2/authorize?response_type=code&client_id=OAUTH_CLIENT_ID")
     }
 
+    public func testOauthDownscopeTokenSucceedsIfNoTokenAvailable() async throws {
+        let config: OAuthConfig = OAuthConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"))
+        let auth: BoxOAuth = BoxOAuth(config: config)
+        let resourcePath: String = "\("https://api.box.com/2.0/files/12345")"
+        await XCTAssertThrowsErrorAsync(try await auth.downscopeToken(scopes: ["item_rename", "item_preview"], resource: resourcePath))
+    }
+
     public func testCcgAuth() async throws {
         let userId: String = Utils.getEnvironmentVariable(name: "USER_ID")
         let enterpriseId: String = Utils.getEnvironmentVariable(name: "ENTERPRISE_ID")
@@ -42,6 +49,15 @@ class AuthManagerTests: XCTestCase {
         try await parentClient.folders.deleteFolderById(folderId: folder.id)
     }
 
+    public func testCcgDownscopeTokenSucceedsIfNoTokenAvailable() async throws {
+        let ccgConfig: CCGConfig = CCGConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"), userId: Utils.getEnvironmentVariable(name: "USER_ID"))
+        let auth: BoxCCGAuth = BoxCCGAuth(config: ccgConfig)
+        let downscopedToken: AccessToken = try await auth.downscopeToken(scopes: ["root_readonly"])
+        XCTAssertTrue(downscopedToken.accessToken != nil)
+        let downscopedClient: BoxClient = BoxClient(auth: BoxDeveloperTokenAuth(token: downscopedToken.accessToken!))
+        await XCTAssertThrowsErrorAsync(try await downscopedClient.uploads.uploadFile(requestBody: UploadFileRequestBody(attributes: UploadFileRequestBodyAttributesField(name: Utils.getUUID(), parent: UploadFileRequestBodyAttributesParentField(id: "0")), file: Utils.generateByteStream(size: 1024 * 1024))))
+    }
+
     public func testCcgAuthRevoke() async throws {
         let ccgConfig: CCGConfig = CCGConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"), userId: Utils.getEnvironmentVariable(name: "USER_ID"))
         let auth: BoxCCGAuth = BoxCCGAuth(config: ccgConfig)
@@ -50,6 +66,13 @@ class AuthManagerTests: XCTestCase {
         try await auth.revokeToken()
         let tokenFromStorageAfterRevoke: AccessToken = try await auth.retrieveToken()
         XCTAssertTrue(tokenFromStorageBeforeRevoke.accessToken != tokenFromStorageAfterRevoke.accessToken)
+    }
+
+    public func testDeveloperDownscopeTokenSucceedsIfNoTokenAvailable() async throws {
+        let developerTokenConfig: DeveloperTokenConfig = DeveloperTokenConfig(clientId: Utils.getEnvironmentVariable(name: "CLIENT_ID"), clientSecret: Utils.getEnvironmentVariable(name: "CLIENT_SECRET"))
+        let auth: BoxDeveloperTokenAuth = BoxDeveloperTokenAuth(token: "", config: developerTokenConfig)
+        let resourcePath: String = "\("https://api.box.com/2.0/folders/12345")"
+        await XCTAssertThrowsErrorAsync(try await auth.downscopeToken(scopes: ["item_rename", "item_preview"], resource: resourcePath))
     }
 
     public func getAccessToken() async throws -> AccessToken {
