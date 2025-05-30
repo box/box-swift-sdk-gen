@@ -5,6 +5,8 @@ public enum GetLegalHoldPolicyAssignmentsQueryParamsAssignToTypeField: CodableSt
     case fileVersion
     case folder
     case user
+    case ownership
+    case interactions
     case customValue(String)
 
     public init(rawValue value: String) {
@@ -17,6 +19,10 @@ public enum GetLegalHoldPolicyAssignmentsQueryParamsAssignToTypeField: CodableSt
             self = .folder
         case "user".lowercased():
             self = .user
+        case "ownership".lowercased():
+            self = .ownership
+        case "interactions".lowercased():
+            self = .interactions
         default:
             self = .customValue(value)
         }
@@ -32,6 +38,10 @@ public enum GetLegalHoldPolicyAssignmentsQueryParamsAssignToTypeField: CodableSt
             return "folder"
         case .user:
             return "user"
+        case .ownership:
+            return "ownership"
+        case .interactions:
+            return "interactions"
         case .customValue(let value):
             return value
         }

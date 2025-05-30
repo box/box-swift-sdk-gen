@@ -8,6 +8,8 @@ public class AiAgentAsk: Codable, RawJSONReadable {
         case basicText = "basic_text"
         case longTextMulti = "long_text_multi"
         case basicTextMulti = "basic_text_multi"
+        case basicImage = "basic_image"
+        case basicImageMulti = "basic_image_multi"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -30,6 +32,10 @@ public class AiAgentAsk: Codable, RawJSONReadable {
 
     public let basicTextMulti: AiAgentBasicTextTool?
 
+    public let basicImage: AiAgentBasicTextTool?
+
+    public let basicImageMulti: AiAgentBasicTextTool?
+
     /// Initializer for a AiAgentAsk.
     ///
     /// - Parameters:
@@ -38,12 +44,16 @@ public class AiAgentAsk: Codable, RawJSONReadable {
     ///   - basicText: 
     ///   - longTextMulti: 
     ///   - basicTextMulti: 
-    public init(type: AiAgentAskTypeField = AiAgentAskTypeField.aiAgentAsk, longText: AiAgentLongTextTool? = nil, basicText: AiAgentBasicTextTool? = nil, longTextMulti: AiAgentLongTextTool? = nil, basicTextMulti: AiAgentBasicTextTool? = nil) {
+    ///   - basicImage: 
+    ///   - basicImageMulti: 
+    public init(type: AiAgentAskTypeField = AiAgentAskTypeField.aiAgentAsk, longText: AiAgentLongTextTool? = nil, basicText: AiAgentBasicTextTool? = nil, longTextMulti: AiAgentLongTextTool? = nil, basicTextMulti: AiAgentBasicTextTool? = nil, basicImage: AiAgentBasicTextTool? = nil, basicImageMulti: AiAgentBasicTextTool? = nil) {
         self.type = type
         self.longText = longText
         self.basicText = basicText
         self.longTextMulti = longTextMulti
         self.basicTextMulti = basicTextMulti
+        self.basicImage = basicImage
+        self.basicImageMulti = basicImageMulti
     }
 
     required public init(from decoder: Decoder) throws {
@@ -53,6 +63,8 @@ public class AiAgentAsk: Codable, RawJSONReadable {
         basicText = try container.decodeIfPresent(AiAgentBasicTextTool.self, forKey: .basicText)
         longTextMulti = try container.decodeIfPresent(AiAgentLongTextTool.self, forKey: .longTextMulti)
         basicTextMulti = try container.decodeIfPresent(AiAgentBasicTextTool.self, forKey: .basicTextMulti)
+        basicImage = try container.decodeIfPresent(AiAgentBasicTextTool.self, forKey: .basicImage)
+        basicImageMulti = try container.decodeIfPresent(AiAgentBasicTextTool.self, forKey: .basicImageMulti)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -62,6 +74,8 @@ public class AiAgentAsk: Codable, RawJSONReadable {
         try container.encodeIfPresent(basicText, forKey: .basicText)
         try container.encodeIfPresent(longTextMulti, forKey: .longTextMulti)
         try container.encodeIfPresent(basicTextMulti, forKey: .basicTextMulti)
+        try container.encodeIfPresent(basicImage, forKey: .basicImage)
+        try container.encodeIfPresent(basicImageMulti, forKey: .basicImageMulti)
     }
 
     /// Sets the raw JSON data.
