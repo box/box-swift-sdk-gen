@@ -42,8 +42,7 @@ public enum AppItemEventSourceOrEventSourceOrFileOrFolderOrGenericSourceOrUser: 
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(AppItemEventSourceOrEventSourceOrFileOrFolderOrGenericSourceOrUser.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key type"))
-
+                    break
                 }
             }
 
@@ -62,8 +61,7 @@ public enum AppItemEventSourceOrEventSourceOrFileOrFolderOrGenericSourceOrUser: 
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(AppItemEventSourceOrEventSourceOrFileOrFolderOrGenericSourceOrUser.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key itemType"))
-
+                    break
                 }
             }
 

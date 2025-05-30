@@ -87,6 +87,14 @@ public enum Utils {
         ///   - value: An instance of any type.
         /// - Returns: A string representation of the provided parameter, or nil when this is not possible.
         public static func toString(value: Any?) -> String? {
+            if let date = value as? Date {
+                if Utils.Dates.isDateOnly(date) {
+                    return Utils.Dates.dateToString(date: date)
+                } else {
+                    return Utils.Dates.dateTimeToString(dateTime: date)
+                }
+            }
+
             if let parameterConvertible = value as? ParameterConvertible {
                 return parameterConvertible.paramValue
             } else if let encodable = value as? Encodable {
@@ -169,6 +177,21 @@ public enum Utils {
         /// - Returns: String
         public static func  dateToString(date: Date) -> String {
             dateFormatter.string(from: date)
+        }
+
+        /// Checks if the date is in date only format
+        /// - Parameters:
+        ///   - date: Date
+        /// - Returns: True if the date is in date only format, otherwise false.
+        public static func isDateOnly(_ date: Date) -> Bool {
+            var calendar = Calendar.current
+            calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+            let components = calendar.dateComponents([.hour, .minute, .second, .nanosecond], from: date)
+
+            return (components.hour == 0 &&
+                    components.minute == 0 &&
+                    components.second == 0 &&
+                    components.nanosecond == 0)
         }
     }
 

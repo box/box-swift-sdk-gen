@@ -39,8 +39,7 @@ public enum KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkil
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(KeywordSkillCardOrStatusSkillCardOrTimelineSkillCardOrTranscriptSkillCard.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key skillCardType"))
-
+                    break
                 }
             }
 

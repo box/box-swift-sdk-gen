@@ -25,8 +25,7 @@ public enum AiAgentAskOrAiAgentReference: Codable {
                     }
 
                 default:
-                    throw DecodingError.typeMismatch(AiAgentAskOrAiAgentReference.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "The Decoded object contains an unexpected value for key type"))
-
+                    break
                 }
             }
 

@@ -13,6 +13,7 @@ public enum AnyCodable: Codable {
     case array([AnyCodable])
     case dictionary([String: AnyCodable])
     case codable(Codable)
+    case null
 
     /// Creates an `AnyCodable` instance from any `Codable` value.
     ///
@@ -32,18 +33,20 @@ public enum AnyCodable: Codable {
     /// Retrieves the raw value stored inside the `AnyCodable`.
     ///
     public var value: Any {
-         switch self {
-         case .int(let v): return v
-         case .double(let v): return v
-         case .bool(let v): return v
-         case .string(let v): return v
-         case .array(let arr): return arr.map { $0.value }
-         case .dictionary(let dict):
-             return dict.mapValues { $0.value }
-         case .codable(let codable):
-             return codable
-         }
-     }
+        switch self {
+        case .int(let v): return v
+        case .double(let v): return v
+        case .bool(let v): return v
+        case .string(let v): return v
+        case .array(let arr): return arr.map { $0.value }
+        case .dictionary(let dict):
+            return dict.mapValues { $0.value }
+        case .codable(let codable):
+            return codable
+        case .null:
+            return JSONNull()
+        }
+    }
 
     /// Encodes the wrapped value to the given encoder.
     ///
@@ -58,6 +61,19 @@ public enum AnyCodable: Codable {
         case .array(let v): try container.encode(v)
         case .dictionary(let v): try container.encode(v)
         case .codable(let box): try box.encode(to: encoder)
+        case .null: try container.encodeNil()
+        }
+    }
+
+
+    private struct AnyCodingKey: CodingKey {
+        var stringValue: String
+        init?(stringValue: String) { self.stringValue = stringValue }
+
+        var intValue: Int?
+        init?(intValue: Int) {
+            self.stringValue = "\(intValue)"
+            self.intValue = intValue
         }
     }
 
@@ -66,7 +82,9 @@ public enum AnyCodable: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
 
-        if let value = try? container.decode(Int.self) {
+        if container.decodeNil() {
+            self = .null
+        } else if let value = try? container.decode(Int.self) {
             self = .int(value)
         } else if let value = try? container.decode(Double.self) {
             self = .double(value)
@@ -189,7 +207,7 @@ extension AnyCodable: ParameterConvertible {
         case .array(let arr): return arr.paramValue
         case .dictionary(let dict):
             let content = dict.map { "\($0): \($1.paramValue ?? "")" }.joined(separator: ", ")
-               return "{" + content + "}"
+            return "{" + content + "}"
         case .codable(let codable):
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
@@ -199,6 +217,7 @@ extension AnyCodable: ParameterConvertible {
             } else {
                 return nil
             }
+        case .null: return "null"
         }
     }
 }
@@ -219,6 +238,60 @@ extension AnyCodable: CustomStringConvertible {
             return "Dictionary({\(dictDescription)})"
         case .codable(let codable):
             return "Codable(\(codable))"
+        case .null:
+            return "null"
         }
+    }
+}
+
+
+/// A representation of a JSON `null` value.
+///
+/// `JSONNull` is used as a concrete placeholder for `null` values in JSON when decoding into `AnyCodable`.
+/// Since Swift's `nil` cannot be assigned to a value of type `Any`, this type allows a `null` to be explicitly
+/// represented and handled just like any other value. It conforms to `Codable`, `Equatable`, and `CustomStringConvertible`
+/// so that it can be encoded, compared, and printed like other values.
+///
+/// This is especially useful when you want to preserve `null` in encoded data or avoid dealing with `Optional<Any>`.
+public struct JSONNull: Codable, CustomStringConvertible, Equatable {
+
+    /// Creates a new instance representing a JSON `null` value.
+    public init() {}
+
+    /// Decodes a `null` from a decoder. Throws if the value is not actually `null`.
+    ///
+    /// - Parameter decoder: The decoder to decode from.
+    /// - Throws: A `DecodingError.typeMismatch` if the value is not `null`.
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if !container.decodeNil() {
+            throw DecodingError.typeMismatch(
+                JSONNull.self,
+                DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Expected null")
+            )
+        }
+    }
+
+    /// Encodes this instance as `null` into the given encoder.
+    ///
+    /// - Parameter encoder: The encoder to encode to.
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encodeNil()
+    }
+
+    /// A textual representation of the value, which is simply `"null"`.
+    public var description: String {
+        return "null"
+    }
+
+    /// Compares two `JSONNull` instances. Always returns `true` since all `JSONNull` values are equal.
+    ///
+    /// - Parameters:
+    ///   - lhs: A `JSONNull` instance.
+    ///   - rhs: Another `JSONNull` instance.
+    /// - Returns: `true` always.
+    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
+        return true
     }
 }
