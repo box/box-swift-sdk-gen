@@ -25,6 +25,15 @@ public class UpdateFolderByIdRequestBody: Codable, RawJSONReadable {
 
 
     /// The optional new name for this folder.
+    /// 
+    /// The following restrictions to folder names apply: names containing
+    /// non-printable ASCII characters, forward and backward slashes
+    /// (`/`, `\`), names with trailing spaces, and names `.` and `..` are
+    /// not allowed.
+    /// 
+    /// Folder names must be unique within their parent folder. The name check is case-insensitive, 
+    /// so a folder named `New Folder` cannot be created in a parent folder that already contains 
+    /// a folder named `new folder`.
     public let name: String?
 
     /// The optional description of this folder
@@ -89,6 +98,15 @@ public class UpdateFolderByIdRequestBody: Codable, RawJSONReadable {
     ///
     /// - Parameters:
     ///   - name: The optional new name for this folder.
+    ///     
+    ///     The following restrictions to folder names apply: names containing
+    ///     non-printable ASCII characters, forward and backward slashes
+    ///     (`/`, `\`), names with trailing spaces, and names `.` and `..` are
+    ///     not allowed.
+    ///     
+    ///     Folder names must be unique within their parent folder. The name check is case-insensitive, 
+    ///     so a folder named `New Folder` cannot be created in a parent folder that already contains 
+    ///     a folder named `new folder`.
     ///   - description: The optional description of this folder
     ///   - syncState: Specifies whether a folder should be synced to a
     ///     user's device or not. This is used by Box Sync
