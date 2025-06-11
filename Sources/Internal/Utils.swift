@@ -179,6 +179,28 @@ public enum Utils {
             dateFormatter.string(from: date)
         }
 
+        /// Get current epoch time in seconds
+        /// Returns the current epoch time in seconds.
+        public static func getEpochTimeInSeconds() -> Int64 {
+            return Int64(Date().timeIntervalSince1970)
+        }
+
+        /// Converts a Date to epoch seconds.
+        /// - Parameters:
+        ///   - dateTime: Date to convert
+        /// - Returns: Epoch seconds as Int64.
+        public static func dateTimeToEpochSeconds(dateTime: Date) -> Int64 {
+            return Int64(dateTime.timeIntervalSince1970)
+        }
+
+        /// Convert epoch seconds to Date
+        /// - Parameters:
+        ///   - seconds: Epoch seconds as Int64
+        /// - Returns: Date
+        public static func epochSecondsToDateTime(seconds: Int64) -> Date {
+            return Date(timeIntervalSince1970: TimeInterval(seconds))
+        }
+
         /// Checks if the date is in date only format
         /// - Parameters:
         ///   - date: Date

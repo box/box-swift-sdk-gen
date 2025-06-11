@@ -45,9 +45,11 @@ class EventsManagerTests: XCTestCase {
     }
 
     public func testGetEventsWithDateFilters() async throws {
-        let createdAfterDate: Date = try Utils.Dates.dateTimeFromString(dateTime: "2024-06-09T00:00:00Z")
-        let createdBeforeDate: Date = try Utils.Dates.dateTimeFromString(dateTime: "2025-06-09T00:00:00Z")
-        let servers: Events = try await client.events.getEvents(queryParams: GetEventsQueryParams(streamType: GetEventsQueryParamsStreamTypeField.adminLogs, limit: 1, createdAfter: createdAfterDate, createdBefore: createdBeforeDate))
+        let currentEpochTimeInSeconds: Int64 = Utils.Dates.getEpochTimeInSeconds()
+        let epochTimeInSecondsAWeekAgo: Int64 = currentEpochTimeInSeconds - 7 * 24 * 60 * 60
+        let createdAfterDate: Date = Utils.Dates.epochSecondsToDateTime(seconds: epochTimeInSecondsAWeekAgo)
+        let createdBeforeDate: Date = Utils.Dates.epochSecondsToDateTime(seconds: currentEpochTimeInSeconds)
+        let servers: Events = try await client.events.getEvents(queryParams: GetEventsQueryParams(streamType: GetEventsQueryParamsStreamTypeField.adminLogs, limit: Int64(1), createdAfter: createdAfterDate, createdBefore: createdBeforeDate))
         XCTAssertTrue(servers.entries!.count == 1)
     }
 }
