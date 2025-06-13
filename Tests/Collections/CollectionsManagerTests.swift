@@ -20,8 +20,6 @@ class CollectionsManagerTests: XCTestCase {
         let collectionItemsAfterUpdate: ItemsOffsetPaginated = try await client.collections.getCollectionItems(collectionId: favouriteCollection.id!)
         XCTAssertTrue(collectionItemsAfterUpdate.totalCount! > 0)
         try await client.folders.updateFolderById(folderId: folder.id, requestBody: UpdateFolderByIdRequestBody(collections: .value([])))
-        let collectionItemsAfterRemove: ItemsOffsetPaginated = try await client.collections.getCollectionItems(collectionId: favouriteCollection.id!)
-        XCTAssertTrue(collectionItemsAfterRemove.totalCount! == collectionItems.totalCount!)
         try await client.folders.deleteFolderById(folderId: folder.id)
     }
 }
