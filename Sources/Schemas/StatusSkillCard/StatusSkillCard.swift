@@ -34,10 +34,10 @@ public class StatusSkillCard: Codable, RawJSONReadable {
     /// The optional date and time this card was created at.
     public let createdAt: Date?
 
-    /// `skill_card`
+    /// The value will always be `skill_card`.
     public let type: StatusSkillCardTypeField
 
-    /// `status`
+    /// The value will always be `status`.
     public let skillCardType: StatusSkillCardSkillCardTypeField
 
     /// The title of the card.
@@ -51,8 +51,8 @@ public class StatusSkillCard: Codable, RawJSONReadable {
     ///   - invocation: The invocation of this service, used to track
     ///     which instance of a service applied the metadata.
     ///   - createdAt: The optional date and time this card was created at.
-    ///   - type: `skill_card`
-    ///   - skillCardType: `status`
+    ///   - type: The value will always be `skill_card`.
+    ///   - skillCardType: The value will always be `status`.
     ///   - skillCardTitle: The title of the card.
     public init(status: StatusSkillCardStatusField, skill: StatusSkillCardSkillField, invocation: StatusSkillCardInvocationField, createdAt: Date? = nil, type: StatusSkillCardTypeField = StatusSkillCardTypeField.skillCard, skillCardType: StatusSkillCardSkillCardTypeField = StatusSkillCardSkillCardTypeField.status, skillCardTitle: StatusSkillCardSkillCardTitleField? = nil) {
         self.status = status

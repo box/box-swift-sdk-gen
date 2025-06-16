@@ -1,6 +1,6 @@
 import Foundation
 
-/// A list of collaborations
+/// A list of collaborations.
 public class CollaborationsOffsetPaginated: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
@@ -38,7 +38,7 @@ public class CollaborationsOffsetPaginated: Codable, RawJSONReadable {
     /// For marker-based paginated APIs, this field will be omitted.
     public let offset: Int64?
 
-    /// A list of collaborations
+    /// A list of collaborations.
     public let entries: [Collaboration]?
 
     /// Initializer for a CollaborationsOffsetPaginated.
@@ -58,7 +58,7 @@ public class CollaborationsOffsetPaginated: Codable, RawJSONReadable {
     ///     
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
-    ///   - entries: A list of collaborations
+    ///   - entries: A list of collaborations.
     public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, entries: [Collaboration]? = nil) {
         self.totalCount = totalCount
         self.limit = limit

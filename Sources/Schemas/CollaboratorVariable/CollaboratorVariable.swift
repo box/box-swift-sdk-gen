@@ -26,13 +26,11 @@ public class CollaboratorVariable: Codable, RawJSONReadable {
 
     /// Collaborator
     /// object type.
-    /// 
     public let type: CollaboratorVariableTypeField
 
     /// Variable type 
     /// for the Collaborator
     /// object.
-    /// 
     public let variableType: CollaboratorVariableVariableTypeField
 
     /// Initializer for a CollaboratorVariable.
@@ -41,11 +39,9 @@ public class CollaboratorVariable: Codable, RawJSONReadable {
     ///   - variableValue: A list of user IDs.
     ///   - type: Collaborator
     ///     object type.
-    ///     
     ///   - variableType: Variable type 
     ///     for the Collaborator
     ///     object.
-    ///     
     public init(variableValue: [CollaboratorVariableVariableValueField], type: CollaboratorVariableTypeField = CollaboratorVariableTypeField.variable, variableType: CollaboratorVariableVariableTypeField = CollaboratorVariableVariableTypeField.userList) {
         self.variableValue = variableValue
         self.type = type

@@ -23,9 +23,9 @@ public class CreateTaskRequestBody: Codable, RawJSONReadable {
 
     /// The action the task assignee will be prompted to do. Must be
     /// 
-    /// * `review` defines an approval task that can be approved or
+    /// * `review` defines an approval task that can be approved or,
     /// rejected
-    /// * `complete` defines a general task which can be completed
+    /// * `complete` defines a general task which can be completed.
     public let action: CreateTaskRequestBodyActionField?
 
     /// An optional message to include with the task.
@@ -50,9 +50,9 @@ public class CreateTaskRequestBody: Codable, RawJSONReadable {
     ///   - item: The file to attach the task to.
     ///   - action: The action the task assignee will be prompted to do. Must be
     ///     
-    ///     * `review` defines an approval task that can be approved or
+    ///     * `review` defines an approval task that can be approved or,
     ///     rejected
-    ///     * `complete` defines a general task which can be completed
+    ///     * `complete` defines a general task which can be completed.
     ///   - message: An optional message to include with the task.
     ///   - dueAt: Defines when the task is due. Defaults to `null` if not
     ///     provided.

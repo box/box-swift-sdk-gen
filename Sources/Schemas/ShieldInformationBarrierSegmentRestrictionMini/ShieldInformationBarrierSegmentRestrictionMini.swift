@@ -2,7 +2,7 @@ import Foundation
 
 /// A mini representation of
 /// a segment restriction object for
-/// the shield information barrier
+/// the shield information barrier.
 public class ShieldInformationBarrierSegmentRestrictionMini: ShieldInformationBarrierSegmentRestrictionBase {
     private enum CodingKeys: String, CodingKey {
         case shieldInformationBarrierSegment = "shield_information_barrier_segment"
@@ -33,7 +33,7 @@ public class ShieldInformationBarrierSegmentRestrictionMini: ShieldInformationBa
     ///     requested shield information barrier segment.
     ///   - restrictedSegment: The `type` and `id` of the
     ///     restricted shield information barrier segment.
-    ///   - type: Shield information barrier segment restriction
+    ///   - type: Shield information barrier segment restriction.
     ///   - id: The unique identifier for the
     ///     shield information barrier segment restriction.
     public init(shieldInformationBarrierSegment: ShieldInformationBarrierSegmentRestrictionMiniShieldInformationBarrierSegmentField, restrictedSegment: ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentField, type: ShieldInformationBarrierSegmentRestrictionBaseTypeField? = nil, id: String? = nil) {

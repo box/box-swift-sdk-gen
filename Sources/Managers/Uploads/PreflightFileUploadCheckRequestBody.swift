@@ -16,10 +16,10 @@ public class PreflightFileUploadCheckRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// The name for the file
+    /// The name for the file.
     public let name: String?
 
-    /// The size of the file in bytes
+    /// The size of the file in bytes.
     public let size: Int?
 
     public let parent: PreflightFileUploadCheckRequestBodyParentField?
@@ -27,8 +27,8 @@ public class PreflightFileUploadCheckRequestBody: Codable, RawJSONReadable {
     /// Initializer for a PreflightFileUploadCheckRequestBody.
     ///
     /// - Parameters:
-    ///   - name: The name for the file
-    ///   - size: The size of the file in bytes
+    ///   - name: The name for the file.
+    ///   - size: The size of the file in bytes.
     ///   - parent: 
     public init(name: String? = nil, size: Int? = nil, parent: PreflightFileUploadCheckRequestBodyParentField? = nil) {
         self.name = name

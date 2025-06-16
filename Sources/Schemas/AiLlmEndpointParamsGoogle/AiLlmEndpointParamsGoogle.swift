@@ -1,6 +1,6 @@
 import Foundation
 
-/// AI LLM endpoint params Google object
+/// AI LLM endpoint params Google object.
 public class AiLlmEndpointParamsGoogle: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type

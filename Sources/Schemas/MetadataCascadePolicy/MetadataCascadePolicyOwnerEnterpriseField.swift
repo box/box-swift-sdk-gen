@@ -15,7 +15,7 @@ public class MetadataCascadePolicyOwnerEnterpriseField: Codable, RawJSONReadable
     }
 
 
-    /// `enterprise`
+    /// The value will always be `enterprise`.
     public let type: MetadataCascadePolicyOwnerEnterpriseTypeField?
 
     /// The ID of the enterprise that owns the policy.
@@ -24,7 +24,7 @@ public class MetadataCascadePolicyOwnerEnterpriseField: Codable, RawJSONReadable
     /// Initializer for a MetadataCascadePolicyOwnerEnterpriseField.
     ///
     /// - Parameters:
-    ///   - type: `enterprise`
+    ///   - type: The value will always be `enterprise`.
     ///   - id: The ID of the enterprise that owns the policy.
     public init(type: MetadataCascadePolicyOwnerEnterpriseTypeField? = nil, id: String? = nil) {
         self.type = type

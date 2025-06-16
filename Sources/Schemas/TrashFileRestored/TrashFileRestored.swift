@@ -51,7 +51,7 @@ public class TrashFileRestored: Codable, RawJSONReadable {
     /// of a file on Box with a local file.
     public let sha1: String
 
-    /// The optional description of this file
+    /// The optional description of this file.
     public let description: String
 
     /// The file size in bytes. Be careful parsing this integer as it can
@@ -82,10 +82,10 @@ public class TrashFileRestored: Codable, RawJSONReadable {
     /// perform changes on the file if (no) changes have happened.
     @CodableTriState public private(set) var etag: String?
 
-    /// `file`
+    /// The value will always be `file`.
     public let type: TrashFileRestoredTypeField
 
-    /// The name of the file
+    /// The name of the file.
     public let name: String?
 
     public let fileVersion: FileVersionMini?
@@ -128,7 +128,7 @@ public class TrashFileRestored: Codable, RawJSONReadable {
     ///   - sequenceId: 
     ///   - sha1: The SHA1 hash of the file. This can be used to compare the contents
     ///     of a file on Box with a local file.
-    ///   - description: The optional description of this file
+    ///   - description: The optional description of this file.
     ///   - size: The file size in bytes. Be careful parsing this integer as it can
     ///     get very large and cause an integer overflow.
     ///   - pathCollection: 
@@ -144,8 +144,8 @@ public class TrashFileRestored: Codable, RawJSONReadable {
     ///   - etag: The HTTP `etag` of this file. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the file if (no) changes have happened.
-    ///   - type: `file`
-    ///   - name: The name of the file
+    ///   - type: The value will always be `file`.
+    ///   - name: The name of the file.
     ///   - fileVersion: 
     ///   - trashedAt: The time at which this file was put in the
     ///     trash - becomes `null` after restore.

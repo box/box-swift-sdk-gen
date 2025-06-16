@@ -1,6 +1,6 @@
 import Foundation
 
-/// A template for metadata that can be applied to files and folders
+/// A template for metadata that can be applied to files and folders.
 public class MetadataTemplate: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -25,7 +25,7 @@ public class MetadataTemplate: Codable, RawJSONReadable {
     /// The ID of the metadata template.
     public let id: String
 
-    /// `metadata_template`
+    /// The value will always be `metadata_template`.
     public let type: MetadataTemplateTypeField
 
     /// The scope of the metadata template can either be `global` or
@@ -60,7 +60,7 @@ public class MetadataTemplate: Codable, RawJSONReadable {
     ///
     /// - Parameters:
     ///   - id: The ID of the metadata template.
-    ///   - type: `metadata_template`
+    ///   - type: The value will always be `metadata_template`.
     ///   - scope: The scope of the metadata template can either be `global` or
     ///     `enterprise_*`. The `global` scope is used for templates that are
     ///     available to any Box enterprise. The `enterprise_*` scope represents

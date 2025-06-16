@@ -41,7 +41,7 @@ public class ShieldListV2025R0: Codable, RawJSONReadable {
 
     public let content: ShieldListContentV2025R0
 
-    /// Description of Shield List
+    /// Description of Shield List.
     public let description: String?
 
     /// Initializer for a ShieldListV2025R0.
@@ -54,7 +54,7 @@ public class ShieldListV2025R0: Codable, RawJSONReadable {
     ///   - createdAt: ISO date time string when this shield list object was created.
     ///   - updatedAt: ISO date time string when this shield list object was updated.
     ///   - content: 
-    ///   - description: Description of Shield List
+    ///   - description: Description of Shield List.
     public init(id: String, type: String, name: String, enterprise: EnterpriseReferenceV2025R0, createdAt: Date, updatedAt: Date, content: ShieldListContentV2025R0, description: String? = nil) {
         self.id = id
         self.type = type

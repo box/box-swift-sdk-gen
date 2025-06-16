@@ -1,6 +1,6 @@
 import Foundation
 
-/// A request to create a `zip` archive to download
+/// A request to create a `zip` archive to download.
 public class ZipDownloadRequest: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case items

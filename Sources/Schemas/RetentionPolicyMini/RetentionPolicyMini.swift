@@ -42,7 +42,7 @@ public class RetentionPolicyMini: RetentionPolicyBase {
     ///
     /// - Parameters:
     ///   - id: The unique identifier that represents a retention policy.
-    ///   - type: `retention_policy`
+    ///   - type: The value will always be `retention_policy`.
     ///   - policyName: The name given to the retention policy.
     ///   - retentionLength: The length of the retention policy. This value
     ///     specifies the duration in days that the retention

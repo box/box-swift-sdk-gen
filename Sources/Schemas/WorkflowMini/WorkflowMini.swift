@@ -22,29 +22,29 @@ public class WorkflowMini: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for the workflow
+    /// The unique identifier for the workflow.
     public let id: String?
 
-    /// `workflow`
+    /// The value will always be `workflow`.
     public let type: WorkflowMiniTypeField?
 
-    /// The name of the workflow
+    /// The name of the workflow.
     public let name: String?
 
     /// The description for a workflow.
     public let description: String?
 
-    /// Specifies if this workflow is enabled
+    /// Specifies if this workflow is enabled.
     public let isEnabled: Bool?
 
     /// Initializer for a WorkflowMini.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for the workflow
-    ///   - type: `workflow`
-    ///   - name: The name of the workflow
+    ///   - id: The unique identifier for the workflow.
+    ///   - type: The value will always be `workflow`.
+    ///   - name: The name of the workflow.
     ///   - description: The description for a workflow.
-    ///   - isEnabled: Specifies if this workflow is enabled
+    ///   - isEnabled: Specifies if this workflow is enabled.
     public init(id: String? = nil, type: WorkflowMiniTypeField? = nil, name: String? = nil, description: String? = nil, isEnabled: Bool? = nil) {
         self.id = id
         self.type = type

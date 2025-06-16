@@ -27,7 +27,7 @@ public class UserFull: User {
     }
 
 
-    /// The user’s enterprise role
+    /// The user’s enterprise role.
     public let role: UserFullRoleField?
 
     /// Tracking codes allow an admin to generate reports from the
@@ -36,20 +36,20 @@ public class UserFull: User {
     /// before it can be used.
     public let trackingCodes: [TrackingCode]?
 
-    /// Whether the user can see other enterprise users in their contact list
+    /// Whether the user can see other enterprise users in their contact list.
     public let canSeeManagedUsers: Bool?
 
-    /// Whether the user can use Box Sync
+    /// Whether the user can use Box Sync.
     public let isSyncEnabled: Bool?
 
     /// Whether the user is allowed to collaborate with users outside their
-    /// enterprise
+    /// enterprise.
     public let isExternalCollabRestricted: Bool?
 
-    /// Whether to exempt the user from Enterprise device limits
+    /// Whether to exempt the user from Enterprise device limits.
     public let isExemptFromDeviceLimits: Bool?
 
-    /// Whether the user must use two-factor authentication
+    /// Whether the user must use two-factor authentication.
     public let isExemptFromLoginVerification: Bool?
 
     public let enterprise: UserFullEnterpriseField?
@@ -59,10 +59,10 @@ public class UserFull: User {
     public let myTags: [String]?
 
     /// The root (protocol, subdomain, domain) of any links that need to be
-    /// generated for the user
+    /// generated for the user.
     public let hostname: String?
 
-    /// Whether the user is an App User
+    /// Whether the user is an App User.
     public let isPlatformAccessOnly: Bool?
 
     /// An external identifier for an app user, which can be used to look up
@@ -73,44 +73,44 @@ public class UserFull: User {
     /// Initializer for a UserFull.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this user
-    ///   - type: `user`
-    ///   - name: The display name of this user
-    ///   - login: The primary email address of this user
-    ///   - createdAt: When the user object was created
-    ///   - modifiedAt: When the user object was last modified
+    ///   - id: The unique identifier for this user.
+    ///   - type: The value will always be `user`.
+    ///   - name: The display name of this user.
+    ///   - login: The primary email address of this user.
+    ///   - createdAt: When the user object was created.
+    ///   - modifiedAt: When the user object was last modified.
     ///   - language: The language of the user, formatted in modified version of the
     ///     [ISO 639-1](/guides/api-calls/language-codes) format.
-    ///   - timezone: The user's timezone
-    ///   - spaceAmount: The user’s total available space amount in bytes
-    ///   - spaceUsed: The amount of space in use by the user
-    ///   - maxUploadSize: The maximum individual file size in bytes the user can have
-    ///   - status: The user's account status
-    ///   - jobTitle: The user’s job title
-    ///   - phone: The user’s phone number
-    ///   - address: The user’s address
-    ///   - avatarUrl: URL of the user’s avatar image
+    ///   - timezone: The user's timezone.
+    ///   - spaceAmount: The user’s total available space amount in bytes.
+    ///   - spaceUsed: The amount of space in use by the user.
+    ///   - maxUploadSize: The maximum individual file size in bytes the user can have.
+    ///   - status: The user's account status.
+    ///   - jobTitle: The user’s job title.
+    ///   - phone: The user’s phone number.
+    ///   - address: The user’s address.
+    ///   - avatarUrl: URL of the user’s avatar image.
     ///   - notificationEmail: An alternate notification email address to which email
     ///     notifications are sent. When it's confirmed, this will be
     ///     the email address to which notifications are sent instead of
     ///     to the primary email address.
-    ///   - role: The user’s enterprise role
+    ///   - role: The user’s enterprise role.
     ///   - trackingCodes: Tracking codes allow an admin to generate reports from the
     ///     admin console and assign an attribute to a specific group
     ///     of users. This setting must be enabled for an enterprise
     ///     before it can be used.
-    ///   - canSeeManagedUsers: Whether the user can see other enterprise users in their contact list
-    ///   - isSyncEnabled: Whether the user can use Box Sync
+    ///   - canSeeManagedUsers: Whether the user can see other enterprise users in their contact list.
+    ///   - isSyncEnabled: Whether the user can use Box Sync.
     ///   - isExternalCollabRestricted: Whether the user is allowed to collaborate with users outside their
-    ///     enterprise
-    ///   - isExemptFromDeviceLimits: Whether to exempt the user from Enterprise device limits
-    ///   - isExemptFromLoginVerification: Whether the user must use two-factor authentication
+    ///     enterprise.
+    ///   - isExemptFromDeviceLimits: Whether to exempt the user from Enterprise device limits.
+    ///   - isExemptFromLoginVerification: Whether the user must use two-factor authentication.
     ///   - enterprise: 
     ///   - myTags: Tags for all files and folders owned by the user. Values returned
     ///     will only contain tags that were set by the requester.
     ///   - hostname: The root (protocol, subdomain, domain) of any links that need to be
-    ///     generated for the user
-    ///   - isPlatformAccessOnly: Whether the user is an App User
+    ///     generated for the user.
+    ///   - isPlatformAccessOnly: Whether the user is an App User.
     ///   - externalAppUserId: An external identifier for an app user, which can be used to look up
     ///     the user. This can be used to tie user IDs from external identity
     ///     providers to Box users.

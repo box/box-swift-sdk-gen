@@ -18,14 +18,14 @@ public class WebLinkPathCollectionField: Codable, RawJSONReadable {
     /// The number of folders in this list.
     public let totalCount: Int64
 
-    /// The parent folders for this item
+    /// The parent folders for this item.
     public let entries: [FolderMini]
 
     /// Initializer for a WebLinkPathCollectionField.
     ///
     /// - Parameters:
     ///   - totalCount: The number of folders in this list.
-    ///   - entries: The parent folders for this item
+    ///   - entries: The parent folders for this item.
     public init(totalCount: Int64, entries: [FolderMini]) {
         self.totalCount = totalCount
         self.entries = entries

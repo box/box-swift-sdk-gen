@@ -20,7 +20,7 @@ public class Outcome: Codable, RawJSONReadable {
     }
 
 
-    /// ID of a specific outcome
+    /// ID of a specific outcome.
     public let id: String
 
     public let collaborators: CollaboratorVariable?
@@ -36,7 +36,7 @@ public class Outcome: Codable, RawJSONReadable {
     /// Initializer for a Outcome.
     ///
     /// - Parameters:
-    ///   - id: ID of a specific outcome
+    ///   - id: ID of a specific outcome.
     ///   - collaborators: 
     ///   - completionRule: 
     ///   - fileCollaboratorRole: 

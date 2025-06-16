@@ -18,25 +18,25 @@ public class EmailAlias: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this object
+    /// The unique identifier for this object.
     public let id: String?
 
-    /// `email_alias`
+    /// The value will always be `email_alias`.
     public let type: EmailAliasTypeField?
 
-    /// The email address
+    /// The email address.
     public let email: String?
 
-    /// Whether the email address has been confirmed
+    /// Whether the email address has been confirmed.
     public let isConfirmed: Bool?
 
     /// Initializer for a EmailAlias.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this object
-    ///   - type: `email_alias`
-    ///   - email: The email address
-    ///   - isConfirmed: Whether the email address has been confirmed
+    ///   - id: The unique identifier for this object.
+    ///   - type: The value will always be `email_alias`.
+    ///   - email: The email address.
+    ///   - isConfirmed: Whether the email address has been confirmed.
     public init(id: String? = nil, type: EmailAliasTypeField? = nil, email: String? = nil, isConfirmed: Bool? = nil) {
         self.id = id
         self.type = type

@@ -16,21 +16,21 @@ public class WorkflowFlowsTriggerField: Codable, RawJSONReadable {
     }
 
 
-    /// The trigger's resource type
+    /// The trigger's resource type.
     public let type: WorkflowFlowsTriggerTypeField?
 
-    /// The type of trigger selected for this flow
+    /// The type of trigger selected for this flow.
     public let triggerType: WorkflowFlowsTriggerTriggerTypeField?
 
-    /// List of trigger scopes
+    /// List of trigger scopes.
     public let scope: [WorkflowFlowsTriggerScopeField]?
 
     /// Initializer for a WorkflowFlowsTriggerField.
     ///
     /// - Parameters:
-    ///   - type: The trigger's resource type
-    ///   - triggerType: The type of trigger selected for this flow
-    ///   - scope: List of trigger scopes
+    ///   - type: The trigger's resource type.
+    ///   - triggerType: The type of trigger selected for this flow.
+    ///   - scope: List of trigger scopes.
     public init(type: WorkflowFlowsTriggerTypeField? = nil, triggerType: WorkflowFlowsTriggerTriggerTypeField? = nil, scope: [WorkflowFlowsTriggerScopeField]? = nil) {
         self.type = type
         self.triggerType = triggerType

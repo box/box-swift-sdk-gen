@@ -21,31 +21,31 @@ public class CollaborationAllowlistExemptTarget: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this exemption
+    /// The unique identifier for this exemption.
     public let id: String?
 
-    /// `collaboration_whitelist_exempt_target`
+    /// The value will always be `collaboration_whitelist_exempt_target`.
     public let type: CollaborationAllowlistExemptTargetTypeField?
 
     public let enterprise: CollaborationAllowlistExemptTargetEnterpriseField?
 
     public let user: UserMini?
 
-    /// The time the entry was created
+    /// The time the entry was created.
     public let createdAt: Date?
 
-    /// The time the entry was modified
+    /// The time the entry was modified.
     public let modifiedAt: Date?
 
     /// Initializer for a CollaborationAllowlistExemptTarget.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this exemption
-    ///   - type: `collaboration_whitelist_exempt_target`
+    ///   - id: The unique identifier for this exemption.
+    ///   - type: The value will always be `collaboration_whitelist_exempt_target`.
     ///   - enterprise: 
     ///   - user: 
-    ///   - createdAt: The time the entry was created
-    ///   - modifiedAt: The time the entry was modified
+    ///   - createdAt: The time the entry was created.
+    ///   - modifiedAt: The time the entry was modified.
     public init(id: String? = nil, type: CollaborationAllowlistExemptTargetTypeField? = nil, enterprise: CollaborationAllowlistExemptTargetEnterpriseField? = nil, user: UserMini? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.id = id
         self.type = type

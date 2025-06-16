@@ -66,8 +66,8 @@ try await client.avatars.createUserAvatar(userId: user.id, requestBody: CreateUs
 
 This function returns a value of type `UserAvatar`.
 
-* `ok`: Returns the `pic_urls` object with URLs to existing
-user avatars that were updated.* `created`: Returns the `pic_urls` object with URLS to user avatars
+`ok`: Returns the `pic_urls` object with URLs to existing
+user avatars that were updated.`created`: Returns the `pic_urls` object with URLS to user avatars
 uploaded to Box with the request.
 
 
@@ -98,6 +98,6 @@ try await client.avatars.deleteUserAvatar(userId: user.id)
 
 This function returns a value of type ``.
 
-* `no_content`: Removes the avatar and returns an empty response.
+`no_content`: Removes the avatar and returns an empty response.
 
 

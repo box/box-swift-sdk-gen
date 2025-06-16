@@ -1,6 +1,6 @@
 import Foundation
 
-/// A list of terms of service user statuses
+/// A list of terms of service user statuses.
 public class TermsOfServiceUserStatuses: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
@@ -19,14 +19,14 @@ public class TermsOfServiceUserStatuses: Codable, RawJSONReadable {
     /// The total number of objects.
     public let totalCount: Int64?
 
-    /// A list of terms of service user statuses
+    /// A list of terms of service user statuses.
     public let entries: [TermsOfServiceUserStatus]?
 
     /// Initializer for a TermsOfServiceUserStatuses.
     ///
     /// - Parameters:
     ///   - totalCount: The total number of objects.
-    ///   - entries: A list of terms of service user statuses
+    ///   - entries: A list of terms of service user statuses.
     public init(totalCount: Int64? = nil, entries: [TermsOfServiceUserStatus]? = nil) {
         self.totalCount = totalCount
         self.entries = entries

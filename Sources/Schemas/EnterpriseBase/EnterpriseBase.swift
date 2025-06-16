@@ -17,17 +17,17 @@ public class EnterpriseBase: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this enterprise
+    /// The unique identifier for this enterprise.
     public let id: String?
 
-    /// `enterprise`
+    /// The value will always be `enterprise`.
     public let type: EnterpriseBaseTypeField?
 
     /// Initializer for a EnterpriseBase.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this enterprise
-    ///   - type: `enterprise`
+    ///   - id: The unique identifier for this enterprise.
+    ///   - type: The value will always be `enterprise`.
     public init(id: String? = nil, type: EnterpriseBaseTypeField? = nil) {
         self.id = id
         self.type = type

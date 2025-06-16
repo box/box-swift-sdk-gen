@@ -34,7 +34,7 @@ public class Classification: Codable, RawJSONReadable {
     /// of the parent in the form `{type}_{id}`.
     public let parent: String?
 
-    /// `securityClassification-6VMVochwUWo`
+    /// The value will always be `securityClassification-6VMVochwUWo`.
     public let template: ClassificationTemplateField?
 
     /// The scope of the enterprise that this classification has been
@@ -66,7 +66,7 @@ public class Classification: Codable, RawJSONReadable {
     ///   - parent: The identifier of the item that this metadata instance
     ///     has been attached to. This combines the `type` and the `id`
     ///     of the parent in the form `{type}_{id}`.
-    ///   - template: `securityClassification-6VMVochwUWo`
+    ///   - template: The value will always be `securityClassification-6VMVochwUWo`.
     ///   - scope: The scope of the enterprise that this classification has been
     ///     applied for.
     ///     

@@ -28,7 +28,7 @@ public class SignRequest: SignRequestBase {
     }
 
 
-    /// object type
+    /// The value will always be `sign-request`.
     public let type: SignRequestTypeField?
 
     /// List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
@@ -66,7 +66,7 @@ public class SignRequest: SignRequestBase {
 
     public let parentFolder: FolderMini?
 
-    /// The collaborator level of the user to the sign request. Values can include "owner", "editor", and "viewer"
+    /// The collaborator level of the user to the sign request. Values can include "owner", "editor", and "viewer".
     @CodableTriState public private(set) var collaboratorLevel: String?
 
     /// The email address of the sender of the sign request.
@@ -91,7 +91,7 @@ public class SignRequest: SignRequestBase {
     ///   - externalId: This can be used to reference an ID in an external system that the sign request is related to.
     ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
     ///   - externalSystemName: Used as an optional system name to appear in the signature log next to the signers who have been assigned the `embed_url_external_id`.
-    ///   - type: object type
+    ///   - type: The value will always be `sign-request`.
     ///   - sourceFiles: List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
     ///   - signers: Array of signers for the signature request.
     ///   - signatureColor: Force a specific color for the signature (blue, black, or red).
@@ -109,7 +109,7 @@ public class SignRequest: SignRequestBase {
     ///     and can be downloaded at any point in the signing process.
     ///   - autoExpireAt: Uses `days_valid` to calculate the date and time, in GMT, the sign request will expire if unsigned.
     ///   - parentFolder: 
-    ///   - collaboratorLevel: The collaborator level of the user to the sign request. Values can include "owner", "editor", and "viewer"
+    ///   - collaboratorLevel: The collaborator level of the user to the sign request. Values can include "owner", "editor", and "viewer".
     ///   - senderEmail: The email address of the sender of the sign request.
     ///   - senderId: The user ID of the sender of the sign request.
     public init(isDocumentPreparationNeeded: Bool? = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: TriStateField<Int64> = nil, externalId: TriStateField<String> = nil, templateId: TriStateField<String> = nil, externalSystemName: TriStateField<String> = nil, type: SignRequestTypeField? = nil, sourceFiles: [FileBase]? = nil, signers: [SignRequestSigner]? = nil, signatureColor: TriStateField<String> = nil, id: String? = nil, prepareUrl: TriStateField<String> = nil, signingLog: FileMini? = nil, status: SignRequestStatusField? = nil, signFiles: SignRequestSignFilesField? = nil, autoExpireAt: TriStateField<Date> = nil, parentFolder: FolderMini? = nil, collaboratorLevel: TriStateField<String> = nil, senderEmail: TriStateField<String> = nil, senderId: TriStateField<Int64> = nil) {

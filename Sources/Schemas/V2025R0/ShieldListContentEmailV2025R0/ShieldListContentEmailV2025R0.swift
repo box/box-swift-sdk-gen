@@ -16,7 +16,7 @@ public class ShieldListContentEmailV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// List of emails
+    /// List of emails.
     public let emailAddresses: [String]
 
     /// The type of content in the shield list.
@@ -25,7 +25,7 @@ public class ShieldListContentEmailV2025R0: Codable, RawJSONReadable {
     /// Initializer for a ShieldListContentEmailV2025R0.
     ///
     /// - Parameters:
-    ///   - emailAddresses: List of emails
+    ///   - emailAddresses: List of emails.
     ///   - type: The type of content in the shield list.
     public init(emailAddresses: [String], type: ShieldListContentEmailV2025R0TypeField = ShieldListContentEmailV2025R0TypeField.email) {
         self.emailAddresses = emailAddresses

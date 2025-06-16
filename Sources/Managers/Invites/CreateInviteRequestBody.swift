@@ -15,17 +15,17 @@ public class CreateInviteRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// The enterprise to invite the user to
+    /// The enterprise to invite the user to.
     public let enterprise: CreateInviteRequestBodyEnterpriseField
 
-    /// The user to invite
+    /// The user to invite.
     public let actionableBy: CreateInviteRequestBodyActionableByField
 
     /// Initializer for a CreateInviteRequestBody.
     ///
     /// - Parameters:
-    ///   - enterprise: The enterprise to invite the user to
-    ///   - actionableBy: The user to invite
+    ///   - enterprise: The enterprise to invite the user to.
+    ///   - actionableBy: The user to invite.
     public init(enterprise: CreateInviteRequestBodyEnterpriseField, actionableBy: CreateInviteRequestBodyActionableByField) {
         self.enterprise = enterprise
         self.actionableBy = actionableBy

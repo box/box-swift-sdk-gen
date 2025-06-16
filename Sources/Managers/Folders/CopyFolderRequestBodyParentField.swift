@@ -14,13 +14,13 @@ public class CopyFolderRequestBodyParentField: Codable, RawJSONReadable {
     }
 
 
-    /// The ID of parent folder
+    /// The ID of parent folder.
     public let id: String
 
     /// Initializer for a CopyFolderRequestBodyParentField.
     ///
     /// - Parameters:
-    ///   - id: The ID of parent folder
+    ///   - id: The ID of parent folder.
     public init(id: String) {
         self.id = id
     }

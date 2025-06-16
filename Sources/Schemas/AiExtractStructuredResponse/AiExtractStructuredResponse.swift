@@ -1,6 +1,6 @@
 import Foundation
 
-/// AI extract structured response
+/// AI extract structured response.
 public class AiExtractStructuredResponse: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case answer

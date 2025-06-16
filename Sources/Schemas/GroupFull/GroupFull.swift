@@ -58,10 +58,10 @@ public class GroupFull: Group {
     /// (Get Memberships for Group).
     /// 
     /// * `admins_only` - the enterprise admin, co-admins, group's
-    ///   group admin
-    /// * `admins_and_members` - all admins and group members
+    ///   group admin.
+    /// * `admins_and_members` - all admins and group members.
     /// * `all_managed_users` - all managed users in the
-    ///   enterprise
+    ///   enterprise.
     public let memberViewabilityLevel: GroupFullMemberViewabilityLevelField?
 
     public let permissions: GroupFullPermissionsField?
@@ -69,12 +69,12 @@ public class GroupFull: Group {
     /// Initializer for a GroupFull.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this object
-    ///   - type: `group`
-    ///   - name: The name of the group
+    ///   - id: The unique identifier for this object.
+    ///   - type: The value will always be `group`.
+    ///   - name: The name of the group.
     ///   - groupType: The type of the group.
-    ///   - createdAt: When the group object was created
-    ///   - modifiedAt: When the group object was last modified
+    ///   - createdAt: When the group object was created.
+    ///   - modifiedAt: When the group object was last modified.
     ///   - provenance: Keeps track of which external source this group is
     ///     coming from (e.g. "Active Directory", "Google Groups",
     ///     "Facebook Groups").  Setting this will
@@ -104,10 +104,10 @@ public class GroupFull: Group {
     ///     (Get Memberships for Group).
     ///     
     ///     * `admins_only` - the enterprise admin, co-admins, group's
-    ///       group admin
-    ///     * `admins_and_members` - all admins and group members
+    ///       group admin.
+    ///     * `admins_and_members` - all admins and group members.
     ///     * `all_managed_users` - all managed users in the
-    ///       enterprise
+    ///       enterprise.
     ///   - permissions: 
     public init(id: String, type: GroupBaseTypeField = GroupBaseTypeField.group, name: String? = nil, groupType: GroupMiniGroupTypeField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, provenance: String? = nil, externalSyncIdentifier: String? = nil, description: String? = nil, invitabilityLevel: GroupFullInvitabilityLevelField? = nil, memberViewabilityLevel: GroupFullMemberViewabilityLevelField? = nil, permissions: GroupFullPermissionsField? = nil) {
         self.provenance = provenance

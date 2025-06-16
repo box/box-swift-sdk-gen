@@ -15,17 +15,17 @@ public class StartWorkflowRequestBodyFlowField: Codable, RawJSONReadable {
     }
 
 
-    /// The type of the flow object
+    /// The type of the flow object.
     public let type: String?
 
-    /// The id of the flow
+    /// The id of the flow.
     public let id: String?
 
     /// Initializer for a StartWorkflowRequestBodyFlowField.
     ///
     /// - Parameters:
-    ///   - type: The type of the flow object
-    ///   - id: The id of the flow
+    ///   - type: The type of the flow object.
+    ///   - id: The id of the flow.
     public init(type: String? = nil, id: String? = nil) {
         self.type = type
         self.id = id

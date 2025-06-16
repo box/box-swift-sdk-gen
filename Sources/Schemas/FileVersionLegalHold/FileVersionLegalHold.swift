@@ -21,10 +21,10 @@ public class FileVersionLegalHold: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this file version legal hold
+    /// The unique identifier for this file version legal hold.
     public let id: String?
 
-    /// `file_version_legal_hold`
+    /// The value will always be `file_version_legal_hold`.
     public let type: FileVersionLegalHoldTypeField?
 
     public let fileVersion: FileVersionMini?
@@ -41,8 +41,8 @@ public class FileVersionLegalHold: Codable, RawJSONReadable {
     /// Initializer for a FileVersionLegalHold.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this file version legal hold
-    ///   - type: `file_version_legal_hold`
+    ///   - id: The unique identifier for this file version legal hold.
+    ///   - type: The value will always be `file_version_legal_hold`.
     ///   - fileVersion: 
     ///   - file: 
     ///   - legalHoldPolicyAssignments: List of assignments contributing to this Hold.

@@ -17,7 +17,7 @@ public class RetentionPolicyAssignments: Codable, RawJSONReadable {
     }
 
 
-    /// A list of retention policy assignments
+    /// A list of retention policy assignments.
     public let entries: [RetentionPolicyAssignment]?
 
     /// The limit that was used for these entries. This will be the same as the
@@ -31,7 +31,7 @@ public class RetentionPolicyAssignments: Codable, RawJSONReadable {
     /// Initializer for a RetentionPolicyAssignments.
     ///
     /// - Parameters:
-    ///   - entries: A list of retention policy assignments
+    ///   - entries: A list of retention policy assignments.
     ///   - limit: The limit that was used for these entries. This will be the same as the
     ///     `limit` query parameter unless that value exceeded the maximum value
     ///     allowed. The maximum value varies by API.

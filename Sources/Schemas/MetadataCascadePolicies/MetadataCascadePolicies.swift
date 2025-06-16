@@ -29,7 +29,7 @@ public class MetadataCascadePolicies: Codable, RawJSONReadable {
     /// The marker for the start of the previous page of results.
     @CodableTriState public private(set) var prevMarker: String?
 
-    /// A list of metadata cascade policies
+    /// A list of metadata cascade policies.
     public let entries: [MetadataCascadePolicy]?
 
     /// Initializer for a MetadataCascadePolicies.
@@ -40,7 +40,7 @@ public class MetadataCascadePolicies: Codable, RawJSONReadable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
-    ///   - entries: A list of metadata cascade policies
+    ///   - entries: A list of metadata cascade policies.
     public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, entries: [MetadataCascadePolicy]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)

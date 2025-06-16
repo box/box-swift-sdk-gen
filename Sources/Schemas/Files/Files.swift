@@ -1,6 +1,6 @@
 import Foundation
 
-/// A list of files
+/// A list of files.
 public class Files: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
@@ -19,14 +19,14 @@ public class Files: Codable, RawJSONReadable {
     /// The number of files.
     public let totalCount: Int64?
 
-    /// A list of files
+    /// A list of files.
     public let entries: [FileFull]?
 
     /// Initializer for a Files.
     ///
     /// - Parameters:
     ///   - totalCount: The number of files.
-    ///   - entries: A list of files
+    ///   - entries: A list of files.
     public init(totalCount: Int64? = nil, entries: [FileFull]? = nil) {
         self.totalCount = totalCount
         self.entries = entries

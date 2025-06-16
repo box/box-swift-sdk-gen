@@ -14,13 +14,13 @@ public class UpdateFileWatermarkRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// The watermark to imprint on the file
+    /// The watermark to imprint on the file.
     public let watermark: UpdateFileWatermarkRequestBodyWatermarkField
 
     /// Initializer for a UpdateFileWatermarkRequestBody.
     ///
     /// - Parameters:
-    ///   - watermark: The watermark to imprint on the file
+    ///   - watermark: The watermark to imprint on the file.
     public init(watermark: UpdateFileWatermarkRequestBodyWatermarkField) {
         self.watermark = watermark
     }

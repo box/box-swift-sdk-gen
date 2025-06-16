@@ -75,7 +75,7 @@ public class TrashFolder: Codable, RawJSONReadable {
     /// perform changes on the folder if (no) changes have happened.
     @CodableTriState public private(set) var etag: String?
 
-    /// `folder`
+    /// The value will always be `folder`.
     public let type: TrashFolderTypeField
 
     public let sequenceId: String?
@@ -144,7 +144,7 @@ public class TrashFolder: Codable, RawJSONReadable {
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
-    ///   - type: `folder`
+    ///   - type: The value will always be `folder`.
     ///   - sequenceId: 
     ///   - createdAt: The date and time when the folder was created. This value may
     ///     be `null` for some folders such as the root folder or the trash

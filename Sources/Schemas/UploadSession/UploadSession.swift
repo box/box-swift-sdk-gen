@@ -21,10 +21,10 @@ public class UploadSession: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this session
+    /// The unique identifier for this session.
     public let id: String?
 
-    /// `upload_session`
+    /// The value will always be `upload_session`.
     public let type: UploadSessionTypeField?
 
     /// The date and time when this session expires.
@@ -52,8 +52,8 @@ public class UploadSession: Codable, RawJSONReadable {
     /// Initializer for a UploadSession.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this session
-    ///   - type: `upload_session`
+    ///   - id: The unique identifier for this session.
+    ///   - type: The value will always be `upload_session`.
     ///   - sessionExpiresAt: The date and time when this session expires.
     ///   - partSize: The  size in bytes that must be used for all parts of of the
     ///     upload.

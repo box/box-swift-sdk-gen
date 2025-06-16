@@ -17,19 +17,19 @@ public class UserIntegrationMappings: UserBase {
     }
 
 
-    /// The display name of this user
+    /// The display name of this user.
     public let name: String?
 
-    /// The primary email address of this user
+    /// The primary email address of this user.
     public let login: String?
 
     /// Initializer for a UserIntegrationMappings.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this user
-    ///   - type: `user`
-    ///   - name: The display name of this user
-    ///   - login: The primary email address of this user
+    ///   - id: The unique identifier for this user.
+    ///   - type: The value will always be `user`.
+    ///   - name: The display name of this user.
+    ///   - login: The primary email address of this user.
     public init(id: String, type: UserBaseTypeField = UserBaseTypeField.user, name: String? = nil, login: String? = nil) {
         self.name = name
         self.login = login

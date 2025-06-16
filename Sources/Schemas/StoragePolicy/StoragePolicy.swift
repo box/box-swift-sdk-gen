@@ -15,15 +15,15 @@ public class StoragePolicy: StoragePolicyMini {
     }
 
 
-    /// A descriptive name of the region
+    /// A descriptive name of the region.
     public let name: String?
 
     /// Initializer for a StoragePolicy.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this storage policy
-    ///   - type: `storage_policy`
-    ///   - name: A descriptive name of the region
+    ///   - id: The unique identifier for this storage policy.
+    ///   - type: The value will always be `storage_policy`.
+    ///   - name: A descriptive name of the region.
     public init(id: String, type: StoragePolicyMiniTypeField = StoragePolicyMiniTypeField.storagePolicy, name: String? = nil) {
         self.name = name
 

@@ -31,7 +31,7 @@ public class SignRequestCreateRequest: SignRequestBase {
     /// List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
     @CodableTriState public private(set) var sourceFiles: [FileBase]?
 
-    /// Force a specific color for the signature (blue, black, or red)
+    /// Force a specific color for the signature (blue, black, or red).
     @CodableTriState public private(set) var signatureColor: SignRequestCreateRequestSignatureColorField?
 
     public let parentFolder: FolderMini?
@@ -61,7 +61,7 @@ public class SignRequestCreateRequest: SignRequestBase {
     ///   - templateId: When a signature request is created from a template this field will indicate the id of that template.
     ///   - externalSystemName: Used as an optional system name to appear in the signature log next to the signers who have been assigned the `embed_url_external_id`.
     ///   - sourceFiles: List of files to create a signing document from. This is currently limited to ten files. Only the ID and type fields are required for each file.
-    ///   - signatureColor: Force a specific color for the signature (blue, black, or red)
+    ///   - signatureColor: Force a specific color for the signature (blue, black, or red).
     ///   - parentFolder: 
     public init(signers: [SignRequestCreateSigner], isDocumentPreparationNeeded: Bool? = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, areTextSignaturesEnabled: Bool? = nil, emailSubject: TriStateField<String> = nil, emailMessage: TriStateField<String> = nil, areRemindersEnabled: Bool? = nil, name: String? = nil, prefillTags: [SignRequestPrefillTag]? = nil, daysValid: TriStateField<Int64> = nil, externalId: TriStateField<String> = nil, templateId: TriStateField<String> = nil, externalSystemName: TriStateField<String> = nil, sourceFiles: TriStateField<[FileBase]> = nil, signatureColor: TriStateField<SignRequestCreateRequestSignatureColorField> = nil, parentFolder: FolderMini? = nil) {
         self.signers = signers

@@ -17,25 +17,25 @@ public class SkillInvocationSkillField: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this skill
+    /// The unique identifier for this skill.
     public let id: String?
 
-    /// `skill`
+    /// The value will always be `skill`.
     public let type: SkillInvocationSkillTypeField?
 
-    /// The name of the skill
+    /// The name of the skill.
     public let name: String?
 
-    /// The client ID of the application
+    /// The client ID of the application.
     public let apiKey: String?
 
     /// Initializer for a SkillInvocationSkillField.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this skill
-    ///   - type: `skill`
-    ///   - name: The name of the skill
-    ///   - apiKey: The client ID of the application
+    ///   - id: The unique identifier for this skill.
+    ///   - type: The value will always be `skill`.
+    ///   - name: The name of the skill.
+    ///   - apiKey: The client ID of the application.
     public init(id: String? = nil, type: SkillInvocationSkillTypeField? = nil, name: String? = nil, apiKey: String? = nil) {
         self.id = id
         self.type = type

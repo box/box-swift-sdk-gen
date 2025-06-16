@@ -18,10 +18,10 @@ public class IntegrationMappingPartnerItemTeamsCreateRequest: Codable, RawJSONRe
     }
 
 
-    /// Type of the mapped item referenced in `id`
+    /// Type of the mapped item referenced in `id`.
     public let type: IntegrationMappingPartnerItemTeamsCreateRequestTypeField
 
-    /// ID of the mapped item (of type referenced in `type`)
+    /// ID of the mapped item (of type referenced in `type`).
     public let id: String
 
     /// ID of the tenant that is registered with Microsoft Teams.
@@ -33,8 +33,8 @@ public class IntegrationMappingPartnerItemTeamsCreateRequest: Codable, RawJSONRe
     /// Initializer for a IntegrationMappingPartnerItemTeamsCreateRequest.
     ///
     /// - Parameters:
-    ///   - type: Type of the mapped item referenced in `id`
-    ///   - id: ID of the mapped item (of type referenced in `type`)
+    ///   - type: Type of the mapped item referenced in `id`.
+    ///   - id: ID of the mapped item (of type referenced in `type`).
     ///   - tenantId: ID of the tenant that is registered with Microsoft Teams.
     ///   - teamId: ID of the team that is registered with Microsoft Teams.
     public init(type: IntegrationMappingPartnerItemTeamsCreateRequestTypeField, id: String, tenantId: String, teamId: String) {

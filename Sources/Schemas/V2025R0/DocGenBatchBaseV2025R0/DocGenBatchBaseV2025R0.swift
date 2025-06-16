@@ -19,14 +19,14 @@ public class DocGenBatchBaseV2025R0: Codable, RawJSONReadable {
     /// The unique identifier that represents a Box Doc Gen batch.
     public let id: String
 
-    /// `docgen_batch`
+    /// The value will always be `docgen_batch`.
     public let type: DocGenBatchBaseV2025R0TypeField
 
     /// Initializer for a DocGenBatchBaseV2025R0.
     ///
     /// - Parameters:
     ///   - id: The unique identifier that represents a Box Doc Gen batch.
-    ///   - type: `docgen_batch`
+    ///   - type: The value will always be `docgen_batch`.
     public init(id: String, type: DocGenBatchBaseV2025R0TypeField = DocGenBatchBaseV2025R0TypeField.docgenBatch) {
         self.id = id
         self.type = type

@@ -1,6 +1,6 @@
 import Foundation
 
-/// AI agent basic tool used to generate text. 
+/// AI agent basic tool used to generate text.
 public class AiAgentBasicGenTool: AiAgentLongTextToolTextGen {
     private enum CodingKeys: String, CodingKey {
         case contentTemplate = "content_template"

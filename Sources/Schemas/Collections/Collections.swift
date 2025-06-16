@@ -1,6 +1,6 @@
 import Foundation
 
-/// A list of collections
+/// A list of collections.
 public class Collections: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
@@ -45,7 +45,7 @@ public class Collections: Codable, RawJSONReadable {
     /// For marker-based paginated APIs, this field will be omitted.
     public let order: [CollectionsOrderField]?
 
-    /// A list of collections
+    /// A list of collections.
     public let entries: [Collection]?
 
     /// Initializer for a Collections.
@@ -69,7 +69,7 @@ public class Collections: Codable, RawJSONReadable {
     ///     
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
-    ///   - entries: A list of collections
+    ///   - entries: A list of collections.
     public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [CollectionsOrderField]? = nil, entries: [Collection]? = nil) {
         self.totalCount = totalCount
         self.limit = limit

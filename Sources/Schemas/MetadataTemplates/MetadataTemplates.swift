@@ -1,6 +1,6 @@
 import Foundation
 
-/// A list of metadata templates
+/// A list of metadata templates.
 public class MetadataTemplates: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case limit
@@ -29,7 +29,7 @@ public class MetadataTemplates: Codable, RawJSONReadable {
     /// The marker for the start of the previous page of results.
     @CodableTriState public private(set) var prevMarker: String?
 
-    /// A list of metadata templates
+    /// A list of metadata templates.
     public let entries: [MetadataTemplate]?
 
     /// Initializer for a MetadataTemplates.
@@ -40,7 +40,7 @@ public class MetadataTemplates: Codable, RawJSONReadable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
-    ///   - entries: A list of metadata templates
+    ///   - entries: A list of metadata templates.
     public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, entries: [MetadataTemplate]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)

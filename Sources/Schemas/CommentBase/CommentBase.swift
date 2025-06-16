@@ -19,14 +19,14 @@ public class CommentBase: Codable, RawJSONReadable {
     /// The unique identifier for this comment.
     public let id: String?
 
-    /// `comment`
+    /// The value will always be `comment`.
     public let type: CommentBaseTypeField?
 
     /// Initializer for a CommentBase.
     ///
     /// - Parameters:
     ///   - id: The unique identifier for this comment.
-    ///   - type: `comment`
+    ///   - type: The value will always be `comment`.
     public init(id: String? = nil, type: CommentBaseTypeField? = nil) {
         self.id = id
         self.type = type

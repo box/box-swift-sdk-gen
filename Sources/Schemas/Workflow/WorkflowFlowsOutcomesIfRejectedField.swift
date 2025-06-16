@@ -17,13 +17,13 @@ public class WorkflowFlowsOutcomesIfRejectedField: Codable, RawJSONReadable {
     }
 
 
-    /// The identifier of the outcome
+    /// The identifier of the outcome.
     public let id: String?
 
-    /// The outcomes resource type
+    /// The outcomes resource type.
     public let type: WorkflowFlowsOutcomesIfRejectedTypeField?
 
-    /// The name of the outcome
+    /// The name of the outcome.
     public let name: String?
 
     public let actionType: WorkflowFlowsOutcomesIfRejectedActionTypeField?
@@ -31,9 +31,9 @@ public class WorkflowFlowsOutcomesIfRejectedField: Codable, RawJSONReadable {
     /// Initializer for a WorkflowFlowsOutcomesIfRejectedField.
     ///
     /// - Parameters:
-    ///   - id: The identifier of the outcome
-    ///   - type: The outcomes resource type
-    ///   - name: The name of the outcome
+    ///   - id: The identifier of the outcome.
+    ///   - type: The outcomes resource type.
+    ///   - name: The name of the outcome.
     ///   - actionType: 
     public init(id: String? = nil, type: WorkflowFlowsOutcomesIfRejectedTypeField? = nil, name: String? = nil, actionType: WorkflowFlowsOutcomesIfRejectedActionTypeField? = nil) {
         self.id = id

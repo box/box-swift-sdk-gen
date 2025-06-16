@@ -1,6 +1,6 @@
 import Foundation
 
-/// A request to create a Teams Integration Mapping object
+/// A request to create a Teams Integration Mapping object.
 public class IntegrationMappingTeamsCreateRequest: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case partnerItem = "partner_item"

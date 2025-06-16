@@ -20,7 +20,6 @@ public class UpdateCollaborationByIdRequestBody: Codable, RawJSONReadable {
     /// The level of access granted.
     public let role: UpdateCollaborationByIdRequestBodyRoleField
 
-    /// <!--alex ignore reject-->
     /// Set the status of a `pending` collaboration invitation,
     /// effectively accepting, or rejecting the invite.
     public let status: UpdateCollaborationByIdRequestBodyStatusField?
@@ -59,8 +58,7 @@ public class UpdateCollaborationByIdRequestBody: Codable, RawJSONReadable {
     ///
     /// - Parameters:
     ///   - role: The level of access granted.
-    ///   - status: <!--alex ignore reject-->
-    ///     Set the status of a `pending` collaboration invitation,
+    ///   - status: Set the status of a `pending` collaboration invitation,
     ///     effectively accepting, or rejecting the invite.
     ///   - expiresAt: Update the expiration date for the collaboration. At this date,
     ///     the collaboration will be automatically removed from the item.

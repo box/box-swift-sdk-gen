@@ -21,10 +21,10 @@ public class WebhookInvocation: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this webhook invocation
+    /// The unique identifier for this webhook invocation.
     public let id: String?
 
-    /// `webhook_event`
+    /// The value will always be `webhook_event`.
     public let type: WebhookInvocationTypeField?
 
     public let webhook: Webhook?
@@ -42,8 +42,8 @@ public class WebhookInvocation: Codable, RawJSONReadable {
     /// Initializer for a WebhookInvocation.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this webhook invocation
-    ///   - type: `webhook_event`
+    ///   - id: The unique identifier for this webhook invocation.
+    ///   - type: The value will always be `webhook_event`.
     ///   - webhook: 
     ///   - createdBy: 
     ///   - createdAt: A timestamp identifying the time that

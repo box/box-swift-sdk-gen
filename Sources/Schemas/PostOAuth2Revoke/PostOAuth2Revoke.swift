@@ -1,6 +1,6 @@
 import Foundation
 
-/// A request to revoke an OAuth 2.0 token
+/// A request to revoke an OAuth 2.0 token.
 public class PostOAuth2Revoke: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case clientId = "client_id"

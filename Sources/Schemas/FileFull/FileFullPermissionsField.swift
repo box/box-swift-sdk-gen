@@ -59,11 +59,11 @@ public class FileFullPermissionsField: Codable, RawJSONReadable {
     /// Specifies if the user can upload a new version of this file.
     public let canUpload: Bool
 
-    /// Specifies if the user view all annotations placed on this file
+    /// Specifies if the user view all annotations placed on this file.
     public let canViewAnnotationsAll: Bool
 
     /// Specifies if the user view annotations placed by themselves
-    /// on this file
+    /// on this file.
     public let canViewAnnotationsSelf: Bool
 
     /// Initializer for a FileFullPermissionsField.
@@ -83,9 +83,9 @@ public class FileFullPermissionsField: Codable, RawJSONReadable {
     ///   - canComment: Specifies if the user can place comments on this file.
     ///   - canPreview: Specifies if the user can preview this file.
     ///   - canUpload: Specifies if the user can upload a new version of this file.
-    ///   - canViewAnnotationsAll: Specifies if the user view all annotations placed on this file
+    ///   - canViewAnnotationsAll: Specifies if the user view all annotations placed on this file.
     ///   - canViewAnnotationsSelf: Specifies if the user view annotations placed by themselves
-    ///     on this file
+    ///     on this file.
     public init(canDelete: Bool, canDownload: Bool, canInviteCollaborator: Bool, canRename: Bool, canSetShareAccess: Bool, canShare: Bool, canAnnotate: Bool, canComment: Bool, canPreview: Bool, canUpload: Bool, canViewAnnotationsAll: Bool, canViewAnnotationsSelf: Bool) {
         self.canDelete = canDelete
         self.canDownload = canDownload

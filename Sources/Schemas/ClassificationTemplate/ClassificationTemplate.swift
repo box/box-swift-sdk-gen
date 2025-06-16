@@ -35,10 +35,10 @@ public class ClassificationTemplate: Codable, RawJSONReadable {
     /// the different classifications available in this enterprise.
     public let fields: [ClassificationTemplateFieldsField]
 
-    /// `metadata_template`
+    /// The value will always be `metadata_template`.
     public let type: ClassificationTemplateTypeField
 
-    /// `securityClassification-6VMVochwUWo`
+    /// The value will always be `securityClassification-6VMVochwUWo`.
     public let templateKey: ClassificationTemplateTemplateKeyField
 
     /// The name of this template as shown in web and mobile interfaces.
@@ -63,8 +63,8 @@ public class ClassificationTemplate: Codable, RawJSONReadable {
     ///   - fields: A list of fields for this classification template. This includes
     ///     only one field, the `Box__Security__Classification__Key`, which defines
     ///     the different classifications available in this enterprise.
-    ///   - type: `metadata_template`
-    ///   - templateKey: `securityClassification-6VMVochwUWo`
+    ///   - type: The value will always be `metadata_template`.
+    ///   - templateKey: The value will always be `securityClassification-6VMVochwUWo`.
     ///   - displayName: The name of this template as shown in web and mobile interfaces.
     ///   - hidden: Determines if the
     ///     template is always available in web and mobile interfaces.

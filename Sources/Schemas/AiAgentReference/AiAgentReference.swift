@@ -19,14 +19,14 @@ public class AiAgentReference: Codable, RawJSONReadable {
     /// The type of AI agent used to handle queries.
     public let type: AiAgentReferenceTypeField
 
-    /// The ID of an Agent
+    /// The ID of an Agent.
     public let id: String?
 
     /// Initializer for a AiAgentReference.
     ///
     /// - Parameters:
     ///   - type: The type of AI agent used to handle queries.
-    ///   - id: The ID of an Agent
+    ///   - id: The ID of an Agent.
     public init(type: AiAgentReferenceTypeField = AiAgentReferenceTypeField.aiAgentId, id: String? = nil) {
         self.type = type
         self.id = id

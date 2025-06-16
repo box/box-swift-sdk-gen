@@ -18,24 +18,24 @@ public class ShieldListMiniV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// Unique global identifier for this list
+    /// Unique global identifier for this list.
     public let id: String
 
-    /// Name of Shield List
+    /// Name of Shield List.
     public let name: String
 
     public let content: ShieldListMiniV2025R0ContentField
 
-    /// The type of object
+    /// The type of object.
     public let type: ShieldListMiniV2025R0TypeField
 
     /// Initializer for a ShieldListMiniV2025R0.
     ///
     /// - Parameters:
-    ///   - id: Unique global identifier for this list
-    ///   - name: Name of Shield List
+    ///   - id: Unique global identifier for this list.
+    ///   - name: Name of Shield List.
     ///   - content: 
-    ///   - type: The type of object
+    ///   - type: The type of object.
     public init(id: String, name: String, content: ShieldListMiniV2025R0ContentField, type: ShieldListMiniV2025R0TypeField = ShieldListMiniV2025R0TypeField.shieldList) {
         self.id = id
         self.name = name

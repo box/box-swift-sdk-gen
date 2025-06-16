@@ -19,14 +19,14 @@ public class RetentionPolicyBase: Codable, RawJSONReadable {
     /// The unique identifier that represents a retention policy.
     public let id: String
 
-    /// `retention_policy`
+    /// The value will always be `retention_policy`.
     public let type: RetentionPolicyBaseTypeField
 
     /// Initializer for a RetentionPolicyBase.
     ///
     /// - Parameters:
     ///   - id: The unique identifier that represents a retention policy.
-    ///   - type: `retention_policy`
+    ///   - type: The value will always be `retention_policy`.
     public init(id: String, type: RetentionPolicyBaseTypeField = RetentionPolicyBaseTypeField.retentionPolicy) {
         self.id = id
         self.type = type

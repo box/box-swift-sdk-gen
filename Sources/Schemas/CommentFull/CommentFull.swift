@@ -2,7 +2,7 @@ import Foundation
 
 /// Comments are messages created on files. Comments
 /// can be made independently or created as responses to other
-/// comments
+/// comments.
 public class CommentFull: Comment {
     private enum CodingKeys: String, CodingKey {
         case taggedMessage = "tagged_message"
@@ -27,13 +27,13 @@ public class CommentFull: Comment {
     ///
     /// - Parameters:
     ///   - id: The unique identifier for this comment.
-    ///   - type: `comment`
+    ///   - type: The value will always be `comment`.
     ///   - isReplyComment: Whether or not this comment is a reply to another
-    ///     comment
-    ///   - message: The text of the comment, as provided by the user
+    ///     comment.
+    ///   - message: The text of the comment, as provided by the user.
     ///   - createdBy: 
-    ///   - createdAt: The time this comment was created
-    ///   - modifiedAt: The time this comment was last modified
+    ///   - createdAt: The time this comment was created.
+    ///   - modifiedAt: The time this comment was last modified.
     ///   - item: 
     ///   - taggedMessage: The string representing the comment text with
     ///     @mentions included. @mention format is @[id:username]

@@ -1,6 +1,6 @@
 import Foundation
 
-/// The assignment of a storage policy to a user or enterprise
+/// The assignment of a storage policy to a user or enterprise.
 public class StoragePolicyAssignment: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -21,7 +21,7 @@ public class StoragePolicyAssignment: Codable, RawJSONReadable {
     /// The unique identifier for a storage policy assignment.
     public let id: String
 
-    /// `storage_policy_assignment`
+    /// The value will always be `storage_policy_assignment`.
     public let type: StoragePolicyAssignmentTypeField
 
     public let storagePolicy: StoragePolicyMini?
@@ -32,7 +32,7 @@ public class StoragePolicyAssignment: Codable, RawJSONReadable {
     ///
     /// - Parameters:
     ///   - id: The unique identifier for a storage policy assignment.
-    ///   - type: `storage_policy_assignment`
+    ///   - type: The value will always be `storage_policy_assignment`.
     ///   - storagePolicy: 
     ///   - assignedTo: 
     public init(id: String, type: StoragePolicyAssignmentTypeField = StoragePolicyAssignmentTypeField.storagePolicyAssignment, storagePolicy: StoragePolicyMini? = nil, assignedTo: StoragePolicyAssignmentAssignedToField? = nil) {

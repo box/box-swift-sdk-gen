@@ -38,7 +38,7 @@ public class SearchResultsWithSharedLinks: Codable, RawJSONReadable {
     /// as the `offset` query parameter used.
     public let offset: Int64?
 
-    /// Specifies the response as search result items with shared links
+    /// Specifies the response as search result items with shared links.
     public let type: SearchResultsWithSharedLinksTypeField
 
     /// The search results for the query provided, including the
@@ -57,7 +57,7 @@ public class SearchResultsWithSharedLinks: Codable, RawJSONReadable {
     ///     allowed.
     ///   - offset: The 0-based offset of the first entry in this set. This will be the same
     ///     as the `offset` query parameter used.
-    ///   - type: Specifies the response as search result items with shared links
+    ///   - type: Specifies the response as search result items with shared links.
     ///   - entries: The search results for the query provided, including the
     ///     additional information about any shared links through
     ///     which the item has been shared with the user.

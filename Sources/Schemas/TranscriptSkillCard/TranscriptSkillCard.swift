@@ -36,10 +36,10 @@ public class TranscriptSkillCard: Codable, RawJSONReadable {
     /// The optional date and time this card was created at.
     public let createdAt: Date?
 
-    /// `skill_card`
+    /// The value will always be `skill_card`.
     public let type: TranscriptSkillCardTypeField
 
-    /// `transcript`
+    /// The value will always be `transcript`.
     public let skillCardType: TranscriptSkillCardSkillCardTypeField
 
     /// The title of the card.
@@ -60,8 +60,8 @@ public class TranscriptSkillCard: Codable, RawJSONReadable {
     ///   - entries: An list of entries for the card. This represents the individual entries of
     ///     the transcription.
     ///   - createdAt: The optional date and time this card was created at.
-    ///   - type: `skill_card`
-    ///   - skillCardType: `transcript`
+    ///   - type: The value will always be `skill_card`.
+    ///   - skillCardType: The value will always be `transcript`.
     ///   - skillCardTitle: The title of the card.
     ///   - duration: An optional total duration in seconds.
     ///     

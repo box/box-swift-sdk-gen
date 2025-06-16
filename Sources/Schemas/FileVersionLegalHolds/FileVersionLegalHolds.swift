@@ -29,7 +29,7 @@ public class FileVersionLegalHolds: Codable, RawJSONReadable {
     /// The marker for the start of the previous page of results.
     @CodableTriState public private(set) var prevMarker: String?
 
-    /// A list of file version legal holds
+    /// A list of file version legal holds.
     public let entries: [FileVersionLegalHold]?
 
     /// Initializer for a FileVersionLegalHolds.
@@ -40,7 +40,7 @@ public class FileVersionLegalHolds: Codable, RawJSONReadable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
-    ///   - entries: A list of file version legal holds
+    ///   - entries: A list of file version legal holds.
     public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, entries: [FileVersionLegalHold]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)

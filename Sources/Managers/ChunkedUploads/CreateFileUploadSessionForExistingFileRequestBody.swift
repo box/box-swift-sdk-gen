@@ -15,17 +15,17 @@ public class CreateFileUploadSessionForExistingFileRequestBody: Codable, RawJSON
     }
 
 
-    /// The total number of bytes of the file to be uploaded
+    /// The total number of bytes of the file to be uploaded.
     public let fileSize: Int64
 
-    /// The optional new name of new file
+    /// The optional new name of new file.
     public let fileName: String?
 
     /// Initializer for a CreateFileUploadSessionForExistingFileRequestBody.
     ///
     /// - Parameters:
-    ///   - fileSize: The total number of bytes of the file to be uploaded
-    ///   - fileName: The optional new name of new file
+    ///   - fileSize: The total number of bytes of the file to be uploaded.
+    ///   - fileName: The optional new name of new file.
     public init(fileSize: Int64, fileName: String? = nil) {
         self.fileSize = fileSize
         self.fileName = fileName

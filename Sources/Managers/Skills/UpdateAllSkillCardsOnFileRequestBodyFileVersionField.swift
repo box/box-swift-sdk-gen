@@ -15,17 +15,17 @@ public class UpdateAllSkillCardsOnFileRequestBodyFileVersionField: Codable, RawJ
     }
 
 
-    /// `file_version`
+    /// The value will always be `file_version`.
     public let type: UpdateAllSkillCardsOnFileRequestBodyFileVersionTypeField?
 
-    /// The ID of the file version
+    /// The ID of the file version.
     public let id: String?
 
     /// Initializer for a UpdateAllSkillCardsOnFileRequestBodyFileVersionField.
     ///
     /// - Parameters:
-    ///   - type: `file_version`
-    ///   - id: The ID of the file version
+    ///   - type: The value will always be `file_version`.
+    ///   - id: The ID of the file version.
     public init(type: UpdateAllSkillCardsOnFileRequestBodyFileVersionTypeField? = nil, id: String? = nil) {
         self.type = type
         self.id = id

@@ -45,7 +45,7 @@ public class Groups: Codable, RawJSONReadable {
     /// For marker-based paginated APIs, this field will be omitted.
     public let order: [GroupsOrderField]?
 
-    /// A list of groups
+    /// A list of groups.
     public let entries: [GroupFull]?
 
     /// Initializer for a Groups.
@@ -69,7 +69,7 @@ public class Groups: Codable, RawJSONReadable {
     ///     
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
-    ///   - entries: A list of groups
+    ///   - entries: A list of groups.
     public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [GroupsOrderField]? = nil, entries: [GroupFull]? = nil) {
         self.totalCount = totalCount
         self.limit = limit

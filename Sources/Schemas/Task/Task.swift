@@ -27,32 +27,32 @@ public class Task: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this task
+    /// The unique identifier for this task.
     public let id: String?
 
-    /// `task`
+    /// The value will always be `task`.
     public let type: TaskTypeField?
 
     public let item: FileMini?
 
-    /// When the task is due
+    /// When the task is due.
     public let dueAt: Date?
 
     /// The type of task the task assignee will be prompted to
     /// perform.
     public let action: TaskActionField?
 
-    /// A message that will be included with the task
+    /// A message that will be included with the task.
     public let message: String?
 
     public let taskAssignmentCollection: TaskAssignments?
 
-    /// Whether the task has been completed
+    /// Whether the task has been completed.
     public let isCompleted: Bool?
 
     public let createdBy: UserMini?
 
-    /// When the task object was created
+    /// When the task object was created.
     public let createdAt: Date?
 
     /// Defines which assignees need to complete this task before the task
@@ -67,17 +67,17 @@ public class Task: Codable, RawJSONReadable {
     /// Initializer for a Task.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this task
-    ///   - type: `task`
+    ///   - id: The unique identifier for this task.
+    ///   - type: The value will always be `task`.
     ///   - item: 
-    ///   - dueAt: When the task is due
+    ///   - dueAt: When the task is due.
     ///   - action: The type of task the task assignee will be prompted to
     ///     perform.
-    ///   - message: A message that will be included with the task
+    ///   - message: A message that will be included with the task.
     ///   - taskAssignmentCollection: 
-    ///   - isCompleted: Whether the task has been completed
+    ///   - isCompleted: Whether the task has been completed.
     ///   - createdBy: 
-    ///   - createdAt: When the task object was created
+    ///   - createdAt: When the task object was created.
     ///   - completionRule: Defines which assignees need to complete this task before the task
     ///     is considered completed.
     ///     

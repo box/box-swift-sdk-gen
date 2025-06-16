@@ -24,7 +24,7 @@ public class UpdateClassificationOnFileRequestBody: Codable, RawJSONReadable {
     /// which lists all available classification keys.
     public let value: String
 
-    /// `replace`
+    /// The value will always be `replace`.
     public let op: UpdateClassificationOnFileRequestBodyOpField
 
     /// Defines classifications 
@@ -40,7 +40,7 @@ public class UpdateClassificationOnFileRequestBody: Codable, RawJSONReadable {
     ///     use the classification API to retrieve the
     ///     [classification template](e://get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema)
     ///     which lists all available classification keys.
-    ///   - op: `replace`
+    ///   - op: The value will always be `replace`.
     ///   - path: Defines classifications 
     ///     available in the enterprise.
     public init(value: String, op: UpdateClassificationOnFileRequestBodyOpField = UpdateClassificationOnFileRequestBodyOpField.replace, path: UpdateClassificationOnFileRequestBodyPathField = UpdateClassificationOnFileRequestBodyPathField.boxSecurityClassificationKey) {

@@ -72,7 +72,7 @@ Returns the new webhook object.
 
 ## Get webhook
 
-Retrieves a specific webhook
+Retrieves a specific webhook.
 
 This operation is performed by calling function `getWebhookById`.
 
@@ -96,7 +96,7 @@ try await client.webhooks.getWebhookById(webhookId: webhook.id!)
 
 This function returns a value of type `Webhook`.
 
-Returns a webhook object
+Returns a webhook object.
 
 
 ## Update webhook

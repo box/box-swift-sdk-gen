@@ -19,10 +19,10 @@ public class IntegrationMappingBase: Codable, RawJSONReadable {
 
     /// A unique identifier of a folder mapping
     /// (part of a composite key together
-    /// with `integration_type`)
+    /// with `integration_type`).
     public let id: String
 
-    /// Mapping type
+    /// Mapping type.
     public let type: IntegrationMappingBaseTypeField
 
     /// Initializer for a IntegrationMappingBase.
@@ -30,8 +30,8 @@ public class IntegrationMappingBase: Codable, RawJSONReadable {
     /// - Parameters:
     ///   - id: A unique identifier of a folder mapping
     ///     (part of a composite key together
-    ///     with `integration_type`)
-    ///   - type: Mapping type
+    ///     with `integration_type`).
+    ///   - type: Mapping type.
     public init(id: String, type: IntegrationMappingBaseTypeField = IntegrationMappingBaseTypeField.integrationMapping) {
         self.id = id
         self.type = type

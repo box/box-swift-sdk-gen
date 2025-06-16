@@ -21,14 +21,14 @@ public class FileVersionBaseV2025R0: Codable, RawJSONReadable {
     /// The unique identifier that represent a file version.
     public let id: String
 
-    /// `file_version`
+    /// The value will always be `file_version`.
     public let type: FileVersionBaseV2025R0TypeField
 
     /// Initializer for a FileVersionBaseV2025R0.
     ///
     /// - Parameters:
     ///   - id: The unique identifier that represent a file version.
-    ///   - type: `file_version`
+    ///   - type: The value will always be `file_version`.
     public init(id: String, type: FileVersionBaseV2025R0TypeField = FileVersionBaseV2025R0TypeField.fileVersion) {
         self.id = id
         self.type = type

@@ -1,6 +1,6 @@
 import Foundation
 
-/// The description of an event that happened within Box
+/// The description of an event that happened within Box.
 public class Event: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -23,16 +23,16 @@ public class Event: Codable, RawJSONReadable {
     }
 
 
-    /// `event`
+    /// The value will always be `event`.
     public let type: String?
 
-    /// When the event object was created
+    /// When the event object was created.
     public let createdAt: Date?
 
-    /// When the event object was recorded in database
+    /// When the event object was recorded in database.
     public let recordedAt: Date?
 
-    /// The ID of the event object. You can use this to detect duplicate events
+    /// The ID of the event object. You can use this to detect duplicate events.
     public let eventId: String?
 
     public let createdBy: UserMini?
@@ -56,10 +56,10 @@ public class Event: Codable, RawJSONReadable {
     /// Initializer for a Event.
     ///
     /// - Parameters:
-    ///   - type: `event`
-    ///   - createdAt: When the event object was created
-    ///   - recordedAt: When the event object was recorded in database
-    ///   - eventId: The ID of the event object. You can use this to detect duplicate events
+    ///   - type: The value will always be `event`.
+    ///   - createdAt: When the event object was created.
+    ///   - recordedAt: When the event object was recorded in database.
+    ///   - eventId: The ID of the event object. You can use this to detect duplicate events.
     ///   - createdBy: 
     ///   - eventType: 
     ///   - sessionId: The session of the user that performed the action. Not all events will

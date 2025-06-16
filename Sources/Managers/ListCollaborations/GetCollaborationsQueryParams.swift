@@ -1,7 +1,7 @@
 import Foundation
 
 public class GetCollaborationsQueryParams {
-    /// The status of the collaborations to retrieve
+    /// The status of the collaborations to retrieve.
     public let status: GetCollaborationsQueryParamsStatusField
 
     /// A comma-separated list of attributes to include in the
@@ -28,7 +28,7 @@ public class GetCollaborationsQueryParams {
     /// Initializer for a GetCollaborationsQueryParams.
     ///
     /// - Parameters:
-    ///   - status: The status of the collaborations to retrieve
+    ///   - status: The status of the collaborations to retrieve.
     ///   - fields: A comma-separated list of attributes to include in the
     ///     response. This can be used to request fields that are
     ///     not normally returned in a standard response.

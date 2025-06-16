@@ -64,7 +64,7 @@ try await client.termsOfServices.createTermsOfService(requestBody: CreateTermsOf
 
 This function returns a value of type `TermsOfService`.
 
-Returns a new task object
+Returns a new task object.
 
 
 ## Get terms of service

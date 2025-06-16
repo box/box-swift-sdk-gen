@@ -16,7 +16,7 @@ public class CreateStoragePolicyAssignmentRequestBody: Codable, RawJSONReadable 
 
 
     /// The storage policy to assign to the user or
-    /// enterprise
+    /// enterprise.
     public let storagePolicy: CreateStoragePolicyAssignmentRequestBodyStoragePolicyField
 
     /// The user or enterprise to assign the storage
@@ -27,7 +27,7 @@ public class CreateStoragePolicyAssignmentRequestBody: Codable, RawJSONReadable 
     ///
     /// - Parameters:
     ///   - storagePolicy: The storage policy to assign to the user or
-    ///     enterprise
+    ///     enterprise.
     ///   - assignedTo: The user or enterprise to assign the storage
     ///     policy to.
     public init(storagePolicy: CreateStoragePolicyAssignmentRequestBodyStoragePolicyField, assignedTo: CreateStoragePolicyAssignmentRequestBodyAssignedToField) {

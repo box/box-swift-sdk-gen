@@ -14,13 +14,13 @@ public class FileFullRepresentationsField: Codable, RawJSONReadable {
     }
 
 
-    /// A list of files
+    /// A list of files.
     public let entries: [FileFullRepresentationsEntriesField]?
 
     /// Initializer for a FileFullRepresentationsField.
     ///
     /// - Parameters:
-    ///   - entries: A list of files
+    ///   - entries: A list of files.
     public init(entries: [FileFullRepresentationsEntriesField]? = nil) {
         self.entries = entries
     }

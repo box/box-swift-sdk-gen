@@ -1,6 +1,6 @@
 import Foundation
 
-/// AI LLM endpoint params AWS object
+/// AI LLM endpoint params AWS object.
 public class AiLlmEndpointParamsAws: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type

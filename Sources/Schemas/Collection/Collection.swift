@@ -28,7 +28,7 @@ public class Collection: Codable, RawJSONReadable {
     /// The unique identifier for this collection.
     public let id: String?
 
-    /// `collection`
+    /// The value will always be `collection`.
     public let type: CollectionTypeField?
 
     /// The name of the collection.
@@ -43,7 +43,7 @@ public class Collection: Codable, RawJSONReadable {
     ///
     /// - Parameters:
     ///   - id: The unique identifier for this collection.
-    ///   - type: `collection`
+    ///   - type: The value will always be `collection`.
     ///   - name: The name of the collection.
     ///   - collectionType: The type of the collection. This is used to
     ///     determine the proper visual treatment for

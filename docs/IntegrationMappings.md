@@ -39,7 +39,7 @@ try await userClient.integrationMappings.getSlackIntegrationMapping()
 
 This function returns a value of type `IntegrationMappings`.
 
-Returns a collection of integration mappings
+Returns a collection of integration mappings.
 
 
 ## Create Slack integration mapping
@@ -96,7 +96,7 @@ try await userClient.integrationMappings.updateSlackIntegrationMappingById(integ
 ### Arguments
 
 - integrationMappingId `String`
-  - An ID of an integration mapping Example: "11235432"
+  - An ID of an integration mapping. Example: "11235432"
 - requestBody `UpdateSlackIntegrationMappingByIdRequestBody`
   - Request body of updateSlackIntegrationMappingById method
 - headers `UpdateSlackIntegrationMappingByIdHeaders`
@@ -131,7 +131,7 @@ try await userClient.integrationMappings.deleteSlackIntegrationMappingById(integ
 ### Arguments
 
 - integrationMappingId `String`
-  - An ID of an integration mapping Example: "11235432"
+  - An ID of an integration mapping. Example: "11235432"
 - headers `DeleteSlackIntegrationMappingByIdHeaders`
   - Headers of deleteSlackIntegrationMappingById method
 
@@ -140,7 +140,7 @@ try await userClient.integrationMappings.deleteSlackIntegrationMappingById(integ
 
 This function returns a value of type ``.
 
-Empty body in response
+Empty body in response.
 
 
 ## List Teams integration mappings
@@ -171,7 +171,7 @@ try await userClient.integrationMappings.getTeamsIntegrationMapping()
 
 This function returns a value of type `IntegrationMappingsTeams`.
 
-Returns a collection of integration mappings
+Returns a collection of integration mappings.
 
 
 ## Create Teams integration mapping
@@ -226,7 +226,7 @@ try await userClient.integrationMappings.updateTeamsIntegrationMappingById(integ
 ### Arguments
 
 - integrationMappingId `String`
-  - An ID of an integration mapping Example: "11235432"
+  - An ID of an integration mapping. Example: "11235432"
 - requestBody `UpdateTeamsIntegrationMappingByIdRequestBody`
   - Request body of updateTeamsIntegrationMappingById method
 - headers `UpdateTeamsIntegrationMappingByIdHeaders`
@@ -259,7 +259,7 @@ try await userClient.integrationMappings.deleteTeamsIntegrationMappingById(integ
 ### Arguments
 
 - integrationMappingId `String`
-  - An ID of an integration mapping Example: "11235432"
+  - An ID of an integration mapping. Example: "11235432"
 - headers `DeleteTeamsIntegrationMappingByIdHeaders`
   - Headers of deleteTeamsIntegrationMappingById method
 
@@ -268,6 +268,6 @@ try await userClient.integrationMappings.deleteTeamsIntegrationMappingById(integ
 
 This function returns a value of type ``.
 
-Empty body in response
+Empty body in response.
 
 

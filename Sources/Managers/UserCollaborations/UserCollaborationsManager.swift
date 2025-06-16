@@ -13,7 +13,7 @@ public class UserCollaborationsManager {
     /// Retrieves a single collaboration.
     ///
     /// - Parameters:
-    ///   - collaborationId: The ID of the collaboration
+    ///   - collaborationId: The ID of the collaboration.
     ///     Example: "1234"
     ///   - queryParams: Query parameters of getCollaborationById method
     ///   - headers: Headers of getCollaborationById method
@@ -31,7 +31,7 @@ public class UserCollaborationsManager {
     /// accept collaboration invites.
     ///
     /// - Parameters:
-    ///   - collaborationId: The ID of the collaboration
+    ///   - collaborationId: The ID of the collaboration.
     ///     Example: "1234"
     ///   - requestBody: Request body of updateCollaborationById method
     ///   - headers: Headers of updateCollaborationById method
@@ -50,7 +50,7 @@ public class UserCollaborationsManager {
     /// Deletes a single collaboration.
     ///
     /// - Parameters:
-    ///   - collaborationId: The ID of the collaboration
+    ///   - collaborationId: The ID of the collaboration.
     ///     Example: "1234"
     ///   - headers: Headers of deleteCollaborationById method
     /// - Throws: The `GeneralError`.

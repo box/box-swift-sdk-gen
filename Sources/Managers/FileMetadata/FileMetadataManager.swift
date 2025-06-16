@@ -42,9 +42,9 @@ public class FileMetadataManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - scope: The scope of the metadata template
+    ///   - scope: The scope of the metadata template.
     ///     Example: "global"
-    ///   - templateKey: The name of the metadata template
+    ///   - templateKey: The name of the metadata template.
     ///     Example: "properties"
     ///   - headers: Headers of getFileMetadataById method
     /// - Returns: The `MetadataFull`.
@@ -70,9 +70,9 @@ public class FileMetadataManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - scope: The scope of the metadata template
+    ///   - scope: The scope of the metadata template.
     ///     Example: "global"
-    ///   - templateKey: The name of the metadata template
+    ///   - templateKey: The name of the metadata template.
     ///     Example: "properties"
     ///   - requestBody: Request body of createFileMetadataById method
     ///   - headers: Headers of createFileMetadataById method
@@ -102,9 +102,9 @@ public class FileMetadataManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - scope: The scope of the metadata template
+    ///   - scope: The scope of the metadata template.
     ///     Example: "global"
-    ///   - templateKey: The name of the metadata template
+    ///   - templateKey: The name of the metadata template.
     ///     Example: "properties"
     ///   - requestBody: Request body of updateFileMetadataById method
     ///   - headers: Headers of updateFileMetadataById method
@@ -127,9 +127,9 @@ public class FileMetadataManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - scope: The scope of the metadata template
+    ///   - scope: The scope of the metadata template.
     ///     Example: "global"
-    ///   - templateKey: The name of the metadata template
+    ///   - templateKey: The name of the metadata template.
     ///     Example: "properties"
     ///   - headers: Headers of deleteFileMetadataById method
     /// - Throws: The `GeneralError`.

@@ -16,18 +16,18 @@ public class CreateCollaborationRequestBodyItemField: Codable, RawJSONReadable {
 
 
     /// The type of the item that this collaboration will be
-    /// granted access to
+    /// granted access to.
     public let type: CreateCollaborationRequestBodyItemTypeField?
 
-    /// The ID of the item that will be granted access to
+    /// The ID of the item that will be granted access to.
     public let id: String?
 
     /// Initializer for a CreateCollaborationRequestBodyItemField.
     ///
     /// - Parameters:
     ///   - type: The type of the item that this collaboration will be
-    ///     granted access to
-    ///   - id: The ID of the item that will be granted access to
+    ///     granted access to.
+    ///   - id: The ID of the item that will be granted access to.
     public init(type: CreateCollaborationRequestBodyItemTypeField? = nil, id: String? = nil) {
         self.type = type
         self.id = id

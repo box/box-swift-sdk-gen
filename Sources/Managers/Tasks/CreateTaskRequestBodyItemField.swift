@@ -15,17 +15,17 @@ public class CreateTaskRequestBodyItemField: Codable, RawJSONReadable {
     }
 
 
-    /// The ID of the file
+    /// The ID of the file.
     public let id: String?
 
-    /// `file`
+    /// The value will always be `file`.
     public let type: CreateTaskRequestBodyItemTypeField?
 
     /// Initializer for a CreateTaskRequestBodyItemField.
     ///
     /// - Parameters:
-    ///   - id: The ID of the file
-    ///   - type: `file`
+    ///   - id: The ID of the file.
+    ///   - type: The value will always be `file`.
     public init(id: String? = nil, type: CreateTaskRequestBodyItemTypeField? = nil) {
         self.id = id
         self.type = type

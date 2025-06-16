@@ -16,13 +16,13 @@ public class IntegrationMappingsTeams: Codable, RawJSONReadable {
     }
 
 
-    /// A list of integration mappings
+    /// A list of integration mappings.
     public let entries: [IntegrationMappingTeams]?
 
     /// Initializer for a IntegrationMappingsTeams.
     ///
     /// - Parameters:
-    ///   - entries: A list of integration mappings
+    ///   - entries: A list of integration mappings.
     public init(entries: [IntegrationMappingTeams]? = nil) {
         self.entries = entries
     }

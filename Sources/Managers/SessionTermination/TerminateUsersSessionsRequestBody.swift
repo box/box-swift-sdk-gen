@@ -15,17 +15,17 @@ public class TerminateUsersSessionsRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// A list of user IDs
+    /// A list of user IDs.
     public let userIds: [String]
 
-    /// A list of user logins
+    /// A list of user logins.
     public let userLogins: [String]
 
     /// Initializer for a TerminateUsersSessionsRequestBody.
     ///
     /// - Parameters:
-    ///   - userIds: A list of user IDs
-    ///   - userLogins: A list of user logins
+    ///   - userIds: A list of user IDs.
+    ///   - userLogins: A list of user logins.
     public init(userIds: [String], userLogins: [String]) {
         self.userIds = userIds
         self.userLogins = userLogins

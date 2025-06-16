@@ -15,17 +15,17 @@ public class WorkflowFlowsTriggerScopeObjectField: Codable, RawJSONReadable {
     }
 
 
-    /// The type of the object
+    /// The type of the object.
     public let type: WorkflowFlowsTriggerScopeObjectTypeField?
 
-    /// The id of the object
+    /// The id of the object.
     public let id: String?
 
     /// Initializer for a WorkflowFlowsTriggerScopeObjectField.
     ///
     /// - Parameters:
-    ///   - type: The type of the object
-    ///   - id: The id of the object
+    ///   - type: The type of the object.
+    ///   - id: The id of the object.
     public init(type: WorkflowFlowsTriggerScopeObjectTypeField? = nil, id: String? = nil) {
         self.type = type
         self.id = id

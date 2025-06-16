@@ -19,14 +19,13 @@ public class AppItemEventSource: Codable, RawJSONReadable {
     }
 
 
-    /// The id of the `AppItem`
+    /// The id of the `AppItem`.
     public let id: String
 
-    /// The type of the `AppItem`
+    /// The type of the `AppItem`.
     public let appItemType: String
 
     /// The type of the source that this event represents. Can only be `app_item`.
-    /// 
     public let type: AppItemEventSourceTypeField
 
     public let user: UserMini?
@@ -36,10 +35,9 @@ public class AppItemEventSource: Codable, RawJSONReadable {
     /// Initializer for a AppItemEventSource.
     ///
     /// - Parameters:
-    ///   - id: The id of the `AppItem`
-    ///   - appItemType: The type of the `AppItem`
+    ///   - id: The id of the `AppItem`.
+    ///   - appItemType: The type of the `AppItem`.
     ///   - type: The type of the source that this event represents. Can only be `app_item`.
-    ///     
     ///   - user: 
     ///   - group: 
     public init(id: String, appItemType: String, type: AppItemEventSourceTypeField = AppItemEventSourceTypeField.appItem, user: UserMini? = nil, group: GroupMini? = nil) {

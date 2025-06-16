@@ -15,7 +15,7 @@ public class AiStudioAgentBasicGenTool: AiAgentBasicGenTool {
     }
 
 
-    /// True if system message contains custom instructions placeholder, false otherwise
+    /// True if system message contains custom instructions placeholder, false otherwise.
     public let isCustomInstructionsIncluded: Bool?
 
     /// Initializer for a AiStudioAgentBasicGenTool.
@@ -33,7 +33,7 @@ public class AiStudioAgentBasicGenTool: AiAgentBasicGenTool {
     ///   - embeddings: 
     ///   - contentTemplate: How the content should be included in a request to the LLM.
     ///     Input for `{content}` is optional, depending on the use.
-    ///   - isCustomInstructionsIncluded: True if system message contains custom instructions placeholder, false otherwise
+    ///   - isCustomInstructionsIncluded: True if system message contains custom instructions placeholder, false otherwise.
     public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParams? = nil, systemMessage: String? = nil, promptTemplate: String? = nil, embeddings: AiAgentLongTextToolTextGenEmbeddingsField? = nil, contentTemplate: String? = nil, isCustomInstructionsIncluded: Bool? = nil) {
         self.isCustomInstructionsIncluded = isCustomInstructionsIncluded
 

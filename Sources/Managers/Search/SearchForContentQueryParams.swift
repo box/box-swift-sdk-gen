@@ -153,10 +153,10 @@ public class SearchForContentQueryParams {
     /// parameter only takes one value. By default the API returns
     /// items that match any of these types.
     /// 
-    /// * `file` - Limits the search results to files
-    /// * `folder` - Limits the search results to folders
+    /// * `file` - Limits the search results to files,
+    /// * `folder` - Limits the search results to folders,
     /// * `web_link` - Limits the search results to web links, also known
-    ///    as bookmarks
+    ///    as bookmarks.
     public let type: SearchForContentQueryParamsTypeField?
 
     /// Determines if the search should look in the trash for items.
@@ -204,7 +204,7 @@ public class SearchForContentQueryParams {
     /// When this parameter has been set to true,
     /// the format of the response of this API changes to return
     /// a list of [Search Results with
-    /// Shared Links](r://search_results_with_shared_links)
+    /// Shared Links](r://search_results_with_shared_links).
     public let includeRecentSharedLinks: Bool?
 
     /// A comma-separated list of attributes to include in the
@@ -395,10 +395,10 @@ public class SearchForContentQueryParams {
     ///     parameter only takes one value. By default the API returns
     ///     items that match any of these types.
     ///     
-    ///     * `file` - Limits the search results to files
-    ///     * `folder` - Limits the search results to folders
+    ///     * `file` - Limits the search results to files,
+    ///     * `folder` - Limits the search results to folders,
     ///     * `web_link` - Limits the search results to web links, also known
-    ///        as bookmarks
+    ///        as bookmarks.
     ///   - trashContent: Determines if the search should look in the trash for items.
     ///     
     ///     By default, this API only returns search results for items
@@ -434,7 +434,7 @@ public class SearchForContentQueryParams {
     ///     When this parameter has been set to true,
     ///     the format of the response of this API changes to return
     ///     a list of [Search Results with
-    ///     Shared Links](r://search_results_with_shared_links)
+    ///     Shared Links](r://search_results_with_shared_links).
     ///   - fields: A comma-separated list of attributes to include in the
     ///     response. This can be used to request fields that are
     ///     not normally returned in a standard response.

@@ -19,7 +19,7 @@ public class TranscriptSkillCardSkillField: Codable, RawJSONReadable {
     /// applied this metadata.
     public let id: String
 
-    /// `service`
+    /// The value will always be `service`.
     public let type: TranscriptSkillCardSkillTypeField
 
     /// Initializer for a TranscriptSkillCardSkillField.
@@ -27,7 +27,7 @@ public class TranscriptSkillCardSkillField: Codable, RawJSONReadable {
     /// - Parameters:
     ///   - id: A custom identifier that represent the service that
     ///     applied this metadata.
-    ///   - type: `service`
+    ///   - type: The value will always be `service`.
     public init(id: String, type: TranscriptSkillCardSkillTypeField = TranscriptSkillCardSkillTypeField.service) {
         self.id = id
         self.type = type

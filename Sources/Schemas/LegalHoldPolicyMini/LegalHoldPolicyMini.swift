@@ -1,6 +1,6 @@
 import Foundation
 
-/// A mini legal hold policy
+/// A mini legal hold policy.
 public class LegalHoldPolicyMini: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -16,17 +16,17 @@ public class LegalHoldPolicyMini: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this legal hold policy
+    /// The unique identifier for this legal hold policy.
     public let id: String
 
-    /// `legal_hold_policy`
+    /// The value will always be `legal_hold_policy`.
     public let type: LegalHoldPolicyMiniTypeField
 
     /// Initializer for a LegalHoldPolicyMini.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this legal hold policy
-    ///   - type: `legal_hold_policy`
+    ///   - id: The unique identifier for this legal hold policy.
+    ///   - type: The value will always be `legal_hold_policy`.
     public init(id: String, type: LegalHoldPolicyMiniTypeField = LegalHoldPolicyMiniTypeField.legalHoldPolicy) {
         self.id = id
         self.type = type

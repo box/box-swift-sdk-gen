@@ -17,10 +17,10 @@ public class IntegrationMappingPartnerItemTeams: Codable, RawJSONReadable {
     }
 
 
-    /// Type of the mapped item referenced in `id`
+    /// Type of the mapped item referenced in `id`.
     public let type: IntegrationMappingPartnerItemTeamsTypeField
 
-    /// ID of the mapped item (of type referenced in `type`)
+    /// ID of the mapped item (of type referenced in `type`).
     public let id: String
 
     /// ID of the tenant that is registered with Microsoft Teams.
@@ -29,8 +29,8 @@ public class IntegrationMappingPartnerItemTeams: Codable, RawJSONReadable {
     /// Initializer for a IntegrationMappingPartnerItemTeams.
     ///
     /// - Parameters:
-    ///   - type: Type of the mapped item referenced in `id`
-    ///   - id: ID of the mapped item (of type referenced in `type`)
+    ///   - type: Type of the mapped item referenced in `id`.
+    ///   - id: ID of the mapped item (of type referenced in `type`).
     ///   - tenantId: ID of the tenant that is registered with Microsoft Teams.
     public init(type: IntegrationMappingPartnerItemTeamsTypeField, id: String, tenantId: String) {
         self.type = type

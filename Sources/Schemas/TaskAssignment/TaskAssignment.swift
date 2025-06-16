@@ -24,10 +24,10 @@ public class TaskAssignment: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this task assignment
+    /// The unique identifier for this task assignment.
     public let id: String?
 
-    /// `task_assignment`
+    /// The value will always be `task_assignment`.
     public let type: TaskAssignmentTypeField?
 
     public let item: FileMini?
@@ -59,8 +59,8 @@ public class TaskAssignment: Codable, RawJSONReadable {
     /// Initializer for a TaskAssignment.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this task assignment
-    ///   - type: `task_assignment`
+    ///   - id: The unique identifier for this task assignment.
+    ///   - type: The value will always be `task_assignment`.
     ///   - item: 
     ///   - assignedTo: 
     ///   - message: A message that will is included with the task

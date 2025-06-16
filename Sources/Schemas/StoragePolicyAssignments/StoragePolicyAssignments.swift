@@ -29,7 +29,7 @@ public class StoragePolicyAssignments: Codable, RawJSONReadable {
     /// The marker for the start of the previous page of results.
     @CodableTriState public private(set) var prevMarker: String?
 
-    /// A list of storage policy assignments
+    /// A list of storage policy assignments.
     public let entries: [StoragePolicyAssignment]?
 
     /// Initializer for a StoragePolicyAssignments.
@@ -40,7 +40,7 @@ public class StoragePolicyAssignments: Codable, RawJSONReadable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
-    ///   - entries: A list of storage policy assignments
+    ///   - entries: A list of storage policy assignments.
     public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, entries: [StoragePolicyAssignment]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)

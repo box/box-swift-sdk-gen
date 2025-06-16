@@ -1,6 +1,6 @@
 import Foundation
 
-/// A list of device pins
+/// A list of device pins.
 public class DevicePinners: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case entries
@@ -18,7 +18,7 @@ public class DevicePinners: Codable, RawJSONReadable {
     }
 
 
-    /// A list of device pins
+    /// A list of device pins.
     public let entries: [DevicePinner]?
 
     /// The limit that was used for these entries. This will be the same as the
@@ -35,7 +35,7 @@ public class DevicePinners: Codable, RawJSONReadable {
     /// Initializer for a DevicePinners.
     ///
     /// - Parameters:
-    ///   - entries: A list of device pins
+    ///   - entries: A list of device pins.
     ///   - limit: The limit that was used for these entries. This will be the same as the
     ///     `limit` query parameter unless that value exceeded the maximum value
     ///     allowed.

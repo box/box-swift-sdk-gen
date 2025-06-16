@@ -40,7 +40,7 @@ public class LegalHoldPolicyAssignmentsManager {
     /// Retrieve a legal hold policy assignment.
     ///
     /// - Parameters:
-    ///   - legalHoldPolicyAssignmentId: The ID of the legal hold policy assignment
+    ///   - legalHoldPolicyAssignmentId: The ID of the legal hold policy assignment.
     ///     Example: "753465"
     ///   - headers: Headers of getLegalHoldPolicyAssignmentById method
     /// - Returns: The `LegalHoldPolicyAssignment`.
@@ -57,7 +57,7 @@ public class LegalHoldPolicyAssignmentsManager {
     /// fully removed yet when the response returns.
     ///
     /// - Parameters:
-    ///   - legalHoldPolicyAssignmentId: The ID of the legal hold policy assignment
+    ///   - legalHoldPolicyAssignmentId: The ID of the legal hold policy assignment.
     ///     Example: "753465"
     ///   - headers: Headers of deleteLegalHoldPolicyAssignmentById method
     /// - Throws: The `GeneralError`.
@@ -87,7 +87,7 @@ public class LegalHoldPolicyAssignmentsManager {
     /// find a list of policy assignments for a given policy ID.
     ///
     /// - Parameters:
-    ///   - legalHoldPolicyAssignmentId: The ID of the legal hold policy assignment
+    ///   - legalHoldPolicyAssignmentId: The ID of the legal hold policy assignment.
     ///     Example: "753465"
     ///   - queryParams: Query parameters of getLegalHoldPolicyAssignmentFileOnHold method
     ///   - headers: Headers of getLegalHoldPolicyAssignmentFileOnHold method

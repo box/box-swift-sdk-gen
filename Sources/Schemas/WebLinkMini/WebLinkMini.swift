@@ -21,24 +21,24 @@ public class WebLinkMini: WebLinkBase {
     }
 
 
-    /// The URL this web link points to
+    /// The URL this web link points to.
     public let url: String?
 
     public let sequenceId: String?
 
-    /// The name of the web link
+    /// The name of the web link.
     public let name: String?
 
     /// Initializer for a WebLinkMini.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this web link
-    ///   - type: `web_link`
+    ///   - id: The unique identifier for this web link.
+    ///   - type: The value will always be `web_link`.
     ///   - etag: The entity tag of this web link. Used with `If-Match`
     ///     headers.
-    ///   - url: The URL this web link points to
+    ///   - url: The URL this web link points to.
     ///   - sequenceId: 
-    ///   - name: The name of the web link
+    ///   - name: The name of the web link.
     public init(id: String, type: WebLinkBaseTypeField = WebLinkBaseTypeField.webLink, etag: String? = nil, url: String? = nil, sequenceId: String? = nil, name: String? = nil) {
         self.url = url
         self.sequenceId = sequenceId

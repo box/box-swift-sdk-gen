@@ -1,7 +1,7 @@
 import Foundation
 
 /// A standard representation of a folder, as returned from any
-/// folder API endpoints by default
+/// folder API endpoints by default.
 public class Folder: FolderMini {
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
@@ -80,7 +80,7 @@ public class Folder: FolderMini {
     /// 
     ///   * The **Allow uploads to this folder via email** setting is enabled for a folder in the Admin Console, and the **Only allow email uploads from collaborators in this folder** setting is deactivated (unchecked).
     /// 
-    /// If the conditions are not met, the parameter will have the following value: `folder_upload_email: null`
+    /// If the conditions are not met, the parameter will have the following value: `folder_upload_email: null`.
     @CodableTriState public private(set) var folderUploadEmail: FolderFolderUploadEmailField?
 
     @CodableTriState public private(set) var parent: FolderMini?
@@ -107,7 +107,7 @@ public class Folder: FolderMini {
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
-    ///   - type: `folder`
+    ///   - type: The value will always be `folder`.
     ///   - sequenceId: 
     ///   - name: The name of the folder.
     ///   - createdAt: The date and time when the folder was created. This value may
@@ -138,7 +138,7 @@ public class Folder: FolderMini {
     ///     
     ///       * The **Allow uploads to this folder via email** setting is enabled for a folder in the Admin Console, and the **Only allow email uploads from collaborators in this folder** setting is deactivated (unchecked).
     ///     
-    ///     If the conditions are not met, the parameter will have the following value: `folder_upload_email: null`
+    ///     If the conditions are not met, the parameter will have the following value: `folder_upload_email: null`.
     ///   - parent: 
     ///   - itemStatus: Defines if this item has been deleted or not.
     ///     

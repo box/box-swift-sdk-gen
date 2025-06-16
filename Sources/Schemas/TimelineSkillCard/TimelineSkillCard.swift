@@ -36,10 +36,10 @@ public class TimelineSkillCard: Codable, RawJSONReadable {
     /// The optional date and time this card was created at.
     public let createdAt: Date?
 
-    /// `skill_card`
+    /// The value will always be `skill_card`.
     public let type: TimelineSkillCardTypeField
 
-    /// `timeline`
+    /// The value will always be `timeline`.
     public let skillCardType: TimelineSkillCardSkillCardTypeField
 
     /// The title of the card.
@@ -56,8 +56,8 @@ public class TimelineSkillCard: Codable, RawJSONReadable {
     ///     which instance of a service applied the metadata.
     ///   - entries: A list of entries on the timeline.
     ///   - createdAt: The optional date and time this card was created at.
-    ///   - type: `skill_card`
-    ///   - skillCardType: `timeline`
+    ///   - type: The value will always be `skill_card`.
+    ///   - skillCardType: The value will always be `timeline`.
     ///   - skillCardTitle: The title of the card.
     ///   - duration: An total duration in seconds of the timeline.
     public init(skill: TimelineSkillCardSkillField, invocation: TimelineSkillCardInvocationField, entries: [TimelineSkillCardEntriesField], createdAt: Date? = nil, type: TimelineSkillCardTypeField = TimelineSkillCardTypeField.skillCard, skillCardType: TimelineSkillCardSkillCardTypeField = TimelineSkillCardSkillCardTypeField.timeline, skillCardTitle: TimelineSkillCardSkillCardTitleField? = nil, duration: Int64? = nil) {

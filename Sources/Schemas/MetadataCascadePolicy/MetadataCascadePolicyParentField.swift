@@ -15,7 +15,7 @@ public class MetadataCascadePolicyParentField: Codable, RawJSONReadable {
     }
 
 
-    /// `folder`
+    /// The value will always be `folder`.
     public let type: MetadataCascadePolicyParentTypeField?
 
     /// The ID of the folder the policy is applied to.
@@ -24,7 +24,7 @@ public class MetadataCascadePolicyParentField: Codable, RawJSONReadable {
     /// Initializer for a MetadataCascadePolicyParentField.
     ///
     /// - Parameters:
-    ///   - type: `folder`
+    ///   - type: The value will always be `folder`.
     ///   - id: The ID of the folder the policy is applied to.
     public init(type: MetadataCascadePolicyParentTypeField? = nil, id: String? = nil) {
         self.type = type

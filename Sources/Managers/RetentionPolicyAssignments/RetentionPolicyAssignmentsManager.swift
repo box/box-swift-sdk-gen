@@ -40,7 +40,7 @@ public class RetentionPolicyAssignmentsManager {
         return try RetentionPolicyAssignment.deserialize(from: response.data!)
     }
 
-    /// Retrieves a retention policy assignment
+    /// Retrieves a retention policy assignment.
     ///
     /// - Parameters:
     ///   - retentionPolicyAssignmentId: The ID of the retention policy assignment.

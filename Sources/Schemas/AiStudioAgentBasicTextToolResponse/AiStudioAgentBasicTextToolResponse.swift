@@ -15,7 +15,7 @@ public class AiStudioAgentBasicTextToolResponse: AiStudioAgentBasicTextTool {
     }
 
 
-    /// Warnings concerning tool
+    /// Warnings concerning tool.
     public let warnings: [String]?
 
     /// Initializer for a AiStudioAgentBasicTextToolResponse.
@@ -28,8 +28,8 @@ public class AiStudioAgentBasicTextToolResponse: AiStudioAgentBasicTextTool {
     ///   - promptTemplate: The prompt template contains contextual information of the request and the user prompt.
     ///     When passing `prompt_template` parameters, you **must include** inputs for `{user_question}` and `{content}`.
     ///     `{current_date}` is optional, depending on the use.
-    ///   - isCustomInstructionsIncluded: True if system message contains custom instructions placeholder, false otherwise
-    ///   - warnings: Warnings concerning tool
+    ///   - isCustomInstructionsIncluded: True if system message contains custom instructions placeholder, false otherwise.
+    ///   - warnings: Warnings concerning tool.
     public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParams? = nil, systemMessage: String? = nil, promptTemplate: String? = nil, isCustomInstructionsIncluded: Bool? = nil, warnings: [String]? = nil) {
         self.warnings = warnings
 

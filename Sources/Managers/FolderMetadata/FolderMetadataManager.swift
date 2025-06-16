@@ -49,9 +49,9 @@ public class FolderMetadataManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - scope: The scope of the metadata template
+    ///   - scope: The scope of the metadata template.
     ///     Example: "global"
-    ///   - templateKey: The name of the metadata template
+    ///   - templateKey: The name of the metadata template.
     ///     Example: "properties"
     ///   - headers: Headers of getFolderMetadataById method
     /// - Returns: The `MetadataFull`.
@@ -84,9 +84,9 @@ public class FolderMetadataManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - scope: The scope of the metadata template
+    ///   - scope: The scope of the metadata template.
     ///     Example: "global"
-    ///   - templateKey: The name of the metadata template
+    ///   - templateKey: The name of the metadata template.
     ///     Example: "properties"
     ///   - requestBody: Request body of createFolderMetadataById method
     ///   - headers: Headers of createFolderMetadataById method
@@ -119,9 +119,9 @@ public class FolderMetadataManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - scope: The scope of the metadata template
+    ///   - scope: The scope of the metadata template.
     ///     Example: "global"
-    ///   - templateKey: The name of the metadata template
+    ///   - templateKey: The name of the metadata template.
     ///     Example: "properties"
     ///   - requestBody: Request body of updateFolderMetadataById method
     ///   - headers: Headers of updateFolderMetadataById method
@@ -147,9 +147,9 @@ public class FolderMetadataManager {
     ///     The root folder of a Box account is
     ///     always represented by the ID `0`.
     ///     Example: "12345"
-    ///   - scope: The scope of the metadata template
+    ///   - scope: The scope of the metadata template.
     ///     Example: "global"
-    ///   - templateKey: The name of the metadata template
+    ///   - templateKey: The name of the metadata template.
     ///     Example: "properties"
     ///   - headers: Headers of deleteFolderMetadataById method
     /// - Throws: The `GeneralError`.

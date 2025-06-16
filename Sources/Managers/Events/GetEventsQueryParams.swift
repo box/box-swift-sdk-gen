@@ -29,7 +29,7 @@ public class GetEventsQueryParams {
     /// * `0` or `null` will return all events.
     public let streamPosition: String?
 
-    /// Limits the number of events returned
+    /// Limits the number of events returned.
     /// 
     /// Note: Sometimes, the events less than the limit requested can be returned
     /// even when there may be more events remaining. This is primarily done in
@@ -81,7 +81,7 @@ public class GetEventsQueryParams {
     ///     * `now` will return an empty list events and
     ///     the latest stream position for initialization.
     ///     * `0` or `null` will return all events.
-    ///   - limit: Limits the number of events returned
+    ///   - limit: Limits the number of events returned.
     ///     
     ///     Note: Sometimes, the events less than the limit requested can be returned
     ///     even when there may be more events remaining. This is primarily done in

@@ -21,13 +21,13 @@ public class CollaborationAllowlistEntry: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this entry
+    /// The unique identifier for this entry.
     public let id: String?
 
-    /// `collaboration_whitelist_entry`
+    /// The value will always be `collaboration_whitelist_entry`.
     public let type: CollaborationAllowlistEntryTypeField?
 
-    /// The whitelisted domain
+    /// The whitelisted domain.
     public let domain: String?
 
     /// The direction of the collaborations to allow.
@@ -35,18 +35,18 @@ public class CollaborationAllowlistEntry: Codable, RawJSONReadable {
 
     public let enterprise: CollaborationAllowlistEntryEnterpriseField?
 
-    /// The time the entry was created at
+    /// The time the entry was created at.
     public let createdAt: Date?
 
     /// Initializer for a CollaborationAllowlistEntry.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this entry
-    ///   - type: `collaboration_whitelist_entry`
-    ///   - domain: The whitelisted domain
+    ///   - id: The unique identifier for this entry.
+    ///   - type: The value will always be `collaboration_whitelist_entry`.
+    ///   - domain: The whitelisted domain.
     ///   - direction: The direction of the collaborations to allow.
     ///   - enterprise: 
-    ///   - createdAt: The time the entry was created at
+    ///   - createdAt: The time the entry was created at.
     public init(id: String? = nil, type: CollaborationAllowlistEntryTypeField? = nil, domain: String? = nil, direction: CollaborationAllowlistEntryDirectionField? = nil, enterprise: CollaborationAllowlistEntryEnterpriseField? = nil, createdAt: Date? = nil) {
         self.id = id
         self.type = type

@@ -22,7 +22,7 @@ public class KeywordSkillCardInvocationField: Codable, RawJSONReadable {
     /// the node that was used to apply the metadata.
     public let id: String
 
-    /// `skill_invocation`
+    /// The value will always be `skill_invocation`.
     public let type: KeywordSkillCardInvocationTypeField
 
     /// Initializer for a KeywordSkillCardInvocationField.
@@ -33,7 +33,7 @@ public class KeywordSkillCardInvocationField: Codable, RawJSONReadable {
     ///     if your `image-recognition-service` runs on multiple
     ///     nodes, this field can be used to identify the ID of
     ///     the node that was used to apply the metadata.
-    ///   - type: `skill_invocation`
+    ///   - type: The value will always be `skill_invocation`.
     public init(id: String, type: KeywordSkillCardInvocationTypeField = KeywordSkillCardInvocationTypeField.skillInvocation) {
         self.id = id
         self.type = type

@@ -21,10 +21,10 @@ public class WorkflowFull: Workflow {
     }
 
 
-    /// The date and time when the workflow was created on Box
+    /// The date and time when the workflow was created on Box.
     public let createdAt: Date?
 
-    /// The date and time when the workflow was last updated on Box
+    /// The date and time when the workflow was last updated on Box.
     public let modifiedAt: Date?
 
     public let createdBy: UserBase?
@@ -34,14 +34,14 @@ public class WorkflowFull: Workflow {
     /// Initializer for a WorkflowFull.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for the workflow
-    ///   - type: `workflow`
-    ///   - name: The name of the workflow
+    ///   - id: The unique identifier for the workflow.
+    ///   - type: The value will always be `workflow`.
+    ///   - name: The name of the workflow.
     ///   - description: The description for a workflow.
-    ///   - isEnabled: Specifies if this workflow is enabled
+    ///   - isEnabled: Specifies if this workflow is enabled.
     ///   - flows: A list of flows assigned to a workflow.
-    ///   - createdAt: The date and time when the workflow was created on Box
-    ///   - modifiedAt: The date and time when the workflow was last updated on Box
+    ///   - createdAt: The date and time when the workflow was created on Box.
+    ///   - modifiedAt: The date and time when the workflow was last updated on Box.
     ///   - createdBy: 
     ///   - modifiedBy: 
     public init(id: String? = nil, type: WorkflowMiniTypeField? = nil, name: String? = nil, description: String? = nil, isEnabled: Bool? = nil, flows: [WorkflowFlowsField]? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, createdBy: UserBase? = nil, modifiedBy: UserBase? = nil) {

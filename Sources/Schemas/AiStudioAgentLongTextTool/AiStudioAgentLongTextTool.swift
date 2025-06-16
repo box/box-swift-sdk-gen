@@ -15,7 +15,7 @@ public class AiStudioAgentLongTextTool: AiAgentLongTextTool {
     }
 
 
-    /// True if system message contains custom instructions placeholder, false otherwise
+    /// True if system message contains custom instructions placeholder, false otherwise.
     public let isCustomInstructionsIncluded: Bool?
 
     /// Initializer for a AiStudioAgentLongTextTool.
@@ -29,7 +29,7 @@ public class AiStudioAgentLongTextTool: AiAgentLongTextTool {
     ///     When passing `prompt_template` parameters, you **must include** inputs for `{user_question}` and `{content}`.
     ///     `{current_date}` is optional, depending on the use.
     ///   - embeddings: 
-    ///   - isCustomInstructionsIncluded: True if system message contains custom instructions placeholder, false otherwise
+    ///   - isCustomInstructionsIncluded: True if system message contains custom instructions placeholder, false otherwise.
     public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParams? = nil, systemMessage: String? = nil, promptTemplate: String? = nil, embeddings: AiAgentLongTextToolEmbeddingsField? = nil, isCustomInstructionsIncluded: Bool? = nil) {
         self.isCustomInstructionsIncluded = isCustomInstructionsIncluded
 

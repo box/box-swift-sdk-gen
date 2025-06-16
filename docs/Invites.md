@@ -71,6 +71,6 @@ try await client.invites.getInviteById(inviteId: invitation.id)
 
 This function returns a value of type `Invite`.
 
-Returns an invite object
+Returns an invite object.
 
 

@@ -20,10 +20,10 @@ public class FileFullLockField: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this lock
+    /// The unique identifier for this lock.
     public let id: String?
 
-    /// `lock`
+    /// The value will always be `lock`.
     public let type: FileFullLockTypeField?
 
     public let createdBy: UserMini?
@@ -46,8 +46,8 @@ public class FileFullLockField: Codable, RawJSONReadable {
     /// Initializer for a FileFullLockField.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this lock
-    ///   - type: `lock`
+    ///   - id: The unique identifier for this lock.
+    ///   - type: The value will always be `lock`.
     ///   - createdBy: 
     ///   - createdAt: The time this lock was created at.
     ///   - expiredAt: The time this lock is to expire at, which might be in the past.

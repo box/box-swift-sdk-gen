@@ -35,14 +35,14 @@ public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
 
 
     /// Set this to `null` to roll the user out of the enterprise
-    /// and make them a free user
+    /// and make them a free user.
     @CodableTriState public private(set) var enterprise: String?
 
     /// Whether the user should receive an email when they
-    /// are rolled out of an enterprise
+    /// are rolled out of an enterprise.
     public let notify: Bool?
 
-    /// The name of the user
+    /// The name of the user.
     public let name: String?
 
     /// The email address the user uses to log in
@@ -51,23 +51,23 @@ public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
     /// primary login address cannot be changed.
     public let login: String?
 
-    /// The user’s enterprise role
+    /// The user’s enterprise role.
     public let role: UpdateUserByIdRequestBodyRoleField?
 
     /// The language of the user, formatted in modified version of the
     /// [ISO 639-1](/guides/api-calls/language-codes) format.
     public let language: String?
 
-    /// Whether the user can use Box Sync
+    /// Whether the user can use Box Sync.
     public let isSyncEnabled: Bool?
 
-    /// The user’s job title
+    /// The user’s job title.
     public let jobTitle: String?
 
-    /// The user’s phone number
+    /// The user’s phone number.
     public let phone: String?
 
-    /// The user’s address
+    /// The user’s address.
     public let address: String?
 
     /// Tracking codes allow an admin to generate reports from the
@@ -77,26 +77,26 @@ public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
     public let trackingCodes: [TrackingCode]?
 
     /// Whether the user can see other enterprise users in their
-    /// contact list
+    /// contact list.
     public let canSeeManagedUsers: Bool?
 
-    /// The user's timezone
+    /// The user's timezone.
     public let timezone: String?
 
     /// Whether the user is allowed to collaborate with users outside
-    /// their enterprise
+    /// their enterprise.
     public let isExternalCollabRestricted: Bool?
 
-    /// Whether to exempt the user from enterprise device limits
+    /// Whether to exempt the user from enterprise device limits.
     public let isExemptFromDeviceLimits: Bool?
 
-    /// Whether the user must use two-factor authentication
+    /// Whether the user must use two-factor authentication.
     public let isExemptFromLoginVerification: Bool?
 
-    /// Whether the user is required to reset their password
+    /// Whether the user is required to reset their password.
     public let isPasswordResetRequired: Bool?
 
-    /// The user's account status
+    /// The user's account status.
     public let status: UpdateUserByIdRequestBodyStatusField?
 
     /// The user’s total available space in bytes. Set this to `-1` to
@@ -123,34 +123,34 @@ public class UpdateUserByIdRequestBody: Codable, RawJSONReadable {
     ///
     /// - Parameters:
     ///   - enterprise: Set this to `null` to roll the user out of the enterprise
-    ///     and make them a free user
+    ///     and make them a free user.
     ///   - notify: Whether the user should receive an email when they
-    ///     are rolled out of an enterprise
-    ///   - name: The name of the user
+    ///     are rolled out of an enterprise.
+    ///   - name: The name of the user.
     ///   - login: The email address the user uses to log in
     ///     
     ///     Note: If the target user's email is not confirmed, then the
     ///     primary login address cannot be changed.
-    ///   - role: The user’s enterprise role
+    ///   - role: The user’s enterprise role.
     ///   - language: The language of the user, formatted in modified version of the
     ///     [ISO 639-1](/guides/api-calls/language-codes) format.
-    ///   - isSyncEnabled: Whether the user can use Box Sync
-    ///   - jobTitle: The user’s job title
-    ///   - phone: The user’s phone number
-    ///   - address: The user’s address
+    ///   - isSyncEnabled: Whether the user can use Box Sync.
+    ///   - jobTitle: The user’s job title.
+    ///   - phone: The user’s phone number.
+    ///   - address: The user’s address.
     ///   - trackingCodes: Tracking codes allow an admin to generate reports from the
     ///     admin console and assign an attribute to a specific group
     ///     of users. This setting must be enabled for an enterprise before it
     ///     can be used.
     ///   - canSeeManagedUsers: Whether the user can see other enterprise users in their
-    ///     contact list
-    ///   - timezone: The user's timezone
+    ///     contact list.
+    ///   - timezone: The user's timezone.
     ///   - isExternalCollabRestricted: Whether the user is allowed to collaborate with users outside
-    ///     their enterprise
-    ///   - isExemptFromDeviceLimits: Whether to exempt the user from enterprise device limits
-    ///   - isExemptFromLoginVerification: Whether the user must use two-factor authentication
-    ///   - isPasswordResetRequired: Whether the user is required to reset their password
-    ///   - status: The user's account status
+    ///     their enterprise.
+    ///   - isExemptFromDeviceLimits: Whether to exempt the user from enterprise device limits.
+    ///   - isExemptFromLoginVerification: Whether the user must use two-factor authentication.
+    ///   - isPasswordResetRequired: Whether the user is required to reset their password.
+    ///   - status: The user's account status.
     ///   - spaceAmount: The user’s total available space in bytes. Set this to `-1` to
     ///     indicate unlimited storage.
     ///   - notificationEmail: An alternate notification email address to which email

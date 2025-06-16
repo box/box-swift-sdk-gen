@@ -1,7 +1,7 @@
 import Foundation
 
 /// A standard representation of a user, as returned from any
-/// user API endpoints by default
+/// user API endpoints by default.
 public class User: UserMini {
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
@@ -28,41 +28,41 @@ public class User: UserMini {
     }
 
 
-    /// When the user object was created
+    /// When the user object was created.
     public let createdAt: Date?
 
-    /// When the user object was last modified
+    /// When the user object was last modified.
     public let modifiedAt: Date?
 
     /// The language of the user, formatted in modified version of the
     /// [ISO 639-1](/guides/api-calls/language-codes) format.
     public let language: String?
 
-    /// The user's timezone
+    /// The user's timezone.
     public let timezone: String?
 
-    /// The user’s total available space amount in bytes
+    /// The user’s total available space amount in bytes.
     public let spaceAmount: Int64?
 
-    /// The amount of space in use by the user
+    /// The amount of space in use by the user.
     public let spaceUsed: Int64?
 
-    /// The maximum individual file size in bytes the user can have
+    /// The maximum individual file size in bytes the user can have.
     public let maxUploadSize: Int64?
 
-    /// The user's account status
+    /// The user's account status.
     public let status: UserStatusField?
 
-    /// The user’s job title
+    /// The user’s job title.
     public let jobTitle: String?
 
-    /// The user’s phone number
+    /// The user’s phone number.
     public let phone: String?
 
-    /// The user’s address
+    /// The user’s address.
     public let address: String?
 
-    /// URL of the user’s avatar image
+    /// URL of the user’s avatar image.
     public let avatarUrl: String?
 
     /// An alternate notification email address to which email
@@ -74,23 +74,23 @@ public class User: UserMini {
     /// Initializer for a User.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this user
-    ///   - type: `user`
-    ///   - name: The display name of this user
-    ///   - login: The primary email address of this user
-    ///   - createdAt: When the user object was created
-    ///   - modifiedAt: When the user object was last modified
+    ///   - id: The unique identifier for this user.
+    ///   - type: The value will always be `user`.
+    ///   - name: The display name of this user.
+    ///   - login: The primary email address of this user.
+    ///   - createdAt: When the user object was created.
+    ///   - modifiedAt: When the user object was last modified.
     ///   - language: The language of the user, formatted in modified version of the
     ///     [ISO 639-1](/guides/api-calls/language-codes) format.
-    ///   - timezone: The user's timezone
-    ///   - spaceAmount: The user’s total available space amount in bytes
-    ///   - spaceUsed: The amount of space in use by the user
-    ///   - maxUploadSize: The maximum individual file size in bytes the user can have
-    ///   - status: The user's account status
-    ///   - jobTitle: The user’s job title
-    ///   - phone: The user’s phone number
-    ///   - address: The user’s address
-    ///   - avatarUrl: URL of the user’s avatar image
+    ///   - timezone: The user's timezone.
+    ///   - spaceAmount: The user’s total available space amount in bytes.
+    ///   - spaceUsed: The amount of space in use by the user.
+    ///   - maxUploadSize: The maximum individual file size in bytes the user can have.
+    ///   - status: The user's account status.
+    ///   - jobTitle: The user’s job title.
+    ///   - phone: The user’s phone number.
+    ///   - address: The user’s address.
+    ///   - avatarUrl: URL of the user’s avatar image.
     ///   - notificationEmail: An alternate notification email address to which email
     ///     notifications are sent. When it's confirmed, this will be
     ///     the email address to which notifications are sent instead of

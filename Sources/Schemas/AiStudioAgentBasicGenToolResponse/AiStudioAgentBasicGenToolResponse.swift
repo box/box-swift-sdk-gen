@@ -15,7 +15,7 @@ public class AiStudioAgentBasicGenToolResponse: AiStudioAgentBasicGenTool {
     }
 
 
-    /// Warnings concerning tool
+    /// Warnings concerning tool.
     public let warnings: [String]?
 
     /// Initializer for a AiStudioAgentBasicGenToolResponse.
@@ -33,8 +33,8 @@ public class AiStudioAgentBasicGenToolResponse: AiStudioAgentBasicGenTool {
     ///   - embeddings: 
     ///   - contentTemplate: How the content should be included in a request to the LLM.
     ///     Input for `{content}` is optional, depending on the use.
-    ///   - isCustomInstructionsIncluded: True if system message contains custom instructions placeholder, false otherwise
-    ///   - warnings: Warnings concerning tool
+    ///   - isCustomInstructionsIncluded: True if system message contains custom instructions placeholder, false otherwise.
+    ///   - warnings: Warnings concerning tool.
     public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParams? = nil, systemMessage: String? = nil, promptTemplate: String? = nil, embeddings: AiAgentLongTextToolTextGenEmbeddingsField? = nil, contentTemplate: String? = nil, isCustomInstructionsIncluded: Bool? = nil, warnings: [String]? = nil) {
         self.warnings = warnings
 

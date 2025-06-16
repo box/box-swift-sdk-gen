@@ -1,7 +1,7 @@
 import Foundation
 
 /// A base representation of a
-/// shield information barrier report object
+/// shield information barrier report object.
 public class ShieldInformationBarrierReportBase: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -17,17 +17,17 @@ public class ShieldInformationBarrierReportBase: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for the shield information barrier report
+    /// The unique identifier for the shield information barrier report.
     public let id: String?
 
-    /// The type of the shield information barrier report
+    /// The type of the shield information barrier report.
     public let type: ShieldInformationBarrierReportBaseTypeField?
 
     /// Initializer for a ShieldInformationBarrierReportBase.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for the shield information barrier report
-    ///   - type: The type of the shield information barrier report
+    ///   - id: The unique identifier for the shield information barrier report.
+    ///   - type: The type of the shield information barrier report.
     public init(id: String? = nil, type: ShieldInformationBarrierReportBaseTypeField? = nil) {
         self.id = id
         self.type = type

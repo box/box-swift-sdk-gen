@@ -15,17 +15,17 @@ public class ItemsOffsetPaginatedOrderField: Codable, RawJSONReadable {
     }
 
 
-    /// The field to order by
+    /// The field to order by.
     public let by: String?
 
-    /// The direction to order by, either ascending or descending
+    /// The direction to order by, either ascending or descending.
     public let direction: ItemsOffsetPaginatedOrderDirectionField?
 
     /// Initializer for a ItemsOffsetPaginatedOrderField.
     ///
     /// - Parameters:
-    ///   - by: The field to order by
-    ///   - direction: The direction to order by, either ascending or descending
+    ///   - by: The field to order by.
+    ///   - direction: The direction to order by, either ascending or descending.
     public init(by: String? = nil, direction: ItemsOffsetPaginatedOrderDirectionField? = nil) {
         self.by = by
         self.direction = direction

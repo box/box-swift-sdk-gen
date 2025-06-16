@@ -19,23 +19,23 @@ public class TrackingCode: Codable, RawJSONReadable {
     }
 
 
-    /// `tracking_code`
+    /// The value will always be `tracking_code`.
     public let type: TrackingCodeTypeField?
 
     /// The name of the tracking code, which must be preconfigured in
-    /// the Admin Console
+    /// the Admin Console.
     public let name: String?
 
-    /// The value of the tracking code
+    /// The value of the tracking code.
     public let value: String?
 
     /// Initializer for a TrackingCode.
     ///
     /// - Parameters:
-    ///   - type: `tracking_code`
+    ///   - type: The value will always be `tracking_code`.
     ///   - name: The name of the tracking code, which must be preconfigured in
-    ///     the Admin Console
-    ///   - value: The value of the tracking code
+    ///     the Admin Console.
+    ///   - value: The value of the tracking code.
     public init(type: TrackingCodeTypeField? = nil, name: String? = nil, value: String? = nil) {
         self.type = type
         self.name = name

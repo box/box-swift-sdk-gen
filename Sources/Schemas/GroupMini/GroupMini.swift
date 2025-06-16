@@ -17,7 +17,7 @@ public class GroupMini: GroupBase {
     }
 
 
-    /// The name of the group
+    /// The name of the group.
     public let name: String?
 
     /// The type of the group.
@@ -26,9 +26,9 @@ public class GroupMini: GroupBase {
     /// Initializer for a GroupMini.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this object
-    ///   - type: `group`
-    ///   - name: The name of the group
+    ///   - id: The unique identifier for this object.
+    ///   - type: The value will always be `group`.
+    ///   - name: The name of the group.
     ///   - groupType: The type of the group.
     public init(id: String, type: GroupBaseTypeField = GroupBaseTypeField.group, name: String? = nil, groupType: GroupMiniGroupTypeField? = nil) {
         self.name = name

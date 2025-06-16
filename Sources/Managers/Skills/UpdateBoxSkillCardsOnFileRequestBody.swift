@@ -16,7 +16,7 @@ public class UpdateBoxSkillCardsOnFileRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// `replace`
+    /// The value will always be `replace`.
     public let op: UpdateBoxSkillCardsOnFileRequestBodyOpField?
 
     /// The JSON Path that represents the card to replace. In most cases
@@ -29,7 +29,7 @@ public class UpdateBoxSkillCardsOnFileRequestBody: Codable, RawJSONReadable {
     /// Initializer for a UpdateBoxSkillCardsOnFileRequestBody.
     ///
     /// - Parameters:
-    ///   - op: `replace`
+    ///   - op: The value will always be `replace`.
     ///   - path: The JSON Path that represents the card to replace. In most cases
     ///     this will be in the format `/cards/{index}` where `index` is the
     ///     zero-indexed position of the card in the list of cards.

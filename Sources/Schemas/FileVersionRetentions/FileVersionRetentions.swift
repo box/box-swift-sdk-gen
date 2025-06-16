@@ -34,7 +34,7 @@ public class FileVersionRetentions: Codable, RawJSONReadable {
     /// The marker for the start of the previous page of results.
     @CodableTriState public private(set) var prevMarker: String?
 
-    /// A list of file version retentions
+    /// A list of file version retentions.
     public let entries: [FileVersionRetention]?
 
     /// Initializer for a FileVersionRetentions.
@@ -45,7 +45,7 @@ public class FileVersionRetentions: Codable, RawJSONReadable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
-    ///   - entries: A list of file version retentions
+    ///   - entries: A list of file version retentions.
     public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, entries: [FileVersionRetention]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)

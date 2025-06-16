@@ -38,7 +38,6 @@ public class FolderLock: Codable, RawJSONReadable {
     /// The operations that have been locked. Currently the `move`
     /// and `delete` operations cannot be locked separately, and both need to be
     /// set to `true`.
-    /// 
     public let lockedOperations: FolderLockLockedOperationsField?
 
     /// The lock type, always `freeze`.
@@ -55,7 +54,6 @@ public class FolderLock: Codable, RawJSONReadable {
     ///   - lockedOperations: The operations that have been locked. Currently the `move`
     ///     and `delete` operations cannot be locked separately, and both need to be
     ///     set to `true`.
-    ///     
     ///   - lockType: The lock type, always `freeze`.
     public init(folder: FolderMini? = nil, id: String? = nil, type: String? = nil, createdBy: UserBase? = nil, createdAt: Date? = nil, lockedOperations: FolderLockLockedOperationsField? = nil, lockType: String? = nil) {
         self.folder = folder

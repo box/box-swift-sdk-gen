@@ -17,13 +17,13 @@ public class ZipDownloadNameConflictsField: Codable, RawJSONReadable {
     }
 
 
-    /// The identifier of the item
+    /// The identifier of the item.
     public let id: String?
 
-    /// The type of this item
+    /// The type of this item.
     public let type: ZipDownloadNameConflictsTypeField?
 
-    /// The original name of this item
+    /// Box Developer Documentation.
     public let originalName: String?
 
     /// The new name of this item as it will appear in the
@@ -33,9 +33,9 @@ public class ZipDownloadNameConflictsField: Codable, RawJSONReadable {
     /// Initializer for a ZipDownloadNameConflictsField.
     ///
     /// - Parameters:
-    ///   - id: The identifier of the item
-    ///   - type: The type of this item
-    ///   - originalName: The original name of this item
+    ///   - id: The identifier of the item.
+    ///   - type: The type of this item.
+    ///   - originalName: Box Developer Documentation.
     ///   - downloadName: The new name of this item as it will appear in the
     ///     downloaded `zip` archive.
     public init(id: String? = nil, type: ZipDownloadNameConflictsTypeField? = nil, originalName: String? = nil, downloadName: String? = nil) {

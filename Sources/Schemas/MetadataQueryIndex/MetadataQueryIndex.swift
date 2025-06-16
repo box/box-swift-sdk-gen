@@ -1,6 +1,6 @@
 import Foundation
 
-/// A metadata query index
+/// A metadata query index.
 public class MetadataQueryIndex: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -18,10 +18,10 @@ public class MetadataQueryIndex: Codable, RawJSONReadable {
     }
 
 
-    /// Value is always `metadata_query_index`
+    /// Value is always `metadata_query_index`.
     public let type: String
 
-    /// The status of the metadata query index
+    /// The status of the metadata query index.
     public let status: MetadataQueryIndexStatusField
 
     /// The ID of the metadata query index.
@@ -33,8 +33,8 @@ public class MetadataQueryIndex: Codable, RawJSONReadable {
     /// Initializer for a MetadataQueryIndex.
     ///
     /// - Parameters:
-    ///   - type: Value is always `metadata_query_index`
-    ///   - status: The status of the metadata query index
+    ///   - type: Value is always `metadata_query_index`.
+    ///   - status: The status of the metadata query index.
     ///   - id: The ID of the metadata query index.
     ///   - fields: A list of template fields which make up the index.
     public init(type: String, status: MetadataQueryIndexStatusField, id: String? = nil, fields: [MetadataQueryIndexFieldsField]? = nil) {

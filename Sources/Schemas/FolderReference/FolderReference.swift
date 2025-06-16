@@ -1,6 +1,6 @@
 import Foundation
 
-/// Folder reference
+/// Folder reference.
 public class FolderReference: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -16,17 +16,17 @@ public class FolderReference: Codable, RawJSONReadable {
     }
 
 
-    /// ID of the folder
+    /// ID of the folder.
     public let id: String
 
-    /// `folder`
+    /// The value will always be `folder`.
     public let type: FolderReferenceTypeField
 
     /// Initializer for a FolderReference.
     ///
     /// - Parameters:
-    ///   - id: ID of the folder
-    ///   - type: `folder`
+    ///   - id: ID of the folder.
+    ///   - type: The value will always be `folder`.
     public init(id: String, type: FolderReferenceTypeField = FolderReferenceTypeField.folder) {
         self.id = id
         self.type = type

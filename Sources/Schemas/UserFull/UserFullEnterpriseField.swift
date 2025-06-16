@@ -19,18 +19,18 @@ public class UserFullEnterpriseField: Codable, RawJSONReadable {
     /// The unique identifier for this enterprise.
     public let id: String?
 
-    /// `enterprise`
+    /// The value will always be `enterprise`.
     public let type: UserFullEnterpriseTypeField?
 
-    /// The name of the enterprise
+    /// The name of the enterprise.
     public let name: String?
 
     /// Initializer for a UserFullEnterpriseField.
     ///
     /// - Parameters:
     ///   - id: The unique identifier for this enterprise.
-    ///   - type: `enterprise`
-    ///   - name: The name of the enterprise
+    ///   - type: The value will always be `enterprise`.
+    ///   - name: The name of the enterprise.
     public init(id: String? = nil, type: UserFullEnterpriseTypeField? = nil, name: String? = nil) {
         self.id = id
         self.type = type

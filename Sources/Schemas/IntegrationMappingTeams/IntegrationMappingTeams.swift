@@ -21,7 +21,7 @@ public class IntegrationMappingTeams: IntegrationMappingBase {
     }
 
 
-    /// Mapped item object for Teams
+    /// Mapped item object for Teams.
     public let partnerItem: IntegrationMappingPartnerItemTeamsUnion
 
     public let boxItem: FolderReference
@@ -29,18 +29,18 @@ public class IntegrationMappingTeams: IntegrationMappingBase {
     /// Identifies the Box partner app,
     /// with which the mapping is associated.
     /// Supports Slack and Teams.
-    /// (part of the composite key together with `id`)
+    /// (part of the composite key together with `id`).
     public let integrationType: IntegrationMappingTeamsIntegrationTypeField?
 
     /// Identifies whether the mapping has
     /// been manually set by the team owner from UI for channels
-    /// (as opposed to being automatically created)
+    /// (as opposed to being automatically created).
     public let isOverriddenByManualMapping: Bool?
 
-    /// When the integration mapping object was created
+    /// When the integration mapping object was created.
     public let createdAt: Date?
 
-    /// When the integration mapping object was last modified
+    /// When the integration mapping object was last modified.
     public let modifiedAt: Date?
 
     /// Initializer for a IntegrationMappingTeams.
@@ -48,19 +48,19 @@ public class IntegrationMappingTeams: IntegrationMappingBase {
     /// - Parameters:
     ///   - id: A unique identifier of a folder mapping
     ///     (part of a composite key together
-    ///     with `integration_type`)
-    ///   - partnerItem: Mapped item object for Teams
+    ///     with `integration_type`).
+    ///   - partnerItem: Mapped item object for Teams.
     ///   - boxItem: 
-    ///   - type: Mapping type
+    ///   - type: Mapping type.
     ///   - integrationType: Identifies the Box partner app,
     ///     with which the mapping is associated.
     ///     Supports Slack and Teams.
-    ///     (part of the composite key together with `id`)
+    ///     (part of the composite key together with `id`).
     ///   - isOverriddenByManualMapping: Identifies whether the mapping has
     ///     been manually set by the team owner from UI for channels
-    ///     (as opposed to being automatically created)
-    ///   - createdAt: When the integration mapping object was created
-    ///   - modifiedAt: When the integration mapping object was last modified
+    ///     (as opposed to being automatically created).
+    ///   - createdAt: When the integration mapping object was created.
+    ///   - modifiedAt: When the integration mapping object was last modified.
     public init(id: String, partnerItem: IntegrationMappingPartnerItemTeamsUnion, boxItem: FolderReference, type: IntegrationMappingBaseTypeField = IntegrationMappingBaseTypeField.integrationMapping, integrationType: IntegrationMappingTeamsIntegrationTypeField? = nil, isOverriddenByManualMapping: Bool? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.partnerItem = partnerItem
         self.boxItem = boxItem

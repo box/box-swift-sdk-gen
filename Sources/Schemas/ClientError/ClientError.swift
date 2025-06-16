@@ -1,6 +1,6 @@
 import Foundation
 
-/// A generic error
+/// A generic error.
 public class ClientError: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -21,13 +21,13 @@ public class ClientError: Codable, RawJSONReadable {
     }
 
 
-    /// error
+    /// The value will always be `error`.
     public let type: ClientErrorTypeField?
 
     /// The HTTP status of the response.
     public let status: Int?
 
-    /// A Box-specific error code
+    /// A Box-specific error code.
     public let code: ClientErrorCodeField?
 
     /// A short message describing the error.
@@ -48,9 +48,9 @@ public class ClientError: Codable, RawJSONReadable {
     /// Initializer for a ClientError.
     ///
     /// - Parameters:
-    ///   - type: error
+    ///   - type: The value will always be `error`.
     ///   - status: The HTTP status of the response.
-    ///   - code: A Box-specific error code
+    ///   - code: A Box-specific error code.
     ///   - message: A short message describing the error.
     ///   - contextInfo: A free-form object that contains additional context
     ///     about the error. The possible fields are defined on

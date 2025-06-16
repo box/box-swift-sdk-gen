@@ -46,7 +46,7 @@ public class DocGenJobV2025R0: DocGenJobBaseV2025R0 {
     ///   - templateFileVersion: 
     ///   - status: Status of the job.
     ///   - outputType: Type of the generated file.
-    ///   - type: `docgen_job`
+    ///   - type: The value will always be `docgen_job`.
     ///   - outputFile: 
     ///   - outputFileVersion: 
     public init(id: String, batch: DocGenBatchBaseV2025R0, templateFile: FileReferenceV2025R0, templateFileVersion: FileVersionBaseV2025R0, status: DocGenJobV2025R0StatusField, outputType: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob, outputFile: FileReferenceV2025R0?? = nil, outputFileVersion: FileVersionBaseV2025R0?? = nil) {

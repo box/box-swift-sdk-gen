@@ -17,7 +17,7 @@ public class SignTemplateCustomBrandingField: Codable, RawJSONReadable {
     }
 
 
-    /// Name of the company
+    /// Name of the company.
     @CodableTriState public private(set) var companyName: String?
 
     /// Custom branding logo URI in the form of a base64 image.
@@ -32,7 +32,7 @@ public class SignTemplateCustomBrandingField: Codable, RawJSONReadable {
     /// Initializer for a SignTemplateCustomBrandingField.
     ///
     /// - Parameters:
-    ///   - companyName: Name of the company
+    ///   - companyName: Name of the company.
     ///   - logoUri: Custom branding logo URI in the form of a base64 image.
     ///   - brandingColor: Custom branding color in hex.
     ///   - emailFooterText: Content of the email footer.

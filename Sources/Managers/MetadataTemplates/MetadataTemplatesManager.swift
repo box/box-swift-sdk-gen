@@ -31,9 +31,9 @@ public class MetadataTemplatesManager {
     /// an enterprise or globally, or list all templates applied to a file or folder.
     ///
     /// - Parameters:
-    ///   - scope: The scope of the metadata template
+    ///   - scope: The scope of the metadata template.
     ///     Example: "global"
-    ///   - templateKey: The name of the metadata template
+    ///   - templateKey: The name of the metadata template.
     ///     Example: "properties"
     ///   - headers: Headers of getMetadataTemplate method
     /// - Returns: The `MetadataTemplate`.
@@ -53,9 +53,9 @@ public class MetadataTemplatesManager {
     /// application of the operations, the metadata template will not be changed.
     ///
     /// - Parameters:
-    ///   - scope: The scope of the metadata template
+    ///   - scope: The scope of the metadata template.
     ///     Example: "global"
-    ///   - templateKey: The name of the metadata template
+    ///   - templateKey: The name of the metadata template.
     ///     Example: "properties"
     ///   - requestBody: Request body of updateMetadataTemplate method
     ///   - headers: Headers of updateMetadataTemplate method
@@ -71,9 +71,9 @@ public class MetadataTemplatesManager {
     /// This deletion is permanent and can not be reversed.
     ///
     /// - Parameters:
-    ///   - scope: The scope of the metadata template
+    ///   - scope: The scope of the metadata template.
     ///     Example: "global"
-    ///   - templateKey: The name of the metadata template
+    ///   - templateKey: The name of the metadata template.
     ///     Example: "properties"
     ///   - headers: Headers of deleteMetadataTemplate method
     /// - Throws: The `GeneralError`.
@@ -85,7 +85,7 @@ public class MetadataTemplatesManager {
     /// Retrieves a metadata template by its ID.
     ///
     /// - Parameters:
-    ///   - templateId: The ID of the template
+    ///   - templateId: The ID of the template.
     ///     Example: "f7a9891f"
     ///   - headers: Headers of getMetadataTemplateById method
     /// - Returns: The `MetadataTemplate`.
@@ -112,7 +112,7 @@ public class MetadataTemplatesManager {
     }
 
     /// Used to retrieve all metadata templates created to be used specifically within
-    /// the user's enterprise
+    /// the user's enterprise.
     ///
     /// - Parameters:
     ///   - queryParams: Query parameters of getEnterpriseMetadataTemplates method

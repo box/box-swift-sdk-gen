@@ -1,6 +1,6 @@
 import Foundation
 
-/// A list of event objects
+/// A list of event objects.
 public class Events: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case chunkSize = "chunk_size"
@@ -24,7 +24,7 @@ public class Events: Codable, RawJSONReadable {
     /// of events.
     public let nextStreamPosition: EventsNextStreamPositionField?
 
-    /// A list of events
+    /// A list of events.
     public let entries: [Event]?
 
     /// Initializer for a Events.
@@ -33,7 +33,7 @@ public class Events: Codable, RawJSONReadable {
     ///   - chunkSize: The number of events returned in this response.
     ///   - nextStreamPosition: The stream position of the start of the next page (chunk)
     ///     of events.
-    ///   - entries: A list of events
+    ///   - entries: A list of events.
     public init(chunkSize: Int64? = nil, nextStreamPosition: EventsNextStreamPositionField? = nil, entries: [Event]? = nil) {
         self.chunkSize = chunkSize
         self.nextStreamPosition = nextStreamPosition

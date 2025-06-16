@@ -26,7 +26,7 @@ public class IntegrationMappings: Codable, RawJSONReadable {
     /// The marker for the start of the next page of results.
     @CodableTriState public private(set) var nextMarker: String?
 
-    /// A list of integration mappings
+    /// A list of integration mappings.
     public let entries: [IntegrationMapping]?
 
     /// Initializer for a IntegrationMappings.
@@ -36,7 +36,7 @@ public class IntegrationMappings: Codable, RawJSONReadable {
     ///     `limit` query parameter unless that value exceeded the maximum value
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
-    ///   - entries: A list of integration mappings
+    ///   - entries: A list of integration mappings.
     public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, entries: [IntegrationMapping]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)

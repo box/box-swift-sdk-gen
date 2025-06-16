@@ -35,7 +35,7 @@ public class Collaboration: Codable, RawJSONReadable {
     /// The unique identifier for this collaboration.
     public let id: String
 
-    /// `collaboration`
+    /// The value will always be `collaboration`.
     public let type: CollaborationTypeField
 
     @CodableTriState public private(set) var item: FileOrFolderOrWebLink?
@@ -84,7 +84,7 @@ public class Collaboration: Codable, RawJSONReadable {
     ///
     /// - Parameters:
     ///   - id: The unique identifier for this collaboration.
-    ///   - type: `collaboration`
+    ///   - type: The value will always be `collaboration`.
     ///   - item: 
     ///   - appItem: 
     ///   - accessibleBy: 

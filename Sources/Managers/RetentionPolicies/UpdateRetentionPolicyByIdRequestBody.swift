@@ -22,7 +22,7 @@ public class UpdateRetentionPolicyByIdRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// The name for the retention policy
+    /// The name for the retention policy.
     @CodableTriState public private(set) var policyName: String?
 
     /// The additional text description of the retention policy.
@@ -89,7 +89,7 @@ public class UpdateRetentionPolicyByIdRequestBody: Codable, RawJSONReadable {
     /// Initializer for a UpdateRetentionPolicyByIdRequestBody.
     ///
     /// - Parameters:
-    ///   - policyName: The name for the retention policy
+    ///   - policyName: The name for the retention policy.
     ///   - description: The additional text description of the retention policy.
     ///   - dispositionAction: The disposition action of the retention policy.
     ///     This action can be `permanently_delete`, which

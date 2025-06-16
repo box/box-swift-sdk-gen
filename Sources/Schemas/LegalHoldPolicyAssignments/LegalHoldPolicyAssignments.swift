@@ -30,7 +30,7 @@ public class LegalHoldPolicyAssignments: Codable, RawJSONReadable {
     @CodableTriState public private(set) var prevMarker: String?
 
     /// A list of legal hold
-    /// policy assignments
+    /// policy assignments.
     public let entries: [LegalHoldPolicyAssignment]?
 
     /// Initializer for a LegalHoldPolicyAssignments.
@@ -42,7 +42,7 @@ public class LegalHoldPolicyAssignments: Codable, RawJSONReadable {
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
     ///   - entries: A list of legal hold
-    ///     policy assignments
+    ///     policy assignments.
     public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, entries: [LegalHoldPolicyAssignment]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)

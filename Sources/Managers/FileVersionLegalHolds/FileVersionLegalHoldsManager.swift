@@ -14,7 +14,7 @@ public class FileVersionLegalHoldsManager {
     /// assigned to a file version.
     ///
     /// - Parameters:
-    ///   - fileVersionLegalHoldId: The ID of the file version legal hold
+    ///   - fileVersionLegalHoldId: The ID of the file version legal hold.
     ///     Example: "2348213"
     ///   - headers: Headers of getFileVersionLegalHoldById method
     /// - Returns: The `FileVersionLegalHold`.

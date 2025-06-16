@@ -14,13 +14,13 @@ public class ShieldInformationBarrierReportDetailsDetailsField: Codable, RawJSON
     }
 
 
-    /// Folder ID for locating this report
+    /// Folder ID for locating this report.
     public let folderId: String?
 
     /// Initializer for a ShieldInformationBarrierReportDetailsDetailsField.
     ///
     /// - Parameters:
-    ///   - folderId: Folder ID for locating this report
+    ///   - folderId: Folder ID for locating this report.
     public init(folderId: String? = nil) {
         self.folderId = folderId
     }

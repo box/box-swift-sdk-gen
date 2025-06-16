@@ -32,7 +32,7 @@ public class Workflows: Codable, RawJSONReadable {
     /// The marker for the start of the previous page of results.
     @CodableTriState public private(set) var prevMarker: String?
 
-    /// A list of workflows
+    /// A list of workflows.
     public let entries: [Workflow]?
 
     /// Initializer for a Workflows.
@@ -43,7 +43,7 @@ public class Workflows: Codable, RawJSONReadable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
-    ///   - entries: A list of workflows
+    ///   - entries: A list of workflows.
     public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, entries: [Workflow]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)

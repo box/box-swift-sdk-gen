@@ -14,13 +14,13 @@ public class RestoreFileFromTrashRequestBodyParentField: Codable, RawJSONReadabl
     }
 
 
-    /// The ID of parent item
+    /// The ID of parent item.
     public let id: String?
 
     /// Initializer for a RestoreFileFromTrashRequestBodyParentField.
     ///
     /// - Parameters:
-    ///   - id: The ID of parent item
+    ///   - id: The ID of parent item.
     public init(id: String? = nil) {
         self.id = id
     }

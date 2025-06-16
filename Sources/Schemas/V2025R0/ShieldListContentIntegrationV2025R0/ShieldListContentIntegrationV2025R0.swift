@@ -16,7 +16,7 @@ public class ShieldListContentIntegrationV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// List of integration
+    /// List of integration.
     public let integrations: [ShieldListContentIntegrationV2025R0IntegrationsField]
 
     /// The type of content in the shield list.
@@ -25,7 +25,7 @@ public class ShieldListContentIntegrationV2025R0: Codable, RawJSONReadable {
     /// Initializer for a ShieldListContentIntegrationV2025R0.
     ///
     /// - Parameters:
-    ///   - integrations: List of integration
+    ///   - integrations: List of integration.
     ///   - type: The type of content in the shield list.
     public init(integrations: [ShieldListContentIntegrationV2025R0IntegrationsField], type: ShieldListContentIntegrationV2025R0TypeField = ShieldListContentIntegrationV2025R0TypeField.integration) {
         self.integrations = integrations

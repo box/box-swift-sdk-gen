@@ -1,6 +1,6 @@
 import Foundation
 
-/// File reference
+/// File reference.
 public class FileReferenceV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -16,17 +16,17 @@ public class FileReferenceV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// ID of the object
+    /// ID of the object.
     public let id: String
 
-    /// `file`
+    /// The value will always be `file`.
     public let type: FileReferenceV2025R0TypeField
 
     /// Initializer for a FileReferenceV2025R0.
     ///
     /// - Parameters:
-    ///   - id: ID of the object
-    ///   - type: `file`
+    ///   - id: ID of the object.
+    ///   - type: The value will always be `file`.
     public init(id: String, type: FileReferenceV2025R0TypeField = FileReferenceV2025R0TypeField.file) {
         self.id = id
         self.type = type

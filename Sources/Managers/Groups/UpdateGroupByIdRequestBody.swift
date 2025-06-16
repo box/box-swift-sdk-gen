@@ -65,10 +65,10 @@ public class UpdateGroupByIdRequestBody: Codable, RawJSONReadable {
     /// Specifies who can see the members of the group.
     /// 
     /// * `admins_only` - the enterprise admin, co-admins, group's
-    ///   group admin
-    /// * `admins_and_members` - all admins and group members
+    ///   group admin.
+    /// * `admins_and_members` - all admins and group members.
     /// * `all_managed_users` - all managed users in the
-    ///   enterprise
+    ///   enterprise.
     public let memberViewabilityLevel: UpdateGroupByIdRequestBodyMemberViewabilityLevelField?
 
     /// Initializer for a UpdateGroupByIdRequestBody.
@@ -110,10 +110,10 @@ public class UpdateGroupByIdRequestBody: Codable, RawJSONReadable {
     ///   - memberViewabilityLevel: Specifies who can see the members of the group.
     ///     
     ///     * `admins_only` - the enterprise admin, co-admins, group's
-    ///       group admin
-    ///     * `admins_and_members` - all admins and group members
+    ///       group admin.
+    ///     * `admins_and_members` - all admins and group members.
     ///     * `all_managed_users` - all managed users in the
-    ///       enterprise
+    ///       enterprise.
     public init(name: String? = nil, provenance: String? = nil, externalSyncIdentifier: String? = nil, description: String? = nil, invitabilityLevel: UpdateGroupByIdRequestBodyInvitabilityLevelField? = nil, memberViewabilityLevel: UpdateGroupByIdRequestBodyMemberViewabilityLevelField? = nil) {
         self.name = name
         self.provenance = provenance

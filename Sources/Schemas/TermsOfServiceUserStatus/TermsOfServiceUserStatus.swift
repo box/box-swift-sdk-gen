@@ -1,6 +1,6 @@
 import Foundation
 
-/// The association between a Terms of Service and a user
+/// The association between a Terms of Service and a user.
 public class TermsOfServiceUserStatus: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -21,20 +21,20 @@ public class TermsOfServiceUserStatus: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this terms of service user status
+    /// The unique identifier for this terms of service user status.
     public let id: String
 
-    /// `terms_of_service_user_status`
+    /// The value will always be `terms_of_service_user_status`.
     public let type: TermsOfServiceUserStatusTypeField
 
     public let tos: TermsOfServiceBase?
 
     public let user: UserMini?
 
-    /// If the user has accepted the terms of services
+    /// If the user has accepted the terms of services.
     public let isAccepted: Bool?
 
-    /// When the legal item was created
+    /// When the legal item was created.
     public let createdAt: Date?
 
     /// When the legal item was modified.
@@ -43,12 +43,12 @@ public class TermsOfServiceUserStatus: Codable, RawJSONReadable {
     /// Initializer for a TermsOfServiceUserStatus.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this terms of service user status
-    ///   - type: `terms_of_service_user_status`
+    ///   - id: The unique identifier for this terms of service user status.
+    ///   - type: The value will always be `terms_of_service_user_status`.
     ///   - tos: 
     ///   - user: 
-    ///   - isAccepted: If the user has accepted the terms of services
-    ///   - createdAt: When the legal item was created
+    ///   - isAccepted: If the user has accepted the terms of services.
+    ///   - createdAt: When the legal item was created.
     ///   - modifiedAt: When the legal item was modified.
     public init(id: String, type: TermsOfServiceUserStatusTypeField = TermsOfServiceUserStatusTypeField.termsOfServiceUserStatus, tos: TermsOfServiceBase? = nil, user: UserMini? = nil, isAccepted: Bool? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.id = id

@@ -37,7 +37,7 @@ public class FileVersionRetentionsManager {
     /// see [files under retention](e://get-retention-policy-assignments-id-files-under-retention) or [file versions under retention](e://get-retention-policy-assignments-id-file-versions-under-retention) endpoints.
     ///
     /// - Parameters:
-    ///   - fileVersionRetentionId: The ID of the file version retention
+    ///   - fileVersionRetentionId: The ID of the file version retention.
     ///     Example: "3424234"
     ///   - headers: Headers of getFileVersionRetentionById method
     /// - Returns: The `FileVersionRetention`.

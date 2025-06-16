@@ -14,13 +14,13 @@ public class CreateGroupMembershipRequestBodyUserField: Codable, RawJSONReadable
     }
 
 
-    /// The ID of the user to add to the group
+    /// The ID of the user to add to the group.
     public let id: String
 
     /// Initializer for a CreateGroupMembershipRequestBodyUserField.
     ///
     /// - Parameters:
-    ///   - id: The ID of the user to add to the group
+    ///   - id: The ID of the user to add to the group.
     public init(id: String) {
         self.id = id
     }
