@@ -4,7 +4,7 @@ public class GetEnterpriseHubsV2025R0QueryParams {
     /// The query string to search for hubs.
     public let query: String?
 
-    /// The field to sort results by. 
+    /// The field to sort results by.
     /// Possible values include `name`, `updated_at`,
     /// `last_accessed_at`, `view_count`, and `relevance`.
     /// Default is `relevance`.
@@ -25,7 +25,7 @@ public class GetEnterpriseHubsV2025R0QueryParams {
     ///
     /// - Parameters:
     ///   - query: The query string to search for hubs.
-    ///   - sort: The field to sort results by. 
+    ///   - sort: The field to sort results by.
     ///     Possible values include `name`, `updated_at`,
     ///     `last_accessed_at`, `view_count`, and `relevance`.
     ///     Default is `relevance`.
