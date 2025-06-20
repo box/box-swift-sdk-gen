@@ -14,13 +14,13 @@ public class UpdateCommentByIdRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// The text of the comment to update
+    /// The text of the comment to update.
     public let message: String?
 
     /// Initializer for a UpdateCommentByIdRequestBody.
     ///
     /// - Parameters:
-    ///   - message: The text of the comment to update
+    ///   - message: The text of the comment to update.
     public init(message: String? = nil) {
         self.message = message
     }

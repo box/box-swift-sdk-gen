@@ -23,20 +23,20 @@ public class SkillCardsMetadata: Codable, RawJSONReadable {
     }
 
 
-    /// Whether the user can edit this metadata
+    /// Whether the user can edit this metadata.
     public let canEdit: Bool?
 
-    /// A UUID to identify the metadata object
+    /// A UUID to identify the metadata object.
     public let id: String?
 
-    /// An ID for the parent folder
+    /// An ID for the parent folder.
     public let parent: String?
 
     /// An ID for the scope in which this template
-    /// has been applied
+    /// has been applied.
     public let scope: String?
 
-    /// The name of the template
+    /// The name of the template.
     public let template: String?
 
     /// A unique identifier for the "type" of this instance. This is an internal
@@ -57,12 +57,12 @@ public class SkillCardsMetadata: Codable, RawJSONReadable {
     /// Initializer for a SkillCardsMetadata.
     ///
     /// - Parameters:
-    ///   - canEdit: Whether the user can edit this metadata
-    ///   - id: A UUID to identify the metadata object
-    ///   - parent: An ID for the parent folder
+    ///   - canEdit: Whether the user can edit this metadata.
+    ///   - id: A UUID to identify the metadata object.
+    ///   - parent: An ID for the parent folder.
     ///   - scope: An ID for the scope in which this template
-    ///     has been applied
-    ///   - template: The name of the template
+    ///     has been applied.
+    ///   - template: The name of the template.
     ///   - type: A unique identifier for the "type" of this instance. This is an internal
     ///     system property and should not be used by a client application.
     ///   - typeVersion: The last-known version of the template of the object. This is an internal

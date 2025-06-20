@@ -24,7 +24,7 @@ try await client.signRequests.cancelSignRequest(signRequestId: createdSignReques
 ### Arguments
 
 - signRequestId `String`
-  - The ID of the signature request Example: "33243242"
+  - The ID of the signature request. Example: "33243242"
 - headers `CancelSignRequestHeaders`
   - Headers of cancelSignRequest method
 
@@ -50,7 +50,7 @@ See the endpoint docs at
 ### Arguments
 
 - signRequestId `String`
-  - The ID of the signature request Example: "33243242"
+  - The ID of the signature request. Example: "33243242"
 - headers `ResendSignRequestHeaders`
   - Headers of resendSignRequest method
 
@@ -80,7 +80,7 @@ try await client.signRequests.getSignRequestById(signRequestId: createdSignReque
 ### Arguments
 
 - signRequestId `String`
-  - The ID of the signature request Example: "33243242"
+  - The ID of the signature request. Example: "33243242"
 - headers `GetSignRequestByIdHeaders`
   - Headers of getSignRequestById method
 
@@ -119,7 +119,7 @@ try await client.signRequests.getSignRequests()
 
 This function returns a value of type `SignRequests`.
 
-Returns a collection of sign requests
+Returns a collection of sign requests.
 
 
 ## Create Box Sign request

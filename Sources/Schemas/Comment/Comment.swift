@@ -21,18 +21,18 @@ public class Comment: CommentBase {
 
 
     /// Whether or not this comment is a reply to another
-    /// comment
+    /// comment.
     public let isReplyComment: Bool?
 
-    /// The text of the comment, as provided by the user
+    /// The text of the comment, as provided by the user.
     public let message: String?
 
     public let createdBy: UserMini?
 
-    /// The time this comment was created
+    /// The time this comment was created.
     public let createdAt: Date?
 
-    /// The time this comment was last modified
+    /// The time this comment was last modified.
     public let modifiedAt: Date?
 
     public let item: CommentItemField?
@@ -41,13 +41,13 @@ public class Comment: CommentBase {
     ///
     /// - Parameters:
     ///   - id: The unique identifier for this comment.
-    ///   - type: `comment`
+    ///   - type: The value will always be `comment`.
     ///   - isReplyComment: Whether or not this comment is a reply to another
-    ///     comment
-    ///   - message: The text of the comment, as provided by the user
+    ///     comment.
+    ///   - message: The text of the comment, as provided by the user.
     ///   - createdBy: 
-    ///   - createdAt: The time this comment was created
-    ///   - modifiedAt: The time this comment was last modified
+    ///   - createdAt: The time this comment was created.
+    ///   - modifiedAt: The time this comment was last modified.
     ///   - item: 
     public init(id: String? = nil, type: CommentBaseTypeField? = nil, isReplyComment: Bool? = nil, message: String? = nil, createdBy: UserMini? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, item: CommentItemField? = nil) {
         self.isReplyComment = isReplyComment

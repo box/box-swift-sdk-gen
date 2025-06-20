@@ -15,17 +15,17 @@ public class StartWorkflowRequestBodyFolderField: Codable, RawJSONReadable {
     }
 
 
-    /// The type of the folder object
+    /// The type of the folder object.
     public let type: StartWorkflowRequestBodyFolderTypeField?
 
-    /// The id of the folder
+    /// The id of the folder.
     public let id: String?
 
     /// Initializer for a StartWorkflowRequestBodyFolderField.
     ///
     /// - Parameters:
-    ///   - type: The type of the folder object
-    ///   - id: The id of the folder
+    ///   - type: The type of the folder object.
+    ///   - id: The id of the folder.
     public init(type: StartWorkflowRequestBodyFolderTypeField? = nil, id: String? = nil) {
         self.type = type
         self.id = id

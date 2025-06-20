@@ -64,7 +64,7 @@ try await client.shieldInformationBarrierSegmentRestrictions.deleteShieldInforma
 
 This function returns a value of type ``.
 
-Empty body in response
+Empty body in response.
 
 
 ## List shield information barrier segment restrictions

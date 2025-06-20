@@ -128,7 +128,7 @@ try await client.tasks.updateTaskById(taskId: task.id!, requestBody: UpdateTaskB
 
 This function returns a value of type `Task`.
 
-Returns the updated task object
+Returns the updated task object.
 
 
 ## Remove task

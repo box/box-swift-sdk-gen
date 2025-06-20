@@ -1,6 +1,6 @@
 import Foundation
 
-/// AI text gen request object
+/// AI text gen request object.
 public class AiTextGen: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case prompt

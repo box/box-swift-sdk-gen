@@ -13,7 +13,7 @@ public class DevicePinnersManager {
     /// Retrieves information about an individual device pin.
     ///
     /// - Parameters:
-    ///   - devicePinnerId: The ID of the device pin
+    ///   - devicePinnerId: The ID of the device pin.
     ///     Example: "2324234"
     ///   - headers: Headers of getDevicePinnerById method
     /// - Returns: The `DevicePinner`.
@@ -27,7 +27,7 @@ public class DevicePinnersManager {
     /// Deletes an individual device pin.
     ///
     /// - Parameters:
-    ///   - devicePinnerId: The ID of the device pin
+    ///   - devicePinnerId: The ID of the device pin.
     ///     Example: "2324234"
     ///   - headers: Headers of deleteDevicePinnerById method
     /// - Throws: The `GeneralError`.
@@ -42,7 +42,7 @@ public class DevicePinnersManager {
     /// needs the "manage enterprise" scope to make this call.
     ///
     /// - Parameters:
-    ///   - enterpriseId: The ID of the enterprise
+    ///   - enterpriseId: The ID of the enterprise.
     ///     Example: "3442311"
     ///   - queryParams: Query parameters of getEnterpriseDevicePinners method
     ///   - headers: Headers of getEnterpriseDevicePinners method

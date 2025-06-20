@@ -15,17 +15,17 @@ public class SkillInvocationTokenField: Codable, RawJSONReadable {
     }
 
 
-    /// The basics of an access token
+    /// The basics of an access token.
     public let read: SkillInvocationTokenReadField?
 
-    /// The basics of an access token
+    /// The basics of an access token.
     public let write: SkillInvocationTokenWriteField?
 
     /// Initializer for a SkillInvocationTokenField.
     ///
     /// - Parameters:
-    ///   - read: The basics of an access token
-    ///   - write: The basics of an access token
+    ///   - read: The basics of an access token.
+    ///   - write: The basics of an access token.
     public init(read: SkillInvocationTokenReadField? = nil, write: SkillInvocationTokenWriteField? = nil) {
         self.read = read
         self.write = write

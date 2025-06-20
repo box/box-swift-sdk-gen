@@ -15,17 +15,17 @@ public class PromoteFileVersionRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// The file version ID
+    /// The file version ID.
     public let id: String?
 
-    /// The type to promote
+    /// The type to promote.
     public let type: PromoteFileVersionRequestBodyTypeField?
 
     /// Initializer for a PromoteFileVersionRequestBody.
     ///
     /// - Parameters:
-    ///   - id: The file version ID
-    ///   - type: The type to promote
+    ///   - id: The file version ID.
+    ///   - type: The type to promote.
     public init(id: String? = nil, type: PromoteFileVersionRequestBodyTypeField? = nil) {
         self.id = id
         self.type = type

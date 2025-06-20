@@ -41,7 +41,7 @@ public class LegalHoldPoliciesManager {
     /// Retrieve a legal hold policy.
     ///
     /// - Parameters:
-    ///   - legalHoldPolicyId: The ID of the legal hold policy
+    ///   - legalHoldPolicyId: The ID of the legal hold policy.
     ///     Example: "324432"
     ///   - headers: Headers of getLegalHoldPolicyById method
     /// - Returns: The `LegalHoldPolicy`.
@@ -55,7 +55,7 @@ public class LegalHoldPoliciesManager {
     /// Update legal hold policy.
     ///
     /// - Parameters:
-    ///   - legalHoldPolicyId: The ID of the legal hold policy
+    ///   - legalHoldPolicyId: The ID of the legal hold policy.
     ///     Example: "324432"
     ///   - requestBody: Request body of updateLegalHoldPolicyById method
     ///   - headers: Headers of updateLegalHoldPolicyById method
@@ -73,7 +73,7 @@ public class LegalHoldPoliciesManager {
     /// fully deleted yet when the response returns.
     ///
     /// - Parameters:
-    ///   - legalHoldPolicyId: The ID of the legal hold policy
+    ///   - legalHoldPolicyId: The ID of the legal hold policy.
     ///     Example: "324432"
     ///   - headers: Headers of deleteLegalHoldPolicyById method
     /// - Throws: The `GeneralError`.

@@ -48,7 +48,7 @@ public class FileVersionsManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - fileVersionId: The ID of the file version
+    ///   - fileVersionId: The ID of the file version.
     ///     Example: "1234"
     ///   - queryParams: Query parameters of getFileVersionById method
     ///   - headers: Headers of getFileVersionById method
@@ -74,7 +74,7 @@ public class FileVersionsManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - fileVersionId: The ID of the file version
+    ///   - fileVersionId: The ID of the file version.
     ///     Example: "1234"
     ///   - headers: Headers of deleteFileVersionById method
     /// - Throws: The `GeneralError`.
@@ -97,7 +97,7 @@ public class FileVersionsManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - fileVersionId: The ID of the file version
+    ///   - fileVersionId: The ID of the file version.
     ///     Example: "1234"
     ///   - requestBody: Request body of updateFileVersionById method
     ///   - headers: Headers of updateFileVersionById method

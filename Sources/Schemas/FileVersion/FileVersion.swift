@@ -1,6 +1,6 @@
 import Foundation
 
-/// A standard representation of a file version
+/// A standard representation of a file version.
 public class FileVersion: FileVersionMini {
     private enum CodingKeys: String, CodingKey {
         case name
@@ -25,16 +25,16 @@ public class FileVersion: FileVersionMini {
     }
 
 
-    /// The name of the file version
+    /// The name of the file version.
     public let name: String?
 
-    /// Size of the file version in bytes
+    /// Size of the file version in bytes.
     public let size: Int64?
 
-    /// When the file version object was created
+    /// When the file version object was created.
     public let createdAt: Date?
 
-    /// When the file version object was last updated
+    /// When the file version object was last updated.
     public let modifiedAt: Date?
 
     public let modifiedBy: UserMini?
@@ -58,12 +58,12 @@ public class FileVersion: FileVersionMini {
     ///
     /// - Parameters:
     ///   - id: The unique identifier that represent a file version.
-    ///   - type: `file_version`
+    ///   - type: The value will always be `file_version`.
     ///   - sha1: The SHA1 hash of this version of the file.
-    ///   - name: The name of the file version
-    ///   - size: Size of the file version in bytes
-    ///   - createdAt: When the file version object was created
-    ///   - modifiedAt: When the file version object was last updated
+    ///   - name: The name of the file version.
+    ///   - size: Size of the file version in bytes.
+    ///   - createdAt: When the file version object was created.
+    ///   - modifiedAt: When the file version object was last updated.
     ///   - modifiedBy: 
     ///   - trashedAt: When the file version object was trashed.
     ///   - trashedBy: 

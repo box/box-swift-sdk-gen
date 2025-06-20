@@ -1,6 +1,6 @@
 import Foundation
 
-/// A relation between a resource (file or folder) and the scopes for which the resource can be accessed
+/// A relation between a resource (file or folder) and the scopes for which the resource can be accessed.
 public class FileOrFolderScope: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case scope
@@ -16,7 +16,7 @@ public class FileOrFolderScope: Codable, RawJSONReadable {
     }
 
 
-    /// The scopes for the resource access
+    /// The scopes for the resource access.
     public let scope: FileOrFolderScopeScopeField?
 
     public let object: FileMiniOrFolderMini?
@@ -24,7 +24,7 @@ public class FileOrFolderScope: Codable, RawJSONReadable {
     /// Initializer for a FileOrFolderScope.
     ///
     /// - Parameters:
-    ///   - scope: The scopes for the resource access
+    ///   - scope: The scopes for the resource access.
     ///   - object: 
     public init(scope: FileOrFolderScopeScopeField? = nil, object: FileMiniOrFolderMini? = nil) {
         self.scope = scope

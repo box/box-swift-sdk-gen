@@ -16,21 +16,21 @@ public class WorkflowFlowsTriggerScopeField: Codable, RawJSONReadable {
     }
 
 
-    /// The trigger scope's resource type
+    /// The trigger scope's resource type.
     public let type: WorkflowFlowsTriggerScopeTypeField?
 
-    /// Indicates the path of the condition value to check
+    /// Indicates the path of the condition value to check.
     public let ref: String?
 
-    /// The object the `ref` points to
+    /// The object the `ref` points to.
     public let object: WorkflowFlowsTriggerScopeObjectField?
 
     /// Initializer for a WorkflowFlowsTriggerScopeField.
     ///
     /// - Parameters:
-    ///   - type: The trigger scope's resource type
-    ///   - ref: Indicates the path of the condition value to check
-    ///   - object: The object the `ref` points to
+    ///   - type: The trigger scope's resource type.
+    ///   - ref: Indicates the path of the condition value to check.
+    ///   - object: The object the `ref` points to.
     public init(type: WorkflowFlowsTriggerScopeTypeField? = nil, ref: String? = nil, object: WorkflowFlowsTriggerScopeObjectField? = nil) {
         self.type = type
         self.ref = ref

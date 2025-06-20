@@ -1,6 +1,6 @@
 import Foundation
 
-/// A list of tasks
+/// A list of tasks.
 public class Tasks: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
@@ -21,7 +21,7 @@ public class Tasks: Codable, RawJSONReadable {
     /// `total_count`.
     public let totalCount: Int64?
 
-    /// A list of tasks
+    /// A list of tasks.
     public let entries: [Task]?
 
     /// Initializer for a Tasks.
@@ -30,7 +30,7 @@ public class Tasks: Codable, RawJSONReadable {
     ///   - totalCount: One greater than the offset of the last entry in the entire collection.
     ///     The total number of entries in the collection may be less than
     ///     `total_count`.
-    ///   - entries: A list of tasks
+    ///   - entries: A list of tasks.
     public init(totalCount: Int64? = nil, entries: [Task]? = nil) {
         self.totalCount = totalCount
         self.entries = entries

@@ -40,7 +40,7 @@ public class DocGenJobFullV2025R0: DocGenJobV2025R0 {
     ///   - createdBy: 
     ///   - enterprise: 
     ///   - source: Source of the request.
-    ///   - type: `docgen_job`
+    ///   - type: The value will always be `docgen_job`.
     ///   - outputFile: 
     ///   - outputFileVersion: 
     ///   - createdAt: Time of job creation.

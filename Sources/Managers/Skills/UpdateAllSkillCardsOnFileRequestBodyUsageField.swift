@@ -15,17 +15,17 @@ public class UpdateAllSkillCardsOnFileRequestBodyUsageField: Codable, RawJSONRea
     }
 
 
-    /// `file`
+    /// The value will always be `file`.
     public let unit: String?
 
-    /// `1`
+    /// Number of resources affected.
     public let value: Double?
 
     /// Initializer for a UpdateAllSkillCardsOnFileRequestBodyUsageField.
     ///
     /// - Parameters:
-    ///   - unit: `file`
-    ///   - value: `1`
+    ///   - unit: The value will always be `file`.
+    ///   - value: Number of resources affected.
     public init(unit: String? = nil, value: Double? = nil) {
         self.unit = unit
         self.value = value

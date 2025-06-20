@@ -1,6 +1,6 @@
 import Foundation
 
-/// A skill card that contains a set of keywords
+/// A skill card that contains a set of keywords.
 public class KeywordSkillCard: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case skill
@@ -34,10 +34,10 @@ public class KeywordSkillCard: Codable, RawJSONReadable {
     /// The optional date and time this card was created at.
     public let createdAt: Date?
 
-    /// `skill_card`
+    /// The value will always be `skill_card`.
     public let type: KeywordSkillCardTypeField
 
-    /// `keyword`
+    /// The value will always be `keyword`.
     public let skillCardType: KeywordSkillCardSkillCardTypeField
 
     /// The title of the card.
@@ -51,8 +51,8 @@ public class KeywordSkillCard: Codable, RawJSONReadable {
     ///     which instance of a service applied the metadata.
     ///   - entries: An list of entries in the metadata card.
     ///   - createdAt: The optional date and time this card was created at.
-    ///   - type: `skill_card`
-    ///   - skillCardType: `keyword`
+    ///   - type: The value will always be `skill_card`.
+    ///   - skillCardType: The value will always be `keyword`.
     ///   - skillCardTitle: The title of the card.
     public init(skill: KeywordSkillCardSkillField, invocation: KeywordSkillCardInvocationField, entries: [KeywordSkillCardEntriesField], createdAt: Date? = nil, type: KeywordSkillCardTypeField = KeywordSkillCardTypeField.skillCard, skillCardType: KeywordSkillCardSkillCardTypeField = KeywordSkillCardSkillCardTypeField.keyword, skillCardTitle: KeywordSkillCardSkillCardTitleField? = nil) {
         self.skill = skill

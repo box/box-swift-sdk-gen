@@ -47,7 +47,7 @@ public class UploadParts: Codable, RawJSONReadable {
     public let order: [UploadPartsOrderField]?
 
     /// A list of uploaded chunks for an upload
-    /// session
+    /// session.
     public let entries: [UploadPart]?
 
     /// Initializer for a UploadParts.
@@ -72,7 +72,7 @@ public class UploadParts: Codable, RawJSONReadable {
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
     ///   - entries: A list of uploaded chunks for an upload
-    ///     session
+    ///     session.
     public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [UploadPartsOrderField]? = nil, entries: [UploadPart]? = nil) {
         self.totalCount = totalCount
         self.limit = limit

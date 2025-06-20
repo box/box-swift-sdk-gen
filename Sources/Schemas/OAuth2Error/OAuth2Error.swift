@@ -1,6 +1,6 @@
 import Foundation
 
-/// An OAuth 2.0 error
+/// An OAuth 2.0 error.
 public class OAuth2Error: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case error

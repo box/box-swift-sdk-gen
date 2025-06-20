@@ -17,10 +17,10 @@ public class CreateRetentionPolicyAssignmentRequestBody: Codable, RawJSONReadabl
     }
 
 
-    /// The ID of the retention policy to assign
+    /// The ID of the retention policy to assign.
     public let policyId: String
 
-    /// The item to assign the policy to
+    /// The item to assign the policy to.
     public let assignTo: CreateRetentionPolicyAssignmentRequestBodyAssignToField
 
     /// If the `assign_to` type is `metadata_template`,
@@ -38,8 +38,8 @@ public class CreateRetentionPolicyAssignmentRequestBody: Codable, RawJSONReadabl
     /// Initializer for a CreateRetentionPolicyAssignmentRequestBody.
     ///
     /// - Parameters:
-    ///   - policyId: The ID of the retention policy to assign
-    ///   - assignTo: The item to assign the policy to
+    ///   - policyId: The ID of the retention policy to assign.
+    ///   - assignTo: The item to assign the policy to.
     ///   - filterFields: If the `assign_to` type is `metadata_template`,
     ///     then optionally add the `filter_fields` parameter which will
     ///     require an array of objects with a field entry and a value entry.

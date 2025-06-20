@@ -121,7 +121,7 @@ public class FilesManager {
     ///     for the URL `https://*.app.box.com/files/123`
     ///     the `file_id` is `123`.
     ///     Example: "12345"
-    ///   - extension_: The file format for the thumbnail
+    ///   - extension_: The file format for the thumbnail.
     ///     Example: "png"
     ///   - downloadDestinationUrl: The URL on disk where the file will be saved once it has been downloaded.
     ///   - queryParams: Query parameters of getFileThumbnailById method

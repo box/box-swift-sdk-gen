@@ -19,7 +19,7 @@ public class ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentFiel
     /// restricted shield information barrier segment.
     public let id: String?
 
-    /// The type of the shield information segment
+    /// The type of the shield information segment.
     public let type: ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentTypeField?
 
     /// Initializer for a ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentField.
@@ -27,7 +27,7 @@ public class ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentFiel
     /// - Parameters:
     ///   - id: The ID reference of the
     ///     restricted shield information barrier segment.
-    ///   - type: The type of the shield information segment
+    ///   - type: The type of the shield information segment.
     public init(id: String? = nil, type: ShieldInformationBarrierSegmentRestrictionMiniRestrictedSegmentTypeField? = nil) {
         self.id = id
         self.type = type

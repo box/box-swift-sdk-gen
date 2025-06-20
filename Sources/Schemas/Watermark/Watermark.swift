@@ -2,7 +2,7 @@ import Foundation
 
 /// A watermark is a semi-transparent overlay on an embedded file
 /// preview that displays a viewer's email address or user ID
-/// and the time of access over a file's content
+/// and the time of access over a file's content.
 public class Watermark: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case watermark

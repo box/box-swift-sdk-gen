@@ -18,14 +18,14 @@ public class CreateLegalHoldPolicyAssignmentRequestBody: Codable, RawJSONReadabl
     /// The ID of the policy to assign.
     public let policyId: String
 
-    /// The item to assign the policy to
+    /// The item to assign the policy to.
     public let assignTo: CreateLegalHoldPolicyAssignmentRequestBodyAssignToField
 
     /// Initializer for a CreateLegalHoldPolicyAssignmentRequestBody.
     ///
     /// - Parameters:
     ///   - policyId: The ID of the policy to assign.
-    ///   - assignTo: The item to assign the policy to
+    ///   - assignTo: The item to assign the policy to.
     public init(policyId: String, assignTo: CreateLegalHoldPolicyAssignmentRequestBodyAssignToField) {
         self.policyId = policyId
         self.assignTo = assignTo

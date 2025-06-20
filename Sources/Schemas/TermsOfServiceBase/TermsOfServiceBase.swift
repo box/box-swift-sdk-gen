@@ -20,14 +20,14 @@ public class TermsOfServiceBase: Codable, RawJSONReadable {
     /// The unique identifier for this terms of service.
     public let id: String
 
-    /// `terms_of_service`
+    /// The value will always be `terms_of_service`.
     public let type: TermsOfServiceBaseTypeField
 
     /// Initializer for a TermsOfServiceBase.
     ///
     /// - Parameters:
     ///   - id: The unique identifier for this terms of service.
-    ///   - type: `terms_of_service`
+    ///   - type: The value will always be `terms_of_service`.
     public init(id: String, type: TermsOfServiceBaseTypeField = TermsOfServiceBaseTypeField.termsOfService) {
         self.id = id
         self.type = type

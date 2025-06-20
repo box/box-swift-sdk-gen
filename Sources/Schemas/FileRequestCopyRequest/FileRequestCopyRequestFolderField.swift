@@ -19,7 +19,7 @@ public class FileRequestCopyRequestFolderField: Codable, RawJSONReadable {
     /// file request to.
     public let id: String
 
-    /// `folder`
+    /// The value will always be `folder`.
     public let type: FileRequestCopyRequestFolderTypeField?
 
     /// Initializer for a FileRequestCopyRequestFolderField.
@@ -27,7 +27,7 @@ public class FileRequestCopyRequestFolderField: Codable, RawJSONReadable {
     /// - Parameters:
     ///   - id: The ID of the folder to associate the new
     ///     file request to.
-    ///   - type: `folder`
+    ///   - type: The value will always be `folder`.
     public init(id: String, type: FileRequestCopyRequestFolderTypeField? = nil) {
         self.id = id
         self.type = type

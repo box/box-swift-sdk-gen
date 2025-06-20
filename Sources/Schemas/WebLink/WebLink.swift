@@ -61,19 +61,19 @@ public class WebLink: WebLinkMini {
 
     /// Whether this item is deleted or not. Values include `active`,
     /// `trashed` if the file has been moved to the trash, and `deleted` if
-    /// the file has been permanently deleted
+    /// the file has been permanently deleted.
     public let itemStatus: WebLinkItemStatusField?
 
     /// Initializer for a WebLink.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this web link
-    ///   - type: `web_link`
+    ///   - id: The unique identifier for this web link.
+    ///   - type: The value will always be `web_link`.
     ///   - etag: The entity tag of this web link. Used with `If-Match`
     ///     headers.
-    ///   - url: The URL this web link points to
+    ///   - url: The URL this web link points to.
     ///   - sequenceId: 
-    ///   - name: The name of the web link
+    ///   - name: The name of the web link.
     ///   - parent: 
     ///   - description: The description accompanying the web link. This is
     ///     visible within the Box web application.
@@ -89,7 +89,7 @@ public class WebLink: WebLinkMini {
     ///   - sharedLink: 
     ///   - itemStatus: Whether this item is deleted or not. Values include `active`,
     ///     `trashed` if the file has been moved to the trash, and `deleted` if
-    ///     the file has been permanently deleted
+    ///     the file has been permanently deleted.
     public init(id: String, type: WebLinkBaseTypeField = WebLinkBaseTypeField.webLink, etag: String? = nil, url: String? = nil, sequenceId: String? = nil, name: String? = nil, parent: FolderMini? = nil, description: String? = nil, pathCollection: WebLinkPathCollectionField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, trashedAt: TriStateField<Date> = nil, purgedAt: TriStateField<Date> = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, ownedBy: UserMini? = nil, sharedLink: WebLinkSharedLinkField? = nil, itemStatus: WebLinkItemStatusField? = nil) {
         self.parent = parent
         self.description = description

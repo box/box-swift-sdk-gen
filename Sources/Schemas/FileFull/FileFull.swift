@@ -1,7 +1,7 @@
 import Foundation
 
 /// A full representation of a file, as can be returned from any
-/// file API endpoints by default
+/// file API endpoints by default.
 public class FileFull: File {
     private enum CodingKeys: String, CodingKey {
         case versionNumber = "version_number"
@@ -36,10 +36,10 @@ public class FileFull: File {
     }
 
 
-    /// The version number of this file
+    /// The version number of this file.
     public let versionNumber: String?
 
-    /// The number of comments on this file
+    /// The number of comments on this file.
     public let commentCount: Int64?
 
     public let permissions: FileFullPermissionsField?
@@ -78,7 +78,7 @@ public class FileFull: File {
 
     public let metadata: FileFullMetadataField?
 
-    /// When the file will automatically be deleted
+    /// When the file will automatically be deleted.
     @CodableTriState public private(set) var expiresAt: Date?
 
     public let representations: FileFullRepresentationsField?
@@ -87,7 +87,7 @@ public class FileFull: File {
 
     public let uploaderDisplayName: String?
 
-    /// The retention expiration timestamp for the given file
+    /// The retention expiration timestamp for the given file.
     @CodableTriState public private(set) var dispositionAt: Date?
 
     /// A list of the types of roles that user can be invited at
@@ -113,9 +113,9 @@ public class FileFull: File {
     ///   - etag: The HTTP `etag` of this file. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the file if (no) changes have happened.
-    ///   - type: `file`
+    ///   - type: The value will always be `file`.
     ///   - sequenceId: 
-    ///   - name: The name of the file
+    ///   - name: The name of the file.
     ///   - sha1: The SHA1 hash of the file. This can be used to compare the contents
     ///     of a file on Box with a local file.
     ///   - fileVersion: 
@@ -144,8 +144,8 @@ public class FileFull: File {
     ///     * `active` when the item has is not in the trash
     ///     * `trashed` when the item has been moved to the trash but not deleted
     ///     * `deleted` when the item has been permanently deleted.
-    ///   - versionNumber: The version number of this file
-    ///   - commentCount: The number of comments on this file
+    ///   - versionNumber: The version number of this file.
+    ///   - commentCount: The number of comments on this file.
     ///   - permissions: 
     ///   - tags: 
     ///   - lock: 
@@ -164,11 +164,11 @@ public class FileFull: File {
     ///     authenticated enterprise.
     ///   - hasCollaborations: Specifies if this file has any other collaborators.
     ///   - metadata: 
-    ///   - expiresAt: When the file will automatically be deleted
+    ///   - expiresAt: When the file will automatically be deleted.
     ///   - representations: 
     ///   - classification: 
     ///   - uploaderDisplayName: 
-    ///   - dispositionAt: The retention expiration timestamp for the given file
+    ///   - dispositionAt: The retention expiration timestamp for the given file.
     ///   - sharedLinkPermissionOptions: A list of the types of roles that user can be invited at
     ///     when sharing this file.
     ///   - isAssociatedWithAppItem: This field will return true if the file or any ancestor of the file

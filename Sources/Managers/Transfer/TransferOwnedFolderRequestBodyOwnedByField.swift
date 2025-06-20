@@ -15,14 +15,14 @@ public class TransferOwnedFolderRequestBodyOwnedByField: Codable, RawJSONReadabl
 
 
     /// The ID of the user who the folder will be
-    /// transferred to
+    /// transferred to.
     public let id: String
 
     /// Initializer for a TransferOwnedFolderRequestBodyOwnedByField.
     ///
     /// - Parameters:
     ///   - id: The ID of the user who the folder will be
-    ///     transferred to
+    ///     transferred to.
     public init(id: String) {
         self.id = id
     }

@@ -2634,7 +2634,6 @@
 		53D1E43AC8F3A642967EEA35 /* TerminateUsersSessionsHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85415D4C01BC0862F22F41B4 /* TerminateUsersSessionsHeaders.swift */; };
 		53E22662BE4DD3E7A3190833 /* FileFullRepresentationsEntriesInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2227D8F2EB8A7CB7601DC7F /* FileFullRepresentationsEntriesInfoField.swift */; };
 		53E7C01B820ACBB60268BCF6 /* CopyFileRequestBodyParentField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A9138DDA871310E49288B5 /* CopyFileRequestBodyParentField.swift */; };
-		540BCFCA22C50FFCAB6C50A5 /* ClientErrorV2025R0ContextInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0BF32619E7112FB8E9C6DC /* ClientErrorV2025R0ContextInfoField.swift */; };
 		5410D441C0587CD951D912F6 /* TimelineSkillCardSkillCardTitleField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546DFAE57B7825E35F4D336 /* TimelineSkillCardSkillCardTitleField.swift */; };
 		5427EAB1E6A3CE48E4A640EA /* DeleteFileVersionByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C5A16823CA474B20EC3132 /* DeleteFileVersionByIdHeaders.swift */; };
 		542995E35423AC8136FCDAB5 /* UpdateCollaborationByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25282463A16A6271EB511DC6 /* UpdateCollaborationByIdHeaders.swift */; };
@@ -2999,7 +2998,6 @@
 		60C65C72CD3DE0546EAB28F2 /* CopyFileRequestBodyParentField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A9138DDA871310E49288B5 /* CopyFileRequestBodyParentField.swift */; };
 		60DD685E31443D816EA82D46 /* FileConflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA237D6D2EB832B4F63F9093 /* FileConflict.swift */; };
 		60DFA79537A2DC770FA10DED /* AiAgentBasicTextToolBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918538C6F0D5C501BC947220 /* AiAgentBasicTextToolBase.swift */; };
-		60E42243F6F9E5F6C5153588 /* ClientErrorV2025R0ContextInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0BF32619E7112FB8E9C6DC /* ClientErrorV2025R0ContextInfoField.swift */; };
 		60E49D190077F1C326A15BA7 /* CreateFileMetadataByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769CB056844158B499FCB96F /* CreateFileMetadataByIdHeaders.swift */; };
 		60FFB0F8B27BB3B2D4FE61D4 /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0849A63DDC596AEC1758955 /* ClientError.swift */; };
 		6101DEE3064FD9A7368B5404 /* DeleteUserByIdQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE625B8A6A0902677F34D72C /* DeleteUserByIdQueryParams.swift */; };
@@ -3561,7 +3559,6 @@
 		7207C54B210D65295E06B102 /* UserBaseV2025R0TypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BFE6E85601D875354B8C28 /* UserBaseV2025R0TypeField.swift */; };
 		7214EFDF5944E0617EB24F0E /* DeleteLegalHoldPolicyByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBAF26334AD9AC6E282CAE7 /* DeleteLegalHoldPolicyByIdHeaders.swift */; };
 		721B03F08325C41C28E4A7BF /* UpdateMetadataTemplateHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F40AA4B286357AAEE50BEF9 /* UpdateMetadataTemplateHeaders.swift */; };
-		721B15D9D4BDD019496AA762 /* ClientErrorV2025R0ContextInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0BF32619E7112FB8E9C6DC /* ClientErrorV2025R0ContextInfoField.swift */; };
 		7234D638315BBFCA7B92183F /* DeleteStoragePolicyAssignmentByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223E068FAB6489749E2BB77C /* DeleteStoragePolicyAssignmentByIdHeaders.swift */; };
 		72431406D7CAE1DA376BA19C /* SkillInvocationTokenReadField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB1EBF79E228EA51B68E0B /* SkillInvocationTokenReadField.swift */; };
 		7248F7C12BC89588EBDACDA4 /* FolderReferenceTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3605035268432AD70FDD83AD /* FolderReferenceTypeField.swift */; };
@@ -6244,7 +6241,6 @@
 		CA4FDFB3EA7080D4743BC041 /* AvatarsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFD285B54D9F7481527EC4 /* AvatarsManager.swift */; };
 		CA5D374805D6E7CE75201FFC /* UpdateUserByIdRequestBodyStatusField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFEAFA60AE6A24C7D17988D /* UpdateUserByIdRequestBodyStatusField.swift */; };
 		CA67763F4FDD16C080A6C3F0 /* ShieldListsUpdateV2025R0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DC74A0DF8C1B1AE6629DF1 /* ShieldListsUpdateV2025R0.swift */; };
-		CA6EF1CE50E1D4360F7D388B /* ClientErrorV2025R0ContextInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0BF32619E7112FB8E9C6DC /* ClientErrorV2025R0ContextInfoField.swift */; };
 		CA720D973146BF08F9A18039 /* ConflictErrorContextInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577CBB92C323C917DBF0AD01 /* ConflictErrorContextInfoField.swift */; };
 		CA7D472B96966BCF51EE401C /* RemoveSharedLinkFromFileHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E00D7B242F5E13FAC8B05B9 /* RemoveSharedLinkFromFileHeaders.swift */; };
 		CA7E5734844A8B64BA14B378 /* WebhookInvocationTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCBED327A73EABA68D745D6 /* WebhookInvocationTypeField.swift */; };
@@ -7862,7 +7858,6 @@
 		FDD39933C790B747BEAADCE9 /* UpdateTeamsIntegrationMappingByIdRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169C2EEBC54ECD81AAA7569B /* UpdateTeamsIntegrationMappingByIdRequestBody.swift */; };
 		FDD76C9A63CEE20732C79765 /* EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53767B7C4981F429B17C77C /* EventSource.swift */; };
 		FDD7F0A55120B56F2880F24A /* GetSignTemplateByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491897FA1890F702878D9ACE /* GetSignTemplateByIdHeaders.swift */; };
-		FDDA7DDDECDC5832B7581E9C /* ClientErrorV2025R0ContextInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0BF32619E7112FB8E9C6DC /* ClientErrorV2025R0ContextInfoField.swift */; };
 		FDDD2ED7472AEE111569580E /* WebLinkSharedLinkEffectivePermissionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FD03DCDF2B4A2556A7D20B /* WebLinkSharedLinkEffectivePermissionField.swift */; };
 		FDE82C94A51BE776C27AEDDE /* UpdateFileByIdRequestBodySharedLinkPermissionsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3B3BB66FDC816B38963542 /* UpdateFileByIdRequestBodySharedLinkPermissionsField.swift */; };
 		FDFD0B7D9BC05D88EFE26CA9 /* ClassificationTemplateFieldsOptionsStaticConfigField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149798BF422EBCECEEE7D643 /* ClassificationTemplateFieldsOptionsStaticConfigField.swift */; };
@@ -9493,7 +9488,6 @@
 		FCBF73D6481BD02F78762A2E /* GetFolderCollaborationsHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFolderCollaborationsHeaders.swift; sourceTree = "<group>"; };
 		FCD729AA979478C05FBE3CA1 /* AddClassificationRequestBodyDataField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClassificationRequestBodyDataField.swift; sourceTree = "<group>"; };
 		FD029948E23EF4645833432C /* CreateFolderRequestBodySyncStateField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFolderRequestBodySyncStateField.swift; sourceTree = "<group>"; };
-		FD0BF32619E7112FB8E9C6DC /* ClientErrorV2025R0ContextInfoField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientErrorV2025R0ContextInfoField.swift; sourceTree = "<group>"; };
 		FD0D6026487EF4BD112F1E3A /* ShieldListContentRequestV2025R0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldListContentRequestV2025R0.swift; sourceTree = "<group>"; };
 		FD239F7EFE0C37974317DEA6 /* ZipDownloadRequestItemsTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipDownloadRequestItemsTypeField.swift; sourceTree = "<group>"; };
 		FD3D38C50B035146274F3C25 /* UploadFilePartByUrlHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFilePartByUrlHeaders.swift; sourceTree = "<group>"; };
@@ -10563,7 +10557,6 @@
 			children = (
 				5AE3B15806C1CFF6A4E9DFE2 /* ClientErrorV2025R0.swift */,
 				650C382B671F24A3BD163E71 /* ClientErrorV2025R0CodeField.swift */,
-				FD0BF32619E7112FB8E9C6DC /* ClientErrorV2025R0ContextInfoField.swift */,
 				8226F25F4CF11060A5A90410 /* ClientErrorV2025R0TypeField.swift */,
 			);
 			path = ClientErrorV2025R0;
@@ -14713,7 +14706,6 @@
 				C5C70D2FD924D30B21D5B1F8 /* ClientErrorTypeField.swift in Sources */,
 				9F4D535A6B0E6B9F1DF9F4EE /* ClientErrorV2025R0.swift in Sources */,
 				28FCCBB048CA4B8AEB67F4FE /* ClientErrorV2025R0CodeField.swift in Sources */,
-				FDDA7DDDECDC5832B7581E9C /* ClientErrorV2025R0ContextInfoField.swift in Sources */,
 				1A9582FDD38B596C1439CE19 /* ClientErrorV2025R0TypeField.swift in Sources */,
 				976ED8380D95C830697B946F /* Codable+Extensions.swift in Sources */,
 				2227224602AA7487BF8FFCC3 /* CodableStringEnum.swift in Sources */,
@@ -16302,7 +16294,6 @@
 				D96751E817A34B8240FF10EA /* ClientErrorTypeField.swift in Sources */,
 				F18659E84116FE4D782E64D7 /* ClientErrorV2025R0.swift in Sources */,
 				164377530043F6ACB1302797 /* ClientErrorV2025R0CodeField.swift in Sources */,
-				540BCFCA22C50FFCAB6C50A5 /* ClientErrorV2025R0ContextInfoField.swift in Sources */,
 				FB8F7C04044DDC467C1608B4 /* ClientErrorV2025R0TypeField.swift in Sources */,
 				3803EB51049EBFA336A61577 /* Codable+Extensions.swift in Sources */,
 				2ABCDFD3941AD1C2BA9B41A5 /* CodableStringEnum.swift in Sources */,
@@ -17891,7 +17882,6 @@
 				9B8B69EBF8BA03B12CBBD8CE /* ClientErrorTypeField.swift in Sources */,
 				C42431135B1E178754538EAE /* ClientErrorV2025R0.swift in Sources */,
 				88CCFB214ABCC797FCBFA95A /* ClientErrorV2025R0CodeField.swift in Sources */,
-				60E42243F6F9E5F6C5153588 /* ClientErrorV2025R0ContextInfoField.swift in Sources */,
 				16F335D8C7F44074B54838B6 /* ClientErrorV2025R0TypeField.swift in Sources */,
 				604E53333D5EE68A6FC55CC0 /* Codable+Extensions.swift in Sources */,
 				CC5F95DCDD994C0355F3CC37 /* CodableStringEnum.swift in Sources */,
@@ -19480,7 +19470,6 @@
 				FE447DB3319E4FA059DDA23C /* ClientErrorTypeField.swift in Sources */,
 				95452F2BF61DAFFA796BFB36 /* ClientErrorV2025R0.swift in Sources */,
 				043DD3EC52C30211A49231EE /* ClientErrorV2025R0CodeField.swift in Sources */,
-				CA6EF1CE50E1D4360F7D388B /* ClientErrorV2025R0ContextInfoField.swift in Sources */,
 				733DA66C71010075537C2A63 /* ClientErrorV2025R0TypeField.swift in Sources */,
 				E3B0D57A2DC96329327BCC3A /* Codable+Extensions.swift in Sources */,
 				AE4784C55764AC24D659A290 /* CodableStringEnum.swift in Sources */,
@@ -21069,7 +21058,6 @@
 				84212C36D2F6E45A7CA4DD59 /* ClientErrorTypeField.swift in Sources */,
 				448DBABC826372B79E1C8AE6 /* ClientErrorV2025R0.swift in Sources */,
 				0AFAF0DB10A0D05A77FE8D48 /* ClientErrorV2025R0CodeField.swift in Sources */,
-				721B15D9D4BDD019496AA762 /* ClientErrorV2025R0ContextInfoField.swift in Sources */,
 				A78E0E35A7A2AC477E65326C /* ClientErrorV2025R0TypeField.swift in Sources */,
 				4B37F5DACABB8D54EE20716A /* Codable+Extensions.swift in Sources */,
 				4CF6EB4FFDE7C97079026047 /* CodableStringEnum.swift in Sources */,

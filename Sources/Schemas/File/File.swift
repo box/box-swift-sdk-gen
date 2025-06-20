@@ -1,7 +1,7 @@
 import Foundation
 
 /// A standard representation of a file, as returned from any
-/// file API endpoints by default
+/// file API endpoints by default.
 public class File: FileMini {
     private enum CodingKeys: String, CodingKey {
         case description
@@ -92,9 +92,9 @@ public class File: FileMini {
     ///   - etag: The HTTP `etag` of this file. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the file if (no) changes have happened.
-    ///   - type: `file`
+    ///   - type: The value will always be `file`.
     ///   - sequenceId: 
-    ///   - name: The name of the file
+    ///   - name: The name of the file.
     ///   - sha1: The SHA1 hash of the file. This can be used to compare the contents
     ///     of a file on Box with a local file.
     ///   - fileVersion: 

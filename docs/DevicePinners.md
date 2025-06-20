@@ -22,7 +22,7 @@ try await client.devicePinners.getDevicePinnerById(devicePinnerId: devicePinnerI
 ### Arguments
 
 - devicePinnerId `String`
-  - The ID of the device pin Example: "2324234"
+  - The ID of the device pin. Example: "2324234"
 - headers `GetDevicePinnerByIdHeaders`
   - Headers of getDevicePinnerById method
 
@@ -51,7 +51,7 @@ try await client.devicePinners.deleteDevicePinnerById(devicePinnerId: devicePinn
 ### Arguments
 
 - devicePinnerId `String`
-  - The ID of the device pin Example: "2324234"
+  - The ID of the device pin. Example: "2324234"
 - headers `DeleteDevicePinnerByIdHeaders`
   - Headers of deleteDevicePinnerById method
 
@@ -83,7 +83,7 @@ try await client.devicePinners.getEnterpriseDevicePinners(enterpriseId: enterpri
 ### Arguments
 
 - enterpriseId `String`
-  - The ID of the enterprise Example: "3442311"
+  - The ID of the enterprise. Example: "3442311"
 - queryParams `GetEnterpriseDevicePinnersQueryParams`
   - Query parameters of getEnterpriseDevicePinners method
 - headers `GetEnterpriseDevicePinnersHeaders`

@@ -20,8 +20,8 @@ public class UpdateTaskByIdRequestBody: Codable, RawJSONReadable {
     /// The action the task assignee will be prompted to do. Must be
     /// 
     /// * `review` defines an approval task that can be approved or
-    /// rejected
-    /// * `complete` defines a general task which can be completed
+    /// rejected,
+    /// * `complete` defines a general task which can be completed.
     public let action: UpdateTaskByIdRequestBodyActionField?
 
     /// The message included with the task.
@@ -45,8 +45,8 @@ public class UpdateTaskByIdRequestBody: Codable, RawJSONReadable {
     ///   - action: The action the task assignee will be prompted to do. Must be
     ///     
     ///     * `review` defines an approval task that can be approved or
-    ///     rejected
-    ///     * `complete` defines a general task which can be completed
+    ///     rejected,
+    ///     * `complete` defines a general task which can be completed.
     ///   - message: The message included with the task.
     ///   - dueAt: When the task is due at.
     ///   - completionRule: Defines which assignees need to complete this task before the task

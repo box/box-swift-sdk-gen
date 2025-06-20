@@ -1,6 +1,6 @@
 import Foundation
 
-/// AI response
+/// AI response.
 public class AiResponse: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case answer

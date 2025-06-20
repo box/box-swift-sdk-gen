@@ -41,7 +41,7 @@ public class FileRequest: Codable, RawJSONReadable {
     /// The date and time when the file request was last updated.
     public let updatedAt: Date
 
-    /// `file_request`
+    /// The value will always be `file_request`.
     public let type: FileRequestTypeField
 
     /// The title of file request. This is shown
@@ -119,7 +119,7 @@ public class FileRequest: Codable, RawJSONReadable {
     ///   - folder: 
     ///   - createdAt: The date and time when the file request was created.
     ///   - updatedAt: The date and time when the file request was last updated.
-    ///   - type: `file_request`
+    ///   - type: The value will always be `file_request`.
     ///   - title: The title of file request. This is shown
     ///     in the Box UI to users uploading files.
     ///     

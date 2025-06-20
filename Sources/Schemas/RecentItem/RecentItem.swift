@@ -19,7 +19,7 @@ public class RecentItem: Codable, RawJSONReadable {
     }
 
 
-    /// `recent_item`
+    /// The value will always be `recent_item`.
     public let type: String?
 
     public let item: FileFullOrFolderFullOrWebLink?
@@ -38,7 +38,7 @@ public class RecentItem: Codable, RawJSONReadable {
     /// Initializer for a RecentItem.
     ///
     /// - Parameters:
-    ///   - type: `recent_item`
+    ///   - type: The value will always be `recent_item`.
     ///   - item: 
     ///   - interactionType: The most recent type of access the user performed on
     ///     the item.

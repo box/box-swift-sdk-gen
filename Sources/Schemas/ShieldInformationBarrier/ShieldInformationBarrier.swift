@@ -1,7 +1,7 @@
 import Foundation
 
 /// A standard representation of a
-/// shield information barrier object
+/// shield information barrier object.
 public class ShieldInformationBarrier: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -25,16 +25,16 @@ public class ShieldInformationBarrier: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for the shield information barrier
+    /// The unique identifier for the shield information barrier.
     public let id: String?
 
-    /// The type of the shield information barrier
+    /// The type of the shield information barrier.
     public let type: ShieldInformationBarrierTypeField?
 
     /// The `type` and `id` of enterprise this barrier is under.
     public let enterprise: EnterpriseBase?
 
-    /// Status of the shield information barrier
+    /// Status of the shield information barrier.
     public let status: ShieldInformationBarrierStatusField?
 
     /// ISO date time string when this
@@ -58,10 +58,10 @@ public class ShieldInformationBarrier: Codable, RawJSONReadable {
     /// Initializer for a ShieldInformationBarrier.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for the shield information barrier
-    ///   - type: The type of the shield information barrier
+    ///   - id: The unique identifier for the shield information barrier.
+    ///   - type: The type of the shield information barrier.
     ///   - enterprise: The `type` and `id` of enterprise this barrier is under.
-    ///   - status: Status of the shield information barrier
+    ///   - status: Status of the shield information barrier.
     ///   - createdAt: ISO date time string when this
     ///     shield information barrier object was created.
     ///   - createdBy: The user who created this shield information barrier.

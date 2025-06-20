@@ -1,6 +1,6 @@
 import Foundation
 
-/// A list of app item associations
+/// A list of app item associations.
 public class AppItemAssociations: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case limit

@@ -1,6 +1,6 @@
 import Foundation
 
-/// A list of folder locks
+/// A list of folder locks.
 public class FolderLocks: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case entries
@@ -17,7 +17,7 @@ public class FolderLocks: Codable, RawJSONReadable {
     }
 
 
-    /// A list of folder locks
+    /// A list of folder locks.
     public let entries: [FolderLock]?
 
     /// The limit that was used for these entries. This will be the same as the
@@ -31,7 +31,7 @@ public class FolderLocks: Codable, RawJSONReadable {
     /// Initializer for a FolderLocks.
     ///
     /// - Parameters:
-    ///   - entries: A list of folder locks
+    ///   - entries: A list of folder locks.
     ///   - limit: The limit that was used for these entries. This will be the same as the
     ///     `limit` query parameter unless that value exceeded the maximum value
     ///     allowed. The maximum value varies by API.

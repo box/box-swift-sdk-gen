@@ -14,13 +14,13 @@ public class TerminateGroupsSessionsRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// A list of group IDs
+    /// A list of group IDs.
     public let groupIds: [String]
 
     /// Initializer for a TerminateGroupsSessionsRequestBody.
     ///
     /// - Parameters:
-    ///   - groupIds: A list of group IDs
+    ///   - groupIds: A list of group IDs.
     public init(groupIds: [String]) {
         self.groupIds = groupIds
     }

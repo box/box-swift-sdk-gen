@@ -1,6 +1,6 @@
 import Foundation
 
-/// List of Shield List objects
+/// List of Shield List objects.
 public class ShieldListsV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case entries
@@ -15,13 +15,13 @@ public class ShieldListsV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// A list of shield list objects
+    /// A list of shield list objects.
     public let entries: [ShieldListMiniV2025R0]?
 
     /// Initializer for a ShieldListsV2025R0.
     ///
     /// - Parameters:
-    ///   - entries: A list of shield list objects
+    ///   - entries: A list of shield list objects.
     public init(entries: [ShieldListMiniV2025R0]? = nil) {
         self.entries = entries
     }

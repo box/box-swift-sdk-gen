@@ -19,17 +19,17 @@ public class WorkflowFlowsField: Codable, RawJSONReadable {
     }
 
 
-    /// The identifier of the flow
+    /// The identifier of the flow.
     public let id: String?
 
-    /// The flow's resource type
+    /// The flow's resource type.
     public let type: WorkflowFlowsTypeField?
 
     public let trigger: WorkflowFlowsTriggerField?
 
     public let outcomes: [WorkflowFlowsOutcomesField]?
 
-    /// When this flow was created
+    /// When this flow was created.
     public let createdAt: Date?
 
     public let createdBy: UserBase?
@@ -37,11 +37,11 @@ public class WorkflowFlowsField: Codable, RawJSONReadable {
     /// Initializer for a WorkflowFlowsField.
     ///
     /// - Parameters:
-    ///   - id: The identifier of the flow
-    ///   - type: The flow's resource type
+    ///   - id: The identifier of the flow.
+    ///   - type: The flow's resource type.
     ///   - trigger: 
     ///   - outcomes: 
-    ///   - createdAt: When this flow was created
+    ///   - createdAt: When this flow was created.
     ///   - createdBy: 
     public init(id: String? = nil, type: WorkflowFlowsTypeField? = nil, trigger: WorkflowFlowsTriggerField? = nil, outcomes: [WorkflowFlowsOutcomesField]? = nil, createdAt: Date? = nil, createdBy: UserBase? = nil) {
         self.id = id

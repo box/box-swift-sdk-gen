@@ -49,7 +49,7 @@ public class TrashFolderRestored: Codable, RawJSONReadable {
     /// perform changes on the folder if (no) changes have happened.
     @CodableTriState public private(set) var etag: String?
 
-    /// `folder`
+    /// The value will always be `folder`.
     public let type: TrashFolderRestoredTypeField?
 
     public let sequenceId: String?
@@ -112,8 +112,8 @@ public class TrashFolderRestored: Codable, RawJSONReadable {
 
     /// Defines if this item has been deleted or not.
     /// 
-    /// * `active` when the item has is not in the trash
-    /// * `trashed` when the item has been moved to the trash but not deleted
+    /// * `active` when the item has is not in the trash,
+    /// * `trashed` when the item has been moved to the trash but not deleted,
     /// * `deleted` when the item has been permanently deleted.
     public let itemStatus: TrashFolderRestoredItemStatusField?
 
@@ -130,7 +130,7 @@ public class TrashFolderRestored: Codable, RawJSONReadable {
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
-    ///   - type: `folder`
+    ///   - type: The value will always be `folder`.
     ///   - sequenceId: 
     ///   - name: The name of the folder.
     ///   - createdAt: The date and time when the folder was created. This value may
@@ -164,8 +164,8 @@ public class TrashFolderRestored: Codable, RawJSONReadable {
     ///   - parent: 
     ///   - itemStatus: Defines if this item has been deleted or not.
     ///     
-    ///     * `active` when the item has is not in the trash
-    ///     * `trashed` when the item has been moved to the trash but not deleted
+    ///     * `active` when the item has is not in the trash,
+    ///     * `trashed` when the item has been moved to the trash but not deleted,
     ///     * `deleted` when the item has been permanently deleted.
     public init(id: String? = nil, etag: TriStateField<String> = nil, type: TrashFolderRestoredTypeField? = nil, sequenceId: String? = nil, name: String? = nil, createdAt: TriStateField<Date> = nil, modifiedAt: TriStateField<Date> = nil, description: String? = nil, size: Int64? = nil, pathCollection: TrashFolderRestoredPathCollectionField? = nil, createdBy: UserMini? = nil, modifiedBy: UserMini? = nil, trashedAt: TriStateField<String> = nil, purgedAt: TriStateField<String> = nil, contentCreatedAt: TriStateField<Date> = nil, contentModifiedAt: TriStateField<Date> = nil, ownedBy: UserMini? = nil, sharedLink: TriStateField<String> = nil, folderUploadEmail: TriStateField<String> = nil, parent: FolderMini? = nil, itemStatus: TrashFolderRestoredItemStatusField? = nil) {
         self.id = id

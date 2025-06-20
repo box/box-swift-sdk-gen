@@ -15,17 +15,17 @@ public class WatermarkWatermarkField: Codable, RawJSONReadable {
     }
 
 
-    /// When this watermark was created
+    /// When this watermark was created.
     public let createdAt: Date?
 
-    /// When this task was modified
+    /// When this task was modified.
     public let modifiedAt: Date?
 
     /// Initializer for a WatermarkWatermarkField.
     ///
     /// - Parameters:
-    ///   - createdAt: When this watermark was created
-    ///   - modifiedAt: When this task was modified
+    ///   - createdAt: When this watermark was created.
+    ///   - modifiedAt: When this task was modified.
     public init(createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt

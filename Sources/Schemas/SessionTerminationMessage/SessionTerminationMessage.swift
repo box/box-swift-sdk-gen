@@ -1,7 +1,7 @@
 import Foundation
 
 /// A message informing about the
-/// termination job status
+/// termination job status.
 public class SessionTerminationMessage: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case message
@@ -16,13 +16,13 @@ public class SessionTerminationMessage: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for the termination job status
+    /// The unique identifier for the termination job status.
     public let message: String?
 
     /// Initializer for a SessionTerminationMessage.
     ///
     /// - Parameters:
-    ///   - message: The unique identifier for the termination job status
+    ///   - message: The unique identifier for the termination job status.
     public init(message: String? = nil) {
         self.message = message
     }

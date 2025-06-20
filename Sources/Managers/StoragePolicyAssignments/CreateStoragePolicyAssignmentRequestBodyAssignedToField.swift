@@ -18,14 +18,14 @@ public class CreateStoragePolicyAssignmentRequestBodyAssignedToField: Codable, R
     /// The type to assign the policy to.
     public let type: CreateStoragePolicyAssignmentRequestBodyAssignedToTypeField
 
-    /// The ID of the user or enterprise
+    /// The ID of the user or enterprise.
     public let id: String
 
     /// Initializer for a CreateStoragePolicyAssignmentRequestBodyAssignedToField.
     ///
     /// - Parameters:
     ///   - type: The type to assign the policy to.
-    ///   - id: The ID of the user or enterprise
+    ///   - id: The ID of the user or enterprise.
     public init(type: CreateStoragePolicyAssignmentRequestBodyAssignedToTypeField, id: String) {
         self.type = type
         self.id = id

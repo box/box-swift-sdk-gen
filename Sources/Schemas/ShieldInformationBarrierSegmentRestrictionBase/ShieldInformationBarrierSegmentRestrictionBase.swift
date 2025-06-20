@@ -2,7 +2,7 @@ import Foundation
 
 /// A base representation of
 /// a segment restriction object for
-/// the shield information barrier
+/// the shield information barrier.
 public class ShieldInformationBarrierSegmentRestrictionBase: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -18,7 +18,7 @@ public class ShieldInformationBarrierSegmentRestrictionBase: Codable, RawJSONRea
     }
 
 
-    /// Shield information barrier segment restriction
+    /// Shield information barrier segment restriction.
     public let type: ShieldInformationBarrierSegmentRestrictionBaseTypeField?
 
     /// The unique identifier for the
@@ -28,7 +28,7 @@ public class ShieldInformationBarrierSegmentRestrictionBase: Codable, RawJSONRea
     /// Initializer for a ShieldInformationBarrierSegmentRestrictionBase.
     ///
     /// - Parameters:
-    ///   - type: Shield information barrier segment restriction
+    ///   - type: Shield information barrier segment restriction.
     ///   - id: The unique identifier for the
     ///     shield information barrier segment restriction.
     public init(type: ShieldInformationBarrierSegmentRestrictionBaseTypeField? = nil, id: String? = nil) {

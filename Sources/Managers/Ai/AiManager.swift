@@ -40,7 +40,7 @@ public class AiManager {
         return try AiResponse.deserialize(from: response.data!)
     }
 
-    /// Get the AI agent default config
+    /// Get the AI agent default config.
     ///
     /// - Parameters:
     ///   - queryParams: Query parameters of getAiAgentDefaultConfig method

@@ -19,18 +19,18 @@ public class CreateFileUploadSessionRequestBody: Codable, RawJSONReadable {
     /// The ID of the folder to upload the new file to.
     public let folderId: String
 
-    /// The total number of bytes of the file to be uploaded
+    /// The total number of bytes of the file to be uploaded.
     public let fileSize: Int64
 
-    /// The name of new file
+    /// The name of new file.
     public let fileName: String
 
     /// Initializer for a CreateFileUploadSessionRequestBody.
     ///
     /// - Parameters:
     ///   - folderId: The ID of the folder to upload the new file to.
-    ///   - fileSize: The total number of bytes of the file to be uploaded
-    ///   - fileName: The name of new file
+    ///   - fileSize: The total number of bytes of the file to be uploaded.
+    ///   - fileName: The name of new file.
     public init(folderId: String, fileSize: Int64, fileName: String) {
         self.folderId = folderId
         self.fileSize = fileSize

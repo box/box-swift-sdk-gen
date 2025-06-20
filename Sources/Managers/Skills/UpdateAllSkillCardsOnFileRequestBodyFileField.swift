@@ -15,17 +15,17 @@ public class UpdateAllSkillCardsOnFileRequestBodyFileField: Codable, RawJSONRead
     }
 
 
-    /// `file`
+    /// The value will always be `file`.
     public let type: UpdateAllSkillCardsOnFileRequestBodyFileTypeField?
 
-    /// The ID of the file
+    /// The ID of the file.
     public let id: String?
 
     /// Initializer for a UpdateAllSkillCardsOnFileRequestBodyFileField.
     ///
     /// - Parameters:
-    ///   - type: `file`
-    ///   - id: The ID of the file
+    ///   - type: The value will always be `file`.
+    ///   - id: The ID of the file.
     public init(type: UpdateAllSkillCardsOnFileRequestBodyFileTypeField? = nil, id: String? = nil) {
         self.type = type
         self.id = id

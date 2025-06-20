@@ -30,8 +30,8 @@ public class UserCollaborations: UserBase {
     /// Initializer for a UserCollaborations.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this user
-    ///   - type: `user`
+    ///   - id: The unique identifier for this user.
+    ///   - type: The value will always be `user`.
     ///   - name: The display name of this user. If the collaboration status is `pending`, an empty string is returned.
     ///   - login: The primary email address of this user. If the collaboration status is `pending`, an empty string is returned.
     ///   - isActive: If set to `false`, the user is either deactivated or deleted.

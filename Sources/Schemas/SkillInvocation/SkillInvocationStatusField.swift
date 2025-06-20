@@ -29,7 +29,7 @@ public class SkillInvocationStatusField: Codable, RawJSONReadable {
     ///   retry would not help.
     public let state: SkillInvocationStatusStateField?
 
-    /// Status information
+    /// Status information.
     public let message: String?
 
     /// Error code information, if error occurred.
@@ -51,7 +51,7 @@ public class SkillInvocationStatusField: Codable, RawJSONReadable {
     ///       retried.
     ///     * `permanent_failure` -  Encountered a permanent issue and
     ///       retry would not help.
-    ///   - message: Status information
+    ///   - message: Status information.
     ///   - errorCode: Error code information, if error occurred.
     ///   - additionalInfo: Additional status information.
     public init(state: SkillInvocationStatusStateField? = nil, message: String? = nil, errorCode: String? = nil, additionalInfo: String? = nil) {

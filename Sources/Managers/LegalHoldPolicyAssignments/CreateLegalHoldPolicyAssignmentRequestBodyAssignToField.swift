@@ -15,17 +15,17 @@ public class CreateLegalHoldPolicyAssignmentRequestBodyAssignToField: Codable, R
     }
 
 
-    /// The type of item to assign the policy to
+    /// The type of item to assign the policy to.
     public let type: CreateLegalHoldPolicyAssignmentRequestBodyAssignToTypeField
 
-    /// The ID of item to assign the policy to
+    /// The ID of item to assign the policy to.
     public let id: String
 
     /// Initializer for a CreateLegalHoldPolicyAssignmentRequestBodyAssignToField.
     ///
     /// - Parameters:
-    ///   - type: The type of item to assign the policy to
-    ///   - id: The ID of item to assign the policy to
+    ///   - type: The type of item to assign the policy to.
+    ///   - id: The ID of item to assign the policy to.
     public init(type: CreateLegalHoldPolicyAssignmentRequestBodyAssignToTypeField, id: String) {
         self.type = type
         self.id = id

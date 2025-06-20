@@ -1,6 +1,6 @@
 import Foundation
 
-/// Representation of content of a Shield List
+/// Representation of content of a Shield List.
 public enum ShieldListContentV2025R0: Codable {
     case shieldListContentCountryV2025R0(ShieldListContentCountryV2025R0)
     case shieldListContentDomainV2025R0(ShieldListContentDomainV2025R0)

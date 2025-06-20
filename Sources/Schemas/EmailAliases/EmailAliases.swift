@@ -1,6 +1,6 @@
 import Foundation
 
-/// A list of email aliases
+/// A list of email aliases.
 public class EmailAliases: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
@@ -19,14 +19,14 @@ public class EmailAliases: Codable, RawJSONReadable {
     /// The number of email aliases.
     public let totalCount: Int64?
 
-    /// A list of email aliases
+    /// A list of email aliases.
     public let entries: [EmailAlias]?
 
     /// Initializer for a EmailAliases.
     ///
     /// - Parameters:
     ///   - totalCount: The number of email aliases.
-    ///   - entries: A list of email aliases
+    ///   - entries: A list of email aliases.
     public init(totalCount: Int64? = nil, entries: [EmailAlias]? = nil) {
         self.totalCount = totalCount
         self.entries = entries

@@ -16,21 +16,21 @@ public class AiAgentInfoModelsField: Codable, RawJSONReadable {
     }
 
 
-    /// The name of the model used for the request
+    /// The name of the model used for the request.
     public let name: String?
 
-    /// The provider that owns the model used for the request
+    /// The provider that owns the model used for the request.
     public let provider: String?
 
-    /// The supported purpose utilized by the model used for the request
+    /// The supported purpose utilized by the model used for the request.
     public let supportedPurpose: String?
 
     /// Initializer for a AiAgentInfoModelsField.
     ///
     /// - Parameters:
-    ///   - name: The name of the model used for the request
-    ///   - provider: The provider that owns the model used for the request
-    ///   - supportedPurpose: The supported purpose utilized by the model used for the request
+    ///   - name: The name of the model used for the request.
+    ///   - provider: The provider that owns the model used for the request.
+    ///   - supportedPurpose: The supported purpose utilized by the model used for the request.
     public init(name: String? = nil, provider: String? = nil, supportedPurpose: String? = nil) {
         self.name = name
         self.provider = provider

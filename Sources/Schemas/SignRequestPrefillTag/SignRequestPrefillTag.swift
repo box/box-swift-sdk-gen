@@ -22,22 +22,22 @@ public class SignRequestPrefillTag: Codable, RawJSONReadable {
     /// This references the ID of a specific tag contained in a file of the signature request.
     @CodableTriState public private(set) var documentTagId: String?
 
-    /// Text prefill value
+    /// Text prefill value.
     @CodableTriState public private(set) var textValue: String?
 
-    /// Checkbox prefill value
+    /// Checkbox prefill value.
     @CodableTriState public private(set) var checkboxValue: Bool?
 
-    /// Date prefill value
+    /// Date prefill value.
     @CodableTriState public private(set) var dateValue: Date?
 
     /// Initializer for a SignRequestPrefillTag.
     ///
     /// - Parameters:
     ///   - documentTagId: This references the ID of a specific tag contained in a file of the signature request.
-    ///   - textValue: Text prefill value
-    ///   - checkboxValue: Checkbox prefill value
-    ///   - dateValue: Date prefill value
+    ///   - textValue: Text prefill value.
+    ///   - checkboxValue: Checkbox prefill value.
+    ///   - dateValue: Date prefill value.
     public init(documentTagId: TriStateField<String> = nil, textValue: TriStateField<String> = nil, checkboxValue: TriStateField<Bool> = nil, dateValue: TriStateField<Date> = nil) {
         self._documentTagId = CodableTriState(state: documentTagId)
         self._textValue = CodableTriState(state: textValue)

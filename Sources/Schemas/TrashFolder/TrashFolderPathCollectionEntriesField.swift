@@ -18,16 +18,16 @@ public class TrashFolderPathCollectionEntriesField: Codable, RawJSONReadable {
     }
 
 
-    /// `folder`
+    /// The value will always be `folder`.
     public let type: TrashFolderPathCollectionEntriesTypeField?
 
     /// The unique identifier that represent a folder.
     public let id: String?
 
-    /// This field is null for the Trash folder
+    /// This field is null for the Trash folder.
     @CodableTriState public private(set) var sequenceId: String?
 
-    /// This field is null for the Trash folder
+    /// This field is null for the Trash folder.
     @CodableTriState public private(set) var etag: String?
 
     /// The name of the Trash folder.
@@ -36,10 +36,10 @@ public class TrashFolderPathCollectionEntriesField: Codable, RawJSONReadable {
     /// Initializer for a TrashFolderPathCollectionEntriesField.
     ///
     /// - Parameters:
-    ///   - type: `folder`
+    ///   - type: The value will always be `folder`.
     ///   - id: The unique identifier that represent a folder.
-    ///   - sequenceId: This field is null for the Trash folder
-    ///   - etag: This field is null for the Trash folder
+    ///   - sequenceId: This field is null for the Trash folder.
+    ///   - etag: This field is null for the Trash folder.
     ///   - name: The name of the Trash folder.
     public init(type: TrashFolderPathCollectionEntriesTypeField? = nil, id: String? = nil, sequenceId: TriStateField<String> = nil, etag: TriStateField<String> = nil, name: String? = nil) {
         self.type = type

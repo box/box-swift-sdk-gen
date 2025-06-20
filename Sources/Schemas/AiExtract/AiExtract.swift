@@ -1,6 +1,6 @@
 import Foundation
 
-/// AI metadata freeform extraction request object
+/// AI metadata freeform extraction request object.
 public class AiExtract: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case prompt

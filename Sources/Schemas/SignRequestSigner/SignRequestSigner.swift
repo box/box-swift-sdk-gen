@@ -20,7 +20,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
     }
 
 
-    /// Set to `true` if the signer views the document
+    /// Set to `true` if the signer views the document.
     public let hasViewedDocument: Bool?
 
     /// Final decision made by the signer.
@@ -28,7 +28,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
 
     public let inputs: [SignRequestSignerInput]?
 
-    /// URL to direct a signer to for signing
+    /// URL to direct a signer to for signing.
     @CodableTriState public private(set) var embedUrl: String?
 
     /// This URL is specifically designed for
@@ -50,7 +50,7 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     log.
     ///   - isInPerson: Used in combination with an embed URL for a sender. After the
     ///     sender signs, they are redirected to the next `in_person` signer.
-    ///   - order: Order of the signer
+    ///   - order: Order of the signer.
     ///   - embedUrlExternalUserId: User ID for the signer in an external application responsible
     ///     for authentication when accessing the embed URL.
     ///   - redirectUrl: The URL that a signer will be redirected
@@ -79,11 +79,11 @@ public class SignRequestSigner: SignRequestCreateSigner {
     ///     as it was intended for an individual signer. The value provided can be any string and only used to
     ///     determine which signers belongs to same group. A successful response will provide a generated UUID value
     ///     instead for signers in the same signer group.
-    ///   - suppressNotifications: If true, no emails about the sign request will be sent
-    ///   - hasViewedDocument: Set to `true` if the signer views the document
+    ///   - suppressNotifications: If true, no emails about the sign request will be sent.
+    ///   - hasViewedDocument: Set to `true` if the signer views the document.
     ///   - signerDecision: Final decision made by the signer.
     ///   - inputs: 
-    ///   - embedUrl: URL to direct a signer to for signing
+    ///   - embedUrl: URL to direct a signer to for signing.
     ///   - iframeableEmbedUrl: This URL is specifically designed for
     ///     signing documents within an HTML `iframe` tag.
     ///     It will be returned in the response

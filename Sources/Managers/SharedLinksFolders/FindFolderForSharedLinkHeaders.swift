@@ -4,9 +4,9 @@ public class FindFolderForSharedLinkHeaders {
     /// A header containing the shared link and optional password for the
     /// shared link.
     /// 
-    /// The format for this header is as follows.
+    /// The format for this header is as follows:
     /// 
-    /// `shared_link=[link]&shared_link_password=[password]`
+    /// `shared_link=[link]&shared_link_password=[password]`.
     public let boxapi: String
 
     /// Ensures an item is only returned if it has changed.
@@ -26,9 +26,9 @@ public class FindFolderForSharedLinkHeaders {
     ///   - boxapi: A header containing the shared link and optional password for the
     ///     shared link.
     ///     
-    ///     The format for this header is as follows.
+    ///     The format for this header is as follows:
     ///     
-    ///     `shared_link=[link]&shared_link_password=[password]`
+    ///     `shared_link=[link]&shared_link_password=[password]`.
     ///   - ifNoneMatch: Ensures an item is only returned if it has changed.
     ///     
     ///     Pass in the item's last observed `etag` value

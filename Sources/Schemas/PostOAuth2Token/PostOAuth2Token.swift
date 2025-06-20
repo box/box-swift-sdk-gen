@@ -1,6 +1,6 @@
 import Foundation
 
-/// A request for a new OAuth 2.0 token
+/// A request for a new OAuth 2.0 token.
 public class PostOAuth2Token: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case grantType = "grant_type"
@@ -95,7 +95,7 @@ public class PostOAuth2Token: Codable, RawJSONReadable {
     /// new access token.
     /// 
     /// The `subject_token` will need to have all of these scopes or
-    /// the call will error with **401 Unauthorized**.
+    /// the call will error with **401 Unauthorized**..
     public let scope: String?
 
     /// Full URL for the file that the token should be generated for.
@@ -162,7 +162,7 @@ public class PostOAuth2Token: Codable, RawJSONReadable {
     ///     new access token.
     ///     
     ///     The `subject_token` will need to have all of these scopes or
-    ///     the call will error with **401 Unauthorized**.
+    ///     the call will error with **401 Unauthorized**..
     ///   - resource: Full URL for the file that the token should be generated for.
     ///   - boxSubjectType: Used in combination with `client_credentials` as the `grant_type`.
     ///   - boxSubjectId: Used in combination with `client_credentials` as the `grant_type`.

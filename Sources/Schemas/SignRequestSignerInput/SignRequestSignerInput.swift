@@ -1,6 +1,6 @@
 import Foundation
 
-/// Input created by a Signer on a Sign Request
+/// Input created by a Signer on a Sign Request.
 public class SignRequestSignerInput: SignRequestPrefillTag {
     private enum CodingKeys: String, CodingKey {
         case pageIndex = "page_index"
@@ -18,29 +18,29 @@ public class SignRequestSignerInput: SignRequestPrefillTag {
     }
 
 
-    /// Index of page that the input is on
+    /// Index of page that the input is on.
     public let pageIndex: Int64
 
-    /// Type of input
+    /// Type of input.
     public let type: SignRequestSignerInputTypeField?
 
-    /// Content type of input
+    /// Content type of input.
     public let contentType: SignRequestSignerInputContentTypeField?
 
-    /// Whether this input was defined as read-only(immutable by signers) or not
+    /// Whether this input was defined as read-only(immutable by signers) or not.
     public let readOnly: Bool?
 
     /// Initializer for a SignRequestSignerInput.
     ///
     /// - Parameters:
-    ///   - pageIndex: Index of page that the input is on
+    ///   - pageIndex: Index of page that the input is on.
     ///   - documentTagId: This references the ID of a specific tag contained in a file of the signature request.
-    ///   - textValue: Text prefill value
-    ///   - checkboxValue: Checkbox prefill value
-    ///   - dateValue: Date prefill value
-    ///   - type: Type of input
-    ///   - contentType: Content type of input
-    ///   - readOnly: Whether this input was defined as read-only(immutable by signers) or not
+    ///   - textValue: Text prefill value.
+    ///   - checkboxValue: Checkbox prefill value.
+    ///   - dateValue: Date prefill value.
+    ///   - type: Type of input.
+    ///   - contentType: Content type of input.
+    ///   - readOnly: Whether this input was defined as read-only(immutable by signers) or not.
     public init(pageIndex: Int64, documentTagId: TriStateField<String> = nil, textValue: TriStateField<String> = nil, checkboxValue: TriStateField<Bool> = nil, dateValue: TriStateField<Date> = nil, type: SignRequestSignerInputTypeField? = nil, contentType: SignRequestSignerInputContentTypeField? = nil, readOnly: Bool? = nil) {
         self.pageIndex = pageIndex
         self.type = type

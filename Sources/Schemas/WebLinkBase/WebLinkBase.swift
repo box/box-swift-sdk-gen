@@ -21,10 +21,10 @@ public class WebLinkBase: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this web link
+    /// The unique identifier for this web link.
     public let id: String
 
-    /// `web_link`
+    /// The value will always be `web_link`.
     public let type: WebLinkBaseTypeField
 
     /// The entity tag of this web link. Used with `If-Match`
@@ -34,8 +34,8 @@ public class WebLinkBase: Codable, RawJSONReadable {
     /// Initializer for a WebLinkBase.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this web link
-    ///   - type: `web_link`
+    ///   - id: The unique identifier for this web link.
+    ///   - type: The value will always be `web_link`.
     ///   - etag: The entity tag of this web link. Used with `If-Match`
     ///     headers.
     public init(id: String, type: WebLinkBaseTypeField = WebLinkBaseTypeField.webLink, etag: String? = nil) {

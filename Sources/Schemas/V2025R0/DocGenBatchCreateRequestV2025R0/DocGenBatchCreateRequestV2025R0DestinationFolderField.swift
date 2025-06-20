@@ -15,17 +15,17 @@ public class DocGenBatchCreateRequestV2025R0DestinationFolderField: Codable, Raw
     }
 
 
-    /// ID of the folder
+    /// ID of the folder.
     public let id: String
 
-    /// `folder`
+    /// The value will always be `folder`.
     public let type: DocGenBatchCreateRequestV2025R0DestinationFolderTypeField
 
     /// Initializer for a DocGenBatchCreateRequestV2025R0DestinationFolderField.
     ///
     /// - Parameters:
-    ///   - id: ID of the folder
-    ///   - type: `folder`
+    ///   - id: ID of the folder.
+    ///   - type: The value will always be `folder`.
     public init(id: String, type: DocGenBatchCreateRequestV2025R0DestinationFolderTypeField = DocGenBatchCreateRequestV2025R0DestinationFolderTypeField.folder) {
         self.id = id
         self.type = type

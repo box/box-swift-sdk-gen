@@ -41,7 +41,7 @@ public class SignRequestCreateSigner: Codable, RawJSONReadable {
     /// sender signs, they are redirected to the next `in_person` signer.
     public let isInPerson: Bool?
 
-    /// Order of the signer
+    /// Order of the signer.
     public let order: Int64?
 
     /// User ID for the signer in an external application responsible
@@ -86,7 +86,7 @@ public class SignRequestCreateSigner: Codable, RawJSONReadable {
     /// instead for signers in the same signer group.
     @CodableTriState public private(set) var signerGroupId: String?
 
-    /// If true, no emails about the sign request will be sent
+    /// If true, no emails about the sign request will be sent.
     @CodableTriState public private(set) var suppressNotifications: Bool?
 
     /// Initializer for a SignRequestCreateSigner.
@@ -100,7 +100,7 @@ public class SignRequestCreateSigner: Codable, RawJSONReadable {
     ///     log.
     ///   - isInPerson: Used in combination with an embed URL for a sender. After the
     ///     sender signs, they are redirected to the next `in_person` signer.
-    ///   - order: Order of the signer
+    ///   - order: Order of the signer.
     ///   - embedUrlExternalUserId: User ID for the signer in an external application responsible
     ///     for authentication when accessing the embed URL.
     ///   - redirectUrl: The URL that a signer will be redirected
@@ -129,7 +129,7 @@ public class SignRequestCreateSigner: Codable, RawJSONReadable {
     ///     as it was intended for an individual signer. The value provided can be any string and only used to
     ///     determine which signers belongs to same group. A successful response will provide a generated UUID value
     ///     instead for signers in the same signer group.
-    ///   - suppressNotifications: If true, no emails about the sign request will be sent
+    ///   - suppressNotifications: If true, no emails about the sign request will be sent.
     public init(email: TriStateField<String> = nil, role: SignRequestCreateSignerRoleField? = nil, isInPerson: Bool? = nil, order: Int64? = nil, embedUrlExternalUserId: TriStateField<String> = nil, redirectUrl: TriStateField<String> = nil, declinedRedirectUrl: TriStateField<String> = nil, loginRequired: TriStateField<Bool> = nil, verificationPhoneNumber: TriStateField<String> = nil, password: TriStateField<String> = nil, signerGroupId: TriStateField<String> = nil, suppressNotifications: TriStateField<Bool> = nil) {
         self._email = CodableTriState(state: email)
         self.role = role

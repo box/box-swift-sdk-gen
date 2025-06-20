@@ -1,6 +1,6 @@
 import Foundation
 
-/// The schema for an integration mapping Box item object for type Slack
+/// The schema for an integration mapping Box item object for type Slack.
 public class IntegrationMappingBoxItemSlack: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -16,17 +16,17 @@ public class IntegrationMappingBoxItemSlack: Codable, RawJSONReadable {
     }
 
 
-    /// ID of the mapped item (of type referenced in `type`)
+    /// ID of the mapped item (of type referenced in `type`).
     public let id: String
 
-    /// Type of the mapped item referenced in `id`
+    /// Type of the mapped item referenced in `id`.
     public let type: IntegrationMappingBoxItemSlackTypeField
 
     /// Initializer for a IntegrationMappingBoxItemSlack.
     ///
     /// - Parameters:
-    ///   - id: ID of the mapped item (of type referenced in `type`)
-    ///   - type: Type of the mapped item referenced in `id`
+    ///   - id: ID of the mapped item (of type referenced in `type`).
+    ///   - type: Type of the mapped item referenced in `id`.
     public init(id: String, type: IntegrationMappingBoxItemSlackTypeField = IntegrationMappingBoxItemSlackTypeField.folder) {
         self.id = id
         self.type = type

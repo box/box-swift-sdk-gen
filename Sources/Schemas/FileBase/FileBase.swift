@@ -33,7 +33,7 @@ public class FileBase: Codable, RawJSONReadable {
     /// perform changes on the file if (no) changes have happened.
     @CodableTriState public private(set) var etag: String?
 
-    /// `file`
+    /// The value will always be `file`.
     public let type: FileBaseTypeField
 
     /// Initializer for a FileBase.
@@ -49,7 +49,7 @@ public class FileBase: Codable, RawJSONReadable {
     ///   - etag: The HTTP `etag` of this file. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the file if (no) changes have happened.
-    ///   - type: `file`
+    ///   - type: The value will always be `file`.
     public init(id: String, etag: TriStateField<String> = nil, type: FileBaseTypeField = FileBaseTypeField.file) {
         self.id = id
         self._etag = CodableTriState(state: etag)

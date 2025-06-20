@@ -18,18 +18,18 @@ public class CreateShieldInformationBarrierSegmentRequestBody: Codable, RawJSONR
 
     public let shieldInformationBarrier: ShieldInformationBarrierBase
 
-    /// Name of the shield information barrier segment
+    /// Name of the shield information barrier segment.
     public let name: String
 
-    /// Description of the shield information barrier segment
+    /// Description of the shield information barrier segment.
     public let description: String?
 
     /// Initializer for a CreateShieldInformationBarrierSegmentRequestBody.
     ///
     /// - Parameters:
     ///   - shieldInformationBarrier: 
-    ///   - name: Name of the shield information barrier segment
-    ///   - description: Description of the shield information barrier segment
+    ///   - name: Name of the shield information barrier segment.
+    ///   - description: Description of the shield information barrier segment.
     public init(shieldInformationBarrier: ShieldInformationBarrierBase, name: String, description: String? = nil) {
         self.shieldInformationBarrier = shieldInformationBarrier
         self.name = name

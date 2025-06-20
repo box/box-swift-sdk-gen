@@ -1,6 +1,6 @@
 import Foundation
 
-/// A shield information barrier segment object
+/// A shield information barrier segment object.
 public class ShieldInformationBarrierSegment: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -23,18 +23,18 @@ public class ShieldInformationBarrierSegment: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for the shield information barrier segment
+    /// The unique identifier for the shield information barrier segment.
     public let id: String?
 
-    /// The type of the shield information barrier segment
+    /// The type of the shield information barrier segment.
     public let type: ShieldInformationBarrierSegmentTypeField?
 
     public let shieldInformationBarrier: ShieldInformationBarrierBase?
 
-    /// Name of the shield information barrier segment
+    /// Name of the shield information barrier segment.
     public let name: String?
 
-    /// Description of the shield information barrier segment
+    /// Description of the shield information barrier segment.
     public let description: String?
 
     /// ISO date time string when this shield information
@@ -52,11 +52,11 @@ public class ShieldInformationBarrierSegment: Codable, RawJSONReadable {
     /// Initializer for a ShieldInformationBarrierSegment.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for the shield information barrier segment
-    ///   - type: The type of the shield information barrier segment
+    ///   - id: The unique identifier for the shield information barrier segment.
+    ///   - type: The type of the shield information barrier segment.
     ///   - shieldInformationBarrier: 
-    ///   - name: Name of the shield information barrier segment
-    ///   - description: Description of the shield information barrier segment
+    ///   - name: Name of the shield information barrier segment.
+    ///   - description: Description of the shield information barrier segment.
     ///   - createdAt: ISO date time string when this shield information
     ///     barrier object was created.
     ///   - createdBy: 

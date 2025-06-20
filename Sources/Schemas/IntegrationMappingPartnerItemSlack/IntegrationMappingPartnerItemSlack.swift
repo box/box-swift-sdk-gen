@@ -22,10 +22,10 @@ public class IntegrationMappingPartnerItemSlack: Codable, RawJSONReadable {
     }
 
 
-    /// ID of the mapped item (of type referenced in `type`)
+    /// ID of the mapped item (of type referenced in `type`).
     public let id: String
 
-    /// Type of the mapped item referenced in `id`
+    /// Type of the mapped item referenced in `id`.
     public let type: IntegrationMappingPartnerItemSlackTypeField
 
     /// ID of the Slack workspace with which the item is associated. Use this parameter if Box for Slack is installed at a workspace level. Do not use `slack_org_id` at the same time.
@@ -37,8 +37,8 @@ public class IntegrationMappingPartnerItemSlack: Codable, RawJSONReadable {
     /// Initializer for a IntegrationMappingPartnerItemSlack.
     ///
     /// - Parameters:
-    ///   - id: ID of the mapped item (of type referenced in `type`)
-    ///   - type: Type of the mapped item referenced in `id`
+    ///   - id: ID of the mapped item (of type referenced in `type`).
+    ///   - type: Type of the mapped item referenced in `id`.
     ///   - slackWorkspaceId: ID of the Slack workspace with which the item is associated. Use this parameter if Box for Slack is installed at a workspace level. Do not use `slack_org_id` at the same time.
     ///   - slackOrgId: ID of the Slack org with which the item is associated. Use this parameter if Box for Slack is installed at the org level. Do not use `slack_workspace_id` at the same time.
     public init(id: String, type: IntegrationMappingPartnerItemSlackTypeField = IntegrationMappingPartnerItemSlackTypeField.channel, slackWorkspaceId: TriStateField<String> = nil, slackOrgId: TriStateField<String> = nil) {

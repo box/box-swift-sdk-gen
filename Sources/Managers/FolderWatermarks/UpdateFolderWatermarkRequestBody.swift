@@ -14,13 +14,13 @@ public class UpdateFolderWatermarkRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// The watermark to imprint on the folder
+    /// The watermark to imprint on the folder.
     public let watermark: UpdateFolderWatermarkRequestBodyWatermarkField
 
     /// Initializer for a UpdateFolderWatermarkRequestBody.
     ///
     /// - Parameters:
-    ///   - watermark: The watermark to imprint on the folder
+    ///   - watermark: The watermark to imprint on the folder.
     public init(watermark: UpdateFolderWatermarkRequestBodyWatermarkField) {
         self.watermark = watermark
     }

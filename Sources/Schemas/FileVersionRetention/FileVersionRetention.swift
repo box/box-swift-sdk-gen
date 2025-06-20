@@ -34,7 +34,7 @@ public class FileVersionRetention: Codable, RawJSONReadable {
     /// The unique identifier for this file version retention.
     public let id: String?
 
-    /// `file_version_retention`
+    /// The value will always be `file_version_retention`.
     public let type: FileVersionRetentionTypeField?
 
     public let fileVersion: FileVersionMini?
@@ -42,11 +42,11 @@ public class FileVersionRetention: Codable, RawJSONReadable {
     public let file: FileMini?
 
     /// When this file version retention object was
-    /// created
+    /// created.
     public let appliedAt: Date?
 
     /// When the retention expires on this file
-    /// version retention
+    /// version retention.
     public let dispositionAt: Date?
 
     public let winningRetentionPolicy: RetentionPolicyMini?
@@ -55,13 +55,13 @@ public class FileVersionRetention: Codable, RawJSONReadable {
     ///
     /// - Parameters:
     ///   - id: The unique identifier for this file version retention.
-    ///   - type: `file_version_retention`
+    ///   - type: The value will always be `file_version_retention`.
     ///   - fileVersion: 
     ///   - file: 
     ///   - appliedAt: When this file version retention object was
-    ///     created
+    ///     created.
     ///   - dispositionAt: When the retention expires on this file
-    ///     version retention
+    ///     version retention.
     ///   - winningRetentionPolicy: 
     public init(id: String? = nil, type: FileVersionRetentionTypeField? = nil, fileVersion: FileVersionMini? = nil, file: FileMini? = nil, appliedAt: Date? = nil, dispositionAt: Date? = nil, winningRetentionPolicy: RetentionPolicyMini? = nil) {
         self.id = id

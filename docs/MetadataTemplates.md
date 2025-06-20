@@ -61,9 +61,9 @@ try await client.metadataTemplates.getMetadataTemplate(scope: GetMetadataTemplat
 ### Arguments
 
 - scope `GetMetadataTemplateScope`
-  - The scope of the metadata template Example: "global"
+  - The scope of the metadata template. Example: "global"
 - templateKey `String`
-  - The name of the metadata template Example: "properties"
+  - The name of the metadata template. Example: "properties"
 - headers `GetMetadataTemplateHeaders`
   - Headers of getMetadataTemplate method
 
@@ -99,9 +99,9 @@ try await client.metadataTemplates.updateMetadataTemplate(scope: UpdateMetadataT
 ### Arguments
 
 - scope `UpdateMetadataTemplateScope`
-  - The scope of the metadata template Example: "global"
+  - The scope of the metadata template. Example: "global"
 - templateKey `String`
-  - The name of the metadata template Example: "properties"
+  - The name of the metadata template. Example: "properties"
 - requestBody `[UpdateMetadataTemplateRequestBody]`
   - Request body of updateMetadataTemplate method
 - headers `UpdateMetadataTemplateHeaders`
@@ -134,9 +134,9 @@ try await client.metadataTemplates.deleteMetadataTemplate(scope: DeleteMetadataT
 ### Arguments
 
 - scope `DeleteMetadataTemplateScope`
-  - The scope of the metadata template Example: "global"
+  - The scope of the metadata template. Example: "global"
 - templateKey `String`
-  - The name of the metadata template Example: "properties"
+  - The name of the metadata template. Example: "properties"
 - headers `DeleteMetadataTemplateHeaders`
   - Headers of deleteMetadataTemplate method
 
@@ -166,7 +166,7 @@ try await client.metadataTemplates.getMetadataTemplateById(templateId: template.
 ### Arguments
 
 - templateId `String`
-  - The ID of the template Example: "f7a9891f"
+  - The ID of the template. Example: "f7a9891f"
 - headers `GetMetadataTemplateByIdHeaders`
   - Headers of getMetadataTemplateById method
 
@@ -212,7 +212,7 @@ and their corresponding schema.
 ## List all metadata templates for enterprise
 
 Used to retrieve all metadata templates created to be used specifically within
-the user's enterprise
+the user's enterprise.
 
 This operation is performed by calling function `getEnterpriseMetadataTemplates`.
 

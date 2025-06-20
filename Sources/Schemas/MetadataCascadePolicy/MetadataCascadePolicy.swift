@@ -21,10 +21,10 @@ public class MetadataCascadePolicy: Codable, RawJSONReadable {
     }
 
 
-    /// The ID of the metadata cascade policy object
+    /// The ID of the metadata cascade policy object.
     public let id: String
 
-    /// `metadata_cascade_policy`
+    /// The value will always be `metadata_cascade_policy`.
     public let type: MetadataCascadePolicyTypeField
 
     /// The enterprise that owns this policy.
@@ -60,8 +60,8 @@ public class MetadataCascadePolicy: Codable, RawJSONReadable {
     /// Initializer for a MetadataCascadePolicy.
     ///
     /// - Parameters:
-    ///   - id: The ID of the metadata cascade policy object
-    ///   - type: `metadata_cascade_policy`
+    ///   - id: The ID of the metadata cascade policy object.
+    ///   - type: The value will always be `metadata_cascade_policy`.
     ///   - ownerEnterprise: The enterprise that owns this policy.
     ///   - parent: Represent the folder the policy is applied to.
     ///   - scope: The scope of the metadata cascade policy can either be `global` or

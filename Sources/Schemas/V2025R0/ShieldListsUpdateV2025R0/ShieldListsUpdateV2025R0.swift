@@ -22,7 +22,7 @@ public class ShieldListsUpdateV2025R0: Codable, RawJSONReadable {
 
     public let content: ShieldListContentRequestV2025R0
 
-    /// Description of Shield List: Optional.
+    /// Optional description of Shield List.
     public let description: String?
 
     /// Initializer for a ShieldListsUpdateV2025R0.
@@ -30,7 +30,7 @@ public class ShieldListsUpdateV2025R0: Codable, RawJSONReadable {
     /// - Parameters:
     ///   - name: The name of the shield list.
     ///   - content: 
-    ///   - description: Description of Shield List: Optional.
+    ///   - description: Optional description of Shield List.
     public init(name: String, content: ShieldListContentRequestV2025R0, description: String? = nil) {
         self.name = name
         self.content = content

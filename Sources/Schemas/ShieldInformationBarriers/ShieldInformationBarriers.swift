@@ -1,6 +1,6 @@
 import Foundation
 
-/// List of Shield Information Barrier objects
+/// List of Shield Information Barrier objects.
 public class ShieldInformationBarriers: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case limit
@@ -25,7 +25,7 @@ public class ShieldInformationBarriers: Codable, RawJSONReadable {
     /// The marker for the start of the next page of results.
     @CodableTriState public private(set) var nextMarker: String?
 
-    /// A list of shield information barrier objects
+    /// A list of shield information barrier objects.
     public let entries: [ShieldInformationBarrier]?
 
     /// Initializer for a ShieldInformationBarriers.
@@ -35,7 +35,7 @@ public class ShieldInformationBarriers: Codable, RawJSONReadable {
     ///     `limit` query parameter unless that value exceeded the maximum value
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
-    ///   - entries: A list of shield information barrier objects
+    ///   - entries: A list of shield information barrier objects.
     public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, entries: [ShieldInformationBarrier]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)

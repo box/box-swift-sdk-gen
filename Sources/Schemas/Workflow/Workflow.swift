@@ -24,11 +24,11 @@ public class Workflow: WorkflowMini {
     /// Initializer for a Workflow.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for the workflow
-    ///   - type: `workflow`
-    ///   - name: The name of the workflow
+    ///   - id: The unique identifier for the workflow.
+    ///   - type: The value will always be `workflow`.
+    ///   - name: The name of the workflow.
     ///   - description: The description for a workflow.
-    ///   - isEnabled: Specifies if this workflow is enabled
+    ///   - isEnabled: Specifies if this workflow is enabled.
     ///   - flows: A list of flows assigned to a workflow.
     public init(id: String? = nil, type: WorkflowMiniTypeField? = nil, name: String? = nil, description: String? = nil, isEnabled: Bool? = nil, flows: [WorkflowFlowsField]? = nil) {
         self.flows = flows

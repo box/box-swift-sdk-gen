@@ -16,7 +16,7 @@ public class FileFullClassificationField: Codable, RawJSONReadable {
     }
 
 
-    /// The name of the classification
+    /// The name of the classification.
     public let name: String?
 
     /// An explanation of the meaning of this classification.
@@ -30,7 +30,7 @@ public class FileFullClassificationField: Codable, RawJSONReadable {
     /// Initializer for a FileFullClassificationField.
     ///
     /// - Parameters:
-    ///   - name: The name of the classification
+    ///   - name: The name of the classification.
     ///   - definition: An explanation of the meaning of this classification.
     ///   - color: The color that is used to display the
     ///     classification label in a user-interface. Colors are defined by the admin

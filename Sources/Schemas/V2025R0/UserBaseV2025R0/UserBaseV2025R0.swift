@@ -17,17 +17,17 @@ public class UserBaseV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this user
+    /// The unique identifier for this user.
     public let id: String
 
-    /// user
+    /// The value will always be `user`.
     public let type: UserBaseV2025R0TypeField
 
     /// Initializer for a UserBaseV2025R0.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this user
-    ///   - type: user
+    ///   - id: The unique identifier for this user.
+    ///   - type: The value will always be `user`.
     public init(id: String, type: UserBaseV2025R0TypeField = UserBaseV2025R0TypeField.user) {
         self.id = id
         self.type = type

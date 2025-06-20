@@ -20,14 +20,14 @@ public class RealtimeServers: Codable, RawJSONReadable {
     /// The number of items in this response.
     public let chunkSize: Int64?
 
-    /// A list of real-time servers
+    /// A list of real-time servers.
     public let entries: [RealtimeServer]?
 
     /// Initializer for a RealtimeServers.
     ///
     /// - Parameters:
     ///   - chunkSize: The number of items in this response.
-    ///   - entries: A list of real-time servers
+    ///   - entries: A list of real-time servers.
     public init(chunkSize: Int64? = nil, entries: [RealtimeServer]? = nil) {
         self.chunkSize = chunkSize
         self.entries = entries

@@ -1,6 +1,6 @@
 import Foundation
 
-/// A list of file versions
+/// A list of file versions.
 public class FileVersions: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
@@ -45,7 +45,7 @@ public class FileVersions: Codable, RawJSONReadable {
     /// For marker-based paginated APIs, this field will be omitted.
     public let order: [FileVersionsOrderField]?
 
-    /// A list of file versions
+    /// A list of file versions.
     public let entries: [FileVersionFull]?
 
     /// Initializer for a FileVersions.
@@ -69,7 +69,7 @@ public class FileVersions: Codable, RawJSONReadable {
     ///     
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
-    ///   - entries: A list of file versions
+    ///   - entries: A list of file versions.
     public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [FileVersionsOrderField]? = nil, entries: [FileVersionFull]? = nil) {
         self.totalCount = totalCount
         self.limit = limit

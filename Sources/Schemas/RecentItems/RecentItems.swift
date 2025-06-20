@@ -29,7 +29,7 @@ public class RecentItems: Codable, RawJSONReadable {
     /// The marker for the start of the previous page of results.
     @CodableTriState public private(set) var prevMarker: String?
 
-    /// A list of recent items
+    /// A list of recent items.
     public let entries: [RecentItem]?
 
     /// Initializer for a RecentItems.
@@ -40,7 +40,7 @@ public class RecentItems: Codable, RawJSONReadable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
-    ///   - entries: A list of recent items
+    ///   - entries: A list of recent items.
     public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, entries: [RecentItem]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)

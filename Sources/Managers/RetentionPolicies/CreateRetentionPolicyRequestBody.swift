@@ -22,7 +22,7 @@ public class CreateRetentionPolicyRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// The name for the retention policy
+    /// The name for the retention policy.
     public let policyName: String
 
     /// The type of the retention policy. A retention
@@ -83,7 +83,7 @@ public class CreateRetentionPolicyRequestBody: Codable, RawJSONReadable {
     /// Initializer for a CreateRetentionPolicyRequestBody.
     ///
     /// - Parameters:
-    ///   - policyName: The name for the retention policy
+    ///   - policyName: The name for the retention policy.
     ///   - policyType: The type of the retention policy. A retention
     ///     policy type can either be `finite`, where a
     ///     specific amount of time to retain the content is known

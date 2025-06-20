@@ -14,13 +14,13 @@ public class CreateFileUploadSessionCommitRequestBody: Codable, RawJSONReadable 
     }
 
 
-    /// The list details for the uploaded parts
+    /// The list details for the uploaded parts.
     public let parts: [UploadPart]
 
     /// Initializer for a CreateFileUploadSessionCommitRequestBody.
     ///
     /// - Parameters:
-    ///   - parts: The list details for the uploaded parts
+    ///   - parts: The list details for the uploaded parts.
     public init(parts: [UploadPart]) {
         self.parts = parts
     }

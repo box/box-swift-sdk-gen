@@ -33,7 +33,7 @@ public class FolderBase: Codable, RawJSONReadable {
     /// perform changes on the folder if (no) changes have happened.
     @CodableTriState public private(set) var etag: String?
 
-    /// `folder`
+    /// The value will always be `folder`.
     public let type: FolderBaseTypeField
 
     /// Initializer for a FolderBase.
@@ -49,7 +49,7 @@ public class FolderBase: Codable, RawJSONReadable {
     ///   - etag: The HTTP `etag` of this folder. This can be used within some API
     ///     endpoints in the `If-Match` and `If-None-Match` headers to only
     ///     perform changes on the folder if (no) changes have happened.
-    ///   - type: `folder`
+    ///   - type: The value will always be `folder`.
     public init(id: String, etag: TriStateField<String> = nil, type: FolderBaseTypeField = FolderBaseTypeField.folder) {
         self.id = id
         self._etag = CodableTriState(state: etag)

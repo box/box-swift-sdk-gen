@@ -15,7 +15,7 @@ public class AiStudioAgentBasicTextTool: AiAgentBasicTextTool {
     }
 
 
-    /// True if system message contains custom instructions placeholder, false otherwise
+    /// True if system message contains custom instructions placeholder, false otherwise.
     public let isCustomInstructionsIncluded: Bool?
 
     /// Initializer for a AiStudioAgentBasicTextTool.
@@ -28,7 +28,7 @@ public class AiStudioAgentBasicTextTool: AiAgentBasicTextTool {
     ///   - promptTemplate: The prompt template contains contextual information of the request and the user prompt.
     ///     When passing `prompt_template` parameters, you **must include** inputs for `{user_question}` and `{content}`.
     ///     `{current_date}` is optional, depending on the use.
-    ///   - isCustomInstructionsIncluded: True if system message contains custom instructions placeholder, false otherwise
+    ///   - isCustomInstructionsIncluded: True if system message contains custom instructions placeholder, false otherwise.
     public init(model: String? = nil, numTokensForCompletion: Int64? = nil, llmEndpointParams: AiLlmEndpointParams? = nil, systemMessage: String? = nil, promptTemplate: String? = nil, isCustomInstructionsIncluded: Bool? = nil) {
         self.isCustomInstructionsIncluded = isCustomInstructionsIncluded
 

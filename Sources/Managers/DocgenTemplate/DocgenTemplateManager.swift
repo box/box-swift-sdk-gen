@@ -37,7 +37,7 @@ public class DocgenTemplateManager {
         return try DocGenTemplatesV2025R0.deserialize(from: response.data!)
     }
 
-    /// Unmarks file as Box Doc Gen template
+    /// Unmarks file as Box Doc Gen template.
     ///
     /// - Parameters:
     ///   - templateId: ID of the file which will no longer be marked as a Box Doc Gen template.

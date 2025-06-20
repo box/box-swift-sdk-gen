@@ -1,7 +1,7 @@
 import Foundation
 
 public class UpdateShieldListByIdV2025R0Headers {
-    /// Version header
+    /// Version header.
     public let boxVersion: BoxVersionHeaderV2025R0
 
     /// Extra headers that will be included in the HTTP request.
@@ -10,7 +10,7 @@ public class UpdateShieldListByIdV2025R0Headers {
     /// Initializer for a UpdateShieldListByIdV2025R0Headers.
     ///
     /// - Parameters:
-    ///   - boxVersion: Version header
+    ///   - boxVersion: Version header.
     ///   - extraHeaders: Extra headers that will be included in the HTTP request.
     public init(boxVersion: BoxVersionHeaderV2025R0 = BoxVersionHeaderV2025R0._20250, extraHeaders: [String: String?]? = [:]) {
         self.boxVersion = boxVersion

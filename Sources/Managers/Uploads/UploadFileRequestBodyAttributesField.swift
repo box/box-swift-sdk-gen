@@ -23,7 +23,7 @@ public class UploadFileRequestBodyAttributesField: Codable, RawJSONReadable {
     /// named `New File` cannot be created in a parent folder that already contains a folder named `new file`.
     public let name: String
 
-    /// The parent folder to upload the file to
+    /// The parent folder to upload the file to.
     public let parent: UploadFileRequestBodyAttributesParentField
 
     /// Defines the time the file was originally created at.
@@ -43,7 +43,7 @@ public class UploadFileRequestBodyAttributesField: Codable, RawJSONReadable {
     ///     
     ///     File names must be unique within their parent folder. The name check is case-insensitive, so a file
     ///     named `New File` cannot be created in a parent folder that already contains a folder named `new file`.
-    ///   - parent: The parent folder to upload the file to
+    ///   - parent: The parent folder to upload the file to.
     ///   - contentCreatedAt: Defines the time the file was originally created at.
     ///     
     ///     If not set, the upload time will be used.

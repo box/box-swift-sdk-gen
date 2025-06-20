@@ -1,7 +1,7 @@
 import Foundation
 
 /// A standard representation of a
-/// shield information barrier segment member object
+/// shield information barrier segment member object.
 public class ShieldInformationBarrierSegmentMember: ShieldInformationBarrierSegmentMemberMini {
     private enum CodingKeys: String, CodingKey {
         case shieldInformationBarrier = "shield_information_barrier"
@@ -43,8 +43,8 @@ public class ShieldInformationBarrierSegmentMember: ShieldInformationBarrierSegm
     ///
     /// - Parameters:
     ///   - id: The unique identifier for the
-    ///     shield information barrier segment member
-    ///   - type: The type of the shield information barrier segment member
+    ///     shield information barrier segment member.
+    ///   - type: The type of the shield information barrier segment member.
     ///   - user: 
     ///   - shieldInformationBarrier: 
     ///   - shieldInformationBarrierSegment: The `type` and `id` of the requested

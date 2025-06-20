@@ -38,7 +38,7 @@ public class DocgenManager {
         return try DocGenJobsFullV2025R0.deserialize(from: response.data!)
     }
 
-    /// Lists Box Doc Gen jobs in a batch
+    /// Lists Box Doc Gen jobs in a batch.
     ///
     /// - Parameters:
     ///   - batchId: Box Doc Gen batch ID.

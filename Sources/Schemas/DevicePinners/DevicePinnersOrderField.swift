@@ -15,17 +15,17 @@ public class DevicePinnersOrderField: Codable, RawJSONReadable {
     }
 
 
-    /// The field that is ordered by
+    /// The field that is ordered by.
     public let by: DevicePinnersOrderByField?
 
-    /// The direction to order by, either ascending or descending
+    /// The direction to order by, either ascending or descending.
     public let direction: DevicePinnersOrderDirectionField?
 
     /// Initializer for a DevicePinnersOrderField.
     ///
     /// - Parameters:
-    ///   - by: The field that is ordered by
-    ///   - direction: The direction to order by, either ascending or descending
+    ///   - by: The field that is ordered by.
+    ///   - direction: The direction to order by, either ascending or descending.
     public init(by: DevicePinnersOrderByField? = nil, direction: DevicePinnersOrderDirectionField? = nil) {
         self.by = by
         self.direction = direction

@@ -24,38 +24,38 @@ public class IntegrationMapping: IntegrationMappingBase {
     }
 
 
-    /// Mapped item object for Slack
+    /// Mapped item object for Slack.
     public let partnerItem: IntegrationMappingPartnerItemSlackUnion
 
     /// The Box folder, to which the object from the
-    /// partner app domain (referenced in `partner_item_id`) is mapped
+    /// partner app domain (referenced in `partner_item_id`) is mapped.
     public let boxItem: FolderMini
 
     /// Identifies the Box partner app,
     /// with which the mapping is associated.
     /// Currently only supports Slack.
-    /// (part of the composite key together with `id`)
+    /// (part of the composite key together with `id`).
     public let integrationType: IntegrationMappingIntegrationTypeField?
 
     /// Identifies whether the mapping has
     /// been manually set
-    /// (as opposed to being automatically created)
+    /// (as opposed to being automatically created).
     public let isManuallyCreated: Bool?
 
     public let options: IntegrationMappingSlackOptions?
 
     /// An object representing the user who
-    /// created the integration mapping
+    /// created the integration mapping.
     public let createdBy: UserIntegrationMappings?
 
     /// The user who
-    /// last modified the integration mapping
+    /// last modified the integration mapping.
     public let modifiedBy: UserIntegrationMappings?
 
-    /// When the integration mapping object was created
+    /// When the integration mapping object was created.
     public let createdAt: Date?
 
-    /// When the integration mapping object was last modified
+    /// When the integration mapping object was last modified.
     public let modifiedAt: Date?
 
     /// Initializer for a IntegrationMapping.
@@ -63,25 +63,25 @@ public class IntegrationMapping: IntegrationMappingBase {
     /// - Parameters:
     ///   - id: A unique identifier of a folder mapping
     ///     (part of a composite key together
-    ///     with `integration_type`)
-    ///   - partnerItem: Mapped item object for Slack
+    ///     with `integration_type`).
+    ///   - partnerItem: Mapped item object for Slack.
     ///   - boxItem: The Box folder, to which the object from the
-    ///     partner app domain (referenced in `partner_item_id`) is mapped
-    ///   - type: Mapping type
+    ///     partner app domain (referenced in `partner_item_id`) is mapped.
+    ///   - type: Mapping type.
     ///   - integrationType: Identifies the Box partner app,
     ///     with which the mapping is associated.
     ///     Currently only supports Slack.
-    ///     (part of the composite key together with `id`)
+    ///     (part of the composite key together with `id`).
     ///   - isManuallyCreated: Identifies whether the mapping has
     ///     been manually set
-    ///     (as opposed to being automatically created)
+    ///     (as opposed to being automatically created).
     ///   - options: 
     ///   - createdBy: An object representing the user who
-    ///     created the integration mapping
+    ///     created the integration mapping.
     ///   - modifiedBy: The user who
-    ///     last modified the integration mapping
-    ///   - createdAt: When the integration mapping object was created
-    ///   - modifiedAt: When the integration mapping object was last modified
+    ///     last modified the integration mapping.
+    ///   - createdAt: When the integration mapping object was created.
+    ///   - modifiedAt: When the integration mapping object was last modified.
     public init(id: String, partnerItem: IntegrationMappingPartnerItemSlackUnion, boxItem: FolderMini, type: IntegrationMappingBaseTypeField = IntegrationMappingBaseTypeField.integrationMapping, integrationType: IntegrationMappingIntegrationTypeField? = nil, isManuallyCreated: Bool? = nil, options: IntegrationMappingSlackOptions? = nil, createdBy: UserIntegrationMappings? = nil, modifiedBy: UserIntegrationMappings? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.partnerItem = partnerItem
         self.boxItem = boxItem

@@ -21,17 +21,17 @@ public class LegalHoldPolicyAssignmentBase: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this legal hold assignment
+    /// The unique identifier for this legal hold assignment.
     public let id: String?
 
-    /// `legal_hold_policy_assignment`
+    /// The value will always be `legal_hold_policy_assignment`.
     public let type: LegalHoldPolicyAssignmentBaseTypeField?
 
     /// Initializer for a LegalHoldPolicyAssignmentBase.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this legal hold assignment
-    ///   - type: `legal_hold_policy_assignment`
+    ///   - id: The unique identifier for this legal hold assignment.
+    ///   - type: The value will always be `legal_hold_policy_assignment`.
     public init(id: String? = nil, type: LegalHoldPolicyAssignmentBaseTypeField? = nil) {
         self.id = id
         self.type = type

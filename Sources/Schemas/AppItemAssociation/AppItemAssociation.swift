@@ -27,7 +27,7 @@ public class AppItemAssociation: Codable, RawJSONReadable {
 
     public let item: FileBaseOrFolderBaseOrWebLinkBase
 
-    /// `app_item_association`
+    /// The value will always be `app_item_association`.
     public let type: AppItemAssociationTypeField
 
     /// Initializer for a AppItemAssociation.
@@ -36,7 +36,7 @@ public class AppItemAssociation: Codable, RawJSONReadable {
     ///   - id: The unique identifier for this app item association.
     ///   - appItem: 
     ///   - item: 
-    ///   - type: `app_item_association`
+    ///   - type: The value will always be `app_item_association`.
     public init(id: String, appItem: AppItem, item: FileBaseOrFolderBaseOrWebLinkBase, type: AppItemAssociationTypeField = AppItemAssociationTypeField.appItemAssociation) {
         self.id = id
         self.appItem = appItem

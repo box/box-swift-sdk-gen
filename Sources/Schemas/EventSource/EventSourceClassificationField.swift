@@ -14,13 +14,13 @@ public class EventSourceClassificationField: Codable, RawJSONReadable {
     }
 
 
-    /// The classification's name
+    /// The classification's name.
     public let name: String?
 
     /// Initializer for a EventSourceClassificationField.
     ///
     /// - Parameters:
-    ///   - name: The classification's name
+    ///   - name: The classification's name.
     public init(name: String? = nil) {
         self.name = name
     }

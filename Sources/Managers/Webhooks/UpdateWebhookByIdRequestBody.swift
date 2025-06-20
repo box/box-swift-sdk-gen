@@ -16,23 +16,23 @@ public class UpdateWebhookByIdRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// The item that will trigger the webhook
+    /// The item that will trigger the webhook.
     public let target: UpdateWebhookByIdRequestBodyTargetField?
 
-    /// The URL that is notified by this webhook
+    /// The URL that is notified by this webhook.
     public let address: String?
 
     /// An array of event names that this webhook is
-    /// to be triggered for
+    /// to be triggered for.
     public let triggers: [UpdateWebhookByIdRequestBodyTriggersField]?
 
     /// Initializer for a UpdateWebhookByIdRequestBody.
     ///
     /// - Parameters:
-    ///   - target: The item that will trigger the webhook
-    ///   - address: The URL that is notified by this webhook
+    ///   - target: The item that will trigger the webhook.
+    ///   - address: The URL that is notified by this webhook.
     ///   - triggers: An array of event names that this webhook is
-    ///     to be triggered for
+    ///     to be triggered for.
     public init(target: UpdateWebhookByIdRequestBodyTargetField? = nil, address: String? = nil, triggers: [UpdateWebhookByIdRequestBodyTriggersField]? = nil) {
         self.target = target
         self.address = address

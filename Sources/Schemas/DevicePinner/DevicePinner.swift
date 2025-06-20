@@ -22,21 +22,21 @@ public class DevicePinner: Codable, RawJSONReadable {
     /// The unique identifier for this device pin.
     public let id: String?
 
-    /// `device_pinner`
+    /// The value will always be `device_pinner`.
     public let type: DevicePinnerTypeField?
 
     public let ownedBy: UserMini?
 
-    /// The type of device being pinned
+    /// The type of device being pinned.
     public let productName: String?
 
     /// Initializer for a DevicePinner.
     ///
     /// - Parameters:
     ///   - id: The unique identifier for this device pin.
-    ///   - type: `device_pinner`
+    ///   - type: The value will always be `device_pinner`.
     ///   - ownedBy: 
-    ///   - productName: The type of device being pinned
+    ///   - productName: The type of device being pinned.
     public init(id: String? = nil, type: DevicePinnerTypeField? = nil, ownedBy: UserMini? = nil, productName: String? = nil) {
         self.id = id
         self.type = type

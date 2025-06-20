@@ -15,17 +15,17 @@ public class UpdateWebhookByIdRequestBodyTargetField: Codable, RawJSONReadable {
     }
 
 
-    /// The ID of the item to trigger a webhook
+    /// The ID of the item to trigger a webhook.
     public let id: String?
 
-    /// The type of item to trigger a webhook
+    /// The type of item to trigger a webhook.
     public let type: UpdateWebhookByIdRequestBodyTargetTypeField?
 
     /// Initializer for a UpdateWebhookByIdRequestBodyTargetField.
     ///
     /// - Parameters:
-    ///   - id: The ID of the item to trigger a webhook
-    ///   - type: The type of item to trigger a webhook
+    ///   - id: The ID of the item to trigger a webhook.
+    ///   - type: The type of item to trigger a webhook.
     public init(id: String? = nil, type: UpdateWebhookByIdRequestBodyTargetTypeField? = nil) {
         self.id = id
         self.type = type

@@ -23,7 +23,7 @@ public class FileVersionMini: FileVersionBase {
     ///
     /// - Parameters:
     ///   - id: The unique identifier that represent a file version.
-    ///   - type: `file_version`
+    ///   - type: The value will always be `file_version`.
     ///   - sha1: The SHA1 hash of this version of the file.
     public init(id: String, type: FileVersionBaseTypeField = FileVersionBaseTypeField.fileVersion, sha1: String? = nil) {
         self.sha1 = sha1

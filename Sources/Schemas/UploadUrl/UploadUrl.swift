@@ -20,7 +20,7 @@ public class UploadUrl: Codable, RawJSONReadable {
     /// the file.
     public let uploadUrl: String?
 
-    /// An optional access token to use to upload the file
+    /// An optional access token to use to upload the file.
     public let uploadToken: String?
 
     /// Initializer for a UploadUrl.
@@ -28,7 +28,7 @@ public class UploadUrl: Codable, RawJSONReadable {
     /// - Parameters:
     ///   - uploadUrl: A URL for an upload session that can be used to upload
     ///     the file.
-    ///   - uploadToken: An optional access token to use to upload the file
+    ///   - uploadToken: An optional access token to use to upload the file.
     public init(uploadUrl: String? = nil, uploadToken: String? = nil) {
         self.uploadUrl = uploadUrl
         self.uploadToken = uploadToken

@@ -33,7 +33,7 @@ public class SearchResults: Codable, RawJSONReadable {
     /// as the `offset` query parameter used.
     public let offset: Int64?
 
-    /// Specifies the response as search result items without shared links
+    /// Specifies the response as search result items without shared links.
     public let type: SearchResultsTypeField
 
     /// The search results for the query provided.
@@ -50,7 +50,7 @@ public class SearchResults: Codable, RawJSONReadable {
     ///     allowed.
     ///   - offset: The 0-based offset of the first entry in this set. This will be the same
     ///     as the `offset` query parameter used.
-    ///   - type: Specifies the response as search result items without shared links
+    ///   - type: Specifies the response as search result items without shared links.
     ///   - entries: The search results for the query provided.
     public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, type: SearchResultsTypeField = SearchResultsTypeField.searchResultsItems, entries: [FileFullOrFolderFullOrWebLink]? = nil) {
         self.totalCount = totalCount

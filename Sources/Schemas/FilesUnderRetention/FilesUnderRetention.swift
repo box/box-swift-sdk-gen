@@ -29,7 +29,7 @@ public class FilesUnderRetention: Codable, RawJSONReadable {
     /// The marker for the start of the previous page of results.
     @CodableTriState public private(set) var prevMarker: String?
 
-    /// A list of files
+    /// A list of files.
     public let entries: [FileMini]?
 
     /// Initializer for a FilesUnderRetention.
@@ -40,7 +40,7 @@ public class FilesUnderRetention: Codable, RawJSONReadable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
-    ///   - entries: A list of files
+    ///   - entries: A list of files.
     public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, entries: [FileMini]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)

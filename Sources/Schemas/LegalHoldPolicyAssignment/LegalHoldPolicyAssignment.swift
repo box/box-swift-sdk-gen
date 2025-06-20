@@ -31,7 +31,7 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
     public let assignedBy: UserMini?
 
     /// When the legal hold policy assignment object was
-    /// created
+    /// created.
     public let assignedAt: Date?
 
     /// When the assignment release request was sent.
@@ -44,13 +44,13 @@ public class LegalHoldPolicyAssignment: LegalHoldPolicyAssignmentBase {
     /// Initializer for a LegalHoldPolicyAssignment.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this legal hold assignment
-    ///   - type: `legal_hold_policy_assignment`
+    ///   - id: The unique identifier for this legal hold assignment.
+    ///   - type: The value will always be `legal_hold_policy_assignment`.
     ///   - legalHoldPolicy: 
     ///   - assignedTo: 
     ///   - assignedBy: 
     ///   - assignedAt: When the legal hold policy assignment object was
-    ///     created
+    ///     created.
     ///   - deletedAt: When the assignment release request was sent.
     ///     (Because it can take time for an assignment to fully
     ///     delete, this isn't quite the same time that the

@@ -51,7 +51,7 @@ public class IntegrationMappingsManager {
     /// use this endpoint.
     ///
     /// - Parameters:
-    ///   - integrationMappingId: An ID of an integration mapping
+    ///   - integrationMappingId: An ID of an integration mapping.
     ///     Example: "11235432"
     ///   - requestBody: Request body of updateSlackIntegrationMappingById method
     ///   - headers: Headers of updateSlackIntegrationMappingById method
@@ -70,7 +70,7 @@ public class IntegrationMappingsManager {
     /// use this endpoint.
     ///
     /// - Parameters:
-    ///   - integrationMappingId: An ID of an integration mapping
+    ///   - integrationMappingId: An ID of an integration mapping.
     ///     Example: "11235432"
     ///   - headers: Headers of deleteSlackIntegrationMappingById method
     /// - Throws: The `GeneralError`.
@@ -117,7 +117,7 @@ public class IntegrationMappingsManager {
     /// use this endpoint.
     ///
     /// - Parameters:
-    ///   - integrationMappingId: An ID of an integration mapping
+    ///   - integrationMappingId: An ID of an integration mapping.
     ///     Example: "11235432"
     ///   - requestBody: Request body of updateTeamsIntegrationMappingById method
     ///   - headers: Headers of updateTeamsIntegrationMappingById method
@@ -134,7 +134,7 @@ public class IntegrationMappingsManager {
     /// use this endpoint.
     ///
     /// - Parameters:
-    ///   - integrationMappingId: An ID of an integration mapping
+    ///   - integrationMappingId: An ID of an integration mapping.
     ///     Example: "11235432"
     ///   - headers: Headers of deleteTeamsIntegrationMappingById method
     /// - Throws: The `GeneralError`.

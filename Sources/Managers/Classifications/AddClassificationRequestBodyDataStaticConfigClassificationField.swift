@@ -25,14 +25,14 @@ public class AddClassificationRequestBodyDataStaticConfigClassificationField: Co
     /// without notice. Currently, the color mappings are as
     /// follows.
     /// 
-    /// * `0`: Yellow
-    /// * `1`: Orange
-    /// * `2`: Watermelon red
-    /// * `3`: Purple rain
-    /// * `4`: Light blue
-    /// * `5`: Dark blue
-    /// * `6`: Light green
-    /// * `7`: Gray
+    /// * `0`: Yellow.
+    /// * `1`: Orange.
+    /// * `2`: Watermelon red.
+    /// * `3`: Purple rain.
+    /// * `4`: Light blue.
+    /// * `5`: Dark blue.
+    /// * `6`: Light green.
+    /// * `7`: Gray.
     public let colorId: Int64?
 
     /// Initializer for a AddClassificationRequestBodyDataStaticConfigClassificationField.
@@ -46,14 +46,14 @@ public class AddClassificationRequestBodyDataStaticConfigClassificationField: Co
     ///     without notice. Currently, the color mappings are as
     ///     follows.
     ///     
-    ///     * `0`: Yellow
-    ///     * `1`: Orange
-    ///     * `2`: Watermelon red
-    ///     * `3`: Purple rain
-    ///     * `4`: Light blue
-    ///     * `5`: Dark blue
-    ///     * `6`: Light green
-    ///     * `7`: Gray
+    ///     * `0`: Yellow.
+    ///     * `1`: Orange.
+    ///     * `2`: Watermelon red.
+    ///     * `3`: Purple rain.
+    ///     * `4`: Light blue.
+    ///     * `5`: Dark blue.
+    ///     * `6`: Light green.
+    ///     * `7`: Gray.
     public init(classificationDefinition: String? = nil, colorId: Int64? = nil) {
         self.classificationDefinition = classificationDefinition
         self.colorId = colorId

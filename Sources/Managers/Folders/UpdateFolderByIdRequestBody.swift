@@ -36,7 +36,7 @@ public class UpdateFolderByIdRequestBody: Codable, RawJSONReadable {
     /// a folder named `new folder`.
     public let name: String?
 
-    /// The optional description of this folder
+    /// The optional description of this folder.
     public let description: String?
 
     /// Specifies whether a folder should be synced to a
@@ -107,7 +107,7 @@ public class UpdateFolderByIdRequestBody: Codable, RawJSONReadable {
     ///     Folder names must be unique within their parent folder. The name check is case-insensitive, 
     ///     so a folder named `New Folder` cannot be created in a parent folder that already contains 
     ///     a folder named `new folder`.
-    ///   - description: The optional description of this folder
+    ///   - description: The optional description of this folder.
     ///   - syncState: Specifies whether a folder should be synced to a
     ///     user's device or not. This is used by Box Sync
     ///     (discontinued) and is not used by Box Drive.

@@ -1,7 +1,7 @@
 import Foundation
 
 /// A standard representation of a group, as returned from any
-/// group API endpoints by default
+/// group API endpoints by default.
 public class Group: GroupMini {
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
@@ -17,21 +17,21 @@ public class Group: GroupMini {
     }
 
 
-    /// When the group object was created
+    /// When the group object was created.
     public let createdAt: Date?
 
-    /// When the group object was last modified
+    /// When the group object was last modified.
     public let modifiedAt: Date?
 
     /// Initializer for a Group.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this object
-    ///   - type: `group`
-    ///   - name: The name of the group
+    ///   - id: The unique identifier for this object.
+    ///   - type: The value will always be `group`.
+    ///   - name: The name of the group.
     ///   - groupType: The type of the group.
-    ///   - createdAt: When the group object was created
-    ///   - modifiedAt: When the group object was last modified
+    ///   - createdAt: When the group object was created.
+    ///   - modifiedAt: When the group object was last modified.
     public init(id: String, type: GroupBaseTypeField = GroupBaseTypeField.group, name: String? = nil, groupType: GroupMiniGroupTypeField? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt

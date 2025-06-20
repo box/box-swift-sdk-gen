@@ -23,12 +23,10 @@ public class RoleVariable: Codable, RawJSONReadable {
     public let variableValue: RoleVariableVariableValueField
 
     /// Role object type.
-    /// 
     public let type: RoleVariableTypeField
 
     /// The variable type used
     /// by the object.
-    /// 
     public let variableType: RoleVariableVariableTypeField
 
     /// Initializer for a RoleVariable.
@@ -36,10 +34,8 @@ public class RoleVariable: Codable, RawJSONReadable {
     /// - Parameters:
     ///   - variableValue: 
     ///   - type: Role object type.
-    ///     
     ///   - variableType: The variable type used
     ///     by the object.
-    ///     
     public init(variableValue: RoleVariableVariableValueField, type: RoleVariableTypeField = RoleVariableTypeField.variable, variableType: RoleVariableVariableTypeField = RoleVariableVariableTypeField.collaboratorRole) {
         self.variableValue = variableValue
         self.type = type

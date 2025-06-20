@@ -18,7 +18,7 @@ public class StartWorkflowRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// The flow that will be triggered
+    /// The flow that will be triggered.
     public let flow: StartWorkflowRequestBodyFlowField
 
     /// The array of files for which the workflow should start. All files
@@ -28,7 +28,7 @@ public class StartWorkflowRequestBody: Codable, RawJSONReadable {
     /// The folder object for which the workflow is configured.
     public let folder: StartWorkflowRequestBodyFolderField
 
-    /// The type of the parameters object
+    /// The type of the parameters object.
     public let type: StartWorkflowRequestBodyTypeField?
 
     /// A configurable outcome the workflow should complete.
@@ -37,11 +37,11 @@ public class StartWorkflowRequestBody: Codable, RawJSONReadable {
     /// Initializer for a StartWorkflowRequestBody.
     ///
     /// - Parameters:
-    ///   - flow: The flow that will be triggered
+    ///   - flow: The flow that will be triggered.
     ///   - files: The array of files for which the workflow should start. All files
     ///     must be in the workflow's configured folder.
     ///   - folder: The folder object for which the workflow is configured.
-    ///   - type: The type of the parameters object
+    ///   - type: The type of the parameters object.
     ///   - outcomes: A configurable outcome the workflow should complete.
     public init(flow: StartWorkflowRequestBodyFlowField, files: [StartWorkflowRequestBodyFilesField], folder: StartWorkflowRequestBodyFolderField, type: StartWorkflowRequestBodyTypeField? = nil, outcomes: [Outcome]? = nil) {
         self.flow = flow

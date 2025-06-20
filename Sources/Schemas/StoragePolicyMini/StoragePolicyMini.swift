@@ -1,6 +1,6 @@
 import Foundation
 
-/// A mini description of a Storage Policy object
+/// A mini description of a Storage Policy object.
 public class StoragePolicyMini: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case id
@@ -16,17 +16,17 @@ public class StoragePolicyMini: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this storage policy
+    /// The unique identifier for this storage policy.
     public let id: String
 
-    /// `storage_policy`
+    /// The value will always be `storage_policy`.
     public let type: StoragePolicyMiniTypeField
 
     /// Initializer for a StoragePolicyMini.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this storage policy
-    ///   - type: `storage_policy`
+    ///   - id: The unique identifier for this storage policy.
+    ///   - type: The value will always be `storage_policy`.
     public init(id: String, type: StoragePolicyMiniTypeField = StoragePolicyMiniTypeField.storagePolicy) {
         self.id = id
         self.type = type

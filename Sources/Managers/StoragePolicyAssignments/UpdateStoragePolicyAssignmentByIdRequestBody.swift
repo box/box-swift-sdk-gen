@@ -15,14 +15,14 @@ public class UpdateStoragePolicyAssignmentByIdRequestBody: Codable, RawJSONReada
 
 
     /// The storage policy to assign to the user or
-    /// enterprise
+    /// enterprise.
     public let storagePolicy: UpdateStoragePolicyAssignmentByIdRequestBodyStoragePolicyField
 
     /// Initializer for a UpdateStoragePolicyAssignmentByIdRequestBody.
     ///
     /// - Parameters:
     ///   - storagePolicy: The storage policy to assign to the user or
-    ///     enterprise
+    ///     enterprise.
     public init(storagePolicy: UpdateStoragePolicyAssignmentByIdRequestBodyStoragePolicyField) {
         self.storagePolicy = storagePolicy
     }

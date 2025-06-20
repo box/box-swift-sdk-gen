@@ -1,7 +1,7 @@
 import Foundation
 
 /// A real-time server that can be used for
-/// long polling user events
+/// long polling user events.
 public class RealtimeServer: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -20,13 +20,13 @@ public class RealtimeServer: Codable, RawJSONReadable {
     }
 
 
-    /// `realtime_server`
+    /// The value will always be `realtime_server`.
     public let type: String?
 
     /// The URL for the server.
     public let url: String?
 
-    /// The time in minutes for which this server is available
+    /// The time in minutes for which this server is available.
     public let ttl: String?
 
     /// The maximum number of retries this server will
@@ -45,9 +45,9 @@ public class RealtimeServer: Codable, RawJSONReadable {
     /// Initializer for a RealtimeServer.
     ///
     /// - Parameters:
-    ///   - type: `realtime_server`
+    ///   - type: The value will always be `realtime_server`.
     ///   - url: The URL for the server.
-    ///   - ttl: The time in minutes for which this server is available
+    ///   - ttl: The time in minutes for which this server is available.
     ///   - maxRetries: The maximum number of retries this server will
     ///     allow before a new long poll should be started by
     ///     getting a [new list of server](#options-events).

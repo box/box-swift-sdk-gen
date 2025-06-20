@@ -1,7 +1,7 @@
 import Foundation
 
 public class GetLegalHoldPolicyAssignmentsQueryParams {
-    /// The ID of the legal hold policy
+    /// The ID of the legal hold policy.
     public let policyId: String
 
     /// Filters the results by the type of item the
@@ -35,7 +35,7 @@ public class GetLegalHoldPolicyAssignmentsQueryParams {
     /// Initializer for a GetLegalHoldPolicyAssignmentsQueryParams.
     ///
     /// - Parameters:
-    ///   - policyId: The ID of the legal hold policy
+    ///   - policyId: The ID of the legal hold policy.
     ///   - assignToType: Filters the results by the type of item the
     ///     policy was applied to.
     ///   - assignToId: Filters the results by the ID of item the

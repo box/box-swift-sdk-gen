@@ -14,13 +14,13 @@ public class TransferOwnedFolderRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// The user who the folder will be transferred to
+    /// The user who the folder will be transferred to.
     public let ownedBy: TransferOwnedFolderRequestBodyOwnedByField
 
     /// Initializer for a TransferOwnedFolderRequestBody.
     ///
     /// - Parameters:
-    ///   - ownedBy: The user who the folder will be transferred to
+    ///   - ownedBy: The user who the folder will be transferred to.
     public init(ownedBy: TransferOwnedFolderRequestBodyOwnedByField) {
         self.ownedBy = ownedBy
     }

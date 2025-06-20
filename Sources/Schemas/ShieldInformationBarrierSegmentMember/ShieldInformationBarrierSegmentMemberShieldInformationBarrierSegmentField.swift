@@ -19,7 +19,7 @@ public class ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmen
     /// shield information barrier segment.
     public let id: String?
 
-    /// The type of the shield information barrier segment
+    /// The type of the shield information barrier segment.
     public let type: ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentTypeField?
 
     /// Initializer for a ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentField.
@@ -27,7 +27,7 @@ public class ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmen
     /// - Parameters:
     ///   - id: The ID reference of the requesting
     ///     shield information barrier segment.
-    ///   - type: The type of the shield information barrier segment
+    ///   - type: The type of the shield information barrier segment.
     public init(id: String? = nil, type: ShieldInformationBarrierSegmentMemberShieldInformationBarrierSegmentTypeField? = nil) {
         self.id = id
         self.type = type

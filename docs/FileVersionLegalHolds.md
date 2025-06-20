@@ -22,7 +22,7 @@ try await client.fileVersionLegalHolds.getFileVersionLegalHoldById(fileVersionLe
 ### Arguments
 
 - fileVersionLegalHoldId `String`
-  - The ID of the file version legal hold Example: "2348213"
+  - The ID of the file version legal hold. Example: "2348213"
 - headers `GetFileVersionLegalHoldByIdHeaders`
   - Headers of getFileVersionLegalHoldById method
 

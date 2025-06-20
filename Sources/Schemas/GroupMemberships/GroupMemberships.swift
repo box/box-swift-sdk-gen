@@ -45,7 +45,7 @@ public class GroupMemberships: Codable, RawJSONReadable {
     /// For marker-based paginated APIs, this field will be omitted.
     public let order: [GroupMembershipsOrderField]?
 
-    /// A list of group memberships
+    /// A list of group memberships.
     public let entries: [GroupMembership]?
 
     /// Initializer for a GroupMemberships.
@@ -69,7 +69,7 @@ public class GroupMemberships: Codable, RawJSONReadable {
     ///     
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
-    ///   - entries: A list of group memberships
+    ///   - entries: A list of group memberships.
     public init(totalCount: Int64? = nil, limit: Int64? = nil, offset: Int64? = nil, order: [GroupMembershipsOrderField]? = nil, entries: [GroupMembership]? = nil) {
         self.totalCount = totalCount
         self.limit = limit

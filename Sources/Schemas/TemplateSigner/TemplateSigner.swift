@@ -1,6 +1,6 @@
 import Foundation
 
-/// The schema for a Signer for Templates
+/// The schema for a Signer for Templates.
 public class TemplateSigner: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case inputs
@@ -27,7 +27,7 @@ public class TemplateSigner: Codable, RawJSONReadable {
 
     public let inputs: [TemplateSignerInput]?
 
-    /// Email address of the signer
+    /// Email address of the signer.
     @CodableTriState public private(set) var email: String?
 
     /// Defines the role of the signer in the signature request. A role of
@@ -42,7 +42,7 @@ public class TemplateSigner: Codable, RawJSONReadable {
     /// redirected to the next `in_person` signer.
     public let isInPerson: Bool?
 
-    /// Order of the signer
+    /// Order of the signer.
     public let order: Int64?
 
     /// If provided, this value points signers that are assigned the same inputs and belongs to same signer group.
@@ -71,7 +71,7 @@ public class TemplateSigner: Codable, RawJSONReadable {
     ///
     /// - Parameters:
     ///   - inputs: 
-    ///   - email: Email address of the signer
+    ///   - email: Email address of the signer.
     ///   - role: Defines the role of the signer in the signature request. A role of
     ///     `signer` needs to sign the document, a role `approver`
     ///     approves the document and
@@ -80,7 +80,7 @@ public class TemplateSigner: Codable, RawJSONReadable {
     ///   - isInPerson: Used in combination with an embed URL for a sender.
     ///     After the sender signs, they will be
     ///     redirected to the next `in_person` signer.
-    ///   - order: Order of the signer
+    ///   - order: Order of the signer.
     ///   - signerGroupId: If provided, this value points signers that are assigned the same inputs and belongs to same signer group.
     ///     A signer group is not a Box Group. It is an entity that belongs to the template itself and can only be used
     ///     within Box Sign requests created from it.

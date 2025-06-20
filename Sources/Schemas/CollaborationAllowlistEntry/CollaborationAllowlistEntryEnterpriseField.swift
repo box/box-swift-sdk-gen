@@ -19,18 +19,18 @@ public class CollaborationAllowlistEntryEnterpriseField: Codable, RawJSONReadabl
     /// The unique identifier for this enterprise.
     public let id: String?
 
-    /// `enterprise`
+    /// The value will always be `enterprise`.
     public let type: CollaborationAllowlistEntryEnterpriseTypeField?
 
-    /// The name of the enterprise
+    /// The name of the enterprise.
     public let name: String?
 
     /// Initializer for a CollaborationAllowlistEntryEnterpriseField.
     ///
     /// - Parameters:
     ///   - id: The unique identifier for this enterprise.
-    ///   - type: `enterprise`
-    ///   - name: The name of the enterprise
+    ///   - type: The value will always be `enterprise`.
+    ///   - name: The name of the enterprise.
     public init(id: String? = nil, type: CollaborationAllowlistEntryEnterpriseTypeField? = nil, name: String? = nil) {
         self.id = id
         self.type = type

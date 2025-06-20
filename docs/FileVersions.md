@@ -62,7 +62,7 @@ try await client.fileVersions.getFileVersionById(fileId: file.id, fileVersionId:
 - fileId `String`
   - The unique identifier that represents a file.  The ID for any file can be determined by visiting a file in the web application and copying the ID from the URL. For example, for the URL `https://*.app.box.com/files/123` the `file_id` is `123`. Example: "12345"
 - fileVersionId `String`
-  - The ID of the file version Example: "1234"
+  - The ID of the file version. Example: "1234"
 - queryParams `GetFileVersionByIdQueryParams`
   - Query parameters of getFileVersionById method
 - headers `GetFileVersionByIdHeaders`
@@ -101,7 +101,7 @@ try await client.fileVersions.deleteFileVersionById(fileId: file.id, fileVersion
 - fileId `String`
   - The unique identifier that represents a file.  The ID for any file can be determined by visiting a file in the web application and copying the ID from the URL. For example, for the URL `https://*.app.box.com/files/123` the `file_id` is `123`. Example: "12345"
 - fileVersionId `String`
-  - The ID of the file version Example: "1234"
+  - The ID of the file version. Example: "1234"
 - headers `DeleteFileVersionByIdHeaders`
   - Headers of deleteFileVersionById method
 
@@ -133,7 +133,7 @@ See the endpoint docs at
 - fileId `String`
   - The unique identifier that represents a file.  The ID for any file can be determined by visiting a file in the web application and copying the ID from the URL. For example, for the URL `https://*.app.box.com/files/123` the `file_id` is `123`. Example: "12345"
 - fileVersionId `String`
-  - The ID of the file version Example: "1234"
+  - The ID of the file version. Example: "1234"
 - requestBody `UpdateFileVersionByIdRequestBody`
   - Request body of updateFileVersionById method
 - headers `UpdateFileVersionByIdHeaders`

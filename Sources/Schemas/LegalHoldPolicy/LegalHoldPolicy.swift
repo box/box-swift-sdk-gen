@@ -34,20 +34,21 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
     /// property with a 500 character limit.
     public let description: String?
 
-    /// * 'active' - the policy is not in a transition state
+    /// Possible values:
+    /// * 'active' - the policy is not in a transition state.
     /// * 'applying' - that the policy is in the process of
-    ///   being applied
+    ///   being applied.
     /// * 'releasing' - that the process is in the process
-    ///   of being released
-    /// * 'released' - the policy is no longer active
+    ///   of being released.
+    /// * 'released' - the policy is no longer active.
     public let status: LegalHoldPolicyStatusField?
 
-    /// Counts of assignments within this a legal hold policy by item type
+    /// Counts of assignments within this a legal hold policy by item type.
     public let assignmentCounts: LegalHoldPolicyAssignmentCountsField?
 
     public let createdBy: UserMini?
 
-    /// When the legal hold policy object was created
+    /// When the legal hold policy object was created.
     public let createdAt: Date?
 
     /// When the legal hold policy object was modified.
@@ -62,11 +63,11 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
     public let deletedAt: Date?
 
     /// User-specified, optional date filter applies to
-    /// Custodian assignments only
+    /// Custodian assignments only.
     public let filterStartedAt: Date?
 
     /// User-specified, optional date filter applies to
-    /// Custodian assignments only
+    /// Custodian assignments only.
     public let filterEndedAt: Date?
 
     /// Optional notes about why the policy was created.
@@ -75,20 +76,21 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
     /// Initializer for a LegalHoldPolicy.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this legal hold policy
-    ///   - type: `legal_hold_policy`
+    ///   - id: The unique identifier for this legal hold policy.
+    ///   - type: The value will always be `legal_hold_policy`.
     ///   - policyName: Name of the legal hold policy.
     ///   - description: Description of the legal hold policy. Optional
     ///     property with a 500 character limit.
-    ///   - status: * 'active' - the policy is not in a transition state
+    ///   - status: Possible values:
+    ///     * 'active' - the policy is not in a transition state.
     ///     * 'applying' - that the policy is in the process of
-    ///       being applied
+    ///       being applied.
     ///     * 'releasing' - that the process is in the process
-    ///       of being released
-    ///     * 'released' - the policy is no longer active
-    ///   - assignmentCounts: Counts of assignments within this a legal hold policy by item type
+    ///       of being released.
+    ///     * 'released' - the policy is no longer active.
+    ///   - assignmentCounts: Counts of assignments within this a legal hold policy by item type.
     ///   - createdBy: 
-    ///   - createdAt: When the legal hold policy object was created
+    ///   - createdAt: When the legal hold policy object was created.
     ///   - modifiedAt: When the legal hold policy object was modified.
     ///     Does not update when assignments are added or removed.
     ///   - deletedAt: When the policy release request was sent. (Because
@@ -97,9 +99,9 @@ public class LegalHoldPolicy: LegalHoldPolicyMini {
     ///     
     ///     If `null`, the policy was not deleted.
     ///   - filterStartedAt: User-specified, optional date filter applies to
-    ///     Custodian assignments only
+    ///     Custodian assignments only.
     ///   - filterEndedAt: User-specified, optional date filter applies to
-    ///     Custodian assignments only
+    ///     Custodian assignments only.
     ///   - releaseNotes: Optional notes about why the policy was created.
     public init(id: String, type: LegalHoldPolicyMiniTypeField = LegalHoldPolicyMiniTypeField.legalHoldPolicy, policyName: String? = nil, description: String? = nil, status: LegalHoldPolicyStatusField? = nil, assignmentCounts: LegalHoldPolicyAssignmentCountsField? = nil, createdBy: UserMini? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, deletedAt: Date? = nil, filterStartedAt: Date? = nil, filterEndedAt: Date? = nil, releaseNotes: String? = nil) {
         self.policyName = policyName

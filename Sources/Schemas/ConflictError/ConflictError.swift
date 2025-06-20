@@ -18,9 +18,9 @@ public class ConflictError: ClientError {
     /// Initializer for a ConflictError.
     ///
     /// - Parameters:
-    ///   - type: error
+    ///   - type: The value will always be `error`.
     ///   - status: The HTTP status of the response.
-    ///   - code: A Box-specific error code
+    ///   - code: A Box-specific error code.
     ///   - message: A short message describing the error.
     ///   - contextInfo: A free-form object that contains additional context
     ///     about the error. The possible fields are defined on

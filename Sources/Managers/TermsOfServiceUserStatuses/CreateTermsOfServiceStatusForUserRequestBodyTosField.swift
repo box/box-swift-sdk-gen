@@ -15,7 +15,7 @@ public class CreateTermsOfServiceStatusForUserRequestBodyTosField: Codable, RawJ
     }
 
 
-    /// The ID of terms of service
+    /// The ID of terms of service.
     public let id: String
 
     /// The type of object.
@@ -24,7 +24,7 @@ public class CreateTermsOfServiceStatusForUserRequestBodyTosField: Codable, RawJ
     /// Initializer for a CreateTermsOfServiceStatusForUserRequestBodyTosField.
     ///
     /// - Parameters:
-    ///   - id: The ID of terms of service
+    ///   - id: The ID of terms of service.
     ///   - type: The type of object.
     public init(id: String, type: CreateTermsOfServiceStatusForUserRequestBodyTosTypeField = CreateTermsOfServiceStatusForUserRequestBodyTosTypeField.termsOfService) {
         self.id = id

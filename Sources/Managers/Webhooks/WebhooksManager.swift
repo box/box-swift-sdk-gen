@@ -42,7 +42,7 @@ public class WebhooksManager {
         return try Webhook.deserialize(from: response.data!)
     }
 
-    /// Retrieves a specific webhook
+    /// Retrieves a specific webhook.
     ///
     /// - Parameters:
     ///   - webhookId: The ID of the webhook.

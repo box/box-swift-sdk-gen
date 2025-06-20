@@ -16,17 +16,17 @@ public class AiAgentInfo: Codable, RawJSONReadable {
     }
 
 
-    /// The models used for the request
+    /// The models used for the request.
     public let models: [AiAgentInfoModelsField]?
 
-    /// The processor used for the request
+    /// The processor used for the request.
     public let processor: String?
 
     /// Initializer for a AiAgentInfo.
     ///
     /// - Parameters:
-    ///   - models: The models used for the request
-    ///   - processor: The processor used for the request
+    ///   - models: The models used for the request.
+    ///   - processor: The processor used for the request.
     public init(models: [AiAgentInfoModelsField]? = nil, processor: String? = nil) {
         self.models = models
         self.processor = processor

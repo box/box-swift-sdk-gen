@@ -18,30 +18,30 @@ public class WorkflowFlowsOutcomesField: Codable, RawJSONReadable {
     }
 
 
-    /// The identifier of the outcome
+    /// The identifier of the outcome.
     public let id: String?
 
-    /// The outcomes resource type
+    /// The outcomes resource type.
     public let type: WorkflowFlowsOutcomesTypeField?
 
-    /// The name of the outcome
+    /// The name of the outcome.
     public let name: String?
 
     public let actionType: WorkflowFlowsOutcomesActionTypeField?
 
     /// If `action_type` is `assign_task` and the task is rejected, returns a
-    /// list of outcomes to complete
+    /// list of outcomes to complete.
     public let ifRejected: [WorkflowFlowsOutcomesIfRejectedField]?
 
     /// Initializer for a WorkflowFlowsOutcomesField.
     ///
     /// - Parameters:
-    ///   - id: The identifier of the outcome
-    ///   - type: The outcomes resource type
-    ///   - name: The name of the outcome
+    ///   - id: The identifier of the outcome.
+    ///   - type: The outcomes resource type.
+    ///   - name: The name of the outcome.
     ///   - actionType: 
     ///   - ifRejected: If `action_type` is `assign_task` and the task is rejected, returns a
-    ///     list of outcomes to complete
+    ///     list of outcomes to complete.
     public init(id: String? = nil, type: WorkflowFlowsOutcomesTypeField? = nil, name: String? = nil, actionType: WorkflowFlowsOutcomesActionTypeField? = nil, ifRejected: [WorkflowFlowsOutcomesIfRejectedField]? = nil) {
         self.id = id
         self.type = type

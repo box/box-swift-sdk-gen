@@ -18,14 +18,14 @@ public class TrashWebLinkPathCollectionField: Codable, RawJSONReadable {
     /// The number of folders in this list.
     public let totalCount: Int64
 
-    /// Array of folders for this item's path collection
+    /// Array of folders for this item's path collection.
     public let entries: [TrashWebLinkPathCollectionEntriesField]
 
     /// Initializer for a TrashWebLinkPathCollectionField.
     ///
     /// - Parameters:
     ///   - totalCount: The number of folders in this list.
-    ///   - entries: Array of folders for this item's path collection
+    ///   - entries: Array of folders for this item's path collection.
     public init(totalCount: Int64, entries: [TrashWebLinkPathCollectionEntriesField]) {
         self.totalCount = totalCount
         self.entries = entries

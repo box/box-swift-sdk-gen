@@ -1,6 +1,6 @@
 import Foundation
 
-/// AI ask response
+/// AI ask response.
 public class AiResponseFull: AiResponse {
     private enum CodingKeys: String, CodingKey {
         case citations

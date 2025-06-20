@@ -19,10 +19,10 @@ public class UploadSessionSessionEndpointsField: Codable, RawJSONReadable {
     }
 
 
-    /// The URL to upload parts to
+    /// The URL to upload parts to.
     public let uploadPart: String?
 
-    /// The URL used to commit the file
+    /// The URL used to commit the file.
     public let commit: String?
 
     /// The URL for used to abort the session.
@@ -40,8 +40,8 @@ public class UploadSessionSessionEndpointsField: Codable, RawJSONReadable {
     /// Initializer for a UploadSessionSessionEndpointsField.
     ///
     /// - Parameters:
-    ///   - uploadPart: The URL to upload parts to
-    ///   - commit: The URL used to commit the file
+    ///   - uploadPart: The URL to upload parts to.
+    ///   - commit: The URL used to commit the file.
     ///   - abort: The URL for used to abort the session.
     ///   - listParts: The URL users to list all parts.
     ///   - status: The URL used to get the status of the upload.

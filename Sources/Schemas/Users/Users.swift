@@ -53,7 +53,7 @@ public class Users: Codable, RawJSONReadable {
     /// For marker-based paginated APIs, this field will be omitted.
     public let order: [UsersOrderField]?
 
-    /// A list of users
+    /// A list of users.
     public let entries: [UserFull]?
 
     /// Initializer for a Users.
@@ -79,7 +79,7 @@ public class Users: Codable, RawJSONReadable {
     ///     
     ///     This field is only returned for calls that use offset-based pagination.
     ///     For marker-based paginated APIs, this field will be omitted.
-    ///   - entries: A list of users
+    ///   - entries: A list of users.
     public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, totalCount: Int64? = nil, offset: Int64? = nil, order: [UsersOrderField]? = nil, entries: [UserFull]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)

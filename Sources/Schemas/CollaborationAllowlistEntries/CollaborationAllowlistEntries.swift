@@ -29,7 +29,7 @@ public class CollaborationAllowlistEntries: Codable, RawJSONReadable {
     /// The marker for the start of the previous page of results.
     @CodableTriState public private(set) var prevMarker: String?
 
-    /// A list of allowed collaboration domains
+    /// A list of allowed collaboration domains.
     public let entries: [CollaborationAllowlistEntry]?
 
     /// Initializer for a CollaborationAllowlistEntries.
@@ -40,7 +40,7 @@ public class CollaborationAllowlistEntries: Codable, RawJSONReadable {
     ///     allowed. The maximum value varies by API.
     ///   - nextMarker: The marker for the start of the next page of results.
     ///   - prevMarker: The marker for the start of the previous page of results.
-    ///   - entries: A list of allowed collaboration domains
+    ///   - entries: A list of allowed collaboration domains.
     public init(limit: Int64? = nil, nextMarker: TriStateField<String> = nil, prevMarker: TriStateField<String> = nil, entries: [CollaborationAllowlistEntry]? = nil) {
         self.limit = limit
         self._nextMarker = CodableTriState(state: nextMarker)

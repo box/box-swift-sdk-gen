@@ -9,7 +9,7 @@ public class UploadFilePartByUrlHeaders {
     /// 
     /// To get the value for the `SHA` digest, use the
     /// openSSL command to encode the file part:
-    /// `openssl sha1 -binary <FILE_PART_NAME> | base64`
+    /// `openssl sha1 -binary <FILE_PART_NAME> | base64`.
     /// 
     /// [1]: https://tools.ietf.org/html/rfc3230
     public let digest: String
@@ -43,7 +43,7 @@ public class UploadFilePartByUrlHeaders {
     ///     
     ///     To get the value for the `SHA` digest, use the
     ///     openSSL command to encode the file part:
-    ///     `openssl sha1 -binary <FILE_PART_NAME> | base64`
+    ///     `openssl sha1 -binary <FILE_PART_NAME> | base64`.
     ///     
     ///     [1]: https://tools.ietf.org/html/rfc3230
     ///   - contentRange: The byte range of the chunk.

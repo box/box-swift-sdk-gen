@@ -25,7 +25,7 @@ public class AppItem: Codable, RawJSONReadable {
     /// The type of the app that owns this app item.
     public let applicationType: String
 
-    /// `app_item`
+    /// The value will always be `app_item`.
     public let type: AppItemTypeField
 
     /// Initializer for a AppItem.
@@ -33,7 +33,7 @@ public class AppItem: Codable, RawJSONReadable {
     /// - Parameters:
     ///   - id: The unique identifier for this app item.
     ///   - applicationType: The type of the app that owns this app item.
-    ///   - type: `app_item`
+    ///   - type: The value will always be `app_item`.
     public init(id: String, applicationType: String, type: AppItemTypeField = AppItemTypeField.appItem) {
         self.id = id
         self.applicationType = applicationType

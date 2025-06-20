@@ -100,7 +100,7 @@ try await client.groups.getGroupById(groupId: group.id, queryParams: GetGroupByI
 
 This function returns a value of type `GroupFull`.
 
-Returns the group object
+Returns the group object.
 
 
 ## Update group

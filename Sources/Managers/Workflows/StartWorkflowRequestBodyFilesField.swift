@@ -15,17 +15,17 @@ public class StartWorkflowRequestBodyFilesField: Codable, RawJSONReadable {
     }
 
 
-    /// The type of the file object
+    /// The type of the file object.
     public let type: StartWorkflowRequestBodyFilesTypeField?
 
-    /// The id of the file
+    /// The id of the file.
     public let id: String?
 
     /// Initializer for a StartWorkflowRequestBodyFilesField.
     ///
     /// - Parameters:
-    ///   - type: The type of the file object
-    ///   - id: The id of the file
+    ///   - type: The type of the file object.
+    ///   - id: The id of the file.
     public init(type: StartWorkflowRequestBodyFilesTypeField? = nil, id: String? = nil) {
         self.type = type
         self.id = id

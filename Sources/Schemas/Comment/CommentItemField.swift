@@ -15,17 +15,17 @@ public class CommentItemField: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this object
+    /// The unique identifier for this object.
     public let id: String?
 
-    /// The type for this object
+    /// The type for this object.
     public let type: String?
 
     /// Initializer for a CommentItemField.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this object
-    ///   - type: The type for this object
+    ///   - id: The unique identifier for this object.
+    ///   - type: The type for this object.
     public init(id: String? = nil, type: String? = nil) {
         self.id = id
         self.type = type

@@ -15,14 +15,14 @@ public class DocGenTemplateV2025R0: DocGenTemplateBaseV2025R0 {
     }
 
 
-    /// The name of the template
+    /// The name of the template.
     @CodableTriState public private(set) var fileName: String?
 
     /// Initializer for a DocGenTemplateV2025R0.
     ///
     /// - Parameters:
     ///   - file: 
-    ///   - fileName: The name of the template
+    ///   - fileName: The name of the template.
     public init(file: FileReferenceV2025R0? = nil, fileName: TriStateField<String> = nil) {
         self._fileName = CodableTriState(state: fileName)
 

@@ -25,7 +25,7 @@ public class SkillInvocation: Codable, RawJSONReadable {
     }
 
 
-    /// `skill_invocation`
+    /// The value will always be `skill_invocation`.
     public let type: SkillInvocationTypeField?
 
     /// Unique identifier for the invocation request.
@@ -33,7 +33,7 @@ public class SkillInvocation: Codable, RawJSONReadable {
 
     public let skill: SkillInvocationSkillField?
 
-    /// The read-only and read-write access tokens for this item
+    /// The read-only and read-write access tokens for this item.
     public let token: SkillInvocationTokenField?
 
     /// The details status of this event.
@@ -42,7 +42,7 @@ public class SkillInvocation: Codable, RawJSONReadable {
     /// The time this invocation was created.
     public let createdAt: Date?
 
-    /// Action that triggered the invocation
+    /// Action that triggered the invocation.
     public let trigger: String?
 
     public let enterprise: SkillInvocationEnterpriseField?
@@ -54,13 +54,13 @@ public class SkillInvocation: Codable, RawJSONReadable {
     /// Initializer for a SkillInvocation.
     ///
     /// - Parameters:
-    ///   - type: `skill_invocation`
+    ///   - type: The value will always be `skill_invocation`.
     ///   - id: Unique identifier for the invocation request.
     ///   - skill: 
-    ///   - token: The read-only and read-write access tokens for this item
+    ///   - token: The read-only and read-write access tokens for this item.
     ///   - status: The details status of this event.
     ///   - createdAt: The time this invocation was created.
-    ///   - trigger: Action that triggered the invocation
+    ///   - trigger: Action that triggered the invocation.
     ///   - enterprise: 
     ///   - source: 
     ///   - event: 

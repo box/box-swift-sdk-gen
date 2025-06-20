@@ -15,7 +15,7 @@ public class CreateTaskAssignmentRequestBodyTaskField: Codable, RawJSONReadable 
     }
 
 
-    /// The ID of the task
+    /// The ID of the task.
     public let id: String
 
     /// The type of the item to assign.
@@ -24,7 +24,7 @@ public class CreateTaskAssignmentRequestBodyTaskField: Codable, RawJSONReadable 
     /// Initializer for a CreateTaskAssignmentRequestBodyTaskField.
     ///
     /// - Parameters:
-    ///   - id: The ID of the task
+    ///   - id: The ID of the task.
     ///   - type: The type of the item to assign.
     public init(id: String, type: CreateTaskAssignmentRequestBodyTaskTypeField = CreateTaskAssignmentRequestBodyTaskTypeField.task) {
         self.id = id

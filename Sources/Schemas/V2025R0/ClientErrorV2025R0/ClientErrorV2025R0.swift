@@ -1,6 +1,6 @@
 import Foundation
 
-/// A generic error
+/// A generic error.
 public class ClientErrorV2025R0: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -21,13 +21,13 @@ public class ClientErrorV2025R0: Codable, RawJSONReadable {
     }
 
 
-    /// error
+    /// The value will always be `error`.
     public let type: ClientErrorV2025R0TypeField?
 
     /// The HTTP status of the response.
     public let status: Int?
 
-    /// A Box-specific error code
+    /// A Box-specific error code.
     public let code: ClientErrorV2025R0CodeField?
 
     /// A short message describing the error.
@@ -36,7 +36,7 @@ public class ClientErrorV2025R0: Codable, RawJSONReadable {
     /// A free-form object that contains additional context
     /// about the error. The possible fields are defined on
     /// a per-endpoint basis. `message` is only one example.
-    @CodableTriState public private(set) var contextInfo: ClientErrorV2025R0ContextInfoField?
+    @CodableTriState public private(set) var contextInfo: [String: AnyCodable]?
 
     /// A URL that links to more information about why this error occurred.
     public let helpUrl: String?
@@ -48,9 +48,9 @@ public class ClientErrorV2025R0: Codable, RawJSONReadable {
     /// Initializer for a ClientErrorV2025R0.
     ///
     /// - Parameters:
-    ///   - type: error
+    ///   - type: The value will always be `error`.
     ///   - status: The HTTP status of the response.
-    ///   - code: A Box-specific error code
+    ///   - code: A Box-specific error code.
     ///   - message: A short message describing the error.
     ///   - contextInfo: A free-form object that contains additional context
     ///     about the error. The possible fields are defined on
@@ -58,7 +58,7 @@ public class ClientErrorV2025R0: Codable, RawJSONReadable {
     ///   - helpUrl: A URL that links to more information about why this error occurred.
     ///   - requestId: A unique identifier for this response, which can be used
     ///     when contacting Box support.
-    public init(type: ClientErrorV2025R0TypeField? = nil, status: Int? = nil, code: ClientErrorV2025R0CodeField? = nil, message: String? = nil, contextInfo: TriStateField<ClientErrorV2025R0ContextInfoField> = nil, helpUrl: String? = nil, requestId: String? = nil) {
+    public init(type: ClientErrorV2025R0TypeField? = nil, status: Int? = nil, code: ClientErrorV2025R0CodeField? = nil, message: String? = nil, contextInfo: TriStateField<[String: AnyCodable]> = nil, helpUrl: String? = nil, requestId: String? = nil) {
         self.type = type
         self.status = status
         self.code = code
@@ -74,7 +74,7 @@ public class ClientErrorV2025R0: Codable, RawJSONReadable {
         status = try container.decodeIfPresent(Int.self, forKey: .status)
         code = try container.decodeIfPresent(ClientErrorV2025R0CodeField.self, forKey: .code)
         message = try container.decodeIfPresent(String.self, forKey: .message)
-        contextInfo = try container.decodeIfPresent(ClientErrorV2025R0ContextInfoField.self, forKey: .contextInfo)
+        contextInfo = try container.decodeIfPresent([String: AnyCodable].self, forKey: .contextInfo)
         helpUrl = try container.decodeIfPresent(String.self, forKey: .helpUrl)
         requestId = try container.decodeIfPresent(String.self, forKey: .requestId)
     }

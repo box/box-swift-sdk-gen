@@ -28,7 +28,7 @@ public class RetentionPolicyAssignment: Codable, RawJSONReadable {
     /// The unique identifier for a retention policy assignment.
     public let id: String
 
-    /// `retention_policy_assignment`
+    /// The value will always be `retention_policy_assignment`.
     public let type: RetentionPolicyAssignmentTypeField
 
     public let retentionPolicy: RetentionPolicyMini?
@@ -57,7 +57,7 @@ public class RetentionPolicyAssignment: Codable, RawJSONReadable {
     ///
     /// - Parameters:
     ///   - id: The unique identifier for a retention policy assignment.
-    ///   - type: `retention_policy_assignment`
+    ///   - type: The value will always be `retention_policy_assignment`.
     ///   - retentionPolicy: 
     ///   - assignedTo: The `type` and `id` of the content that is under
     ///     retention. The `type` can either be `folder`

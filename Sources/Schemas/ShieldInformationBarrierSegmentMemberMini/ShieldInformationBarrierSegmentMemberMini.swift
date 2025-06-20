@@ -1,7 +1,7 @@
 import Foundation
 
 /// A mini representation of a
-/// shield information barrier segment member object
+/// shield information barrier segment member object.
 public class ShieldInformationBarrierSegmentMemberMini: ShieldInformationBarrierSegmentMemberBase {
     private enum CodingKeys: String, CodingKey {
         case user
@@ -22,8 +22,8 @@ public class ShieldInformationBarrierSegmentMemberMini: ShieldInformationBarrier
     ///
     /// - Parameters:
     ///   - id: The unique identifier for the
-    ///     shield information barrier segment member
-    ///   - type: The type of the shield information barrier segment member
+    ///     shield information barrier segment member.
+    ///   - type: The type of the shield information barrier segment member.
     ///   - user: 
     public init(id: String? = nil, type: ShieldInformationBarrierSegmentMemberBaseTypeField? = nil, user: UserBase? = nil) {
         self.user = user

@@ -14,13 +14,13 @@ public class CreateInviteRequestBodyActionableByField: Codable, RawJSONReadable 
     }
 
 
-    /// The login of the invited user
+    /// The login of the invited user.
     public let login: String?
 
     /// Initializer for a CreateInviteRequestBodyActionableByField.
     ///
     /// - Parameters:
-    ///   - login: The login of the invited user
+    ///   - login: The login of the invited user.
     public init(login: String? = nil) {
         self.login = login
     }

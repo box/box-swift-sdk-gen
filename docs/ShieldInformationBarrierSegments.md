@@ -63,7 +63,7 @@ try await client.shieldInformationBarrierSegments.deleteShieldInformationBarrier
 
 This function returns a value of type ``.
 
-Empty body in response
+Empty body in response.
 
 
 ## Update shield information barrier segment with specified ID

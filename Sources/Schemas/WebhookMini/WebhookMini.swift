@@ -20,18 +20,18 @@ public class WebhookMini: Codable, RawJSONReadable {
     /// The unique identifier for this webhook.
     public let id: String?
 
-    /// `webhook`
+    /// The value will always be `webhook`.
     public let type: WebhookMiniTypeField?
 
-    /// The item that will trigger the webhook
+    /// The item that will trigger the webhook.
     public let target: WebhookMiniTargetField?
 
     /// Initializer for a WebhookMini.
     ///
     /// - Parameters:
     ///   - id: The unique identifier for this webhook.
-    ///   - type: `webhook`
-    ///   - target: The item that will trigger the webhook
+    ///   - type: The value will always be `webhook`.
+    ///   - target: The item that will trigger the webhook.
     public init(id: String? = nil, type: WebhookMiniTypeField? = nil, target: WebhookMiniTargetField? = nil) {
         self.id = id
         self.type = type

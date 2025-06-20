@@ -19,14 +19,14 @@ public class DocGenJobBaseV2025R0: Codable, RawJSONReadable {
     /// The unique identifier that represent a Box Doc Gen job.
     public let id: String
 
-    /// `docgen_job`
+    /// The value will always be `docgen_job`.
     public let type: DocGenJobBaseV2025R0TypeField
 
     /// Initializer for a DocGenJobBaseV2025R0.
     ///
     /// - Parameters:
     ///   - id: The unique identifier that represent a Box Doc Gen job.
-    ///   - type: `docgen_job`
+    ///   - type: The value will always be `docgen_job`.
     public init(id: String, type: DocGenJobBaseV2025R0TypeField = DocGenJobBaseV2025R0TypeField.docgenJob) {
         self.id = id
         self.type = type

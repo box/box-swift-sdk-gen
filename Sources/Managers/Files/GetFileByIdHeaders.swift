@@ -39,7 +39,7 @@ public class GetFileByIdHeaders {
     /// document file types in Box using the `[extracted_text]`
     /// representation.
     /// 
-    /// `x-rep-hints: [extracted_text]`
+    /// `x-rep-hints: [extracted_text]`.
     public let xRepHints: String?
 
     /// Extra headers that will be included in the HTTP request.
@@ -82,7 +82,7 @@ public class GetFileByIdHeaders {
     ///     document file types in Box using the `[extracted_text]`
     ///     representation.
     ///     
-    ///     `x-rep-hints: [extracted_text]`
+    ///     `x-rep-hints: [extracted_text]`.
     ///   - extraHeaders: Extra headers that will be included in the HTTP request.
     public init(ifNoneMatch: String? = nil, boxapi: String? = nil, xRepHints: String? = nil, extraHeaders: [String: String?]? = [:]) {
         self.ifNoneMatch = ifNoneMatch

@@ -31,7 +31,7 @@ public class CreateUserRequestBody: Codable, RawJSONReadable {
     }
 
 
-    /// The name of the user
+    /// The name of the user.
     public let name: String
 
     /// The email address the user uses to log in
@@ -43,23 +43,23 @@ public class CreateUserRequestBody: Codable, RawJSONReadable {
     /// Specifies that the user is an app user.
     public let isPlatformAccessOnly: Bool?
 
-    /// The user’s enterprise role
+    /// The user’s enterprise role.
     public let role: CreateUserRequestBodyRoleField?
 
     /// The language of the user, formatted in modified version of the
     /// [ISO 639-1](/guides/api-calls/language-codes) format.
     public let language: String?
 
-    /// Whether the user can use Box Sync
+    /// Whether the user can use Box Sync.
     public let isSyncEnabled: Bool?
 
-    /// The user’s job title
+    /// The user’s job title.
     public let jobTitle: String?
 
-    /// The user’s phone number
+    /// The user’s phone number.
     public let phone: String?
 
-    /// The user’s address
+    /// The user’s address.
     public let address: String?
 
     /// The user’s total available space in bytes. Set this to `-1` to
@@ -73,23 +73,23 @@ public class CreateUserRequestBody: Codable, RawJSONReadable {
     public let trackingCodes: [TrackingCode]?
 
     /// Whether the user can see other enterprise users in their
-    /// contact list
+    /// contact list.
     public let canSeeManagedUsers: Bool?
 
-    /// The user's timezone
+    /// The user's timezone.
     public let timezone: String?
 
     /// Whether the user is allowed to collaborate with users outside
-    /// their enterprise
+    /// their enterprise.
     public let isExternalCollabRestricted: Bool?
 
-    /// Whether to exempt the user from enterprise device limits
+    /// Whether to exempt the user from enterprise device limits.
     public let isExemptFromDeviceLimits: Bool?
 
-    /// Whether the user must use two-factor authentication
+    /// Whether the user must use two-factor authentication.
     public let isExemptFromLoginVerification: Bool?
 
-    /// The user's account status
+    /// The user's account status.
     public let status: CreateUserRequestBodyStatusField?
 
     /// An external identifier for an app user, which can be used to look
@@ -100,19 +100,19 @@ public class CreateUserRequestBody: Codable, RawJSONReadable {
     /// Initializer for a CreateUserRequestBody.
     ///
     /// - Parameters:
-    ///   - name: The name of the user
+    ///   - name: The name of the user.
     ///   - login: The email address the user uses to log in
     ///     
     ///     Required, unless `is_platform_access_only`
     ///     is set to `true`.
     ///   - isPlatformAccessOnly: Specifies that the user is an app user.
-    ///   - role: The user’s enterprise role
+    ///   - role: The user’s enterprise role.
     ///   - language: The language of the user, formatted in modified version of the
     ///     [ISO 639-1](/guides/api-calls/language-codes) format.
-    ///   - isSyncEnabled: Whether the user can use Box Sync
-    ///   - jobTitle: The user’s job title
-    ///   - phone: The user’s phone number
-    ///   - address: The user’s address
+    ///   - isSyncEnabled: Whether the user can use Box Sync.
+    ///   - jobTitle: The user’s job title.
+    ///   - phone: The user’s phone number.
+    ///   - address: The user’s address.
     ///   - spaceAmount: The user’s total available space in bytes. Set this to `-1` to
     ///     indicate unlimited storage.
     ///   - trackingCodes: Tracking codes allow an admin to generate reports from the
@@ -120,13 +120,13 @@ public class CreateUserRequestBody: Codable, RawJSONReadable {
     ///     of users. This setting must be enabled for an enterprise before it
     ///     can be used.
     ///   - canSeeManagedUsers: Whether the user can see other enterprise users in their
-    ///     contact list
-    ///   - timezone: The user's timezone
+    ///     contact list.
+    ///   - timezone: The user's timezone.
     ///   - isExternalCollabRestricted: Whether the user is allowed to collaborate with users outside
-    ///     their enterprise
-    ///   - isExemptFromDeviceLimits: Whether to exempt the user from enterprise device limits
-    ///   - isExemptFromLoginVerification: Whether the user must use two-factor authentication
-    ///   - status: The user's account status
+    ///     their enterprise.
+    ///   - isExemptFromDeviceLimits: Whether to exempt the user from enterprise device limits.
+    ///   - isExemptFromLoginVerification: Whether the user must use two-factor authentication.
+    ///   - status: The user's account status.
     ///   - externalAppUserId: An external identifier for an app user, which can be used to look
     ///     up the user. This can be used to tie user IDs from external
     ///     identity providers to Box users.

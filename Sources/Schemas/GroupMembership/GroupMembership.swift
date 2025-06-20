@@ -22,10 +22,10 @@ public class GroupMembership: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this group membership
+    /// The unique identifier for this group membership.
     public let id: String?
 
-    /// `group_membership`
+    /// The value will always be `group_membership`.
     public let type: GroupMembershipTypeField?
 
     public let user: UserMini?
@@ -44,8 +44,8 @@ public class GroupMembership: Codable, RawJSONReadable {
     /// Initializer for a GroupMembership.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this group membership
-    ///   - type: `group_membership`
+    ///   - id: The unique identifier for this group membership.
+    ///   - type: The value will always be `group_membership`.
     ///   - user: 
     ///   - group: 
     ///   - role: The role of the user in the group.

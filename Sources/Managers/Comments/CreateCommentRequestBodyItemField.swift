@@ -15,7 +15,7 @@ public class CreateCommentRequestBodyItemField: Codable, RawJSONReadable {
     }
 
 
-    /// The ID of the item
+    /// The ID of the item.
     public let id: String
 
     /// The type of the item that this comment will be placed on.
@@ -24,7 +24,7 @@ public class CreateCommentRequestBodyItemField: Codable, RawJSONReadable {
     /// Initializer for a CreateCommentRequestBodyItemField.
     ///
     /// - Parameters:
-    ///   - id: The ID of the item
+    ///   - id: The ID of the item.
     ///   - type: The type of the item that this comment will be placed on.
     public init(id: String, type: CreateCommentRequestBodyItemTypeField) {
         self.id = id

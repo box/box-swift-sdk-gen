@@ -32,7 +32,7 @@ public class ClassificationTemplateFieldsField: Codable, RawJSONReadable {
     /// available in the enterprise.
     public let key: ClassificationTemplateFieldsKeyField
 
-    /// `Classification`
+    /// The value will always be `Classification`.
     public let displayName: ClassificationTemplateFieldsDisplayNameField
 
     /// Classifications are always visible to web and mobile users.
@@ -46,7 +46,7 @@ public class ClassificationTemplateFieldsField: Codable, RawJSONReadable {
     ///   - type: The array item type.
     ///   - key: Defines classifications 
     ///     available in the enterprise.
-    ///   - displayName: `Classification`
+    ///   - displayName: The value will always be `Classification`.
     ///   - hidden: Classifications are always visible to web and mobile users.
     public init(id: String, options: [ClassificationTemplateFieldsOptionsField], type: ClassificationTemplateFieldsTypeField = ClassificationTemplateFieldsTypeField.enum_, key: ClassificationTemplateFieldsKeyField = ClassificationTemplateFieldsKeyField.boxSecurityClassificationKey, displayName: ClassificationTemplateFieldsDisplayNameField = ClassificationTemplateFieldsDisplayNameField.classification, hidden: Bool? = nil) {
         self.id = id

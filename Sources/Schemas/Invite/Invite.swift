@@ -22,23 +22,23 @@ public class Invite: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this invite
+    /// The unique identifier for this invite.
     public let id: String
 
-    /// `invite`
+    /// The value will always be `invite`.
     public let type: InviteTypeField
 
-    /// A representation of a Box enterprise
+    /// A representation of a Box enterprise.
     public let invitedTo: InviteInvitedToField?
 
     public let actionableBy: UserMini?
 
     public let invitedBy: UserMini?
 
-    /// The status of the invite
+    /// The status of the invite.
     public let status: String?
 
-    /// When the invite was created
+    /// When the invite was created.
     public let createdAt: Date?
 
     /// When the invite was modified.
@@ -47,13 +47,13 @@ public class Invite: Codable, RawJSONReadable {
     /// Initializer for a Invite.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this invite
-    ///   - type: `invite`
-    ///   - invitedTo: A representation of a Box enterprise
+    ///   - id: The unique identifier for this invite.
+    ///   - type: The value will always be `invite`.
+    ///   - invitedTo: A representation of a Box enterprise.
     ///   - actionableBy: 
     ///   - invitedBy: 
-    ///   - status: The status of the invite
-    ///   - createdAt: When the invite was created
+    ///   - status: The status of the invite.
+    ///   - createdAt: When the invite was created.
     ///   - modifiedAt: When the invite was modified.
     public init(id: String, type: InviteTypeField = InviteTypeField.invite, invitedTo: InviteInvitedToField? = nil, actionableBy: UserMini? = nil, invitedBy: UserMini? = nil, status: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.id = id

@@ -16,17 +16,17 @@ public class GroupBase: Codable, RawJSONReadable {
     }
 
 
-    /// The unique identifier for this object
+    /// The unique identifier for this object.
     public let id: String
 
-    /// `group`
+    /// The value will always be `group`.
     public let type: GroupBaseTypeField
 
     /// Initializer for a GroupBase.
     ///
     /// - Parameters:
-    ///   - id: The unique identifier for this object
-    ///   - type: `group`
+    ///   - id: The unique identifier for this object.
+    ///   - type: The value will always be `group`.
     public init(id: String, type: GroupBaseTypeField = GroupBaseTypeField.group) {
         self.id = id
         self.type = type

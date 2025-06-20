@@ -13,7 +13,7 @@ public class SignRequestsManager {
     /// Cancels a sign request.
     ///
     /// - Parameters:
-    ///   - signRequestId: The ID of the signature request
+    ///   - signRequestId: The ID of the signature request.
     ///     Example: "33243242"
     ///   - headers: Headers of cancelSignRequest method
     /// - Returns: The `SignRequest`.
@@ -27,7 +27,7 @@ public class SignRequestsManager {
     /// Resends a signature request email to all outstanding signers.
     ///
     /// - Parameters:
-    ///   - signRequestId: The ID of the signature request
+    ///   - signRequestId: The ID of the signature request.
     ///     Example: "33243242"
     ///   - headers: Headers of resendSignRequest method
     /// - Throws: The `GeneralError`.
@@ -39,7 +39,7 @@ public class SignRequestsManager {
     /// Gets a sign request by ID.
     ///
     /// - Parameters:
-    ///   - signRequestId: The ID of the signature request
+    ///   - signRequestId: The ID of the signature request.
     ///     Example: "33243242"
     ///   - headers: Headers of getSignRequestById method
     /// - Returns: The `SignRequest`.

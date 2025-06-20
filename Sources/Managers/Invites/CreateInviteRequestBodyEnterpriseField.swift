@@ -14,13 +14,13 @@ public class CreateInviteRequestBodyEnterpriseField: Codable, RawJSONReadable {
     }
 
 
-    /// The ID of the enterprise
+    /// The ID of the enterprise.
     public let id: String
 
     /// Initializer for a CreateInviteRequestBodyEnterpriseField.
     ///
     /// - Parameters:
-    ///   - id: The ID of the enterprise
+    ///   - id: The ID of the enterprise.
     public init(id: String) {
         self.id = id
     }
