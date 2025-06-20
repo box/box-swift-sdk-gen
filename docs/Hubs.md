@@ -15,7 +15,10 @@ This operation is performed by calling function `getHubsV2025R0`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2025.0/get-hubs/).
 
-*Currently we don't have an example for calling `getHubsV2025R0` in integration tests*
+<!-- sample get_hubs_v2025.0 -->
+```
+try await client.hubs.getHubsV2025R0(queryParams: GetHubsV2025R0QueryParams(scope: "all", sort: "name", direction: GetHubsV2025R0QueryParamsDirectionField.asc))
+```
 
 ### Arguments
 
@@ -44,7 +47,10 @@ This operation is performed by calling function `getEnterpriseHubsV2025R0`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2025.0/get-enterprise-hubs/).
 
-*Currently we don't have an example for calling `getEnterpriseHubsV2025R0` in integration tests*
+<!-- sample get_enterprise_hubs_v2025.0 -->
+```
+try await client.hubs.getEnterpriseHubsV2025R0(queryParams: GetEnterpriseHubsV2025R0QueryParams(sort: "name", direction: GetEnterpriseHubsV2025R0QueryParamsDirectionField.asc))
+```
 
 ### Arguments
 
@@ -70,7 +76,10 @@ This operation is performed by calling function `getHubByIdV2025R0`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2025.0/get-hubs-id/).
 
-*Currently we don't have an example for calling `getHubByIdV2025R0` in integration tests*
+<!-- sample get_hubs_id_v2025.0 -->
+```
+try await client.hubs.getHubByIdV2025R0(hubId: userHub.id)
+```
 
 ### Arguments
 
@@ -96,7 +105,10 @@ This operation is performed by calling function `deleteHubByIdV2025R0`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/v2025.0/delete-hubs-id/).
 
-*Currently we don't have an example for calling `deleteHubByIdV2025R0` in integration tests*
+<!-- sample delete_hubs_id_v2025.0 -->
+```
+try await client.hubs.deleteHubByIdV2025R0(hubId: hub.id)
+```
 
 ### Arguments
 
