@@ -6,6 +6,7 @@ public class AiAgentAsk: Codable, RawJSONReadable {
         case type
         case longText = "long_text"
         case basicText = "basic_text"
+        case spreadsheet
         case longTextMulti = "long_text_multi"
         case basicTextMulti = "basic_text_multi"
         case basicImage = "basic_image"
@@ -28,6 +29,8 @@ public class AiAgentAsk: Codable, RawJSONReadable {
 
     public let basicText: AiAgentBasicTextTool?
 
+    public let spreadsheet: AiAgentSpreadsheetTool?
+
     public let longTextMulti: AiAgentLongTextTool?
 
     public let basicTextMulti: AiAgentBasicTextTool?
@@ -42,14 +45,16 @@ public class AiAgentAsk: Codable, RawJSONReadable {
     ///   - type: The type of AI agent used to handle queries.
     ///   - longText: 
     ///   - basicText: 
+    ///   - spreadsheet: 
     ///   - longTextMulti: 
     ///   - basicTextMulti: 
     ///   - basicImage: 
     ///   - basicImageMulti: 
-    public init(type: AiAgentAskTypeField = AiAgentAskTypeField.aiAgentAsk, longText: AiAgentLongTextTool? = nil, basicText: AiAgentBasicTextTool? = nil, longTextMulti: AiAgentLongTextTool? = nil, basicTextMulti: AiAgentBasicTextTool? = nil, basicImage: AiAgentBasicTextTool? = nil, basicImageMulti: AiAgentBasicTextTool? = nil) {
+    public init(type: AiAgentAskTypeField = AiAgentAskTypeField.aiAgentAsk, longText: AiAgentLongTextTool? = nil, basicText: AiAgentBasicTextTool? = nil, spreadsheet: AiAgentSpreadsheetTool? = nil, longTextMulti: AiAgentLongTextTool? = nil, basicTextMulti: AiAgentBasicTextTool? = nil, basicImage: AiAgentBasicTextTool? = nil, basicImageMulti: AiAgentBasicTextTool? = nil) {
         self.type = type
         self.longText = longText
         self.basicText = basicText
+        self.spreadsheet = spreadsheet
         self.longTextMulti = longTextMulti
         self.basicTextMulti = basicTextMulti
         self.basicImage = basicImage
@@ -61,6 +66,7 @@ public class AiAgentAsk: Codable, RawJSONReadable {
         type = try container.decode(AiAgentAskTypeField.self, forKey: .type)
         longText = try container.decodeIfPresent(AiAgentLongTextTool.self, forKey: .longText)
         basicText = try container.decodeIfPresent(AiAgentBasicTextTool.self, forKey: .basicText)
+        spreadsheet = try container.decodeIfPresent(AiAgentSpreadsheetTool.self, forKey: .spreadsheet)
         longTextMulti = try container.decodeIfPresent(AiAgentLongTextTool.self, forKey: .longTextMulti)
         basicTextMulti = try container.decodeIfPresent(AiAgentBasicTextTool.self, forKey: .basicTextMulti)
         basicImage = try container.decodeIfPresent(AiAgentBasicTextTool.self, forKey: .basicImage)
@@ -72,6 +78,7 @@ public class AiAgentAsk: Codable, RawJSONReadable {
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(longText, forKey: .longText)
         try container.encodeIfPresent(basicText, forKey: .basicText)
+        try container.encodeIfPresent(spreadsheet, forKey: .spreadsheet)
         try container.encodeIfPresent(longTextMulti, forKey: .longTextMulti)
         try container.encodeIfPresent(basicTextMulti, forKey: .basicTextMulti)
         try container.encodeIfPresent(basicImage, forKey: .basicImage)
