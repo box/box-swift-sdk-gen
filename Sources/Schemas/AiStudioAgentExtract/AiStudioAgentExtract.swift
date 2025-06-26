@@ -1,6 +1,6 @@
 import Foundation
 
-/// The AI Agent to be used for extraction.
+/// The AI agent to be used for metadata extraction.
 public class AiStudioAgentExtract: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case accessState = "access_state"
@@ -9,6 +9,7 @@ public class AiStudioAgentExtract: Codable, RawJSONReadable {
         case customInstructions = "custom_instructions"
         case longText = "long_text"
         case basicText = "basic_text"
+        case basicImage = "basic_image"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -23,35 +24,39 @@ public class AiStudioAgentExtract: Codable, RawJSONReadable {
     /// The state of the AI Agent capability. Possible values are: `enabled` and `disabled`.
     public let accessState: String
 
-    /// The description of the AI Agent.
+    /// The description of the AI agent.
     public let description: String
 
-    /// The type of AI agent to be used for extraction.
+    /// The type of AI agent to be used for metadata extraction.
     public let type: AiStudioAgentExtractTypeField
 
-    /// Custom instructions for the agent.
+    /// Custom instructions for the AI agent.
     @CodableTriState public private(set) var customInstructions: String?
 
     public let longText: AiStudioAgentLongTextTool?
 
     public let basicText: AiStudioAgentBasicTextTool?
 
+    public let basicImage: AiStudioAgentBasicTextTool?
+
     /// Initializer for a AiStudioAgentExtract.
     ///
     /// - Parameters:
     ///   - accessState: The state of the AI Agent capability. Possible values are: `enabled` and `disabled`.
-    ///   - description: The description of the AI Agent.
-    ///   - type: The type of AI agent to be used for extraction.
-    ///   - customInstructions: Custom instructions for the agent.
+    ///   - description: The description of the AI agent.
+    ///   - type: The type of AI agent to be used for metadata extraction.
+    ///   - customInstructions: Custom instructions for the AI agent.
     ///   - longText: 
     ///   - basicText: 
-    public init(accessState: String, description: String, type: AiStudioAgentExtractTypeField = AiStudioAgentExtractTypeField.aiAgentExtract, customInstructions: TriStateField<String> = nil, longText: AiStudioAgentLongTextTool? = nil, basicText: AiStudioAgentBasicTextTool? = nil) {
+    ///   - basicImage: 
+    public init(accessState: String, description: String, type: AiStudioAgentExtractTypeField = AiStudioAgentExtractTypeField.aiAgentExtract, customInstructions: TriStateField<String> = nil, longText: AiStudioAgentLongTextTool? = nil, basicText: AiStudioAgentBasicTextTool? = nil, basicImage: AiStudioAgentBasicTextTool? = nil) {
         self.accessState = accessState
         self.description = description
         self.type = type
         self._customInstructions = CodableTriState(state: customInstructions)
         self.longText = longText
         self.basicText = basicText
+        self.basicImage = basicImage
     }
 
     required public init(from decoder: Decoder) throws {
@@ -62,6 +67,7 @@ public class AiStudioAgentExtract: Codable, RawJSONReadable {
         customInstructions = try container.decodeIfPresent(String.self, forKey: .customInstructions)
         longText = try container.decodeIfPresent(AiStudioAgentLongTextTool.self, forKey: .longText)
         basicText = try container.decodeIfPresent(AiStudioAgentBasicTextTool.self, forKey: .basicText)
+        basicImage = try container.decodeIfPresent(AiStudioAgentBasicTextTool.self, forKey: .basicImage)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -72,6 +78,7 @@ public class AiStudioAgentExtract: Codable, RawJSONReadable {
         try container.encode(field: _customInstructions.state, forKey: .customInstructions)
         try container.encodeIfPresent(longText, forKey: .longText)
         try container.encodeIfPresent(basicText, forKey: .basicText)
+        try container.encodeIfPresent(basicImage, forKey: .basicImage)
     }
 
     /// Sets the raw JSON data.

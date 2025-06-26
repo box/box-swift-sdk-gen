@@ -1,16 +1,20 @@
 import Foundation
 
-/// The AI Agent to be used for ask.
+/// The AI agent to be used to ask questions.
 public class AiStudioAgentAskResponse: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case accessState = "access_state"
         case description
         case type
         case customInstructions = "custom_instructions"
+        case suggestedQuestions = "suggested_questions"
         case longText = "long_text"
         case basicText = "basic_text"
+        case basicImage = "basic_image"
+        case spreadsheet
         case longTextMulti = "long_text_multi"
         case basicTextMulti = "basic_text_multi"
+        case basicImageMulti = "basic_image_multi"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -25,43 +29,60 @@ public class AiStudioAgentAskResponse: Codable, RawJSONReadable {
     /// The state of the AI Agent capability. Possible values are: `enabled` and `disabled`.
     public let accessState: String
 
-    /// The description of the AI Agent.
+    /// The description of the AI agent.
     public let description: String
 
-    /// The type of AI agent used to handle queries.
+    /// The type of AI agent used to ask questions.
     public let type: AiStudioAgentAskResponseTypeField
 
-    /// Custom instructions for the agent.
+    /// Custom instructions for the AI agent.
     @CodableTriState public private(set) var customInstructions: String?
+
+    /// Suggested questions for the AI agent. If null, suggested question will be generated. If empty, no suggested questions will be displayed.
+    public let suggestedQuestions: [String]?
 
     public let longText: AiStudioAgentLongTextToolResponse?
 
     public let basicText: AiStudioAgentBasicTextToolResponse?
 
+    public let basicImage: AiStudioAgentBasicTextToolResponse?
+
+    public let spreadsheet: AiStudioAgentSpreadsheetToolResponse?
+
     public let longTextMulti: AiStudioAgentLongTextToolResponse?
 
     public let basicTextMulti: AiStudioAgentBasicTextToolResponse?
+
+    public let basicImageMulti: AiStudioAgentBasicTextToolResponse?
 
     /// Initializer for a AiStudioAgentAskResponse.
     ///
     /// - Parameters:
     ///   - accessState: The state of the AI Agent capability. Possible values are: `enabled` and `disabled`.
-    ///   - description: The description of the AI Agent.
-    ///   - type: The type of AI agent used to handle queries.
-    ///   - customInstructions: Custom instructions for the agent.
+    ///   - description: The description of the AI agent.
+    ///   - type: The type of AI agent used to ask questions.
+    ///   - customInstructions: Custom instructions for the AI agent.
+    ///   - suggestedQuestions: Suggested questions for the AI agent. If null, suggested question will be generated. If empty, no suggested questions will be displayed.
     ///   - longText: 
     ///   - basicText: 
+    ///   - basicImage: 
+    ///   - spreadsheet: 
     ///   - longTextMulti: 
     ///   - basicTextMulti: 
-    public init(accessState: String, description: String, type: AiStudioAgentAskResponseTypeField = AiStudioAgentAskResponseTypeField.aiAgentAsk, customInstructions: TriStateField<String> = nil, longText: AiStudioAgentLongTextToolResponse? = nil, basicText: AiStudioAgentBasicTextToolResponse? = nil, longTextMulti: AiStudioAgentLongTextToolResponse? = nil, basicTextMulti: AiStudioAgentBasicTextToolResponse? = nil) {
+    ///   - basicImageMulti: 
+    public init(accessState: String, description: String, type: AiStudioAgentAskResponseTypeField = AiStudioAgentAskResponseTypeField.aiAgentAsk, customInstructions: TriStateField<String> = nil, suggestedQuestions: [String]? = nil, longText: AiStudioAgentLongTextToolResponse? = nil, basicText: AiStudioAgentBasicTextToolResponse? = nil, basicImage: AiStudioAgentBasicTextToolResponse? = nil, spreadsheet: AiStudioAgentSpreadsheetToolResponse? = nil, longTextMulti: AiStudioAgentLongTextToolResponse? = nil, basicTextMulti: AiStudioAgentBasicTextToolResponse? = nil, basicImageMulti: AiStudioAgentBasicTextToolResponse? = nil) {
         self.accessState = accessState
         self.description = description
         self.type = type
         self._customInstructions = CodableTriState(state: customInstructions)
+        self.suggestedQuestions = suggestedQuestions
         self.longText = longText
         self.basicText = basicText
+        self.basicImage = basicImage
+        self.spreadsheet = spreadsheet
         self.longTextMulti = longTextMulti
         self.basicTextMulti = basicTextMulti
+        self.basicImageMulti = basicImageMulti
     }
 
     required public init(from decoder: Decoder) throws {
@@ -70,10 +91,14 @@ public class AiStudioAgentAskResponse: Codable, RawJSONReadable {
         description = try container.decode(String.self, forKey: .description)
         type = try container.decode(AiStudioAgentAskResponseTypeField.self, forKey: .type)
         customInstructions = try container.decodeIfPresent(String.self, forKey: .customInstructions)
+        suggestedQuestions = try container.decodeIfPresent([String].self, forKey: .suggestedQuestions)
         longText = try container.decodeIfPresent(AiStudioAgentLongTextToolResponse.self, forKey: .longText)
         basicText = try container.decodeIfPresent(AiStudioAgentBasicTextToolResponse.self, forKey: .basicText)
+        basicImage = try container.decodeIfPresent(AiStudioAgentBasicTextToolResponse.self, forKey: .basicImage)
+        spreadsheet = try container.decodeIfPresent(AiStudioAgentSpreadsheetToolResponse.self, forKey: .spreadsheet)
         longTextMulti = try container.decodeIfPresent(AiStudioAgentLongTextToolResponse.self, forKey: .longTextMulti)
         basicTextMulti = try container.decodeIfPresent(AiStudioAgentBasicTextToolResponse.self, forKey: .basicTextMulti)
+        basicImageMulti = try container.decodeIfPresent(AiStudioAgentBasicTextToolResponse.self, forKey: .basicImageMulti)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -82,10 +107,14 @@ public class AiStudioAgentAskResponse: Codable, RawJSONReadable {
         try container.encode(description, forKey: .description)
         try container.encode(type, forKey: .type)
         try container.encode(field: _customInstructions.state, forKey: .customInstructions)
+        try container.encodeIfPresent(suggestedQuestions, forKey: .suggestedQuestions)
         try container.encodeIfPresent(longText, forKey: .longText)
         try container.encodeIfPresent(basicText, forKey: .basicText)
+        try container.encodeIfPresent(basicImage, forKey: .basicImage)
+        try container.encodeIfPresent(spreadsheet, forKey: .spreadsheet)
         try container.encodeIfPresent(longTextMulti, forKey: .longTextMulti)
         try container.encodeIfPresent(basicTextMulti, forKey: .basicTextMulti)
+        try container.encodeIfPresent(basicImageMulti, forKey: .basicImageMulti)
     }
 
     /// Sets the raw JSON data.

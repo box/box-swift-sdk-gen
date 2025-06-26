@@ -1,12 +1,13 @@
 import Foundation
 
-/// The AI agent used for generating text.
+/// The AI agent to be used to generate text.
 public class AiStudioAgentTextGenResponse: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case accessState = "access_state"
         case description
         case type
         case customInstructions = "custom_instructions"
+        case suggestedQuestions = "suggested_questions"
         case basicGen = "basic_gen"
     }
 
@@ -22,14 +23,17 @@ public class AiStudioAgentTextGenResponse: Codable, RawJSONReadable {
     /// The state of the AI Agent capability. Possible values are: `enabled` and `disabled`.
     public let accessState: String
 
-    /// The description of the AI Agent.
+    /// The description of the AI agent.
     public let description: String
 
     /// The type of AI agent used for generating text.
     public let type: AiStudioAgentTextGenResponseTypeField
 
-    /// Custom instructions for the agent.
+    /// Custom instructions for the AI agent.
     @CodableTriState public private(set) var customInstructions: String?
+
+    /// Suggested questions for the AI agent. If null, suggested question will be generated. If empty, no suggested questions will be displayed.
+    public let suggestedQuestions: [String]?
 
     public let basicGen: AiStudioAgentBasicGenToolResponse?
 
@@ -37,15 +41,17 @@ public class AiStudioAgentTextGenResponse: Codable, RawJSONReadable {
     ///
     /// - Parameters:
     ///   - accessState: The state of the AI Agent capability. Possible values are: `enabled` and `disabled`.
-    ///   - description: The description of the AI Agent.
+    ///   - description: The description of the AI agent.
     ///   - type: The type of AI agent used for generating text.
-    ///   - customInstructions: Custom instructions for the agent.
+    ///   - customInstructions: Custom instructions for the AI agent.
+    ///   - suggestedQuestions: Suggested questions for the AI agent. If null, suggested question will be generated. If empty, no suggested questions will be displayed.
     ///   - basicGen: 
-    public init(accessState: String, description: String, type: AiStudioAgentTextGenResponseTypeField = AiStudioAgentTextGenResponseTypeField.aiAgentTextGen, customInstructions: TriStateField<String> = nil, basicGen: AiStudioAgentBasicGenToolResponse? = nil) {
+    public init(accessState: String, description: String, type: AiStudioAgentTextGenResponseTypeField = AiStudioAgentTextGenResponseTypeField.aiAgentTextGen, customInstructions: TriStateField<String> = nil, suggestedQuestions: [String]? = nil, basicGen: AiStudioAgentBasicGenToolResponse? = nil) {
         self.accessState = accessState
         self.description = description
         self.type = type
         self._customInstructions = CodableTriState(state: customInstructions)
+        self.suggestedQuestions = suggestedQuestions
         self.basicGen = basicGen
     }
 
@@ -55,6 +61,7 @@ public class AiStudioAgentTextGenResponse: Codable, RawJSONReadable {
         description = try container.decode(String.self, forKey: .description)
         type = try container.decode(AiStudioAgentTextGenResponseTypeField.self, forKey: .type)
         customInstructions = try container.decodeIfPresent(String.self, forKey: .customInstructions)
+        suggestedQuestions = try container.decodeIfPresent([String].self, forKey: .suggestedQuestions)
         basicGen = try container.decodeIfPresent(AiStudioAgentBasicGenToolResponse.self, forKey: .basicGen)
     }
 
@@ -64,6 +71,7 @@ public class AiStudioAgentTextGenResponse: Codable, RawJSONReadable {
         try container.encode(description, forKey: .description)
         try container.encode(type, forKey: .type)
         try container.encode(field: _customInstructions.state, forKey: .customInstructions)
+        try container.encodeIfPresent(suggestedQuestions, forKey: .suggestedQuestions)
         try container.encodeIfPresent(basicGen, forKey: .basicGen)
     }
 
