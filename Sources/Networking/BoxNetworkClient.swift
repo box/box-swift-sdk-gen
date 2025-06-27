@@ -8,7 +8,20 @@ public class BoxNetworkClient: NetworkClient {
 
     private let utilityQueue = DispatchQueue.global(qos: .utility)
 
-    public init(){}
+    /// The URLSession object used to perform network requests.
+    private let session: URLSession
+
+    /// Handles redirect behavior for URLSession tasks on a per-task basis.
+    private let redirectHandler: RedirectHandler
+
+    ///  Initializer
+    ///
+    /// - Parameters:
+    ///   - configuration: A configuration object that specifies certain behaviors, such as caching policies, timeouts, proxies, pipelining, TLS versions to support, cookie policies, and credential storage.
+    public init(configuration: URLSessionConfiguration = URLSessionConfiguration.default) {
+        self.redirectHandler = RedirectHandler()
+        self.session = URLSession(configuration: configuration, delegate: redirectHandler, delegateQueue: nil)
+    }
 
     /// Executes requests
     ///
@@ -53,11 +66,11 @@ public class BoxNetworkClient: NetworkClient {
         }
 
         if let downloadDestinationUrl = options.downloadDestinationUrl, options.responseFormat == .binary {
-            let (downloadUrl, urlResponse) = try await sendDownloadRequest(urlRequest, downloadDestinationURL: downloadDestinationUrl, networkSession: networkSession)
+            let (downloadUrl, urlResponse) = try await sendDownloadRequest(urlRequest, downloadDestinationURL: downloadDestinationUrl)
             let conversation = FetchConversation(options: options, urlRequest: urlRequest, urlResponse: urlResponse as! HTTPURLResponse, responseType: .url(downloadUrl))
             return try await processResponse(using: conversation, networkSession: networkSession, attempt: attempt)
         } else {
-            let (data, urlResponse) =  try await sendDataRequest(urlRequest, networkSession: networkSession)
+            let (data, urlResponse) =  try await sendDataRequest(urlRequest, followRedirects: options.followRedirects ?? true)
             let conversation = FetchConversation(options: options, urlRequest: urlRequest, urlResponse: urlResponse as! HTTPURLResponse, responseType: .data(data))
             return try await processResponse(using: conversation, networkSession: networkSession, attempt: attempt)
         }
@@ -67,12 +80,20 @@ public class BoxNetworkClient: NetworkClient {
     ///
     /// - Parameters:
     ///   - urlRequest: The request object.
+    ///   - followRedirects: Whether the request should follow redirect or not
     ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
     /// - Returns: Tuple of  of (Data, URLResponse)
     /// - Throws: An error if the request fails for any reason.
-    private func sendDataRequest(_ urlRequest: URLRequest, networkSession: NetworkSession) async throws -> (Data, URLResponse) {
-        return try await withCheckedThrowingContinuation { continuation in
-            networkSession.session.dataTask(with: urlRequest) { data, response, error in
+    private func sendDataRequest(_ urlRequest: URLRequest, followRedirects: Bool) async throws -> (Data, URLResponse) {
+        return try await withCheckedThrowingContinuation { [weak self] continuation in
+            guard let self = self else {
+                continuation.resume(
+                    with: .failure(BoxNetworkError(message: "Request failed: self was deallocated before execution."))
+                )
+                return
+            }
+
+            let task = self.session.dataTask(with: urlRequest) { data, response, error in
                 if let error = error {
                     continuation.resume(with: .failure(BoxNetworkError(message: error.localizedDescription, error: error)))
                     return
@@ -89,7 +110,9 @@ public class BoxNetworkClient: NetworkClient {
                     with: .success((data ?? Data(), response))
                 )
             }
-            .resume()
+
+            self.redirectHandler.setRedirectAllowed(followRedirects, for: task)
+            task.resume()
         }
     }
 
@@ -97,12 +120,19 @@ public class BoxNetworkClient: NetworkClient {
     ///
     /// - Parameters:
     ///   - urlRequest: The request object.
-    ///   - networkSession: The Networking Session object which provides the URLSession object along with a network configuration parameters used in network communication.
+    ///   - downloadDestinationURL: The URL on disk where the file will be saved.
     /// - Returns: Tuple of  of (URL, URLResponse)
     /// - Throws: An error if the request fails for any reason.
-    private func sendDownloadRequest(_ urlRequest: URLRequest, downloadDestinationURL: URL, networkSession: NetworkSession) async throws -> (URL, URLResponse) {
-        return try await withCheckedThrowingContinuation { continuation in
-            networkSession.session.downloadTask(with: urlRequest) { location, response, error in
+    private func sendDownloadRequest(_ urlRequest: URLRequest, downloadDestinationURL: URL) async throws -> (URL, URLResponse) {
+        return try await withCheckedThrowingContinuation { [weak self] continuation in
+            guard let self = self else {
+                continuation.resume(
+                    with: .failure(BoxNetworkError(message: "Request failed: self was deallocated before execution."))
+                )
+                return
+            }
+
+            let task = self.session.downloadTask(with: urlRequest) { location, response, error in
                 if let error = error {
                     continuation.resume(with: .failure(BoxNetworkError(message: error.localizedDescription, error: error)))
                     return
@@ -135,7 +165,10 @@ public class BoxNetworkClient: NetworkClient {
                 continuation.resume(
                     with: .success((downloadDestinationURL, response))
                 )
-            }.resume()
+            }
+
+            self.redirectHandler.setRedirectAllowed(true, for: task)
+            task.resume()
         }
     }
 

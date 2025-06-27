@@ -14,6 +14,16 @@ class FilesManagerTests: XCTestCase {
         return uploadedFiles.entries![0]
     }
 
+    public func testGetFileThumbnailUrl() async throws {
+        let thumbnailFileName: String = Utils.getUUID()
+        let thumbnailContentStream: InputStream = Utils.generateByteStream(size: 1024 * 1024)
+        let thumbnailFile: FileFull = try await uploadFile(fileName: thumbnailFileName, fileStream: thumbnailContentStream)
+        let downloadUrl: String = try await client.files.getFileThumbnailUrl(fileId: thumbnailFile.id, extension_: GetFileThumbnailUrlExtension.png)
+        XCTAssertTrue(downloadUrl != nil)
+        XCTAssertTrue(downloadUrl.contains("https://"))
+        try await client.files.deleteFileById(fileId: thumbnailFile.id)
+    }
+
     public func testGetFileThumbnail() async throws {
         let thumbnailFileName: String = Utils.getUUID()
         let thumbnailBuffer: Data = Utils.generateByteBuffer(size: 1024 * 1024)
