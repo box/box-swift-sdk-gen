@@ -20,4 +20,12 @@ class DownloadsManagerTests: XCTestCase {
         XCTAssertTrue(Utils.bufferEquals(buffer1: Utils.readBufferFromFile(filePath: destinationPathString), buffer2: fileBuffer))
         try await client.files.deleteFileById(fileId: uploadedFile.id)
     }
+
+    public func testGetDownloadUrl() async throws {
+        let uploadedFile: FileFull = try await CommonsManager().uploadNewFile()
+        let downloadUrl: String = try await client.downloads.getDownloadFileUrl(fileId: uploadedFile.id)
+        XCTAssertTrue(downloadUrl != nil)
+        XCTAssertTrue(downloadUrl.contains("https://"))
+        try await client.files.deleteFileById(fileId: uploadedFile.id)
+    }
 }
