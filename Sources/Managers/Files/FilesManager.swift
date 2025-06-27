@@ -123,6 +123,47 @@ public class FilesManager {
     ///     Example: "12345"
     ///   - extension_: The file format for the thumbnail.
     ///     Example: "png"
+    ///   - queryParams: Query parameters of getFileThumbnailById method
+    ///   - headers: Headers of getFileThumbnailById method
+    /// - Returns: The `String`.
+    /// - Throws: The `GeneralError`.
+    public func getFileThumbnailUrl(fileId: String, extension_: GetFileThumbnailUrlExtension, queryParams: GetFileThumbnailUrlQueryParams = GetFileThumbnailUrlQueryParams(), headers: GetFileThumbnailUrlHeaders = GetFileThumbnailUrlHeaders()) async throws -> String {
+        let queryParamsMap: [String: String] = Utils.Dictionary.prepareParams(map: ["min_height": Utils.Strings.toString(value: queryParams.minHeight), "min_width": Utils.Strings.toString(value: queryParams.minWidth), "max_height": Utils.Strings.toString(value: queryParams.maxHeight), "max_width": Utils.Strings.toString(value: queryParams.maxWidth)])
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge([:], headers.extraHeaders))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/files/")\(fileId)\("/thumbnail.")\(extension_)", method: "GET", params: queryParamsMap, headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession, followRedirects: false))
+        if response.headers.keys.contains("location") {
+            return response.headers["location"]!
+        }
+
+        if response.headers.keys.contains("Location") {
+            return response.headers["Location"]!
+        }
+
+        throw BoxSDKError(message: "No location header in response")
+    }
+
+    /// Retrieves a thumbnail, or smaller image representation, of a file.
+    /// 
+    /// Sizes of `32x32`,`64x64`, `128x128`, and `256x256` can be returned in
+    /// the `.png` format and sizes of `32x32`, `160x160`, and `320x320`
+    /// can be returned in the `.jpg` format.
+    /// 
+    /// Thumbnails can be generated for the image and video file formats listed
+    /// [found on our community site][1].
+    /// 
+    /// [1]: https://community.box.com/t5/Migrating-and-Previewing-Content/File-Types-and-Fonts-Supported-in-Box-Content-Preview/ta-p/327
+    ///
+    /// - Parameters:
+    ///   - fileId: The unique identifier that represents a file.
+    ///     
+    ///     The ID for any file can be determined
+    ///     by visiting a file in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/files/123`
+    ///     the `file_id` is `123`.
+    ///     Example: "12345"
+    ///   - extension_: The file format for the thumbnail.
+    ///     Example: "png"
     ///   - downloadDestinationUrl: The URL on disk where the file will be saved once it has been downloaded.
     ///   - queryParams: Query parameters of getFileThumbnailById method
     ///   - headers: Headers of getFileThumbnailById method

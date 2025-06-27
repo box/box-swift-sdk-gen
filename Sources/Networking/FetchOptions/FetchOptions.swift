@@ -37,6 +37,9 @@ public class FetchOptions {
     /// Network session object
     public let networkSession: NetworkSession?
 
+    /// A boolean value indicate if the request should follow redirects. Defaults to True. Not supported in Browser environment.
+    public let followRedirects: Bool?
+
     /// Initializer for a FetchOptions.
     ///
     /// - Parameters:
@@ -52,7 +55,8 @@ public class FetchOptions {
     ///   - downloadDestinationUrl: The URL on disk where the file will be saved
     ///   - auth: Authentication object
     ///   - networkSession: Network session object
-    public init(url: String, method: String, params: [String: String]? = nil, headers: [String: String]? = nil, data: SerializedData? = nil, fileStream: InputStream? = nil, multipartData: [MultipartItem]? = nil, contentType: String = "application/json", responseFormat: ResponseFormat = ResponseFormat.json, downloadDestinationUrl: URL? = nil, auth: Authentication? = nil, networkSession: NetworkSession? = nil) {
+    ///   - followRedirects: A boolean value indicate if the request should follow redirects. Defaults to True. Not supported in Browser environment.
+    public init(url: String, method: String, params: [String: String]? = nil, headers: [String: String]? = nil, data: SerializedData? = nil, fileStream: InputStream? = nil, multipartData: [MultipartItem]? = nil, contentType: String = "application/json", responseFormat: ResponseFormat = ResponseFormat.json, downloadDestinationUrl: URL? = nil, auth: Authentication? = nil, networkSession: NetworkSession? = nil, followRedirects: Bool? = true) {
         self.url = url
         self.method = method
         self.params = params
@@ -65,6 +69,7 @@ public class FetchOptions {
         self.downloadDestinationUrl = downloadDestinationUrl
         self.auth = auth
         self.networkSession = networkSession
+        self.followRedirects = followRedirects
     }
 
 }

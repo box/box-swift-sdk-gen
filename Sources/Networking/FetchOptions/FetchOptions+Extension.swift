@@ -19,7 +19,8 @@ extension FetchOptions {
             responseFormat: responseFormat,
             downloadDestinationUrl: downloadDestinationUrl,
             auth: auth,
-            networkSession: networkSession
+            networkSession: networkSession,
+            followRedirects: followRedirects
         )
     }
 }
