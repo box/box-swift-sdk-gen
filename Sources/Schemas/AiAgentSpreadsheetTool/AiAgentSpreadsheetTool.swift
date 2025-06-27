@@ -1,6 +1,6 @@
 import Foundation
 
-/// AI agent processor used to handle spreadsheets and tabular data.
+/// The AI agent tool used to handle spreadsheets and tabular data.
 public class AiAgentSpreadsheetTool: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case model

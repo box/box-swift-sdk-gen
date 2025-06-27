@@ -1,6 +1,6 @@
 import Foundation
 
-/// The AI Agent to be used for extraction.
+/// The AI agent to be used for metadata extraction.
 public class AiStudioAgentExtractResponse: Codable, RawJSONReadable {
     private enum CodingKeys: String, CodingKey {
         case accessState = "access_state"
@@ -9,6 +9,7 @@ public class AiStudioAgentExtractResponse: Codable, RawJSONReadable {
         case customInstructions = "custom_instructions"
         case longText = "long_text"
         case basicText = "basic_text"
+        case basicImage = "basic_image"
     }
 
     /// Internal backing store for rawData. Used to store raw dictionary data associated with the instance.
@@ -23,35 +24,39 @@ public class AiStudioAgentExtractResponse: Codable, RawJSONReadable {
     /// The state of the AI Agent capability. Possible values are: `enabled` and `disabled`.
     public let accessState: String
 
-    /// The description of the AI Agent.
+    /// The description of the AI agent.
     public let description: String
 
-    /// The type of AI agent to be used for extraction.
+    /// The type of AI agent to be used for metadata extraction.
     public let type: AiStudioAgentExtractResponseTypeField
 
-    /// Custom instructions for the agent.
+    /// Custom instructions for the AI agent.
     @CodableTriState public private(set) var customInstructions: String?
 
     public let longText: AiStudioAgentLongTextToolResponse?
 
     public let basicText: AiStudioAgentBasicTextToolResponse?
 
+    public let basicImage: AiStudioAgentBasicTextToolResponse?
+
     /// Initializer for a AiStudioAgentExtractResponse.
     ///
     /// - Parameters:
     ///   - accessState: The state of the AI Agent capability. Possible values are: `enabled` and `disabled`.
-    ///   - description: The description of the AI Agent.
-    ///   - type: The type of AI agent to be used for extraction.
-    ///   - customInstructions: Custom instructions for the agent.
+    ///   - description: The description of the AI agent.
+    ///   - type: The type of AI agent to be used for metadata extraction.
+    ///   - customInstructions: Custom instructions for the AI agent.
     ///   - longText: 
     ///   - basicText: 
-    public init(accessState: String, description: String, type: AiStudioAgentExtractResponseTypeField = AiStudioAgentExtractResponseTypeField.aiAgentExtract, customInstructions: TriStateField<String> = nil, longText: AiStudioAgentLongTextToolResponse? = nil, basicText: AiStudioAgentBasicTextToolResponse? = nil) {
+    ///   - basicImage: 
+    public init(accessState: String, description: String, type: AiStudioAgentExtractResponseTypeField = AiStudioAgentExtractResponseTypeField.aiAgentExtract, customInstructions: TriStateField<String> = nil, longText: AiStudioAgentLongTextToolResponse? = nil, basicText: AiStudioAgentBasicTextToolResponse? = nil, basicImage: AiStudioAgentBasicTextToolResponse? = nil) {
         self.accessState = accessState
         self.description = description
         self.type = type
         self._customInstructions = CodableTriState(state: customInstructions)
         self.longText = longText
         self.basicText = basicText
+        self.basicImage = basicImage
     }
 
     required public init(from decoder: Decoder) throws {
@@ -62,6 +67,7 @@ public class AiStudioAgentExtractResponse: Codable, RawJSONReadable {
         customInstructions = try container.decodeIfPresent(String.self, forKey: .customInstructions)
         longText = try container.decodeIfPresent(AiStudioAgentLongTextToolResponse.self, forKey: .longText)
         basicText = try container.decodeIfPresent(AiStudioAgentBasicTextToolResponse.self, forKey: .basicText)
+        basicImage = try container.decodeIfPresent(AiStudioAgentBasicTextToolResponse.self, forKey: .basicImage)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -72,6 +78,7 @@ public class AiStudioAgentExtractResponse: Codable, RawJSONReadable {
         try container.encode(field: _customInstructions.state, forKey: .customInstructions)
         try container.encodeIfPresent(longText, forKey: .longText)
         try container.encodeIfPresent(basicText, forKey: .basicText)
+        try container.encodeIfPresent(basicImage, forKey: .basicImage)
     }
 
     /// Sets the raw JSON data.
