@@ -85,21 +85,24 @@ jobs:
             -derivedDataPath build/DerivedData \
             clean test | xcpretty
 
-      - name: Generate Coverage Report with Slather
+      - name: Extract branch name
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: get_branch
+
+      - name: Upload coverage via Slather → Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_BRANCH: ${{ steps.get_branch.outputs.branch }}
         run: |
           slather coverage \
+             --ci-service github \
+            --coverage-service coveralls \
             --scheme BoxSdkGen_iOS \
             --configuration Debug \
             --build-directory build/DerivedData \
             --output-directory slather-report \
-            --lcov \
+            --ignore "Tests/*" \
             BoxSdkGen.xcodeproj
-
-      - name: Upload Coverage to Coveralls
-        uses: coverallsapp/github-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: slather-report/slather.lcov
 
   Linux:
     name: Linux
