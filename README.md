@@ -4,6 +4,14 @@
 
 # Box Swift SDK GENERATED
 
+[![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
+![build](https://github.com/box/box-swift-sdk-gen/actions/workflows/build_and_test.yml/badge.svg)
+[![Platforms](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS_Linux-yellowgreen?style=flat-square)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS_Linux-yellowgreen?style=flat-square)
+[![Coverage](https://coveralls.io/repos/github/box/box-swift-sdk-gen/badge.svg?branch=main)](https://coveralls.io/github/box/box-swift-sdk-gen?branch=main)
+[![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxSdkGen.svg)](https://cocoapods.org/pods/BoxSdkGen)
+
 We are excited to introduce the latest generation (currently in Beta) of Box Swift SDK Gen, designed to elevate the developer experience and streamline your integration with the Box Content Cloud.
 
 With this SDK, you’ll have access to:
