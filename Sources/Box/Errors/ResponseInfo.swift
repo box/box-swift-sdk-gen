@@ -53,10 +53,11 @@ extension ResponseInfo {
     ///
     /// - Returns: A dictionary representing a `ResponseInfo`.
     func getDictionary(dataSanitizer: DataSanitizer) -> [String: Any] {
+
         var dict = [String: Any]()
         dict["statusCode"] = statusCode
         dict["headers"] = dataSanitizer.sanitizeHeaders(headers: headers)
-        dict["rawBody"] = rawBody
+        dict["body"] = JsonUtils.sdToJsonDictionary(from: dataSanitizer.sanitizeBody(body: body ?? SerializedData(data: Data())))
         dict["code"] = code
         dict["contextInfo"] = contextInfo
         dict["requestId"] = requestId

@@ -85,6 +85,37 @@ public enum JsonUtils {
     ///   - keysToSanitize: The keys to sanitize.
     /// - Returns: A new serialized data with the specified keys sanitized.
     public static func sanitizeSerializedData(sd: SerializedData, keysToSanitize: [String: String]) -> SerializedData {
-        return sd
+        let dictionary = JsonUtils.dataToJsonDictionary(from: sd.data)
+        guard let dictionary = dictionary else {
+            return SerializedData(data: Data())
+         }
+
+        let lowercaseKeys = Set(keysToSanitize.keys.map { $0.lowercased() })
+        let sanitizedDictionary = sanitizeDictionary(dictionary: dictionary, keysToSanitize: lowercaseKeys)
+        let sanitizedData = try? JSONSerialization.data(withJSONObject: sanitizedDictionary, options: [])
+        return SerializedData(data: sanitizedData ?? Data())
+    }
+
+    /// Sanitizes a dictionary by replacing the values of specified keys with a sanitized value.
+    ///
+    /// - Parameters:
+    ///   - dictionary: The dictionary to sanitize.
+    ///   - keysToSanitize: The keys to sanitize.
+    /// - Returns: A new dictionary with the specified keys sanitized.
+    internal static func sanitizeDictionary(dictionary: [String: Any], keysToSanitize: Set<String>) -> [String: Any] {
+        var sanitizedDictionary: [String: Any] = [:]
+
+        for (key, value) in dictionary {
+            if value is String,
+               keysToSanitize.contains(key.lowercased()) {
+                sanitizedDictionary[key] = sanitizedValue()
+            } else if let nestedDictionary = value as? [String: Any] {
+                sanitizedDictionary[key] = sanitizeDictionary(dictionary: nestedDictionary, keysToSanitize: keysToSanitize)
+            } else {
+                sanitizedDictionary[key] = value
+            }
+        }
+
+        return sanitizedDictionary
     }
 }

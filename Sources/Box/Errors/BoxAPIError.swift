@@ -45,7 +45,7 @@ extension BoxAPIError {
     /// - Parameters:
     ///   - fromConversation: Represents a data combined with the request and the corresponding response.
     convenience init(fromConversation conversation: FetchConversation, message: String? = nil) {
-        let requestHeaders = conversation.options.headers ?? [:]
+        let requestHeaders = conversation.urlRequest.allHTTPHeaderFields ?? [:]
         let requestInfo = RequestInfo(
             method: conversation.options.method.uppercased(),
             url: conversation.options.url,
