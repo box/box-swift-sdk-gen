@@ -47,7 +47,7 @@ See the endpoint docs at
 
 <!-- sample put_users_id_folders_0 -->
 ```
-try await client.transfer.transferOwnedFolder(userId: newUser.id, requestBody: TransferOwnedFolderRequestBody(ownedBy: TransferOwnedFolderRequestBodyOwnedByField(id: currentUser.id)), queryParams: TransferOwnedFolderQueryParams(notify: false))
+try await client.transfer.transferOwnedFolder(userId: sourceUser.id, requestBody: TransferOwnedFolderRequestBody(ownedBy: TransferOwnedFolderRequestBodyOwnedByField(id: targetUser.id)), queryParams: TransferOwnedFolderQueryParams(notify: false))
 ```
 
 ### Arguments
