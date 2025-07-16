@@ -2,7 +2,7 @@ import Foundation
 import BoxSdkGen
 import XCTest
 
-class ChunkedUploadsManagerTests: XCTestCase {
+class ChunkedUploadsManagerTests: RetryableTestCase {
     var client: BoxClient!
 
     override func setUp() async throws {
@@ -32,29 +32,31 @@ class ChunkedUploadsManagerTests: XCTestCase {
     }
 
     public func testChunkedManualProcessById() async throws {
-        let fileSize: Int = 20 * 1024 * 1024
-        let fileByteStream: InputStream = Utils.generateByteStream(size: fileSize)
-        let fileName: String = Utils.getUUID()
-        let parentFolderId: String = "0"
-        let uploadSession: UploadSession = try await client.chunkedUploads.createFileUploadSession(requestBody: CreateFileUploadSessionRequestBody(folderId: parentFolderId, fileSize: Int64(fileSize), fileName: fileName))
-        let uploadSessionId: String = uploadSession.id!
-        let partSize: Int64 = uploadSession.partSize!
-        let totalParts: Int = uploadSession.totalParts!
-        XCTAssertTrue(partSize * Int64(totalParts) >= fileSize)
-        XCTAssertTrue(uploadSession.numPartsProcessed == 0)
-        let fileHash: Hash = Hash(algorithm: HashName.sha1)
-        let chunksIterator: StreamSequence = Utils.iterateChunks(stream: fileByteStream, chunkSize: partSize, fileSize: Int64(fileSize))
-        let results: TestPartAccumulator = try await Utils.reduceIterator(iterator: chunksIterator, reducer: reducerById, initialValue: TestPartAccumulator(lastIndex: -1, parts: [], fileSize: Int64(fileSize), fileHash: fileHash, uploadSessionId: uploadSessionId))
-        let parts: [UploadPart] = results.parts
-        let processedSessionParts: UploadParts = try await client.chunkedUploads.getFileUploadSessionParts(uploadSessionId: uploadSessionId)
-        XCTAssertTrue(processedSessionParts.totalCount! == totalParts)
-        let processedSession: UploadSession = try await client.chunkedUploads.getFileUploadSessionById(uploadSessionId: uploadSessionId)
-        XCTAssertTrue(processedSession.id! == uploadSessionId)
-        let sha1: String = await fileHash.digestHash(encoding: "base64")
-        let digest: String = "\("sha=")\(sha1)"
-        let committedSession: Files? = try await client.chunkedUploads.createFileUploadSessionCommit(uploadSessionId: uploadSessionId, requestBody: CreateFileUploadSessionCommitRequestBody(parts: parts), headers: CreateFileUploadSessionCommitHeaders(digest: digest))
-        XCTAssertTrue(committedSession!.entries![0].name! == fileName)
-        try await client.chunkedUploads.deleteFileUploadSessionById(uploadSessionId: uploadSessionId)
+        await runWithRetryAsync {
+            let fileSize: Int = 20 * 1024 * 1024
+            let fileByteStream: InputStream = Utils.generateByteStream(size: fileSize)
+            let fileName: String = Utils.getUUID()
+            let parentFolderId: String = "0"
+            let uploadSession: UploadSession = try await client.chunkedUploads.createFileUploadSession(requestBody: CreateFileUploadSessionRequestBody(folderId: parentFolderId, fileSize: Int64(fileSize), fileName: fileName))
+            let uploadSessionId: String = uploadSession.id!
+            let partSize: Int64 = uploadSession.partSize!
+            let totalParts: Int = uploadSession.totalParts!
+            XCTAssertTrue(partSize * Int64(totalParts) >= fileSize)
+            XCTAssertTrue(uploadSession.numPartsProcessed == 0)
+            let fileHash: Hash = Hash(algorithm: HashName.sha1)
+            let chunksIterator: StreamSequence = Utils.iterateChunks(stream: fileByteStream, chunkSize: partSize, fileSize: Int64(fileSize))
+            let results: TestPartAccumulator = try await Utils.reduceIterator(iterator: chunksIterator, reducer: reducerById, initialValue: TestPartAccumulator(lastIndex: -1, parts: [], fileSize: Int64(fileSize), fileHash: fileHash, uploadSessionId: uploadSessionId))
+            let parts: [UploadPart] = results.parts
+            let processedSessionParts: UploadParts = try await client.chunkedUploads.getFileUploadSessionParts(uploadSessionId: uploadSessionId)
+            XCTAssertTrue(processedSessionParts.totalCount! == totalParts)
+            let processedSession: UploadSession = try await client.chunkedUploads.getFileUploadSessionById(uploadSessionId: uploadSessionId)
+            XCTAssertTrue(processedSession.id! == uploadSessionId)
+            let sha1: String = await fileHash.digestHash(encoding: "base64")
+            let digest: String = "\("sha=")\(sha1)"
+            let committedSession: Files? = try await client.chunkedUploads.createFileUploadSessionCommit(uploadSessionId: uploadSessionId, requestBody: CreateFileUploadSessionCommitRequestBody(parts: parts), headers: CreateFileUploadSessionCommitHeaders(digest: digest))
+            XCTAssertTrue(committedSession!.entries![0].name! == fileName)
+            try await client.chunkedUploads.deleteFileUploadSessionById(uploadSessionId: uploadSessionId)
+        }
     }
 
     public func reducerByUrl(acc: TestPartAccumulator, chunk: InputStream) async throws -> TestPartAccumulator {
@@ -80,45 +82,49 @@ class ChunkedUploadsManagerTests: XCTestCase {
     }
 
     public func testChunkedManualProcessByUrl() async throws {
-        let fileSize: Int = 20 * 1024 * 1024
-        let fileByteStream: InputStream = Utils.generateByteStream(size: fileSize)
-        let fileName: String = Utils.getUUID()
-        let parentFolderId: String = "0"
-        let uploadSession: UploadSession = try await client.chunkedUploads.createFileUploadSession(requestBody: CreateFileUploadSessionRequestBody(folderId: parentFolderId, fileSize: Int64(fileSize), fileName: fileName))
-        let uploadPartUrl: String = uploadSession.sessionEndpoints!.uploadPart!
-        let commitUrl: String = uploadSession.sessionEndpoints!.commit!
-        let listPartsUrl: String = uploadSession.sessionEndpoints!.listParts!
-        let statusUrl: String = uploadSession.sessionEndpoints!.status!
-        let abortUrl: String = uploadSession.sessionEndpoints!.abort!
-        let uploadSessionId: String = uploadSession.id!
-        let partSize: Int64 = uploadSession.partSize!
-        let totalParts: Int = uploadSession.totalParts!
-        XCTAssertTrue(partSize * Int64(totalParts) >= fileSize)
-        XCTAssertTrue(uploadSession.numPartsProcessed == 0)
-        let fileHash: Hash = Hash(algorithm: HashName.sha1)
-        let chunksIterator: StreamSequence = Utils.iterateChunks(stream: fileByteStream, chunkSize: partSize, fileSize: Int64(fileSize))
-        let results: TestPartAccumulator = try await Utils.reduceIterator(iterator: chunksIterator, reducer: reducerByUrl, initialValue: TestPartAccumulator(lastIndex: -1, parts: [], fileSize: Int64(fileSize), fileHash: fileHash, uploadPartUrl: uploadPartUrl))
-        let parts: [UploadPart] = results.parts
-        let processedSessionParts: UploadParts = try await client.chunkedUploads.getFileUploadSessionPartsByUrl(url: listPartsUrl)
-        XCTAssertTrue(processedSessionParts.totalCount! == totalParts)
-        let processedSession: UploadSession = try await client.chunkedUploads.getFileUploadSessionByUrl(url: statusUrl)
-        XCTAssertTrue(processedSession.id! == uploadSessionId)
-        let sha1: String = await fileHash.digestHash(encoding: "base64")
-        let digest: String = "\("sha=")\(sha1)"
-        let committedSession: Files? = try await client.chunkedUploads.createFileUploadSessionCommitByUrl(url: commitUrl, requestBody: CreateFileUploadSessionCommitByUrlRequestBody(parts: parts), headers: CreateFileUploadSessionCommitByUrlHeaders(digest: digest))
-        XCTAssertTrue(committedSession!.entries![0].name! == fileName)
-        try await client.chunkedUploads.deleteFileUploadSessionByUrl(url: abortUrl)
+        await runWithRetryAsync {
+            let fileSize: Int = 20 * 1024 * 1024
+            let fileByteStream: InputStream = Utils.generateByteStream(size: fileSize)
+            let fileName: String = Utils.getUUID()
+            let parentFolderId: String = "0"
+            let uploadSession: UploadSession = try await client.chunkedUploads.createFileUploadSession(requestBody: CreateFileUploadSessionRequestBody(folderId: parentFolderId, fileSize: Int64(fileSize), fileName: fileName))
+            let uploadPartUrl: String = uploadSession.sessionEndpoints!.uploadPart!
+            let commitUrl: String = uploadSession.sessionEndpoints!.commit!
+            let listPartsUrl: String = uploadSession.sessionEndpoints!.listParts!
+            let statusUrl: String = uploadSession.sessionEndpoints!.status!
+            let abortUrl: String = uploadSession.sessionEndpoints!.abort!
+            let uploadSessionId: String = uploadSession.id!
+            let partSize: Int64 = uploadSession.partSize!
+            let totalParts: Int = uploadSession.totalParts!
+            XCTAssertTrue(partSize * Int64(totalParts) >= fileSize)
+            XCTAssertTrue(uploadSession.numPartsProcessed == 0)
+            let fileHash: Hash = Hash(algorithm: HashName.sha1)
+            let chunksIterator: StreamSequence = Utils.iterateChunks(stream: fileByteStream, chunkSize: partSize, fileSize: Int64(fileSize))
+            let results: TestPartAccumulator = try await Utils.reduceIterator(iterator: chunksIterator, reducer: reducerByUrl, initialValue: TestPartAccumulator(lastIndex: -1, parts: [], fileSize: Int64(fileSize), fileHash: fileHash, uploadPartUrl: uploadPartUrl))
+            let parts: [UploadPart] = results.parts
+            let processedSessionParts: UploadParts = try await client.chunkedUploads.getFileUploadSessionPartsByUrl(url: listPartsUrl)
+            XCTAssertTrue(processedSessionParts.totalCount! == totalParts)
+            let processedSession: UploadSession = try await client.chunkedUploads.getFileUploadSessionByUrl(url: statusUrl)
+            XCTAssertTrue(processedSession.id! == uploadSessionId)
+            let sha1: String = await fileHash.digestHash(encoding: "base64")
+            let digest: String = "\("sha=")\(sha1)"
+            let committedSession: Files? = try await client.chunkedUploads.createFileUploadSessionCommitByUrl(url: commitUrl, requestBody: CreateFileUploadSessionCommitByUrlRequestBody(parts: parts), headers: CreateFileUploadSessionCommitByUrlHeaders(digest: digest))
+            XCTAssertTrue(committedSession!.entries![0].name! == fileName)
+            try await client.chunkedUploads.deleteFileUploadSessionByUrl(url: abortUrl)
+        }
     }
 
     public func testChunkedUploadConvenienceMethod() async throws {
-        let fileSize: Int = 20 * 1024 * 1024
-        let fileByteStream: InputStream = Utils.generateByteStream(size: fileSize)
-        let fileName: String = Utils.getUUID()
-        let parentFolderId: String = "0"
-        let uploadedFile: File = try await client.chunkedUploads.uploadBigFile(file: fileByteStream, fileName: fileName, fileSize: Int64(fileSize), parentFolderId: parentFolderId)
-        XCTAssertTrue(uploadedFile.name! == fileName)
-        XCTAssertTrue(uploadedFile.size! == fileSize)
-        XCTAssertTrue(uploadedFile.parent!.id == parentFolderId)
-        try await client.files.deleteFileById(fileId: uploadedFile.id)
+        await runWithRetryAsync {
+            let fileSize: Int = 20 * 1024 * 1024
+            let fileByteStream: InputStream = Utils.generateByteStream(size: fileSize)
+            let fileName: String = Utils.getUUID()
+            let parentFolderId: String = "0"
+            let uploadedFile: File = try await client.chunkedUploads.uploadBigFile(file: fileByteStream, fileName: fileName, fileSize: Int64(fileSize), parentFolderId: parentFolderId)
+            XCTAssertTrue(uploadedFile.name! == fileName)
+            XCTAssertTrue(uploadedFile.size! == fileSize)
+            XCTAssertTrue(uploadedFile.parent!.id == parentFolderId)
+            try await client.files.deleteFileById(fileId: uploadedFile.id)
+        }
     }
 }

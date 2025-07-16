@@ -2,7 +2,7 @@ import Foundation
 import BoxSdkGen
 import XCTest
 
-class TrashedItemsManagerTests: XCTestCase {
+class TrashedItemsManagerTests: RetryableTestCase {
     var client: BoxClient!
 
     override func setUp() async throws {
@@ -10,9 +10,11 @@ class TrashedItemsManagerTests: XCTestCase {
     }
 
     public func testListTrashedItems() async throws {
-        let file: FileFull = try await CommonsManager().uploadNewFile()
-        try await client.files.deleteFileById(fileId: file.id)
-        let trashedItems: Items = try await client.trashedItems.getTrashedItems()
-        XCTAssertTrue(trashedItems.entries!.count > 0)
+        await runWithRetryAsync {
+            let file: FileFull = try await CommonsManager().uploadNewFile()
+            try await client.files.deleteFileById(fileId: file.id)
+            let trashedItems: Items = try await client.trashedItems.getTrashedItems()
+            XCTAssertTrue(trashedItems.entries!.count > 0)
+        }
     }
 }

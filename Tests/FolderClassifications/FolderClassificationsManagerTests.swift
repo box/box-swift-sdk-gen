@@ -2,7 +2,7 @@ import Foundation
 import BoxSdkGen
 import XCTest
 
-class FolderClassificationsManagerTests: XCTestCase {
+class FolderClassificationsManagerTests: RetryableTestCase {
     var client: BoxClient!
 
     override func setUp() async throws {
@@ -21,19 +21,21 @@ class FolderClassificationsManagerTests: XCTestCase {
     }
 
     public func testFolderClassifications() async throws {
-        let classificationTemplate: ClassificationTemplate = try await CommonsManager().getOrCreateClassificationTemplate()
-        let classification: ClassificationTemplateFieldsOptionsField = try await CommonsManager().getOrCreateClassification(classificationTemplate: classificationTemplate)
-        let folder: FolderFull = try await CommonsManager().createNewFolder()
-        await XCTAssertThrowsErrorAsync(try await client.folderClassifications.getClassificationOnFolder(folderId: folder.id))
-        let createdFolderClassification: Classification = try await client.folderClassifications.addClassificationToFolder(folderId: folder.id, requestBody: AddClassificationToFolderRequestBody(boxSecurityClassificationKey: classification.key))
-        XCTAssertTrue(createdFolderClassification.boxSecurityClassificationKey == classification.key)
-        let folderClassification: Classification = try await client.folderClassifications.getClassificationOnFolder(folderId: folder.id)
-        XCTAssertTrue(folderClassification.boxSecurityClassificationKey == classification.key)
-        let secondClassification: ClassificationTemplateFieldsOptionsField = try await getOrCreateSecondClassification(classificationTemplate: classificationTemplate)
-        let updatedFolderClassification: Classification = try await client.folderClassifications.updateClassificationOnFolder(folderId: folder.id, requestBody: [UpdateClassificationOnFolderRequestBody(value: secondClassification.key)])
-        XCTAssertTrue(updatedFolderClassification.boxSecurityClassificationKey == secondClassification.key)
-        try await client.folderClassifications.deleteClassificationFromFolder(folderId: folder.id)
-        await XCTAssertThrowsErrorAsync(try await client.folderClassifications.getClassificationOnFolder(folderId: folder.id))
-        try await client.folders.deleteFolderById(folderId: folder.id)
+        await runWithRetryAsync {
+            let classificationTemplate: ClassificationTemplate = try await CommonsManager().getOrCreateClassificationTemplate()
+            let classification: ClassificationTemplateFieldsOptionsField = try await CommonsManager().getOrCreateClassification(classificationTemplate: classificationTemplate)
+            let folder: FolderFull = try await CommonsManager().createNewFolder()
+            await XCTAssertThrowsErrorAsync(try await client.folderClassifications.getClassificationOnFolder(folderId: folder.id))
+            let createdFolderClassification: Classification = try await client.folderClassifications.addClassificationToFolder(folderId: folder.id, requestBody: AddClassificationToFolderRequestBody(boxSecurityClassificationKey: classification.key))
+            XCTAssertTrue(createdFolderClassification.boxSecurityClassificationKey == classification.key)
+            let folderClassification: Classification = try await client.folderClassifications.getClassificationOnFolder(folderId: folder.id)
+            XCTAssertTrue(folderClassification.boxSecurityClassificationKey == classification.key)
+            let secondClassification: ClassificationTemplateFieldsOptionsField = try await getOrCreateSecondClassification(classificationTemplate: classificationTemplate)
+            let updatedFolderClassification: Classification = try await client.folderClassifications.updateClassificationOnFolder(folderId: folder.id, requestBody: [UpdateClassificationOnFolderRequestBody(value: secondClassification.key)])
+            XCTAssertTrue(updatedFolderClassification.boxSecurityClassificationKey == secondClassification.key)
+            try await client.folderClassifications.deleteClassificationFromFolder(folderId: folder.id)
+            await XCTAssertThrowsErrorAsync(try await client.folderClassifications.getClassificationOnFolder(folderId: folder.id))
+            try await client.folders.deleteFolderById(folderId: folder.id)
+        }
     }
 }
