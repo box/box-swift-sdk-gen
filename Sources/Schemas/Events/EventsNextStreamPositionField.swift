@@ -1,12 +1,12 @@
 import Foundation
 
 public enum EventsNextStreamPositionField: Codable {
-    case double(Double)
+    case int64(Int64)
     case string(String)
 
     public init(from decoder: Decoder) throws {
-        if let content = try? Double(from: decoder) {
-            self = .double(content)
+        if let content = try? Int64(from: decoder) {
+            self = .int64(content)
             return
         }
 
@@ -21,8 +21,8 @@ public enum EventsNextStreamPositionField: Codable {
 
     public func encode(to encoder: Encoder) throws {
         switch self {
-        case .double(let double):
-            try double.encode(to: encoder)
+        case .int64(let int64):
+            try int64.encode(to: encoder)
         case .string(let string):
             try string.encode(to: encoder)
         }
