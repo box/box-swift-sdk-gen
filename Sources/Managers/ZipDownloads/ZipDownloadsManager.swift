@@ -90,4 +90,17 @@ public class ZipDownloadsManager {
         return try ZipDownloadStatus.deserialize(from: response.data!)
     }
 
+    /// Creates a zip and downloads its content
+    ///
+    /// - Parameters:
+    ///   - requestBody: Zip download request body
+    ///   - downloadDestinationUrl: The URL on disk where the file will be saved once it has been downloaded.
+    ///   - headers: Headers of zip download method
+    /// - Returns: The `URL?`.
+    /// - Throws: The `GeneralError`.
+    public func downloadZip(requestBody: ZipDownloadRequest, downloadDestinationUrl: URL, headers: DownloadZipHeaders = DownloadZipHeaders()) async throws -> URL? {
+        let zipDownloadSession: ZipDownload = try await self.createZipDownload(requestBody: ZipDownloadRequest(items: requestBody.items, downloadFileName: requestBody.downloadFileName), headers: CreateZipDownloadHeaders(extraHeaders: headers.extraHeaders))
+        return try await self.getZipDownloadContent(downloadUrl: zipDownloadSession.downloadUrl!, downloadDestinationUrl: downloadDestinationUrl, headers: GetZipDownloadContentHeaders(extraHeaders: headers.extraHeaders))
+    }
+
 }

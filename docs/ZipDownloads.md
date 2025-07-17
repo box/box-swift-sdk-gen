@@ -4,6 +4,7 @@
 - [Create zip download](#create-zip-download)
 - [Download zip archive](#download-zip-archive)
 - [Get zip download status](#get-zip-download-status)
+- [Download ZIP](#download-zip)
 
 ## Create zip download
 
@@ -29,7 +30,10 @@ This operation is performed by calling function `createZipDownload`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/post-zip-downloads/).
 
-*Currently we don't have an example for calling `createZipDownload` in integration tests*
+<!-- sample post_zip_downloads -->
+```
+try await client.zipDownloads.createZipDownload(requestBody: ZipDownloadRequest(items: [ZipDownloadRequestItemsField(id: file1.id, type: ZipDownloadRequestItemsTypeField.file), ZipDownloadRequestItemsField(id: file2.id, type: ZipDownloadRequestItemsTypeField.file), ZipDownloadRequestItemsField(id: folder1.id, type: ZipDownloadRequestItemsTypeField.folder)], downloadFileName: "zip"))
+```
 
 ### Arguments
 
@@ -69,7 +73,10 @@ This operation is performed by calling function `getZipDownloadContent`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-zip-downloads-id-content/).
 
-*Currently we don't have an example for calling `getZipDownloadContent` in integration tests*
+<!-- sample get_zip_downloads_id_content -->
+```
+try await client.zipDownloads.getZipDownloadContent(downloadUrl: zipDownload.downloadUrl!, downloadDestinationUrl: URL(path: destinationPathString))
+```
 
 ### Arguments
 
@@ -109,7 +116,10 @@ This operation is performed by calling function `getZipDownloadStatus`.
 See the endpoint docs at
 [API Reference](https://developer.box.com/reference/get-zip-downloads-id-status/).
 
-*Currently we don't have an example for calling `getZipDownloadStatus` in integration tests*
+<!-- sample get_zip_downloads_id_status -->
+```
+try await client.zipDownloads.getZipDownloadStatus(statusUrl: zipDownload.statusUrl!)
+```
 
 ### Arguments
 
@@ -124,5 +134,34 @@ See the endpoint docs at
 This function returns a value of type `ZipDownloadStatus`.
 
 Returns the status of the `zip` archive that is being downloaded.
+
+
+## Download ZIP
+
+Creates a zip and downloads its content
+
+This operation is performed by calling function `downloadZip`.
+
+
+
+```
+try await client.zipDownloads.downloadZip(requestBody: ZipDownloadRequest(items: [ZipDownloadRequestItemsField(id: file1.id, type: ZipDownloadRequestItemsTypeField.file), ZipDownloadRequestItemsField(id: file2.id, type: ZipDownloadRequestItemsTypeField.file), ZipDownloadRequestItemsField(id: folder1.id, type: ZipDownloadRequestItemsTypeField.folder)], downloadFileName: "zip"), downloadDestinationUrl: URL(path: destinationPathString))
+```
+
+### Arguments
+
+- requestBody `ZipDownloadRequest`
+  - Zip download request body
+- downloadDestinationUrl `URL`
+  - The URL on disk where the file will be saved once it has been downloaded.
+- headers `DownloadZipHeaders`
+  - Headers of zip download method
+
+
+### Returns
+
+This function returns a value of type `URL?`.
+
+
 
 
