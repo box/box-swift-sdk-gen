@@ -2,7 +2,7 @@ import Foundation
 import BoxSdkGen
 import XCTest
 
-class FileClassificationsManagerTests: XCTestCase {
+class FileClassificationsManagerTests: RetryableTestCase {
     var client: BoxClient!
 
     override func setUp() async throws {
@@ -21,19 +21,21 @@ class FileClassificationsManagerTests: XCTestCase {
     }
 
     public func testFileClassifications() async throws {
-        let classificationTemplate: ClassificationTemplate = try await CommonsManager().getOrCreateClassificationTemplate()
-        let classification: ClassificationTemplateFieldsOptionsField = try await CommonsManager().getOrCreateClassification(classificationTemplate: classificationTemplate)
-        let file: FileFull = try await CommonsManager().uploadNewFile()
-        await XCTAssertThrowsErrorAsync(try await client.fileClassifications.getClassificationOnFile(fileId: file.id))
-        let createdFileClassification: Classification = try await client.fileClassifications.addClassificationToFile(fileId: file.id, requestBody: AddClassificationToFileRequestBody(boxSecurityClassificationKey: classification.key))
-        XCTAssertTrue(createdFileClassification.boxSecurityClassificationKey == classification.key)
-        let fileClassification: Classification = try await client.fileClassifications.getClassificationOnFile(fileId: file.id)
-        XCTAssertTrue(fileClassification.boxSecurityClassificationKey == classification.key)
-        let secondClassification: ClassificationTemplateFieldsOptionsField = try await getOrCreateSecondClassification(classificationTemplate: classificationTemplate)
-        let updatedFileClassification: Classification = try await client.fileClassifications.updateClassificationOnFile(fileId: file.id, requestBody: [UpdateClassificationOnFileRequestBody(value: secondClassification.key)])
-        XCTAssertTrue(updatedFileClassification.boxSecurityClassificationKey == secondClassification.key)
-        try await client.fileClassifications.deleteClassificationFromFile(fileId: file.id)
-        await XCTAssertThrowsErrorAsync(try await client.fileClassifications.getClassificationOnFile(fileId: file.id))
-        try await client.files.deleteFileById(fileId: file.id)
+        await runWithRetryAsync {
+            let classificationTemplate: ClassificationTemplate = try await CommonsManager().getOrCreateClassificationTemplate()
+            let classification: ClassificationTemplateFieldsOptionsField = try await CommonsManager().getOrCreateClassification(classificationTemplate: classificationTemplate)
+            let file: FileFull = try await CommonsManager().uploadNewFile()
+            await XCTAssertThrowsErrorAsync(try await client.fileClassifications.getClassificationOnFile(fileId: file.id))
+            let createdFileClassification: Classification = try await client.fileClassifications.addClassificationToFile(fileId: file.id, requestBody: AddClassificationToFileRequestBody(boxSecurityClassificationKey: classification.key))
+            XCTAssertTrue(createdFileClassification.boxSecurityClassificationKey == classification.key)
+            let fileClassification: Classification = try await client.fileClassifications.getClassificationOnFile(fileId: file.id)
+            XCTAssertTrue(fileClassification.boxSecurityClassificationKey == classification.key)
+            let secondClassification: ClassificationTemplateFieldsOptionsField = try await getOrCreateSecondClassification(classificationTemplate: classificationTemplate)
+            let updatedFileClassification: Classification = try await client.fileClassifications.updateClassificationOnFile(fileId: file.id, requestBody: [UpdateClassificationOnFileRequestBody(value: secondClassification.key)])
+            XCTAssertTrue(updatedFileClassification.boxSecurityClassificationKey == secondClassification.key)
+            try await client.fileClassifications.deleteClassificationFromFile(fileId: file.id)
+            await XCTAssertThrowsErrorAsync(try await client.fileClassifications.getClassificationOnFile(fileId: file.id))
+            try await client.files.deleteFileById(fileId: file.id)
+        }
     }
 }
