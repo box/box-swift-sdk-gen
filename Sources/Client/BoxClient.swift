@@ -157,6 +157,8 @@ public class BoxClient {
 
     public let hubCollaborations: HubCollaborationsManager
 
+    public let hubItems: HubItemsManager
+
     public let shieldLists: ShieldListsManager
 
     public init(auth: Authentication, networkSession: NetworkSession = NetworkSession(baseUrls: BaseUrls())) {
@@ -238,6 +240,7 @@ public class BoxClient {
         self.docgen = DocgenManager(auth: self.auth, networkSession: self.networkSession)
         self.hubs = HubsManager(auth: self.auth, networkSession: self.networkSession)
         self.hubCollaborations = HubCollaborationsManager(auth: self.auth, networkSession: self.networkSession)
+        self.hubItems = HubItemsManager(auth: self.auth, networkSession: self.networkSession)
         self.shieldLists = ShieldListsManager(auth: self.auth, networkSession: self.networkSession)
     }
 

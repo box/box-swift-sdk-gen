@@ -24,6 +24,19 @@ public class HubsManager {
         return try HubsV2025R0.deserialize(from: response.data!)
     }
 
+    /// Creates a new Hub.
+    ///
+    /// - Parameters:
+    ///   - requestBody: Request body of createHubV2025R0 method
+    ///   - headers: Headers of createHubV2025R0 method
+    /// - Returns: The `HubV2025R0`.
+    /// - Throws: The `GeneralError`.
+    public func createHubV2025R0(requestBody: HubCreateRequestV2025R0, headers: CreateHubV2025R0Headers = CreateHubV2025R0Headers()) async throws -> HubV2025R0 {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try HubV2025R0.deserialize(from: response.data!)
+    }
+
     /// Retrieves all hubs for a given enterprise.
     /// 
     /// Admins or Hub Co-admins of an enterprise
@@ -61,6 +74,27 @@ public class HubsManager {
         return try HubV2025R0.deserialize(from: response.data!)
     }
 
+    /// Updates a Hub. Can be used to change title, description, or Hub settings.
+    ///
+    /// - Parameters:
+    ///   - hubId: The unique identifier that represent a hub.
+    ///     
+    ///     The ID for any hub can be determined
+    ///     by visiting this hub in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/hubs/123`
+    ///     the `hub_id` is `123`.
+    ///     Example: "12345"
+    ///   - requestBody: Request body of updateHubByIdV2025R0 method
+    ///   - headers: Headers of updateHubByIdV2025R0 method
+    /// - Returns: The `HubV2025R0`.
+    /// - Throws: The `GeneralError`.
+    public func updateHubByIdV2025R0(hubId: String, requestBody: HubUpdateRequestV2025R0, headers: UpdateHubByIdV2025R0Headers = UpdateHubByIdV2025R0Headers()) async throws -> HubV2025R0 {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(hubId)", method: "PUT", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try HubV2025R0.deserialize(from: response.data!)
+    }
+
     /// Deletes a single hub.
     ///
     /// - Parameters:
@@ -77,6 +111,29 @@ public class HubsManager {
     public func deleteHubByIdV2025R0(hubId: String, headers: DeleteHubByIdV2025R0Headers = DeleteHubByIdV2025R0Headers()) async throws {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(hubId)", method: "DELETE", headers: headersMap, responseFormat: ResponseFormat.noContent, auth: self.auth, networkSession: self.networkSession))
+    }
+
+    /// Creates a copy of a Hub.
+    /// 
+    /// The original Hub will not be modified.
+    ///
+    /// - Parameters:
+    ///   - hubId: The unique identifier that represent a hub.
+    ///     
+    ///     The ID for any hub can be determined
+    ///     by visiting this hub in the web application
+    ///     and copying the ID from the URL. For example,
+    ///     for the URL `https://*.app.box.com/hubs/123`
+    ///     the `hub_id` is `123`.
+    ///     Example: "12345"
+    ///   - requestBody: Request body of createHubCopyV2025R0 method
+    ///   - headers: Headers of createHubCopyV2025R0 method
+    /// - Returns: The `HubV2025R0`.
+    /// - Throws: The `GeneralError`.
+    public func createHubCopyV2025R0(hubId: String, requestBody: HubCopyRequestV2025R0, headers: CreateHubCopyV2025R0Headers = CreateHubCopyV2025R0Headers()) async throws -> HubV2025R0 {
+        let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
+        let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(hubId)\("/copy")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
+        return try HubV2025R0.deserialize(from: response.data!)
     }
 
 }
