@@ -1,13 +1,13 @@
 import Foundation
 
-public class CreateHubCopyV2025R0Headers {
+public class CopyHubV2025R0Headers {
     /// Version header.
     public let boxVersion: BoxVersionHeaderV2025R0
 
     /// Extra headers that will be included in the HTTP request.
     public let extraHeaders: [String: String?]?
 
-    /// Initializer for a CreateHubCopyV2025R0Headers.
+    /// Initializer for a CopyHubV2025R0Headers.
     ///
     /// - Parameters:
     ///   - boxVersion: Version header.

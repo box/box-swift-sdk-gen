@@ -126,11 +126,11 @@ public class HubsManager {
     ///     for the URL `https://*.app.box.com/hubs/123`
     ///     the `hub_id` is `123`.
     ///     Example: "12345"
-    ///   - requestBody: Request body of createHubCopyV2025R0 method
-    ///   - headers: Headers of createHubCopyV2025R0 method
+    ///   - requestBody: Request body of copyHubV2025R0 method
+    ///   - headers: Headers of copyHubV2025R0 method
     /// - Returns: The `HubV2025R0`.
     /// - Throws: The `GeneralError`.
-    public func createHubCopyV2025R0(hubId: String, requestBody: HubCopyRequestV2025R0, headers: CreateHubCopyV2025R0Headers = CreateHubCopyV2025R0Headers()) async throws -> HubV2025R0 {
+    public func copyHubV2025R0(hubId: String, requestBody: HubCopyRequestV2025R0, headers: CopyHubV2025R0Headers = CopyHubV2025R0Headers()) async throws -> HubV2025R0 {
         let headersMap: [String: String] = Utils.Dictionary.prepareParams(map: Utils.Dictionary.merge(["box-version": Utils.Strings.toString(value: headers.boxVersion)], headers.extraHeaders))
         let response: FetchResponse = try await self.networkSession.networkClient.fetch(options: FetchOptions(url: "\(self.networkSession.baseUrls.baseUrl)\("/2.0/hubs/")\(hubId)\("/copy")", method: "POST", headers: headersMap, data: try requestBody.serialize(), contentType: "application/json", responseFormat: ResponseFormat.json, auth: self.auth, networkSession: self.networkSession))
         return try HubV2025R0.deserialize(from: response.data!)
