@@ -2478,6 +2478,7 @@
 		47BD4285D3F43E10876E57BE /* TrashedFoldersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73190695AFCF20314FFECB0A /* TrashedFoldersManager.swift */; };
 		47C2F14EB7B223593A76AF1E /* GetRetentionPolicyAssignmentByIdQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1D50DB2BFA8F1BA8B94AF /* GetRetentionPolicyAssignmentByIdQueryParams.swift */; };
 		47C59EC05C35B2F1588047BB /* CreateCommentQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CC81E0A76EFB8741519176 /* CreateCommentQueryParams.swift */; };
+		47CA0EB0B84B0A528E99A902 /* MetadataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7623FF1576ED80A2FEE7015 /* MetadataError.swift */; };
 		47D0637601927424E7D857BF /* AiResponseFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79D972D711D25F9085E9A7B /* AiResponseFull.swift */; };
 		47DD22CCF5D3C39784E5370F /* GetSlackIntegrationMappingHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = D769276799FF14E0360DCE91 /* GetSlackIntegrationMappingHeaders.swift */; };
 		47E053A67CA8C232358E1174 /* CreateFolderQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EB40214A032BAD2A9CEA0 /* CreateFolderQueryParams.swift */; };
@@ -3095,6 +3096,7 @@
 		5A4027880A5359DD9C3FC03A /* HubItemOperationV2025R0ActionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA64D64BEDFD9FFB0700E190 /* HubItemOperationV2025R0ActionField.swift */; };
 		5A418FFE7F55B0D41207BFFF /* RetentionPolicyAssignmentCountsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A602239D23083FE3CCDC67D /* RetentionPolicyAssignmentCountsField.swift */; };
 		5A4BA4EEEF65F24987A0F244 /* UpdateSlackIntegrationMappingByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0ED4B47D4B958D095EE0788 /* UpdateSlackIntegrationMappingByIdHeaders.swift */; };
+		5A657C5C1AC124EC80831A62 /* MetadataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7623FF1576ED80A2FEE7015 /* MetadataError.swift */; };
 		5A66667DA673C5613F6EA78C /* DeleteTrashedWebLinkByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936CDD0E4818E8110E7E99F5 /* DeleteTrashedWebLinkByIdHeaders.swift */; };
 		5A7BBF87B47E16FED2316CD1 /* GetSharedLinkForWebLinkHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147D295DEE8681E2C6FD4BD /* GetSharedLinkForWebLinkHeaders.swift */; };
 		5A96E9836C889EDDF8229A3D /* CommentsOrderDirectionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ED53E0D6AFBE06FE720115 /* CommentsOrderDirectionField.swift */; };
@@ -3873,6 +3875,7 @@
 		71105C7FC4DB4801D99028BD /* DeleteAiAgentByIdHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72063B14CC73A75E48FF3609 /* DeleteAiAgentByIdHeaders.swift */; };
 		71160B415646008E2391007B /* AiAgentBasicTextToolBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918538C6F0D5C501BC947220 /* AiAgentBasicTextToolBase.swift */; };
 		7127DE116B14ECDEDBC4632C /* UpdateClassificationOnFileRequestBodyOpField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB23DBE081A4AC631D43C1EA /* UpdateClassificationOnFileRequestBodyOpField.swift */; };
+		712B6009900F063D79DFCD13 /* MetadataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7623FF1576ED80A2FEE7015 /* MetadataError.swift */; };
 		71362E33BB5598959F674836 /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0849A63DDC596AEC1758955 /* ClientError.swift */; };
 		7137E6D00516E39C3754317D /* SearchResultWithSharedLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B7A6797B6EBF7AF269D81 /* SearchResultWithSharedLink.swift */; };
 		7138C8D68DB206CB90562892 /* CreateFileRequestCopyHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD1B286FE27C983AD2CAF5A /* CreateFileRequestCopyHeaders.swift */; };
@@ -6206,6 +6209,7 @@
 		B558B98ABB7AEA98475641A7 /* StartWorkflowRequestBodyFilesTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9450946E985F71D4EF58E2 /* StartWorkflowRequestBodyFilesTypeField.swift */; };
 		B563ACDE8968E22C548E102E /* IntegrationMappingSlackOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA804F468DFF40EAE2C9D57 /* IntegrationMappingSlackOptions.swift */; };
 		B563D56316809C2452D4EACC /* IntegrationMappingPartnerItemTeamsCreateRequestTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1944ECB1DE1665182991960 /* IntegrationMappingPartnerItemTeamsCreateRequestTypeField.swift */; };
+		B56D4F1204B68CF55C116F49 /* MetadataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7623FF1576ED80A2FEE7015 /* MetadataError.swift */; };
 		B57185F39939E711F76546B9 /* GetHubCollaborationsV2025R0Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023EF658AD3038A2983A96A0 /* GetHubCollaborationsV2025R0Headers.swift */; };
 		B57A1AF835A04CB5E1BF3C13 /* GetEventsQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214D60C78015FE6B4CE8898 /* GetEventsQueryParams.swift */; };
 		B587C9EB40575CD625597BA7 /* UpdateStoragePolicyAssignmentByIdRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24A992ABAABF62B2507F1 /* UpdateStoragePolicyAssignmentByIdRequestBody.swift */; };
@@ -8557,6 +8561,7 @@
 		FBAC8426526E683B6185422F /* CollaborationAllowlistExemptTargetEnterpriseTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BCECDD78ADF385EA11C01 /* CollaborationAllowlistExemptTargetEnterpriseTypeField.swift */; };
 		FBAF825F8B086E480A818D03 /* CreateUserRequestBodyStatusField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4281287FD800D159AE2AC46 /* CreateUserRequestBodyStatusField.swift */; };
 		FBC216F8444250A8BD2D2E3F /* CreateShieldInformationBarrierSegmentMemberHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A7346E95DCDC8F2A8B60C3 /* CreateShieldInformationBarrierSegmentMemberHeaders.swift */; };
+		FBC4DF6CE7886A796B66CF49 /* MetadataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7623FF1576ED80A2FEE7015 /* MetadataError.swift */; };
 		FBC4F330CB8685C40633D116 /* UsersOrderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A60E80B447D5E861B3EE1 /* UsersOrderField.swift */; };
 		FBD227EE4B2972675A04AAA3 /* GetSlackIntegrationMappingQueryParamsBoxItemTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E89393B254E38D42A1FFC7F /* GetSlackIntegrationMappingQueryParamsBoxItemTypeField.swift */; };
 		FBD2A9291DD812BEDF8115BA /* CreateTermsOfServiceStatusForUserRequestBodyUserTypeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54161078CA96B2EE10451F /* CreateTermsOfServiceStatusForUserRequestBodyUserTypeField.swift */; };
@@ -10399,6 +10404,7 @@
 		E6BF1A566BDECA81D5E8D866 /* SignTemplateAdditionalInfoNonEditableField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTemplateAdditionalInfoNonEditableField.swift; sourceTree = "<group>"; };
 		E6F2F1C01B24AB6751920ADD /* ShieldInformationBarrierReportsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldInformationBarrierReportsManagerTests.swift; sourceTree = "<group>"; };
 		E6FD03DCDF2B4A2556A7D20B /* WebLinkSharedLinkEffectivePermissionField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinkSharedLinkEffectivePermissionField.swift; sourceTree = "<group>"; };
+		E7623FF1576ED80A2FEE7015 /* MetadataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataError.swift; sourceTree = "<group>"; };
 		E79E9E816F88DE9A9F7BF018 /* SkillInvocationTokenReadTokenTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillInvocationTokenReadTokenTypeField.swift; sourceTree = "<group>"; };
 		E7B2C827C04DD1419C6EF8A7 /* UpdateWebLinkByIdHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateWebLinkByIdHeaders.swift; sourceTree = "<group>"; };
 		E8818F895257021A94F1697B /* RetentionPolicyAssignmentBaseTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPolicyAssignmentBaseTypeField.swift; sourceTree = "<group>"; };
@@ -13620,6 +13626,14 @@
 			path = DocGenBatchBaseV2025R0;
 			sourceTree = "<group>";
 		};
+		91D3DA08903C42C58FEE28FB /* MetadataError */ = {
+			isa = PBXGroup;
+			children = (
+				E7623FF1576ED80A2FEE7015 /* MetadataError.swift */,
+			);
+			path = MetadataError;
+			sourceTree = "<group>";
+		};
 		93596A1CEC83EAF6C57266F5 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -16320,6 +16334,7 @@
 				B508C43FC6252812D82E68B1 /* MetadataBase */,
 				7C550CA5E7F0A05D352481EF /* MetadataCascadePolicies */,
 				3F767D8DB2D4F371600E9BE8 /* MetadataCascadePolicy */,
+				91D3DA08903C42C58FEE28FB /* MetadataError */,
 				06120604E6FBDD0258E6BF07 /* MetadataFieldFilterDateRange */,
 				8864F478B040DD8093394AFE /* MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString */,
 				9A369D197EE3EA69EDC53517 /* MetadataFieldFilterFloatRange */,
@@ -17975,6 +17990,7 @@
 				5759905C42E69D68301ADD82 /* MetadataCascadePolicyParentField.swift in Sources */,
 				4430BDDF444CD631DC220776 /* MetadataCascadePolicyParentTypeField.swift in Sources */,
 				2307438AED227EF06557D657 /* MetadataCascadePolicyTypeField.swift in Sources */,
+				712B6009900F063D79DFCD13 /* MetadataError.swift in Sources */,
 				DE4299E3B0D12B7E722C2F93 /* MetadataFieldFilterDateRange.swift in Sources */,
 				5B5D7C4831E544273B7872E6 /* MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString.swift in Sources */,
 				580B25D4CDF9DDFB7D25D84B /* MetadataFieldFilterFloatRange.swift in Sources */,
@@ -19639,6 +19655,7 @@
 				7FD0A78D1B6E6382C9ED6BD3 /* MetadataCascadePolicyParentField.swift in Sources */,
 				748075E3375758E40918A409 /* MetadataCascadePolicyParentTypeField.swift in Sources */,
 				4C7C1488C18BE8821B225796 /* MetadataCascadePolicyTypeField.swift in Sources */,
+				5A657C5C1AC124EC80831A62 /* MetadataError.swift in Sources */,
 				63361AC8EF71FF065E61373F /* MetadataFieldFilterDateRange.swift in Sources */,
 				DD37335E5B5D26175215EA1F /* MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString.swift in Sources */,
 				ED19455217E8D11C4F96C3D9 /* MetadataFieldFilterFloatRange.swift in Sources */,
@@ -21477,6 +21494,7 @@
 				89C64E9067E9A2A3391EA236 /* MetadataCascadePolicyParentField.swift in Sources */,
 				803858F305FE8FE670C3C46C /* MetadataCascadePolicyParentTypeField.swift in Sources */,
 				C7C5A7F60EC4D33AF2B8F2F2 /* MetadataCascadePolicyTypeField.swift in Sources */,
+				FBC4DF6CE7886A796B66CF49 /* MetadataError.swift in Sources */,
 				5D6C392B6D687E9610222C23 /* MetadataFieldFilterDateRange.swift in Sources */,
 				38B98D6E7186C1D46DB341D3 /* MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString.swift in Sources */,
 				08B38CE5F5F4F65D0E5B5515 /* MetadataFieldFilterFloatRange.swift in Sources */,
@@ -23141,6 +23159,7 @@
 				50B6864340323EC05C3F3CD6 /* MetadataCascadePolicyParentField.swift in Sources */,
 				EDB7BE50C34B6EBE10878FD0 /* MetadataCascadePolicyParentTypeField.swift in Sources */,
 				1AA77C6E14EB71AA11BCABFC /* MetadataCascadePolicyTypeField.swift in Sources */,
+				47CA0EB0B84B0A528E99A902 /* MetadataError.swift in Sources */,
 				E42725A56112056B9D4A2CA5 /* MetadataFieldFilterDateRange.swift in Sources */,
 				C9A7937EA7F4913766ABF663 /* MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString.swift in Sources */,
 				2097A77C9BD7F799CCA97540 /* MetadataFieldFilterFloatRange.swift in Sources */,
@@ -24892,6 +24911,7 @@
 				C58EF27A7814A71D19A87615 /* MetadataCascadePolicyParentField.swift in Sources */,
 				D113BB4A106621829F65B81C /* MetadataCascadePolicyParentTypeField.swift in Sources */,
 				6EFA0B97593CCBFACD041FA6 /* MetadataCascadePolicyTypeField.swift in Sources */,
+				B56D4F1204B68CF55C116F49 /* MetadataError.swift in Sources */,
 				86147C7CE2AD277B54F192E9 /* MetadataFieldFilterDateRange.swift in Sources */,
 				F0B4FA0E10A8A95F4D82DFE2 /* MetadataFieldFilterDateRangeOrMetadataFieldFilterFloatRangeOrArrayOfStringOrNumberOrString.swift in Sources */,
 				166F7CB9A9773A42440D7330 /* MetadataFieldFilterFloatRange.swift in Sources */,
