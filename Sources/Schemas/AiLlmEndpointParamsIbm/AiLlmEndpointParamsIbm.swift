@@ -32,9 +32,9 @@ public class AiLlmEndpointParamsIbm: Codable, RawJSONReadable {
     /// mass are considered. We generally recommend altering this or temperature but not both.
     @CodableTriState public private(set) var topP: Double?
 
-    /// `Top-K` changes how the model selects tokens for output. A `top-K` of 1 means the next selected token is
+    /// `Top-K` changes how the model selects tokens for output. A low `top-K` means the next selected token is
     /// the most probable among all tokens in the model's vocabulary (also called greedy decoding),
-    /// while a `top-K` of 3 means that the next token is selected from among the three most probable tokens by using temperature.
+    /// while a high `top-K` means that the next token is selected from among the three most probable tokens by using temperature.
     @CodableTriState public private(set) var topK: Double?
 
     /// Initializer for a AiLlmEndpointParamsIbm.
@@ -48,9 +48,9 @@ public class AiLlmEndpointParamsIbm: Codable, RawJSONReadable {
     ///   - topP: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results 
     ///     of the tokens with `top_p` probability mass. So 0.1 means only the tokens comprising the top 10% probability 
     ///     mass are considered. We generally recommend altering this or temperature but not both.
-    ///   - topK: `Top-K` changes how the model selects tokens for output. A `top-K` of 1 means the next selected token is
+    ///   - topK: `Top-K` changes how the model selects tokens for output. A low `top-K` means the next selected token is
     ///     the most probable among all tokens in the model's vocabulary (also called greedy decoding),
-    ///     while a `top-K` of 3 means that the next token is selected from among the three most probable tokens by using temperature.
+    ///     while a high `top-K` means that the next token is selected from among the three most probable tokens by using temperature.
     public init(type: AiLlmEndpointParamsIbmTypeField = AiLlmEndpointParamsIbmTypeField.ibmParams, temperature: TriStateField<Double> = nil, topP: TriStateField<Double> = nil, topK: TriStateField<Double> = nil) {
         self.type = type
         self._temperature = CodableTriState(state: temperature)
