@@ -161,6 +161,8 @@ public class BoxClient {
 
     public let shieldLists: ShieldListsManager
 
+    public let archives: ArchivesManager
+
     public init(auth: Authentication, networkSession: NetworkSession = NetworkSession(baseUrls: BaseUrls())) {
         self.auth = auth
         self.networkSession = networkSession
@@ -242,6 +244,7 @@ public class BoxClient {
         self.hubCollaborations = HubCollaborationsManager(auth: self.auth, networkSession: self.networkSession)
         self.hubItems = HubItemsManager(auth: self.auth, networkSession: self.networkSession)
         self.shieldLists = ShieldListsManager(auth: self.auth, networkSession: self.networkSession)
+        self.archives = ArchivesManager(auth: self.auth, networkSession: self.networkSession)
     }
 
     /// Make a custom http request using the client authentication and network session.
