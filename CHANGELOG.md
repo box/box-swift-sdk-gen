@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.2](https://github.com/box/box-swift-sdk-gen/compare/0.6.1...0.6.2) (2025-08-12)
+
+
+### Bug Fixes
+
+* Fix downscope token to use `retrieveToken` method for token retrieval (box/box-codegen[#731](https://github.com/box/box-swift-sdk-gen/issues/731)) ([#459](https://github.com/box/box-swift-sdk-gen/issues/459)) ([8992b32](https://github.com/box/box-swift-sdk-gen/commit/8992b32e9dd058fc77b4d68418da81b162aea315))
+* Fix parsing `Date` into query parameters (box/box-codegen[#729](https://github.com/box/box-swift-sdk-gen/issues/729)) ([#449](https://github.com/box/box-swift-sdk-gen/issues/449)) ([1a95d0c](https://github.com/box/box-swift-sdk-gen/commit/1a95d0c80e0bd29dc1b467e7e98e6f5e6196ddfb))
+* Specify events `next_stream_position` property type as `int64` (box/box-openapi[#535](https://github.com/box/box-swift-sdk-gen/issues/535)) ([#502](https://github.com/box/box-swift-sdk-gen/issues/502)) ([795fe1c](https://github.com/box/box-swift-sdk-gen/commit/795fe1c7f0aa6074145b675fce4dd8e1432b0a64))
+
+
+### New Features and Enhancements
+
+* Add `downloadZip` method (box/box-codegen[#765](https://github.com/box/box-swift-sdk-gen/issues/765)) ([#505](https://github.com/box/box-swift-sdk-gen/issues/505)) ([c03589d](https://github.com/box/box-swift-sdk-gen/commit/c03589d6add3ee6d548f10b5380031cd38284e42))
+* Add `rawData` property (box/box-codegen[#724](https://github.com/box/box-swift-sdk-gen/issues/724)) ([#445](https://github.com/box/box-swift-sdk-gen/issues/445)) ([77405ad](https://github.com/box/box-swift-sdk-gen/commit/77405adc986adb8a1ce3bcff051ea8c481dbfd9d))
+* add AI agents warnings; allow for more types of metadata value (box/box-openapi[#520](https://github.com/box/box-swift-sdk-gen/issues/520)) ([#435](https://github.com/box/box-swift-sdk-gen/issues/435)) ([af1dc12](https://github.com/box/box-swift-sdk-gen/commit/af1dc12763f9a84691573fd3ba8307925fc017d6))
+* add AI spreadsheet processor (box/box-openapi[#533](https://github.com/box/box-swift-sdk-gen/issues/533)) ([#484](https://github.com/box/box-swift-sdk-gen/issues/484)) ([14726d1](https://github.com/box/box-swift-sdk-gen/commit/14726d1952f5ddb2414f723a0b18fa5226269a64))
+* Add Archive Public API (box/box-openapi[#540](https://github.com/box/box-swift-sdk-gen/issues/540)) ([#509](https://github.com/box/box-swift-sdk-gen/issues/509)) ([8266386](https://github.com/box/box-swift-sdk-gen/commit/82663868c61a31f43b229c6f24e29737913662a0))
+* Add CI for swift (box/box-codegen[#755](https://github.com/box/box-swift-sdk-gen/issues/755)) ([#494](https://github.com/box/box-swift-sdk-gen/issues/494)) ([76a3337](https://github.com/box/box-swift-sdk-gen/commit/76a3337bed9bfc4629ec7dcb9af86bec4aa710f3))
+* add hubs API beta endpoints (box/box-openapi[#531](https://github.com/box/box-swift-sdk-gen/issues/531)) ([#476](https://github.com/box/box-swift-sdk-gen/issues/476)) ([a05aa5f](https://github.com/box/box-swift-sdk-gen/commit/a05aa5fe2aaade1d7bdd7acb90c82fcb3a3bf262))
+* Add new Hubs APIs and Hubs items API (box/box-openapi[#538](https://github.com/box/box-swift-sdk-gen/issues/538)) ([#503](https://github.com/box/box-swift-sdk-gen/issues/503)) ([9058c45](https://github.com/box/box-swift-sdk-gen/commit/9058c45c0bcd3e7f294a1bedac151637001aec63))
+* Add new schema for `Metadata Error` (box/box-openapi[#539](https://github.com/box/box-swift-sdk-gen/issues/539)) ([#504](https://github.com/box/box-swift-sdk-gen/issues/504)) ([2e9ecf9](https://github.com/box/box-swift-sdk-gen/commit/2e9ecf9477854656958b715674b8aa0413508d31))
+* Add security settings properties on sign template schema (box/box-openapi[#518](https://github.com/box/box-swift-sdk-gen/issues/518)) ([#426](https://github.com/box/box-swift-sdk-gen/issues/426)) ([a741a73](https://github.com/box/box-swift-sdk-gen/commit/a741a7305e2b2d174bc325e35ea9b77548a38095))
+* add Shield Lists APIs (box/box-openapi[#528](https://github.com/box/box-swift-sdk-gen/issues/528)) ([#462](https://github.com/box/box-swift-sdk-gen/issues/462)) ([b5993b0](https://github.com/box/box-swift-sdk-gen/commit/b5993b096b4fceb77301f76eba1c17225b2844d6))
+* Add support for `additionalProperties` with Any value (box/box-codegen[#711](https://github.com/box/box-swift-sdk-gen/issues/711)) ([#427](https://github.com/box/box-swift-sdk-gen/issues/427)) ([7fbf706](https://github.com/box/box-swift-sdk-gen/commit/7fbf7069eff66afddc328066f8aeb7321b249eea))
+* Add support for `nullable` fields (box/box-codegen[#700](https://github.com/box/box-swift-sdk-gen/issues/700)) ([#420](https://github.com/box/box-swift-sdk-gen/issues/420)) ([5d0ff41](https://github.com/box/box-swift-sdk-gen/commit/5d0ff414b325db92db44c580cebb5636ab33553f))
+* add support of IBM models to AI API (box/box-openapi[#522](https://github.com/box/box-swift-sdk-gen/issues/522)) ([#436](https://github.com/box/box-swift-sdk-gen/issues/436)) ([0717222](https://github.com/box/box-swift-sdk-gen/commit/071722246402e0ec2439ae1e5e3d26bca45a049f))
+* Expose `makeRequest` method in `BoxClient` (box/box-codegen[#687](https://github.com/box/box-swift-sdk-gen/issues/687)) ([#408](https://github.com/box/box-swift-sdk-gen/issues/408)) ([7ba7d09](https://github.com/box/box-swift-sdk-gen/commit/7ba7d091b0c832276daa571fad2a7db75469676d))
+* Improve AI integration test (box/box-codegen[#758](https://github.com/box/box-swift-sdk-gen/issues/758)) ([#499](https://github.com/box/box-swift-sdk-gen/issues/499)) ([3c7e717](https://github.com/box/box-swift-sdk-gen/commit/3c7e717c6ca076caf1a963b3f60d3bd88f8c4bff))
+* Sanitize response body when throwing `BoxAPIError` (box/box-codegen[#760](https://github.com/box/box-swift-sdk-gen/issues/760)) ([#498](https://github.com/box/box-swift-sdk-gen/issues/498)) ([2afc793](https://github.com/box/box-swift-sdk-gen/commit/2afc7936dac87dee22adff3e22def92913f5854c))
+* Support `getDownloadUrl` in Swift (box/box-codegen[#751](https://github.com/box/box-swift-sdk-gen/issues/751)) ([#491](https://github.com/box/box-swift-sdk-gen/issues/491)) ([5916ede](https://github.com/box/box-swift-sdk-gen/commit/5916ede7454a1926de195e77b9a158c2af0fae2b))
+* Support new tools in AI Studio (box/box-openapi[#534](https://github.com/box/box-swift-sdk-gen/issues/534)) ([#485](https://github.com/box/box-swift-sdk-gen/issues/485)) ([e793d7b](https://github.com/box/box-swift-sdk-gen/commit/e793d7b3a03e8d58ce6adb63a894a0330ae154d1))
+* Support sensitive data sanitization in errors (box/box-codegen[#695](https://github.com/box/box-swift-sdk-gen/issues/695)) ([#415](https://github.com/box/box-swift-sdk-gen/issues/415)) ([330ca9a](https://github.com/box/box-swift-sdk-gen/commit/330ca9ad17cbc79c93ffb114fd56c09a41f92694))
+* Update legal holds and AI models (box/box-openapi[#526](https://github.com/box/box-swift-sdk-gen/issues/526)) ([#460](https://github.com/box/box-swift-sdk-gen/issues/460)) ([caa848a](https://github.com/box/box-swift-sdk-gen/commit/caa848ac977c7fedeacbe018339d27b9d948bb1e))
+
 ### [0.6.1](https://github.com/box/box-swift-sdk-gen/compare/0.6.0...0.6.1) (2025-03-18)
 
 
