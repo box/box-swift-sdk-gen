@@ -1,0 +1,4 @@
+module BoxSdkGenPackageTests {
+    header "/Users/ajankowski/work/sdk/box-codegen/scripts/ready_swift_gen/swift/.build/arm64-apple-macosx/debug/BoxSdkGenPackageTests.build/BoxSdkGenPackageTests-Swift.h"
+    requires objc
+}
