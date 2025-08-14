@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -8949,6 +8949,7 @@
 		0A95736DCE1597DE1111E226 /* AuthManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManagerTests.swift; sourceTree = "<group>"; };
 		0ADFE23C295C8566229F24C6 /* RestoreFolderFromTrashHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreFolderFromTrashHeaders.swift; sourceTree = "<group>"; };
 		0B0A352DA4D6EFD51B56469C /* GetUserByIdHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserByIdHeaders.swift; sourceTree = "<group>"; };
+		0B1AF4631AB22C64A7A09339 /* BoxSdkGenTests_watchOS.xctestplan */ = {isa = PBXFileReference; path = BoxSdkGenTests_watchOS.xctestplan; sourceTree = "<group>"; };
 		0B2BA1E7C235588A1EC19E64 /* TrashFileRestoredItemStatusField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashFileRestoredItemStatusField.swift; sourceTree = "<group>"; };
 		0B469046B0288E266285151B /* UpdateSharedLinkOnFolderQueryParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateSharedLinkOnFolderQueryParams.swift; sourceTree = "<group>"; };
 		0B4DCA96CE53B2D5E7FABE27 /* CreateShieldListV2025R0Headers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShieldListV2025R0Headers.swift; sourceTree = "<group>"; };
@@ -9608,6 +9609,7 @@
 		693726D631E39C5FE3F9F1EF /* UploadWithPreflightCheckHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadWithPreflightCheckHeaders.swift; sourceTree = "<group>"; };
 		693954FBB89B8B53D80F77EE /* StatusSkillCardInvocationField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusSkillCardInvocationField.swift; sourceTree = "<group>"; };
 		694461325C0DFD9110DE672F /* RetentionPolicyRetentionTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPolicyRetentionTypeField.swift; sourceTree = "<group>"; };
+		6964B2D191EA7C80E5FE4368 /* BoxSdkGenTests_visionOS.xctestplan */ = {isa = PBXFileReference; path = BoxSdkGenTests_visionOS.xctestplan; sourceTree = "<group>"; };
 		697226DE3676B4F179D1B5BD /* AppItemEventSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppItemEventSource.swift; sourceTree = "<group>"; };
 		697BD58581D6A42E16DE0EA6 /* AppItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppItem.swift; sourceTree = "<group>"; };
 		69A5BB68DD9AA14D1992BF8B /* AiLlmEndpointParamsAws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiLlmEndpointParamsAws.swift; sourceTree = "<group>"; };
@@ -9959,6 +9961,7 @@
 		98CC81E0A76EFB8741519176 /* CreateCommentQueryParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentQueryParams.swift; sourceTree = "<group>"; };
 		9928C2AFB22831C29ECDD188 /* CreateCollaborationWhitelistExemptTargetRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollaborationWhitelistExemptTargetRequestBody.swift; sourceTree = "<group>"; };
 		9948A009FC29CCEDA3B750CC /* CreateShieldInformationBarrierSegmentMemberRequestBodyTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShieldInformationBarrierSegmentMemberRequestBodyTypeField.swift; sourceTree = "<group>"; };
+		9950FDDDB97EF3E11FF7F7A7 /* BoxSdkGenTests_macOS.xctestplan */ = {isa = PBXFileReference; path = BoxSdkGenTests_macOS.xctestplan; sourceTree = "<group>"; };
 		9955C3B135D820CA542EEF53 /* CreateFileUploadSessionRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFileUploadSessionRequestBody.swift; sourceTree = "<group>"; };
 		99962409D71B64C107CE7E0A /* CreateUserRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserRequestBody.swift; sourceTree = "<group>"; };
 		999C2EA1F448889D79C96E6E /* GetRecentItemsHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRecentItemsHeaders.swift; sourceTree = "<group>"; };
@@ -9981,6 +9984,7 @@
 		9C201458839BD39D791DBC7E /* RetentionPoliciesManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPoliciesManagerTests.swift; sourceTree = "<group>"; };
 		9C213B24D765C87C742F39BE /* WorkflowFlowsTriggerTriggerTypeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowFlowsTriggerTriggerTypeField.swift; sourceTree = "<group>"; };
 		9C22B60ABE614489274BD856 /* CreateLegalHoldPolicyRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLegalHoldPolicyRequestBody.swift; sourceTree = "<group>"; };
+		9D18F930C78703363D282DD7 /* BoxSdkGenTests_tvOS.xctestplan */ = {isa = PBXFileReference; path = BoxSdkGenTests_tvOS.xctestplan; sourceTree = "<group>"; };
 		9D23578254F634AE8B0AB2DB /* GetWorkflowsHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWorkflowsHeaders.swift; sourceTree = "<group>"; };
 		9D8A7DDE4621E1FFDE4863AD /* AiAgentReferenceOrAiAgentTextGen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiAgentReferenceOrAiAgentTextGen.swift; sourceTree = "<group>"; };
 		9DAEDEFF0AAFA2BD4DED9711 /* UpdateHubCollaborationByIdV2025R0Headers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateHubCollaborationByIdV2025R0Headers.swift; sourceTree = "<group>"; };
@@ -10602,6 +10606,7 @@
 		FA73D96C5EF80BFF97DB0FA1 /* UploadsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadsManager.swift; sourceTree = "<group>"; };
 		FA8D0375843A523AE1EC07CE /* ClassificationTemplateFieldsDisplayNameField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationTemplateFieldsDisplayNameField.swift; sourceTree = "<group>"; };
 		FABCDD14A807224D16664A94 /* GroupMembershipRoleField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMembershipRoleField.swift; sourceTree = "<group>"; };
+		FAEE782641B55B46C02760A7 /* BoxSdkGenTests_iOS.xctestplan */ = {isa = PBXFileReference; path = BoxSdkGenTests_iOS.xctestplan; sourceTree = "<group>"; };
 		FB01935FB6B0FC9A67B20C3F /* CreateInviteRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInviteRequestBody.swift; sourceTree = "<group>"; };
 		FB17787DF519C41C919208E7 /* CollaborationAllowlistEntriesManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationAllowlistEntriesManagerTests.swift; sourceTree = "<group>"; };
 		FB30C02955056663E6C16977 /* TasksManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksManagerTests.swift; sourceTree = "<group>"; };
@@ -15079,6 +15084,11 @@
 		CDE183EC8DE3EAB5109347B4 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				FAEE782641B55B46C02760A7 /* BoxSdkGenTests_iOS.xctestplan */,
+				9950FDDDB97EF3E11FF7F7A7 /* BoxSdkGenTests_macOS.xctestplan */,
+				9D18F930C78703363D282DD7 /* BoxSdkGenTests_tvOS.xctestplan */,
+				6964B2D191EA7C80E5FE4368 /* BoxSdkGenTests_visionOS.xctestplan */,
+				0B1AF4631AB22C64A7A09339 /* BoxSdkGenTests_watchOS.xctestplan */,
 				DB906C57584CA75D72F81D72 /* BoxSdkGenTests.xctestplan */,
 				49CA6309598105BDC1FD5C1A /* RetryableTestCase.swift */,
 				972DE315839B6F6AFEA7B608 /* URL+Extensions.swift */,
@@ -16663,8 +16673,6 @@
 			dependencies = (
 			);
 			name = BoxSdkGen_watchOS;
-			packageProductDependencies = (
-			);
 			productName = BoxSdkGen_watchOS;
 			productReference = 7309936F8740B59A0DB3CC08 /* BoxSdkGen.framework */;
 			productType = "com.apple.product-type.framework";
@@ -16681,8 +16689,6 @@
 			dependencies = (
 			);
 			name = BoxSdkGen_macOS;
-			packageProductDependencies = (
-			);
 			productName = BoxSdkGen_macOS;
 			productReference = D43BE4A7FB166BBAA1023A07 /* BoxSdkGen.framework */;
 			productType = "com.apple.product-type.framework";
@@ -16701,8 +16707,6 @@
 				D7C77A17EB17218808308A43 /* PBXTargetDependency */,
 			);
 			name = BoxSdkGenTests_iOS;
-			packageProductDependencies = (
-			);
 			productName = BoxSdkGenTests_iOS;
 			productReference = CD9EFC92BB04B7B27197AD70 /* BoxSdkGenTests_iOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -16719,8 +16723,6 @@
 			dependencies = (
 			);
 			name = BoxSdkGen_tvOS;
-			packageProductDependencies = (
-			);
 			productName = BoxSdkGen_tvOS;
 			productReference = C3AE1758A329122017298588 /* BoxSdkGen.framework */;
 			productType = "com.apple.product-type.framework";
@@ -16737,8 +16739,6 @@
 			dependencies = (
 			);
 			name = BoxSdkGen_visionOS;
-			packageProductDependencies = (
-			);
 			productName = BoxSdkGen_visionOS;
 			productReference = 10EAA57F74A06B7070AD0271 /* BoxSdkGen.framework */;
 			productType = "com.apple.product-type.framework";
@@ -16757,8 +16757,6 @@
 				DC63517569169EE31AC3EE02 /* PBXTargetDependency */,
 			);
 			name = BoxSdkGenTests_macOS;
-			packageProductDependencies = (
-			);
 			productName = BoxSdkGenTests_macOS;
 			productReference = D55204827B3642844A8A3903 /* BoxSdkGenTests_macOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -16777,8 +16775,6 @@
 				60254F42B2254D19B0D53059 /* PBXTargetDependency */,
 			);
 			name = BoxSdkGenTests_watchOS;
-			packageProductDependencies = (
-			);
 			productName = BoxSdkGenTests_watchOS;
 			productReference = 3AD9B2B29680104A46CFF496 /* BoxSdkGenTests_watchOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -16795,8 +16791,6 @@
 			dependencies = (
 			);
 			name = BoxSdkGen_iOS;
-			packageProductDependencies = (
-			);
 			productName = BoxSdkGen_iOS;
 			productReference = 73E5F4A42A0A227676CC6618 /* BoxSdkGen.framework */;
 			productType = "com.apple.product-type.framework";
@@ -16815,8 +16809,6 @@
 				049A486FFB45B6A42DF289E5 /* PBXTargetDependency */,
 			);
 			name = BoxSdkGenTests_visionOS;
-			packageProductDependencies = (
-			);
 			productName = BoxSdkGenTests_visionOS;
 			productReference = F84CBCDF5683CE1BCC17392E /* BoxSdkGenTests_visionOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -16835,8 +16827,6 @@
 				FAF3F995EB183013FFC2B6FA /* PBXTargetDependency */,
 			);
 			name = BoxSdkGenTests_tvOS;
-			packageProductDependencies = (
-			);
 			productName = BoxSdkGenTests_tvOS;
 			productReference = E38F1A79AC9586D2391D954F /* BoxSdkGenTests_tvOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -16849,6 +16839,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 8DBBB4DCC44E3FB7C21B4F4F /* Build configuration list for PBXProject "BoxSdkGen" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -16859,8 +16851,6 @@
 				en,
 			);
 			mainGroup = 47F467DE023DFEDC03202AF8;
-			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
