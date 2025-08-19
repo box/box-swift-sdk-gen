@@ -31,10 +31,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - destination: 'OS=18.0,name=iPhone 16 Pro'
-            name: 'xcodebuild (iOS 18.0)'
-            xcode: 'Xcode_16.0'
+          - destination: 'platform=iOS Simulator,OS=18.5,name=iPhone 16 Pro'
+            name: 'xcodebuild (iOS 18.5)'
+            xcode: 'Xcode_16.4'
             runsOn: macOS-15
+            platform: iOS
 
     env:
       DEVELOPER_DIR: '/Applications/${{ matrix.xcode }}.app/Contents/Developer'
@@ -64,7 +65,7 @@ jobs:
 
       - name: Inject environment variables into .xctestplan
         run: |
-          XCTESTPLAN_PATH="Tests/BoxSdkGenTests.xctestplan"
+          XCTESTPLAN_PATH="Tests/BoxSdkGenTests_${{ matrix.platform }}.xctestplan"
 
           ENV_JSON=$(jq -n '[
             {key: "CLIENT_ID", value: env.CLIENT_ID},
@@ -95,9 +96,9 @@ jobs:
           xcodebuild \
             OTHER_SWIFT_FLAGS="-suppress-warnings" \
             -project "BoxSdkGen.xcodeproj" \
-            -scheme "BoxSdkGenTests_iOS" \
+            -scheme "BoxSdkGenTests_${{ matrix.platform }}" \
             -destination "${{ matrix.destination }}" \
-            -testPlan BoxSdkGenTests \
+            -testPlan "BoxSdkGenTests_${{ matrix.platform }}" \
             -enableCodeCoverage YES \
             -derivedDataPath build/DerivedData \
             clean test | xcpretty

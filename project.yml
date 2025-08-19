@@ -33,7 +33,7 @@ targets:
       FRAMEWORK_SEARCH_PATHS: $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
     scheme:
       testPlans:
-        - path: Tests/BoxSdkGenTests.xctestplan
+        - path: Tests/BoxSdkGenTests_macOS.xctestplan
           default: true
   
   # Tests for iOS
@@ -50,7 +50,7 @@ targets:
       FRAMEWORK_SEARCH_PATHS: $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
     scheme:
       testPlans:
-        - path: Tests/BoxSdkGenTests.xctestplan
+        - path: Tests/BoxSdkGenTests_iOS.xctestplan
           default: true
   
   # Tests for tvOS
@@ -67,7 +67,7 @@ targets:
       FRAMEWORK_SEARCH_PATHS: $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
     scheme:
       testPlans:
-        - path: Tests/BoxSdkGenTests.xctestplan
+        - path: Tests/BoxSdkGenTests_tvOS.xctestplan
           default: true
   
   # Tests for watchOS
@@ -84,7 +84,7 @@ targets:
       FRAMEWORK_SEARCH_PATHS: $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
     scheme:
       testPlans:
-        - path: Tests/BoxSdkGenTests.xctestplan
+        - path: Tests/BoxSdkGenTests_watchOS.xctestplan
           default: true
   
   # Tests for visionOS
@@ -101,6 +101,6 @@ targets:
       FRAMEWORK_SEARCH_PATHS: $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
     scheme:
       testPlans:
-        - path: Tests/BoxSdkGenTests.xctestplan
+        - path: Tests/BoxSdkGenTests_visionOS.xctestplan
           default: true
   

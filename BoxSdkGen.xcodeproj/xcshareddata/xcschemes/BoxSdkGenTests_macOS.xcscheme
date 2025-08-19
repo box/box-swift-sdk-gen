@@ -32,7 +32,7 @@
       <TestPlans>
          <TestPlanReference
             default = "YES"
-            reference = "container:Tests/BoxSdkGenTests.xctestplan">
+            reference = "container:Tests/BoxSdkGenTests_macOS.xctestplan">
          </TestPlanReference>
       </TestPlans>
       <MacroExpansion>

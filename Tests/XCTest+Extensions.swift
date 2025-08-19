@@ -14,7 +14,7 @@ extension XCTest {
             errorHandler(error)
         }
     }
-    
+
     func XCTAssertTrueAsync(_ expression: @autoclosure () async throws -> Bool, _ message: @autoclosure () -> String = "", file: StaticString = #filePath, line: UInt = #line) async {
         do {
             let result = try await expression()
