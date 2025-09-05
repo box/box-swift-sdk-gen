@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.3](https://github.com/box/box-swift-sdk-gen/compare/0.6.2...0.6.3) (2025-09-05)
+
+
+### New Features and Enhancements
+
+* Add missing webhook events (box/box-openapi[#554](https://github.com/box/box-swift-sdk-gen/issues/554)) ([#581](https://github.com/box/box-swift-sdk-gen/issues/581)) ([966d171](https://github.com/box/box-swift-sdk-gen/commit/966d171baa3f6fa1139732b05081000e44b0e08a))
+
 ### [0.6.2](https://github.com/box/box-swift-sdk-gen/compare/0.6.1...0.6.2) (2025-08-13)
 
 
