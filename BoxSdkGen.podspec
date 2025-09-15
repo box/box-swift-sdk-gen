@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'BoxSdkGen'
-  spec.version      = '0.6.3'
+  spec.version      = '0.1.0'
   spec.summary      = 'Official Box Swift Generated SDK'
   spec.homepage     = 'https://github.com/box/box-swift-sdk-gen'
   spec.license      = 'Apache License, Version 2.0'
