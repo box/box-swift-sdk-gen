@@ -2,9 +2,15 @@
   <img src="https://github.com/box/sdks/blob/master/images/box-dev-logo.png" alt= “box-dev-logo” width="30%" height="50%">
 </p>
 
+# Deprecation notice
+
+As of September 17, 2025 Box Next Generation SDKs are no longer supported as separate artifacts. Don't worry, your existing code will continue to work without changes. You can still use your applications based on Box Next Generation SDKs with no impact, but you won't receive new features, updates, or bug fixes. In keeping with industry best practices, we are consolidating the Box Next Generation SDKs and Box core SDKs into a single package for each programming language. This makes migration efforts much easier and allows to seamlessly add new capabilities to existing applications still powered by the manually maintained Box core SDKs. Box Next Generation SDKs are available as the latest major version release (`v10`) of Box core SDKs. Currently, it’s available as a separate [branch](https://github.com/box/box-ios-sdk/tree/sdk-gen).
+
+For more details, see our [SDK versioning strategy document](https://developer.box.com/guides/tooling/sdks/sdk-versioning/).
+
 # Box Swift SDK GENERATED
 
-[![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
+[![Project Status](http://opensource.box.com/badges/deprecated.svg)](http://opensource.box.com/badges)
 ![build](https://github.com/box/box-swift-sdk-gen/actions/workflows/build_and_test.yml/badge.svg)
 [![Platforms](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS_Linux-yellowgreen?style=flat-square)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS_Linux-yellowgreen?style=flat-square)
 [![Coverage](https://coveralls.io/repos/github/box/box-swift-sdk-gen/badge.svg?branch=main)](https://coveralls.io/github/box/box-swift-sdk-gen?branch=main)
