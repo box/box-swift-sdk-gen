@@ -43,6 +43,7 @@ This library provides access to the [Box Platform API](https://developer.box.com
   - [Carthage](#carthage)
   - [CocoaPods](#cocoapods)
 - [Getting Started](#getting-started)
+- [Documentation](#documentation)
 - [Integration Tests](#integration-tests)
   - [Running integration tests locally](#running-integration-tests-locally)
     - [Create Platform Application](#create-custom-application)
@@ -110,6 +111,8 @@ For more detailed instructions, please see the [official documentation for Cocoa
 
 # Getting Started
 
+The full API of this library is listed in [api.md](api.md), with code samples for each manager in [docs/](docs/README.md).
+
 To get started with the SDK, get a Developer Token from the Configuration page of your app in the [Box Developer
 Console](https://app.box.com/developers/console). You can use this token to make test calls for your own Box account.
 
@@ -143,6 +146,14 @@ if let entries = items.entries {
 The usage docs that show how to make calls to the Box API with the SDK can be found [here](https://github.com/box/box-swift-sdk-gen/tree/main/docs).
 
 We recommend, familiarizing yourself with the remaining [authentication methods](https://github.com/box/box-swift-sdk-gen/tree/main/docs/Authentication.md), [uploading files](https://github.com/box/box-swift-sdk-gen/tree/main/docs/Uploads.md) and [downloading files](https://github.com/box/box-swift-sdk-gen/tree/main/docs/Downloads.md).
+
+# Documentation
+
+- [api.md](api.md): every manager and method on `BoxClient`, with signatures and return types.
+- [docs/](docs/README.md): code samples for each manager, plus guides for [authentication](docs/Authentication.md), [configuration](docs/Configuration.md), and [the client](docs/Client.md).
+- [Box API Reference](https://developer.box.com/reference/): the underlying REST API.
+
+For `box-ios-sdk`, the maintained replacement for this package, see its [README](https://github.com/box/box-ios-sdk/blob/main/README.md) and [docs](https://github.com/box/box-ios-sdk/blob/main/docs/README.md).
 
 # Integration Tests
 
