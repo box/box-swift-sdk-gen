@@ -1,5 +1,12 @@
 # ShieldInformationBarrierReportsManager
 
+<!-- box-swift-sdk-gen deprecation banner -->
+> [!CAUTION]
+> **`box-swift-sdk-gen` is deprecated and no longer maintained.** As of September 17, 2025, it receives no new features, bug fixes, or security patches. Do not use it for new projects.
+>
+> Use [`box-ios-sdk`](https://github.com/box/box-ios-sdk) v10+ instead: add `https://github.com/box/box-ios-sdk.git` with Swift Package Manager, or `pod 'BoxSDK', '>= 10.0.0'` with CocoaPods.
+> The equivalent of this page is [box-ios-sdk/docs/ShieldInformationBarrierReports.md](https://github.com/box/box-ios-sdk/blob/main/docs/ShieldInformationBarrierReports.md). To migrate existing code, see the [migration guide](https://github.com/box/box-ios-sdk/blob/main/migration-guides/from-box-swift-sdk-gen-v0-to-box-ios-sdk.md).
+
 
 - [List shield information barrier reports](#list-shield-information-barrier-reports)
 - [Create shield information barrier report](#create-shield-information-barrier-report)
