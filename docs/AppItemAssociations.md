@@ -1,5 +1,12 @@
 # AppItemAssociationsManager
 
+<!-- box-swift-sdk-gen deprecation banner -->
+> [!CAUTION]
+> **`box-swift-sdk-gen` is deprecated and no longer maintained.** As of September 17, 2025, it receives no new features, bug fixes, or security patches. Do not use it for new projects.
+>
+> Use [`box-ios-sdk`](https://github.com/box/box-ios-sdk) v10+ instead: add `https://github.com/box/box-ios-sdk.git` with Swift Package Manager, or `pod 'BoxSDK', '>= 10.0.0'` with CocoaPods.
+> The equivalent of this page is [box-ios-sdk/docs/AppItemAssociations.md](https://github.com/box/box-ios-sdk/blob/main/docs/AppItemAssociations.md). To migrate existing code, see the [migration guide](https://github.com/box/box-ios-sdk/blob/main/migration-guides/from-box-swift-sdk-gen-v0-to-box-ios-sdk.md).
+
 
 - [List file app item associations](#list-file-app-item-associations)
 - [List folder app item associations](#list-folder-app-item-associations)
